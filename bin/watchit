@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require "digest"
+
+def compute_sha
+  contents = Dir["./**/*.rs"].map do |file|
+    File.read(file)
+  end.join("\n")
+
+  Digest::MD5.hexdigest(contents)
+end
+
+sha = compute_sha
+
+loop do
+  new_sha = compute_sha
+  if sha != new_sha
+    sha = new_sha
+    system "clear && echo '#{'-'*80}' && cargo test"
+  end
+  sleep 1
+end

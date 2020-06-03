@@ -1,0 +1,12 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Noah Masur
+	email = noah.masur@take2games.com
+[hub]
+	host = github.take2games.com
+[pager]
+	branch = false

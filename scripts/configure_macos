@@ -1,0 +1,103 @@
+#!/bin/sh
+
+echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# echo "Enable subpixel font rendering on non-Apple LCDs"
+# defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# echo "Automatically show and hide the dock"
+# defaults write com.apple.dock autohide -bool true
+
+echo "Make Dock icons of hidden applications translucent"
+defaults write com.apple.dock showhidden -bool true
+
+# echo "Show all filename extensions in Finder"
+# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+echo "Use current directory as default search scope in Finder"
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+echo "Expand save panel by default"
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+echo "Expand print panel by default"
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
+echo "Disable the \"Are you sure you want to open this application?\" dialog"
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+echo "Enable highlight hover effect for the grid view of a stack (Dock)"
+defaults write com.apple.dock mouse-over-hilte-stack -bool true
+
+echo "Enable spring loading for all Dock items"
+defaults write enable-spring-load-actions-on-all-items -bool true
+
+echo "Disable press-and-hold for keys in favor of key repeat"
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+echo "Set a blazingly fast keyboard repeat rate"
+defaults write NSGlobalDomain KeyRepeat -int 2
+
+echo "Set a shorter Delay until key repeat"
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
+
+echo "Disable disk image verification"
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
+echo "Avoid creating .DS_Store files on network volumes"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+echo "Disable the warning when changing a file extension"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# echo "Enable snap-to-grid for desktop icons"
+# /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+echo "Disable the warning before emptying the Trash"
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# echo "Enable tap to click (Trackpad)"
+# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+echo "Enable Safari’s debug menu"
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+echo "Make Safari’s search banners default to Contains instead of Starts With"
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+
+echo "Add a context menu item for showing the Web Inspector in web views"
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# echo "Only use UTF-8 in Terminal.app"
+# defaults write com.apple.terminal StringEncodings -array 4
+
+# echo "Make ⌘ + F focus the search input in iTunes"
+# defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
+
+# Noah Prefs
+echo "Enable dock magnification"
+defaults write com.apple.dock magnification -bool true
+
+echo "Set dock size"
+defaults write com.apple.dock largesize -int 48
+defaults write com.apple.dock tilesize -int 44
+
+# echo "Allow apps from anywhere"
+# sudo spctl --master-disable
+
+# ---
+
+echo "Reset Launchpad"
+# [ -e ~/Library/Application\ Support/Dock/*.db ] && rm ~/Library/Application\ Support/Dock/*.db
+rm ~/Library/Application\ Support/Dock/*.db
+
+echo "Show the ~/Library folder"
+chflags nohidden ~/Library
+
+# Clean up
+echo "Kill affected applications"
+for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done

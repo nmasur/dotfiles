@@ -1,0 +1,61 @@
+tap "homebrew/cask"
+
+brew "ansible"
+brew "emacs-plus"
+brew "terraform"
+brew "packer"
+brew "pyenv"
+brew "pyenv-virtualenv"
+brew "the_silver_searcher"
+brew "ripgrep"
+brew "sd"
+brew "telnet"
+brew "bat"
+brew "fd"
+brew "exa"
+brew "tldr"
+brew "wget"
+brew "jq"
+brew "gpg"
+brew "prettyping"
+brew "fzf"
+brew "httpie"
+brew "qrencode"
+brew "dos2unix"
+brew "trash"
+brew "youtube-dl"
+brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
+brew "googler"
+brew "ruby"
+brew "shellcheck"
+brew "xsv"
+
+# git
+# hub
+# pulumi
+# libmagic
+# awscli
+# saulpw/vd/visidata
+# brew tap weaveworks/tap && brew install weaveworks/tap/eksctl (EKS on AWS)
+# fasd (cd)
+# glances (top)
+
+# cask "github-desktop"
+# cask "iterm2"
+# cask "google-chrome"
+# cask "docker"
+# cask "slack"
+# cask "dash"
+# cask "discord"
+# cask "postman"
+# cask "onepassword"
+# cask "steam"
+# cask "vlc"
+# cask "keybase"
+# cask "cyberduck"
+# cask "zoomus"
+# cask "dropbox"
+# cask "calibre"
+# cask "drawio"
+# cask "skype"

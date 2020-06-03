@@ -1,0 +1,14 @@
+#!/bin/sh
+
+install_ohmyzsh() {
+    if [ ! -d ~/.oh-my-zsh ]
+    then
+        printf "\ninstalling oh my zsh...\nremember to restart terminal afterwards\n\n"
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        echo ""
+    fi
+
+    echo "installed ✓"
+}
+
+install_ohmyzsh

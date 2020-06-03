@@ -1,0 +1,86 @@
+# ls aliases
+alias ls='exa'
+alias ll='ls -alhF'
+alias la='ls -A'
+alias l='ls -CFA'
+alias lh='ls -l'
+# alias lh='ls -lhtraF'
+
+# Old aliases
+alias inv='source ~/.venv/inventorybot/bin/activate'
+alias awscli='source ~/.venv/aws/bin/activate'
+alias gstory='source ~/.venv/gstory/bin/activate'
+alias stu='source ~/.venv/stupid/bin/activate'
+alias r='/projects/device42/run'
+alias qu='/projects/device42/utils/quickupdate-noah'
+alias qudb='/projects/device42/utils/debug-noah'
+alias dlog='/projects/device42/logwatch.sh'
+alias hlog='/projects/soc-utils/Hive_Bot/utils/logwatch.sh'
+alias bot='cd /projects/device42/inventorybot'
+alias tap='terraform apply'
+alias mod='cd /projects/terraform/modules'
+alias hs='cd /projects/soc-utils/Hive_Scripts'
+alias esc='cd /projects/soc-utils/Hive_Responders/Escalator'
+
+# Emacs
+emacsenv='~/Documents/GitHub/dotfiles/bin/emacs_env'
+
+# Improved CLI Tools
+alias ping='prettyping --nolegend'
+alias cat='bat'
+alias icat='$PROJ/dotfiles/iterm/imgcat'
+alias h='http -Fh --all'
+alias search='googler -j'
+alias checkip='curl checkip.amazonaws.com'
+
+# Dotfile and config shortcuts
+alias aliases='edit $DOTS/zsh/aliases'
+alias zenv='edit $DOTS/zsh/env'
+alias zrc='edit $DOTS/zsh/zrcsh.symlink'
+alias reload='source ~/.zshrc'
+alias runbootstrap='$DOTS/scripts/bootstrap'
+alias sshc='edit ~/.ssh/config'
+alias hosts='edit /etc/hosts'
+
+# Navigation shortcuts
+alias dots='cd $DOTS'
+alias org='cd ~/Dropbox\ \(Take-Two\)/org'
+alias proj='cd $PROJ'
+alias tpt='cd $PROJ/thirdpartytrust'
+alias hv='cd $PROJ/soc-utils/Hive_Bot/hivebot'
+alias tf='cd $TFDIR'
+alias gs='cd $TFDIR/projects/ghoststory'
+alias pd='cd $TFDIR/projects/privatedivision'
+alias t2='cd $TFDIR/projects/take2games'
+alias kb='cd $TFDIR/projects/kerbalspaceprogram'
+alias di='cd $TFDIR/projects/disintegration'
+alias slack='cd $PROJ/slack'
+alias misty='cd $PROJ/misty'
+alias dl='cd ~/Downloads'
+alias ssl='echo openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr'
+
+# Virtualenv
+alias d='deactivate'
+alias pv='cd $WORKON_HOME'
+alias ip='source $WORKON_HOME/ipython/bin/activate'
+alias tp='source $WORKON_HOME/thirdpartytrust/bin/activate'
+alias hive='source $WORKON_HOME/hivebot/bin/activate'
+
+# Docker
+alias dc='$DOTS/bin/docker_cleanup'
+alias dr='docker run'
+alias db='docker build . -t'
+alias connect='docker run --rm -v ~/.aws:/root/.aws -v ~/.ssh:/root/.ssh -it connect-aws'
+
+# Python
+alias py='python'
+alias domisty='cd $PROJ/misty && ./buildrun.sh'
+
+# Rust
+alias ca='cargo'
+
+# Non-MacOS
+if [ $(uname) = "Linux" ]; then
+    alias pbcopy='xclip -selection clipboard -in'
+    alias pbpaste='xclip -selection clipboard -out'
+fi

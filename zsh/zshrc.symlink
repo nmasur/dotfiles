@@ -1,0 +1,12 @@
+DOTFILE=`readlink ~/.zshrc`
+export DOTS=`dirname "$(dirname $DOTFILE)"`
+
+source $DOTS/zsh/env
+source $DOTS/zsh/ohmyzsh
+source $DOTS/zsh/aliases
+source $DOTS/zsh/functions
+source $DOTS/zsh/vim
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source ~/.iterm2_shell_integration.zsh

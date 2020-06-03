@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require "uri"
+
+module Clipboard
+  class << self
+    def paste
+      `pbpaste`.chomp
+    end
+  end
+end
+
+def parse_params(url)
+  url.query.split("&").each_with_object({}) do |param, acc|
+    key, value = *param.split("=", 2)
+    acc[key] = value
+  end
+end
+
+url = URI.parse Clipboard.paste
+params = parse_params url
+id = params.fetch("v") { raise "Probably not a youtube URL" }
+
+clean_url = "https://www.youtube.com/watch?v=#{id}"
+system "(cd ~/Downloads && youtube-dl -f best \"#{clean_url}\")"

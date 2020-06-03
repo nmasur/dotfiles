@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+#
+# Run a quick calculation with Ruby
+#
+#   Usage: calc "1/2"
+
+class Integer
+  def /(other)
+    fdiv(other)
+  end
+end
+
+puts eval(ARGV.join(""))

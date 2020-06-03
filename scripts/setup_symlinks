@@ -1,0 +1,26 @@
+#!/bin/sh
+
+DOTS=$(dirname "$0")/..
+cd "$DOTS" || (echo "Directory not found: $DOTS"; exit 1)
+DOTS="$PWD"
+
+setup_symlinks() {
+    for source in $(find "$DOTS" -iname "*.symlink")
+    do
+        dest="$HOME/.`basename \"${source%.*}\"`"
+        rm -rf "$dest"
+        ln -s "$source" "$dest"
+    done
+
+    # Spacemacs
+    rm -rf "$HOME/.spacemacs.d"
+    ln -s "$DOTS/spacemacs.d" "$HOME/.spacemacs.d"
+
+    # Vim
+    rm -rf "$HOME/.vim"
+    ln -s "$DOTS/vim" "$HOME/.vim"
+
+    echo "symlinks ✓"
+}
+
+setup_symlinks

@@ -1,0 +1,105 @@
+# Open in Emacs
+edit() {
+    emacsclient --no-wait --alternate-editor="emacs" "$@" &> /dev/null & disown
+}
+
+# Create QR code from link
+qr() { qrencode "$1" -t ANSIUTF8 -o -; }
+
+# Open directory in projects
+prj() {
+    local projdir
+    projdir=$(ls $PROJ | fzf)
+    if [[ -z $projdir ]]
+    then
+        return 1
+    else
+        cd $projdir
+    fi
+}
+
+# Activate pyenv virtualenv
+venv() {
+    source ~/.pyenv/versions/$1/bin/activate
+}
+
+# Temporarily enter iPython interpreter with its Pyenv
+ipy() {
+    STORED_VENV=$VIRTUAL_ENV
+    source $WORKON_HOME/ipython/bin/activate && \
+        ipython && \
+        deactivate && \
+        if [ $STORED_VENV ]; then
+            source $STORED_VENV/bin/activate
+        fi
+}
+
+# Run pylint on all python files
+lint() {
+    fd -IH -t f .py$ | xargs pylint
+}
+
+# Stolen from: https://github.com/davidpdrsn/dotfiles/blob/master/zsh/functions
+
+# Extract archives
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+        *.tar.bz2) tar xjf $1 ;;
+        *.tar.gz) tar xzf $1 ;;
+        *.bz2) bunzip2 $1 ;;
+        *.rar) rar x $1 ;;
+        *.gz) gunzip $1 ;;
+        *.tar) tar xf $1 ;;
+        *.tbz2) tar xjf $1 ;;
+        *.tgz) tar xzf $1 ;;
+        *.zip) unzip $1 ;;
+        *.Z) uncompress $1 ;;
+        *.7z) 7z x $1 ;;
+        *) echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fe() {
+    local file
+    file=$(fzf --query="$1" --select-1 --exit-0)
+    [ -n "$file" ] && ${EDITOR:-vim} "$file"
+}
+
+# fd - cd to selected directory
+fcd() {
+    local dir
+    dir=$(find ${1:-*} -path '*/\.*' -prune \
+                    -o -type d -print 2> /dev/null | fzf +m) &&
+    cd "$dir"
+}
+
+# dir - fd name of dir in this directory
+dir() {
+    # fd ".*$1.*" -H -d 1
+    ls -lha | rg "$1"
+}
+
+# vers - switch to pyenv virtualenv with fuzzy menu
+vers() {
+    local version
+    version=$(pyenv versions --bare --skip-aliases | fzf)
+    if [[ -z $version ]]
+    then
+        return 1
+    else
+        source $WORKON_HOME/$version/bin/activate
+    fi
+}
+
+# unsetaws - remove all AWS environment variables
+unsetaws() {
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+}

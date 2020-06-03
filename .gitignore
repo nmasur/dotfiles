@@ -1,0 +1,8 @@
+.DS_Store
+.vim/dirs/*
+.vim/.netrwhist
+vim/dirs/*
+vim/.netrwhist
+.ssh/known_hosts
+spacemacs.d/.spacemacs.env
+*.lock.json
