@@ -3,17 +3,17 @@
 echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# echo "Enable subpixel font rendering on non-Apple LCDs"
-# defaults write NSGlobalDomain AppleFontSmoothing -int 2
+echo "Enable subpixel font rendering on non-Apple LCDs"
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
-# echo "Automatically show and hide the dock"
-# defaults write com.apple.dock autohide -bool true
+echo "Do NOT automatically show and hide the dock"
+defaults write com.apple.dock autohide -bool false
 
 echo "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true
 
-# echo "Show all filename extensions in Finder"
-# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+echo "Do NOT show all filename extensions in Finder"
+defaults write NSGlobalDomain AppleShowAllExtensions -bool false
 
 echo "Use current directory as default search scope in Finder"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -60,8 +60,8 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 echo "Disable the warning before emptying the Trash"
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-# echo "Enable tap to click (Trackpad)"
-# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+echo "Disable tap to click (Trackpad)"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool false
 
 echo "Enable Safari’s debug menu"
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
@@ -85,6 +85,10 @@ defaults write com.apple.dock magnification -bool true
 echo "Set dock size"
 defaults write com.apple.dock largesize -int 48
 defaults write com.apple.dock tilesize -int 44
+
+echo "Turn on Scroll Reverser"
+open /Applications/Scroll\ Reverser.app
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Scroll Reverser.app", hidden:false}'
 
 # echo "Allow apps from anywhere"
 # sudo spctl --master-disable
