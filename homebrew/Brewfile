@@ -1,11 +1,6 @@
 tap "homebrew/cask"
 
-brew "ansible"
-brew "emacs-plus"
-brew "terraform"
-brew "packer"
-brew "pyenv"
-brew "pyenv-virtualenv"
+# Shell Tools
 brew "the_silver_searcher"
 brew "ripgrep"
 brew "sd"
@@ -16,21 +11,37 @@ brew "exa"
 brew "tldr"
 brew "wget"
 brew "jq"
-brew "gpg"
-brew "prettyping"
 brew "fzf"
-brew "httpie"
-brew "qrencode"
-brew "dos2unix"
 brew "trash"
-brew "youtube-dl"
+brew "dos2unix"
+brew "tmux"
+brew "xsv"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
-brew "googler"
-brew "ruby"
-brew "shellcheck"
-brew "xsv"
 
+# Networking
+brew "prettyping"
+brew "httpie"
+
+# Languages
+brew "shellcheck"
+brew "pyenv"
+brew "pyenv-virtualenv"
+brew "ruby"
+brew "ansible"
+brew "terraform"
+brew "packer"
+
+# Miscellaneous
+brew "gpg"
+brew "emacs-plus"
+
+# Fun
+brew "qrencode"
+brew "youtube-dl"
+brew "googler"
+
+# Not Installed
 # git
 # hub
 # pulumi
@@ -41,21 +52,23 @@ brew "xsv"
 # fasd (cd)
 # glances (top)
 
-# cask "github-desktop"
+# Applications
 # cask "iterm2"
 # cask "google-chrome"
 # cask "docker"
 # cask "slack"
+# cask "zoomus"
+# cask "onepassword"
+# cask "github-desktop"
+cask "keybase"
+cask "scroll-reverser"
 # cask "dash"
 # cask "discord"
 # cask "postman"
-# cask "onepassword"
 # cask "steam"
 # cask "vlc"
-# cask "keybase"
 # cask "cyberduck"
-# cask "zoomus"
 # cask "dropbox"
-# cask "calibre"
+cask "calibre"
 # cask "drawio"
-# cask "skype"
+cask "skype"
