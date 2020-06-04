@@ -70,7 +70,7 @@ install_spacemacs() {
     emacsdir=~/.emacs.d
     if ! (git -C "$emacsdir" pull > /dev/null 2>&1)
     then
-       git clone https://github.com/syl20bnr/spacemacs "$emacsdir"
+       git clone -b develop https://github.com/syl20bnr/spacemacs "$emacsdir"
     fi
 
     echo "spacemacs ✓"
