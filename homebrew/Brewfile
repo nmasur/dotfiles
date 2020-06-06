@@ -1,25 +1,31 @@
 tap "homebrew/cask"
 
-# Shell Tools
-brew "the_silver_searcher"
-brew "ripgrep"
-brew "sd"
-brew "telnet"
-brew "bat"
-brew "fd"
+# Shell Navigation
 brew "exa"
-brew "tldr"
-brew "wget"
-brew "jq"
-brew "fzf"
-brew "trash"
-brew "dos2unix"
 brew "tmux"
-brew "xsv"
+
+# Shell Completion
+brew "tldr"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 
+# Searching
+brew "the_silver_searcher"
+brew "ripgrep"
+brew "fzf"
+brew "fd"
+
+# File Manipulation
+brew "sd"
+brew "bat"
+brew "jq"
+brew "xsv"
+brew "dos2unix"
+brew "trash"
+
 # Networking
+brew "wget"
+brew "telnet"
 brew "prettyping"
 brew "httpie"
 
@@ -42,8 +48,8 @@ brew "youtube-dl"
 brew "googler"
 
 # Not Installed
-# git
-# hub
+# git -- already installed
+# hub -- github commands
 # pulumi
 # libmagic
 # awscli
@@ -52,23 +58,3 @@ brew "googler"
 # fasd (cd)
 # glances (top)
 
-# Applications
-# cask "iterm2"
-# cask "google-chrome"
-# cask "docker"
-# cask "slack"
-# cask "zoomus"
-# cask "onepassword"
-# cask "github-desktop"
-cask "keybase"
-cask "scroll-reverser"
-# cask "dash"
-# cask "discord"
-# cask "postman"
-# cask "steam"
-# cask "vlc"
-# cask "cyberduck"
-# cask "dropbox"
-cask "calibre"
-# cask "drawio"
-cask "skype"

@@ -1,0 +1,9 @@
+install_casks() {
+    brewfile=$DOTS/homebrew/Caskfile
+    if ! (/usr/local/bin/brew bundle check --file "$brewfile" > /dev/null)
+    then
+        /usr/local/bin/brew bundle --file "$brewfile"
+    fi
+
+    echo "casks installed ✓"
+}

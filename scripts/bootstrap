@@ -87,6 +87,7 @@ install_spacemacs
 
 echo ""
 echo "consider running other scripts:"
+echo " - install_casks"
 echo " - configure_macos"
 echo " - setup_keybase"
 echo " - install_python"

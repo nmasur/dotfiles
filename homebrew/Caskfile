@@ -1,0 +1,28 @@
+# Core Applications
+cask "iterm2"
+cask "google-chrome"
+
+# Work Programs
+cask "slack"
+cask "zoomus"
+cask "onepassword"
+cask "dropbox"
+
+# Secondary Tools
+cask "docker"
+cask "github-desktop"
+cask "keybase"
+cask "scroll-reverser"
+
+# Unnecessary
+cask "dash"
+cask "postman"
+cask "cyberduck"
+cask "drawio"
+
+# Personal
+cask "discord"
+cask "steam"
+cask "vlc"
+cask "calibre"
+cask "skype"
