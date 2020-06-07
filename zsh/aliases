@@ -25,6 +25,12 @@ alias esc='cd /projects/soc-utils/Hive_Responders/Escalator'
 # Emacs
 emacsenv='~/Documents/GitHub/dotfiles/bin/emacs_env'
 
+# Vim
+if (which nvim > /dev/null)
+then
+    alias vim='nvim'
+fi
+
 # Improved CLI Tools
 alias ping='prettyping --nolegend'
 alias cat='bat'
