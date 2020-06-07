@@ -100,7 +100,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # Auto-Suggestions
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6,bg=6"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=60"
 export ZSH_AUTOSUGGEST_STRATEGY=(completion history)
 bindkey '^ ' autosuggest-accept
 zstyle ':completion:*' use-cache on
