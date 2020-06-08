@@ -47,6 +47,10 @@ brew "qrencode"
 brew "youtube-dl"
 brew "googler"
 
+# Personal
+tap "nmasur/repo"
+brew "nmasur/repo/drips"
+
 # Not Installed
 # git -- already installed
 # hub -- github commands
