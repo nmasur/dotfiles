@@ -51,6 +51,7 @@ endif
 "     colorscheme solarized
 "     set mouse=a
 " endif
+set mouse=nv
 
 " change title
 let &titlestring = @%

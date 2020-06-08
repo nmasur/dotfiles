@@ -20,6 +20,9 @@ setup_symlinks() {
     rm -rf "$HOME/.vim"
     ln -s "$DOTS/vim" "$HOME/.vim"
 
+    rm -rf "$HOME/.config/nvim"
+    ln -s "$DOTS/vim" "$HOME/.config/nvim"
+
     echo "symlinks ✓"
 }
 
