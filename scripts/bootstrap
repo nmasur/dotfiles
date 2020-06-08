@@ -66,6 +66,14 @@ install_brews() {
     echo "brews installed ✓"
 }
 
+setup_tmux() {
+    if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    echo "tmux ✓"
+}
+
 install_spacemacs() {
     emacsdir=~/.emacs.d
     if ! (git -C "$emacsdir" pull > /dev/null 2>&1)
@@ -82,6 +90,7 @@ check_for_ohmyzsh
 install_xcode
 install_homebrew
 install_brews
+setup_tmux
 install_spacemacs
 ("$DOTS/scripts/setup_symlinks")
 
