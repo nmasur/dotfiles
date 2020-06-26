@@ -36,8 +36,14 @@ alias ping='prettyping --nolegend'
 alias cat='bat'
 alias icat='$PROJ/dotfiles/iterm/imgcat'
 alias h='http -Fh --all'
+
+# Fun CLI Tools
 alias search='googler -j'
 alias checkip='curl checkip.amazonaws.com'
+alias weather='curl wttr.in'
+alias moon='curl wttr.in/Moon'
+alias ipinfo='curl ipinfo.io'
+alias worldmap='telnet mapscii.me'
 
 # Dotfile and config shortcuts
 alias aliases='edit $DOTS/zsh/aliases'
