@@ -360,6 +360,12 @@ you should place your code here."
   ;; Org Mode -- count empty lines as blank separators
   (setq org-cycle-separator-lines -1)
 
+  ;; Org Mode -- agenda files
+  (setq org-agenda-files (list "~/Dropbox (Take-Two)/org/tasks"))
+
+  ;; Org Mode -- capture file
+  (setq org-default-notes-file "~/Dropbox (Take-Two)/org/tasks/capture.org")
+
   ;; Ranger Mode -- kill all the buffers on exit
   (setq ranger-cleanup-on-disable t)
 
