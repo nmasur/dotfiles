@@ -1,0 +1,15 @@
+#!/bin/sh
+
+install_cargos() {
+    programs=(
+        cargo-edit
+        cargo-whatfeatures
+        jql
+        racer
+        rustlings
+        toml-cli
+    )
+    for i in "${programs[@]}"; do
+        cargo install "$i"
+    done
+}
