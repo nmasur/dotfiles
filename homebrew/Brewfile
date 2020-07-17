@@ -50,6 +50,7 @@ brew "googler"
 # Personal
 tap "nmasur/repo"
 brew "nmasur/repo/drips"
+brew "nmasur/repo/update-ssh-config"
 
 # Not Installed
 # git -- already installed

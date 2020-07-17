@@ -13,6 +13,7 @@ cask "docker"
 cask "github-desktop"
 cask "keybase"
 cask "scroll-reverser"
+cask "authy"
 
 # Unnecessary
 cask "dash"
