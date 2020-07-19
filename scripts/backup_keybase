@@ -7,13 +7,13 @@ setup_keybase() {
     echo "keybase ✓"
 }
 
-setup_keybase_ssh() {
+backup_keybase_ssh() {
     SSH_DIR="/Volumes/Keybase/private/$KEYBASE_USER/ssh"
     if [ -d "$SSH_DIR" ]
     then
-        rsync -a "$SSH_DIR"/ ~/.ssh/
+        rsync -a ~/.ssh/ "$SSH_DIR"/
 
-        echo " - keybase: ssh ✓"
+        echo " - backed up to keybase: ssh ✓"
     else
         echo "Directory not found: $SSH_DIR"
         echo "Please check your keybase files"
@@ -21,13 +21,13 @@ setup_keybase_ssh() {
     fi
 }
 
-setup_keybase_aws() {
+backup_keybase_aws() {
     AWS_DIR="/Volumes/Keybase/private/$KEYBASE_USER/aws"
     if [ -d "$AWS_DIR" ]
     then
-        rsync -a "$AWS_DIR"/ ~/.aws/
+        rsync -a ~/.aws/ "$AWS_DIR"/
 
-        echo " - keybase: aws ✓"
+        echo " - backed up to keybase: aws ✓"
     else
         echo "Directory not found: $AWS_DIR"
         echo "Please check your keybase files"
@@ -36,5 +36,5 @@ setup_keybase_aws() {
 }
 
 setup_keybase
-setup_keybase_ssh
-setup_keybase_aws
+backup_keybase_ssh
+backup_keybase_aws
