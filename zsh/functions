@@ -107,3 +107,25 @@ unsetaws() {
 copy() {
     cat $1 | pbcopy
 }
+
+cloud() {
+    profile=${$1:-default}
+    search=${2:-prod}
+    num=${$3:-1}
+    ips=$(drips --raw | grep $search)
+    if [[ -z $ips ]]
+    then
+        echo "Failed to find instances."
+        return 1
+    fi
+    count=$(echo $ips | wc -l)
+    echo "Found ${count##*( )} instances."
+    ip=$(echo $ips | sed -n "$num"p | awk -F' - ' '{print $2}')
+    if [[ -z $ip ]]
+    then
+        echo "Not an available selection."
+        return 1
+    fi
+    update-ssh-config --host $search --hostname $ip
+    ssh $search
+}
