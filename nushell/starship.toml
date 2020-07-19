@@ -1,0 +1,16 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+prompt_order = ["directory", "git_branch", "git_status", "character"]
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]      # The name of the module we are configuring is "character"
+# symbol = "➜"     # The "symbol" segment is being set to "➜"
+symbol = "❯"
+
+[directory]
+truncate_to_repo = true
+truncation_length = 100
+
+[git_status]
+prefix = ""
+suffix = ""

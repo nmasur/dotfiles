@@ -23,6 +23,10 @@ setup_symlinks() {
     rm -rf "$HOME/.config/nvim"
     ln -s "$DOTS/vim" "$HOME/.config/nvim"
 
+    # Starship
+    rm -rf "$HOME/.config/starship.toml"
+    ln -s "$DOTS/nushell/starship.toml" "$HOME/.config/starship.toml"
+
     echo "symlinks ✓"
 }
 
