@@ -52,7 +52,7 @@ alias zrc='edit $DOTS/zsh/zrcsh.symlink'
 alias reload='source ~/.zshrc'
 alias runbootstrap='$DOTS/scripts/bootstrap'
 alias sshc='edit ~/.ssh/config'
-alias hosts='edit /etc/hosts'
+alias hosts='edit /sudo:root@localhost:/etc/hosts'
 
 # Navigation shortcuts
 alias dots='cd $DOTS'
