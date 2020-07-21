@@ -129,3 +129,17 @@ cloud() {
     update-ssh-config --host $search --hostname $ip
     ssh $search
 }
+
+journal() {
+    today=$(date -j +"%Y-%m-%d_%a")
+    today_journal=$HOME/Documents/notes/journal/$today.md
+    if [[ -f $today_journal ]]
+    then
+        echo "already exists"
+    else
+        echo "not here!"
+        yesterday=$(date -jv "-1d" +"%Y-%m-%d_%a")
+        tomorrow=$(date -jv "+1d" +"%Y-%m-%d_%a")
+        printf "[[$yesterday|Yesterday]] - [[calendar|Index]] - [[$tomorrow|Tomorrow]]\n\n---\n\n" > $today_journal
+    fi
+}
