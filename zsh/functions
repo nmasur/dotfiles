@@ -135,11 +135,11 @@ journal() {
     today_journal=$HOME/Documents/notes/journal/$today.md
     if [[ -f $today_journal ]]
     then
-        echo "already exists"
+        echo "Already exists."
     else
-        echo "not here!"
         yesterday=$(date -jv "-1d" +"%Y-%m-%d_%a")
         tomorrow=$(date -jv "+1d" +"%Y-%m-%d_%a")
-        printf "[[$yesterday|Yesterday]] - [[calendar|Index]] - [[$tomorrow|Tomorrow]]\n\n---\n\n" > $today_journal
+        printf "[[$yesterday|Previous]] - [[calendar|Index]] - [[$tomorrow|Next]]\n\n---\n\n#Tasks\n\n\n#Log\n\n\n#Communication\n\n---\n\n#Meetings\n\n" > $today_journal
+        echo "New journal added."
     fi
 }
