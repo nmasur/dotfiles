@@ -139,7 +139,7 @@ journal() {
     else
         yesterday=$(date -jv "-1d" +"%Y-%m-%d_%a")
         tomorrow=$(date -jv "+1d" +"%Y-%m-%d_%a")
-        printf "[[$yesterday|Previous]] - [[calendar|Index]] - [[$tomorrow|Next]]\n\n---\n\n#Tasks\n\n\n#Log\n\n\n#Communication\n\n---\n\n#Meetings\n\n" > $today_journal
+        printf "[[journal/$yesterday|Previous]] - [[calendar|Index]] - [[journal/$tomorrow|Next]]\n\n---\n\n# Tasks\n\n\n# Log\n\n\n# Communication\n\n---\n\n# Meetings\n\n" > $today_journal
         echo "New journal added."
     fi
 }
