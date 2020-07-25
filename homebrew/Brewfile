@@ -9,6 +9,9 @@ brew "tldr"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 
+# Shell Style
+brew "starship"
+
 # Searching
 brew "the_silver_searcher"
 brew "ripgrep"
