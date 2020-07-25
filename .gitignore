@@ -1,6 +1,6 @@
 .DS_Store
-vim/dirs/*
-vim/.netrwhist
-spacemacs.d/.spacemacs.env
+nvim.configlink/dirs/*
+nvim.configlink/.netrwhist
+spacemacs.d.symlink/.spacemacs.env
 *.lock.json
 

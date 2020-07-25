@@ -12,22 +12,20 @@ setup_symlinks() {
         ln -s "$source" "$dest"
     done
 
-    # Spacemacs
-    rm -rf "$HOME/.spacemacs.d"
-    ln -s "$DOTS/spacemacs.d" "$HOME/.spacemacs.d"
-
-    # Vim
-    rm -rf "$HOME/.vim"
-    ln -s "$DOTS/vim" "$HOME/.vim"
-
-    rm -rf "$HOME/.config/nvim"
-    ln -s "$DOTS/vim" "$HOME/.config/nvim"
-
-    # Starship
-    rm -rf "$HOME/.config/starship.toml"
-    ln -s "$DOTS/nushell/starship.toml" "$HOME/.config/starship.toml"
-
     echo "symlinks ✓"
 }
 
+setup_configlinks() {
+    for source in $(find "$DOTS" -iname "*.configlink")
+    do
+        dest="$HOME/.config/`basename \"${source%.*}\"`"
+        rm -rf "$dest"
+        ln -s "$source" "$dest"
+    done
+
+    echo "configlinks ✓"
+}
+
 setup_symlinks
+setup_configlinks
+
