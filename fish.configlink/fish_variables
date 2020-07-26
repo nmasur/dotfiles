@@ -16,6 +16,7 @@ SETUVAR _fish_abbr_frc:vim\x20\x24HOME/\x2econfig/fish/config\x2efish
 SETUVAR _fish_abbr_ga:git\x20add\x20\x2dA
 SETUVAR _fish_abbr_gc:git\x20commit\x20\x2dm
 SETUVAR _fish_abbr_gd:git\x20diff
+SETUVAR _fish_abbr_gp:git\x20push
 SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_h:http\x20\x2dFh\x20\x2d\x2dall
 SETUVAR _fish_abbr_hosts:sudo\x20vim\x20/etc/hosts

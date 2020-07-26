@@ -13,6 +13,7 @@ function aliases --description 'All aliases'
     abbr -a gd 'git diff'
     abbr -a ga 'git add -A'
     abbr -a gc 'git commit -m'
+    abbr -a gp 'git push'
 
     # Vim
     if command -v nvim > /dev/null
