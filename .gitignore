@@ -2,5 +2,5 @@
 nvim.configlink/dirs/*
 nvim.configlink/.netrwhist
 spacemacs.d.symlink/.spacemacs.env
+fish.configlink/config.fish.bac
 *.lock.json
-

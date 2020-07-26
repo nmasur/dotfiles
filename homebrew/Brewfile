@@ -1,8 +1,12 @@
 tap "homebrew/cask"
 
+# Shells
+brew "fish"
+
 # Shell Navigation
 brew "exa"
 brew "tmux"
+brew "autojump"
 
 # Shell Completion
 brew "tldr"

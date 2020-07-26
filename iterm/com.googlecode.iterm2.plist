@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>ApplePressAndHoldEnabled</key>
@@ -643,7 +645,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2570 588 620 392 1920 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>463 195 1290 921 0 0 1920 1177 </string>
+	<string>265 136 1445 981 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>341 175 1310 927 0 0 1920 1177 </string>
 	<key>NeverWarnAboutShortLivedSessions_59B0BABD-32F0-4160-A076-C545EA0C9DD2</key>
@@ -4561,7 +4563,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>599358748.53944695</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>165</integer>
+	<integer>174</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -5482,7 +5484,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-13T21:23:14Z</date>
+	<date>2020-07-25T13:34:44Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

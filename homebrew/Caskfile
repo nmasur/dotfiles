@@ -1,5 +1,6 @@
 # Core Applications
 cask "iterm2"
+cask "alacritty"
 cask "google-chrome"
 
 # Work Programs
@@ -7,6 +8,10 @@ cask "slack"
 cask "zoomus"
 cask "onepassword"
 cask "dropbox"
+
+# Fonts
+tap "homebrew/cask-fonts"
+cask "font-fira-mono-for-powerline"
 
 # Secondary Tools
 cask "docker"
