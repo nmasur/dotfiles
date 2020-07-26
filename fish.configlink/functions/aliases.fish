@@ -7,15 +7,18 @@ function aliases --description 'All aliases'
     abbr -a l 'ls'                              # Quicker shortcut for ls
     abbr -a lh 'ls -lh'                         # Pretty vertical list
     abbr -a ll 'ls -alhF'                       # Include hidden files
+    abbr -a c 'cd'
 
     # Git
     abbr -a gs 'git status'
     abbr -a gd 'git diff'
     abbr -a ga 'git add -A'
     abbr -a gc 'git commit -m'
+    abbr -a gu 'git pull'
     abbr -a gp 'git push'
 
     # Vim
+    abbr -a v 'vim'
     if command -v nvim > /dev/null
         alias vim='nvim'                                    # Use neovim if installed
         abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'     # Edit ".vimrc" file
@@ -24,7 +27,6 @@ function aliases --description 'All aliases'
     # Improved CLI Tools
     alias ping='prettyping --nolegend'
     abbr -a cat 'bat'                           # Swap cat with bat
-    abbr -a oldcat 'cat'                        # If we need to use cat
     abbr -a h 'http -Fh --all'                  # Curl site for headers
 
     # Fun CLI Tools
