@@ -11,12 +11,12 @@ if status --is-interactive
 
     # Use `vi` in the shell
     fish_vi_key_bindings
-    set XTERM_VERSION hello
+    set -g fish_vi_force_cursor
+    set -g fish_cursor_default block
+    set -g fish_cursor_insert line
+    set -g fish_cursor_visual block
+    set -g fish_cursor_replace_one underscore
     fish_vi_cursor
-    set fish_cursor_default block
-    set fish_cursor_insert line
-    set fish_cursor_replace_one underscore
-    set fish_cursor_visual block
 
     # Turn off greeting
     set fish_greeting ""
