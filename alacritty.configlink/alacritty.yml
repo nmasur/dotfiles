@@ -361,10 +361,12 @@ font:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /usr/local/bin/fish
-#  args:
-#    - --login
+shell:
+  program: /usr/local/bin/fish
+  args:
+    - --login
+    - --init-command
+    - tmux
 
 # Startup directory
 #

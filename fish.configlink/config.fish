@@ -9,7 +9,7 @@ if status --is-interactive
     set PATH $PATH /usr/local/bin ~/.local/bin $DOTS/bin ~/.cargo/bin
     set CDPATH . $HOME $PROJ $DOTS
 
-    # Use `vi` in the shell
+    # Use `vi` in the shell with cursor shapes
     fish_vi_key_bindings
     set -g fish_vi_force_cursor
     set -g fish_cursor_default block

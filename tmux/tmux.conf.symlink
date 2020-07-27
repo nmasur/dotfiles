@@ -7,10 +7,10 @@ set -g prefix C-space
 bind C-space send-prefix
 
 # Keep plenty of history for scrollback
-set -g history-limit 10000
+set -g history-limit 100000
 
 # Upgrade colors
-set -g default-terminal "screen-256color"
+#set -g default-terminal "screen-256color"
 
 # Remove delay for entering copy mode
 set-option -sg escape-time 0
