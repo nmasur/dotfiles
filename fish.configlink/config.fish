@@ -32,6 +32,8 @@ if status --is-interactive
 
     # Individual features
     pyenv
+    notes
+    aws
 
     # Use `starship` prompt
     starship init fish | source

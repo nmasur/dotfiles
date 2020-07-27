@@ -1,16 +1,10 @@
-# Plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-yank'
-
 # Remap prefix to Control + space
-set -g prefix C-space
-bind C-space send-prefix
+#unbind C-b
+#set -g prefix C-space
+#bind C-space send-prefix
 
 # Keep plenty of history for scrollback
 set -g history-limit 100000
-
-# Upgrade colors
-#set -g default-terminal "screen-256color"
 
 # Remove delay for entering copy mode
 set-option -sg escape-time 0
@@ -19,27 +13,83 @@ set-option -sg escape-time 0
 bind \\ split-window -h -c '#{pane_current_path}'
 bind - split-window -v -c '#{pane_current_path}'
 
-# Smart pane switching with awareness of vim splits
-bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
-bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
-bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
-bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
-bind -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
-
-# Status bar
-set -g status-interval 2
-set -g status-right-length 59
-set -g renumber-windows on
-set-option -g base-index 1
-set-window-option -g pane-base-index 1
-
-set-option -g status-position bottom
-
+# Move between panes with vi keys
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
 
 # Copy mode works as Vim
 bind Escape copy-mode
 bind C-[ copy-mode
 bind p paste-buffer
 
+# Vi-style scrollback with prefix + C-[
+set-window-option -g mode-keys vi
+
+# Use v to trigger selection
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+
+# Use y to yank current selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
 # Enable mouse mode
 set -g mouse on
+
+# Status bar
+set -g status-interval 10                # Seconds between refreshes
+set -g renumber-windows on
+set-option -g base-index 1               # Set 1 for first window (easier to type)
+set-window-option -g pane-base-index 1   # Set 1 for first pane (easier to type)
+set-option -g status-position bottom
+
+################################
+
+## COLORSCHEME: gruvbox dark
+set-option -g status "on"
+
+# Default statusbar color
+set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
+
+# Default window title colors
+set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
+
+# Default window with an activity alert
+set-window-option -g window-status-activity-style bg=colour237,fg=colour248 # bg=bg1, fg=fg3
+
+# Active window title colors
+set-window-option -g window-status-current-style bg=red,fg=colour237 # fg=bg1
+
+# Pane border
+set-option -g pane-active-border-style fg=colour250 #fg2
+set-option -g pane-border-style fg=colour237 #bg1
+
+# Message infos
+set-option -g message-style bg=colour239,fg=colour223 # bg=bg2, fg=fg1
+
+# Writing commands inactive
+set-option -g message-command-style bg=colour239,fg=colour223 # bg=fg3, fg=bg1
+
+# Pane number display
+set-option -g display-panes-active-colour colour250 #fg2
+set-option -g display-panes-colour colour237 #bg1
+
+# Clock
+set-window-option -g clock-mode-colour colour109 #blue
+
+# Bell
+set-window-option -g window-status-bell-style bg=colour167,fg=colour235 # bg=red, fg=bg
+
+# Theme settings mixed with colors (unfortunately, but there is no cleaner way)
+set-option -g status-justify "left"
+set-option -g status-left-style none
+set-option -g status-left-length "80"
+set-option -g status-right-style none
+set-option -g status-right-length "80"
+set-window-option -g window-status-separator ""
+
+set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore]"
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] %Y-%m-%d  %H:%M #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248] #(gitmux -cfg .gitmux.conf '#{pane_current_path}')"
+
+set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
+set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"

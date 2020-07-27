@@ -7,13 +7,15 @@ colorscheme gruvbox             " Installed in autoload/ and colors/
 set number                      " Show line numbers
 set relativenumber              " Relative numbers instead of absolute
 set expandtab                   " Tabs into spaces
-set shiftwidth=4                " 
-set softtabstop=4               " 
+set shiftwidth=4                " Amount to shift with > key
+set softtabstop=4               " Amount to shift with TAB key
 set ignorecase                  " Ignore case when searching
 set smartcase                   " Check case when using capitals in search
 set incsearch                   " Search while typing
 set pastetoggle=<F3>
 set visualbell
+
+set clipboard+=unnamedplus      " Uses system clipboard for yanking
 
 " Remember last position
 if has("autocmd")
@@ -24,7 +26,7 @@ endif
 let g:terraform_align=1
 let g:terraform_remap_spacebar=1
 
-" line type
+" Line type
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"

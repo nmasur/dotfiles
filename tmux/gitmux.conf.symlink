@@ -1,0 +1,23 @@
+tmux:
+  symbols:
+    branch: '⎇ '
+    hashprefix: ':'
+    ahead: ↑·
+    behind: ↓·
+    staged: '● '
+    conflict: '✖ '
+    modified: '✚ '
+    untracked: '… '
+    stashed: '⚑ '
+    clean: ✔
+  styles:
+    state: '#[fg=red,bold]'
+    branch: '#[fg=red,bold]'
+    remote: '#[fg=colour239]'
+    staged: '#[fg=green,bold]'
+    conflict: '#[fg=red,bold]'
+    modified: '#[fg=red,bold]'
+    untracked: '#[fg=magenta,bold]'
+    stashed: '#[fg=cyan,bold]'
+    clean: '#[fg=green,bold]'
+  layout: [remote, ' ', flags]

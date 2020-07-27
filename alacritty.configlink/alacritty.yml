@@ -366,7 +366,7 @@ shell:
   args:
     - --login
     - --init-command
-    - tmux
+    - tmux a -t noah || tmux new -s noah
 
 # Startup directory
 #
@@ -589,7 +589,8 @@ shell:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-    - { key: F, mods: Option, action: ToggleSimpleFullscreen }
+    - { key: F, mods: Super, action: ToggleSimpleFullscreen }
+    - { key: A, mods: Super, chars: "\x02" }
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
