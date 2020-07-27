@@ -4,20 +4,20 @@ tmux:
     hashprefix: ':'
     ahead: ↑·
     behind: ↓·
-    staged: '● '
+    staged: '●'
     conflict: '✖ '
-    modified: '✚ '
-    untracked: '… '
+    modified: '~'
+    untracked: '✚'
     stashed: '⚑ '
-    clean: ✔
+    clean: '✔'
   styles:
     state: '#[fg=red,bold]'
     branch: '#[fg=red,bold]'
     remote: '#[fg=colour239]'
-    staged: '#[fg=green,bold]'
+    staged: '#[fg=colour241,bold]'
     conflict: '#[fg=red,bold]'
-    modified: '#[fg=red,bold]'
-    untracked: '#[fg=magenta,bold]'
-    stashed: '#[fg=cyan,bold]'
+    modified: '#[fg=colour239,bold]'
+    untracked: '#[fg=colour239,bold]'
+    stashed: '#[fg=colour239,bold]'
     clean: '#[fg=green,bold]'
-  layout: [remote, ' ', flags]
+  layout: [remote, ' ', flags, ' ']
