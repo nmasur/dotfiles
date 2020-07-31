@@ -10,6 +10,7 @@ Plug 'Raimondi/delimitMate'                         " Auto-close parentheses
 Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
 Plug 'hashivim/vim-terraform'                       " Terraform HCL syntax
 Plug 'vimwiki/vimwiki'                              " Wiki System
+Plug 'jreybert/vimagit'                             " Git GUI
 
 call plug#end()
 
