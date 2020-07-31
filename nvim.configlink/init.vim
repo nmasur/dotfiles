@@ -21,6 +21,7 @@ colorscheme gruvbox             " Installed in autoload/ and colors/
 
 set number                      " Show line numbers
 set relativenumber              " Relative numbers instead of absolute
+set list                        " Reveal whitespace with ---
 set expandtab                   " Tabs into spaces
 set shiftwidth=4                " Amount to shift with > key
 set softtabstop=4               " Amount to shift with TAB key
