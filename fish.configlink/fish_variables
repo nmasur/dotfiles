@@ -9,7 +9,9 @@ SETUVAR _fish_abbr_cat:bat
 SETUVAR _fish_abbr_d:deactivate
 SETUVAR _fish_abbr_db:docker\x20build\x20\x2e\x20\x2dt
 SETUVAR _fish_abbr_dc:\x24DOTS/bin/docker_cleanup
-SETUVAR _fish_abbr_dr:docker\x20run
+SETUVAR _fish_abbr_de:docker\x20exec\x20\x2dit
+SETUVAR _fish_abbr_dr:docker\x20run\x20\x2d\x2drm\x20\x2dit
+SETUVAR _fish_abbr_ds:docker\x20ps\x20\x2da
 SETUVAR _fish_abbr_falias:vim\x20\x24HOME/\x2econfig/fish/functions/aliases\x2efish
 SETUVAR _fish_abbr_fishal:vim\x20\x24HOME/\x2econfig/fish/functions/aliases\x2efish
 SETUVAR _fish_abbr_fishrc:vim\x20\x24HOME/\x2econfig/fish/config\x2efish
@@ -18,6 +20,7 @@ SETUVAR _fish_abbr_g:git
 SETUVAR _fish_abbr_ga:git\x20add\x20\x2dA
 SETUVAR _fish_abbr_gc:git\x20commit\x20\x2dm
 SETUVAR _fish_abbr_gd:git\x20diff
+SETUVAR _fish_abbr_get_2D_fingerprint:ssh\x2dkeyscan\x20myhost\x2ecom\x20\x7c\x20ssh\x2dkeygen\x20\x2dlf\x20\x2d
 SETUVAR _fish_abbr_gp:git\x20push
 SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_gu:git\x20pull
@@ -30,6 +33,7 @@ SETUVAR _fish_abbr_ll:ls\x20\x2dalhF
 SETUVAR _fish_abbr_misty:cd\x20\x24PROJ/misty
 SETUVAR _fish_abbr_oldcat:cat
 SETUVAR _fish_abbr_p:python
+SETUVAR _fish_abbr_public_2D_key:ssh\x2dkeygen\x20\x2dy\x20\x2df\x20\x7e/\x2essh/id_rsa\x20\x3e\x20\x7e/\x2essh/id_rsa\x2epub
 SETUVAR _fish_abbr_py:python
 SETUVAR _fish_abbr_runbootstrap:\x24DOTS/scripts/bootstrap
 SETUVAR _fish_abbr_sshc:vim\x20\x7e/\x2essh/config
@@ -64,3 +68,4 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_user_paths:/usr/local/opt/fzf/bin

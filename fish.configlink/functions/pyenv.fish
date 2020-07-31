@@ -13,6 +13,16 @@ function 'pyenv' --description 'Features for Pyenv virtualenvs'
         source ~/.pyenv/versions/$argv[1]/bin/activate.fish
     end
 
+    # vers - switch to pyenv virtualenv with fuzzy menu
+    function 'vers' --description 'Switch to virtualenv'
+        set pyversion (bash -c "pyenv versions --bare --skip-aliases" | fzf)
+        if test $status -ne 0
+            return 1
+        else
+            source "$PYENV_VERSIONS_DIR/$pyversion/bin/activate.fish"
+        end
+    end
+
     function 'ipy' --description 'Borrow iPython interpreter'
         set STORED_VENV $VIRTUAL_ENV
         source $PYENV_VERSIONS_DIR/ipython/bin/activate.fish; and \

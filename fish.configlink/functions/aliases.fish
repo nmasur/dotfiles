@@ -49,11 +49,15 @@ function aliases --description 'All aliases'
     alias proj='cd $PROJ'
     abbr -a ssl 'openssl req -new -newkey rsa:2048 -nodes' \
                 '-keyout server.key -out server.csr'
+    abbr -a get-fingerprint 'ssh-keyscan myhost.com | ssh-keygen -lf -'
+    abbr -a public-key 'ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub'
 
     # Docker
     abbr -a dc '$DOTS/bin/docker_cleanup'
-    abbr -a dr 'docker run'
+    abbr -a dr 'docker run --rm -it'
     abbr -a db 'docker build . -t'
+    abbr -a ds 'docker ps -a'
+    abbr -a de 'docker exec -it'
     alias connect='docker run --rm -v ~/.aws:/root/.aws -v ~/.ssh:/root/.ssh -it connect-aws'
 
     # Terraform

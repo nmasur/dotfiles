@@ -9,7 +9,7 @@ tmux:
     modified: '~'
     untracked: '✚'
     stashed: '⚑ '
-    clean: '✔'
+    clean: ''
   styles:
     state: '#[fg=red,bold]'
     branch: '#[fg=red,bold]'
@@ -19,5 +19,5 @@ tmux:
     modified: '#[fg=colour239,bold]'
     untracked: '#[fg=colour239,bold]'
     stashed: '#[fg=colour239,bold]'
-    clean: '#[fg=green,bold]'
-  layout: [remote, ' ', flags, ' ']
+    clean: '#[fg=colour241,bold]'
+  layout: ['  ', remote, ' ', flags, ' |']

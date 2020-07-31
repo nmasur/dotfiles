@@ -66,12 +66,53 @@ install_brews() {
     echo "brews installed ✓"
 }
 
+use_fish_shell() {
+    if ! (which fish > /dev/null)
+    then
+        echo "Install fish before continuing"
+        echo "You can do: brew install fish"
+        echo "Or add fish to homebrew/Brewfile and rerun"
+        exit 1
+    fi
+    FISH_SHELL=$(which fish)
+    if ! (cat /etc/shells | grep $FISH_SHELL > /dev/null)
+    then
+        echo "Modifying /etc/shells"
+        echo "Requires sudo password"
+        sudo echo $FISH_SHELL >> /etc/shells
+    fi
+    if ! (echo "$SHELL" | grep fish > /dev/null)
+    then
+        echo "Changing default shell to fish"
+        echo "Requires sudo password"
+        sudo chsh -s $FISH_SHELL
+    fi
+
+    echo "fish ✓"
+}
+
 setup_tmux() {
     if [[ ! -d ~/.tmux/plugins/tpm ]]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 
     echo "tmux ✓"
+}
+
+install_gitmux() {
+    if ! (which gitmux > /dev/null)
+    then
+        printf "gitmux ✕\n\n"
+        printf "\ninstalling gitmux..."
+        /bin/bash -c "$(curl -L -o gitmux.tar.gz https://github.com/arl/gitmux/releases/download/v0.6.0/gitmux_0.6.0_macOS_amd64.tar.gz)"
+        tar -xzf gitmux.tar.gz gitmux
+        mkdir -p ~/.local/bin
+        mv gitmux ~/.local/bin/
+        rm gitmux.tar.gz
+        echo ""
+    fi
+
+    echo "gitmux ✓"
 }
 
 install_spacemacs() {
@@ -85,13 +126,15 @@ install_spacemacs() {
 }
 
 printf "\nbootstrapping...\n\n"
-check_for_zsh
-check_for_ohmyzsh
+#check_for_zsh
+#check_for_ohmyzsh
 install_xcode
 install_homebrew
 install_brews
 setup_tmux
+install_gitmux
 install_spacemacs
+use_fish_shell
 ("$DOTS/scripts/setup_symlinks")
 
 echo ""

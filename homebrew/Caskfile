@@ -6,7 +6,8 @@ cask "google-chrome"
 # Work Programs
 cask "slack"
 cask "zoomus"
-cask "onepassword"
+cask "1password"
+cask "1password-cli"
 cask "dropbox"
 
 # Fonts

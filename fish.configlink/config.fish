@@ -27,13 +27,15 @@ if status --is-interactive
     # Colors
     theme_gruvbox
 
-    # Aliases
-    aliases
-
     # Individual features
+    aliases
     pyenv
     notes
     aws
+    mactools
+
+    # Fuzzy finder
+    fzf_key_bindings
 
     # Use `starship` prompt
     starship init fish | source

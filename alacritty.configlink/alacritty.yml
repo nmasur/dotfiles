@@ -366,7 +366,7 @@ shell:
   args:
     - --login
     - --init-command
-    - tmux a -t noah || tmux new -s noah
+    - tmux a -t noah || eval (security find-generic-password -s 1Password -w | op signin enterprise_console) && tmux new -s noah
 
 # Startup directory
 #
