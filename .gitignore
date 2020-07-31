@@ -1,6 +1,8 @@
 .DS_Store
 nvim.configlink/dirs/*
 nvim.configlink/.netrwhist
+nvim.configlink/plugged/**
 spacemacs.d.symlink/.spacemacs.env
 fish.configlink/config.fish.bac
 *.lock.json
+

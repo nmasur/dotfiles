@@ -1,5 +1,17 @@
 " Vim Config
 
+" Plugins
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
+Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
+Plug 'hashivim/vim-terraform'                       " Terraform HCL syntax
+Plug 'vimwiki/vimwiki'                              " Wiki System
+
+call plug#end()
+
+" Settings
+filetype plugin on              " Load the plugin for current filetype (vimwiki)
 syntax enable                   " Syntax highlighting
 set termguicolors               " Set to truecolor
 colorscheme gruvbox             " Installed in autoload/ and colors/
@@ -13,7 +25,9 @@ set ignorecase                  " Ignore case when searching
 set smartcase                   " Check case when using capitals in search
 set incsearch                   " Search while typing
 set pastetoggle=<F3>
-set visualbell
+set visualbell                  " No sounds
+set scrolljump=1                " Scroll more than one line (or 1 line)
+set scrolloff=3                 " Margin of lines when scrolling
 
 set clipboard+=unnamedplus      " Uses system clipboard for yanking
 
@@ -21,10 +35,6 @@ set clipboard+=unnamedplus      " Uses system clipboard for yanking
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-
-" Terraform plugin
-let g:terraform_align=1
-let g:terraform_remap_spacebar=1
 
 " Line type
 let &t_ti.="\e[1 q"
@@ -36,8 +46,8 @@ let &t_te.="\e[0 q"
 set noswapfile                          " Instead of swaps, create backups (less annoying)
 set backup                              " Easier to recover and more secure 
 set undofile                            " Keeps undos after quit
-set backupdir=~/.vim/dirs/backup
-set undodir=~/.vim/dirs/undo
+set backupdir=~/.config/nvim/dirs/backup
+set undodir=~/.config/vim/dirs/undo
 
 " Create backup directories if they don't exist
 if !isdirectory(&backupdir)
@@ -53,4 +63,11 @@ set mouse=nv
 " Change title
 let &titlestring = @%
 set title
+
+" Terraform Plugin
+let g:terraform_fmt_on_save=1
+
+" VimWiki Plugin
+let g:vimwiki_list = [{'path': '~/Documents/notes/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 

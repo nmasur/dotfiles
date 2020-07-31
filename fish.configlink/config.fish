@@ -7,7 +7,7 @@ if status --is-interactive
     set DOTS (dirname $FISH_DIR)
     set PROJ (dirname $DOTS)
     set PATH $PATH /usr/local/bin ~/.local/bin $DOTS/bin ~/.cargo/bin
-    set CDPATH . $HOME $PROJ $DOTS
+    set CDPATH . $HOME $PROJ
 
     # Use `vi` in the shell with cursor shapes
     fish_vi_key_bindings

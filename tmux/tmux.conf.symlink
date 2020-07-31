@@ -14,6 +14,9 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
+# Split out pane
+bind b break-pane
+
 # Copy mode works as Vim
 bind Escape copy-mode
 bind C-[ copy-mode
