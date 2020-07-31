@@ -5,6 +5,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
 Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
+Plug 'tpope/vim-surround'                           " Enables paren editing
+Plug 'Raimondi/delimitMate'                         " Auto-close parentheses
+Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
 Plug 'hashivim/vim-terraform'                       " Terraform HCL syntax
 Plug 'vimwiki/vimwiki'                              " Wiki System
 
@@ -56,6 +59,21 @@ endif
 if !isdirectory(&undodir)
   call mkdir(&undodir, "p")
 endif
+
+" Map the leader key
+map <Space> <Leader>
+
+" Jump to text in this directory
+nnoremap <Leader>t :Rg<CR>
+
+" Open file in this directory
+nnoremap <Leader>f :Files<cr>
+
+" Switch between multiple open files
+nnoremap <Leader>b :Buffers<cr>
+
+" Jump to text in this file
+nnoremap <Leader>s :BLines<cr>
 
 " Mouse interaction / scrolling
 set mouse=nv
