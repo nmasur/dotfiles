@@ -17,8 +17,9 @@ function notes --description "Notes functions"
     end
 
     function today --description "Open today's journal"
+        cd $HOME/Documents/notes
         set today (date -j +"%Y-%m-%d_%a")
-        set today_journal $HOME/Documents/notes/$today.md
+        set today_journal $today.md
         if [ -f $today_journal ]
             vim $today_journal
         else
@@ -29,13 +30,16 @@ function notes --description "Notes functions"
             echo "New journal added."
             vim $today_journal
         end
+        cd -
     end
 
     function wiki --description "Open vimwiki file"
-        set file (fd . ~/Documents/notes | fzf)
+        cd $HOME/Documents/notes
+        set file (ls | fzf)
         if [ $status -eq 0 ]
             vim $file
         end
+        cd -
     end
 
     function note --description "Edit or create a note"

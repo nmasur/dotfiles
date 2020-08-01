@@ -590,7 +590,7 @@ shell:
 # in the order they were defined in.
 key_bindings:
     - { key: F, mods: Super, action: ToggleSimpleFullscreen }
-    - { key: A, mods: Super, chars: "\x02" }
+    - { key: A, mods: Super, chars: "\x02" }        # CMD-A sends CTRL-B for tmux
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }

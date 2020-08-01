@@ -67,6 +67,9 @@ if !isdirectory(&undodir)
   call mkdir(&undodir, "p")
 endif
 
+" Command to edit vimrc (this file)
+command Vimrc edit ~/.config/nvim/init.vim
+
 " Map the leader key
 map <Space> <Leader>
 
