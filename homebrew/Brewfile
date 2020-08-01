@@ -9,7 +9,7 @@ brew "tmux"
 brew "autojump"
 
 # Shell Completion
-brew "tldr"
+brew "tealdeer"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 
@@ -58,6 +58,10 @@ brew "googler"
 tap "nmasur/repo"
 brew "nmasur/repo/drips"
 brew "nmasur/repo/update-ssh-config"
+
+# Try them out
+tap "cjbassi/ytop"
+brew "cjbassi/ytop/ytop"
 
 # Not Installed
 # git -- already installed

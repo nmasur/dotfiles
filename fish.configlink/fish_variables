@@ -26,13 +26,16 @@ SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_gu:git\x20pull
 SETUVAR _fish_abbr_h:http\x20\x2dFh\x20\x2d\x2dall
 SETUVAR _fish_abbr_hosts:sudo\x20vim\x20/etc/hosts
+SETUVAR _fish_abbr_k:kubectl
 SETUVAR _fish_abbr_l:ls
 SETUVAR _fish_abbr_la:ls\x20\x2dalhF
 SETUVAR _fish_abbr_lh:ls\x20\x2dlh
 SETUVAR _fish_abbr_ll:ls\x20\x2dalhF
 SETUVAR _fish_abbr_misty:cd\x20\x24PROJ/misty
+SETUVAR _fish_abbr_nodes:kubectl\x20get\x20nodes
 SETUVAR _fish_abbr_oldcat:cat
 SETUVAR _fish_abbr_p:python
+SETUVAR _fish_abbr_pods:kubectl\x20get\x20pods\x20\x2dA
 SETUVAR _fish_abbr_public_2D_key:ssh\x2dkeygen\x20\x2dy\x20\x2df\x20\x7e/\x2essh/id_rsa\x20\x3e\x20\x7e/\x2essh/id_rsa\x2epub
 SETUVAR _fish_abbr_py:python
 SETUVAR _fish_abbr_runbootstrap:\x24DOTS/scripts/bootstrap

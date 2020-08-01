@@ -63,6 +63,11 @@ function aliases --description 'All aliases'
     # Terraform
     abbr -a te 'terraform'
 
+    # Kubernetes
+    abbr -a k 'kubectl'
+    abbr -a pods 'kubectl get pods -A'
+    abbr -a nodes 'kubectl get nodes'
+
     # Python
     abbr py 'python'
     alias domisty='cd $PROJ/misty && ./buildrun.sh'
