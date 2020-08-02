@@ -22,18 +22,26 @@ download_rust_analyzer() {
     then
         echo "downloading rust analyzer"
         rust_analyzer_bin=/usr/local/bin/rust-analyzer
-        curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac -o $rust_analyzer_bin
+        curl -s -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac -o $rust_analyzer_bin
         chmod +x $rust_analyzer_bin
     fi
 
     echo "rust-analyzer ✓"
 }
 
-cargo_tools() {
-    cargo install toml-cli
-    cargo install jql
+install_cargos() {
+    programs=(
+        cargo-edit
+        cargo-whatfeatures
+        jql
+        toml-cli
+    )
+    for i in "${programs[@]}"; do
+        cargo install "$i"
+    done
 }
 
 install_rust
 update_rust
 download_rust_analyzer
+install_cargos

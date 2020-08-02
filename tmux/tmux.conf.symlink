@@ -1,3 +1,6 @@
+# Colors for CoC
+set-option -g default-terminal "screen-256color"
+
 # Keep plenty of history for scrollback
 set -g history-limit 100000
 

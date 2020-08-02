@@ -3,17 +3,11 @@
 echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-echo "Enable subpixel font rendering on non-Apple LCDs"
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
-echo "Do NOT automatically show and hide the dock"
-defaults write com.apple.dock autohide -bool false
+echo "Automatically show and hide the dock"
+defaults write com.apple.dock autohide -bool true
 
 echo "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true
-
-echo "Do NOT show all filename extensions in Finder"
-defaults write NSGlobalDomain AppleShowAllExtensions -bool false
 
 echo "Use current directory as default search scope in Finder"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -75,9 +69,6 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # echo "Only use UTF-8 in Terminal.app"
 # defaults write com.apple.terminal StringEncodings -array 4
 
-# echo "Make ⌘ + F focus the search input in iTunes"
-# defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
-
 # Noah Prefs
 echo "Enable dock magnification"
 defaults write com.apple.dock magnification -bool true
@@ -90,8 +81,15 @@ echo "Turn on Scroll Reverser"
 open /Applications/Scroll\ Reverser.app
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Scroll Reverser.app", hidden:false}'
 
-# echo "Allow apps from anywhere"
-# sudo spctl --master-disable
+echo "Allow apps from anywhere"
+SPCTL=$(spctl --status)
+if ! [ "$SPCTL" = "assessments disabled" ]
+then
+    sudo spctl --master-disable
+fi
+
+# App Store Installs
+mas install 1017470484 # NextMeeting - show upcoming meeting in menu bar
 
 # ---
 

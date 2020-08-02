@@ -20,6 +20,7 @@ brew "wget"                 # Not quite curl
 brew "telnet"               # Check networking
 brew "prettyping"           # Better ping
 brew "httpie"               # Better curl
+brew "nushell"              # Data manipulation shell
 brew "shellcheck"           # Lint for bash
 brew "pyenv"                # Python installations
 brew "pyenv-virtualenv"     # Python virtualenvs

@@ -9,4 +9,4 @@ source $DOTS/zsh/vim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source ~/.iterm2_shell_integration.zsh
+#source ~/.iterm2_shell_integration.zsh

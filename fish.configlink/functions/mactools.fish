@@ -6,6 +6,9 @@ function mactools
         cat $argv | pbcopy
     end
 
+    abbr -a brews 'vim $DOTS/homebrew/Brewfile'
+    abbr -a casks 'vim $DOTS/homebrew/Caskfile'
+
     function brewsearch --description "Install brew plugins"
         set -l inst (brew search | eval "fzf $FZF_DEFAULT_OPTS -m --header='[brew:install]'")
 

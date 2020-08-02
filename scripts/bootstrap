@@ -126,14 +126,11 @@ install_spacemacs() {
 }
 
 printf "\nbootstrapping...\n\n"
-#check_for_zsh
-#check_for_ohmyzsh
 install_xcode
 install_homebrew
 install_brews
 setup_tmux
 install_gitmux
-install_spacemacs
 use_fish_shell
 ("$DOTS/scripts/setup_symlinks")
 
@@ -144,4 +141,5 @@ echo " - configure_macos"
 echo " - setup_keybase"
 echo " - install_python"
 echo " - install_rust"
+echo " - install_cargos"
 echo ""

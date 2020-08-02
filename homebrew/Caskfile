@@ -7,6 +7,7 @@ cask "slack"
 cask "zoomus"
 cask "1password"
 cask "1password-cli"
+cask "lastpass"
 cask "dropbox"
 
 # Fonts
@@ -21,6 +22,7 @@ cask "scroll-reverser"
 cask "authy"
 cask "postman"
 cask "drawio"
+cask "meetingbar"
 
 # Personal
 cask "discord"

@@ -4,8 +4,10 @@ SETUVAR OP_SESSION_enterprise_console:CoIqb03EMshttN\x2dvIfdyWOhc6IIckFS6mBfvRQ9
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr__01_t:cat
 SETUVAR _fish_abbr_boot:\x24DOTS/scripts/bootstrap
+SETUVAR _fish_abbr_brews:vim\x20\x24DOTS/homebrew/Brewfile
 SETUVAR _fish_abbr_c:cd
 SETUVAR _fish_abbr_ca:cargo
+SETUVAR _fish_abbr_casks:vim\x20\x24DOTS/homebrew/Caskfile
 SETUVAR _fish_abbr_cat:bat
 SETUVAR _fish_abbr_d:deactivate
 SETUVAR _fish_abbr_db:docker\x20build\x20\x2e\x20\x2dt
