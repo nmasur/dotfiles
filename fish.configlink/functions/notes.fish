@@ -11,7 +11,7 @@ function notes --description "Notes functions"
             set yesterday (date -jv "-1d" +"%Y-%m-%d_%a")
             set tomorrow (date -jv "+1d" +"%Y-%m-%d_%a")
             set weather (curl -s "https://wttr.in/?format=1")
-            printf "[[$yesterday|Previous]] - [[calendar|Index]] - [[$tomorrow|Next]]\n\n---\n\n$weather\n\n # Tasks\n\n\n# Log\n\n\n# Communication\n\n---\n\n# Meetings\n\n" > $today_journal
+            printf "[[$yesterday|Previous]] - [[calendar|Index]] - [[$tomorrow|Next]]\n\n---\n\n$weather\n\n# Tasks\n\n\n# Log\n\n\n# Communication\n\n---\n\n# Meetings\n\n" > $today_journal
             echo "New journal added."
         end
     end
@@ -26,7 +26,7 @@ function notes --description "Notes functions"
             set yesterday (date -jv "-1d" +"%Y-%m-%d_%a")
             set tomorrow (date -jv "+1d" +"%Y-%m-%d_%a")
             set weather (curl -s "https://wttr.in/?format=1")
-            printf "[[$yesterday|Previous]] - [[calendar|Index]] - [[$tomorrow|Next]]\n\n---\n\n$weather\n\n # Tasks\n\n\n# Log\n\n\n# Communication\n\n---\n\n# Meetings\n\n" > $today_journal
+            printf "[[$yesterday|Previous]] - [[calendar|Index]] - [[$tomorrow|Next]]\n\n---\n\n$weather\n\n# Tasks\n\n\n# Log\n\n\n# Communication\n\n---\n\n# Meetings\n\n" > $today_journal
             echo "New journal added."
             vim $today_journal
         end
