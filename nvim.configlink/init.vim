@@ -1,17 +1,18 @@
 " Vim Config
 
-" Plugin Settings
-"----------------
+" Plugins
+"--------
 
 " Install vim-plugged if not installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
+
+" All plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" List of plugins
 Plug 'morhetz/gruvbox'                              " Colorscheme
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
 Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
