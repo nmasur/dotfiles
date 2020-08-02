@@ -26,6 +26,7 @@ brew "pyenv-virtualenv"     # Python virtualenvs
 brew "ruby"                 # Newer than default ruby
 brew "ansible"              # Deploy to local server
 brew "terraform"            # Deploy cloud infra
+brew "node"                 # Ugh, nodejs
 brew "packer"               # Build deployment images
 brew "gpg"                  # Encryption
 brew "qrencode"             # Make a QR code

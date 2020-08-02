@@ -1,12 +1,22 @@
 " Vim Config
 
-" Plugins
+" Plugin Settings
+"----------------
+
+" Install vim-plugged if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 call plug#begin('~/.config/nvim/plugged')
 
+" List of plugins
+Plug 'morhetz/gruvbox'                              " Colorscheme
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
 Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
 Plug 'tpope/vim-surround'                           " Enables paren editing
-Plug 'Raimondi/delimitMate'                         " Auto-close parentheses
+Plug 'tmsvg/pear-tree'                              " Auto- and smart-parentheses
 Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
 Plug 'sheerun/vim-polyglot'                         " Syntax for every language
 Plug 'vimwiki/vimwiki'                              " Wiki Markdown System
@@ -15,9 +25,10 @@ Plug 'airblade/vim-gitgutter'                       " Git next to line numbers
 Plug 'tpope/vim-fugitive'                           " Other git commands
 Plug 'machakann/vim-highlightedyank'                " Highlight text when copied
 Plug 'itchyny/lightline.vim'                        " Status bar
-Plug 'shinchu/lightline-gruvbox.vim'                " Colors for status bar
 Plug 'tpope/vim-vinegar'                            " Fixes netrw file explorer
+Plug 'lambdalisue/fern.vim'                         " File explorer / project drawer
 Plug 'christoomey/vim-tmux-navigator'               " Hotkeys for tmux panes
+Plug 'neoclide/coc.nvim', {'branch': 'release'}     " Code completion
 
 call plug#end()
 
@@ -45,6 +56,9 @@ set clipboard+=unnamedplus      " Uses system clipboard for yanking
 
 " Neovim only
 set inccommand=split            " Live preview search and replace
+
+" Mouse interaction / scrolling
+set mouse=nv
 
 " Remember last position
 if has("autocmd")
@@ -84,6 +98,9 @@ nnoremap <Leader>/ :Rg<CR>
 " Open file in this directory
 nnoremap <Leader>f :Files<cr>
 
+" Open a recent file
+nnoremap <Leader>r :History<cr>
+
 " Switch between multiple open files
 nnoremap <Leader>b :Buffers<cr>
 
@@ -103,10 +120,7 @@ nnoremap <Leader>p :Git push<cr>
 nnoremap <Leader>m :only<cr>
 
 " Open file tree
-nnoremap <Leader>t :Vexplore<cr>
-
-" Mouse interaction / scrolling
-set mouse=nv
+noremap <silent> <Leader>t :Fern . -drawer -width=35 -toggle<CR><C-w>=
 
 " Plugin Settings
 "----------------
@@ -116,19 +130,30 @@ let g:netrw_liststyle = 3               " Change style to 'tree' view
 let g:netrw_banner = 0                  " Remove useless banner
 let g:netrw_winsize = 15                " Explore window takes % of page
 let g:netrw_browse_split = 4            " Open in previous window
-let g:netrw_altv = 1                    " idk
+let g:netrw_altv = 1                    " Always split left
+
+" Pear Tree parentheses plugin
+let g:pear_tree_repeatable_expand = 0   " Don't hide paren until escape
+let g:pear_tree_smart_openers = 1       " Smart paren mode, which checks outer or inners
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 
 " Gitgutter plugin
 let g:gitgutter_enabled = 0             " Disable on start
 
-" Terraform Plugin
-let g:terraform_fmt_on_save=1
+" Polyglot syntax plugin
+let g:terraform_fmt_on_save=1           " Formats with terraform plugin
 
-" VimWiki Plugin
-let g:vimwiki_list = [{'path': '~/Documents/notes/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+" VimWiki plugin
+let g:vimwiki_list = [
+  \ {
+  \   'path': '~/Documents/notes/',
+  \   'syntax': 'markdown',
+  \   'ext': '.md'
+  \ }
+  \ ]
 
-" Status Bar Plugin
+" Lightline status bar plugin
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ 'active': {
@@ -140,5 +165,3 @@ let g:lightline = {
   \   'gitbranch': 'fugitive#head'
   \ }
   \ }
-" let g:lightline.colorscheme = 'gruvbox'
-
