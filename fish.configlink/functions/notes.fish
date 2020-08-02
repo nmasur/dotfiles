@@ -46,4 +46,14 @@ function notes --description "Notes functions"
         vim ~/Documents/notes/$argv[1].md
     end
 
+    abbr -a sn 'syncnotes'
+    function syncnotes --description "Full git commit on notes"
+        cd $HOME/Documents/notes
+        git pull
+        git add -A
+        git commit -m "autosync"
+        git push
+        cd -
+    end
+
 end

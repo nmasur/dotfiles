@@ -42,6 +42,7 @@ SETUVAR _fish_abbr_pods:kubectl\x20get\x20pods\x20\x2dA
 SETUVAR _fish_abbr_public_2D_key:ssh\x2dkeygen\x20\x2dy\x20\x2df\x20\x7e/\x2essh/id_rsa\x20\x3e\x20\x7e/\x2essh/id_rsa\x2epub
 SETUVAR _fish_abbr_py:python
 SETUVAR _fish_abbr_runbootstrap:\x24DOTS/scripts/bootstrap
+SETUVAR _fish_abbr_sn:syncnotes
 SETUVAR _fish_abbr_sshc:vim\x20\x7e/\x2essh/config
 SETUVAR _fish_abbr_ssl:openssl\x20req\x20\x2dnew\x20\x2dnewkey\x20rsa\x3a2048\x20\x2dnodes\x20\x2dkeyout\x20server\x2ekey\x20\x2dout\x20server\x2ecsr
 SETUVAR _fish_abbr_te:terraform
