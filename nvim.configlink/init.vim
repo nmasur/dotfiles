@@ -17,7 +17,6 @@ Plug 'morhetz/gruvbox'                              " Colorscheme
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
 Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
 Plug 'tpope/vim-surround'                           " Enables paren editing
-Plug 'tmsvg/pear-tree'                              " Auto- and smart-parentheses
 Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
 Plug 'sheerun/vim-polyglot'                         " Syntax for every language
 Plug 'vimwiki/vimwiki'                              " Wiki Markdown System
@@ -40,6 +39,7 @@ set termguicolors               " Set to truecolor
 colorscheme gruvbox             " Installed in autoload/ and colors/
 
 " Options
+set hidden                      " Don't unload buffers when leaving them
 set number                      " Show line numbers
 set relativenumber              " Relative numbers instead of absolute
 set list                        " Reveal whitespace with ---
@@ -54,6 +54,7 @@ set scrolljump=1                " Scroll more than one line (or 1 line)
 set scrolloff=3                 " Margin of lines when scrolling
 set pastetoggle=<F3>            " Use F3 to enter paste mode
 set clipboard+=unnamedplus      " Uses system clipboard for yanking
+set updatetime=300              " Faster diagnostics
 
 " Neovim only
 set inccommand=split            " Live preview search and replace
@@ -97,31 +98,95 @@ nnoremap <silent> <CR> :noh<CR><CR>
 nnoremap <Leader>/ :Rg<CR>
 
 " Open file in this directory
-nnoremap <Leader>f :Files<cr>
+nnoremap <Leader>ff :Files<cr>
 
 " Open a recent file
-nnoremap <Leader>r :History<cr>
+nnoremap <Leader>fr :History<cr>
 
 " Switch between multiple open files
-nnoremap <Leader>b :Buffers<cr>
+nnoremap <Leader>bb :Buffers<cr>
 
 " Jump to text in this file
 nnoremap <Leader>s :BLines<cr>
 
 " Start Magit buffer
-nnoremap <Leader>g :Magit<cr>
+nnoremap <Leader>gs :Magit<cr>
 
 " Toggle Git gutter (by line numbers)
 nnoremap <Leader>` :GitGutterToggle<cr>
 
 " Git push
-nnoremap <Leader>p :Git push<cr>
+nnoremap <Leader>gp :Git push<cr>
 
 " Close all other splits
-nnoremap <Leader>m :only<cr>
+nnoremap <Leader>wm :only<cr>
 
 " Open file tree
 noremap <silent> <Leader>t :Fern . -drawer -width=35 -toggle<CR><C-w>=
+
+" CoC Settings
+"-------------
+
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-pairs']
+
+" Set tab to completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+" Uses updatetime for delay before showing info.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Plugin Settings
 "----------------
@@ -133,17 +198,12 @@ let g:netrw_winsize = 15                " Explore window takes % of page
 let g:netrw_browse_split = 4            " Open in previous window
 let g:netrw_altv = 1                    " Always split left
 
-" Pear Tree parentheses plugin
-let g:pear_tree_repeatable_expand = 0   " Don't hide paren until escape
-let g:pear_tree_smart_openers = 1       " Smart paren mode, which checks outer or inners
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
-
 " Gitgutter plugin
-let g:gitgutter_enabled = 0             " Disable on start
+let g:gitgutter_enabled = 1             " Enabled on start
 
 " Polyglot syntax plugin
 let g:terraform_fmt_on_save=1           " Formats with terraform plugin
+let g:rustfmt_autosave = 1              " Formats with rust plugin
 
 " VimWiki plugin
 let g:vimwiki_list = [
@@ -160,9 +220,13 @@ let g:lightline = {
   \ 'active': {
   \   'right': [[ 'lineinfo' ]],
   \   'left': [[ 'mode', 'paste' ],
-  \            [ 'readonly', 'relativepath', 'gitbranch', 'modified' ]]
+  \            [ 'cocstatus', 'readonly', 'relativepath', 'gitbranch', 'modified' ]]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'fugitive#head',
+  \   'cocstatus': 'coc#status'
+  \ },
   \ }
-  \ }
+
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
