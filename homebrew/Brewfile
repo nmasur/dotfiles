@@ -27,7 +27,7 @@ brew "pyenv-virtualenv"     # Python virtualenvs
 brew "ruby"                 # Newer than default ruby
 brew "ansible"              # Deploy to local server
 brew "terraform"            # Deploy cloud infra
-brew "node"                 # Ugh, nodejs
+brew "node"                 # Ugh, nodejs (for Vim CoC)
 brew "packer"               # Build deployment images
 brew "gpg"                  # Encryption
 brew "qrencode"             # Make a QR code
@@ -45,10 +45,8 @@ tap "cjbassi/ytop"          # Fancy system performance
 brew "cjbassi/ytop/ytop"
 
 # Not Installed
-# git -- already installed
 # pulumi
 # awscli
 # saulpw/vd/visidata
 # brew tap weaveworks/tap && brew install weaveworks/tap/eksctl (EKS on AWS)
-# glances (top)
 
