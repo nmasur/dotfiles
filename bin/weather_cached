@@ -1,0 +1,12 @@
+#!/bin/sh
+
+CACHE_FILE="$HOME/.tmux/.weather_cache"
+CACHE_TIME=$(stat -f %m $CACHE_FILE)
+NOW_TIME=$(date +%s)
+TIME_PASSED=$((NOW_TIME-CACHE_TIME))
+if [[ "$TIME_PASSED" -gt "1200" ]]
+then
+    curl -m 2 -s wttr.in/\?format\="%c%t" > $CACHE_FILE
+fi
+cat $CACHE_FILE
+

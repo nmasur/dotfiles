@@ -8,8 +8,8 @@ Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
 Plug 'tpope/vim-surround'                           " Enables paren editing
 Plug 'Raimondi/delimitMate'                         " Auto-close parentheses
 Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
-Plug 'hashivim/vim-terraform'                       " Terraform HCL syntax
-Plug 'vimwiki/vimwiki'                              " Wiki System
+Plug 'sheerun/vim-polyglot'                         " Syntax for every language
+Plug 'vimwiki/vimwiki'                              " Wiki Markdown System
 Plug 'jreybert/vimagit'                             " Git 'gui' buffer
 Plug 'airblade/vim-gitgutter'                       " Git next to line numbers
 Plug 'tpope/vim-fugitive'                           " Other git commands
@@ -17,15 +17,17 @@ Plug 'machakann/vim-highlightedyank'                " Highlight text when copied
 Plug 'itchyny/lightline.vim'                        " Status bar
 Plug 'shinchu/lightline-gruvbox.vim'                " Colors for status bar
 Plug 'tpope/vim-vinegar'                            " Fixes netrw file explorer
+Plug 'christoomey/vim-tmux-navigator'               " Hotkeys for tmux panes
 
 call plug#end()
 
-" Settings
+" Basic Settings
 filetype plugin on              " Load the plugin for current filetype (vimwiki)
 syntax enable                   " Syntax highlighting
 set termguicolors               " Set to truecolor
 colorscheme gruvbox             " Installed in autoload/ and colors/
 
+" Options
 set number                      " Show line numbers
 set relativenumber              " Relative numbers instead of absolute
 set list                        " Reveal whitespace with ---
@@ -38,19 +40,16 @@ set incsearch                   " Search while typing
 set visualbell                  " No sounds
 set scrolljump=1                " Scroll more than one line (or 1 line)
 set scrolloff=3                 " Margin of lines when scrolling
-
+set pastetoggle=<F3>            " Use F3 to enter paste mode
 set clipboard+=unnamedplus      " Uses system clipboard for yanking
+
+" Neovim only
+set inccommand=split            " Live preview search and replace
 
 " Remember last position
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-
-" Line type
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
 
 " Better backup, swap and undo storage
 set noswapfile                          " Instead of swaps, create backups (less annoying)
@@ -67,11 +66,17 @@ if !isdirectory(&undodir)
   call mkdir(&undodir, "p")
 endif
 
-" Command to edit vimrc (this file)
-command Vimrc edit ~/.config/nvim/init.vim
+" Custom commands
+command Vimrc edit ~/.config/nvim/init.vim  " Edit .vimrc (this file)
+
+" Custom Keybinds
+"----------------
 
 " Map the leader key
 map <Space> <Leader>
+
+"This unsets the `last search pattern` register by hitting return
+nnoremap <silent> <CR> :noh<CR><CR>
 
 " Jump to text in this directory
 nnoremap <Leader>/ :Rg<CR>
@@ -103,14 +108,8 @@ nnoremap <Leader>t :Vexplore<cr>
 " Mouse interaction / scrolling
 set mouse=nv
 
-" Change title
-let &titlestring = @%
-set title
-
-" Make whitespace pretty
-" if &listchars ==# 'eol:$'
-"   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-" endif
+" Plugin Settings
+"----------------
 
 " Built-in explorer plugin
 let g:netrw_liststyle = 3               " Change style to 'tree' view
@@ -129,11 +128,7 @@ let g:terraform_fmt_on_save=1
 let g:vimwiki_list = [{'path': '~/Documents/notes/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
-endfunction
-
+" Status Bar Plugin
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ 'active': {
@@ -147,4 +142,3 @@ let g:lightline = {
   \ }
 " let g:lightline.colorscheme = 'gruvbox'
 
-" set statusline+=%{GitStatus()}

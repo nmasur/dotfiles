@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR OP_SESSION_enterprise_console:CoIqb03EMshttN\x2dvIfdyWOhc6IIckFS6mBfvRQ9r1a0
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr__01_t:cat
 SETUVAR _fish_abbr_boot:\x24DOTS/scripts/bootstrap
@@ -25,7 +26,7 @@ SETUVAR _fish_abbr_gp:git\x20push
 SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_gu:git\x20pull
 SETUVAR _fish_abbr_h:http\x20\x2dFh\x20\x2d\x2dall
-SETUVAR _fish_abbr_hosts:sudo\x20vim\x20/etc/hosts
+SETUVAR _fish_abbr_hosts:sudo\x20nvim\x20/etc/hosts
 SETUVAR _fish_abbr_k:kubectl
 SETUVAR _fish_abbr_l:ls
 SETUVAR _fish_abbr_la:ls\x20\x2dalhF
@@ -44,6 +45,10 @@ SETUVAR _fish_abbr_ssl:openssl\x20req\x20\x2dnew\x20\x2dnewkey\x20rsa\x3a2048\x2
 SETUVAR _fish_abbr_te:terraform
 SETUVAR _fish_abbr_v:vim
 SETUVAR _fish_abbr_vimrc:vim\x20\x24HOME/\x2econfig/nvim/init\x2evim
+SETUVAR _fish_abbr_za:zoxide\x20add
+SETUVAR _fish_abbr_zq:zoxide\x20query
+SETUVAR _fish_abbr_zqi:zoxide\x20query\x20\x2di
+SETUVAR _fish_abbr_zr:zoxide\x20remove
 SETUVAR fish_color_autosuggestion:686868
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:a1b56c

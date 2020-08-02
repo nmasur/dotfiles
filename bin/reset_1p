@@ -1,0 +1,4 @@
+#!/bin/sh
+
+security find-generic-password -s 1Password -w | op signin enterprise_console --output=raw > $HOME/.op_tmux_token_tmp
+ 

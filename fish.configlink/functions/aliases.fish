@@ -36,17 +36,19 @@ function aliases --description 'All aliases'
     alias moon='curl wttr.in/Moon'
     alias ipinfo='curl ipinfo.io'
     alias worldmap='telnet mapscii.me'
+    function qr
+        qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png
+    end
 
     # Dotfile and config shortcuts
     alias reload='source $DOTS/fish.configlink/config.fish'     # Refresh fish shell
     abbr -a boot '$DOTS/scripts/bootstrap'
     abbr -a sshc 'vim ~/.ssh/config'
-    abbr -a hosts 'sudo vim /etc/hosts'
+    abbr -a hosts 'sudo nvim /etc/hosts'
     abbr -a frc 'vim $HOME/.config/fish/config.fish'
     abbr -a falias 'vim $HOME/.config/fish/functions/aliases.fish'
 
     # Cheat Sheets
-    alias proj='cd $PROJ'
     abbr -a ssl 'openssl req -new -newkey rsa:2048 -nodes' \
                 '-keyout server.key -out server.csr'
     abbr -a get-fingerprint 'ssh-keyscan myhost.com | ssh-keygen -lf -'

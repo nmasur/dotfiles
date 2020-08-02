@@ -1,76 +1,52 @@
-tap "homebrew/cask"
+# Homebrew Installations
 
-# Shells
-brew "fish"
-
-# Shell Navigation
-brew "exa"
-brew "tmux"
-brew "autojump"
-
-# Shell Completion
-brew "tealdeer"
-brew "zsh-syntax-highlighting"
-brew "zsh-autosuggestions"
-
-# Shell Style
-brew "starship"
-
-# Searching
-brew "the_silver_searcher"
-brew "ripgrep"
-brew "fzf"
-brew "fd"
-
-# File Manipulation
-brew "sd"
-brew "bat"
-brew "jq"
-brew "xsv"
-brew "dos2unix"
-brew "trash"
-
-# Networking
-brew "wget"
-brew "telnet"
-brew "prettyping"
-brew "httpie"
-
-# Languages
-brew "shellcheck"
-brew "pyenv"
-brew "pyenv-virtualenv"
-brew "ruby"
-brew "ansible"
-brew "terraform"
-brew "packer"
-
-# Miscellaneous
-brew "gpg"
-brew "emacs-plus"
-
-# Fun
-brew "qrencode"
-brew "youtube-dl"
-brew "googler"
+brew "fish"                 # My shell
+brew "neovim"               # My editor
+brew "exa"                  # Better ls
+brew "tmux"                 # Terminal panes and windows
+brew "tealdeer"             # Mini man page
+brew "starship"             # Shell prompt
+brew "ripgrep"              # Faster, better grep
+brew "fzf"                  # Fuzzy finder
+brew "fd"                   # Faster, better find
+brew "sd"                   # Faster, better sed
+brew "bat"                  # Better cat
+brew "zoxide"               # Better autojump
+brew "jq"                   # JSON manipulation
+brew "xsv"                  # CSV manipulation
+brew "dos2unix"             # File conversion
+brew "trash"                # Delete to trash
+brew "wget"                 # Not quite curl
+brew "telnet"               # Check networking
+brew "prettyping"           # Better ping
+brew "httpie"               # Better curl
+brew "shellcheck"           # Lint for bash
+brew "pyenv"                # Python installations
+brew "pyenv-virtualenv"     # Python virtualenvs
+brew "ruby"                 # Newer than default ruby
+brew "ansible"              # Deploy to local server
+brew "terraform"            # Deploy cloud infra
+brew "packer"               # Build deployment images
+brew "gpg"                  # Encryption
+brew "qrencode"             # Make a QR code
+brew "youtube-dl"           # Download YouTube videos
+brew "googler"              # Search Google
+brew "hub"                  # GitHub commands
 
 # Personal
-tap "nmasur/repo"
-brew "nmasur/repo/drips"
-brew "nmasur/repo/update-ssh-config"
+tap "nmasur/repo"                     # My repo
+brew "nmasur/repo/drips"              # Retrieve AWS IPs
+brew "nmasur/repo/update-ssh-config"  # Update .ssh/config
 
-# Try them out
-tap "cjbassi/ytop"
+# Experimental
+tap "cjbassi/ytop"          # Fancy system performance
 brew "cjbassi/ytop/ytop"
 
 # Not Installed
 # git -- already installed
-# hub -- github commands
 # pulumi
-# libmagic
 # awscli
 # saulpw/vd/visidata
 # brew tap weaveworks/tap && brew install weaveworks/tap/eksctl (EKS on AWS)
-# fasd (cd)
 # glances (top)
 

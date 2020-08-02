@@ -22,7 +22,7 @@ if status --is-interactive
     set fish_greeting ""
 
     # Autojump
-    [ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
+    zoxide init fish | source
 
     # Colors
     theme_gruvbox
@@ -33,6 +33,7 @@ if status --is-interactive
     notes
     aws
     mactools
+    projects
 
     # Fuzzy finder
     fzf_key_bindings

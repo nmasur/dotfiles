@@ -1,9 +1,8 @@
+tap "homebrew/cask"
+
 # Core Applications
-cask "iterm2"
 cask "alacritty"
 cask "google-chrome"
-
-# Work Programs
 cask "slack"
 cask "zoomus"
 cask "1password"
@@ -14,17 +13,13 @@ cask "dropbox"
 tap "homebrew/cask-fonts"
 cask "font-fira-mono-for-powerline"
 
-# Secondary Tools
+# Auxiliary Tools
 cask "docker"
 cask "github-desktop"
 cask "keybase"
 cask "scroll-reverser"
 cask "authy"
-
-# Unnecessary
-cask "dash"
 cask "postman"
-cask "cyberduck"
 cask "drawio"
 
 # Personal
@@ -32,4 +27,9 @@ cask "discord"
 cask "steam"
 cask "vlc"
 cask "calibre"
-cask "skype"
+cask "firefox"
+
+# Don't bother
+# cask "skype"
+# cask "dash"
+# cask "cyberduck"
