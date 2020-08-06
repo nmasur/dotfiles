@@ -69,9 +69,13 @@ function aliases --description 'All aliases'
     abbr -a k 'kubectl'
     abbr -a pods 'kubectl get pods -A'
     abbr -a nodes 'kubectl get nodes'
+    abbr -a deploys 'kubectl get deployments -A'
+    abbr -a dash 'kube-dashboard'
 
     # Python
-    abbr py 'python'
+    abbr -a py 'python'
+    abbr -a po 'poetry'
+    abbr -a pr 'poetry run python'
     alias domisty='cd $PROJ/misty && ./buildrun.sh'
 
     # Rust
