@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR OP_SESSION_enterprise_console:CoIqb03EMshttN\x2dvIfdyWOhc6IIckFS6mBfvRQ9r1a0
+SETUVAR --export PYENV_ROOT:/Users/noah\x2emasur/\x2epyenv
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr__01_t:cat
 SETUVAR _fish_abbr_boot:\x24DOTS/scripts/bootstrap
@@ -10,9 +11,11 @@ SETUVAR _fish_abbr_ca:cargo
 SETUVAR _fish_abbr_casks:vim\x20\x24DOTS/homebrew/Caskfile
 SETUVAR _fish_abbr_cat:bat
 SETUVAR _fish_abbr_d:deactivate
+SETUVAR _fish_abbr_dash:kube\x2ddashboard
 SETUVAR _fish_abbr_db:docker\x20build\x20\x2e\x20\x2dt
 SETUVAR _fish_abbr_dc:\x24DOTS/bin/docker_cleanup
 SETUVAR _fish_abbr_de:docker\x20exec\x20\x2dit
+SETUVAR _fish_abbr_deploys:kubectl\x20get\x20deployments\x20\x2dA
 SETUVAR _fish_abbr_dr:docker\x20run\x20\x2d\x2drm\x20\x2dit
 SETUVAR _fish_abbr_ds:docker\x20ps\x20\x2da
 SETUVAR _fish_abbr_falias:vim\x20\x24HOME/\x2econfig/fish/functions/aliases\x2efish
@@ -38,7 +41,9 @@ SETUVAR _fish_abbr_misty:cd\x20\x24PROJ/misty
 SETUVAR _fish_abbr_nodes:kubectl\x20get\x20nodes
 SETUVAR _fish_abbr_oldcat:cat
 SETUVAR _fish_abbr_p:python
+SETUVAR _fish_abbr_po:poetry
 SETUVAR _fish_abbr_pods:kubectl\x20get\x20pods\x20\x2dA
+SETUVAR _fish_abbr_pr:poetry\x20run\x20python
 SETUVAR _fish_abbr_public_2D_key:ssh\x2dkeygen\x20\x2dy\x20\x2df\x20\x7e/\x2essh/id_rsa\x20\x3e\x20\x7e/\x2essh/id_rsa\x2epub
 SETUVAR _fish_abbr_py:python
 SETUVAR _fish_abbr_runbootstrap:\x24DOTS/scripts/bootstrap
@@ -79,4 +84,4 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR fish_user_paths:/usr/local/opt/fzf/bin
+SETUVAR --export fish_user_paths:/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/Users/noah\x2emasur/\x2epyenv/bin\x1e/usr/local/opt/fzf/bin
