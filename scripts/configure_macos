@@ -88,9 +88,6 @@ then
     sudo spctl --master-disable
 fi
 
-# App Store Installs
-mas install 1017470484 # NextMeeting - show upcoming meeting in menu bar
-
 # ---
 
 echo "Reset Launchpad"
