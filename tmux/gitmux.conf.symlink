@@ -12,7 +12,7 @@ tmux:
     clean: ''
   styles:
     state: '#[fg=red,bold]'
-    branch: '#[fg=red,bold]'
+    branch: '#[fg=bold]'
     remote: '#[fg=colour239]'
     staged: '#[fg=colour241,bold]'
     conflict: '#[fg=red,bold]'
@@ -20,4 +20,4 @@ tmux:
     untracked: '#[fg=colour239,bold]'
     stashed: '#[fg=colour239,bold]'
     clean: '#[fg=colour241,bold]'
-  layout: ['  ', remote, ' ', flags, ' |']
+  layout: ['  ', branch, ' ', flags, ' |']
