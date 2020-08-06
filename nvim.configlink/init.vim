@@ -97,6 +97,12 @@ nnoremap <silent> <CR> :noh<CR><CR>
 " Jump to text in this directory
 nnoremap <Leader>/ :Rg<CR>
 
+" Quit vim
+nnoremap <Leader>q :quit<cr>
+
+" Save file
+nnoremap <Leader>fs :write<cr>
+
 " Open file in this directory
 nnoremap <Leader>ff :Files<cr>
 
