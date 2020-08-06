@@ -22,8 +22,8 @@ brew "prettyping"           # Better ping
 brew "httpie"               # Better curl
 brew "nushell"              # Data manipulation shell
 brew "shellcheck"           # Lint for bash
-brew "pyenv"                # Python installations
-brew "pyenv-virtualenv"     # Python virtualenvs
+brew "python"               # Latest version of Python
+brew "poetry"               # Project-based Python dependencies
 brew "ruby"                 # Newer than default ruby
 brew "ansible"              # Deploy to local server
 brew "terraform"            # Deploy cloud infra
@@ -43,6 +43,9 @@ brew "nmasur/repo/update-ssh-config"  # Update .ssh/config
 # Experimental
 tap "cjbassi/ytop"          # Fancy system performance
 brew "cjbassi/ytop/ytop"
+brew "haskell-stack"        # Latest version of Haskell
+brew "noti"                 # Create system notifications
+brew "kakoune"              # Modal editor
 
 # Not Installed
 # pulumi
