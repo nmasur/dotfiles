@@ -66,8 +66,42 @@ defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 echo "Add a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-# echo "Only use UTF-8 in Terminal.app"
-# defaults write com.apple.terminal StringEncodings -array 4
+echo "Save to disk (not to iCloud) by default"
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+echo "Disable automatic capitalization as it’s annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+echo "Disable smart dashes as they’re annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+echo "Disable automatic period substitution as it’s annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+echo "Disable smart quotes as they’re annoying when typing code"
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+echo "Disable auto-correct"
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+echo "Use scroll gesture with the Ctrl (^) modifier key to zoom"
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+echo "Follow the keyboard focus while zoomed in"
+defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+echo "Require password immediately after sleep or screen saver begins"
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+echo "Save screenshots to downloads"
+defaults write com.apple.screencapture location -string "${HOME}/Downloads"
+
+echo "Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons"
+defaults write com.apple.finder QuitMenuItem -bool true
+
+echo "Show the ~/Library folder"
+chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
 
 # Noah Prefs
 echo "Enable dock magnification"
