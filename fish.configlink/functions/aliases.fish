@@ -16,6 +16,8 @@ function aliases --description 'All aliases'
     abbr -a gc 'git commit -m'
     abbr -a gu 'git pull'
     abbr -a gp 'git push'
+    abbr -a gh 'hub'
+    abbr -a ghb 'hub browse'
 
     # Vim
     abbr -a v 'vim'
@@ -76,6 +78,9 @@ function aliases --description 'All aliases'
     abbr -a py 'python'
     abbr -a po 'poetry'
     abbr -a pr 'poetry run python'
+    abbr -a pl 'poetry run pylint *'
+    abbr -a black 'poetry run black --target-version py38 .'
+    abbr -a bl 'poetry run black --target-version py38 .'
     alias domisty='cd $PROJ/misty && ./buildrun.sh'
 
     # Rust
