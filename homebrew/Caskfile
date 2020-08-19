@@ -9,6 +9,7 @@ cask "1password"            # Work pwm
 cask "1password-cli"        # Pwm for tmux
 cask "dropbox"              # File sharing
 cask "docker"               # Containers
+cask "lens"                 # Kubernetes manager
 
 # Helpful Applications
 cask "obsidian"             # Notes
