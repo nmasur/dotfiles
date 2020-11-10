@@ -1,10 +1,11 @@
 # Don't print a new line at the start of the prompt
 add_newline = false
-prompt_order = ["directory", "custom.virtualenv", "character"]
+format = """\
+  $directory\
+  $character\
+  """
 
-# Replace the "❯" symbol in the prompt with "➜"
-[character]      # The name of the module we are configuring is "character"
-# symbol = "➜"     # The "symbol" segment is being set to "➜"
+[character]
 symbol = "❯"
 
 [directory]
@@ -16,14 +17,17 @@ truncation_length = 1
 truncation_symbol = ""
 
 [git_status]
-prefix = ""
-suffix = ""
+format = '([\[$all_status$ahead_behind\]]($style) )'
+# prefix = ""
+# suffix = ""
 
 [python]
 symbol = ""
+format = '[\($virtualenv\)]($style)'
 
 [custom.virtualenv]
 command = "echo (basename $VIRTUAL_ENV)"  # shows output of command
-prefix = "("
-suffix = ") "
+format = "[$output]($style) "
 when = "true"
+# prefix = "("
+# suffix = ") "

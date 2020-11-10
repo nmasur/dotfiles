@@ -1,0 +1,3 @@
+#!/usr/local/bin/nu
+
+ls **/* | where type == File | sort-by size | reverse | keep 10

@@ -33,7 +33,7 @@ brew "gpg"                  # Encryption
 brew "qrencode"             # Make a QR code
 brew "youtube-dl"           # Download YouTube videos
 brew "googler"              # Search Google
-brew "hub"                  # GitHub commands
+brew "gh"                   # GitHub commands
 
 # Personal
 tap "nmasur/repo"                     # My repo
@@ -46,6 +46,7 @@ brew "cjbassi/ytop/ytop"
 brew "haskell-stack"        # Latest version of Haskell
 brew "noti"                 # Create system notifications
 brew "kakoune"              # Modal editor
+brew "b2-tools"             # BackBlaze B2 storage
 
 # Not Installed
 # pulumi

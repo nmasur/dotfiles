@@ -36,6 +36,9 @@ cask "steam"                # Games
 cask "vlc"                  # Video player
 cask "calibre"              # Ebook manager
 
+cask "jira-client"
+cask "wkhtmltopdf"
+
 # Don't bother
 # cask "skype"
 # cask "dash"

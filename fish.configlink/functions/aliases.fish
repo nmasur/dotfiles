@@ -16,8 +16,7 @@ function aliases --description 'All aliases'
     abbr -a gc 'git commit -m'
     abbr -a gu 'git pull'
     abbr -a gp 'git push'
-    abbr -a gh 'hub'
-    abbr -a ghb 'hub browse'
+    abbr -a ghb 'gh repo view -w'
 
     # Vim
     abbr -a v 'vim'

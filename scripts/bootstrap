@@ -104,7 +104,7 @@ install_gitmux() {
     then
         printf "gitmux ✕\n\n"
         printf "\ninstalling gitmux..."
-        /bin/bash -c "$(curl -L -o gitmux.tar.gz https://github.com/arl/gitmux/releases/download/v0.6.0/gitmux_0.6.0_macOS_amd64.tar.gz)"
+        /bin/bash -c "$(curl -L -o gitmux.tar.gz https://github.com/arl/gitmux/releases/download/v0.7.4/gitmux_0.7.4_macOS_amd64.tar.gz)"
         tar -xzf gitmux.tar.gz gitmux
         mkdir -p ~/.local/bin
         mv gitmux ~/.local/bin/
