@@ -1,39 +1,41 @@
 # Homebrew Installations
 
-brew "fish"                 # My shell
-brew "neovim"               # My editor
-brew "exa"                  # Better ls
-brew "tmux"                 # Terminal panes and windows
-brew "tealdeer"             # Mini man page
-brew "starship"             # Shell prompt
-brew "ripgrep"              # Faster, better grep
-brew "fzf"                  # Fuzzy finder
-brew "fd"                   # Faster, better find
-brew "sd"                   # Faster, better sed
-brew "bat"                  # Better cat
-brew "zoxide"               # Better autojump
-brew "jq"                   # JSON manipulation
-brew "xsv"                  # CSV manipulation
-brew "dos2unix"             # File conversion
-brew "trash"                # Delete to trash
-brew "wget"                 # Not quite curl
-brew "telnet"               # Check networking
-brew "prettyping"           # Better ping
-brew "httpie"               # Better curl
-brew "nushell"              # Data manipulation shell
-brew "shellcheck"           # Lint for bash
-brew "python"               # Latest version of Python
-brew "poetry"               # Project-based Python dependencies
-brew "ruby"                 # Newer than default ruby
-brew "ansible"              # Deploy to local server
-brew "terraform"            # Deploy cloud infra
-brew "node"                 # Ugh, nodejs (for Vim CoC)
-brew "packer"               # Build deployment images
-brew "gpg"                  # Encryption
-brew "qrencode"             # Make a QR code
-brew "youtube-dl"           # Download YouTube videos
-brew "googler"              # Search Google
-brew "gh"                   # GitHub commands
+brew "fish"        # My shell
+brew "neovim"      # My editor
+brew "exa"         # Better ls
+brew "tmux"        # Terminal panes and windows
+brew "tealdeer"    # Mini man page
+brew "starship"    # Shell prompt
+brew "ripgrep"     # Faster, better grep
+brew "fzf"         # Fuzzy finder
+brew "fd"          # Faster, better find
+brew "sd"          # Faster, better sed
+brew "bat"         # Better cat
+brew "zoxide"      # Better autojump
+brew "jq"          # JSON manipulation
+brew "xsv"         # CSV manipulation
+brew "dos2unix"    # File conversion
+brew "trash"       # Delete to trash
+brew "wget"        # Not quite curl
+brew "telnet"      # Check networking
+brew "prettyping"  # Better ping
+brew "httpie"      # Better curl
+brew "nushell"     # Data manipulation shell
+brew "shellcheck"  # Lint for bash
+brew "python"      # Latest version of Python
+brew "poetry"      # Project-based Python dependencies
+brew "ruby"        # Newer than default ruby
+brew "ansible"     # Deploy to local server
+brew "terraform"   # Deploy cloud infra
+brew "node"        # Ugh, nodejs (for Vim CoC)
+brew "packer"      # Build deployment images
+brew "gpg"         # Encryption
+brew "qrencode"    # Make a QR code
+brew "youtube-dl"  # Download YouTube videos
+brew "googler"     # Search Google
+brew "gh"          # GitHub commands
+brew "pandoc"      # Document converter
+brew "awscli"      # AWS API tools
 
 # Personal
 tap "nmasur/repo"                     # My repo
@@ -41,12 +43,12 @@ brew "nmasur/repo/drips"              # Retrieve AWS IPs
 brew "nmasur/repo/update-ssh-config"  # Update .ssh/config
 
 # Experimental
-tap "cjbassi/ytop"          # Fancy system performance
+tap "cjbassi/ytop"       # Fancy system performance
 brew "cjbassi/ytop/ytop"
-brew "haskell-stack"        # Latest version of Haskell
-brew "noti"                 # Create system notifications
-brew "kakoune"              # Modal editor
-brew "b2-tools"             # BackBlaze B2 storage
+brew "haskell-stack"     # Latest version of Haskell
+brew "noti"              # Create system notifications
+brew "kakoune"           # Modal editor
+brew "b2-tools"          # BackBlaze B2 storage
 
 # Not Installed
 # pulumi

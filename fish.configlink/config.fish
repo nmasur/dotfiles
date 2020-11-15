@@ -31,7 +31,7 @@ if status --is-interactive
     aliases
     pyenv
     notes
-    aws
+    awstools
     mactools
     projects
 
