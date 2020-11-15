@@ -4,35 +4,6 @@ DOTS=$(dirname "$0")/..
 cd "$DOTS" || (echo "Directory not found: $DOTS"; exit 1)
 DOTS="$PWD"
 
-check_for_zsh() {
-    if ! (echo "$SHELL" | grep zsh > /dev/null)
-    then
-        echo "Switch to using zsh before continuing"
-        echo ""
-        echo "MacOS Instructions:"
-        echo "System Preferences > Users & Groups > Unlock"
-        echo "Right-click on user, Advanced Options..."
-        echo "Login shell: /bin/zsh"
-        exit 1
-    fi
-
-    echo "zsh ✓"
-}
-
-check_for_ohmyzsh() {
-    if [ ! -d ~/.oh-my-zsh ]
-    then
-        echo "oh-my-zsh ✕"
-        echo ""
-        echo "Install oh-my-zsh before continuing"
-        echo "You can run the script: install_ohmyzsh"
-        echo ""
-        exit 1
-    fi
-
-    echo "oh-my-zsh ✓"
-}
-
 install_xcode() {
     if [ "$(uname)" = "Darwin" ]
     then
@@ -115,16 +86,6 @@ install_gitmux() {
     echo "gitmux ✓"
 }
 
-install_spacemacs() {
-    emacsdir=~/.emacs.d
-    if ! (git -C "$emacsdir" pull > /dev/null 2>&1)
-    then
-       git clone -b develop https://github.com/syl20bnr/spacemacs "$emacsdir"
-    fi
-
-    echo "spacemacs ✓"
-}
-
 setup_poetry() {
     poetry completions fish > $(brew --prefix)/share/fish/vendor_completions.d/poetry.fish
 }
@@ -143,8 +104,6 @@ echo ""
 echo "consider running other scripts:"
 echo " - install_casks"
 echo " - configure_macos"
-echo " - setup_keybase"
 echo " - install_python"
 echo " - install_rust"
-echo " - install_cargos"
 echo ""

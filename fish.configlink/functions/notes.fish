@@ -33,17 +33,17 @@ function notes --description "Notes functions"
         cd -
     end
 
-    function wiki --description "Open vimwiki file"
+    function note --description "Edit or create a note" -a "filename"
         cd $HOME/Documents/notes
-        set file (ls | fzf)
-        if [ $status -eq 0 ]
-            vim $file
+        if test -n "$filename"
+            vim $filename.md
+        else
+            set file (ls | fzf)
+            if [ $status -eq 0 ]
+                vim $file
+            end
         end
         cd -
-    end
-
-    function note --description "Edit or create a note"
-        vim ~/Documents/notes/$argv[1].md
     end
 
     abbr -a sn 'syncnotes'

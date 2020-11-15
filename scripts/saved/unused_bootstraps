@@ -1,0 +1,40 @@
+#!/bin/sh
+
+check_for_zsh() {
+    if ! (echo "$SHELL" | grep zsh > /dev/null)
+    then
+        echo "Switch to using zsh before continuing"
+        echo ""
+        echo "MacOS Instructions:"
+        echo "System Preferences > Users & Groups > Unlock"
+        echo "Right-click on user, Advanced Options..."
+        echo "Login shell: /bin/zsh"
+        exit 1
+    fi
+
+    echo "zsh ✓"
+}
+
+check_for_ohmyzsh() {
+    if [ ! -d ~/.oh-my-zsh ]
+    then
+        echo "oh-my-zsh ✕"
+        echo ""
+        echo "Install oh-my-zsh before continuing"
+        echo "You can run the script: install_ohmyzsh"
+        echo ""
+        exit 1
+    fi
+
+    echo "oh-my-zsh ✓"
+}
+
+install_spacemacs() {
+    emacsdir=~/.emacs.d
+    if ! (git -C "$emacsdir" pull > /dev/null 2>&1)
+    then
+       git clone -b develop https://github.com/syl20bnr/spacemacs "$emacsdir"
+    fi
+
+    echo "spacemacs ✓"
+}
