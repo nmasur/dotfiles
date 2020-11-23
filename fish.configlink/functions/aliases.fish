@@ -9,6 +9,10 @@ function aliases --description 'All aliases'
     abbr -a ll 'ls -alhF'                       # Include hidden files
     abbr -a c 'cd'
 
+    # Tmux
+    abbr -a ta 'tmux attach-session'
+    abbr -a tan 'tmux attach-session -t noah'
+
     # Git
     abbr -a gs 'git status'
     abbr -a gd 'git diff'
@@ -84,6 +88,7 @@ function aliases --description 'All aliases'
 
     # Python
     abbr -a py 'python'
+    abbr -a dpy 'docker run --rm -it -v $PWD:/project python:alpine python'
     abbr -a po 'poetry'
     abbr -a pr 'poetry run python'
     abbr -a pl 'poetry run pylint *'
