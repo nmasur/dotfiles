@@ -62,6 +62,22 @@ use_fish_shell() {
     echo "fish ✓"
 }
 
+use_fisher() {
+    if ! (which fish > /dev/null)
+    then
+        echo "Skipping fisher: fish not installed"
+    elif ! (fish -c "which fisher" > /dev/null)
+    then
+        echo "Installing fisher..."
+        fish -c "curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher"
+    fi
+    if (fish -c "which fisher" > /dev/null)
+    then
+        fish -c "fisher update"
+        echo "fisher ✓"
+    fi
+}
+
 setup_tmux() {
     if [[ ! -d ~/.tmux/plugins/tpm ]]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
