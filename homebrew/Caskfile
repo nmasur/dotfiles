@@ -22,6 +22,7 @@ cask "drawio"               # Diagrams
 cask "scroll-reverser"      # Mouse vs. trackpad
 cask "meetingbar"           # Scheduling
 cask "gitify"               # GitHub notifications
+brew "basictex"             # Small LaTeX distribution
 
 # Fonts
 tap "homebrew/cask-fonts"

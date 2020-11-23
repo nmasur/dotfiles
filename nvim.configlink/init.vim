@@ -91,8 +91,14 @@ command Vimrc edit ~/.config/nvim/init.vim  " Edit .vimrc (this file)
 " Map the leader key
 map <Space> <Leader>
 
+" Jump to the next occurence of <> and replace it with insert mode
+nnoremap <Leader><Space> /<><Esc>:noh<CR>c2l
+
 "This unsets the `last search pattern` register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
+
+" Replace all
+nnoremap <Leader>S :%s//g<Left><Left>
 
 " Jump to text in this directory
 nnoremap <Leader>/ :Rg<CR>
@@ -193,6 +199,12 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" LaTeX Hotkeys
+autocmd FileType tex inoremap ;bf \textbf{}<Esc>i
+
+" Autocompile LaTeX on save
+autocmd BufWritePost *.tex silent! execute "!pdflatex -output-directory=%:p:h % >/dev/null 2>&1" | redraw!
 
 " Plugin Settings
 "----------------
