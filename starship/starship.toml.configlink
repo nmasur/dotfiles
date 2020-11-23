@@ -1,7 +1,6 @@
 # Don't print a new line at the start of the prompt
 add_newline = false
 format = """\
-  $cmd_duration\
   $directory\
   $git_branch\
   $git_commit\
@@ -16,6 +15,7 @@ symbol = "❯"
 min_time = 3_000
 show_notifications = true
 min_time_to_notify = 30_000
+format = "[$duration]($style) "
 
 [directory]
 truncate_to_repo = true
