@@ -22,9 +22,11 @@ function aliases --description 'All aliases'
     abbr -a gl 'git log --graph --decorate --oneline -20'
     abbr -a gll 'git log --graph --decorate --oneline'
     abbr -a gco 'git checkout'
+    abbr -a gcom 'git checkout master'
     abbr -a gcob 'git checkout -b'
     abbr -a gb 'git branch'
     abbr -a grh 'git reset --hard'
+    abbr -a gm 'git merge'
     abbr -a ghb 'gh repo view -w'
 
     # Vim
