@@ -21,7 +21,7 @@ function notes --description "Notes functions"
             echo "Already exists."
         else
             note_header
-            echo $JOURNAL_HEADER > $NOTES_PATH/$TODAY_NOTE.md
+            printf $JOURNAL_HEADER > $NOTES_PATH/$TODAY_NOTE.md
             echo "New journal added."
         end
     end
@@ -34,7 +34,7 @@ function notes --description "Notes functions"
             vim $TODAY_NOTE.md
         else
             note_header
-            echo $JOURNAL_HEADER > $TODAY_NOTE.md
+            printf $JOURNAL_HEADER > $TODAY_NOTE.md
             echo "New journal added."
             vim $TODAY_NOTE.md
         end
