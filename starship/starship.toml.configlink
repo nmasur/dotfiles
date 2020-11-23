@@ -3,7 +3,8 @@ add_newline = false
 format = """\
   $directory\
   $git_branch\
-  $git_commit \
+  $git_commit\
+  $git_status\
   $character\
   """
 
@@ -15,14 +16,15 @@ truncate_to_repo = true
 truncation_length = 100
 
 [git_branch]
-format = "[$symbol$branch]($style)"
+format = "[$symbol$branch]($style) "
 
 [git_commit]
-commit_has_length = 7
-format = "[\\($hash\\)]($style)"
+format = "[$hash]($style) "
+disabled = false
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style) )'
+format = "[$all_status$ahead_behind]($style) "
+style = "red"
 # prefix = ""
 # suffix = ""
 
