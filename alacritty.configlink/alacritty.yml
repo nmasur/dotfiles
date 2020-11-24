@@ -591,6 +591,7 @@ shell:
 key_bindings:
     - { key: F, mods: Super, action: ToggleSimpleFullscreen }
     - { key: A, mods: Super, chars: "\x02" }        # CMD-A sends CTRL-B for tmux
+    - { key: O, mods: Super, chars: "\x14" }        # CMD-O sends CTRL-T for fzf
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
