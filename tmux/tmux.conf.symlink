@@ -14,7 +14,7 @@ bind - split-window -v -c '#{pane_current_path}'
 # Move between panes with vi keys
 bind h select-pane -L
 bind j select-pane -D
-bind k select-pane -U
+bind K select-pane -U
 bind l select-pane -R
 
 # Split out pane
@@ -22,6 +22,7 @@ bind b break-pane
 
 # Copy mode works as Vim
 bind Escape copy-mode
+bind k copy-mode
 bind C-[ copy-mode
 bind p paste-buffer
 
