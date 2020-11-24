@@ -37,6 +37,7 @@ function aliases --description 'All aliases'
     abbr -a grh 'git reset --hard'
     abbr -a gm 'git merge'
     abbr -a gmf 'git-merge-fuzzy'
+    abbr -a gcp 'git cherry-pick'
     abbr -a ghb 'gh repo view -w'
 
     # Vim
