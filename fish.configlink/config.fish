@@ -8,6 +8,7 @@ if status --is-interactive
     set PROJ (dirname $DOTS)
     set PATH $PATH /usr/local/bin ~/.local/bin $DOTS/bin ~/.cargo/bin
     set CDPATH . $HOME $PROJ
+    set EDITOR nvim
 
     # Use `vi` in the shell with cursor shapes
     fish_vi_key_bindings
