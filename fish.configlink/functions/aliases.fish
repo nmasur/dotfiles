@@ -30,9 +30,12 @@ function aliases --description 'All aliases'
     abbr -a gco 'git checkout'
     abbr -a gcom 'git checkout master'
     abbr -a gcob 'git checkout -b'
+    abbr -a gcof 'git-checkout-fuzzy'
     abbr -a gb 'git branch'
+    abbr -a gbd 'git-delete-fuzzy'
     abbr -a grh 'git reset --hard'
     abbr -a gm 'git merge'
+    abbr -a gmf 'git-merge-fuzzy'
     abbr -a ghb 'gh repo view -w'
 
     # Vim

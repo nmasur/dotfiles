@@ -38,6 +38,7 @@ if status --is-interactive
     notes
     awstools
     mactools
+    gittools
     projects
 
     # Fuzzy finder
