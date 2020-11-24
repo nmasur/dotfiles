@@ -2,24 +2,45 @@
 add_newline = false
 format = """\
   $directory\
+  $git_branch\
+  $git_commit\
+  $git_status\
   $character\
   """
 
 [character]
 symbol = "❯"
 
+[cmd_duration]
+min_time = 3_000
+show_notifications = true
+min_time_to_notify = 30_000
+format = "[$duration]($style) "
+
 [directory]
 truncate_to_repo = true
 truncation_length = 100
 
 [git_branch]
-truncation_length = 1
-truncation_symbol = ""
+format = "[$symbol$branch]($style)"
+
+[git_commit]
+format = "[$hash]($style) "
+disabled = false
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style) )'
-# prefix = ""
-# suffix = ""
+format = "[$all_status$ahead_behind]($style) "
+conflicted = " ="
+ahead = " ⇡"
+behind = " ⇣"
+diverged = " ⇕"
+untracked = " ⋄"
+stashed = " ⩮"
+modified = " ∽"
+staged = " +"
+renamed = " »"
+deleted = " ✘"
+style = "red"
 
 [python]
 symbol = ""
