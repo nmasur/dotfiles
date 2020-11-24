@@ -25,21 +25,21 @@ truncation_length = 100
 format = "[$symbol$branch]($style)"
 
 [git_commit]
-format = "[$hash]($style) "
-disabled = false
+format = "( @ [$hash]($style) )"
+only_detached = false
 
 [git_status]
-format = "[$all_status$ahead_behind]($style) "
-conflicted = " ="
-ahead = " ⇡"
-behind = " ⇣"
-diverged = " ⇕"
-untracked = " ⋄"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "⋄"
 stashed = " ⩮"
-modified = " ∽"
-staged = " +"
-renamed = " »"
-deleted = " ✘"
+modified = "∽"
+staged = "+"
+renamed = "»"
+deleted = "✘"
 style = "red"
 
 [python]
