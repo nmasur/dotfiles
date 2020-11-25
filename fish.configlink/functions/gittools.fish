@@ -14,11 +14,43 @@ function gittools
     end
 
     function git-merge-fuzzy
-        git merge (git-fuzzy-branch "merge from...")
+        set branch (git-fuzzy-branch "merge from...")
+        and git merge
     end
 
     function git-delete-fuzzy
-        git branch -d (git-fuzzy-branch "delete branch...")
+        set branch (git-fuzzy-branch "delete branch...")
+        and git branch -d
+    end
+
+    function git-force-delete-fuzzy
+        set branch (git-fuzzy-branch "force delete branch...")
+        and git branch -D
+    end
+
+    function git
+        if contains f $argv
+            switch $argv[1]
+                case "checkout"
+                    git-checkout-fuzzy
+                case "merge"
+                    git-merge-fuzzy
+                case "branch"
+                    if test "$argv[2]" = "-d"
+                        git-delete-fuzzy
+                    else if test "$argv[2]" = "-D"
+                        git-force-delete-fuzzy
+                    else
+                        echo "Not a fuzzy option."
+                        return 1
+                    end
+                case "*"
+                    echo "No fuzzy option."
+                    return 1
+                end
+        else
+            command git $argv
+        end
     end
 
 end
