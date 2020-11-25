@@ -34,7 +34,6 @@ if status --is-interactive
 
     # Individual features
     aliases
-    pyenv
     notes
     awstools
     mactools

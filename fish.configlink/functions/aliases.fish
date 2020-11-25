@@ -12,6 +12,7 @@ function aliases --description 'All aliases'
     # Tmux
     abbr -a ta 'tmux attach-session'
     abbr -a tan 'tmux attach-session -t noah'
+    abbr -a tnn 'tmux new-session -s noah'
 
     # Git
     abbr -a gs 'git status -sb'
@@ -53,12 +54,19 @@ function aliases --description 'All aliases'
     abbr -a h 'http -Fh --all'                  # Curl site for headers
 
     # Fun CLI Tools
-    alias search='googler -j'
-    alias checkip='curl checkip.amazonaws.com'
+    abbr goo 'googler'
+    abbr gooj 'googler -j'
     alias weather='curl wttr.in'
     alias moon='curl wttr.in/Moon'
     alias ipinfo='curl ipinfo.io'
     alias worldmap='telnet mapscii.me'
+    function ip
+        if count $argv > /dev/null
+            curl ipinfo.io/$argv
+        else
+            curl checkip.amazonaws.com
+        end
+    end
     function qr
         qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png
     end
@@ -74,8 +82,8 @@ function aliases --description 'All aliases'
     # Cheat Sheets
     abbr -a ssl 'openssl req -new -newkey rsa:2048 -nodes' \
                 '-keyout server.key -out server.csr'
-    abbr -a get-fingerprint 'ssh-keyscan myhost.com | ssh-keygen -lf -'
-    abbr -a public-key 'ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub'
+    abbr -a fingerprint 'ssh-keyscan myhost.com | ssh-keygen -lf -'
+    abbr -a publickey 'ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub'
 
     # Docker
     abbr -a dc '$DOTS/bin/docker_cleanup'
@@ -89,6 +97,7 @@ function aliases --description 'All aliases'
 
     # Terraform
     abbr -a te 'terraform'
+    abbr -a tap 'terraform apply'
 
     # Kubernetes
     abbr -a k 'kubectl'
