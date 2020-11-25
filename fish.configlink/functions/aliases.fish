@@ -15,7 +15,7 @@ function aliases --description 'All aliases'
     abbr -a tnn 'tmux new-session -s noah'
 
     # Git
-    abbr -a gs 'git status -sb'
+    abbr -a gs 'git status'
     abbr -a gd 'git diff'
     abbr -a gds 'git diff --staged'
     abbr -a ga 'git add'

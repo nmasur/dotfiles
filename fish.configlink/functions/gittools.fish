@@ -15,17 +15,17 @@ function gittools
 
     function git-merge-fuzzy
         set branch (git-fuzzy-branch "merge from...")
-        and git merge
+        and git merge $branch
     end
 
     function git-delete-fuzzy
         set branch (git-fuzzy-branch "delete branch...")
-        and git branch -d
+        and git branch -d $branch
     end
 
     function git-force-delete-fuzzy
         set branch (git-fuzzy-branch "force delete branch...")
-        and git branch -D
+        and git branch -D $branch
     end
 
     function git
@@ -49,7 +49,11 @@ function gittools
                     return 1
                 end
         else
-            command git $argv
+            if count $argv > /dev/null
+                command git $argv
+            else
+                command git status -sb
+            end
         end
     end
 
