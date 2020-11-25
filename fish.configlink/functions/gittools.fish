@@ -13,6 +13,11 @@ function gittools
         and git checkout $branch
     end
 
+    function git-show-fuzzy
+        set commit (git log --pretty=oneline | fzf | cut -d' ' -f1)
+        and git show $commit
+    end
+
     function git-merge-fuzzy
         set branch (git-fuzzy-branch "merge from...")
         and git merge $branch
@@ -33,6 +38,8 @@ function gittools
             switch $argv[1]
                 case "checkout"
                     git-checkout-fuzzy
+                case "show"
+                    git-show-fuzzy
                 case "merge"
                     git-merge-fuzzy
                 case "branch"

@@ -134,7 +134,7 @@ nnoremap <Leader>gp :Git push<cr>
 nnoremap <Leader>wm :only<cr>
 
 " Open file tree
-noremap <silent> <Leader>t :Fern . -drawer -width=35 -toggle<CR><C-w>=
+noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 
 " CoC Settings
 "-------------
