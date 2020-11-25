@@ -42,7 +42,7 @@ if status --is-interactive
 
     # Fuzzy finder
     fzf_key_bindings
-    set -g FZF_DEFAULT_COMMAND 'rg --files'
+    set -g FZF_DEFAULT_COMMAND 'fd --type file --hidden'
     set -g FZF_DEFAULT_OPTS '-m --height 50% --border'
 
     # Use `starship` prompt
