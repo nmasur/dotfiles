@@ -38,7 +38,7 @@ function aliases --description 'All aliases'
     abbr -a gm 'git merge'
     abbr -a gmf 'git-merge-fuzzy'
     abbr -a gcp 'git cherry-pick'
-    abbr -a ghb 'gh repo view -w'
+    abbr -a ghr 'gh repo view -w'
 
     # Vim
     abbr -a v 'vim'
@@ -83,6 +83,8 @@ function aliases --description 'All aliases'
     abbr -a db 'docker build . -t'
     abbr -a ds 'docker ps -a'
     abbr -a de 'docker exec -it'
+    abbr -a dpy 'docker run --rm -it -v $PWD:/project python:alpine python'
+    abbr -a alp 'docker run --rm -it -v $PWD:/project alpine sh'
     alias connect='docker run --rm -v ~/.aws:/root/.aws -v ~/.ssh:/root/.ssh -it connect-aws'
 
     # Terraform
@@ -97,7 +99,6 @@ function aliases --description 'All aliases'
 
     # Python
     abbr -a py 'python'
-    abbr -a dpy 'docker run --rm -it -v $PWD:/project python:alpine python'
     abbr -a po 'poetry'
     abbr -a pr 'poetry run python'
     abbr -a pl 'poetry run pylint *'
