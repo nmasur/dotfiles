@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-
-system %{osascript -e 'display notification "#{ARGV.join(' ')}"'}

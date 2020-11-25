@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-python -c $"import os; [print(k) for k in os.environ.keys()]" > ~/Document/GitHub/dotfiles/env.txt
