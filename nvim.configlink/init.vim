@@ -226,7 +226,7 @@ let g:rustfmt_autosave = 1              " Formats with rust plugin
 " VimWiki plugin
 let g:vimwiki_list = [
   \ {
-  \   'path': '~/Documents/notes/',
+  \   'path': $NOTES_PATH,
   \   'syntax': 'markdown',
   \   'index': 'home',
   \   'ext': '.md'

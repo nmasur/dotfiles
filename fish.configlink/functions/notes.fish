@@ -2,7 +2,7 @@
 
 function notes --description "Notes functions"
 
-    set -g NOTES_PATH $HOME/Documents/notes
+    set -gx NOTES_PATH $HOME/Documents/notes
 
     function note_dates
         set -g TODAY_NOTE (date +"%Y-%m-%d_%a")
