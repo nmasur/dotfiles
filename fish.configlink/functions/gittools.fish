@@ -22,8 +22,8 @@ function gittools
                 --height 50% \
                 --preview 'git show --color=always (echo {} | cut -d" " -f4)' \
                 )
-        and set commit (echo $commitline | cut -d" " -f1)
-        and git checkout $commit
+        and set commit (echo $commitline | cut -d" " -f4)
+        and echo $commit
     end
 
     function git-checkout-fuzzy
@@ -86,6 +86,13 @@ function gittools
                     else
                         echo "Not a fuzzy option."
                         return 1
+                    end
+                case "reset"
+                    set commit (git-commits)
+                    and if test "$argv[2]" = "--hard"
+                        git reset --hard $commit
+                    else
+                        git reset $commit
                     end
                 case "*"
                     echo "No fuzzy option."
