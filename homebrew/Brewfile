@@ -37,6 +37,7 @@ brew "googler"     # Search Google
 brew "gh"          # GitHub commands
 brew "pandoc"      # Document converter
 brew "awscli"      # AWS API tools
+brew "kubectl"     # Kubernetes CLI
 
 # Personal
 tap "nmasur/repo"                     # My repo
