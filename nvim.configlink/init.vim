@@ -91,9 +91,6 @@ command Vimrc edit ~/.config/nvim/init.vim  " Edit .vimrc (this file)
 " Map the leader key
 map <Space> <Leader>
 
-" Jump to the next occurence of <> and replace it with insert mode
-nnoremap <Leader><Space> /<><Esc>:noh<CR>c2l
-
 "This unsets the `last search pattern` register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
 
@@ -111,6 +108,12 @@ nnoremap <Leader>fs :write<cr>
 
 " Open file in this directory
 nnoremap <Leader>ff :Files<cr>
+
+" Change directory to this file
+nnoremap <silent> <Leader>fd :lcd %:p:h<cr>
+
+" Back up directory
+nnoremap <silent> <Leader>fu :lcd ..<cr>
 
 " Open a recent file
 nnoremap <Leader>fr :History<cr>
@@ -202,6 +205,8 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " LaTeX Hotkeys
 autocmd FileType tex inoremap ;bf \textbf{}<Esc>i
+" Jump to the next occurence of <> and replace it with insert mode
+autocmd FileType tex nnoremap <Leader><Space> /<><Esc>:noh<CR>c2l
 
 " Autocompile LaTeX on save
 autocmd BufWritePost *.tex silent! execute "!pdflatex -output-directory=%:p:h % >/dev/null 2>&1" | redraw!
