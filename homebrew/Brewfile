@@ -2,6 +2,7 @@
 
 brew "fish"        # My shell
 brew "neovim"      # My editor
+brew "git"         # Latest git
 brew "exa"         # Better ls
 brew "tmux"        # Terminal panes and windows
 brew "tealdeer"    # Mini man page
