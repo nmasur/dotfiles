@@ -52,6 +52,8 @@ brew "noti"              # Create system notifications
 brew "kakoune"           # Modal editor
 brew "b2-tools"          # BackBlaze B2 storage
 brew "k9s"               # Kubernetes TUI
+tap "superfly/tap"
+brew "superfly/tap/flyctl"
 
 # Not Installed
 # pulumi
