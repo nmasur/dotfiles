@@ -6,5 +6,4 @@ nvim.configlink/autoload/**
 spacemacs.d.symlink/.spacemacs.env
 fish.configlink/config.fish.bac
 fish_variables
-*.lock.json
-
+homebrew/*.lock.json

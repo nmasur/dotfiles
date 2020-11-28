@@ -28,7 +28,7 @@ install_homebrew() {
 }
 
 install_brews() {
-    brewfile=$DOTS/homebrew/Brewfile
+    brewfile=$DOTS/homebrew/core.Brewfile
     if ! (/usr/local/bin/brew bundle check --file "$brewfile" > /dev/null)
     then
         /usr/local/bin/brew bundle --file "$brewfile"
@@ -102,6 +102,7 @@ use_fish_shell
 
 echo ""
 echo "consider running other scripts:"
+echo " - all_brews"
 echo " - install_casks"
 echo " - configure_macos"
 echo " - install_rust"
