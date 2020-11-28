@@ -24,6 +24,7 @@ Plug 'jreybert/vimagit'                             " Git 'gui' buffer
 Plug 'airblade/vim-gitgutter'                       " Git next to line numbers
 Plug 'tpope/vim-fugitive'                           " Other git commands
 Plug 'machakann/vim-highlightedyank'                " Highlight text when copied
+Plug 'godlygeek/tabular'                            " Spacing and alignment
 Plug 'itchyny/lightline.vim'                        " Status bar
 Plug 'tpope/vim-vinegar'                            " Fixes netrw file explorer
 Plug 'lambdalisue/fern.vim'                         " File explorer / project drawer
