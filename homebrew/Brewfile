@@ -51,6 +51,7 @@ brew "haskell-stack"     # Latest version of Haskell
 brew "noti"              # Create system notifications
 brew "kakoune"           # Modal editor
 brew "b2-tools"          # BackBlaze B2 storage
+brew "k9s"               # Kubernetes TUI
 
 # Not Installed
 # pulumi
