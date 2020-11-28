@@ -10,3 +10,5 @@
 	host = github.take2games.com
 [pager]
 	branch = false
+[core]
+	editor = nvim
