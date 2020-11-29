@@ -8,8 +8,7 @@ setup_symlinks() {
     for source in $(find "$DOTS" -iname "*.symlink")
     do
         dest="$HOME/.`basename \"${source%.*}\"`"
-        rm -rf "$dest"
-        ln -s "$source" "$dest"
+        ln -sf "$source" "$dest"
     done
 
     echo "symlinks ✓"
@@ -19,8 +18,7 @@ setup_configlinks() {
     for source in $(find "$DOTS" -iname "*.configlink")
     do
         dest="$HOME/.config/`basename \"${source%.*}\"`"
-        rm -rf "$dest"
-        ln -s "$source" "$dest"
+        ln -sf "$source" "$dest"
     done
 
     echo "configlinks ✓"
