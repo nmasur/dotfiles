@@ -70,6 +70,9 @@ function aliases --description 'All aliases'
     function qr
         qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png
     end
+    function psf
+        ps aux | rg -v "$USER.*rg $argv" | rg $argv
+    end
 
     # Dotfile and config shortcuts
     alias reload='source $DOTS/fish.configlink/config.fish'     # Refresh fish shell
