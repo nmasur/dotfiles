@@ -6,7 +6,7 @@ NOW_TIME=$(date +%s)
 TIME_PASSED=$((NOW_TIME-CACHE_TIME))
 if [[ "$TIME_PASSED" -gt "1200" ]]
 then
-    curl -m 2 -s wttr.in/\?format\="%c%t" > $CACHE_FILE
+    curl -m 2 -s wttr.in/$WEATHER_CITY\?format\="%c%t" > $CACHE_FILE
 fi
 cat $CACHE_FILE
 
