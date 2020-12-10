@@ -56,7 +56,7 @@ function aliases --description 'All aliases'
     # Fun CLI Tools
     abbr goo 'googler'
     abbr gooj 'googler -j'
-    alias weather='curl wttr.in'
+    alias weather='curl wttr.in/$WEATHER_CITY'
     alias moon='curl wttr.in/Moon'
     alias ipinfo='curl ipinfo.io'
     alias worldmap='telnet mapscii.me'
