@@ -5,9 +5,8 @@ if status --is-interactive
     # Set $PATH for finding programs
     set FISH_DIR (readlink ~/.config/fish)
     set DOTS (dirname $FISH_DIR)
-    set PROJ (dirname $DOTS)
     set PATH $PATH /usr/local/bin ~/.local/bin $DOTS/bin ~/.cargo/bin
-    set CDPATH . $HOME $PROJ
+    set CDPATH . $HOME
     set EDITOR nvim
 
     # Use `vi` in the shell with cursor shapes
