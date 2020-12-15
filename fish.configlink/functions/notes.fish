@@ -47,7 +47,7 @@ function notes --description "Notes functions"
         set meeting_name (echo $name | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
         set meeting_note $today_date-$meeting_name
         printf "[$TODAY_NOTE](journal/$TODAY_NOTE.md) | #meeting\n\n# $name\n\n---\n\n" > $NOTES_PATH/$meeting_note.md
-        printf "\n\n---\n\n$time - [$name](../$meeting_note)\n\n---\n\n" >> $TODAY_NOTE_FILE
+        printf "\n\n---\n\n$time - [$name](../$meeting_note.md)\n\n---\n\n" >> $TODAY_NOTE_FILE
         open "obsidian://open?vault=notes&file=$meeting_note"
     end
 
