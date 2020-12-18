@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 function theme_gruvbox --description 'Apply gruvbox theme'
-  set -l mode 'dark'
+  set -l mode 'light'
   if test  (count $argv) -gt 0
     set mode $argv[1]
   end

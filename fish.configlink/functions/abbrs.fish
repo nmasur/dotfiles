@@ -7,7 +7,6 @@ function abbrs --description 'All abbreviations'
     abbr -a lh 'ls -lh'                         # Pretty vertical list
     abbr -a ll 'ls -alhF'                       # Include hidden files
     abbr -a c 'cd'
-    abbr -a .. 'cd ..'
     abbr -a -- - 'cd -'
 
     # Tmux

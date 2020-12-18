@@ -1,3 +1,9 @@
 #!/usr/bin/env fish
 
-echo "nothing yet"
+# Install fisher packages
+fisher update
+
+# Load abbreviations
+abbrs
+
+echo "fish setup ✓"

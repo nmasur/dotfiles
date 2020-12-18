@@ -50,7 +50,7 @@ if status --is-interactive
     zoxide init fish | source
 
     # Colors
-    # theme_gruvbox
+    theme_gruvbox dark
 
     # Fuzzy finder
     fzf_key_bindings
