@@ -8,6 +8,8 @@ function aliases --description 'All aliases'
     abbr -a lh 'ls -lh'                         # Pretty vertical list
     abbr -a ll 'ls -alhF'                       # Include hidden files
     abbr -a c 'cd'
+    abbr -a .. 'cd ..'
+    alias proj='cd $PROJ'
 
     # Tmux
     abbr -a ta 'tmux attach-session'
@@ -36,6 +38,7 @@ function aliases --description 'All aliases'
     abbr -a gbD 'git branch -D'
     abbr -a gr 'git reset'
     abbr -a grh 'git reset --hard'
+    abbr -a grm 'git reset --mixed'
     abbr -a gm 'git merge'
     abbr -a gmf 'git-merge-fuzzy'
     abbr -a gcp 'git cherry-pick'
@@ -47,6 +50,10 @@ function aliases --description 'All aliases'
         alias vim='nvim'                                    # Use neovim if installed
         abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'     # Edit ".vimrc" file
     end
+
+    # Notes
+    abbr -a qn 'quicknote'
+    abbr -a sn 'syncnotes'
 
     # Improved CLI Tools
     alias ping='prettyping --nolegend'
@@ -121,7 +128,10 @@ function aliases --description 'All aliases'
     # Rust
     abbr -a ca 'cargo'
 
-    # Non-MacOS
+    # macOS
+    abbr -a casks 'vim $DOTS/homebrew/Caskfile'
+
+    # Non-macOS
     if [ (uname) = "Linux" ]
         alias pbcopy='xclip -selection clipboard -in'
         alias pbpaste='xclip -selection clipboard -out'

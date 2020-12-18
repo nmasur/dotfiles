@@ -8,6 +8,8 @@ if status --is-interactive
     set PATH $PATH /usr/local/bin ~/.local/bin $DOTS/bin ~/.cargo/bin
     set CDPATH . $HOME
     set EDITOR nvim
+    set PROJ $HOME/dev/work
+    set NOTES_PATH $HOME/notes
 
     # Use `vi` in the shell with cursor shapes
     fish_vi_key_bindings
@@ -33,11 +35,6 @@ if status --is-interactive
 
     # Individual features
     aliases
-    notes
-    awstools
-    mactools
-    gittools
-    projects
 
     # Fuzzy finder
     fzf_key_bindings
