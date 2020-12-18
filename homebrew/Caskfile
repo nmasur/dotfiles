@@ -14,7 +14,6 @@ cask "lens"                 # Kubernetes manager
 # Helpful Applications
 cask "obsidian"             # Notes
 cask "github-desktop"       # Git GUI
-cask "google-chrome"        # Alt browser
 cask "postman"              # API testing
 cask "drawio"               # Diagrams
 
@@ -44,3 +43,4 @@ cask "wkhtmltopdf"
 # cask "skype"
 # cask "dash"
 # cask "cyberduck"
+# cask "google-chrome"

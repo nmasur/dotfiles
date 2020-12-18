@@ -18,6 +18,7 @@ brew "youtube-dl"                    # Download YouTube videos
 brew "googler"                       # Search Google
 brew "gh"                            # GitHub commands
 brew "pandoc"                        # Document converter
+brew "tectonic"                      # Minimal LaTeX compiler
 brew "noti"                          # Create system notifications
 brew "b2-tools"                      # BackBlaze B2 storage
 brew "cjbassi/ytop/ytop"             # Fancy system performance
