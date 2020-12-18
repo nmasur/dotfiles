@@ -9,7 +9,7 @@ if status --is-interactive
     set CDPATH . $HOME
     set EDITOR nvim
     set PROJ $HOME/dev/work
-    set NOTES_PATH $HOME/notes
+    set -gx NOTES_PATH $HOME/notes
 
     # Aliases
     alias reload='source $DOTS/fish.configlink/config.fish'
