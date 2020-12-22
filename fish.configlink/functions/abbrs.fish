@@ -3,11 +3,12 @@
 function abbrs --description 'All abbreviations'
 
     # Directory aliases
-    abbr -a l 'ls'                              # Quicker shortcut for ls
-    abbr -a lh 'ls -lh'                         # Pretty vertical list
-    abbr -a ll 'ls -alhF'                       # Include hidden files
+    abbr -a l 'ls'
+    abbr -a lh 'ls -lh'
+    abbr -a ll 'ls -alhF'
     abbr -a c 'cd'
     abbr -a -- - 'cd -'
+    abbr -a proj 'cd $PROJ'
 
     # Tmux
     abbr -a ta 'tmux attach-session'
