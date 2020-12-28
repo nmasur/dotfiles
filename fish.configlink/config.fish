@@ -33,7 +33,7 @@ if status --is-interactive
 
     # Fuzzy finder
     fzf_key_bindings
-    set -g FZF_DEFAULT_COMMAND 'fd --type file'
+    set -gx FZF_DEFAULT_COMMAND 'fd --type file'
     set -g FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
     set -g FZF_DEFAULT_OPTS '-m --height 50% --border'
 

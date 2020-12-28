@@ -4,6 +4,7 @@ tap "nmasur/repo"
 tap "cjbassi/ytop"
 
 brew "jq"                            # JSON manipulation
+brew "gron"                          # JSON grep
 brew "xsv"                           # CSV manipulation
 brew "dos2unix"                      # File conversion
 brew "trash"                         # Delete to trash
