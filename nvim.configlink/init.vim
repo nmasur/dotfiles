@@ -18,6 +18,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
 Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
 Plug 'tpope/vim-surround'                           " Enables paren editing
 Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
+Plug 'unblevable/quick-scope'                       " Hints for f and t
 Plug 'sheerun/vim-polyglot'                         " Syntax for every language
 Plug 'vimwiki/vimwiki'                              " Wiki Markdown System
 Plug 'jreybert/vimagit'                             " Git 'gui' buffer
@@ -244,6 +245,9 @@ let g:vimwiki_key_mappings =
   \   'mouse': 1,
   \ }
 let g:vimwiki_auto_chdir = 1
+
+" Quickscope only highlight on keypress
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Lightline status bar plugin
 let g:lightline = {

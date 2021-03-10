@@ -1,3 +1,3 @@
-function ping --description "Improved ping"
-    prettyping --nolegend
+function ping --description "Improved ping" -a "target"
+    prettyping --nolegend $target
 end
