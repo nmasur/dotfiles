@@ -92,6 +92,7 @@ function abbrs --description 'All abbreviations'
     abbr -a nodes 'kubectl get nodes'
     abbr -a deploys 'kubectl get deployments -A'
     abbr -a dash 'kube-dashboard'
+    abbr -a ks 'k9s'
 
     # Python
     abbr -a py 'python'
