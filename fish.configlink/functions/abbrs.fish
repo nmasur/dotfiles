@@ -42,13 +42,14 @@ function abbrs --description 'All abbreviations'
     abbr -a gmf 'git-merge-fuzzy'
     abbr -a gcp 'git cherry-pick'
     abbr -a ghr 'gh repo view -w'
+    abbr -a cdg 'cd (git rev-parse --show-toplevel)'
 
     # Vim
     abbr -a v 'vim'
     abbr -a vimrc 'vim $HOME/.vimrc'
 
     # Notes
-    abbr -a qn 'quicknote'
+    abbr -a qn 'quicknote "'
     abbr -a sn 'syncnotes'
 
     # Improved CLI Tools
