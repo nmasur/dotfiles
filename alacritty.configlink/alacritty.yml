@@ -591,7 +591,8 @@ shell:
 key_bindings:
     - { key: F, mods: Super, action: ToggleSimpleFullscreen }
     - { key: A, mods: Super, chars: "\x02" }        # CMD-A sends CTRL-B for tmux
-    - { key: O, mods: Super, chars: "\x14" }        # CMD-O sends CTRL-T for fzf
+    - { key: D, mods: Super, chars: "\x14" }        # CMD-D sends CTRL-T for fzf
+    - { key: O, mods: Super, chars: "edit\x0D" } # CMD-O opens file in vim
 
     - { key: A, mods: Alt, chars: "\x1ba" }
     - { key: B, mods: Alt, chars: "\x1bb" }
