@@ -19,6 +19,7 @@ function abbrs --description 'All abbreviations'
     abbr -a gs 'git status'
     abbr -a gd 'git diff'
     abbr -a gds 'git diff --staged'
+    abbr -a gdp 'git diff HEAD^'
     abbr -a ga 'git add'
     abbr -a gaa 'git add -A'
     abbr -a gac 'git commit -am'
@@ -47,6 +48,8 @@ function abbrs --description 'All abbreviations'
     # Vim
     abbr -a v 'vim'
     abbr -a vimrc 'vim $HOME/.vimrc'
+    abbr -a vl 'vim -c "normal! `0"'
+    abbr -a vh 'vim -c "Hist"'
 
     # Notes
     abbr -a qn 'quicknote "'
