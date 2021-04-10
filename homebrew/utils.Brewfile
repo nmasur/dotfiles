@@ -1,7 +1,6 @@
 # Utility Packages
 
 tap "nmasur/repo"
-tap "cjbassi/ytop"
 
 brew "jq"         # JSON manipulation
 brew "dos2unix"   # File conversion
