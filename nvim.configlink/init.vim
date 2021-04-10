@@ -55,6 +55,7 @@ set shiftwidth=4           " Amount to shift with > key
 set softtabstop=4          " Amount to shift with <TAB> key
 set ignorecase             " Ignore case when searching
 set smartcase              " Check case when using capitals in search
+set infercase              " Don't match cases when completing suggestions
 set incsearch              " Search while typing
 set visualbell             " No sounds
 set scrolljump=1           " Scroll more than one line (or 1 line)
