@@ -9,12 +9,10 @@ cask "1password"            # Work pwm
 cask "1password-cli"        # Pwm for tmux
 cask "dropbox"              # File sharing
 cask "docker"               # Containers
-cask "lens"                 # Kubernetes manager
 
 # Helpful Applications
 cask "obsidian"             # Notes
 cask "github-desktop"       # Git GUI
-cask "postman"              # API testing
 cask "drawio"               # Diagrams
 
 # Auxiliary Tools
@@ -28,19 +26,16 @@ tap "homebrew/cask-fonts"
 cask "font-fira-mono-for-powerline"
 
 # Personal
-cask "lastpass"             # My pwm
 cask "authy"                # Authentication
 cask "keybase"              # Encryption
 cask "discord"              # My chat
 cask "steam"                # Games
 cask "vlc"                  # Video player
-cask "calibre"              # Ebook manager
 
 cask "jira-client"
 cask "wkhtmltopdf"
 
-# Don't bother
-# cask "skype"
-# cask "dash"
-# cask "cyberduck"
-# cask "google-chrome"
+# Optional
+# cask "postman"              # API testing
+# cask "lens"                 # Kubernetes manager
+# cask "calibre"              # Ebook manager

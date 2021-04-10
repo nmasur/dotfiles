@@ -13,5 +13,4 @@ brew "fd"       # Faster, better find
 brew "sd"       # Faster, better sed
 brew "bat"      # Better cat
 brew "zoxide"   # Better autojump
-brew "thefuck"  # Fix terminal mistakes
 brew "node"     # Ugh, nodejs (for Vim CoC)
