@@ -10,6 +10,7 @@ function abbrs --description 'All abbreviations'
     abbr -a c 'cd'
     abbr -a -- - 'cd -'
     abbr -a proj 'cd $PROJ'
+    abbr -a mkd 'mkdir -pv'
 
     # Tmux
     abbr -a ta 'tmux attach-session'

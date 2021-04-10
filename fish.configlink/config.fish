@@ -2,8 +2,14 @@
 
 if status --is-interactive
 
+    # Add directories to path
+    set PATH $PATH \
+        /usr/local/bin \
+        ~/.local/bin \
+        $DOTS/bin \
+        ~/.cargo/bin
+
     # Aliases
-    set PATH $PATH /usr/local/bin ~/.local/bin $DOTS/bin ~/.cargo/bin
     if command -v nvim > /dev/null
         alias vim='nvim'
         abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'
@@ -29,7 +35,7 @@ if status --is-interactive
     zoxide init fish | source
 
     # Colors
-    theme_gruvbox dark
+    command cat $DOTS/fish.configlink/fish_colors
 
     # Fuzzy finder
     fzf_key_bindings
