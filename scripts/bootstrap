@@ -62,14 +62,6 @@ use_fish_shell() {
     echo "fish ✓"
 }
 
-setup_tmux() {
-    if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
-
-    echo "tmux ✓"
-}
-
 setup_poetry() {
     poetry completions fish > $(brew --prefix)/share/fish/vendor_completions.d/poetry.fish
 }
@@ -78,8 +70,6 @@ printf "\nbootstrapping...\n\n"
 install_xcode
 install_homebrew
 install_brews
-setup_tmux
-install_gitmux
 setup_poetry
 use_fish_shell
 ("$DOTS/scripts/setup_symlinks")

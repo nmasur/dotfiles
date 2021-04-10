@@ -96,13 +96,3 @@ set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, 
 
 set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
 set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
-
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-
-# Customize 1pass
-set -g @1password-copy-to-clipboard 'on'
-
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run '~/.tmux/plugins/tpm/tpm'
-
