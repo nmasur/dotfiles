@@ -70,22 +70,6 @@ setup_tmux() {
     echo "tmux ✓"
 }
 
-install_gitmux() {
-    if ! (which gitmux > /dev/null)
-    then
-        printf "gitmux ✕\n\n"
-        printf "\ninstalling gitmux..."
-        /bin/bash -c "$(curl -L -o gitmux.tar.gz https://github.com/arl/gitmux/releases/download/v0.7.4/gitmux_0.7.4_macOS_amd64.tar.gz)"
-        tar -xzf gitmux.tar.gz gitmux
-        mkdir -p ~/.local/bin
-        mv gitmux ~/.local/bin/
-        rm gitmux.tar.gz
-        echo ""
-    fi
-
-    echo "gitmux ✓"
-}
-
 setup_poetry() {
     poetry completions fish > $(brew --prefix)/share/fish/vendor_completions.d/poetry.fish
 }

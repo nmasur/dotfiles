@@ -92,17 +92,15 @@ set-window-option -g window-status-separator ""
 
 WEATHER='#(weather_cached)'
 set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore]"
-set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] %Y-%m-%d  %H:%M #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248]#(gitmux -cfg .gitmux.conf '#{pane_current_path}') #[fg=colour237, nobold, bg=colour248]$WEATHER #[fg=colour237] "
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] %Y-%m-%d  %H:%M #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, nobold, bg=colour248] $WEATHER #[fg=colour237] "
 
 set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
 set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'yardnsm/tmux-1password'
 
 # Customize 1pass
-bind i run-shell "reset_1p"
 set -g @1password-copy-to-clipboard 'on'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
