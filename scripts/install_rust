@@ -30,15 +30,16 @@ download_rust_analyzer() {
 }
 
 install_cargos() {
-    programs=(
-        cargo-edit
-        cargo-whatfeatures
-        jql
-        toml-cli
-    )
-    for i in "${programs[@]}"; do
-        cargo install "$i"
+    set -- \
+        'cargo-edit'
+        'cargo-whatfeatures' \
+        'jql' \
+        'toml-cli'
+    for program do
+        cargo install "$program"
     done
+
+    echo "cargos ✓"
 }
 
 install_rust
