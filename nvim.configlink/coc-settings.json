@@ -1,4 +1,11 @@
 {
   "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer",
-  "rust-analyzer.checkOnSave.enable": true
+  "rust-analyzer.checkOnSave.enable": true,
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "python": "black",
+    "sh": "shfmt"
+  }
 }

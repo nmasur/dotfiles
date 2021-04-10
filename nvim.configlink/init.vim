@@ -13,23 +13,28 @@ endif
 " All plugins
 call plug#begin('~/.config/nvim/plugged')
 
+" Core plugins
 Plug 'morhetz/gruvbox'                              " Colorscheme
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Required for fuzzyfinder
 Plug 'junegunn/fzf.vim'                             " Actual fuzzyfinder
 Plug 'tpope/vim-surround'                           " Enables paren editing
-Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
-Plug 'unblevable/quick-scope'                       " Hints for f and t
 Plug 'sheerun/vim-polyglot'                         " Syntax for every language
+Plug 'airblade/vim-gitgutter'                       " Git next to line numbers
+Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
+Plug 'godlygeek/tabular'                            " Spacing and alignment
+
+" Ancillary plugins
+Plug 'unblevable/quick-scope'                       " Hints for f and t
 Plug 'vimwiki/vimwiki'                              " Wiki Markdown System
 Plug 'jreybert/vimagit'                             " Git 'gui' buffer
-Plug 'airblade/vim-gitgutter'                       " Git next to line numbers
 Plug 'tpope/vim-fugitive'                           " Other git commands
 Plug 'machakann/vim-highlightedyank'                " Highlight text when copied
-Plug 'godlygeek/tabular'                            " Spacing and alignment
 Plug 'itchyny/lightline.vim'                        " Status bar
 Plug 'tpope/vim-vinegar'                            " Fixes netrw file explorer
 Plug 'lambdalisue/fern.vim'                         " File explorer / project drawer
 Plug 'christoomey/vim-tmux-navigator'               " Hotkeys for tmux panes
+
+" CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " Code completion
 
 call plug#end()
@@ -135,6 +140,9 @@ nnoremap <Leader>` :GitGutterToggle<cr>
 " Git push
 nnoremap <Leader>gp :Git push<cr>
 
+" Split window
+nnoremap <Leader>ws :vsplit<cr>
+
 " Close all other splits
 nnoremap <Leader>wm :only<cr>
 
@@ -144,13 +152,17 @@ noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 " CoC Settings
 "-------------
 
-let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-pairs']
+let g:coc_global_extensions = [
+    \ 'coc-rust-analyzer',
+    \ 'coc-pairs',
+    \ 'coc-diagnostic',
+\ ]
 
 " Set tab to completion
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -190,20 +202,13 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" LaTeX Settings
+"---------------
 
 " LaTeX Hotkeys
 autocmd FileType tex inoremap ;bf \textbf{}<Esc>i
@@ -217,18 +222,18 @@ autocmd BufWritePost *.tex silent! execute "!pdflatex -output-directory=%:p:h % 
 "----------------
 
 " Built-in explorer plugin
-let g:netrw_liststyle = 3               " Change style to 'tree' view
-let g:netrw_banner = 0                  " Remove useless banner
-let g:netrw_winsize = 15                " Explore window takes % of page
-let g:netrw_browse_split = 4            " Open in previous window
-let g:netrw_altv = 1                    " Always split left
+let g:netrw_liststyle = 3    " Change style to 'tree' view
+let g:netrw_banner = 0       " Remove useless banner
+let g:netrw_winsize = 15     " Explore window takes % of page
+let g:netrw_browse_split = 4 " Open in previous window
+let g:netrw_altv = 1         " Always split left
 
 " Gitgutter plugin
-let g:gitgutter_enabled = 1             " Enabled on start
+let g:gitgutter_enabled = 1 " Enabled on start
 
 " Polyglot syntax plugin
-let g:terraform_fmt_on_save=1           " Formats with terraform plugin
-let g:rustfmt_autosave = 1              " Formats with rust plugin
+let g:terraform_fmt_on_save=1 " Formats with terraform plugin
+let g:rustfmt_autosave = 1    " Formats with rust plugin
 
 " VimWiki plugin
 let g:vimwiki_list = [
