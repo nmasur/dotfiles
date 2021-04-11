@@ -24,15 +24,16 @@ Plug 'tpope/vim-commentary'                         " Use gc or gcc to comment
 Plug 'godlygeek/tabular'                            " Spacing and alignment
 
 " Ancillary plugins
-Plug 'unblevable/quick-scope'                       " Hints for f and t
-Plug 'vimwiki/vimwiki'                              " Wiki Markdown System
-Plug 'jreybert/vimagit'                             " Git 'gui' buffer
-Plug 'tpope/vim-fugitive'                           " Other git commands
-Plug 'machakann/vim-highlightedyank'                " Highlight text when copied
-Plug 'itchyny/lightline.vim'                        " Status bar
-Plug 'tpope/vim-vinegar'                            " Fixes netrw file explorer
-Plug 'lambdalisue/fern.vim'                         " File explorer / project drawer
-Plug 'christoomey/vim-tmux-navigator'               " Hotkeys for tmux panes
+Plug 'unblevable/quick-scope'         " Hints for f and t
+Plug 'vimwiki/vimwiki'                " Wiki Markdown System
+Plug 'jreybert/vimagit'               " Git 'gui' buffer
+Plug 'airblade/vim-rooter'            " Change directory to git route
+Plug 'tpope/vim-fugitive'             " Other git commands
+Plug 'machakann/vim-highlightedyank'  " Highlight text when copied
+Plug 'itchyny/lightline.vim'          " Status bar
+Plug 'tpope/vim-vinegar'              " Fixes netrw file explorer
+Plug 'lambdalisue/fern.vim'           " File explorer / project drawer
+Plug 'christoomey/vim-tmux-navigator' " Hotkeys for tmux panes
 
 " CoC (Language Server Protocol, requires NodeJS)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " Code completion
@@ -60,6 +61,8 @@ set incsearch              " Search while typing
 set visualbell             " No sounds
 set scrolljump=1           " Scroll more than one line (or 1 line)
 set scrolloff=3            " Margin of lines when to start scrolling
+set splitright             " Vertical splits on the right side
+set splitbelow             " Horizontal splits on the lower side
 set pastetoggle=<F3>       " Use F3 to enter raw paste mode
 set clipboard+=unnamedplus " Uses system clipboard for yanking
 set updatetime=300         " Faster diagnostics
@@ -110,6 +113,7 @@ nnoremap <Leader>/ :Rg<CR>
 
 " Quit vim
 nnoremap <Leader>q :quit<cr>
+nnoremap <Leader>Q :quitall<cr>
 
 " Save file
 nnoremap <Leader>fs :write<cr>
@@ -152,6 +156,9 @@ nnoremap <Leader>ws :vsplit<cr>
 
 " Close all other splits
 nnoremap <Leader>wm :only<cr>
+
+" Exit terminal mode (requires Alacritty escape)
+tnoremap <S-CR> <C-\><C-n>
 
 " Open file tree
 noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
