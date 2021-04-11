@@ -5,7 +5,7 @@ fisher update
 
 # Set $PATH for finding programs
 set -U FISH_DIR (readlink ~/.config/fish)
-set -U DOTS (dirname $FISH_DIR)
+set -Ux DOTS (dirname $FISH_DIR)
 set -U CDPATH . $HOME
 set -U EDITOR nvim
 set -U PROJ $HOME/dev/work

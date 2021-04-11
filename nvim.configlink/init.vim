@@ -94,7 +94,8 @@ endif
 " Custom Commands
 "----------------
 
-command Vimrc edit ~/.config/nvim/init.vim  " Edit .vimrc (this file)
+command! Vimrc edit ~/.config/nvim/init.vim     " Edit .vimrc (this file)
+command! Refresh source ~/.config/nvim/init.vim " Refresh from .vimrc (this file)
 
 " Custom Keybinds
 "----------------
@@ -160,8 +161,18 @@ nnoremap <Leader>wm :only<cr>
 " Exit terminal mode (requires Alacritty escape)
 tnoremap <S-CR> <C-\><C-n>
 
+" Reload Vimrc settings
+nnoremap <Leader>rr :Refresh<cr>
+nnoremap <Leader>rp :Refresh<cr> :PlugInstall<cr>
+
 " Open file tree
 noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
+
+" Snippets
+"---------
+
+nnoremap ,sh :-1read $DOTS/shell/templates/skeleton.sh<CR>Gdd03kC
+nnoremap ,py :-1read $DOTS/shell/templates/skeleton.py<CR>Gdd08kC
 
 " LaTeX Settings
 "---------------
