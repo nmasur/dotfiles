@@ -1,8 +1,5 @@
 #!/usr/bin/env fish
 
-# Install fisher packages
-fisher update
-
 # Set $PATH for finding programs
 set -U FISH_DIR (readlink ~/.config/fish)
 set -Ux DOTS (dirname $FISH_DIR)
