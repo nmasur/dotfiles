@@ -19,8 +19,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 140
-    lines: 55
+    columns: 130
+    lines: 50
 
   # Window position (changes require restart)
   #
@@ -61,7 +61,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Windowed
+  startup_mode: SimpleFullscreen
 
   # Window title
   #title: Alacritty
@@ -138,7 +138,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 16.0
+  size: 18.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
