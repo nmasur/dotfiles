@@ -1,12 +1,12 @@
 #!/usr/bin/env fish
 
-# Set $PATH for finding programs
-set -U FISH_DIR (readlink ~/.config/fish)
-set -Ux DOTS (dirname $FISH_DIR)
-set -U CDPATH . $HOME
-set -U EDITOR nvim
-set -U PROJ $HOME/dev/work
-set -Ux NOTES_PATH $HOME/notes
+set -U FISH_DIR (readlink ~/.config/fish) # Used for getting to this repo
+set -Ux DOTS (dirname $FISH_DIR)          # Directory of this config repo
+set -U CDPATH . $HOME                     # Directories available for immediate cd
+set -U EDITOR nvim                        # Preferred text editor
+set -U PROJ $HOME/dev/work                # Projects directory
+set -Ux NOTES_PATH $HOME/notes            # Notes directory
+set -Ux MANPAGER "nvim +Man!"             # Used for reading man pages
 
 # Load abbreviations
 abbrs

@@ -1,0 +1,10 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name:
+  namespace: default
+rules:
+- apiGroups: [""]
+  resourceNames:
+  resources:
+  verbs:

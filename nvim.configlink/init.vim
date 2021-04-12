@@ -83,6 +83,10 @@ set undofile                             " Keeps undos after quit
 set backupdir=~/.config/nvim/dirs/backup
 set undodir=~/.config/nvim/dirs/undo
 
+" Keep selection when tabbing
+vnoremap < <gv
+vnoremap > >gv
+
 " Create backup directories if they don't exist
 if !isdirectory(&backupdir)
   call mkdir(&backupdir, "p")
@@ -94,8 +98,8 @@ endif
 " Custom Commands
 "----------------
 
-command! Vimrc edit ~/.config/nvim/init.vim     " Edit .vimrc (this file)
-command! Refresh source ~/.config/nvim/init.vim " Refresh from .vimrc (this file)
+command! Vimrc edit $MYVIMRC     " Edit .vimrc (this file)
+command! Refresh source $MYVIMRC " Refresh from .vimrc (this file)
 
 " Custom Keybinds
 "----------------
@@ -168,11 +172,28 @@ nnoremap <Leader>rp :Refresh<cr> :PlugInstall<cr>
 " Open file tree
 noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 
+" Tabularize
+nnoremap <Leader>ta :Tabularize /
+nnoremap <Leader>t# :Tabularize /#<CR>
+nnoremap <Leader>t" :Tabularize /"<CR>
+
 " Snippets
 "---------
 
+" Basic programming files
 nnoremap ,sh :-1read $DOTS/shell/templates/skeleton.sh<CR>Gdd03kC
 nnoremap ,py :-1read $DOTS/shell/templates/skeleton.py<CR>Gdd08kC
+
+" Kubernetes
+nnoremap ,cm :-1read $DOTS/shell/templates/configmap.yaml<CR>Gdd0gg
+nnoremap ,sec :-1read $DOTS/shell/templates/secret.yaml<CR>Gdd0gg
+nnoremap ,dep :-1read $DOTS/shell/templates/deployment.yaml<CR>Gdd0gg
+nnoremap ,svc :-1read $DOTS/shell/templates/service.yaml<CR>Gdd0gg
+nnoremap ,cro :-1read $DOTS/shell/templates/clusterrole.yaml<CR>Gdd0gg
+nnoremap ,crb :-1read $DOTS/shell/templates/clusterrolebinding.yaml<CR>Gdd0gg
+nnoremap ,ro :-1read $DOTS/shell/templates/role.yaml<CR>Gdd0gg
+nnoremap ,rb :-1read $DOTS/shell/templates/rolebinding.yaml<CR>Gdd0gg
+nnoremap ,sa :-1read $DOTS/shell/templates/serviceaccount.yaml<CR>Gdd0gg
 
 " LaTeX Settings
 "---------------
