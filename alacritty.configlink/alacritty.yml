@@ -594,6 +594,7 @@ key_bindings:
     - { key: D, mods: Super, chars: "\x14" }        # CMD-D sends CTRL-T for fzf
     - { key: O, mods: Super, chars: "edit\x0D" }    # CMD-O opens file in vim
     - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
+    - { key: E, mods: Alt, chars: "\x1be" }         # Send ALT-E for fish
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }

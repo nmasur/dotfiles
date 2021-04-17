@@ -82,3 +82,6 @@ noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 nnoremap <Leader>ta :Tabularize /
 nnoremap <Leader>t# :Tabularize /#<CR>
 nnoremap <Leader>t" :Tabularize /"<CR>
+
+" Read todo comments
+nnoremap <Leader>td /# \?TODO:\?<CR>

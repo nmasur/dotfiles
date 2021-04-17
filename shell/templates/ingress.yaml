@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1 # must be beta until k8s 1.19
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name:
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/security-groups:
+    alb.ingress.kubernetes.io/tags: Project=
+    alb.ingress.kubernetes.io/target-type: instance
+  name:
+  namespace:
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - backend:
+          serviceName:
+          servicePort:
