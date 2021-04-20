@@ -3,6 +3,7 @@
 
 command! Vimrc edit $MYVIMRC     " Edit .vimrc (this file)
 command! Refresh source $MYVIMRC " Refresh from .vimrc (this file)
+command! Today exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'
 
 " Custom Keybinds
 "----------------
@@ -15,6 +16,14 @@ nnoremap <silent> <CR> :noh<CR><CR>
 
 " Replace all
 nnoremap <Leader>S :%s//g<Left><Left>
+
+" Shuffle lines around
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Jump to text in this directory
 nnoremap <Leader>/ :Rg<CR>
@@ -61,6 +70,9 @@ nnoremap <Leader>` :GitGutterToggle<cr>
 
 " Git push
 nnoremap <Leader>gp :Git push<cr>
+
+" Git repo
+nnoremap <silent> <Leader>gr :!gh repo view -w<cr><cr>
 
 " Split window
 nnoremap <Leader>ws :vsplit<cr>

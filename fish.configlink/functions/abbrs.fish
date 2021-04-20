@@ -53,7 +53,7 @@ function abbrs --description 'All abbreviations'
     abbr -a vh 'vim -c "Hist"'
 
     # Notes
-    abbr -a qn 'quicknote "'
+    abbr -a qn 'quicknote'
     abbr -a sn 'syncnotes'
 
     # Improved CLI Tools
