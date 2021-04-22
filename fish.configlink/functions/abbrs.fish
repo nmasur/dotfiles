@@ -50,6 +50,7 @@ function abbrs --description 'All abbreviations'
     abbr -a v 'vim'
     abbr -a vimrc 'vim $HOME/.vimrc'
     abbr -a vl 'vim -c "normal! `0"'
+    abbr -a vll 'vim -c "Hist"'
     abbr -a vh 'vim -c "Hist"'
 
     # Notes
