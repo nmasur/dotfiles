@@ -29,6 +29,7 @@ Plug 'airblade/vim-rooter'            " Change directory to git route
 Plug 'tpope/vim-fugitive'             " Other git commands
 Plug 'machakann/vim-highlightedyank'  " Highlight text when copied
 Plug 'itchyny/lightline.vim'          " Status bar
+Plug 'tpope/vim-eunuch'               " File manipulation in Vim
 Plug 'tpope/vim-vinegar'              " Fixes netrw file explorer
 Plug 'lambdalisue/fern.vim'           " File explorer / project drawer
 Plug 'christoomey/vim-tmux-navigator' " Hotkeys for tmux panes

@@ -75,10 +75,27 @@ nnoremap <Leader>gp :Git push<cr>
 nnoremap <silent> <Leader>gr :!gh repo view -w<cr><cr>
 
 " Split window
-nnoremap <Leader>ws :vsplit<cr>
+nnoremap <Leader>wv :vsplit<cr>
+nnoremap <Leader>wh :split<cr>
 
 " Close all other splits
 nnoremap <Leader>wm :only<cr>
+
+" Zoom / Restore window.
+" https://stackoverflow.com/a/26551079
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <leader>z :ZoomToggle<CR>
 
 " Exit terminal mode (requires Alacritty escape)
 tnoremap <S-CR> <C-\><C-n>
@@ -91,9 +108,9 @@ nnoremap <Leader>rp :Refresh<cr> :PlugInstall<cr>
 noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 
 " Tabularize
-nnoremap <Leader>ta :Tabularize /
-nnoremap <Leader>t# :Tabularize /#<CR>
-nnoremap <Leader>t" :Tabularize /"<CR>
+noremap <Leader>ta :Tabularize /
+noremap <Leader>t# :Tabularize /#<CR>
+noremap <Leader>t" :Tabularize /"<CR>
 
 " Read todo comments
 nnoremap <Leader>td /# \?TODO:\?<CR>
