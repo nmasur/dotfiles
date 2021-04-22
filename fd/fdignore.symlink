@@ -1,4 +1,5 @@
 !.env*
 !.github/
+!.gitignore
 .terraform/
 .target/

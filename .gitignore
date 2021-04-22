@@ -3,7 +3,6 @@ nvim.configlink/dirs/*
 nvim.configlink/.netrwhist
 nvim.configlink/plugged/**
 nvim.configlink/autoload/**
-spacemacs.d.symlink/.spacemacs.env
 fish.configlink/config.fish.bac
 fish_variables
 homebrew/*.lock.json
