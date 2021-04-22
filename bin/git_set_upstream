@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 # Copied from David Pedersen: https://github.com/davidpdrsn/dotfiles/blob/master/bin/git-pp
 
 set -e
 
-function git_branch_name {
-  val=`git branch 2>/dev/null | grep '^*' | colrm 1 2`
+git_branch_name() {
+  val=$( git branch 2>/dev/null | grep '^\*' | colrm 1 2 )
   echo "$val"
 }
 
-git push --set-upstream origin $(git_branch_name)
+git push --set-upstream origin "$(git_branch_name)"
