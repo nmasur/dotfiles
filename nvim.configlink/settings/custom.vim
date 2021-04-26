@@ -14,8 +14,9 @@ map <Space> <Leader>
 "This unsets the `last search pattern` register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
 
-" Replace all
-nnoremap <Leader>S :%s//g<Left><Left>
+" Find and replace
+nnoremap <Leader>S :%s/
+vnoremap <leader>S :s/
 
 " Shuffle lines around
 nnoremap <A-j> :m .+1<CR>==
@@ -105,7 +106,7 @@ nnoremap <Leader>rr :Refresh<cr>
 nnoremap <Leader>rp :Refresh<cr> :PlugInstall<cr>
 
 " Open file tree
-noremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
+nnoremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 
 " Tabularize
 noremap <Leader>ta :Tabularize /
