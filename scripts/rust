@@ -29,12 +29,12 @@ download_rust_analyzer() {
     echo "rust-analyzer ✓"
 }
 
+# cargo-edit: quickly add and remove packages
+# whatfeatures: see optional features for a package
 install_cargos() {
     set -- \
-        'cargo-edit'
-        'cargo-whatfeatures' \
-        'jql' \
-        'toml-cli'
+        'cargo-edit' \
+        'cargo-whatfeatures'
     for program do
         cargo install "$program"
     done

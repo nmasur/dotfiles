@@ -16,3 +16,4 @@ brew "youtube-dl" # Download YouTube videos
 brew "googler"    # Search Google
 brew "gh"         # GitHub commands
 brew "pandoc"     # Document converter
+brew "visidata"   # Spreadsheet manipulation

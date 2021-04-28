@@ -17,3 +17,4 @@ brew "cjbassi/ytop/ytop"             # Fancy system performance
 brew "nmasur/repo/update-ssh-config" # Update .ssh/config
 brew "kakoune"                       # Modal editor
 brew "awslogs"                       # View AWS log streams
+brew "uplink"                        # StorJ encrypted storage CLI

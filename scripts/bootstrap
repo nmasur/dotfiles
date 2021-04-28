@@ -46,24 +46,24 @@ use_fish_shell() {
         exit 1
     fi
     FISH_SHELL=$(which fish)
-    if ! (cat /etc/shells | grep $FISH_SHELL > /dev/null)
+    if ! (grep "$FISH_SHELL" /etc/shells > /dev/null)
     then
         echo "Modifying /etc/shells"
         echo "Requires sudo password"
-        sudo echo $FISH_SHELL >> /etc/shells
+        echo "$FISH_SHELL" | sudo tee -a /etc/shells
     fi
     if ! (echo "$SHELL" | grep fish > /dev/null)
     then
         echo "Changing default shell to fish"
         echo "Requires sudo password"
-        sudo chsh -s $FISH_SHELL
+        sudo chsh -s "$FISH_SHELL"
     fi
 
     echo "fish ✓"
 }
 
 setup_poetry() {
-    poetry completions fish > $(brew --prefix)/share/fish/vendor_completions.d/poetry.fish
+    poetry completions fish > "$(brew --prefix)/share/fish/vendor_completions.d/poetry.fish"
 }
 
 printf "\nbootstrapping...\n\n"
@@ -76,8 +76,9 @@ use_fish_shell
 
 echo ""
 echo "consider running other scripts:"
-echo " - all_brews"
-echo " - install_casks"
+echo " - brews"
+echo " - casks"
 echo " - configure_macos"
-echo " - install_rust"
+echo " - rust"
+echo " - cargos"
 echo ""

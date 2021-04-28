@@ -593,6 +593,7 @@ key_bindings:
   - { key: A, mods: Super, chars: "\x02" }        # CMD-A sends CTRL-B for tmux
   - { key: D, mods: Super, chars: "\x14" }        # CMD-D sends CTRL-T for fzf
   - { key: O, mods: Super, chars: "edit\x0D" }    # CMD-O opens file in vim
+  - { key: R, mods: Super, chars: "recent\x0D" }    # CMD-R opens file in vim
 
   - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
   - { key: N,           mods: Command,         action: SpawnNewInstance }

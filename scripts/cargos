@@ -1,0 +1,26 @@
+#!/bin/sh
+
+DOTS=$(dirname "$0")/..
+cd "$DOTS" || (echo "Directory not found: $DOTS"; exit 1)
+DOTS="$PWD"
+
+check_rust() {
+    if ! (which ~/.cargo/bin/rustup > /dev/null)
+    then
+        echo "Install rust (cargo) before continuing"
+        echo "Run the rust script before this one"
+        exit 1
+    fi
+}
+
+all_cargos() {
+    cargofile=$DOTS/cargo/Cargofile
+    sed 's/#.*$//g;/^$/d' "$cargofile" | while read -r line
+    do
+        cargo install "$line"
+    done \
+    && echo "all cargos installed ✓"
+}
+
+check_rust
+all_cargos

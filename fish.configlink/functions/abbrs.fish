@@ -79,6 +79,7 @@ function abbrs --description 'All abbreviations'
     abbr -a fingerprint 'ssh-keyscan myhost.com | ssh-keygen -lf -'
     abbr -a publickey 'ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub'
     abbr -a forloop 'for i in (seq 1 100)'
+    abbr -a gatekeeper 'sudo spctl --master-disable'
 
     # Docker
     abbr -a dc '$DOTS/bin/docker_cleanup'

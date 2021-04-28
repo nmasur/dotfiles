@@ -1,0 +1,6 @@
+# Packages to install with Cargo
+
+toml-cli # Parse TOML from the command line
+rates    # See exchange rates
+wrangler # Cloudflare Workers CLI
+csview   # Quick display CSV as tables

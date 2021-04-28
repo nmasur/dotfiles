@@ -5,7 +5,6 @@ cd "$DOTS" || (echo "Directory not found: $DOTS"; exit 1)
 DOTS="$PWD"
 
 all_brews() {
-    brewfile=$DOTS/homebrew/Caskfile
     for brewfile in $(find "$DOTS/homebrew" -iname "*.Brewfile")
     do
         /usr/local/bin/brew bundle check --file "$brewfile" \
