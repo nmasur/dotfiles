@@ -44,6 +44,7 @@ function abbrs --description 'All abbreviations'
     abbr -a gmf 'git-merge-fuzzy'
     abbr -a gcp 'git cherry-pick'
     abbr -a ghr 'gh repo view -w'
+    abbr -a gha 'gh run list | head -1 | awk \'{ print $NF }\' | xargs gh run view'
     abbr -a cdg 'cd (git rev-parse --show-toplevel)'
 
     # Vim
