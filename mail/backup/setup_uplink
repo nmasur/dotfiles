@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# First Uplink
+curl -L https://github.com/storj/storj/releases/latest/download/uplink_linux_amd64.zip -o uplink_linux_amd64.zip
+if ! (which unzip > /dev/null)
+then
+    apt install -y unzip
+fi
+unzip -o uplink_linux_amd64.zip
+rm uplink_linux_amd64.zip
+chmod 755 uplink
+sudo mv uplink /usr/local/bin/uplink
+
+# Then rclone
+curl https://rclone.org/install.sh | sudo bash
+
+echo "\n\nNow setup rclone with: rclone config\n"

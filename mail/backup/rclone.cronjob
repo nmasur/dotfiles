@@ -1,0 +1,2 @@
+# Run backup of mail folder, requires rclone (and uplink, with proper setup)
+@hourly root rclone sync /home/noah/Mail/ mail-backup:mail/

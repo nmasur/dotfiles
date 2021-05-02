@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bucket="$1"
+access="$2"
+uplink ls ${access:+--access "$access"} "sj://$bucket/" | awk '{print $NF}' | xargs -I {} uplink rm ${access:+--access "$access"} "sj://$bucket/{}"
