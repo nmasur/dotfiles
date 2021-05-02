@@ -595,7 +595,9 @@ key_bindings:
   - { key: O, mods: Super, chars: "edit\x0D" }    # CMD-O opens file in vim
   - { key: R, mods: Super, chars: "recent\x0D" }    # CMD-R opens file in vim
 
-  - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
+  - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
+  - { key: Return,   mods: Control, chars: "\x1b[13;5u" }
+  - { key: Return,   mods: Control|Shift, chars: "\x1b[13;6u" }
   - { key: N,           mods: Command,         action: SpawnNewInstance }
   - { key: PageUp,                             action: ScrollPageUp     }
   - { key: PageUp,      mode: Alt,             chars: "\x1B[5~"         }

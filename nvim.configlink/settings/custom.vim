@@ -98,8 +98,8 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <leader>z :ZoomToggle<CR>
 
-" Exit terminal mode (requires Alacritty escape)
-tnoremap <S-CR> <C-\><C-n>
+" Exit terminal mode
+tnoremap <A-CR> <C-\><C-n>
 
 " Reload Vimrc settings
 nnoremap <Leader>rr :Refresh<cr>
