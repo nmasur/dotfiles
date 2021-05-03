@@ -6,3 +6,4 @@ nvim.configlink/autoload/**
 fish.configlink/config.fish.bac
 fish_variables
 homebrew/*.lock.json
+*.bak

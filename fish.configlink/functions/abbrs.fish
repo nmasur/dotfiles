@@ -18,6 +18,7 @@ function abbrs --description 'All abbreviations'
     abbr -a tnn 'tmux new-session -s noah'
 
     # Git
+    abbr -a g 'git'
     abbr -a gs 'git status'
     abbr -a gd 'git diff'
     abbr -a gds 'git diff --staged'

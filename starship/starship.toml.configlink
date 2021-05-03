@@ -9,7 +9,9 @@ format = """\
   """
 
 [character]
-symbol = "❯"
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold green)"
 
 [cmd_duration]
 min_time = 3_000
