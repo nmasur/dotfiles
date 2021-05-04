@@ -590,10 +590,13 @@ shell:
 # in the order they were defined in.
 key_bindings:
   - { key: F, mods: Super, action: ToggleSimpleFullscreen }
-  - { key: A, mods: Super, chars: "\x02" }        # CMD-A sends CTRL-B for tmux
-  - { key: D, mods: Super, chars: "\x14" }        # CMD-D sends CTRL-T for fzf
-  - { key: O, mods: Super, chars: "edit\x0D" }    # CMD-O opens file in vim
-  - { key: R, mods: Super, chars: "recent\x0D" }    # CMD-R opens file in vim
+
+  # Reference for escape codes: https://www.gaijin.at/en/infos/ascii-ansi-character-table
+
+  - { key: A, mods: Super, chars: "\x02" } # CMD-A sends CTRL-B for tmux
+  - { key: D, mods: Super, chars: "\x14" } # CMD-D sends CTRL-T for fzf
+  - { key: O, mods: Super, chars: "\x0f" } # CMD-O sends CTRL-O for fish/vim
+  - { key: R, mods: Super, chars: "\x05" } # CMD-R sends CTRL-E for fish/vim
 
   - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
   - { key: Return,   mods: Control, chars: "\x1b[13;5u" }
