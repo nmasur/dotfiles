@@ -49,8 +49,13 @@ function abbrs --description 'All abbreviations'
     abbr -a cdg 'cd (git rev-parse --show-toplevel)'
 
     # Vim
+    if command -v nvim > /dev/null
+        alias vim='nvim'
+        abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'
+    else
+        abbr -a vimrc 'vim $HOME/.vimrc'
+    end
     abbr -a v 'vim'
-    abbr -a vimrc 'vim $HOME/.vimrc'
     abbr -a vl 'vim -c "normal! `0"'
     abbr -a vll 'vim -c "Hist"'
     abbr -a vh 'vim -c "Hist"'
@@ -117,5 +122,11 @@ function abbrs --description 'All abbreviations'
 
     # macOS
     abbr -a casks 'vim $DOTS/homebrew/Caskfile'
+
+    # Linux
+    if [ (uname) = "Linux" ]
+        linux
+    end
+
 
 end

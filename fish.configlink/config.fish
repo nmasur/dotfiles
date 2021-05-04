@@ -9,15 +9,6 @@ if status --is-interactive
         $DOTS/bin \
         ~/.cargo/bin
 
-    # Aliases
-    if command -v nvim > /dev/null
-        alias vim='nvim'
-        abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'
-    end
-    if [ (uname) = "Linux" ]
-        linux
-    end
-
     # Use `vi` in the shell with cursor shapes
     fish_vi_key_bindings
     bind yy fish_clipboard_copy
@@ -35,7 +26,9 @@ if status --is-interactive
     zoxide init fish | source
 
     # Colors
-    command cat $DOTS/fish.configlink/fish_colors
+    if test -e $DOTS/fish.configlink/fish_colors
+        command cat $DOTS/fish.configlink/fish_colors
+    end
 
     # Fuzzy finder
     fzf_key_bindings
