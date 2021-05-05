@@ -1,7 +1,7 @@
 {
-  "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer",
-  "rust-analyzer.checkOnSave.enable": true,
-  "diagnostic-languageserver.filetypes": {
-    "sh": "shellcheck"
-  }
+    "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer",
+    "rust-analyzer.checkOnSave.enable": true,
+    "diagnostic-languageserver.filetypes": {
+        "sh": "shellcheck"
+    }
 }

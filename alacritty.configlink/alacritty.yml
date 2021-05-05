@@ -599,6 +599,8 @@ key_bindings:
   - { key: R, mods : Super, chars: "\x05" } # CMD-R sends CTRL-E for fish/vim
   - { key: G, mods : Super, chars: "\x07" } # CMD-G sends CTRL-G for fish/vim
   - { key: L, mods : Super, chars: "\x1F" } # CMD-L sends null key for fish
+  - { key: H, mods : Super|Shift, chars: "\x02P" } # CMD-SHIFT-H previous tmux window
+  - { key: L, mods : Super|Shift, chars: "\x02n" } # CMD-SHIFT-L next tmux window
 
   - { key: Return,      mods : Shift,          chars: "\x1b[13;2u"      }
   - { key: Return,      mods : Control,        chars: "\x1b[13;5u"      }

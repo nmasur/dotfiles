@@ -2,7 +2,7 @@
 "--------
 
 " Basic Settings
-filetype plugin on  " Load the plugin for current filetype (vimwiki)
+filetype plugin on  " Load the plugin for current filetype
 syntax enable       " Syntax highlighting
 set termguicolors   " Set to truecolor
 colorscheme gruvbox " Installed in autoload/ and colors/
@@ -38,15 +38,11 @@ if has("autocmd")
 endif
 
 " Better backup, swap and undo storage
-set noswapfile                           " Instead of swaps, create backups (less annoying)
+set noswapfile                           " Instead of swaps, create backups
 set backup                               " Easier to recover and more secure
 set undofile                             " Keeps undos after quit
 set backupdir=~/.config/nvim/dirs/backup
 set undodir=~/.config/nvim/dirs/undo
-
-" Keep selection when tabbing
-vnoremap < <gv
-vnoremap > >gv
 
 " Create backup directories if they don't exist
 if !isdirectory(&backupdir)
@@ -55,3 +51,15 @@ endif
 if !isdirectory(&undodir)
   call mkdir(&undodir, "p")
 endif
+
+" Keep selection when tabbing
+vnoremap < <gv
+vnoremap > >gv
+
+" Force filetype patterns that Vim doesn't know about
+au BufRead,BufNewFile *.Brewfile setfiletype brewfile
+au BufRead,BufNewFile tmux.conf* setfiletype tmux
+au BufRead,BufNewFile *ignore.*link setfiletype gitignore
+au BufRead,BufNewFile gitconfig.*link setfiletype gitconfig
+au BufRead,BufNewFile *.toml.*link setfiletype toml
+au BufRead,BufNewFile .env* set ft=text | set syntax=sh

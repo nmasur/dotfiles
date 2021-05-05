@@ -19,7 +19,7 @@ cask "drawio"               # Diagrams
 cask "scroll-reverser"      # Mouse vs. trackpad
 cask "meetingbar"           # Scheduling
 cask "gitify"               # GitHub notifications
-brew "basictex"             # Small LaTeX distribution
+cask "basictex"             # Small LaTeX distribution
 
 # Fonts
 tap "homebrew/cask-fonts"
@@ -30,7 +30,6 @@ cask "authy"                # Authentication
 cask "keybase"              # Encryption
 cask "discord"              # My chat
 cask "steam"                # Games
-cask "vlc"                  # Video player
 
 cask "jira-client"
 cask "wkhtmltopdf"
@@ -39,3 +38,4 @@ cask "wkhtmltopdf"
 # cask "postman"              # API testing
 # cask "lens"                 # Kubernetes manager
 # cask "calibre"              # Ebook manager
+# cask "vlc"                  # Video player

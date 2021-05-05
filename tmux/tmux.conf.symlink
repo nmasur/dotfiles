@@ -17,6 +17,9 @@ bind j select-pane -D
 bind K select-pane -U
 bind l select-pane -R
 
+# Another option for previous
+bind P previous-window
+
 # Split out pane
 bind b break-pane
 
