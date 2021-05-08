@@ -33,5 +33,5 @@ choose_issue() {
 
 issue_branch=$(choose_issue)
 if [ -n "$issue_branch" ]; then
-    git checkout -b "$issue_branch"
+    echo "git checkout -b \"$issue_branch\""
 fi

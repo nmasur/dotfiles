@@ -122,6 +122,7 @@ function abbrs --description 'All abbreviations'
 
     # macOS
     abbr -a casks 'vim $DOTS/homebrew/Caskfile'
+    abbr -a t 'trash'
 
     # Linux
     if [ (uname) = "Linux" ]
