@@ -8,9 +8,11 @@ function abbrs --description 'All abbreviations'
     abbr -a ll 'ls -alhF'
     abbr -a lf 'ls -lh | fzf'
     abbr -a c 'cd'
+    abbr -a fcd 'cd (fd -t d . ~ | fzf)'
     abbr -a -- - 'cd -'
     abbr -a proj 'cd $PROJ'
     abbr -a mkd 'mkdir -pv'
+    alias --save fcd 'set jump (fd -t d . ~ | fzf); and cd $jump'
 
     # Tmux
     abbr -a ta 'tmux attach-session'
@@ -42,7 +44,6 @@ function abbrs --description 'All abbreviations'
     abbr -a gr 'git reset'
     abbr -a grh 'git reset --hard'
     abbr -a gm 'git merge'
-    abbr -a gmf 'git-merge-fuzzy'
     abbr -a gcp 'git cherry-pick'
     abbr -a ghr 'gh repo view -w'
     abbr -a gha 'gh run list | head -1 | awk \'{ print $NF }\' | xargs gh run view'
@@ -58,7 +59,6 @@ function abbrs --description 'All abbreviations'
     abbr -a v 'vim'
     abbr -a vl 'vim -c "normal! `0"'
     abbr -a vll 'vim -c "Hist"'
-    abbr -a vh 'vim -c "Hist"'
 
     # Notes
     abbr -a qn 'quicknote'
@@ -71,6 +71,8 @@ function abbrs --description 'All abbreviations'
     # Fun CLI Tools
     abbr goo 'googler'
     abbr gooj 'googler -j'
+    abbr weather 'curl wttr.in/$WEATHER_CITY'
+    abbr moon 'curl wttr.in/Moon'
 
     # Dotfile and config shortcuts
     abbr -a s 'sudo'
@@ -108,6 +110,9 @@ function abbrs --description 'All abbreviations'
     abbr -a deploys 'kubectl get deployments -A'
     abbr -a dash 'kube-dashboard'
     abbr -a ks 'k9s'
+
+    # Cloud
+    abbr -a awsc 'vim ~/.aws/credentials'
 
     # Python
     abbr -a py 'python'

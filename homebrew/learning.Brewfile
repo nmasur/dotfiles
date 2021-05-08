@@ -4,7 +4,6 @@ tap "superfly/tap"
 tap "nmasur/repo"
 tap "cjbassi/ytop"
 
-brew "thefuck"                       # Fix terminal mistakes
 brew "superfly/tap/flyctl"           # Fly.io CLI
 brew "haskell-stack"                 # Latest version of Haskell
 brew "xsv"                           # CSV manipulation
