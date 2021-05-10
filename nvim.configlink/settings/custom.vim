@@ -11,12 +11,8 @@ command! Today exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'
 " Map the leader key
 map <Space> <Leader>
 
-"This unsets the `last search pattern` register by hitting return
+" Unsets the search pattern register by hitting return
 nnoremap <silent> <CR> :noh<CR><CR>
-
-" Find and replace
-nnoremap <Leader>S :%s/
-vnoremap <leader>S :s/
 
 " Shuffle lines around
 nnoremap <A-j> :m .+1<CR>==
@@ -63,14 +59,8 @@ nnoremap <Leader><Tab> :b#<cr>
 " Jump to text in this file
 nnoremap <Leader>s :BLines<cr>
 
-" Start Magit buffer
-nnoremap <Leader>gs :Magit<cr>
-
 " Toggle Git gutter (by line numbers)
 nnoremap <Leader>` :GitGutterToggle<cr>
-
-" Git push
-nnoremap <Leader>gp :Git push<cr>
 
 " Git repo
 nnoremap <silent> <Leader>gr :!gh repo view -w<cr><cr>
@@ -104,9 +94,6 @@ tnoremap <A-CR> <C-\><C-n>
 " Reload Vimrc settings
 nnoremap <Leader>rr :Refresh<cr>
 nnoremap <Leader>rp :Refresh<cr> :PlugInstall<cr>
-
-" Open file tree
-nnoremap <silent> <Leader>ft :Fern . -drawer -width=35 -toggle<CR><C-w>=
 
 " Tabularize
 noremap <Leader>ta :Tabularize /

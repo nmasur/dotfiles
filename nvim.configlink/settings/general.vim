@@ -20,10 +20,10 @@ set smartcase              " Check case when using capitals in search
 set infercase              " Don't match cases when completing suggestions
 set incsearch              " Search while typing
 set visualbell             " No sounds
-set scrolljump=1           " Scroll more than one line (or 1 line)
-set scrolloff=3            " Margin of lines when to start scrolling
+set scrolljump=1           " Number of lines to scroll
+set scrolloff=3            " Margin of lines to see while scrolling
 set splitright             " Vertical splits on the right side
-set splitbelow             " Horizontal splits on the lower side
+set splitbelow             " Horizontal splits on the bottom side
 set pastetoggle=<F3>       " Use F3 to enter raw paste mode
 set clipboard+=unnamedplus " Uses system clipboard for yanking
 set updatetime=300         " Faster diagnostics
