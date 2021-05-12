@@ -8,11 +8,9 @@ function abbrs --description 'All abbreviations'
     abbr -a ll 'ls -alhF'
     abbr -a lf 'ls -lh | fzf'
     abbr -a c 'cd'
-    abbr -a fcd 'cd (fd -t d . ~ | fzf)'
     abbr -a -- - 'cd -'
     abbr -a proj 'cd $PROJ'
     abbr -a mkd 'mkdir -pv'
-    alias --save fcd 'set jump (fd -t d . ~ | fzf); and cd $jump'
 
     # Tmux
     abbr -a ta 'tmux attach-session'
@@ -54,6 +52,7 @@ function abbrs --description 'All abbreviations'
         alias --save vim='nvim'
         abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'
     else
+        alias --save vim='vim'
         abbr -a vimrc 'vim $HOME/.vimrc'
     end
     abbr -a v 'vim'

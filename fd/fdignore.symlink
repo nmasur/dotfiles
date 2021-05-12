@@ -1,6 +1,7 @@
 !.env*
 !.github/
 !.gitignore
+!*.tfvars
 .terraform/
 .target/
 /Library/

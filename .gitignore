@@ -4,6 +4,7 @@ nvim.configlink/.netrwhist
 nvim.configlink/plugged/**
 nvim.configlink/autoload/**
 fish.configlink/config.fish.bac
+fish.configlink/functions/vim.fish
 fish_variables
 homebrew/*.lock.json
 *.bak
