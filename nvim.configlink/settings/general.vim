@@ -30,7 +30,8 @@ set updatetime=300         " Faster diagnostics
 set mouse=nv               " Mouse interaction / scrolling
 
 " Neovim only
-set inccommand=split       " Live preview search and replace
+set inccommand=split             " Live preview search and replace
+set completeopt=menuone,noselect " Required for nvim-compe completion
 
 " Remember last position when reopening file
 if has("autocmd")
@@ -63,3 +64,9 @@ au BufRead,BufNewFile *ignore.*link setfiletype gitignore
 au BufRead,BufNewFile gitconfig.*link setfiletype gitconfig
 au BufRead,BufNewFile *.toml.*link setfiletype toml
 au BufRead,BufNewFile .env* set ft=text | set syntax=sh
+
+" Highlight when yanking
+au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250 }
+
+" Auto-pairs
+let g:AutoPairsFlyMode = 1

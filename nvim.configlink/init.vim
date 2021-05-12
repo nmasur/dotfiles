@@ -11,4 +11,3 @@ source $HOME/.config/nvim/settings/polyglot.vim   " Polyglot plugin settings
 source $HOME/.config/nvim/settings/vimwiki.vim    " VimWiki plugin settings
 source $HOME/.config/nvim/settings/quickscope.vim " Quickscope plugin settings
 source $HOME/.config/nvim/settings/lightline.vim  " Lightline plugin settings
-source $HOME/.config/nvim/settings/coc.vim        " CoC plugins settings

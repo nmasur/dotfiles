@@ -72,6 +72,9 @@ nnoremap <Leader>wh :split<cr>
 " Close all other splits
 nnoremap <Leader>wm :only<cr>
 
+" Jump around
+nnoremap <Leader><Space> :HopWord<cr>
+
 " Zoom / Restore window.
 " https://stackoverflow.com/a/26551079
 function! s:ZoomToggle() abort
