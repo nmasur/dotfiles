@@ -50,7 +50,7 @@ function abbrs --description 'All abbreviations'
     # Vim
     if command -v nvim > /dev/null
         alias --save vim='nvim'
-        abbr -a vimrc 'vim $HOME/.config/nvim/init.vim'
+        abbr -a vimrc 'vim $HOME/.config/nvim/init.lua'
     else
         alias --save vim='vim'
         abbr -a vimrc 'vim $HOME/.vimrc'
