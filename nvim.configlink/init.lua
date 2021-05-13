@@ -47,7 +47,9 @@ end)
 
 -- LSP Plugins
 require('lspconfig').rust_analyzer.setup{}
-require('lspconfig').pyls.setup{}
+require('lspconfig').pyright.setup{
+    cmd = { "poetry", "run", "pyright-langserver", "--stdio" }
+}
 require'compe'.setup({
     enabled = true,
     source = {
