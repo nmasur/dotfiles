@@ -22,6 +22,7 @@ require('packer').startup(function()
     use 'sheerun/vim-polyglot'                -- Syntax for every language
     use 'phaazon/hop.nvim'                    -- Quick jump around the buffer
     use 'neovim/nvim-lspconfig'               -- Language server linting
+    use 'folke/lsp-colors.nvim'               -- Pretty LSP highlights
     use 'jiangmiao/auto-pairs'                -- Parentheses
     use 'rafamadriz/friendly-snippets'
     use 'hrsh7th/vim-vsnip'
