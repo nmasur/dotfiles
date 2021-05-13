@@ -94,6 +94,11 @@ nnoremap <silent> <leader>z :ZoomToggle<CR>
 " Exit terminal mode
 tnoremap <A-CR> <C-\><C-n>
 
+lua << EOF
+-- Y yank until the end of line
+vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})
+EOF
+
 " Reload Vimrc settings
 nnoremap <Leader>rr :Refresh<cr>
 nnoremap <Leader>rp :Refresh<cr> :PlugInstall<cr>

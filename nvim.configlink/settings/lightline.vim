@@ -6,10 +6,9 @@ let g:lightline = {
   \ 'active': {
   \   'right': [[ 'lineinfo' ]],
   \   'left': [[ 'mode', 'paste' ],
-  \            [ 'cocstatus', 'readonly', 'relativepath', 'gitbranch', 'modified' ]]
+  \            [ 'readonly', 'relativepath', 'gitbranch', 'modified' ]]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
-  \   'cocstatus': 'coc#status'
+  \   'gitbranch': 'fugitive#head'
   \ },
   \ }
