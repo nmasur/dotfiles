@@ -62,6 +62,7 @@ function abbrs --description 'All abbreviations'
     # Notes
     abbr -a qn 'quicknote'
     abbr -a sn 'syncnotes'
+    abbr -a work 'vim $NOTES_PATH/work.md'
 
     # Improved CLI Tools
     abbr -a cat 'bat'          # Swap cat with bat
