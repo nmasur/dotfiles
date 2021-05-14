@@ -35,3 +35,6 @@ cargos: rust
 programs:
 	./scripts/setup_cheatsheet
 	./scripts/setup_ytfzf
+
+python: brews
+	npm install -g pyright
