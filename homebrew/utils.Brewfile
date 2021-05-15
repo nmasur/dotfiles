@@ -12,6 +12,7 @@ brew "prettyping" # Better ping
 brew "httpie"     # Better curl
 brew "gpg"        # Encryption
 brew "qrencode"   # Make a QR code
+brew "mpv"        # Video player
 brew "youtube-dl" # Download YouTube videos
 brew "googler"    # Search Google
 brew "gh"         # GitHub commands

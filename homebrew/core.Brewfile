@@ -1,15 +1,15 @@
 # Core Packages
 
-brew "fish"     # My shell
-brew "neovim"   # My editor
-brew "git"      # Latest git
-brew "exa"      # Better ls
+brew "fish"     # Shell
+brew "neovim"   # Editor
 brew "tmux"     # Terminal panes and windows
-brew "tealdeer" # Mini man page
 brew "starship" # Shell prompt
+brew "git"      # Latest git
 brew "ripgrep"  # Faster, better grep
-brew "fzf"      # Fuzzy finder
 brew "fd"       # Faster, better find
 brew "sd"       # Faster, better sed
+brew "zoxide"   # Faster, better autojump
+brew "exa"      # Better ls
 brew "bat"      # Better cat
-brew "zoxide"   # Better autojump
+brew "fzf"      # Fuzzy finder
+brew "tealdeer" # Mini man page
