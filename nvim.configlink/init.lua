@@ -59,6 +59,42 @@ require'compe'.setup({
         nvim_lsp = true,
     },
 })
+if require('lspconfig/util').has_bins('diagnostic-languageserver') then
+    require('lspconfig').diagnosticls.setup{
+        cmd = { "diagnostic-languageserver", "--stdio" },
+        filetypes = { "sh" },
+        on_attach = on_attach,
+        init_options = {
+            filetypes = {
+                sh = "shellcheck",
+            },
+            linters = {
+                shellcheck = {
+                    sourceName = "shellcheck",
+                    command = "shellcheck",
+                    debounce = 100,
+                    args = { "--format=gcc", "-" },
+                    offsetLine = 0,
+                    offsetColumn = 0,
+                    formatLines = 1,
+                    formatPattern = {
+                        "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+                        {
+                            line = 1,
+                            column = 2,
+                            message = 4,
+                            security = 3
+                        }
+                    },
+                    securities = {
+                        error = "error",
+                        warning = "warning",
+                    }
+                },
+            }
+        }
+    }
+end
 
 -- Auto-complete
 -- ====================
@@ -172,6 +208,7 @@ vim.api.nvim_exec([[
     au BufRead,BufNewFile *ignore.*link setfiletype gitignore
     au BufRead,BufNewFile gitconfig.*link setfiletype gitconfig
     au BufRead,BufNewFile *.toml.*link setfiletype toml
+    au BufRead,BufNewFile *.muttrc setfiletype muttrc
     au BufRead,BufNewFile .env* set ft=text | set syntax=sh
 ]], false)
 
