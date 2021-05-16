@@ -5,7 +5,7 @@ tap "nmasur/repo"
 tap "cjbassi/ytop"
 
 brew "superfly/tap/flyctl"           # Fly.io CLI
-brew "haskell-stack"                 # Latest version of Haskell
+brew "ghc"                           # Haskell
 brew "xsv"                           # CSV manipulation
 brew "gron"                          # JSON grep
 brew "nushell"                       # Data manipulation shell

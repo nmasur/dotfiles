@@ -1,8 +1,8 @@
 # Fun / Unnecessary Packages
 
 tap "nmasur/repo"
+tap "tarkah/tickrs"
 
-brew "ffmpeg"          # Convert videos
-brew "nmasur/repo/bid" # Look up stock tickers
-brew "nmasur/repo/bee" # Cheat on NYTimes Spelling Bee
-brew "tickrs"          # Interactive stock tickers
+brew "ffmpeg"               # Convert videos
+brew "nmasur/repo/bee"      # Cheat on NYTimes Spelling Bee
+brew "tarkah/tickrs/tickrs" # Interactive stock tickers

@@ -1,7 +1,5 @@
 # Utility Packages
 
-tap "nmasur/repo"
-
 brew "jq"         # JSON manipulation
 brew "dos2unix"   # File conversion
 brew "tree"       # Display directory trees
