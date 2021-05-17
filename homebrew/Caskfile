@@ -19,6 +19,7 @@ cask "scroll-reverser"               # Mouse vs. trackpad
 cask "meetingbar"                    # Scheduling
 cask "gitify"                        # GitHub notifications
 cask "basictex"                      # Small LaTeX distribution
+cask "hammerspoon"
 
 # Fonts
 tap "homebrew/cask-fonts"
