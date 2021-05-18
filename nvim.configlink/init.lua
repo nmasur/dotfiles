@@ -334,4 +334,5 @@ vim.api.nvim_set_keymap("n", "<Leader>rr", ":luafile $MYVIMRC<CR>", {noremap=tru
 -- Other
 vim.api.nvim_set_keymap("n", "<Leader><Space>", ":HopWord<CR>", {noremap=true})
 vim.api.nvim_set_keymap("t", "<A-CR>", "<C-\\><C-n>", {noremap=true}) -- Exit terminal mode
+vim.api.nvim_set_keymap("n", "<A-CR>", ":noh<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})
