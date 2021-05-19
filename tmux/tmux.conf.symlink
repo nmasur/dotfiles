@@ -17,9 +17,6 @@ bind j select-pane -D
 bind K select-pane -U
 bind l select-pane -R
 
-# Another option for previous
-bind P previous-window
-
 # Split out pane
 bind b break-pane
 
@@ -27,7 +24,6 @@ bind b break-pane
 bind Escape copy-mode
 bind k copy-mode
 bind C-[ copy-mode
-bind p paste-buffer
 
 # Vi-style scrollback with prefix + C-[
 set-window-option -g mode-keys vi
