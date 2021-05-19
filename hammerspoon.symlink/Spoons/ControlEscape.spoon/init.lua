@@ -63,6 +63,20 @@ function obj:init()
       self.sendEscape = false
     end
   )
+
+  -- If mouse is moving, don't send escape
+  self.scrolling = hs.eventtap.new({hs.eventtap.event.types.gesture},
+    function(event)
+      local touches = event:getTouches()
+      local i, v = next(touches, nil)
+      while i do
+        if v["phase"] == "moved" then
+          self.sendEscape = false
+        end
+        i, v = next(touches, i)  -- get next index
+      end
+    end
+  )
 end
 
 --- ControlEscape:start()
@@ -71,6 +85,7 @@ end
 function obj:start()
   self.controlTap:start()
   self.asModifier:start()
+  self.scrolling:start()
 end
 
 --- ControlEscape:stop()
@@ -80,6 +95,7 @@ function obj:stop()
   -- Stop monitoring keystrokes
   self.controlTap:stop()
   self.asModifier:stop()
+  self.scrolling:stop()
 
   -- Reset state
   self.sendEscape = false
