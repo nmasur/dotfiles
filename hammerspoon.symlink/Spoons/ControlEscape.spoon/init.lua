@@ -27,18 +27,40 @@ function obj:init()
   self.controlTap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged},
     function(event)
       local newModifiers = event:getFlags()
-      if not self.lastModifiers['ctrl'] then
-        if newModifiers['ctrl'] then
-          if (newModifiers['shift'] and newModifiers['cmd']) then
-            ;
-          elseif newModifiers['shift'] then
-            hs.eventtap.keyStroke({'shift'}, 'escape', 0)
-          else
-            hs.eventtap.keyStroke(newModifiers, 'escape', 0)
-          end
-        end
+
+      -- If this change to the modifier keys does not invole a *change* to the
+      -- up/down state of the `control` key (i.e., it was up before and it's
+      -- still up, or it was down before and it's still down), then don't take
+      -- any action.
+      if self.lastModifiers['ctrl'] == newModifiers['ctrl'] then
+        return false
       end
-      self.lastModifiers = newModifiers
+
+      -- Control was not down but is now
+      if not self.lastModifiers['ctrl'] then
+        self.lastModifiers = newModifiers
+        if (not self.lastModifiers['cmd'] and not self.lastModifiers['alt']) then
+          self.sendEscape = true
+        end
+      -- Control was down and is up
+      elseif (self.sendEscape == true and not newModifiers['ctrl']) then
+        self.lastModifiers = newModifiers
+        if newModifiers['shift'] then
+          hs.eventtap.keyStroke({'shift'}, 'escape', 0)
+        else
+          hs.eventtap.keyStroke(newModifiers, 'escape', 0)
+        end
+        self.sendEscape = false
+      else
+        self.lastModifiers = newModifiers
+      end
+    end
+  )
+
+  -- If any other key is pressed, don't send escape
+  self.asModifier = hs.eventtap.new({hs.eventtap.event.types.keyDown},
+    function(event)
+      self.sendEscape = false
     end
   )
 end
@@ -48,6 +70,7 @@ end
 --- Start sending `escape` when `control` is pressed and released in isolation
 function obj:start()
   self.controlTap:start()
+  self.asModifier:start()
 end
 
 --- ControlEscape:stop()
@@ -56,6 +79,7 @@ end
 function obj:stop()
   -- Stop monitoring keystrokes
   self.controlTap:stop()
+  self.asModifier:stop()
 
   -- Reset state
   self.sendEscape = false
