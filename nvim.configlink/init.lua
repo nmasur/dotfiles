@@ -224,7 +224,7 @@ vim.api.nvim_exec([[
 ]], false)
 
 -- Auto-pairs
-vim.g.AutoPairsFlyMode = 1
+vim.g.AutoPairsFlyMode = 0
 
 -- Netrw
 vim.g.netrw_liststyle = 3    -- Change style to 'tree' view

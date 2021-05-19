@@ -29,7 +29,9 @@ function obj:init()
       local newModifiers = event:getFlags()
       if not self.lastModifiers['ctrl'] then
         if newModifiers['ctrl'] then
-          if newModifiers['shift'] then
+          if (newModifiers['shift'] and newModifiers['cmd']) then
+            ;
+          elseif newModifiers['shift'] then
             hs.eventtap.keyStroke({'shift'}, 'escape', 0)
           else
             hs.eventtap.keyStroke(newModifiers, 'escape', 0)
