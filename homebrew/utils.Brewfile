@@ -16,3 +16,4 @@ brew "googler"    # Search Google
 brew "gh"         # GitHub commands
 brew "pandoc"     # Document converter
 brew "visidata"   # Spreadsheet manipulation
+brew "mdp"        # Terminal slideshows
