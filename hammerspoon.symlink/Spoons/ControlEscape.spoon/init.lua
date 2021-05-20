@@ -19,6 +19,7 @@ obj.homepage = 'https://github.com/jasonrudolph/ControlEscape.spoon'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
 
 function obj:init()
+  self.movements = 0
   self.sendEscape = false
   self.lastModifiers = {}
 
@@ -28,7 +29,7 @@ function obj:init()
     function(event)
       local newModifiers = event:getFlags()
 
-      -- If this change to the modifier keys does not invole a *change* to the
+      -- If this change to the modifier keys does not involve a *change* to the
       -- up/down state of the `control` key (i.e., it was up before and it's
       -- still up, or it was down before and it's still down), then don't take
       -- any action.
@@ -41,16 +42,20 @@ function obj:init()
         self.lastModifiers = newModifiers
         if (not self.lastModifiers['cmd'] and not self.lastModifiers['alt']) then
           self.sendEscape = true
+          self.movements = 0
         end
-      -- Control was down and is up
-      elseif (self.sendEscape == true and not newModifiers['ctrl']) then
+      -- Control was down and is up, hasn't been blocked by another key, and
+      -- isn't above the movement threshold
+      elseif (self.sendEscape == true and not newModifiers['ctrl'] and self.movements < 12) then
         self.lastModifiers = newModifiers
+        -- Allow for shift-escape
         if newModifiers['shift'] then
           hs.eventtap.keyStroke({'shift'}, 'escape', 0)
         else
           hs.eventtap.keyStroke(newModifiers, 'escape', 0)
         end
         self.sendEscape = false
+        self.movements = 0
       else
         self.lastModifiers = newModifiers
       end
@@ -64,14 +69,15 @@ function obj:init()
     end
   )
 
-  -- If mouse is moving, don't send escape
+  -- If mouse is moving significantly, don't send escape
   self.scrolling = hs.eventtap.new({hs.eventtap.event.types.gesture},
     function(event)
       local touches = event:getTouches()
       local i, v = next(touches, nil)
       while i do
         if v["phase"] == "moved" then
-          self.sendEscape = false
+          -- Increment the movement counter
+          self.movements = self.movements + 1
         end
         i, v = next(touches, i)  -- get next index
       end
