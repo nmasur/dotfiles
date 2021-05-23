@@ -10,40 +10,49 @@ end
 -- Packer plugin installations
 local use = require('packer').use
 require('packer').startup(function()
-    use 'wbthomason/packer.nvim'              -- Maintain plugin manager
-    use 'tpope/vim-eunuch'                    -- File manipulation in Vim
-    use 'tpope/vim-vinegar'                   -- Fixes netrw file explorer
-    use 'tpope/vim-fugitive'                  -- Git commands
-    use 'tpope/vim-surround'                  -- Manipulate parentheses
-    use 'tpope/vim-commentary'                -- Use gc or gcc to add comments
-    use 'tpope/vim-repeat'                    -- Actually repeat using .
-    use 'christoomey/vim-tmux-navigator'      -- Hotkeys for tmux panes
-    use 'morhetz/gruvbox'                     -- Colorscheme
-    use 'sheerun/vim-polyglot'                -- Syntax for every language
-    use 'phaazon/hop.nvim'                    -- Quick jump around the buffer
-    use 'neovim/nvim-lspconfig'               -- Language server linting
-    use 'folke/lsp-colors.nvim'               -- Pretty LSP highlights
-    use 'jiangmiao/auto-pairs'                -- Parentheses
+    use 'wbthomason/packer.nvim'                -- Maintain plugin manager
+    use 'tpope/vim-eunuch'                      -- File manipulation in Vim
+    use 'tpope/vim-vinegar'                     -- Fixes netrw file explorer
+    use 'tpope/vim-fugitive'                    -- Git commands
+    use 'tpope/vim-surround'                    -- Manipulate parentheses
+    use 'tpope/vim-commentary'                  -- Use gc or gcc to add comments
+    use 'tpope/vim-repeat'                      -- Actually repeat using .
+    use 'christoomey/vim-tmux-navigator'        -- Hotkeys for tmux panes
+    use 'morhetz/gruvbox'                       -- Colorscheme
+    use 'phaazon/hop.nvim'                      -- Quick jump around the buffer
+    use 'neovim/nvim-lspconfig'                 -- Language server linting
+    use 'folke/lsp-colors.nvim'                 -- Pretty LSP highlights
+    use 'jiangmiao/auto-pairs'                  -- Parentheses
     use 'rafamadriz/friendly-snippets'
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
-    use 'hrsh7th/nvim-compe'                  -- Auto-complete
-    use 'godlygeek/tabular'                   -- Spacing and alignment
-    use 'vimwiki/vimwiki'                     -- Wiki Markdown System
-    use 'airblade/vim-rooter'                 -- Change directory to git route
-    use 'itchyny/lightline.vim'               -- Status bar
-    use {                                     -- Git next to line numbers
+    use 'hrsh7th/nvim-compe'                    -- Auto-complete
+    use 'godlygeek/tabular'                     -- Spacing and alignment
+    use 'vimwiki/vimwiki'                       -- Wiki Markdown System
+    use 'airblade/vim-rooter'                   -- Change directory to git route
+    use 'itchyny/lightline.vim'                 -- Status bar
+    use {                                       -- Syntax highlighting for most languages
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    use 'bfontaine/Brewfile.vim'                -- Brewfile syntax
+    use 'blankname/vim-fish'                    -- Fish syntax
+    use 'chr4/nginx.vim'                        -- Nginx syntax
+    use 'hashivim/vim-terraform'                -- Terraform syntax
+    use 'cespare/vim-toml'                      -- TOML syntax
+    use 'towolf/vim-helm'                       -- Helm syntax
+    use {                                       -- Git next to line numbers
         'lewis6991/gitsigns.nvim',
         requires = {'nvim-lua/plenary.nvim'},
         config = function()
             require('gitsigns').setup()
         end
     }
-    use {                                     -- Fuzzy finder
+    use {                                       -- Fuzzy finder
         'junegunn/fzf.vim',
         requires = {'/usr/local/opt/fzf'}
     }
-    -- use 'ludovicchabant/vim-gutentags'     -- Good for autogen tags
+                                                -- use 'ludovicchabant/vim-gutentags'
 end)
 
 -- LSP Plugins
@@ -223,6 +232,11 @@ vim.api.nvim_exec([[
     au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250 }
 ]], false)
 
+-- Rust stuff
+-- vim.api.nvim_exec([[
+--     au BufWritePost *.rs silent! execute "%! rustfmt"
+-- ]], false)
+
 -- Auto-pairs
 vim.g.AutoPairsFlyMode = 0
 
@@ -262,7 +276,7 @@ vim.api.nvim_exec([[
         norm "zpx
     endfunction
 
-    command! AddTag call fzf#run({'source': 'rg "#[\w/]+[ |\$]" -o --no-filename --no-line-number | sort | uniq', 'sink': function('PInsert')})
+    command! AddTag call fzf#run({'source': 'rg "#[A-Za-z/]+[ |\$]" -o --no-filename --no-line-number | sort | uniq', 'sink': function('PInsert')})
 ]], false)
 
 -- Lightline status bar
