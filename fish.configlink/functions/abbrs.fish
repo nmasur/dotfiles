@@ -43,9 +43,14 @@ function abbrs --description 'All abbreviations'
     abbr -a grh 'git reset --hard'
     abbr -a gm 'git merge'
     abbr -a gcp 'git cherry-pick'
+    abbr -a cdg 'cd (git rev-parse --show-toplevel)'
+
+    # GitHub
     abbr -a ghr 'gh repo view -w'
     abbr -a gha 'gh run list | head -1 | awk \'{ print $NF }\' | xargs gh run view'
-    abbr -a cdg 'cd (git rev-parse --show-toplevel)'
+    abbr -a grw 'gh run watch'
+    abbr -a grf 'gh run view --log-failed'
+    abbr -a grl 'gh run view --log'
 
     # Vim
     if command -v nvim > /dev/null
