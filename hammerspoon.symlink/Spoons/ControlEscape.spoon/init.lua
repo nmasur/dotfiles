@@ -46,7 +46,7 @@ function obj:init()
         end
       -- Control was down and is up, hasn't been blocked by another key, and
       -- isn't above the movement threshold
-      elseif (self.sendEscape == true and not newModifiers['ctrl'] and self.movements < 12) then
+      elseif (self.sendEscape == true and not newModifiers['ctrl'] and self.movements < 20) then
         self.lastModifiers = newModifiers
         -- Allow for shift-escape
         if newModifiers['shift'] then
