@@ -47,7 +47,7 @@ function abbrs --description 'All abbreviations'
 
     # GitHub
     abbr -a ghr 'gh repo view -w'
-    abbr -a gha 'gh run list | head -1 | awk \'{ print $NF }\' | xargs gh run view'
+    abbr -a gha 'gh run list | head -1 | awk \'{ print $(NF-2) }\' | xargs gh run view'
     abbr -a grw 'gh run watch'
     abbr -a grf 'gh run view --log-failed'
     abbr -a grl 'gh run view --log'
@@ -67,6 +67,7 @@ function abbrs --description 'All abbreviations'
     # Notes
     abbr -a qn 'quicknote'
     abbr -a sn 'syncnotes'
+    abbr -a to 'today'
     abbr -a work 'vim $NOTES_PATH/work.md'
 
     # Improved CLI Tools

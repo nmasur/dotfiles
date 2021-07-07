@@ -10,52 +10,60 @@ end
 -- Packer plugin installations
 local use = require('packer').use
 require('packer').startup(function()
-    use 'wbthomason/packer.nvim'                -- Maintain plugin manager
-    use 'tpope/vim-eunuch'                      -- File manipulation in Vim
-    use 'tpope/vim-vinegar'                     -- Fixes netrw file explorer
-    use 'tpope/vim-fugitive'                    -- Git commands
-    use 'tpope/vim-surround'                    -- Manipulate parentheses
-    use 'tpope/vim-commentary'                  -- Use gc or gcc to add comments
-    use 'tpope/vim-repeat'                      -- Actually repeat using .
-    use 'christoomey/vim-tmux-navigator'        -- Hotkeys for tmux panes
-    use 'morhetz/gruvbox'                       -- Colorscheme
-    use 'phaazon/hop.nvim'                      -- Quick jump around the buffer
-    use 'neovim/nvim-lspconfig'                 -- Language server linting
-    use 'folke/lsp-colors.nvim'                 -- Pretty LSP highlights
-    use 'jiangmiao/auto-pairs'                  -- Parentheses
+    use 'wbthomason/packer.nvim'               -- Maintain plugin manager
+    use 'tpope/vim-eunuch'                     -- File manipulation in Vim
+    use 'tpope/vim-vinegar'                    -- Fixes netrw file explorer
+    use 'tpope/vim-fugitive'                   -- Git commands
+    use 'tpope/vim-surround'                   -- Manipulate parentheses
+    use 'tpope/vim-commentary'                 -- Use gc or gcc to add comments
+    use 'tpope/vim-repeat'                     -- Actually repeat using .
+    use 'christoomey/vim-tmux-navigator'       -- Hotkeys for tmux panes
+    use 'morhetz/gruvbox'                      -- Colorscheme
+    use 'phaazon/hop.nvim'                     -- Quick jump around the buffer
+    use 'neovim/nvim-lspconfig'                -- Language server linting
+    use 'folke/lsp-colors.nvim'                -- Pretty LSP highlights
     use 'rafamadriz/friendly-snippets'
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
-    use 'hrsh7th/nvim-compe'                    -- Auto-complete
-    use 'godlygeek/tabular'                     -- Spacing and alignment
-    use 'vimwiki/vimwiki'                       -- Wiki Markdown System
-    use 'airblade/vim-rooter'                   -- Change directory to git route
-    use 'itchyny/lightline.vim'                 -- Status bar
-    use {                                       -- Syntax highlighting for most languages
+    use 'hrsh7th/nvim-compe'                   -- Auto-complete
+    use 'godlygeek/tabular'                    -- Spacing and alignment
+    use 'vimwiki/vimwiki'                      -- Wiki Markdown System
+    use 'airblade/vim-rooter'                  -- Change directory to git route
+    use {                                      -- Status bar
+	'hoob3rt/lualine.nvim',
+	requires = {
+	    'kyazdani42/nvim-web-devicons',
+	    opt = true
+        }
+    }
+    use {                                      -- Syntax highlighting for most languages
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-    use 'bfontaine/Brewfile.vim'                -- Brewfile syntax
-    use 'blankname/vim-fish'                    -- Fish syntax
-    use 'chr4/nginx.vim'                        -- Nginx syntax
-    use 'hashivim/vim-terraform'                -- Terraform syntax
-    use 'cespare/vim-toml'                      -- TOML syntax
-    use 'towolf/vim-helm'                       -- Helm syntax
-    use {                                       -- Git next to line numbers
+    use 'bfontaine/Brewfile.vim'               -- Brewfile syntax
+    use 'blankname/vim-fish'                   -- Fish syntax
+    use 'chr4/nginx.vim'                       -- Nginx syntax
+    use 'hashivim/vim-terraform'               -- Terraform syntax
+    use 'cespare/vim-toml'                     -- TOML syntax
+    use 'towolf/vim-helm'                      -- Helm syntax
+    use 'LnL7/vim-nix'                         -- Nix syntax
+    use {                                      -- Git next to line numbers
         'lewis6991/gitsigns.nvim',
         requires = {'nvim-lua/plenary.nvim'},
         config = function()
             require('gitsigns').setup()
         end
     }
-    use {                                       -- Fuzzy finder
+    use {                                      -- Fuzzy finder
         'junegunn/fzf.vim',
         requires = {'/usr/local/opt/fzf'}
     }
-                                                -- use 'ludovicchabant/vim-gutentags'
+	-- use 'ludovicchabant/vim-gutentags'
 end)
 
--- LSP Plugins
+-- LSP Settings
+-- ============
+
 require('lspconfig').rust_analyzer.setup{}
 require('lspconfig').pyright.setup{
     cmd = { "poetry", "run", "pyright-langserver", "--stdio" }
@@ -279,22 +287,10 @@ vim.api.nvim_exec([[
     command! AddTag call fzf#run({'source': 'rg "#[A-Za-z/]+[ |\$]" -o --no-filename --no-line-number | sort | uniq', 'sink': function('PInsert')})
 ]], false)
 
--- Lightline status bar
-vim.g.lightline = {
-  ["colorscheme"] = "jellybeans",
-  ["active"] = {
-    ["right"] = {
-        { "lineinfo" }
-    },
-    ["left"] = {
-        { "mode", "paste" },
-        { "readonly", "relativepath", "gitbranch", "modified" }
-    }
-  },
-  ["component_function"] = {
-    ["gitbranch"] = "fugitive#head"
-  },
-}
+-- Status bar
+require('lualine').setup({
+    options = { theme = 'gruvbox' }
+})
 
 -- Remap space as leader key
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", {noremap=true, silent=true})
