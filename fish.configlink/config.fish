@@ -36,6 +36,11 @@ if status --is-interactive
     set -g FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
     set -g FZF_DEFAULT_OPTS '-m --height 50% --border'
 
+    source $DOTS/fish.configlink/conf.d/nix-env.fish
+
     # Use `starship` prompt
     starship init fish | source
+
+    # Hook into direnv
+    direnv hook fish | source
 end

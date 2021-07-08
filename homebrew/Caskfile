@@ -32,6 +32,7 @@ cask "discord"                       # Chat
 cask "steam"                         # Games
 cask "epic-games"                    # Games
 cask "calibre"                       # E-Books
+cask "signal"                        # Messaging
 
 # Maybe
 cask "jira-client"                   # Project Management
