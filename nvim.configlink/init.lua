@@ -337,7 +337,7 @@ vim.api.nvim_set_keymap("", "<Leader>ta", ":Tabularize /", {noremap=true})
 vim.api.nvim_set_keymap("", "<Leader>t#", ":Tabularize /#<CR>", {noremap=true})
 vim.api.nvim_set_keymap("", "<Leader>t\"", ":Tabularize /\"<CR>", {noremap=true})
 
--- Vimrc
+-- Vimrc editing
 vim.api.nvim_set_keymap("n", "<Leader>fv", ":edit $MYVIMRC<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<Leader>rr", ":luafile $MYVIMRC<CR>", {noremap=true})
 
@@ -346,3 +346,14 @@ vim.api.nvim_set_keymap("n", "<Leader><Space>", ":HopWord<CR>", {noremap=true})
 vim.api.nvim_set_keymap("t", "<A-CR>", "<C-\\><C-n>", {noremap=true}) -- Exit terminal mode
 vim.api.nvim_set_keymap("n", "<A-CR>", ":noh<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})
+
+-- Keep cursor in place
+vim.api.nvim_set_keymap("n", 'n', "nzz", {noremap=true})
+vim.api.nvim_set_keymap("n", 'N', "Nzz", {noremap=true})
+vim.api.nvim_set_keymap("n", 'J', "mzJ`z", {noremap=true}) -- Mark and jump back to it
+
+-- Add undo breakpoints
+vim.api.nvim_set_keymap("i", ',', ",<C-g>u", {noremap=true})
+vim.api.nvim_set_keymap("i", '.', ".<C-g>u", {noremap=true})
+vim.api.nvim_set_keymap("i", '!', "!<C-g>u", {noremap=true})
+vim.api.nvim_set_keymap("i", '?', "?<C-g>u", {noremap=true})
