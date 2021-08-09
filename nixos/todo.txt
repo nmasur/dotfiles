@@ -1,0 +1,3 @@
+libratbag (ratbagd) for input devices
+
+inspiration: https://github.com/JonathanReeve/dotfiles/blob/minimal/dotfiles/home.nix

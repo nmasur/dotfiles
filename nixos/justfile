@@ -1,0 +1,11 @@
+# Show these options
+default:
+  @just --list --list-heading $'Update NixOS config:\n'
+
+# Update the system
+system:
+  nixos-rebuild switch -I nixos-config=./configuration.nix
+
+# Update the user environment
+home:
+  home-manager switch -f ./home.nix
