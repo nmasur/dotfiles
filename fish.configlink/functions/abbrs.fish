@@ -73,6 +73,7 @@ function abbrs --description 'All abbreviations'
     # Improved CLI Tools
     abbr -a cat 'bat'          # Swap cat with bat
     abbr -a h 'http -Fh --all' # Curl site for headers
+    abbr -a j 'just'
 
     # Fun CLI Tools
     abbr goo 'googler'
