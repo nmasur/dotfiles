@@ -39,15 +39,20 @@ function obj:init()
 
       -- Control was not down but is now
       if not self.lastModifiers['ctrl'] then
+
+        -- Only prepare to send escape if no other modifier keys are in use
         self.lastModifiers = newModifiers
         if (not self.lastModifiers['cmd'] and not self.lastModifiers['alt']) then
           self.sendEscape = true
           self.movements = 0
         end
+
       -- Control was down and is up, hasn't been blocked by another key, and
       -- isn't above the movement threshold
-      elseif (self.sendEscape == true and not newModifiers['ctrl'] and self.movements < 20) then
+      elseif (self.sendEscape == true and not newModifiers['ctrl'] and self.movements < 30) then
+
         self.lastModifiers = newModifiers
+
         -- Allow for shift-escape
         if newModifiers['shift'] then
           hs.eventtap.keyStroke({'shift'}, 'escape', 0)
@@ -56,8 +61,12 @@ function obj:init()
         end
         self.sendEscape = false
         self.movements = 0
+        self.numberOfCharacters = 0
+
+      -- Control was down and is up, but isn't ready to send escape
       else
         self.lastModifiers = newModifiers
+
       end
     end
   )
@@ -65,7 +74,7 @@ function obj:init()
   -- If any other key is pressed, don't send escape
   self.asModifier = hs.eventtap.new({hs.eventtap.event.types.keyDown},
     function(event)
-      self.sendEscape = false
+        self.sendEscape = false
     end
   )
 

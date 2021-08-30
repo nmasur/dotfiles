@@ -227,6 +227,7 @@ vim.api.nvim_exec([[
     au BufRead,BufNewFile *.toml.*link setfiletype toml
     au BufRead,BufNewFile *.muttrc setfiletype muttrc
     au BufRead,BufNewFile .env* set ft=text | set syntax=sh
+    au BufRead,BufNewFile *.hcl set ft=terraform
 ]], false)
 
 -- LaTeX options
