@@ -48,9 +48,11 @@ function abbrs --description 'All abbreviations'
     # GitHub
     abbr -a ghr 'gh repo view -w'
     abbr -a gha 'gh run list | head -1 | awk \'{ print $(NF-2) }\' | xargs gh run view'
-    abbr -a grw 'gh run watch'
+    abbr -a grw 'noti gh run watch'
     abbr -a grf 'gh run view --log-failed'
     abbr -a grl 'gh run view --log'
+    abbr -a ghpr 'gh pr create && sleep 3 && noti gh run watch'
+    abbr -a ghm 'gh pr merge -s -d'
 
     # Vim
     if command -v nvim > /dev/null
