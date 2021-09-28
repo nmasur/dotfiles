@@ -52,7 +52,7 @@ function abbrs --description 'All abbreviations'
     abbr -a grf 'gh run view --log-failed'
     abbr -a grl 'gh run view --log'
     abbr -a ghpr 'gh pr create && sleep 3 && noti gh run watch'
-    abbr -a ghm 'gh pr merge -s -d'
+    abbr -a ghm 'gh pr merge -s -d && git pull'
 
     # Vim
     if command -v nvim > /dev/null
