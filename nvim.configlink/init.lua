@@ -47,6 +47,7 @@ require('packer').startup(function()
     use 'cespare/vim-toml'                     -- TOML syntax
     use 'towolf/vim-helm'                      -- Helm syntax
     use 'LnL7/vim-nix'                         -- Nix syntax
+    use 'rodjek/vim-puppet'                    -- Puppet syntax
     use {                                      -- Git next to line numbers
         'lewis6991/gitsigns.nvim',
         requires = {'nvim-lua/plenary.nvim'},
