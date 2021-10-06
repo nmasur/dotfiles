@@ -30,7 +30,7 @@ function abbrs --description 'All abbreviations'
     abbr -a gca 'git commit --amend'
     abbr -a gu 'git pull'
     abbr -a gp 'git push'
-    abbr -a gpp 'git_set_upstream'
+    abbr -a gpp git push --set-upstream origin (git branch 2>/dev/null | grep '^\*' | colrm 1 2)
     abbr -a gl 'git log --graph --decorate --oneline -20'
     abbr -a gll 'git log --graph --decorate --oneline'
     abbr -a gco 'git checkout'
@@ -43,7 +43,7 @@ function abbrs --description 'All abbreviations'
     abbr -a grh 'git reset --hard'
     abbr -a gm 'git merge'
     abbr -a gcp 'git cherry-pick'
-    abbr -a cdg 'cd (git rev-parse --show-toplevel)'
+    abbr -a cdg cd (git rev-parse --show-toplevel)
 
     # GitHub
     abbr -a ghr 'gh repo view -w'
