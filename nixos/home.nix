@@ -30,7 +30,7 @@ in
     settings = {
       window = {
         dimensions = {
-          columns = 110;
+          columns = 85;
           lines = 30;
         };
         padding = {
@@ -169,6 +169,7 @@ in
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    fish_greeting = "";
   };
 
   programs.starship = {

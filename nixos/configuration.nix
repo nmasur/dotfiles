@@ -63,6 +63,12 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # Install fonts
+  fonts.fonts = with pkgs; [
+    fira-code
+    fira-code-symbols
+  ];
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
