@@ -24,6 +24,7 @@ cask "hammerspoon"
 # Fonts
 tap "homebrew/cask-fonts"
 cask "font-fira-mono-for-powerline"
+cask "font-fira-mono-nerd-font"
 
 # Personal
 cask "authy"                         # Authentication
