@@ -443,7 +443,7 @@ vim.api.nvim_set_keymap("", "<Leader>tl", ":Tabularize /--<CR>", {noremap=true})
 -- Vimrc editing
 vim.api.nvim_set_keymap("n", "<Leader>fv", ":edit $MYVIMRC<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<Leader>rr", ":luafile $MYVIMRC<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerCompile<CR>:PackerInstall<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:PackerCompile<CR>", {noremap=true})
 
 -- Other
 vim.api.nvim_set_keymap("t", "<A-CR>", "<C-\\><C-n>", {noremap=true})           -- Exit terminal mode
