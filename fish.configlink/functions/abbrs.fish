@@ -64,7 +64,8 @@ function abbrs --description 'All abbreviations'
     end
     abbr -a v 'vim'
     abbr -a vl 'vim -c "normal! `0"'
-    abbr -a vll 'vim -c "Hist"'
+    abbr -a vll 'vim -c "Telescope oldfiles"'
+    abbr -a vh 'vim -c "Telescope oldfiles"'
 
     # Notes
     abbr -a qn 'quicknote'
