@@ -10,72 +10,144 @@ end
 -- Packer plugin installations
 local use = require('packer').use
 require('packer').startup(function()
-    use 'wbthomason/packer.nvim'               -- Maintain plugin manager
-    use 'tpope/vim-eunuch'                     -- File manipulation in Vim
-    use 'tpope/vim-vinegar'                    -- Fixes netrw file explorer
-    use 'tpope/vim-fugitive'                   -- Git commands
-    use 'tpope/vim-surround'                   -- Manipulate parentheses
-    use 'tpope/vim-commentary'                 -- Use gc or gcc to add comments
-    use 'tpope/vim-repeat'                     -- Actually repeat using .
-    use 'christoomey/vim-tmux-navigator'       -- Hotkeys for tmux panes
-    use 'morhetz/gruvbox'                      -- Colorscheme
-    use 'phaazon/hop.nvim'                     -- Quick jump around the buffer
-    use 'neovim/nvim-lspconfig'                -- Language server linting
-    use 'folke/lsp-colors.nvim'                -- Pretty LSP highlights
-    use 'rafamadriz/friendly-snippets'
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-    use 'hrsh7th/nvim-compe'                   -- Auto-complete
-    use 'godlygeek/tabular'                    -- Spacing and alignment
-    use 'vimwiki/vimwiki'                      -- Wiki Markdown System
-    use 'airblade/vim-rooter'                  -- Change directory to git route
-    use {                                      -- Status bar
+    use 'wbthomason/packer.nvim'              -- Maintain plugin manager
+    use 'lewis6991/impatient.nvim'            -- Startup speed hacks
+    use 'tpope/vim-eunuch'                    -- File manipulation in Vim
+    use 'tpope/vim-vinegar'                   -- Fixes netrw file explorer
+    use 'tpope/vim-fugitive'                  -- Git commands and syntax
+    use 'tpope/vim-surround'                  -- Manipulate parentheses
+    use 'tpope/vim-commentary'                -- Use gc or gcc to add comments
+    use 'tpope/vim-repeat'                    -- Actually repeat using .
+    use 'christoomey/vim-tmux-navigator'      -- Hotkeys for tmux panes
+    use 'morhetz/gruvbox'                     -- Colorscheme
+    use 'L3MON4D3/LuaSnip'                    -- Snippet engine
+    use 'neovim/nvim-lspconfig'               -- Language server linting
+    use 'folke/lsp-colors.nvim'               -- Pretty LSP highlights
+    use 'hrsh7th/cmp-nvim-lsp'                -- Language server completion
+    use 'hrsh7th/cmp-buffer'                  -- Generic text completion
+    use 'hrsh7th/cmp-path'                    -- Local file completion
+    use 'hrsh7th/cmp-cmdline'                 -- Command line completion
+    use 'hrsh7th/cmp-nvim-lua'                -- Nvim lua api completion
+    use 'saadparwaiz1/cmp_luasnip'            -- Luasnip completion
+    use 'hrsh7th/nvim-cmp'                    -- Completion system
+    use 'godlygeek/tabular'                   -- Spacing and alignment
+    use 'vimwiki/vimwiki'                     -- Wiki Markdown System
+    use 'airblade/vim-rooter'                 -- Change directory to git route
+    use {                                     -- Status bar
 	'hoob3rt/lualine.nvim',
 	requires = {
 	    'kyazdani42/nvim-web-devicons',
 	    opt = true
         }
     }
-    use {                                      -- Syntax highlighting for most languages
+    use 'nathom/filetype.nvim'                -- Faster startup
+    use {                                     -- Syntax highlighting processor
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-    use 'bfontaine/Brewfile.vim'               -- Brewfile syntax
-    use 'blankname/vim-fish'                   -- Fish syntax
-    use 'chr4/nginx.vim'                       -- Nginx syntax
-    use 'hashivim/vim-terraform'               -- Terraform syntax
-    use 'cespare/vim-toml'                     -- TOML syntax
-    use 'towolf/vim-helm'                      -- Helm syntax
-    use 'LnL7/vim-nix'                         -- Nix syntax
-    use {                                      -- Git next to line numbers
+    use 'bfontaine/Brewfile.vim'              -- Brewfile syntax
+    use 'chr4/nginx.vim'                      -- Nginx syntax
+    use 'hashivim/vim-terraform'              -- Terraform formatting
+    use 'towolf/vim-helm'                     -- Helm syntax
+    use 'rodjek/vim-puppet'                   -- Puppet syntax
+    use {                                     -- Git next to line numbers
         'lewis6991/gitsigns.nvim',
+        branch = 'main',
         requires = {'nvim-lua/plenary.nvim'},
         config = function()
             require('gitsigns').setup()
         end
     }
-    use {                                      -- Fuzzy finder
-        'junegunn/fzf.vim',
-        requires = {'/usr/local/opt/fzf'}
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
-	-- use 'ludovicchabant/vim-gutentags'
+    use 'nvim-telescope/telescope-fzy-native.nvim'
+    use 'camgraff/telescope-tmux.nvim'
+    use {
+        'jvgrootveld/telescope-zoxide',
+        requires = {'nvim-lua/popup.nvim'},
+    }
+    use {
+        "AckslD/nvim-neoclip.lua",
+        branch = 'main',
+        requires = {'tami5/sqlite.lua', module = 'sqlite'},
+    }
+    -- use 'ludovicchabant/vim-gutentags'
 end)
+
+require('impatient') -- Faster startup
+
+-- Completion Settings
+-- ===================
+
+local cmp = require'cmp'
+
+cmp.setup({
+    snippet = {
+        expand = function(args)
+           require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    mapping = {
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<Esc>'] = function(fallback)
+            cmp.mapping({
+                i = cmp.mapping.abort(),
+                c = cmp.mapping.close(),
+            })
+            vim.cmd('stopinsert') -- Abort and leave insert mode
+        end,
+        -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+        -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        })
+    },
+    sources = {
+        { name = 'nvim_lua' },
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'luasnip' },
+        { name = 'buffer', keyword_length = 5, max_item_count = 10 },
+    },
+    experimental = {
+        native_menu = false, -- Use cmp menu instead of Vim menu
+        ghost_text = true,   -- Show preview auto-completion
+    },
+})
+
+-- Use buffer source for `/`
+cmp.setup.cmdline('/', {
+    sources = {
+        { name = 'buffer', keyword_length = 5 }
+    }
+})
+
+-- Use cmdline & path source for ':'
+cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    })
+})
+
 
 -- LSP Settings
 -- ============
 
-require('lspconfig').rust_analyzer.setup{}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+require('lspconfig').rust_analyzer.setup{ capabilities = capabilities }
+require('lspconfig').tflint.setup{ capabilities = capabilities }
+require('lspconfig').terraformls.setup{ capabilities = capabilities }
 require('lspconfig').pyright.setup{
-    cmd = { "poetry", "run", "pyright-langserver", "--stdio" }
+    cmd = { "poetry", "run", "pyright-langserver", "--stdio" },
+    capabilities = capabilities,
 }
-require'compe'.setup({
-    enabled = true,
-    source = {
-        path = true,
-        buffer = true,
-        nvim_lsp = true,
-    },
-})
 if require('lspconfig/util').has_bins('diagnostic-languageserver') then
     require('lspconfig').diagnosticls.setup{
         cmd = { "diagnostic-languageserver", "--stdio" },
@@ -113,52 +185,6 @@ if require('lspconfig/util').has_bins('diagnostic-languageserver') then
     }
 end
 
--- Auto-complete
--- ====================
-
--- Auto-complete mapping
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        return t "<S-Tab>"
-    end
-end
-
--- Auto-complete keybinds
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
 -- Settings
 -- ========
 
@@ -187,47 +213,65 @@ vim.o.updatetime = 300          -- Faster diagnostics
 vim.o.mouse = "nv"              -- Mouse interaction / scrolling
 
 -- Neovim features
-vim.o.inccommand = "split"             -- Live preview search and replace
-vim.o.completeopt = "menuone,noselect" -- Required for nvim-compe completion
+vim.o.inccommand = "split"                  -- Live preview search and replace
+vim.o.completeopt = "menu,menuone,noselect" -- Required for nvim-cmp completion
+-- Required until 0.6.0: do not source the default filetype.vim
+vim.g.did_load_filetypes = 1
 
 -- Remember last position when reopening file
 vim.api.nvim_exec([[
-    if has("autocmd")
-      au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-    endif
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]], false)
 
 -- Better backup, swap and undo storage
-vim.o.backup = true                      -- Easier to recover and more secure
-vim.bo.swapfile = false                  -- Instead of swaps, create backups
-vim.bo.undofile = true                   -- Keeps undos after quit
+vim.o.backup = true     -- Easier to recover and more secure
+vim.bo.swapfile = false -- Instead of swaps, create backups
+vim.bo.undofile = true  -- Keeps undos after quit
 
 -- Create backup directories if they don't exist
+-- Should be fixed in 0.6 by https://github.com/neovim/neovim/pull/15433
+vim.o.backupdir = vim.fn.stdpath('cache') .. '/backup'
 vim.api.nvim_exec([[
-    set backupdir=~/.local/share/nvim/backup
-    set undodir=~/.local/share/nvim/undo
     if !isdirectory(&backupdir)
         call mkdir(&backupdir, "p")
     endif
-    if !isdirectory(&undodir)
-        call mkdir(&undodir, "p")
-    endif
 ]], false)
 
--- Keep selection when tabbing
-vim.api.nvim_set_keymap("v", "<", "<gv", {noremap=true})
-vim.api.nvim_set_keymap("v", ">", ">gv", {noremap=true})
+-- Filetype for .env files
+local envfiletype = function()
+    vim.bo.filetype = 'text'
+    vim.bo.syntax = 'sh'
+end
 
 -- Force filetype patterns that Vim doesn't know about
-vim.api.nvim_exec([[
-    au BufRead,BufNewFile *.Brewfile setfiletype brewfile
-    au BufRead,BufNewFile tmux.conf* setfiletype tmux
-    au BufRead,BufNewFile *ignore.*link setfiletype gitignore
-    au BufRead,BufNewFile gitconfig.*link setfiletype gitconfig
-    au BufRead,BufNewFile *.toml.*link setfiletype toml
-    au BufRead,BufNewFile *.muttrc setfiletype muttrc
-    au BufRead,BufNewFile .env* set ft=text | set syntax=sh
-]], false)
+require('filetype').setup({
+    overrides = {
+        extensions = {
+            Brewfile = 'brewfile',
+            muttrc = 'muttrc',
+            hcl = 'terraform',
+        },
+        literal = {
+            Caskfile = 'brewfile',
+            [".gitignore"] = 'gitignore',
+        },
+        complex = {
+            [".*git/config"] = "gitconfig",
+            ["tmux.conf%..*link"] = "tmux",
+            ["gitconfig%..*link"] = "gitconfig",
+            [".*ignore%..*link"] = "gitignore",
+            [".*%.toml%..*link"] = "toml",
+        },
+        function_extensions = {},
+        function_literal = {
+            [".envrc"] = envfiletype,
+            [".env"] = envfiletype,
+            [".env.dev"] = envfiletype,
+            [".env.prod"] = envfiletype,
+            [".env.example"] = envfiletype,
+        },
+    }
+})
 
 -- LaTeX options
 vim.api.nvim_exec([[
@@ -240,11 +284,6 @@ vim.api.nvim_exec([[
     au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250 }
 ]], false)
 
--- Rust stuff
--- vim.api.nvim_exec([[
---     au BufWritePost *.rs silent! execute "%! rustfmt"
--- ]], false)
-
 -- Auto-pairs
 vim.g.AutoPairsFlyMode = 0
 
@@ -255,9 +294,15 @@ vim.g.netrw_winsize = 15     -- Explore window takes % of page
 vim.g.netrw_browse_split = 4 -- Open in previous window
 vim.g.netrw_altv = 1         -- Always split left
 
--- Polyglot
+-- Formatting
 vim.g.terraform_fmt_on_save = 1 -- Formats with terraform plugin
 vim.g.rustfmt_autosave = 1      -- Formats with rust plugin
+
+-- Tree-Sitter Syntax Processing
+require('nvim-treesitter.configs').setup {
+  highlight = { enable = true },
+  indent = { enable = true },
+}
 
 -- VimWiki
 vim.g.vimwiki_list = {
@@ -289,13 +334,47 @@ vim.api.nvim_exec([[
 
 -- Status bar
 require('lualine').setup({
-    options = { theme = 'gruvbox' }
+    options = {
+        theme = 'gruvbox',
+        icons_enabled = true
+    }
 })
+
+-- Clipboard history
+require('neoclip').setup({
+    enable_persistant_history = true,
+})
+
+-- Telescope: quit instantly with escape
+local actions = require("telescope.actions")
+require("telescope").setup({
+    defaults = {
+        mappings = {
+            i = { ["<esc>"] = actions.close, },
+        },
+    },
+    pickers = {
+        find_files = { theme = "dropdown" },
+        oldfiles = { theme = "dropdown" },
+        buffers = { theme = "dropdown" },
+    },
+    extensions = {
+        fzy_native = {},
+        tmux = {},
+        zoxide = {},
+        neoclip = {},
+    },
+})
+require('telescope').load_extension('neoclip')
 
 -- Remap space as leader key
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", {noremap=true, silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Keep selection when changing indentation
+vim.api.nvim_set_keymap("v", "<", "<gv", {noremap=true})
+vim.api.nvim_set_keymap("v", ">", ">gv", {noremap=true})
 
 -- Unset search pattern register
 vim.api.nvim_set_keymap("n", "<CR>", ":noh<CR><CR>", {noremap=true, silent=true})
@@ -308,12 +387,33 @@ vim.api.nvim_set_keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", {noremap=true})
 vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", {noremap=true})
 vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", {noremap=true})
 
--- Fzf (fuzzy finder)
-vim.api.nvim_set_keymap("n", "<Leader>/", ":Rg<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>ff", ":Files<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fr", ":History<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>b", ":Buffers<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>s", ":BLines<CR>", {noremap=true})
+-- Telescope (fuzzy finder)
+vim.api.nvim_set_keymap("n", "<Leader>/", ":Telescope live_grep<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>ff", ":Telescope find_files<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>fa", ":Telescope file_browser<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>wt", ":Telescope tmux sessions<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>ww", ":Telescope tmux windows<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>w/", ":Telescope tmux pane_contents<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>fz", ":Telescope zoxide list<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>b", ":Telescope buffers<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>hh", ":Telescope help_tags<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>fr", ":Telescope oldfiles<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>cc", ":Telescope commands<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>cr", ":Telescope command_history<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>y", ":Telescope neoclip<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>s", ":Telescope current_buffer_fuzzy_find<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>gc", ":Telescope git_commits<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>gf", ":Telescope git_bcommits<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>gb", ":Telescope git_branches<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>gs", ":Telescope git_status<CR>", {noremap=true})
+
+-- LSP
+vim.api.nvim_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap("n", "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap("n", "]e", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap("n", "[e", "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", {silent=true, noremap=true})
 
 -- File commands
 vim.api.nvim_set_keymap("n", "<Leader>q", ":quit<CR>", {noremap=true})
@@ -325,7 +425,9 @@ vim.api.nvim_set_keymap("n", "<Leader>fd", ":lcd %:p:h<CR>", {silent=true, norem
 vim.api.nvim_set_keymap("n", "<Leader>fu", ":lcd ..<CR>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap("n", "<Leader><Tab>", ":b#<CR>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap("n", "<Leader>gr", ":!gh repo view -w<CR><CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>tt", [[<Cmd>exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]], {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>tt",
+    [[<Cmd>exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]], {noremap=true}
+)
 
 -- Window commands
 vim.api.nvim_set_keymap("n", "<Leader>wv", ":vsplit<CR>", {noremap=true})
@@ -336,13 +438,25 @@ vim.api.nvim_set_keymap("n", "<Leader>wm", ":only<CR>", {noremap=true})
 vim.api.nvim_set_keymap("", "<Leader>ta", ":Tabularize /", {noremap=true})
 vim.api.nvim_set_keymap("", "<Leader>t#", ":Tabularize /#<CR>", {noremap=true})
 vim.api.nvim_set_keymap("", "<Leader>t\"", ":Tabularize /\"<CR>", {noremap=true})
+vim.api.nvim_set_keymap("", "<Leader>tl", ":Tabularize /--<CR>", {noremap=true})
 
--- Vimrc
+-- Vimrc editing
 vim.api.nvim_set_keymap("n", "<Leader>fv", ":edit $MYVIMRC<CR>", {noremap=true})
 vim.api.nvim_set_keymap("n", "<Leader>rr", ":luafile $MYVIMRC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:PackerCompile<CR>", {noremap=true})
 
 -- Other
-vim.api.nvim_set_keymap("n", "<Leader><Space>", ":HopWord<CR>", {noremap=true})
-vim.api.nvim_set_keymap("t", "<A-CR>", "<C-\\><C-n>", {noremap=true}) -- Exit terminal mode
-vim.api.nvim_set_keymap("n", "<A-CR>", ":noh<CR>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})
+vim.api.nvim_set_keymap("t", "<A-CR>", "<C-\\><C-n>", {noremap=true})           -- Exit terminal mode
+vim.api.nvim_set_keymap("n", "<A-CR>", ":noh<CR>", {noremap=true, silent=true}) -- Clear search
+vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})                      -- Copy to end of line
+
+-- Keep cursor in place
+vim.api.nvim_set_keymap("n", 'n', "nzz", {noremap=true})
+vim.api.nvim_set_keymap("n", 'N', "Nzz", {noremap=true})
+vim.api.nvim_set_keymap("n", 'J', "mzJ`z", {noremap=true}) -- Mark and jump back to it
+
+-- Add undo breakpoints
+vim.api.nvim_set_keymap("i", ',', ",<C-g>u", {noremap=true})
+vim.api.nvim_set_keymap("i", '.', ".<C-g>u", {noremap=true})
+vim.api.nvim_set_keymap("i", '!', "!<C-g>u", {noremap=true})
+vim.api.nvim_set_keymap("i", '?', "?<C-g>u", {noremap=true})

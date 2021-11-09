@@ -30,7 +30,7 @@ function abbrs --description 'All abbreviations'
     abbr -a gca 'git commit --amend'
     abbr -a gu 'git pull'
     abbr -a gp 'git push'
-    abbr -a gpp 'git_set_upstream'
+    abbr -a gpp 'git-push-upstream'
     abbr -a gl 'git log --graph --decorate --oneline -20'
     abbr -a gll 'git log --graph --decorate --oneline'
     abbr -a gco 'git checkout'
@@ -48,9 +48,11 @@ function abbrs --description 'All abbreviations'
     # GitHub
     abbr -a ghr 'gh repo view -w'
     abbr -a gha 'gh run list | head -1 | awk \'{ print $(NF-2) }\' | xargs gh run view'
-    abbr -a grw 'gh run watch'
+    abbr -a grw 'noti gh run watch'
     abbr -a grf 'gh run view --log-failed'
     abbr -a grl 'gh run view --log'
+    abbr -a ghpr 'gh pr create && sleep 3 && noti gh run watch'
+    abbr -a ghm 'gh pr merge -s -d && git pull'
 
     # Vim
     if command -v nvim > /dev/null
@@ -62,7 +64,8 @@ function abbrs --description 'All abbreviations'
     end
     abbr -a v 'vim'
     abbr -a vl 'vim -c "normal! `0"'
-    abbr -a vll 'vim -c "Hist"'
+    abbr -a vll 'vim -c "Telescope oldfiles"'
+    abbr -a vh 'vim -c "Telescope oldfiles"'
 
     # Notes
     abbr -a qn 'quicknote'
@@ -73,6 +76,7 @@ function abbrs --description 'All abbreviations'
     # Improved CLI Tools
     abbr -a cat 'bat'          # Swap cat with bat
     abbr -a h 'http -Fh --all' # Curl site for headers
+    abbr -a j 'just'
 
     # Fun CLI Tools
     abbr goo 'googler'
