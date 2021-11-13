@@ -79,8 +79,6 @@ function abbrs --description 'All abbreviations'
     abbr -a j 'just'
 
     # Fun CLI Tools
-    abbr goo 'googler'
-    abbr gooj 'googler -j'
     abbr weather 'curl wttr.in/$WEATHER_CITY'
     abbr moon 'curl wttr.in/Moon'
 

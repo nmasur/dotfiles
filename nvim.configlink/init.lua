@@ -37,7 +37,12 @@ require('packer').startup(function(use)
     use 'airblade/vim-rooter'            --- Change directory to git route
 
     -- Colorscheme
-    use 'morhetz/gruvbox'
+    use {
+        'morhetz/gruvbox',
+        config = function()
+            vim.cmd[[colorscheme gruvbox]]
+        end
+    }
 
     -- Git next to line numbers
     use {
@@ -336,7 +341,6 @@ end)
 -- ===========================================================================
 
 vim.o.termguicolors = true      --- Set to truecolor
-vim.cmd[[colorscheme gruvbox]]  --- Installed with a plugin
 vim.o.hidden = true             --- Don't unload buffers when leaving them
 vim.wo.number = true            --- Show line numbers
 vim.wo.relativenumber = true    --- Relative numbers instead of absolute

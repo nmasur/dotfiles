@@ -3,37 +3,37 @@ tap "homebrew/cask"
 # Core Applications
 cask "alacritty"                     # Terminal
 cask "firefox"                       # Browser
-cask "slack"                         # Chat
-cask "zoomus"                        # Video conference
+#cask "slack"                         # Chat
+#cask "zoomus"                        # Video conference
 cask "1password"                     # Passwords
 cask "dropbox"                       # File sync
-cask "docker"                        # Containers
+#cask "docker"                        # Containers
 
 # Helpful Applications
 cask "obsidian"                      # Notes
-cask "github-desktop"                # Git GUI
-cask "drawio"                        # Diagrams
+#cask "github-desktop"                # Git GUI
+#cask "drawio"                        # Diagrams
 
 # Auxiliary Tools
 cask "scroll-reverser"               # Mouse vs. trackpad
 cask "meetingbar"                    # Scheduling
 cask "gitify"                        # GitHub notifications
-cask "basictex"                      # Small LaTeX distribution
+#cask "basictex"                      # Small LaTeX distribution
 cask "hammerspoon"
 
 # Fonts
 tap "homebrew/cask-fonts"
-cask "font-fira-mono-for-powerline"
+#cask "font-fira-mono-for-powerline"
 cask "font-fira-mono-nerd-font"
 
 # Personal
-cask "authy"                         # Authentication
+#cask "authy"                         # Authentication
 cask "keybase"                       # Encryption
 cask "discord"                       # Chat
-cask "steam"                         # Games
-cask "epic-games"                    # Games
-cask "calibre"                       # E-Books
-cask "signal"                        # Messaging
+#cask "steam"                         # Games
+#cask "epic-games"                    # Games
+#cask "calibre"                       # E-Books
+#cask "signal"                        # Messaging
 
 # Maybe
-cask "jira-client"                   # Project Management
+#cask "jira-client"                   # Project Management

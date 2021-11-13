@@ -6,6 +6,9 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 echo "Automatically show and hide the dock"
 defaults write com.apple.dock autohide -bool true
 
+echo "Automatically show and hide the menu bar"
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
 echo "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true
 
@@ -110,6 +113,36 @@ defaults write com.apple.dock magnification -bool true
 echo "Set dock size"
 defaults write com.apple.dock largesize -int 48
 defaults write com.apple.dock tilesize -int 44
+
+echo "Choose and order dock icons"
+__dock_item() {
+    printf '%s%s%s%s%s' \
+           '<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
+           '<key>_CFURLString</key><string>' \
+           "$1" \
+           '</string><key>_CFURLStringType</key><integer>0</integer>' \
+           '</dict></dict></dict>'
+}
+
+defaults write com.apple.dock persistent-apps -array \
+    "$(__dock_item /Applications/1Password\ 7.app)" \
+    "$(__dock_item /Applications/Microsoft\ Outlook.app)" \
+    "$(__dock_item /Applications/Slack.app)" \
+    "$(__dock_item /System/Applications/Calendar.app)" \
+    "$(__dock_item /Applications/Firefox.app)" \
+    "$(__dock_item /System/Applications/Messages.app)" \
+    "$(__dock_item /System/Applications/Mail.app)" \
+    "$(__dock_item /Applications/Mimestream.app)" \
+    "$(__dock_item /Applications/zoom.us.app)" \
+    "$(__dock_item /Applications/Obsidian.app)" \
+    "$(__dock_item /Applications/Alacritty.app)" \
+    "$(__dock_item /System/Applications/System\ Preferences.app)"
+
+echo "No recent items in dock"
+defaults write com.apple.dock show-recents -bool FALSE
+
+echo "Switch to dark mode"
+defaults write "Apple Global Domain" "AppleInterfaceStyle" "Dark"
 
 echo "Turn on Scroll Reverser"
 open /Applications/Scroll\ Reverser.app
