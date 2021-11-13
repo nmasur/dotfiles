@@ -115,6 +115,12 @@ require('packer').startup(function(use)
     -- Markdown renderer / wiki notes
     use 'vimwiki/vimwiki'
 
+    -- Navigation
+    use {
+        'ggandor/lightspeed.nvim',
+        branch = 'smart-autojump'
+    }
+
     -- Snippet engine
     use 'L3MON4D3/LuaSnip'
 
