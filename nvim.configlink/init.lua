@@ -444,98 +444,105 @@ vim.api.nvim_exec([[
 -- Key Mapping
 -- ===========================================================================
 
+-- Function to cut down config boilerplate
+local key = function(mode, key_sequence, action, params)
+    params = params or {}
+    params["noremap"] = true
+    vim.api.nvim_set_keymap(mode, key_sequence, action, params)
+end
+
 -- Remap space as leader key
-vim.api.nvim_set_keymap("", "<Space>", "<Nop>", {noremap=true, silent=true})
+key("", "<Space>", "<Nop>", {silent=true})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Keep selection when changing indentation
-vim.api.nvim_set_keymap("v", "<", "<gv", {noremap=true})
-vim.api.nvim_set_keymap("v", ">", ">gv", {noremap=true})
+key("v", "<", "<gv")
+key("v", ">", ">gv")
 
 -- Unset search pattern register
-vim.api.nvim_set_keymap("n", "<CR>", ":noh<CR><CR>", {noremap=true, silent=true})
+key("n", "<CR>", ":noh<CR><CR>", {silent=true})
 
 -- Shuffle lines around
-vim.api.nvim_set_keymap("n", "<A-j>", ":m .+1<CR>==", {noremap=true})
-vim.api.nvim_set_keymap("n", "<A-k>", ":m .-2<CR>==", {noremap=true})
-vim.api.nvim_set_keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", {noremap=true})
-vim.api.nvim_set_keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", {noremap=true})
-vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", {noremap=true})
-vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", {noremap=true})
+key("n", "<A-j>", ":m .+1<CR>==")
+key("n", "<A-k>", ":m .-2<CR>==")
+key("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+key("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+key("v", "<A-j>", ":m '>+1<CR>gv=gv")
+key("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Telescope (fuzzy finder)
-vim.api.nvim_set_keymap("n", "<Leader>/", ":Telescope live_grep<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>ff", ":Telescope find_files<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fa", ":Telescope file_browser<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>wt", ":Telescope tmux sessions<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>ww", ":Telescope tmux windows<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>w/", ":Telescope tmux pane_contents<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fz", ":Telescope zoxide list<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>b", ":Telescope buffers<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>hh", ":Telescope help_tags<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fr", ":Telescope oldfiles<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>cc", ":Telescope commands<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>cr", ":Telescope command_history<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>y", ":Telescope neoclip<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>s", ":Telescope current_buffer_fuzzy_find<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>gc", ":Telescope git_commits<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>gf", ":Telescope git_bcommits<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>gb", ":Telescope git_branches<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>gs", ":Telescope git_status<CR>", {noremap=true})
+key("n", "<Leader>/", ":Telescope live_grep<CR>")
+key("n", "<Leader>ff", ":Telescope find_files<CR>")
+key("n", "<Leader>fa", ":Telescope file_browser<CR>")
+key("n", "<Leader>wt", ":Telescope tmux sessions<CR>")
+key("n", "<Leader>ww", ":Telescope tmux windows<CR>")
+key("n", "<Leader>w/", ":Telescope tmux pane_contents<CR>")
+key("n", "<Leader>fz", ":Telescope zoxide list<CR>")
+key("n", "<Leader>b", ":Telescope buffers<CR>")
+key("n", "<Leader>hh", ":Telescope help_tags<CR>")
+key("n", "<Leader>fr", ":Telescope oldfiles<CR>")
+key("n", "<Leader>cc", ":Telescope commands<CR>")
+key("n", "<Leader>cr", ":Telescope command_history<CR>")
+key("n", "<Leader>y", ":Telescope neoclip<CR>")
+key("n", "<Leader>s", ":Telescope current_buffer_fuzzy_find<CR>")
+key("n", "<Leader>gc", ":Telescope git_commits<CR>")
+key("n", "<Leader>gf", ":Telescope git_bcommits<CR>")
+key("n", "<Leader>gb", ":Telescope git_branches<CR>")
+key("n", "<Leader>gs", ":Telescope git_status<CR>")
 
 -- LSP
-vim.api.nvim_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "]e", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "[e", "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", {silent=true, noremap=true})
+key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent=true})
+key("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", {silent=true})
+key("n", "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>", {silent=true})
+key("n", "]e", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent=true})
+key("n", "[e", "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent=true})
+key("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", {silent=true})
 
 -- File commands
-vim.api.nvim_set_keymap("n", "<Leader>q", ":quit<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>Q", ":quitall<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fs", ":write<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fe", ":!chmod 755 %<CR><CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fn", ":!chmod 644 %<CR><CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fd", ":lcd %:p:h<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>fu", ":lcd ..<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader><Tab>", ":b#<CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>gr", ":!gh repo view -w<CR><CR>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>tt",
-    [[<Cmd>exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]], {noremap=true}
+key("n", "<Leader>q", ":quit<CR>")
+key("n", "<Leader>Q", ":quitall<CR>")
+key("n", "<Leader>fs", ":write<CR>")
+key("n", "<Leader>fe", ":!chmod 755 %<CR><CR>")
+key("n", "<Leader>fn", ":!chmod 644 %<CR><CR>")
+key("n", "<Leader>fd", ":lcd %:p:h<CR>", {silent=true})
+key("n", "<Leader>fu", ":lcd ..<CR>", {silent=true})
+key("n", "<Leader><Tab>", ":b#<CR>", {silent=true})
+key("n", "<Leader>gr", ":!gh repo view -w<CR><CR>", {silent=true})
+key("n", "<Leader>tt",
+    [[<Cmd>exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]]
 )
 
 -- Window commands
-vim.api.nvim_set_keymap("n", "<Leader>wv", ":vsplit<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>wh", ":split<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>wm", ":only<CR>", {noremap=true})
+key("n", "<Leader>wv", ":vsplit<CR>")
+key("n", "<Leader>wh", ":split<CR>")
+key("n", "<Leader>wm", ":only<CR>")
 
 -- Tabularize
-vim.api.nvim_set_keymap("", "<Leader>ta", ":Tabularize /", {noremap=true})
-vim.api.nvim_set_keymap("", "<Leader>t#", ":Tabularize /#<CR>", {noremap=true})
-vim.api.nvim_set_keymap("", "<Leader>t\"", ":Tabularize /\"<CR>", {noremap=true})
-vim.api.nvim_set_keymap("", "<Leader>tl", ":Tabularize /--<CR>", {noremap=true})
-vim.api.nvim_set_keymap("", "<Leader>tL", ":Tabularize /---<CR>", {noremap=true})
+key("", "<Leader>ta", ":Tabularize /")
+key("", "<Leader>t#", ":Tabularize /#<CR>")
+key("", "<Leader>t\"", ":Tabularize /\"<CR>")
+key("", "<Leader>tl", ":Tabularize /--<CR>")
+key("", "<Leader>tL", ":Tabularize /---<CR>")
 
 -- Vimrc editing
-vim.api.nvim_set_keymap("n", "<Leader>fv", ":edit $MYVIMRC<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>rr", ":luafile $MYVIMRC<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:PackerCompile<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "<Leader>rc", ":luafile $MYVIMRC<CR>:PackerCompile<CR>", {noremap=true})
+key("n", "<Leader>fv", ":edit $MYVIMRC<CR>")
+key("n", "<Leader>rr", ":luafile $MYVIMRC<CR>")
+key("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:PackerCompile<CR>")
+key("n", "<Leader>rc", ":luafile $MYVIMRC<CR>:PackerCompile<CR>")
 
 -- Keep cursor in place
-vim.api.nvim_set_keymap("n", 'n', "nzz", {noremap=true})
-vim.api.nvim_set_keymap("n", 'N', "Nzz", {noremap=true})
-vim.api.nvim_set_keymap("n", 'J', "mzJ`z", {noremap=true}) --- Mark and jump back to it
+key("n", 'n', "nzz")
+key("n", 'N', "Nzz")
+key("n", 'J', "mzJ`z") --- Mark and jump back to it
 
 -- Add undo breakpoints
-vim.api.nvim_set_keymap("i", ',', ",<C-g>u", {noremap=true})
-vim.api.nvim_set_keymap("i", '.', ".<C-g>u", {noremap=true})
-vim.api.nvim_set_keymap("i", '!', "!<C-g>u", {noremap=true})
-vim.api.nvim_set_keymap("i", '?', "?<C-g>u", {noremap=true})
+key("i", ',', ",<C-g>u")
+key("i", '.', ".<C-g>u")
+key("i", '!', "!<C-g>u")
+key("i", '?', "?<C-g>u")
 
 -- Other
-vim.api.nvim_set_keymap("t", "<A-CR>", "<C-\\><C-n>", {noremap=true})           --- Exit terminal mode
-vim.api.nvim_set_keymap("n", "<A-CR>", ":noh<CR>", {noremap=true, silent=true}) --- Clear search
-vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true})                      --- Copy to end of line
+key("t", "<A-CR>", "<C-\\><C-n>")             --- Exit terminal mode
+key("n", "<A-CR>", ":noh<CR>", {silent=true}) --- Clear search
+key("n", "Y", "y$")                           --- Copy to end of line
