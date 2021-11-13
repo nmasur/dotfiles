@@ -182,6 +182,7 @@ require('packer').startup(function(use)
     use 'hrsh7th/cmp-cmdline'      --- Command line completion
     use 'hrsh7th/cmp-nvim-lua'     --- Nvim lua api completion
     use 'saadparwaiz1/cmp_luasnip' --- Luasnip completion
+    use 'lukas-reineke/cmp-rg'     --- Ripgrep completion
 
     -- Completion engine
     use {
@@ -217,7 +218,11 @@ require('packer').startup(function(use)
                     { name = 'nvim_lsp' },
                     { name = 'path' },
                     { name = 'luasnip' },
-                    { name = 'buffer', keyword_length = 5, max_item_count = 10 },
+                    { name = 'buffer', keyword_length = 3, max_item_count = 10 },
+                    {
+                        name = 'rg', keyword_length = 6, max_item_count = 10,
+                        opts = { additional_arguments = "--ignore-case" }
+                    },
                 },
                 experimental = {
                     native_menu = false, --- Use cmp menu instead of Vim menu
