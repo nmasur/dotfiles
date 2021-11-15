@@ -343,6 +343,7 @@ require('packer').startup(function(use)
         config = function()
             require('neoclip').setup({
                 enable_persistant_history = true,
+                default_register = {'+', '"'},
             })
             require('telescope').load_extension('neoclip')
         end
