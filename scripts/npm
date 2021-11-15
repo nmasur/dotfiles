@@ -1,0 +1,5 @@
+#!/bin/sh
+
+npm update -g
+npm install -g pyright
+npm install -g diagnostic-languageserver
