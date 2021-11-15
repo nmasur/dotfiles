@@ -1,0 +1,26 @@
+#!/bin/sh
+
+case $1 in
+    t2) organization="take-two" ;;
+    d2c) organization="take-two-t2gp" ;;
+    t2gp) organization="take-two-t2gp" ;;
+    pd) organization="private-division" ;;
+    dots) organization="playdots" ;;
+    *) organization="nmasur" ;;
+esac
+
+selected=$(gh repo list "$organization" \
+    --limit 50 \
+    --no-archived \
+    --json=name,description,isPrivate,updatedAt,primaryLanguage \
+    | jq -r '.[] | .name + "," + if .description == "" then "-" else .description end + "," + .updatedAt + "," + .primaryLanguage.name' \
+    | (echo "REPO,DESCRIPTION,UPDATED,LANGUAGE"; cat -) \
+    | column -s , -t \
+    | fzf \
+        --header-lines=1 \
+        --layout=reverse \
+        --bind "ctrl-o:execute:gh repo view -w ${organization}/{1}" \
+        --preview "gh repo view ${organization}/{1} | bat -f -l=md --style=grid" \
+        --preview-window up
+)
+[ -n "${selected}" ] && gh repo clone "${organization}/$(echo "${selected}" | awk '{print $1}')"
