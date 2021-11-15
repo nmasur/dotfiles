@@ -1,13 +1,13 @@
 #!/usr/bin/env fish
 
-set -U FISH_DIR (readlink ~/.config/fish) # Used for getting to this repo
-set -Ux DOTS (dirname $FISH_DIR)          # Directory of this config repo
-set -U CDPATH . $HOME                     # Directories available for immediate cd
-set -Ux EDITOR nvim                       # Preferred text editor
-set -U PROJ $HOME/dev/work                # Projects directory
-set -Ux NOTES_PATH $HOME/notes            # Notes directory
-set -Ux MANPAGER "nvim +Man!"             # Used for reading man pages
-set -Ux DIRENV_LOG_FORMAT ""              # Disable direnv output
+set -U FISH_DIR (readlink ~/.config/fish)                                              # Used for getting to this repo
+set -Ux DOTS (dirname $FISH_DIR)                                                       # Directory of this config repo
+set -U CDPATH . $HOME                                                                  # Directories available for immediate cd
+set -Ux EDITOR nvim                                                                    # Preferred text editor
+set -U PROJ $HOME/dev/work                                                             # Projects directory
+set -Ux NOTES_PATH "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes" # Notes directory
+set -Ux MANPAGER "nvim +Man!"                                                          # Used for reading man pages
+set -Ux DIRENV_LOG_FORMAT ""                                                           # Disable direnv output
 
 # Load abbreviations
 abbrs

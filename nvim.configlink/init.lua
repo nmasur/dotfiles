@@ -521,7 +521,7 @@ key("n", "<Leader>fu", ":lcd ..<CR>", {silent=true})
 key("n", "<Leader><Tab>", ":b#<CR>", {silent=true})
 key("n", "<Leader>gr", ":!gh repo view -w<CR><CR>", {silent=true})
 key("n", "<Leader>tt",
-    [[<Cmd>exe 'edit ~/notes/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]]
+    [[<Cmd>exe 'edit $NOTES_PATH/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]]
 )
 
 -- Window commands
