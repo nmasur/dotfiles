@@ -348,6 +348,12 @@ require('packer').startup(function(use)
         end
     }
 
+    -- Project bookmarks
+    use {
+        'ThePrimeagen/harpoon',
+        requires = {'nvim-lua/plenary.nvim'}
+    }
+
     -- =======================================================================
 
     -- Install on initial bootstrap
@@ -510,6 +516,13 @@ key("n", "<Leader>gc", ":Telescope git_commits<CR>")
 key("n", "<Leader>gf", ":Telescope git_bcommits<CR>")
 key("n", "<Leader>gb", ":Telescope git_branches<CR>")
 key("n", "<Leader>gs", ":Telescope git_status<CR>")
+
+-- Harpoon
+key("n", "<Leader>m", ":<Cmd> lua require('harpoon.mark').add_file()<CR><Esc>")
+key("n", "<Leader>`", ":<Cmd> lua require('harpoon.ui').toggle_quick_menu()<CR><Esc>")
+key("n", "<Leader>1", ":<Cmd> lua require('harpoon.ui').nav_file(1)<CR><Esc>")
+key("n", "<Leader>2", ":<Cmd> lua require('harpoon.ui').nav_file(2)<CR><Esc>")
+key("n", "<Leader>3", ":<Cmd> lua require('harpoon.ui').nav_file(3)<CR><Esc>")
 
 -- LSP
 key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent=true})
