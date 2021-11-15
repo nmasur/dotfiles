@@ -217,7 +217,16 @@ require('packer').startup(function(use)
                     ['<CR>'] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
-                    })
+                    }),
+                    ['<C-r>'] = cmp.mapping.confirm({
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true,
+                    }),
+                    ['<C-l>'] = cmp.mapping(function(fallback)
+                        if require('luasnip').expand_or_jumpable() then
+                            require('luasnip').expand_or_jump()
+                        end
+                    end, {"i", "s"})
                 },
                 sources = {
                     { name = 'nvim_lua' },
