@@ -20,7 +20,7 @@ selected=$(gh repo list "$organization" \
         --header-lines=1 \
         --layout=reverse \
         --bind "ctrl-o:execute:gh repo view -w ${organization}/{1}" \
-        --preview "gh repo view ${organization}/{1} | bat -f -l=md --style=grid" \
+        --preview "GH_FORCE_TTY=49% gh repo view ${organization}/{1} | glow -" \
         --preview-window up
 )
 [ -n "${selected}" ] && gh repo clone "${organization}/$(echo "${selected}" | awk '{print $1}')"

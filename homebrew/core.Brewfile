@@ -13,4 +13,5 @@ brew "exa"      # Better ls
 brew "bat"      # Better cat
 brew "fzf"      # Fuzzy finder
 brew "tealdeer" # Mini man page
-brew "direnv" # Environment variables
+brew "direnv"   # Environment variables
+brew "glow"     # Markdown previews

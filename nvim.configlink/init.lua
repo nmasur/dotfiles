@@ -115,6 +115,9 @@ require('packer').startup(function(use)
     -- Markdown renderer / wiki notes
     use 'vimwiki/vimwiki'
 
+    -- Markdown pretty view
+    use 'ellisonleao/glow.nvim'
+
     -- Navigation
     use {
         'ggandor/lightspeed.nvim',
