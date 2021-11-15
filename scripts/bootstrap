@@ -62,15 +62,10 @@ use_fish_shell() {
     echo "fish ✓"
 }
 
-setup_poetry() {
-    poetry completions fish > "$(brew --prefix)/share/fish/vendor_completions.d/poetry.fish"
-}
-
 printf "\nbootstrapping...\n\n"
 install_xcode
 install_homebrew
 install_brews
-setup_poetry
 use_fish_shell
 ("$DOTS/scripts/setup_symlinks")
 
