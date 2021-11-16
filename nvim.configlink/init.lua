@@ -283,11 +283,12 @@ require('packer').startup(function(use)
     }
 
     -- Additional syntax sources
-    use 'bfontaine/Brewfile.vim' -- Brewfile syntax
-    use 'chr4/nginx.vim'         -- Nginx syntax
-    use 'hashivim/vim-terraform' -- Terraform formatting
-    use 'towolf/vim-helm'        -- Helm syntax
-    use 'rodjek/vim-puppet'      -- Puppet syntax
+    use 'bfontaine/Brewfile.vim' --- Brewfile syntax
+    use 'chr4/nginx.vim'         --- Nginx syntax
+    use 'hashivim/vim-terraform' --- Terraform formatting
+    use 'towolf/vim-helm'        --- Helm syntax
+    use 'rodjek/vim-puppet'      --- Puppet syntax
+    use 'blankname/vim-fish'     --- Better fish syntax
 
     -- =======================================================================
     -- Fuzzy Launcher
