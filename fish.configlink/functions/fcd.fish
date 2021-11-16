@@ -8,4 +8,5 @@ function fcd --description 'Jump to directory' -a 'directory'
     end
     set jump (fd -t d . $directory | fzf)
     and cd $jump $argv;
+    and commandline -f execute;
 end
