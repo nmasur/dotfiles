@@ -11,23 +11,22 @@ cask "dropbox"                       # File sync
 
 # Helpful Applications
 cask "obsidian"                      # Notes
-#cask "github-desktop"                # Git GUI
-#cask "drawio"                        # Diagrams
 
 # Auxiliary Tools
-cask "scroll-reverser"               # Mouse vs. trackpad
-cask "meetingbar"                    # Scheduling
-cask "gitify"                        # GitHub notifications
-#cask "basictex"                      # Small LaTeX distribution
+cask "scroll-reverser" # Mouse vs. trackpad
+cask "meetingbar"      # Scheduling
+cask "gitify"          # GitHub notifications
+# cask "basictex"      # Small LaTeX distribution
 cask "hammerspoon"
+
+tap "homebrew/cask-drivers"
+cask "logitech-g-hub"  # Hardware drivers
 
 # Fonts
 tap "homebrew/cask-fonts"
-#cask "font-fira-mono-for-powerline"
 cask "font-fira-mono-nerd-font"
 
 # Personal
-#cask "authy"                         # Authentication
 cask "keybase"                       # Encryption
 cask "discord"                       # Chat
 #cask "steam"                         # Games
