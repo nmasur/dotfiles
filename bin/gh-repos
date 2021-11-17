@@ -13,7 +13,7 @@ selected=$(gh repo list "$organization" \
     --limit 50 \
     --no-archived \
     --json=name,description,isPrivate,updatedAt,primaryLanguage \
-    | jq -r '.[] | .name + "," + if .description == "" then "-" else .description end + "," + .updatedAt + "," + .primaryLanguage.name' \
+    | jq -r '.[] | .name + "," + if .description == "" then "-" else .description |= gsub(","; " ") | .description end + "," + .updatedAt + "," + .primaryLanguage.name' \
     | (echo "REPO,DESCRIPTION,UPDATED,LANGUAGE"; cat -) \
     | column -s , -t \
     | fzf \
