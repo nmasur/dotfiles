@@ -491,7 +491,7 @@ vim.g.maplocalleader = " "
 key("v", "<", "<gv")
 key("v", ">", ">gv")
 
--- Unset search pattern register
+-- Clear search register
 key("n", "<CR>", ":noh<CR><CR>", {silent=true})
 
 -- Shuffle lines around
@@ -506,6 +506,7 @@ key("v", "<A-k>", ":m '<-2<CR>gv=gv")
 key("n", "<Leader>/", ":Telescope live_grep<CR>")
 key("n", "<Leader>ff", ":Telescope find_files<CR>")
 key("n", "<Leader>fa", ":Telescope file_browser<CR>")
+key("n", "<Leader>fw", ":Telescope grep_string<CR>")
 key("n", "<Leader>wt", ":Telescope tmux sessions<CR>")
 key("n", "<Leader>ww", ":Telescope tmux windows<CR>")
 key("n", "<Leader>w/", ":Telescope tmux pane_contents<CR>")
@@ -581,6 +582,7 @@ key("i", '!', "!<C-g>u")
 key("i", '?', "?<C-g>u")
 
 -- Other
-key("t", "<A-CR>", "<C-\\><C-n>")             --- Exit terminal mode
-key("n", "<A-CR>", ":noh<CR>", {silent=true}) --- Clear search
-key("n", "Y", "y$")                           --- Copy to end of line
+key("t", "<A-CR>", "<C-\\><C-n>")                           --- Exit terminal mode
+key("n", "<A-CR>", ":noh<CR>", {silent=true})               --- Clear search in VimWiki
+key("n", "Y", "y$")                                         --- Copy to end of line
+key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
