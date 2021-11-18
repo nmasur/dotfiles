@@ -34,7 +34,6 @@ require('packer').startup(function(use)
     use 'tpope/vim-fugitive'             --- Git commands and syntax
     use 'tpope/vim-repeat'               --- Actually repeat using .
     use 'christoomey/vim-tmux-navigator' --- Hotkeys for tmux panes
-    use 'airblade/vim-rooter'            --- Change directory to git route
 
     -- Colorscheme
     use {
@@ -310,8 +309,8 @@ require('packer').startup(function(use)
                     },
                 },
                 pickers = {
-                    find_files = { theme = "dropdown" },
-                    oldfiles = { theme = "dropdown" },
+                    find_files = { theme = "ivy" },
+                    oldfiles = { theme = "ivy" },
                     buffers = { theme = "dropdown" },
                 },
                 extensions = {
@@ -319,6 +318,9 @@ require('packer').startup(function(use)
                     tmux = {},
                     zoxide = {},
                     neoclip = {},
+                    project = {
+                        base_dirs = { '~/dev/work', },
+                    },
                 },
             })
         end
@@ -334,6 +336,15 @@ require('packer').startup(function(use)
     use {
         'jvgrootveld/telescope-zoxide',
         requires = {'nvim-lua/popup.nvim'},
+    }
+
+    -- Jump projects
+    use {
+        'nvim-telescope/telescope-project.nvim',
+        requires = {'nvim-telescope/telescope.nvim'},
+        config = function()
+            require('telescope').load_extension('project')
+        end
     }
 
     -- Clipboard history
@@ -356,7 +367,16 @@ require('packer').startup(function(use)
     -- Project bookmarks
     use {
         'ThePrimeagen/harpoon',
-        requires = {'nvim-lua/plenary.nvim'}
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim'
+        }
+    }
+
+    -- TLDR Lookup
+    use {
+        'mrjones2014/tldr.nvim',
+        requires = {'nvim-telescope/telescope.nvim'}
     }
 
     -- =======================================================================
@@ -456,7 +476,7 @@ vim.g.vimwiki_key_mappings = {
     ["all_maps"] = 1,
     ["mouse"] = 1,
 }
-vim.g.vimwiki_auto_chdir = 1     -- Set local dir to Wiki when open
+--vim.g.vimwiki_auto_chdir = 1     -- Set local dir to Wiki when open
 vim.g.vimwiki_create_link = 0    -- Don't automatically create new links
 vim.g.vimwiki_listsyms = " x"    -- Set checkbox symbol progression
 vim.g.vimwiki_table_mappings = 0 -- VimWiki table keybinds interfere with tab completion
@@ -470,6 +490,31 @@ vim.api.nvim_exec([[
 
     command! AddTag call fzf#run({'source': 'rg "#[A-Za-z/]+[ |\$]" -o --no-filename --no-line-number | sort | uniq', 'sink': function('PInsert')})
 ]], false)
+
+-- ===========================================================================
+-- Custom Functions
+-- ===========================================================================
+
+grep_notes = function()
+    local opts = {}
+    opts.prompt_title = "Search Notes"
+    opts.cwd = '$NOTES_PATH'
+    require('telescope.builtin').live_grep(opts)
+end
+
+find_notes = function()
+    local opts = {}
+    opts.prompt_title = "Find Notes"
+    opts.cwd = '$NOTES_PATH'
+    require('telescope.builtin').find_files(opts)
+end
+
+find_downloads = function()
+    local opts = {}
+    opts.prompt_title = "Find Downloads"
+    opts.cwd = '~/Downloads'
+    require('telescope.builtin').file_browser(opts)
+end
 
 -- ===========================================================================
 -- Key Mapping
@@ -503,8 +548,13 @@ key("v", "<A-j>", ":m '>+1<CR>gv=gv")
 key("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Telescope (fuzzy finder)
+key("n", "<Leader>k", ":Telescope keymaps<CR>")
 key("n", "<Leader>/", ":Telescope live_grep<CR>")
 key("n", "<Leader>ff", ":Telescope find_files<CR>")
+key("n", "<Leader>fp", ":Telescope git_files<CR>")
+key("n", "<Leader>fN", "<Cmd>lua find_notes()<CR>")
+key("n", "<Leader>N", "<Cmd>lua grep_notes()<CR>")
+key("n", "<Leader>fD", "<Cmd>lua find_downloads()<CR>")
 key("n", "<Leader>fa", ":Telescope file_browser<CR>")
 key("n", "<Leader>fw", ":Telescope grep_string<CR>")
 key("n", "<Leader>wt", ":Telescope tmux sessions<CR>")
@@ -515,13 +565,14 @@ key("n", "<Leader>b", ":Telescope buffers<CR>")
 key("n", "<Leader>hh", ":Telescope help_tags<CR>")
 key("n", "<Leader>fr", ":Telescope oldfiles<CR>")
 key("n", "<Leader>cc", ":Telescope commands<CR>")
-key("n", "<Leader>cr", ":Telescope command_history<CR>")
-key("n", "<Leader>y", ":Telescope neoclip<CR>")
+key("n", "<Leader>cr", "<Cmd>lua require('telescope.builtin').command_history(require('telescope.themes').get_ivy({}))<CR>")
+key("n", "<Leader>y", "<Cmd>lua require('telescope').extensions.neoclip.neoclip(require('telescope.themes').get_cursor({}))<CR>")
 key("n", "<Leader>s", ":Telescope current_buffer_fuzzy_find<CR>")
 key("n", "<Leader>gc", ":Telescope git_commits<CR>")
 key("n", "<Leader>gf", ":Telescope git_bcommits<CR>")
 key("n", "<Leader>gb", ":Telescope git_branches<CR>")
 key("n", "<Leader>gs", ":Telescope git_status<CR>")
+key("n", "<C-p>", ":lua require'telescope'.extensions.project.project(require('telescope.themes').get_ivy({}))<CR>")
 
 -- Harpoon
 key("n", "<Leader>m", ":<Cmd> lua require('harpoon.mark').add_file()<CR><Esc>")
@@ -542,8 +593,6 @@ key("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
 key("n", "<Leader>q", ":quit<CR>")
 key("n", "<Leader>Q", ":quitall<CR>")
 key("n", "<Leader>fs", ":write<CR>")
-key("n", "<Leader>fe", ":!chmod 755 %<CR><CR>")
-key("n", "<Leader>fn", ":!chmod 644 %<CR><CR>")
 key("n", "<Leader>fd", ":lcd %:p:h<CR>", {silent=true})
 key("n", "<Leader>fu", ":lcd ..<CR>", {silent=true})
 key("n", "<Leader><Tab>", ":b#<CR>", {silent=true})
