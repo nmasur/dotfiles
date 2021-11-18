@@ -551,6 +551,7 @@ key("n", "<Leader>gr", ":!gh repo view -w<CR><CR>", {silent=true})
 key("n", "<Leader>tt",
     [[<Cmd>exe 'edit $NOTES_PATH/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]]
 )
+key("n", "<Leader>jj", ":!journal<CR>:e<CR>")
 
 -- Window commands
 key("n", "<Leader>wv", ":vsplit<CR>")
@@ -567,7 +568,7 @@ key("", "<Leader>tL", ":Tabularize /---<CR>")
 -- Vimrc editing
 key("n", "<Leader>fv", ":edit $MYVIMRC<CR>")
 key("n", "<Leader>rr", ":luafile $MYVIMRC<CR>")
-key("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:PackerCompile<CR>")
+key("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:")
 key("n", "<Leader>rc", ":luafile $MYVIMRC<CR>:PackerCompile<CR>")
 
 -- Keep cursor in place
@@ -586,3 +587,4 @@ key("t", "<A-CR>", "<C-\\><C-n>")                           --- Exit terminal mo
 key("n", "<A-CR>", ":noh<CR>", {silent=true})               --- Clear search in VimWiki
 key("n", "Y", "y$")                                         --- Copy to end of line
 key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
+key("v", "D", "y'>p")                                       --- Duplicate selected
