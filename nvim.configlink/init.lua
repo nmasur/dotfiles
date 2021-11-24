@@ -163,16 +163,18 @@ require("packer").startup(function(use)
             require("null-ls").config({
                 sources = {
                     require("null-ls").builtins.formatting.stylua,
-                    require("null-ls").builtins.formatting.black,
+                    require("null-ls").builtins.formatting.black.with({
+                        command = "poetry",
+                        args = { "run", "black", "--quiet", "--fast", "-" },
+                    }),
                     require("null-ls").builtins.formatting.fish_indent,
-                    require("null-ls").builtins.formatting.reorder_python_imports,
-                    require("null-ls").builtins.formatting.nixfmt,
+                    -- require("null-ls").builtins.formatting.nixfmt,
                     require("null-ls").builtins.formatting.rustfmt,
+                    require("null-ls").builtins.diagnostics.shellcheck,
                     require("null-ls").builtins.formatting.shfmt.with({
                         extra_args = { "-i", "4", "-ci" },
                     }),
                     require("null-ls").builtins.formatting.terraform_fmt,
-                    require("null-ls").builtins.diagnostics.shellcheck,
                     -- require("null-ls").builtins.diagnostics.luacheck,
                     -- require("null-ls").builtins.diagnostics.markdownlint,
                     -- require("null-ls").builtins.diagnostics.pylint,
@@ -291,7 +293,6 @@ require("packer").startup(function(use)
     use("chr4/nginx.vim") --- Nginx syntax
     use("towolf/vim-helm") --- Helm syntax
     use("rodjek/vim-puppet") --- Puppet syntax
-    use("blankname/vim-fish") --- Better fish syntax
 
     -- =======================================================================
     -- Fuzzy Launcher
