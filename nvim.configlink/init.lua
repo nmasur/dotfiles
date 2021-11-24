@@ -145,37 +145,67 @@ require('packer').startup(function(use)
                 cmd = { "poetry", "run", "pyright-langserver", "--stdio" },
                 capabilities = capabilities,
             }
-            if require('lspconfig/util').has_bins('diagnostic-languageserver') then
-                require('lspconfig').diagnosticls.setup{
-                    cmd = { "diagnostic-languageserver", "--stdio" },
-                    filetypes = { "sh" },
-                    on_attach = on_attach,
-                    init_options = {
-                        filetypes = { sh = "shellcheck" },
-                        linters = {
-                            shellcheck = {
-                                sourceName = "shellcheck",
-                                command = "shellcheck",
-                                debounce = 100,
-                                args = { "--format=gcc", "-" },
-                                offsetLine = 0,
-                                offsetColumn = 0,
-                                formatLines = 1,
-                                formatPattern = {
-                                    "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
-                                    { line = 1, column = 2, message = 4, security = 3 }
-                                },
-                                securities = { error = "error", warning = "warning", }
-                            },
-                        }
-                    }
-                }
-            end
+            -- if require('lspconfig/util').has_bins('diagnostic-languageserver') then
+            --     require('lspconfig').diagnosticls.setup{
+            --         cmd = { "diagnostic-languageserver", "--stdio" },
+            --         filetypes = { "sh" },
+            --         on_attach = on_attach,
+            --         init_options = {
+            --             filetypes = { sh = "shellcheck" },
+            --             linters = {
+            --                 shellcheck = {
+            --                     sourceName = "shellcheck",
+            --                     command = "shellcheck",
+            --                     debounce = 100,
+            --                     args = { "--format=gcc", "-" },
+            --                     offsetLine = 0,
+            --                     offsetColumn = 0,
+            --                     formatLines = 1,
+            --                     formatPattern = {
+            --                         "^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$",
+            --                         { line = 1, column = 2, message = 4, security = 3 }
+            --                     },
+            --                     securities = { error = "error", warning = "warning", }
+            --                 },
+            --             }
+            --         }
+            --     }
+            -- end
         end
     }
 
     -- Pretty highlights
     use 'folke/lsp-colors.nvim'
+
+    -- Linting
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'neovim/nvim-lspconfig'
+        },
+        config = function()
+            require("null-ls").config({
+                sources = { 
+                    require("null-ls").builtins.formatting.stylua,
+                    require("null-ls").builtins.formatting.black,
+                    require("null-ls").builtins.formatting.fish_indent,
+                    require("null-ls").builtins.formatting.reorder_python_imports,
+                    require("null-ls").builtins.formatting.nixfmt,
+                    require("null-ls").builtins.formatting.rustfmt,
+                    require("null-ls").builtins.formatting.shfmt.with( {
+                        extra_args = {"-i", "4", "-ci"}
+                    }),
+                    require("null-ls").builtins.formatting.terraform_fmt,
+                    require("null-ls").builtins.diagnostics.shellcheck,
+                    -- require("null-ls").builtins.diagnostics.luacheck,
+                    -- require("null-ls").builtins.diagnostics.markdownlint,
+                    -- require("null-ls").builtins.diagnostics.pylint,
+                }
+            })
+            require("lspconfig")["null-ls"].setup({})
+        end
+    }
 
     -- =======================================================================
     -- Completion System
@@ -282,7 +312,6 @@ require('packer').startup(function(use)
     -- Additional syntax sources
     use 'bfontaine/Brewfile.vim' --- Brewfile syntax
     use 'chr4/nginx.vim'         --- Nginx syntax
-    use 'hashivim/vim-terraform' --- Terraform formatting
     use 'towolf/vim-helm'        --- Helm syntax
     use 'rodjek/vim-puppet'      --- Puppet syntax
     use 'blankname/vim-fish'     --- Better fish syntax
@@ -439,6 +468,11 @@ vim.api.nvim_exec([[
     endif
 ]], false)
 
+-- Formatting
+vim.api.nvim_exec([[
+    au BufWritePost * silent! lua vim.lsp.buf.formatting()
+]], false)
+
 -- LaTeX options
 vim.api.nvim_exec([[
     au FileType tex inoremap ;bf \textbf{}<Esc>i
@@ -456,10 +490,6 @@ vim.g.netrw_banner = 0       -- Remove useless banner
 vim.g.netrw_winsize = 15     -- Explore window takes % of page
 vim.g.netrw_browse_split = 4 -- Open in previous window
 vim.g.netrw_altv = 1         -- Always split left
-
--- Formatting
-vim.g.terraform_fmt_on_save = 1 -- Formats with terraform plugin
-vim.g.rustfmt_autosave = 1      -- Formats with rust plugin
 
 -- VimWiki
 vim.g.vimwiki_list = {
