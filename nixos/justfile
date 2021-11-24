@@ -2,6 +2,10 @@
 default:
   @just --list --list-heading $'Update NixOS config:\n'
 
+channel:
+  nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixos-unstable
+  nix-channel --update
+
 # Update the system
 system:
   nixos-rebuild switch -I nixos-config=./configuration.nix

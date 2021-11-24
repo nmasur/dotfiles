@@ -9,8 +9,10 @@ in
 
 {
   home.packages = with pkgs; [
-    firefox
+    # firefox
     unzip
+    neovim
+    gcc # for tree-sitter
     # alacritty
     # unstable.neovim
     tmux
@@ -22,40 +24,40 @@ in
     sd
     jq
     tealdeer
-    unstable._1password-gui
+    /* unstable._1password-gui */
   ];
 
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window = {
-        dimensions = {
-          columns = 85;
-          lines = 30;
-        };
-        padding = {
-          x = 20;
-          y = 20;
-        };
-      };
-      scrolling.history = 10000;
-      font = {
-        size = 15.0;
-      };
-      key_bindings = [
-        {
-          key = "F";
-          mods = "Super";
-          action = "ToggleFullscreen";
-        }
-        {
-          key = "L";
-          mods = "Super";
-          chars = "\x1F";
-        }
-      ];
-    };
-  };
+  #programs.alacritty = {
+  #  enable = true;
+  #  settings = {
+  #    window = {
+  #      dimensions = {
+  #        columns = 85;
+  #        lines = 30;
+  #      };
+  #      padding = {
+  #        x = 20;
+  #        y = 20;
+  #      };
+  #    };
+  #    scrolling.history = 10000;
+  #    font = {
+  #      size = 15.0;
+  #    };
+  #    key_bindings = [
+  #      {
+  #        key = "F";
+  #        mods = "Super";
+  #        action = "ToggleFullscreen";
+  #      }
+  #      {
+  #        key = "L";
+  #        mods = "Super";
+  #        chars = "\x1F";
+  #      }
+  #    ];
+  #  };
+  #};
 
   programs.fish = {
     enable = true;
@@ -114,9 +116,9 @@ in
       grl = "gh run view --log";
 
       # Vim
-      v = "vim";
-      vl = "vim -c 'normal! `0'";
-      vll = "vim -c 'Hist'";
+      v = "nvim";
+      vl = "nvim -c 'normal! `0'";
+      vll = "nvim -c 'Hist'";
 
       # Notes
       qn = "quicknote";
@@ -127,6 +129,7 @@ in
       # Improved CLI Tools
       cat = "bat";          # Swap cat with bat
       h = "http -Fh --all"; # Curl site for headers
+      j = "just";
 
       # Fun CLI Tools
       weather = "curl wttr.in/$WEATHER_CITY";
@@ -191,7 +194,7 @@ in
   xdg.configFile = {
     "starship.toml".source = ../starship/starship.toml.configlink;
     #"alacritty/alacritty.yml".source = ../alacritty.configlink/alacritty.yml;
-    # "nvim/init.lua".source = ../nvim.configlink/init.lua;
+    "nvim/init.lua".source = ./init.lua;
   };
 
   # nixpkgs.overlays = [(
@@ -205,51 +208,26 @@ in
     }))
   ];
 
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-nightly;
-    vimAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      fzf-vim
-      fzfWrapper
-      vim-eunuch
-      vim-vinegar
-      surround
-      commentary
-      repeat
-      gruvbox-nvim
-      nvim-lspconfig
-      lsp-colors-nvim
-      vim-vsnip
-      vim-vsnip-integ
-      nvim-compe
-      tabular
-      vimwiki
-      vim-rooter
-      lualine-nvim
-      nvim-web-devicons
-      nvim-treesitter
-      vim-fish
-      nginx-vim
-      vim-terraform
-      vim-toml
-      vim-helm
-      vim-nix
-      gitsigns-nvim
-      plenary-nvim
-      vim-hexokinase
-    ];
-    extraPackages = with pkgs; [
-      nodePackages.pyright
-      rust-analyzer
-      terraform-ls
-    ];
-    extraConfig = ''
-      lua << EOF
-        ${builtins.readFile ./init.lua}
-      EOF
-    '';
-  };
+  #programs.neovim = {
+  #  enable = true;
+  #  # package = pkgs.neovim-nightly;
+  #  vimAlias = true;
+  #  extraPackages = with pkgs; [
+  #    nodePackages.pyright
+  #    rust-analyzer
+  #    terraform-ls
+  #  ];
+  #  #extraConfig = builtins.concatStringsSep "\n" [
+  #  #  ''
+  #  #  luafile ${builtins.toString ./init.lua}
+  #  #  ''
+  #  #];
+  #  #extraConfig = ''
+  #  #  lua << EOF
+  #  #    ${builtins.readFile ./init.lua}
+  #  #  EOF
+  #  #'';
+  #};
 
   # # Neovim config
   # home.file = {
