@@ -130,9 +130,6 @@ require('packer').startup(function(use)
     -- Language Server
     -- =======================================================================
 
-    -- Language server completion plugin
-    use 'hrsh7th/cmp-nvim-lsp'
-
     -- Language server engine
     use {
         'neovim/nvim-lspconfig',
@@ -180,11 +177,20 @@ require('packer').startup(function(use)
     -- Pretty highlights
     use 'folke/lsp-colors.nvim'
 
+    use {
+      'folke/trouble.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require("trouble").setup { }
+      end
+    }
+
     -- =======================================================================
     -- Completion System
     -- =======================================================================
 
     -- Completion sources
+    use 'hrsh7th/cmp-nvim-lsp'     --- Language server completion plugin
     use 'hrsh7th/cmp-buffer'       --- Generic text completion
     use 'hrsh7th/cmp-path'         --- Local file completion
     use 'hrsh7th/cmp-cmdline'      --- Command line completion
@@ -359,6 +365,9 @@ require('packer').startup(function(use)
             require('neoclip').setup({
                 enable_persistant_history = true,
                 default_register = {'+', '"'},
+                keys = {
+                    i = { paste = '<c-v>' },
+                },
             })
             require('telescope').load_extension('neoclip')
         end
@@ -449,9 +458,6 @@ vim.api.nvim_exec([[
     au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250 }
 ]], false)
 
--- Auto-pairs
-vim.g.AutoPairsFlyMode = 0
-
 -- Netrw
 vim.g.netrw_liststyle = 3    -- Change style to 'tree' view
 vim.g.netrw_banner = 0       -- Remove useless banner
@@ -496,24 +502,60 @@ vim.api.nvim_exec([[
 -- ===========================================================================
 
 grep_notes = function()
-    local opts = {}
-    opts.prompt_title = "Search Notes"
-    opts.cwd = '$NOTES_PATH'
+    local opts = {
+        prompt_title = "Search Notes",
+        cwd = '$NOTES_PATH',
+    }
     require('telescope.builtin').live_grep(opts)
 end
 
 find_notes = function()
-    local opts = {}
-    opts.prompt_title = "Find Notes"
-    opts.cwd = '$NOTES_PATH'
+    local opts = {
+        prompt_title = "Find Notes",
+        cwd = '$NOTES_PATH',
+    }
     require('telescope.builtin').find_files(opts)
 end
 
 find_downloads = function()
-    local opts = {}
-    opts.prompt_title = "Find Downloads"
-    opts.cwd = '~/Downloads'
+    local opts = {
+        prompt_title = "Find Downloads",
+        cwd = '~/Downloads',
+    }
     require('telescope.builtin').file_browser(opts)
+end
+
+choose_project = function()
+    local opts = require("telescope.themes").get_ivy {
+        layout_config = {
+            bottom_pane = {
+                height = 10,
+            },
+        },
+    }
+    require('telescope').extensions.project.project(opts)
+end
+
+clipboard_history = function()
+    local opts = require("telescope.themes").get_cursor {
+        layout_config = {
+            cursor = {
+                width = 150,
+            },
+        },
+    }
+    require('telescope').extensions.neoclip.neoclip(opts)
+end
+
+command_history = function()
+    local opts = require("telescope.themes").get_ivy {
+        layout_config = {
+            bottom_pane = {
+                height = 15,
+            }
+        }
+    }
+    require('telescope.builtin').command_history(opts)
 end
 
 -- ===========================================================================
@@ -565,21 +607,22 @@ key("n", "<Leader>b", ":Telescope buffers<CR>")
 key("n", "<Leader>hh", ":Telescope help_tags<CR>")
 key("n", "<Leader>fr", ":Telescope oldfiles<CR>")
 key("n", "<Leader>cc", ":Telescope commands<CR>")
-key("n", "<Leader>cr", "<Cmd>lua require('telescope.builtin').command_history(require('telescope.themes').get_ivy({}))<CR>")
-key("n", "<Leader>y", "<Cmd>lua require('telescope').extensions.neoclip.neoclip(require('telescope.themes').get_cursor({}))<CR>")
+key("n", "<Leader>cr", "<Cmd>lua command_history()<CR>")
+key("n", "<Leader>y", "<Cmd>lua clipboard_history()<CR>")
+key("i", "<c-y>", "<Cmd>lua clipboard_history()<CR>")
 key("n", "<Leader>s", ":Telescope current_buffer_fuzzy_find<CR>")
 key("n", "<Leader>gc", ":Telescope git_commits<CR>")
 key("n", "<Leader>gf", ":Telescope git_bcommits<CR>")
 key("n", "<Leader>gb", ":Telescope git_branches<CR>")
 key("n", "<Leader>gs", ":Telescope git_status<CR>")
-key("n", "<C-p>", ":lua require'telescope'.extensions.project.project(require('telescope.themes').get_ivy({}))<CR>")
+key("n", "<C-p>", "<Cmd>lua choose_project()<CR>")
 
 -- Harpoon
-key("n", "<Leader>m", ":<Cmd> lua require('harpoon.mark').add_file()<CR><Esc>")
-key("n", "<Leader>`", ":<Cmd> lua require('harpoon.ui').toggle_quick_menu()<CR><Esc>")
-key("n", "<Leader>1", ":<Cmd> lua require('harpoon.ui').nav_file(1)<CR><Esc>")
-key("n", "<Leader>2", ":<Cmd> lua require('harpoon.ui').nav_file(2)<CR><Esc>")
-key("n", "<Leader>3", ":<Cmd> lua require('harpoon.ui').nav_file(3)<CR><Esc>")
+key("n", "<Leader>m", "<Cmd>lua require('harpoon.mark').add_file()<CR><Esc>")
+key("n", "<Leader>`", "<Cmd>lua require('harpoon.ui').toggle_quick_menu()<CR><Esc>")
+key("n", "<Leader>1", "<Cmd>lua require('harpoon.ui').nav_file(1)<CR><Esc>")
+key("n", "<Leader>2", "<Cmd>lua require('harpoon.ui').nav_file(2)<CR><Esc>")
+key("n", "<Leader>3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR><Esc>")
 
 -- LSP
 key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent=true})
@@ -610,9 +653,7 @@ key("n", "<Leader>wm", ":only<CR>")
 -- Tabularize
 key("", "<Leader>ta", ":Tabularize /")
 key("", "<Leader>t#", ":Tabularize /#<CR>")
-key("", "<Leader>t\"", ":Tabularize /\"<CR>")
-key("", "<Leader>tl", ":Tabularize /--<CR>")
-key("", "<Leader>tL", ":Tabularize /---<CR>")
+key("", "<Leader>tl", ":Tabularize /---<CR>")
 
 -- Vimrc editing
 key("n", "<Leader>fv", ":edit $MYVIMRC<CR>")
@@ -636,4 +677,4 @@ key("t", "<A-CR>", "<C-\\><C-n>")                           --- Exit terminal mo
 key("n", "<A-CR>", ":noh<CR>", {silent=true})               --- Clear search in VimWiki
 key("n", "Y", "y$")                                         --- Copy to end of line
 key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
-key("v", "D", "y'>p")                                       --- Duplicate selected
+key("v", "D", "y'>gp")                                      --- Duplicate selected
