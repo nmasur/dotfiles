@@ -155,6 +155,7 @@ require("packer").startup(function(use)
     -- Linting
     use({
         "jose-elias-alvarez/null-ls.nvim",
+        branch = "main",
         requires = {
             "nvim-lua/plenary.nvim",
             "neovim/nvim-lspconfig",
@@ -455,7 +456,7 @@ vim.api.nvim_exec(
 -- Formatting
 vim.api.nvim_exec(
     [[
-    au BufWritePost * silent! lua vim.lsp.buf.formatting()
+    au BufWritePost * lua vim.lsp.buf.formatting()
 ]],
     false
 )
