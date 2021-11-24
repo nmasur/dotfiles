@@ -126,7 +126,6 @@ __dock_item() {
 
 defaults write com.apple.dock persistent-apps -array \
     "$(__dock_item /Applications/1Password\ 7.app)" \
-    "$(__dock_item /Applications/Microsoft\ Outlook.app)" \
     "$(__dock_item /Applications/Slack.app)" \
     "$(__dock_item /System/Applications/Calendar.app)" \
     "$(__dock_item /Applications/Firefox.app)" \
