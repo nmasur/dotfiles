@@ -177,14 +177,6 @@ require('packer').startup(function(use)
     -- Pretty highlights
     use 'folke/lsp-colors.nvim'
 
-    use {
-      'folke/trouble.nvim',
-      requires = 'kyazdani42/nvim-web-devicons',
-      config = function()
-        require("trouble").setup { }
-      end
-    }
-
     -- =======================================================================
     -- Completion System
     -- =======================================================================
