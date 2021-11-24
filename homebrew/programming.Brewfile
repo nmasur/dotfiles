@@ -2,6 +2,7 @@
 
 brew "shellcheck" # Lint for bash
 brew "shfmt"      # Formatter for bash
+brew "stylua"     # Formatter for lua
 brew "python"     # Latest version of Python
 brew "ipython"    # Better interactive Python shell
 brew "poetry"     # Project-based Python dependencies
