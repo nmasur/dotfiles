@@ -1,0 +1,15 @@
+#!/bin/sh
+
+URL=$1
+TITLE=$2
+DESCRIPTION=$3
+FEED=$4
+
+printf "\n\n## [%s](%s)\n%s\nFrom %s: added on [%s](%s.md).\n\n---\n" \
+    "$TITLE" \
+    "$URL" \
+    "$DESCRIPTION" \
+    "$FEED" \
+    "$TODAY_NOTE" \
+    "$TODAY_NOTE" \
+    >>"$NOTES_PATH/bookmarks.md"

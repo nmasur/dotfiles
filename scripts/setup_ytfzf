@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "downloading ytfzf"
-curl -sL "https://raw.githubusercontent.com/pystardust/ytfzf/master/ytfzf" > ~/.local/bin/ytfzf
+mkdir -p ~/.local/bin
+curl -sL "https://raw.githubusercontent.com/pystardust/ytfzf/master/ytfzf" >~/.local/bin/ytfzf
 chmod 755 ~/.local/bin/ytfzf
 echo "ytfzf ✓"

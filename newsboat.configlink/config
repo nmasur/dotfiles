@@ -1,4 +1,7 @@
 browser "$BROWSER %u"
+prepopulate-query-feeds yes
+feed-sort-order lastupdated
+reload-only-visible-feeds yes
 
 bind-key j down
 bind-key k up
@@ -12,9 +15,16 @@ bind-key n next-unread
 bind-key p prev-unread
 bind-key ; macro-prefix
 bind-key B bookmark
-bind-key N toggle-article-read
+bind-key f edit-flags
 
 macro v set browser "mpv %u"; open-in-browser; set browser "$BROWSER %u"
 macro h set browser "clx view $(echo %u | cut -d '=' -f2)"; one; set browser "$BROWSER %u"
 macro w set browser "w3m -o confirm_qq=false %u"; open-in-browser; set browser "$BROWSER %u"
 macro r set browser "url-markdown %u | glow -p -w 72 -"; open-in-browser; set browser "$BROWSER %u"
+macro d set browser "youtube-dl -o "~/Downloads/%(title)s.%(ext)s" %u &"; open-in-browser-noninteractively; set browser "$BROWSER %u"
+macro n set-tag News; reload-all
+macro q set-tag All
+macro e set-tag Reddit; reload-all
+macro e set-tag YouTube; reload-all
+
+bookmark-cmd "bookmark"
