@@ -2,6 +2,7 @@ browser "$BROWSER %u"
 prepopulate-query-feeds yes
 feed-sort-order lastupdated
 reload-only-visible-feeds yes
+text-width 72
 
 bind-key j down
 bind-key k up
@@ -18,13 +19,20 @@ bind-key B bookmark
 bind-key f edit-flags
 
 macro v set browser "mpv %u"; open-in-browser; set browser "$BROWSER %u"
-macro h set browser "clx view $(echo %u | cut -d '=' -f2)"; one; set browser "$BROWSER %u"
+macro p set browser "echo %u"; one; set browser "$BROWSER %u"
+macro H set browser "clx view $(echo %u | cut -d '=' -f2)"; one; set browser "$BROWSER %u"
+macro h set browser "clx view $(echo %u | cut -d '=' -f2)"; two; set browser "$BROWSER %u"
 macro w set browser "w3m -o confirm_qq=false %u"; open-in-browser; set browser "$BROWSER %u"
 macro r set browser "url-markdown %u | glow -p -w 72 -"; open-in-browser; set browser "$BROWSER %u"
-macro d set browser "youtube-dl -o "~/Downloads/%(title)s.%(ext)s" %u &"; open-in-browser-noninteractively; set browser "$BROWSER %u"
+macro d set browser "youtube-dl -o ~/Downloads/%(title)s.%(ext)s %u &"; open-in-browser-noninteractively; set browser "$BROWSER %u"
 macro n set-tag News; reload-all
-macro q set-tag All
+macro a set-tag All
 macro e set-tag Reddit; reload-all
-macro e set-tag YouTube; reload-all
+macro y set-tag YouTube; reload-all
 
 bookmark-cmd "bookmark"
+
+highlight article "^(Feed|Title|Author|Link|Date):.*" color243 default
+highlight article "^(Links):.*" color243 default
+highlight article "^(\\[[0-9]\\]):.*" color243 default
+highlight article "^\\[.*\\]$" color243 default
