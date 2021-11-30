@@ -118,12 +118,6 @@ require("packer").startup(function(use)
     -- Markdown pretty view
     use("ellisonleao/glow.nvim")
 
-    -- Navigation
-    use({
-        "ggandor/lightspeed.nvim",
-        branch = "smart-autojump",
-    })
-
     -- Snippet engine
     use("L3MON4D3/LuaSnip")
 
