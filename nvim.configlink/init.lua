@@ -240,7 +240,7 @@ require("packer").startup(function(use)
                         name = "rg",
                         keyword_length = 6,
                         max_item_count = 10,
-                        opts = { additional_arguments = "--ignore-case" },
+                        option = { additional_arguments = "--ignore-case" },
                     },
                 },
                 experimental = {
