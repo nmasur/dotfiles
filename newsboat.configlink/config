@@ -34,5 +34,5 @@ bookmark-cmd "bookmark"
 
 highlight article "^(Feed|Title|Author|Link|Date):.*" color243 default
 highlight article "^(Links):.*" color243 default
-highlight article "^(\\[[0-9]\\]):.*" color243 default
+highlight article "^(\\[[0-9]+\\]):.*" color243 default
 highlight article "^\\[.*\\]$" color243 default
