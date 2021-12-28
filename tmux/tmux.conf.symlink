@@ -20,6 +20,11 @@ bind l select-pane -R
 # Split out pane
 bind b break-pane
 
+# Synchronize panes
+bind S set-window-option synchronize-panes
+bind C-h resize-pane -L 10
+bind C-l resize-pane -R 10
+
 # Copy mode works as Vim
 bind Escape copy-mode
 bind k copy-mode
