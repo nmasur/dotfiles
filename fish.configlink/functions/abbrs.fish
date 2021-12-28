@@ -27,7 +27,7 @@ function abbrs --description 'All abbreviations'
     abbr -a gaa 'git add -A'
     abbr -a gac 'git commit -am'
     abbr -a gc 'git commit -m'
-    abbr -a gca 'git commit --amend'
+    abbr -a gca 'git commit --amend --no-edit'
     abbr -a gu 'git pull'
     abbr -a gp 'git push'
     abbr -a gpp git-push-upstream
@@ -100,6 +100,7 @@ function abbrs --description 'All abbreviations'
     abbr -a publickey 'ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub'
     abbr -a forloop 'for i in (seq 1 100)'
     abbr -a gatekeeper 'sudo spctl --master-disable'
+    abbr -a flushdns 'sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
     # Docker
     abbr -a dc '$DOTS/bin/docker_cleanup'
