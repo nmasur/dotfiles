@@ -2,8 +2,7 @@
 
 let
 
-  # Import unstable channel (for Neovim 0.5)
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+    # Nothing
 
 in
 
@@ -16,7 +15,6 @@ in
     neovim
     gcc # for tree-sitter
     alacritty
-    # unstable.neovim
     tmux
     rsync
     ripgrep
@@ -28,6 +26,7 @@ in
     tealdeer
     _1password-gui
     discord
+    gh
   ];
 
   #programs.alacritty = {
@@ -200,17 +199,6 @@ in
     "nvim/init.lua".source = ./init.lua;
   };
 
-  # nixpkgs.overlays = [(
-  #   self: super: {
-  #     neovim = unstable.neovim;
-  #   })
-  # ];
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
-
   #programs.neovim = {
   #  enable = true;
   #  # package = pkgs.neovim-nightly;
@@ -245,6 +233,22 @@ in
       core = {
         editor = "nvim";
       };
+      pager = {
+        branch = "false";
+      };
+      #credential = {
+      #  helper = "store";
+      #};
+      /* credential = { */
+      /*   "https://github.com/helper" = "!gh auth git-credential"; */
+      /* }; */
     };
+  };
+
+  programs.gh = {
+    #package = nixos-unstable.gh;
+    enable = true;
+    enableGitCredentialHelper = true;
+    settings.git_protocol = "https";
   };
 }
