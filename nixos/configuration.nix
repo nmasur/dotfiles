@@ -63,7 +63,16 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+
+    # Sound card drivers
+    alsa.enable = true;
+
+    # PulseAudio emulation
+    pulse.enable = true;
+  };
 
   #services.xrandr.xrandrHeads = [
   #  "HDMI-0" 
