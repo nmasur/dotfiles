@@ -338,7 +338,7 @@ require("packer").startup(function(use)
                     fzy_native = {},
                     tmux = {},
                     zoxide = {},
-                    neoclip = {},
+                    --neoclip = {},
                     project = {
                         base_dirs = { "~/dev/work" },
                     },
@@ -369,26 +369,26 @@ require("packer").startup(function(use)
     })
 
     -- Clipboard history
-    use({
-        "AckslD/nvim-neoclip.lua",
-        branch = "main",
-        requires = {
-            { "tami5/sqlite.lua", module = "sqlite" },
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = function()
-            require("neoclip").setup({
-                enable_persistant_history = true,
-                default_register = { "+", '"' },
-                keys = {
-                    telescope = {
-                        i = { paste = "<c-v>" },
-                    },
-                },
-            })
-            require("telescope").load_extension("neoclip")
-        end,
-    })
+    -- use({
+    --     "AckslD/nvim-neoclip.lua",
+    --     branch = "main",
+    --     requires = {
+    --         { "tami5/sqlite.lua", module = "sqlite" },
+    --         { "nvim-telescope/telescope.nvim" },
+    --     },
+    --     config = function()
+    --         require("neoclip").setup({
+    --             enable_persistant_history = true,
+    --             default_register = { "+", '"' },
+    --             keys = {
+    --                 telescope = {
+    --                     i = { paste = "<c-v>" },
+    --                 },
+    --             },
+    --         })
+    --         require("telescope").load_extension("neoclip")
+    --     end,
+    -- })
 
     -- Project bookmarks
     use({
@@ -564,16 +564,16 @@ choose_project = function()
     require("telescope").extensions.project.project(opts)
 end
 
-clipboard_history = function()
-    local opts = require("telescope.themes").get_cursor({
-        layout_config = {
-            cursor = {
-                width = 150,
-            },
-        },
-    })
-    require("telescope").extensions.neoclip.neoclip(opts)
-end
+-- clipboard_history = function()
+--     local opts = require("telescope.themes").get_cursor({
+--         layout_config = {
+--             cursor = {
+--                 width = 150,
+--             },
+--         },
+--     })
+--     require("telescope").extensions.neoclip.neoclip(opts)
+-- end
 
 command_history = function()
     local opts = require("telescope.themes").get_ivy({
