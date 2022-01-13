@@ -83,7 +83,8 @@ require("packer").startup(function(use)
                     extensions = {
                         Brewfile = "brewfile",
                         muttrc = "muttrc",
-                        hcl = "terraform",
+                        tfvars = "hcl",
+                        tf = "hcl",
                     },
                     literal = {
                         Caskfile = "brewfile",
@@ -155,7 +156,7 @@ require("packer").startup(function(use)
             "neovim/nvim-lspconfig",
         },
         config = function()
-            require("null-ls").config({
+            require("null-ls").setup({
                 sources = {
                     require("null-ls").builtins.formatting.stylua,
                     require("null-ls").builtins.formatting.black.with({
@@ -175,7 +176,6 @@ require("packer").startup(function(use)
                     -- require("null-ls").builtins.diagnostics.pylint,
                 },
             })
-            require("lspconfig")["null-ls"].setup({})
         end,
     })
 
@@ -277,9 +277,21 @@ require("packer").startup(function(use)
         run = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({
+                ensure_installed = {
+                    "hcl",
+                    "python",
+                    "lua",
+                    "nix",
+                    "fish",
+                    "toml",
+                    "yaml",
+                    "json",
+                },
                 highlight = { enable = true },
                 indent = { enable = true },
             })
+            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+            parser_config.hcl.used_by = { "tf" }
         end,
     })
 
@@ -360,7 +372,9 @@ require("packer").startup(function(use)
                 enable_persistant_history = true,
                 default_register = { "+", '"' },
                 keys = {
-                    i = { paste = "<c-v>" },
+                    telescope = {
+                        i = { paste = "<c-v>" },
+                    },
                 },
             })
             require("telescope").load_extension("neoclip")
