@@ -196,7 +196,7 @@ in
   xdg.configFile = {
     "starship.toml".source = ../starship/starship.toml.configlink;
     #"alacritty/alacritty.yml".source = ../alacritty.configlink/alacritty.yml;
-    "nvim/init.lua".source = ./init.lua;
+    "nvim/init.lua".source = ../nvim.configlink/init.lua;
   };
 
   #programs.neovim = {
