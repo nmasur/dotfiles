@@ -8,12 +8,14 @@ let
 in
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
-    # firefox
+    firefox
     unzip
     neovim
     gcc # for tree-sitter
-    # alacritty
+    alacritty
     # unstable.neovim
     tmux
     rsync
@@ -24,7 +26,8 @@ in
     sd
     jq
     tealdeer
-    /* unstable._1password-gui */
+    _1password-gui
+    discord
   ];
 
   #programs.alacritty = {

@@ -10,6 +10,8 @@
       /etc/nixos/hardware-configuration.nix
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -62,6 +64,15 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+  #services.xrandr.xrandrHeads = [
+  #  "HDMI-0" 
+  #];
+  services.xserver.displayManager.setupCommands = ''
+    LEFT='HDMI-0'
+    RIGHT='DisplayPort-0'
+    ${pkgs.xorg.xrandr}/bin/xrandr --output $LEFT --output $RIGHT --right-of $LEFT --rotate left
+  '';
 
   # Install fonts
   fonts.fonts = with pkgs; [
