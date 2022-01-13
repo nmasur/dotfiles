@@ -226,35 +226,9 @@ in
   # Other configs
   xdg.configFile = {
     "starship.toml".source = ../starship/starship.toml.configlink;
-    #"alacritty/alacritty.yml".source = ../alacritty.configlink/alacritty.yml;
     "nvim/init.lua".source = ../nvim.configlink/init.lua;
+    "fish/functions".source = ../fish.configlink/functions;
   };
-
-  #programs.neovim = {
-  #  enable = true;
-  #  # package = pkgs.neovim-nightly;
-  #  vimAlias = true;
-  #  extraPackages = with pkgs; [
-  #    nodePackages.pyright
-  #    rust-analyzer
-  #    terraform-ls
-  #  ];
-  #  #extraConfig = builtins.concatStringsSep "\n" [
-  #  #  ''
-  #  #  luafile ${builtins.toString ./init.lua}
-  #  #  ''
-  #  #];
-  #  #extraConfig = ''
-  #  #  lua << EOF
-  #  #    ${builtins.readFile ./init.lua}
-  #  #  EOF
-  #  #'';
-  #};
-
-  # # Neovim config
-  # home.file = {
-  #   ".config/nvim/init.lua".source = ../nvim.configlink/init.lua;
-  # };
 
   programs.git = {
     enable = true;
