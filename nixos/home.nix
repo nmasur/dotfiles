@@ -236,17 +236,10 @@ in
       pager = {
         branch = "false";
       };
-      #credential = {
-      #  helper = "store";
-      #};
-      /* credential = { */
-      /*   "https://github.com/helper" = "!gh auth git-credential"; */
-      /* }; */
     };
   };
 
   programs.gh = {
-    #package = nixos-unstable.gh;
     enable = true;
     enableGitCredentialHelper = true;
     settings.git_protocol = "https";
