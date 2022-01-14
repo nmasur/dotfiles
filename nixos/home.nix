@@ -55,7 +55,7 @@ in
         {
           key = "L";
           mods = "Super";
-          chars = "\x1F";
+          chars = "\\x1F";
         }
       ];
       colors = {
