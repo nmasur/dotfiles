@@ -80,7 +80,7 @@
   services.xserver.displayManager.setupCommands = ''
     LEFT='HDMI-0'
     RIGHT='DisplayPort-0'
-    ${pkgs.xorg.xrandr}/bin/xrandr --output $LEFT --output $RIGHT --right-of $LEFT --rotate left
+    ${pkgs.xorg.xrandr}/bin/xrandr --output $LEFT --primary --output $RIGHT --right-of $LEFT --rotate left
   '';
 
   # Install fonts
