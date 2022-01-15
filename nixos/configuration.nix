@@ -55,6 +55,9 @@
     libinput.mouse.accelSpeed = "3.0";
   };
 
+  # Mouse config
+  services.ratbagd.enable = true;
+
   # Configure keymap in X11
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e,caps:swapescape";
@@ -83,14 +86,20 @@
   /*   script = "${pkgs.pavucontrol}/bin/pavucontrol"; */
   /* }; */
 
-  #services.xrandr.xrandrHeads = [
-  #  "HDMI-0" 
-  #];
   services.xserver.displayManager.setupCommands = ''
-    LEFT='HDMI-0'
-    RIGHT='DisplayPort-0'
-    ${pkgs.xorg.xrandr}/bin/xrandr --output $LEFT --primary --output $RIGHT --right-of $LEFT --rotate left
-  '';
+    ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 \
+                                        --mode 1920x1200 \
+                                        --pos 1920x0 \
+                                        --rotate left \
+                                    --output HDMI-0 \
+                                        --primary \
+                                        --mode 1920x1080 \
+                                        --pos 0x559 \
+                                        --rotate normal \
+                                    --output DVI-0 --off \
+                                    --output DVI-1 --off \
+    '';
+
 
   # Install fonts
   fonts.fonts = with pkgs; [
@@ -149,8 +158,9 @@
     curl
     home-manager
     just
-    /* pavucontrol */
     libratbag
+    pavucontrol
+    piper
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
