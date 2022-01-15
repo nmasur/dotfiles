@@ -52,6 +52,7 @@
 
     # Disable mouse acceleration
     libinput.mouse.accelProfile = "flat";
+    libinput.mouse.accelSpeed = "3.0";
   };
 
   # Configure keymap in X11
@@ -68,11 +69,19 @@
     enable = true;
 
     # Sound card drivers
-    alsa.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
 
     # PulseAudio emulation
     pulse.enable = true;
   };
+
+  /* systemd.services.pavucontrol = { */
+  /*   wantedBy = [ "multi-user.target" ]; */
+  /*   script = "${pkgs.pavucontrol}/bin/pavucontrol"; */
+  /* }; */
 
   #services.xrandr.xrandrHeads = [
   #  "HDMI-0" 
@@ -140,6 +149,8 @@
     curl
     home-manager
     just
+    /* pavucontrol */
+    libratbag
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -167,6 +178,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 
 }
