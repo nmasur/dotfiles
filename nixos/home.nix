@@ -27,6 +27,9 @@ in
     _1password-gui
     discord
     gh
+    /* neomutt */
+    mpv  # Video viewer
+    sxiv # Image viewer
   ];
 
   programs.alacritty = {
@@ -47,14 +50,14 @@ in
         size = 13.0;
       };
       key_bindings = [
-        {
-          key = "F";
-          mods = "Super";
-          action = "ToggleFullscreen";
-        }
+        /* { */
+        /*   key = "F"; */
+        /*   mods = "Super"; */
+        /*   action = "ToggleFullscreen"; */
+        /* } */
         {
           key = "L";
-          mods = "Super";
+          mods = "Control|Shift";
           chars = "\\x1F";
         }
       ];
@@ -228,6 +231,7 @@ in
     "starship.toml".source = ../starship/starship.toml.configlink;
     "nvim/init.lua".source = ../nvim.configlink/init.lua;
     "fish/functions".source = ../fish.configlink/functions;
+    "awesome/rc.lua".source = ./rc.lua;
   };
 
   programs.git = {
@@ -249,4 +253,25 @@ in
     enableGitCredentialHelper = true;
     settings.git_protocol = "https";
   };
+
+  # Email
+  /* programs.himalaya = { */
+  /*   enable = true; */
+  /*   settings = { */
+  /*     name = "Noah Masur"; */
+  /*     downloads-dir = "~/Downloads"; */
+  /*     home = { */
+  /*       default = true; */
+  /*       email = "censored"; */
+  /*       imap-host = "censored"; */
+  /*       imap-port = 993; */
+  /*       imap-login = "censored"; */
+  /*       imap-passwd-cmd = "cat ~/.config/himalaya/passwd"; */
+  /*       smtp-host = "censored"; */
+  /*       smtp-port = 587; */
+  /*       smtp-login = "censored"; */
+  /*       smtp-passwd-cmd = "cat ~/.config/himalaya/passwd"; */
+  /*     }; */
+  /*   }; */
+  /* }; */
 }

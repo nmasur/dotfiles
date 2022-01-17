@@ -44,42 +44,51 @@
   # services.xserver.enable = true;
   services.xserver = {
     enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
+
+    /* desktopManager = { */
+    /*   xterm.enable = false; */
+    /*   xfce.enable = true; */
+    /* }; */
+    /* displayManager.defaultSession = "xfce"; */
+    windowManager = {
+      awesome = {
+        enable = true;
+      };
     };
-    displayManager.defaultSession = "xfce";
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
 
     # Disable mouse acceleration
     libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "3.0";
+    libinput.mouse.accelSpeed = "2.0";
+
+    # Configure keymap in X11
+    layout = "us";
+    xkbOptions = "eurosign:e,caps:swapescape";
   };
 
   # Mouse config
   services.ratbagd.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e,caps:swapescape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
+  hardware.pulseaudio.enable = true;
+  /* services.pipewire = { */
+  /*   enable = true; */
 
-    # Sound card drivers
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
+  /*   # Sound card drivers */
+  /*   alsa = { */
+  /*     enable = true; */
+  /*     support32Bit = true; */
+  /*   }; */
 
-    # PulseAudio emulation
-    pulse.enable = true;
-  };
+  /*   # PulseAudio emulation */
+  /*   pulse.enable = true; */
+  /* }; */
 
   /* systemd.services.pavucontrol = { */
   /*   wantedBy = [ "multi-user.target" ]; */
@@ -107,8 +116,12 @@
     fira-code-symbols
   ];
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # Gaming
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
+  hardware.steam-hardware.enable = true;
 
   # Replace sudo with doas
   security = {
@@ -158,10 +171,28 @@
     curl
     home-manager
     just
+
+    # Mouse config
     libratbag
-    pavucontrol
     piper
+
+    # Audio
+    alsa-utils
+
+    # Pulse Audio control utility
+    #pavucontrol
+
+    steam
   ];
+
+  location = {
+    latitude = 40.0;
+    longitude = 74.0;
+  };
+
+  services.redshift = {
+    enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
