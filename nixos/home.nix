@@ -28,6 +28,7 @@ in
     discord
     gh
     /* neomutt */
+    himalaya # Email
     mpv  # Video viewer
     sxiv # Image viewer
   ];
