@@ -76,24 +76,19 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  /* services.pipewire = { */
-  /*   enable = true; */
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
 
-  /*   # Sound card drivers */
-  /*   alsa = { */
-  /*     enable = true; */
-  /*     support32Bit = true; */
-  /*   }; */
+    # Sound card drivers
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
 
-  /*   # PulseAudio emulation */
-  /*   pulse.enable = true; */
-  /* }; */
-
-  /* systemd.services.pavucontrol = { */
-  /*   wantedBy = [ "multi-user.target" ]; */
-  /*   script = "${pkgs.pavucontrol}/bin/pavucontrol"; */
-  /* }; */
+    # PulseAudio emulation
+    pulse.enable = true;
+  };
 
   services.xserver.displayManager.setupCommands = ''
     ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 \
@@ -171,16 +166,12 @@
     curl
     home-manager
     just
+    xclip
+    pamixer
 
     # Mouse config
     libratbag
     piper
-
-    # Audio
-    alsa-utils
-
-    # Pulse Audio control utility
-    #pavucontrol
 
     steam
   ];
