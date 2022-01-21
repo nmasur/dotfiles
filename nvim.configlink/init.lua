@@ -83,8 +83,8 @@ require("packer").startup(function(use)
                     extensions = {
                         Brewfile = "brewfile",
                         muttrc = "muttrc",
-                        tfvars = "hcl",
-                        tf = "hcl",
+                        tfvars = "terraform",
+                        tf = "terraform",
                     },
                     literal = {
                         Caskfile = "brewfile",
@@ -175,6 +175,17 @@ require("packer").startup(function(use)
                     -- require("null-ls").builtins.diagnostics.markdownlint,
                     -- require("null-ls").builtins.diagnostics.pylint,
                 },
+                -- Format on save
+                on_attach = function(client)
+                    if client.resolved_capabilities.document_formatting then
+                        vim.cmd([[
+                        augroup LspFormatting
+                            autocmd! * <buffer>
+                            autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
+                        augroup END
+                        ]])
+                    end
+                end,
             })
         end,
     })
@@ -290,8 +301,6 @@ require("packer").startup(function(use)
                 highlight = { enable = true },
                 indent = { enable = true },
             })
-            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-            parser_config.hcl.used_by = { "tf" }
         end,
     })
 
@@ -457,14 +466,6 @@ vim.api.nvim_exec(
     if !isdirectory(&backupdir)
         call mkdir(&backupdir, "p")
     endif
-]],
-    false
-)
-
--- Formatting
-vim.api.nvim_exec(
-    [[
-    au BufWritePost * lua vim.lsp.buf.formatting()
 ]],
     false
 )
