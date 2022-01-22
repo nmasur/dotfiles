@@ -61,7 +61,7 @@
 
     # Disable mouse acceleration
     libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "2.0";
+    libinput.mouse.accelSpeed = "1.5";
 
     # Configure keymap in X11
     layout = "us";
