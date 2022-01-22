@@ -2,6 +2,14 @@
 default:
   @just --list --list-heading $'Update NixOS config:\n'
 
+# Bootstrap from nothing
+bootstrap:
+  sudo nix-channel --add https://nixos.org/channels/nixos-unstable
+  sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+  sudo nix-channel --update
+  sudo nixos-rebuild switch -I nixos-config=./configuration.nix
+
+# Use intended software channels
 channels:
   doas nix-channel --add https://nixos.org/channels/nixos-unstable
   doas nix-channel --add https://nixos.org/channels/nixpkgs-unstable

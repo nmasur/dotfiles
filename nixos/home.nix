@@ -3,6 +3,7 @@
 let
 
   name = "Noah Masur";
+  editor = "nvim";
   font = "Victor Mono";
 
 in {
@@ -54,11 +55,24 @@ in {
         size = 14.0;
         normal = { family = "${font}"; };
       };
-      key_bindings = [{
-        key = "L";
-        mods = "Control|Shift";
-        chars = "\\x1F";
-      }];
+      key_bindings = [
+        {
+          key = "L";
+          mods = "Control|Shift";
+          chars = "\\x1F";
+        }
+        {
+          key = "K";
+          mods = "Control";
+          mode = "~Vi";
+          action = "ToggleViMode";
+        }
+        {
+          key = "Return";
+          mode = "Vi";
+          action = "ToggleViMode";
+        }
+      ];
       colors = {
         primary = {
           background = "0x1d2021";
@@ -98,7 +112,10 @@ in {
     functions = { };
     interactiveShellInit = "";
     loginShellInit = "";
-    shellAliases = { vim = "nvim"; };
+    shellAliases = {
+      vim = "nvim";
+      sudo = "doas";
+    };
     shellAbbrs = {
 
       # Directory aliases
@@ -155,7 +172,7 @@ in {
       v = "vim";
       vl = "vim -c 'normal! `0'";
       vll = "vim -c 'Telescope oldfiles'";
-      vimrc = "vim ~/dev/personal/dotfiles/nvim.configlink/init.lua";
+      vimrc = "vim ${builtins.getEnv "PWD"}/../nvim.configlink/init.lua";
 
       # Notes
       qn = "quicknote";
@@ -210,7 +227,7 @@ in {
 
   home.sessionVariables = {
     fish_greeting = "";
-    EDITOR = "nvim";
+    EDITOR = "${editor}";
     NIXOS_CONFIG = builtins.getEnv "PWD";
     DOTS = "${builtins.getEnv "PWD"}/..";
   };
@@ -236,15 +253,14 @@ in {
     "nvim/init.lua".source = ../nvim.configlink/init.lua;
     "fish/functions".source = ../fish.configlink/functions;
     "awesome/rc.lua".source = ./awesomerc.lua;
+    "direnvrc".text = "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
   };
-
-  home.file.".direnvrc".text =
-    "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
 
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
     nix-direnv.enable = true;
+    config = { whitelist = { prefix = [ "${builtins.getEnv "PWD"}/" ]; }; };
   };
 
   programs.git = {
