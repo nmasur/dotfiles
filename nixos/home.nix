@@ -107,7 +107,7 @@ in {
       ll = "ls -alhF";
       lf = "ls -lh | fzf";
       c = "cd";
-      # -- - = "cd -";
+      "-" = "cd -";
       mkd = "mkdir -pv";
 
       # Tmux
