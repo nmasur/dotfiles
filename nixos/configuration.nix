@@ -159,7 +159,6 @@
     wget
     curl
     home-manager
-    just
     xclip
     pamixer
 

@@ -5,6 +5,8 @@ let
   name = "Noah Masur";
   editor = "nvim";
   font = "Victor Mono";
+  dotfiles = builtins.toString ../.;
+  nixos_config = builtins.toString ./.;
 
 in {
   nixpkgs.config.allowUnfree = true;
@@ -172,7 +174,7 @@ in {
       v = "vim";
       vl = "vim -c 'normal! `0'";
       vll = "vim -c 'Telescope oldfiles'";
-      vimrc = "vim ${builtins.getEnv "PWD"}/../nvim.configlink/init.lua";
+      vimrc = "vim ${dotfiles}/nvim.configlink/init.lua";
 
       # Notes
       qn = "quicknote";
@@ -180,10 +182,10 @@ in {
       to = "today";
       work = "vim $NOTES_PATH/work.md";
 
-      # Improved CLI Tools
+      # CLI Tools
       cat = "bat"; # Swap cat with bat
       h = "http -Fh --all"; # Curl site for headers
-      j = "just";
+      m = "make"; # For makefiles
 
       # Fun CLI Tools
       weather = "curl wttr.in/$WEATHER_CITY";
@@ -228,8 +230,8 @@ in {
   home.sessionVariables = {
     fish_greeting = "";
     EDITOR = "${editor}";
-    NIXOS_CONFIG = builtins.getEnv "PWD";
-    DOTS = "${builtins.getEnv "PWD"}/..";
+    NIXOS_CONFIG = "${nixos_config}";
+    DOTS = "${dotfiles}";
   };
 
   programs.starship = {
@@ -260,7 +262,7 @@ in {
     enable = true;
     enableFishIntegration = true;
     nix-direnv.enable = true;
-    config = { whitelist = { prefix = [ "${builtins.getEnv "PWD"}/" ]; }; };
+    config = { whitelist = { prefix = [ "${dotfiles}/" ]; }; };
   };
 
   programs.git = {
