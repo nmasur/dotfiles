@@ -98,6 +98,7 @@ in {
     functions = { };
     interactiveShellInit = "";
     loginShellInit = "";
+    shellAliases = { vim = "nvim"; };
     shellAbbrs = {
 
       # Directory aliases
@@ -124,7 +125,7 @@ in {
       gaa = "git add -A";
       gac = "git commit -am";
       gc = "git commit -m";
-      gca = "git commit --amend";
+      gca = "git commit --amend --no-edit";
       gu = "git pull";
       gp = "git push";
       gpp = "git_set_upstream";
@@ -151,10 +152,10 @@ in {
       grl = "gh run view --log";
 
       # Vim
-      v = "nvim";
-      vl = "nvim -c 'normal! `0'";
-      vll = "nvim -c 'Telescope oldfiles'";
-      vimrc = "nvim ~/dev/personal/dotfiles/nvim.configlink/init.lua";
+      v = "vim";
+      vl = "vim -c 'normal! `0'";
+      vll = "vim -c 'Telescope oldfiles'";
+      vimrc = "vim ~/dev/personal/dotfiles/nvim.configlink/init.lua";
 
       # Notes
       qn = "quicknote";
