@@ -12,3 +12,4 @@ fish_variables
 homebrew/*.lock.json
 *.bak
 *.db
+**/.direnv/**

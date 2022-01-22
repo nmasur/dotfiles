@@ -2,6 +2,7 @@
 
 let
 
+  name = "Noah Masur";
   font = "Victor Mono";
 
 in {
@@ -33,7 +34,6 @@ in {
     tealdeer
     gh
     pass
-    nixfmt
   ];
 
   programs.alacritty = {
@@ -235,12 +235,21 @@ in {
     "starship.toml".source = ../starship/starship.toml.configlink;
     "nvim/init.lua".source = ../nvim.configlink/init.lua;
     "fish/functions".source = ../fish.configlink/functions;
-    "awesome/rc.lua".source = ./rc.lua;
+    "awesome/rc.lua".source = ./awesomerc.lua;
+  };
+
+  home.file.".direnvrc".text =
+    "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
+
+  programs.direnv = {
+    enable = true;
+    enableFishIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.git = {
     enable = true;
-    userName = "Noah Masur";
+    userName = "${name}";
     userEmail = "7386960+nmasur@users.noreply.github.com";
     extraConfig = {
       core = { editor = "nvim"; };
@@ -258,7 +267,7 @@ in {
   # programs.himalaya = {
   # enable = true;
   # settings = {
-  # name = "Noah Masur";
+  # name = "${name}";
   # downloads-dir = "~/Downloads";
   # home = {
   # default = true;
