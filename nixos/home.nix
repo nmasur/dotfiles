@@ -48,7 +48,10 @@ in
       };
       scrolling.history = 10000;
       font = {
-        size = 13.0;
+        size = 14.0;
+        normal = {
+          family = "Victor Mono";
+        };
       };
       key_bindings = [
         /* { */
@@ -155,7 +158,8 @@ in
       # Vim
       v = "nvim";
       vl = "nvim -c 'normal! `0'";
-      vll = "nvim -c 'Hist'";
+      vll = "nvim -c 'Telescope oldfiles'";
+      vimrc = "nvim ~/dev/personal/dotfiles/nvim.configlink/init.lua";
 
       # Notes
       qn = "quicknote";

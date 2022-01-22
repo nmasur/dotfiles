@@ -44,6 +44,8 @@
   # services.xserver.enable = true;
   services.xserver = {
     enable = true;
+    autoRepeatDelay = 250;
+    autoRepeatInterval = 40;
 
     /* desktopManager = { */
     /*   xterm.enable = false; */
@@ -107,9 +109,10 @@
 
   # Install fonts
   fonts.fonts = with pkgs; [
-    fira-code
-    fira-code-symbols
+    victor-mono
+    nerdfonts
   ];
+  fonts.fontconfig.defaultFonts.monospace = ["Victor Mono"];
 
   # Gaming
   hardware.opengl = {
