@@ -165,7 +165,7 @@ require("packer").startup(function(use)
                         args = { "run", "black", "--quiet", "--fast", "-" },
                     }),
                     require("null-ls").builtins.formatting.fish_indent,
-                    -- require("null-ls").builtins.formatting.nixfmt,
+                    require("null-ls").builtins.formatting.nixfmt,
                     require("null-ls").builtins.formatting.rustfmt,
                     require("null-ls").builtins.diagnostics.shellcheck,
                     require("null-ls").builtins.formatting.shfmt.with({
@@ -683,7 +683,7 @@ key("", "<Leader>t#", ":Tabularize /#<CR>")
 key("", "<Leader>tl", ":Tabularize /---<CR>")
 
 -- Vimrc editing
-key("n", "<Leader>fv", ":edit $MYVIMRC<CR>")
+key("n", "<Leader>fv", ":edit $DOTS/nvim.configlink/init.lua<CR>")
 key("n", "<Leader>rr", ":luafile $MYVIMRC<CR>")
 key("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:")
 key("n", "<Leader>rc", ":luafile $MYVIMRC<CR>:PackerCompile<CR>")

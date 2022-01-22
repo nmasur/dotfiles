@@ -2,19 +2,26 @@
 
 let
 
-    # Nothing
+  font = "Victor Mono";
 
-in
-
-{
+in {
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    # Applications
     firefox
-    unzip
     neovim
-    gcc # for tree-sitter
     alacritty
+    _1password-gui
+    discord
+    # neomutt
+    himalaya # Email
+    mpv # Video viewer
+    sxiv # Image viewer
+
+    # Utilities
+    unzip
+    gcc # for tree-sitter
     tmux
     rsync
     ripgrep
@@ -24,13 +31,9 @@ in
     sd
     jq
     tealdeer
-    _1password-gui
-    discord
     gh
-    /* neomutt */
-    himalaya # Email
-    mpv  # Video viewer
-    sxiv # Image viewer
+    pass
+    nixfmt
   ];
 
   programs.alacritty = {
@@ -49,22 +52,13 @@ in
       scrolling.history = 10000;
       font = {
         size = 14.0;
-        normal = {
-          family = "Victor Mono";
-        };
+        normal = { family = "${font}"; };
       };
-      key_bindings = [
-        /* { */
-        /*   key = "F"; */
-        /*   mods = "Super"; */
-        /*   action = "ToggleFullscreen"; */
-        /* } */
-        {
-          key = "L";
-          mods = "Control|Shift";
-          chars = "\\x1F";
-        }
-      ];
+      key_bindings = [{
+        key = "L";
+        mods = "Control|Shift";
+        chars = "\\x1F";
+      }];
       colors = {
         primary = {
           background = "0x1d2021";
@@ -75,24 +69,24 @@ in
           cursor = "0xd5c4a1";
         };
         normal = {
-          black =   "0x1d2021";
-          red =     "0xfb4934";
-          green =   "0xb8bb26";
-          yellow =  "0xfabd2f";
-          blue =    "0x83a598";
+          black = "0x1d2021";
+          red = "0xfb4934";
+          green = "0xb8bb26";
+          yellow = "0xfabd2f";
+          blue = "0x83a598";
           magenta = "0xd3869b";
-          cyan =    "0x8ec07c";
-          white =   "0xd5c4a1";
+          cyan = "0x8ec07c";
+          white = "0xd5c4a1";
         };
         bright = {
-          black =   "0x665c54";
-          red =     "0xfe8019";
-          green =   "0x3c3836";
-          yellow =  "0x504945";
-          blue =    "0xbdae93";
+          black = "0x665c54";
+          red = "0xfe8019";
+          green = "0x3c3836";
+          yellow = "0x504945";
+          blue = "0xbdae93";
           magenta = "0xebdbb2";
-          cyan =    "0xd65d0e";
-          white =   "0xfbf1c7";
+          cyan = "0xd65d0e";
+          white = "0xfbf1c7";
         };
       };
       draw_bold_text_with_bright_colors = false;
@@ -101,7 +95,7 @@ in
 
   programs.fish = {
     enable = true;
-    functions = {};
+    functions = { };
     interactiveShellInit = "";
     loginShellInit = "";
     shellAbbrs = {
@@ -150,7 +144,8 @@ in
 
       # GitHub
       ghr = "gh repo view -w";
-      gha = "gh run list | head -1 | awk \'{ print $(NF-2) }\' | xargs gh run view";
+      gha =
+        "gh run list | head -1 | awk '{ print $(NF-2) }' | xargs gh run view";
       grw = "gh run watch";
       grf = "gh run view --log-failed";
       grl = "gh run view --log";
@@ -168,7 +163,7 @@ in
       work = "vim $NOTES_PATH/work.md";
 
       # Improved CLI Tools
-      cat = "bat";          # Swap cat with bat
+      cat = "bat"; # Swap cat with bat
       h = "http -Fh --all"; # Curl site for headers
       j = "just";
 
@@ -177,7 +172,8 @@ in
       moon = "curl wttr.in/Moon";
 
       # Cheat Sheets
-      ssl = "openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr";
+      ssl =
+        "openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr";
       fingerprint = "ssh-keyscan myhost.com | ssh-keygen -lf -";
       publickey = "ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub";
       forloop = "for i in (seq 1 100)";
@@ -207,13 +203,15 @@ in
       ca = "cargo";
 
     };
-    shellAliases = {};
+    shellAliases = { };
     shellInit = "";
   };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
     fish_greeting = "";
+    EDITOR = "nvim";
+    NIXOS_CONFIG = builtins.getEnv "PWD";
+    DOTS = "${builtins.getEnv "PWD"}/..";
   };
 
   programs.starship = {
@@ -244,12 +242,8 @@ in
     userName = "Noah Masur";
     userEmail = "7386960+nmasur@users.noreply.github.com";
     extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-      pager = {
-        branch = "false";
-      };
+      core = { editor = "nvim"; };
+      pager = { branch = "false"; };
     };
   };
 
@@ -260,23 +254,23 @@ in
   };
 
   # Email
-  /* programs.himalaya = { */
-  /*   enable = true; */
-  /*   settings = { */
-  /*     name = "Noah Masur"; */
-  /*     downloads-dir = "~/Downloads"; */
-  /*     home = { */
-  /*       default = true; */
-  /*       email = "censored"; */
-  /*       imap-host = "censored"; */
-  /*       imap-port = 993; */
-  /*       imap-login = "censored"; */
-  /*       imap-passwd-cmd = "cat ~/.config/himalaya/passwd"; */
-  /*       smtp-host = "censored"; */
-  /*       smtp-port = 587; */
-  /*       smtp-login = "censored"; */
-  /*       smtp-passwd-cmd = "cat ~/.config/himalaya/passwd"; */
-  /*     }; */
-  /*   }; */
-  /* }; */
+  # programs.himalaya = {
+  # enable = true;
+  # settings = {
+  # name = "Noah Masur";
+  # downloads-dir = "~/Downloads";
+  # home = {
+  # default = true;
+  # email = "censored";
+  # imap-host = "censored";
+  # imap-port = 993;
+  # imap-login = "censored";
+  # imap-passwd-cmd = "cat ~/.config/himalaya/passwd";
+  # smtp-host = "censored";
+  # smtp-port = 587;
+  # smtp-login = "censored";
+  # smtp-passwd-cmd = "cat ~/.config/himalaya/passwd";
+  # };
+  # };
+  # };
 }

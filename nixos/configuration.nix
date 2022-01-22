@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -47,16 +46,12 @@
     autoRepeatDelay = 250;
     autoRepeatInterval = 40;
 
-    /* desktopManager = { */
-    /*   xterm.enable = false; */
-    /*   xfce.enable = true; */
-    /* }; */
-    /* displayManager.defaultSession = "xfce"; */
-    windowManager = {
-      awesome = {
-        enable = true;
-      };
-    };
+    # desktopManager = {
+    # xterm.enable = false;
+    # xfce.enable = true;
+    # };
+    # displayManager.defaultSession = "xfce";
+    windowManager = { awesome = { enable = true; }; };
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -104,15 +99,11 @@
                                         --rotate normal \
                                     --output DVI-0 --off \
                                     --output DVI-1 --off \
-    '';
-
+  '';
 
   # Install fonts
-  fonts.fonts = with pkgs; [
-    victor-mono
-    nerdfonts
-  ];
-  fonts.fontconfig.defaultFonts.monospace = ["Victor Mono"];
+  fonts.fonts = with pkgs; [ victor-mono nerdfonts ];
+  fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
 
   # Gaming
   hardware.opengl = {
@@ -184,9 +175,7 @@
     longitude = 74.0;
   };
 
-  services.redshift = {
-    enable = true;
-  };
+  services.redshift = { enable = true; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
