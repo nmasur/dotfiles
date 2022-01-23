@@ -269,6 +269,7 @@ in {
     "nvim/init.lua".source = ../nvim.configlink/init.lua;
     "fish/functions".source = ../fish.configlink/functions;
     "awesome/rc.lua".source = ./awesomerc.lua;
+    "qtile/config.py".source = ./qtile.py;
     "direnvrc".text = "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
   };
 

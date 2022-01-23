@@ -19,8 +19,10 @@
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Set your time zone.
-  time.timeZone = "America/New_York";
+  # Set your time zone, also used by redshift
+  services.localtime.enable = true;
+  services.geoclue2.enable = true;
+  location = { provider = "geoclue2"; };
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -30,12 +32,10 @@
   networking.interfaces.wlp3s0.useDHCP = true;
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
   services.xserver = {
     enable = true;
 
-    # Use the Awesome WM
-    windowManager = { awesome = { enable = true; }; };
+    windowManager = { qtile = { enable = true; }; };
 
     # Enable touchpad support
     libinput.enable = true;
@@ -83,7 +83,7 @@
   };
 
   # Required for setting GTK theme (for preferred-color-scheme in browser)
-  services.dbus.packages = with pkgs; [ dconf gnome3.dconf ];
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
   # Mouse config
   services.ratbagd.enable = true;
@@ -176,17 +176,19 @@
     amdvlk
     wine
     openssl # Required for League of Legends
+    dconf
   ];
 
   environment.variables = { NIX_SKIP_KEYBASE_CHECKS = "1"; };
 
-  location = {
-    latitude = 40.0;
-    longitude = 74.0;
-  };
-
   # Reduce blue light at night
-  services.redshift.enable = true;
+  services.redshift = {
+    enable = true;
+    brightness = {
+      day = "1.0";
+      night = "0.5";
+    };
+  };
 
   # Login to Keybase in the background
   services.keybase.enable = true;

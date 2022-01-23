@@ -138,10 +138,10 @@ require("packer").startup(function(use)
             require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
             require("lspconfig").tflint.setup({ capabilities = capabilities })
             require("lspconfig").terraformls.setup({ capabilities = capabilities })
-            require("lspconfig").pyright.setup({
-                cmd = { "poetry", "run", "pyright-langserver", "--stdio" },
-                capabilities = capabilities,
-            })
+            -- require("lspconfig").pyright.setup({
+            --     cmd = { "poetry", "run", "pyright-langserver", "--stdio" },
+            --     capabilities = capabilities,
+            -- })
         end,
     })
 
@@ -160,10 +160,10 @@ require("packer").startup(function(use)
             require("null-ls").setup({
                 sources = {
                     require("null-ls").builtins.formatting.stylua,
-                    require("null-ls").builtins.formatting.black.with({
-                        command = "poetry",
-                        args = { "run", "black", "--quiet", "--fast", "-" },
-                    }),
+                    -- require("null-ls").builtins.formatting.black.with({
+                    --     command = "poetry",
+                    --     args = { "run", "black", "--quiet", "--fast", "-" },
+                    -- }),
                     require("null-ls").builtins.formatting.fish_indent,
                     require("null-ls").builtins.formatting.nixfmt,
                     require("null-ls").builtins.formatting.rustfmt,
