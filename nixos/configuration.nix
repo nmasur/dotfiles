@@ -29,48 +29,64 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
   services.xserver = {
     enable = true;
-    autoRepeatDelay = 250;
-    autoRepeatInterval = 40;
 
-    # desktopManager = {
-    # xterm.enable = false;
-    # xfce.enable = true;
-    # };
-    # displayManager.defaultSession = "xfce";
+    # Use the Awesome WM
     windowManager = { awesome = { enable = true; }; };
 
-    # Enable touchpad support (enabled default in most desktopManager).
+    # Enable touchpad support
     libinput.enable = true;
 
     # Disable mouse acceleration
     libinput.mouse.accelProfile = "flat";
     libinput.mouse.accelSpeed = "1.5";
 
+    # Keyboard responsiveness
+    autoRepeatDelay = 250;
+    autoRepeatInterval = 40;
+
     # Configure keymap in X11
     layout = "us";
     xkbOptions = "eurosign:e,caps:swapescape";
+
+    # Login screen
+    displayManager = {
+      lightdm = {
+        enable = true;
+
+        # Make the login screen dark
+        greeters.gtk.theme.name = "Adwaita-dark";
+
+        # Put the login screen on the left monitor
+        greeters.gtk.extraConfig = ''
+          active-monitor=0
+        '';
+      };
+      setupCommands = ''
+        ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 \
+                                            --mode 1920x1200 \
+                                            --pos 1920x0 \
+                                            --rotate left \
+                                        --output HDMI-0 \
+                                            --primary \
+                                            --mode 1920x1080 \
+                                            --pos 0x559 \
+                                            --rotate normal \
+                                        --output DVI-0 --off \
+                                        --output DVI-1 --off \
+      '';
+    };
+
   };
+
+  # Required for setting GTK theme (for preferred-color-scheme in browser)
+  services.dbus.packages = with pkgs; [ dconf gnome3.dconf ];
 
   # Mouse config
   services.ratbagd.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -88,20 +104,6 @@
     pulse.enable = true;
   };
 
-  services.xserver.displayManager.setupCommands = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 \
-                                        --mode 1920x1200 \
-                                        --pos 1920x0 \
-                                        --rotate left \
-                                    --output HDMI-0 \
-                                        --primary \
-                                        --mode 1920x1080 \
-                                        --pos 0x559 \
-                                        --rotate normal \
-                                    --output DVI-0 --off \
-                                    --output DVI-1 --off \
-  '';
-
   # Install fonts
   fonts.fonts = with pkgs; [ victor-mono nerdfonts ];
   fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
@@ -112,6 +114,7 @@
     driSupport32Bit = true;
   };
   hardware.steam-hardware.enable = true;
+  boot.kernel.sysctl = { "abi.vsyscall32" = 0; }; # League of Legends anti-cheat
 
   # Replace sudo with doas
   security = {
@@ -139,7 +142,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noah = {
 
-    # Not sure what this means tbh
+    # Create a home directory for human user
     isNormalUser = true;
 
     # Automatically create a password to start
@@ -160,14 +163,19 @@
     wget
     curl
     home-manager
-    xclip
-    pamixer
+    xclip # Clipboard
+    pamixer # Audio control
 
     # Mouse config
     libratbag
     piper
 
+    # Gaming
     steam
+    lutris
+    amdvlk
+    wine
+    openssl # Required for League of Legends
   ];
 
   environment.variables = { NIX_SKIP_KEYBASE_CHECKS = "1"; };
@@ -180,6 +188,7 @@
   # Reduce blue light at night
   services.redshift.enable = true;
 
+  # Login to Keybase in the background
   services.keybase.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -189,17 +198,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

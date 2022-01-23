@@ -22,6 +22,7 @@ in {
     himalaya # Email
     mpv # Video viewer
     sxiv # Image viewer
+    zathura # PDF viewer
 
     # Utilities
     unzip
@@ -39,6 +40,8 @@ in {
     tealdeer
     gh
     direnv
+    tree
+    htop
 
     # Encryption
     keybase
@@ -46,6 +49,9 @@ in {
     gnupg
     pass
   ];
+
+  gtk.enable = true;
+  gtk.theme = { name = "Adwaita-dark"; };
 
   programs.alacritty = {
     enable = true;

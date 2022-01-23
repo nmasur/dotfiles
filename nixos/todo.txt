@@ -1,3 +1,5 @@
 libratbag (ratbagd) for input devices
 
 inspiration: https://github.com/JonathanReeve/dotfiles/blob/minimal/dotfiles/home.nix
+
+more: https://github.com/mitchellh/nixos-config/blob/main/users/mitchellh/home-manager.nix
