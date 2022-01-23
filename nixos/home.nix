@@ -26,16 +26,24 @@ in {
     # Utilities
     unzip
     gcc # for tree-sitter
-    tmux
+    starship
     rsync
+    fzf
     ripgrep
     bat
     fd
     exa
     sd
+    zoxide
     jq
     tealdeer
     gh
+    direnv
+
+    # Encryption
+    keybase
+    keybase-gui
+    gnupg
     pass
   ];
 

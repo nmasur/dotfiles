@@ -10,6 +10,7 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nix.extraOptions = "experimental-features = nix-command flakes";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -169,12 +170,17 @@
     steam
   ];
 
+  environment.variables = { NIX_SKIP_KEYBASE_CHECKS = "1"; };
+
   location = {
     latitude = 40.0;
     longitude = 74.0;
   };
 
-  services.redshift = { enable = true; };
+  # Reduce blue light at night
+  services.redshift.enable = true;
+
+  services.keybase.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
