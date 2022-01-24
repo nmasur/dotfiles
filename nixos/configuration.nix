@@ -35,7 +35,7 @@
   services.xserver = {
     enable = true;
 
-    windowManager = { qtile = { enable = true; }; };
+    windowManager = { spectrwm = { enable = true; }; };
 
     # Enable touchpad support
     libinput.enable = true;
@@ -165,6 +165,9 @@
     home-manager
     xclip # Clipboard
     pamixer # Audio control
+    dmenu
+    xlockmore
+    feh
 
     # Mouse config
     libratbag
@@ -186,7 +189,7 @@
     enable = true;
     brightness = {
       day = "1.0";
-      night = "0.5";
+      night = "0.75";
     };
   };
 

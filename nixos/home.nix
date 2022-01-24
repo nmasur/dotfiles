@@ -42,6 +42,7 @@ in {
     direnv
     tree
     htop
+    glow
 
     # Encryption
     keybase
@@ -271,6 +272,7 @@ in {
     "awesome/rc.lua".source = ./awesomerc.lua;
     "qtile/config.py".source = ./qtile.py;
     "direnvrc".text = "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
+    "spectrwm/spectrwm.conf".source = ./spectrwm.conf;
   };
 
   programs.direnv = {
