@@ -368,6 +368,15 @@ require("packer").startup(function(use)
         end,
     })
 
+    -- File browser
+    use({
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim" },
+        config = function()
+            require("telescope").load_extension("file_browser")
+        end,
+    })
+
     -- Clipboard history
     use({
         "AckslD/nvim-neoclip.lua",
@@ -550,7 +559,7 @@ find_downloads = function()
         prompt_title = "Find Downloads",
         cwd = "~/Downloads",
     }
-    require("telescope.builtin").file_browser(opts)
+    require("telescope").extensions.file_browser.file_browser(opts)
 end
 
 choose_project = function()
