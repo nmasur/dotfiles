@@ -5,6 +5,7 @@ format = """\
   $git_branch\
   $git_commit\
   $git_status\
+  $python\
   $character\
   """
 
