@@ -1,0 +1,14 @@
+libratbag (ratbagd) for input devices
+
+inspiration: https://github.com/JonathanReeve/dotfiles/blob/minimal/dotfiles/home.nix
+
+more: https://github.com/mitchellh/nixos-config/blob/main/users/mitchellh/home-manager.nix
+
+https://github.com/kyechou/leagueoflegends
+
+Encryption:
+https://www.passwordstore.org/
+https://github.com/roddhjav/pass-tomb#readme
+https://github.com/AGWA/git-crypt
+https://github.com/FiloSottile/age
+https://sr.ht/~gpanders/passage/
