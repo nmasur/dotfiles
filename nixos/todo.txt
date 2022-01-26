@@ -2,6 +2,8 @@ libratbag (ratbagd) for input devices
 
 inspiration: https://github.com/JonathanReeve/dotfiles/blob/minimal/dotfiles/home.nix
 
+https://github.com/nuxshed/dotfiles
+
 more: https://github.com/mitchellh/nixos-config/blob/main/users/mitchellh/home-manager.nix
 
 https://github.com/kyechou/leagueoflegends
