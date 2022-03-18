@@ -138,7 +138,13 @@ require("packer").startup(function(use)
             require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
             require("lspconfig").tflint.setup({ capabilities = capabilities })
             require("lspconfig").terraformls.setup({ capabilities = capabilities })
-            require("lspconfig").pyright.setup({ capabilities = capabilities })
+            require("lspconfig").pyright.setup({
+                on_attach = function()
+                    -- set keymaps (requires 0.7.0)
+                    -- vim.keymap.set("n", "", "", {buffer=0})
+                end,
+                capabilities = capabilities,
+            })
         end,
     })
 
@@ -445,7 +451,12 @@ vim.o.mouse = "nv" --- Mouse interaction / scrolling
 
 -- Neovim features
 vim.o.inccommand = "split" --- Live preview search and replace
-vim.o.completeopt = "menu,menuone,noselect" --- Required for nvim-cmp completion
+--- Required for nvim-cmp completion
+vim.opt.completeopt = {
+    "menu",
+    "menuone",
+    "noselect",
+}
 -- Required until 0.6.0: do not source the default filetype.vim
 vim.g.did_load_filetypes = 1
 
@@ -658,11 +669,15 @@ key("n", "<Leader>3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR><Esc>")
 
 -- LSP
 key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { silent = true })
+key("n", "gT", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { silent = true })
 key("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { silent = true })
 key("n", "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>", { silent = true })
-key("n", "]e", "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { silent = true })
-key("n", "[e", "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", { silent = true })
+key("n", "gr", "<Cmd>Telescope lsp_references<CR>", { silent = true })
+key("n", "<Leader>R", "<Cmd>lua vim.lsp.buf.rename()<CR>", { silent = true })
+key("n", "]e", "<Cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true })
+key("n", "[e", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", { silent = true })
 key("n", "<Leader>e", "<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", { silent = true })
+key("n", "<Leader>E", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { silent = true })
 
 -- File commands
 key("n", "<Leader>q", ":quit<CR>")
