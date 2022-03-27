@@ -5,7 +5,7 @@ set -Ux DOTS (dirname $FISH_DIR) # Directory of this config repo
 set -U CDPATH . $HOME # Directories available for immediate cd
 set -Ux EDITOR nvim # Preferred text editor
 set -U PROJ $HOME/dev/work # Projects directory
-set -Ux NOTES_PATH "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes" # Notes directory
+set -Ux NOTES_PATH "$HOME/dev/personal/notes" # Notes directory
 set -Ux MANPAGER "nvim +Man!" # Used for reading man pages
 set -Ux DIRENV_LOG_FORMAT "" # Disable direnv output
 set -Ux BROWSER "/Applications/Firefox.app/Contents/MacOS/firefox"
