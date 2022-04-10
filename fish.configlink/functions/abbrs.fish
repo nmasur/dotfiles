@@ -80,6 +80,7 @@ function abbrs --description 'All abbreviations'
     abbr -a cat bat # Swap cat with bat
     abbr -a h 'http -Fh --all' # Curl site for headers
     abbr -a j just
+    abbr -a scim sc-im
 
     # Fun CLI Tools
     abbr weather 'curl wttr.in/$WEATHER_CITY'
