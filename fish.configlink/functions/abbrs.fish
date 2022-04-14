@@ -28,6 +28,7 @@ function abbrs --description 'All abbreviations'
     abbr -a gac 'git commit -am'
     abbr -a gc 'git commit -m'
     abbr -a gca 'git commit --amend --no-edit'
+    abbr -a gcae 'git commit --amend'
     abbr -a gu 'git pull'
     abbr -a gp 'git push'
     abbr -a gpp git-push-upstream
