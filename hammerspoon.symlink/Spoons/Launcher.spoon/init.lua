@@ -25,7 +25,9 @@ end
 
 function obj:init()
     -- Begin launcher mode
-    self.launcher = hs.hotkey.modal.new("ctrl", "space")
+    if self.launcher == nil then
+        self.launcher = hs.hotkey.modal.new("ctrl", "space")
+    end
 
     -- Behaviors on enter
     function self.launcher:entered()
@@ -44,6 +46,7 @@ function obj:init()
     end)
 
     -- Launcher shortcuts
+    self.launcher:bind("ctrl", "space", function() end)
     self.launcher:bind("", "space", function()
         hs.hints.windowHints()
         self.launcher:exit()
