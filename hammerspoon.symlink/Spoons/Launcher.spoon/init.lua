@@ -10,7 +10,14 @@ obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 function drawSwitcher()
     -- Drawing
-    canv = hs.canvas.new({ x = 850, y = 1, h = 3, w = 120 })
+    width = hs.screen.mainScreen():fullFrame().w
+    switcherWidth = 500
+    canv = hs.canvas.new({
+        x = width / 2 - switcherWidth / 2,
+        y = 1,
+        h = 3,
+        w = switcherWidth,
+    })
     canv[#canv + 1] = {
         action = "build",
         type = "rectangle",
@@ -65,6 +72,9 @@ function obj:init()
     end)
     self.launcher:bind("", "F", function()
         self:switch("Firefox.app")
+    end)
+    self.launcher:bind("", "H", function()
+        self:switch("Hammerspoon.app")
     end)
     self.launcher:bind("", "G", function()
         self:switch("Mimestream.app")
