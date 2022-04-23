@@ -93,19 +93,7 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-
-    # Sound card drivers
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-
-    # PulseAudio emulation
-    pulse.enable = true;
-  };
+  hardware.pulseaudio.enable = true;
 
   # Install fonts
   fonts.fonts = with pkgs; [
