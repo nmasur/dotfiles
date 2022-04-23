@@ -146,6 +146,10 @@ in {
       "-" = "cd -";
       mkd = "mkdir -pv";
 
+      # System
+      s = "sudo";
+      sc = "systemctl";
+
       # Tmux
       ta = "tmux attach-session";
       tan = "tmux attach-session -t noah";
@@ -162,6 +166,7 @@ in {
       gac = "git commit -am";
       gc = "git commit -m";
       gca = "git commit --amend --no-edit";
+      gcae = "git commit --amend";
       gu = "git pull";
       gp = "git push";
       gpp = "git_set_upstream";
