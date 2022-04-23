@@ -90,6 +90,7 @@ require("packer").startup(function(use)
                     literal = {
                         Caskfile = "brewfile",
                         [".gitignore"] = "gitignore",
+                        config = "config",
                     },
                     complex = {
                         [".*git/config"] = "gitconfig",
@@ -119,6 +120,14 @@ require("packer").startup(function(use)
 
     -- Markdown pretty view
     use("ellisonleao/glow.nvim")
+
+    -- Hex color previews
+    use({
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end,
+    })
 
     -- Snippet engine
     use("L3MON4D3/LuaSnip")

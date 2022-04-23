@@ -23,6 +23,7 @@ in {
     mpv # Video viewer
     sxiv # Image viewer
     zathura # PDF viewer
+    qbittorrent
 
     # Utilities
     unzip

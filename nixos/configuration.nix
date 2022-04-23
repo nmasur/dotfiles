@@ -21,6 +21,7 @@
 
   # Set your time zone, also used by redshift
   services.localtime.enable = true;
+  services.avahi.enable = true;
   services.geoclue2.enable = true;
   location = { provider = "geoclue2"; };
 
@@ -35,14 +36,14 @@
   services.xserver = {
     enable = true;
 
-    windowManager = { spectrwm = { enable = true; }; };
+    windowManager = { i3 = { enable = true; }; };
 
     # Enable touchpad support
     libinput.enable = true;
 
     # Disable mouse acceleration
     libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "1.5";
+    libinput.mouse.accelSpeed = "1.25";
 
     # Keyboard responsiveness
     autoRepeatDelay = 250;
@@ -82,8 +83,10 @@
 
   };
 
+  hardware.acpilight.enable = true;
+
   # Required for setting GTK theme (for preferred-color-scheme in browser)
-  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  services.dbus.packages = with pkgs; [ pkgs.dconf ];
 
   # Mouse config
   services.ratbagd.enable = true;
@@ -105,7 +108,12 @@
   };
 
   # Install fonts
-  fonts.fonts = with pkgs; [ victor-mono nerdfonts ];
+  fonts.fonts = with pkgs; [
+    victor-mono # Used for Vim and Terminal
+    nerdfonts
+    font-awesome # Icons (for i3)
+    siji # More icons for Polybar
+  ];
   fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
 
   # Gaming
@@ -168,6 +176,12 @@
     dmenu
     xlockmore
     feh
+    xorg.xbacklight
+    playerctl
+    # i3blocks
+    polybar
+    st # alt terminal
+    kitty # alt terminal
 
     # Mouse config
     libratbag
@@ -189,12 +203,16 @@
     enable = true;
     brightness = {
       day = "1.0";
-      night = "0.75";
+      night = "0.5";
     };
   };
 
   # Login to Keybase in the background
   services.keybase.enable = true;
+  services.kbfs = {
+    enable = true;
+    mountPoint = "/keybase";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
