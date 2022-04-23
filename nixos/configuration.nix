@@ -157,7 +157,10 @@
     initialPassword = "changeme";
 
     # Enable sudo privileges
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel" # Sudo privileges
+      "i2c" # Access to external monitors
+    ];
 
     # Use the fish shell
     shell = pkgs.fish;
@@ -176,10 +179,9 @@
     dmenu
     xlockmore
     feh
-    xorg.xbacklight
     playerctl
-    # i3blocks
     polybar
+    ddcutil # Monitor brightness control
 
     # Mouse config
     libratbag
@@ -204,6 +206,9 @@
       night = "0.5";
     };
   };
+
+  # Detect monitors (brightness)
+  hardware.i2c.enable = true;
 
   # Login to Keybase in the background
   services.keybase.enable = true;
