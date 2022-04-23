@@ -7,6 +7,7 @@ let
   font = "Victor Mono";
   dotfiles = builtins.toString ../.;
   nixos_config = builtins.toString ./.;
+  notes_path = "$HOME/dev/personal/notes";
 
 in {
   nixpkgs.config.allowUnfree = true;
@@ -248,6 +249,7 @@ in {
     EDITOR = "${editor}";
     NIXOS_CONFIG = "${nixos_config}";
     DOTS = "${dotfiles}";
+    NOTES_PATH = "${notes_path}";
   };
 
   programs.starship = {

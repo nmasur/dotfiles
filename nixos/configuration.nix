@@ -180,8 +180,6 @@
     playerctl
     # i3blocks
     polybar
-    st # alt terminal
-    kitty # alt terminal
 
     # Mouse config
     libratbag
