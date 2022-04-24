@@ -47,7 +47,6 @@ in {
     glow
 
     # Encryption
-    keybase
     keybase-gui
     gnupg
     pass
@@ -141,6 +140,7 @@ in {
       l = "ls";
       lh = "ls -lh";
       ll = "ls -alhF";
+      la = "ls -a";
       lf = "ls -lh | fzf";
       c = "cd";
       "-" = "cd -";
@@ -149,6 +149,7 @@ in {
       # System
       s = "sudo";
       sc = "systemctl";
+      scs = "systemctl status";
 
       # Tmux
       ta = "tmux attach-session";

@@ -98,9 +98,9 @@
   # Install fonts
   fonts.fonts = with pkgs; [
     victor-mono # Used for Vim and Terminal
-    nerdfonts
-    font-awesome # Icons (for i3)
-    siji # More icons for Polybar
+    nerdfonts # Used for icons in Vim
+    font-awesome # Icons for i3
+    # siji # More icons for Polybar
   ];
   fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
 
@@ -164,16 +164,15 @@
     home-manager
     xclip # Clipboard
     pamixer # Audio control
-    dmenu
-    xlockmore
-    feh
-    playerctl
-    polybar
+    dmenu # Launcher
+    feh # Wallpaper
+    playerctl # Media control
+    polybarFull # Polybar + PulseAudio
     ddcutil # Monitor brightness control
 
     # Mouse config
-    libratbag
-    piper
+    libratbag # Mouse adjustments
+    piper # Mouse adjustments GUI
 
     # Gaming
     steam
@@ -184,7 +183,7 @@
     dconf
   ];
 
-  environment.variables = { NIX_SKIP_KEYBASE_CHECKS = "1"; };
+  # environment.variables = { NIX_SKIP_KEYBASE_CHECKS = "1"; };
 
   # Reduce blue light at night
   services.redshift = {
@@ -202,7 +201,11 @@
   services.keybase.enable = true;
   services.kbfs = {
     enable = true;
-    mountPoint = "/keybase";
+    enableRedirector = true;
+  };
+  security.wrappers.keybase-redirector = {
+    owner = "root";
+    group = "wheel";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
