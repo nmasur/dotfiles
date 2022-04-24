@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+nixos-rebuild switch -I nixos-config="/home/noah/dev/personal/dotfiles/nixos/configuration.nix"
