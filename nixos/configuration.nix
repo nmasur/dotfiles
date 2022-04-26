@@ -190,7 +190,7 @@
     enable = true;
     brightness = {
       day = "1.0";
-      night = "0.5";
+      night = "1.0";
     };
   };
 
@@ -199,25 +199,7 @@
 
   # Login to Keybase in the background
   services.keybase.enable = true;
-  services.kbfs = {
-    enable = true;
-    enableRedirector = true;
-  };
-  security.wrappers.keybase-redirector = {
-    owner = "root";
-    group = "wheel";
-  };
-  # Required while kbfs service doesn't work automatically
-  systemd.user.services.kbfsfuse = {
-    description = "Keybase File System - KBFS";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.kbfs}/bin/kbfsfuse";
-      Restart = "on-abnormal";
-      Environment = [ "PATH=/run/wrappers/bin/:$PATH" ];
-    };
-  };
+  services.kbfs.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
