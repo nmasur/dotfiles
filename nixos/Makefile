@@ -25,3 +25,11 @@ system:
 # Update the user environment
 home:
 	home-manager switch -f ./home.nix
+
+upgrade:
+	nix-channel --update
+	nixos-rebuild switch -I nixos-config=./configuration.nix --upgrade
+
+prune:
+	nix-env --delete-generations 14d
+	nix-collect-garbage --delete-old
