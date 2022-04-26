@@ -7,6 +7,9 @@
 {
   imports = [ # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
+    ../modules/system/timezone.nix
+    ../modules/system/doas.nix
+    ../modules/gaming/steam.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -18,12 +21,6 @@
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone, also used by redshift
-  services.localtime.enable = true;
-  services.avahi.enable = true;
-  services.geoclue2.enable = true;
-  location = { provider = "geoclue2"; };
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -83,8 +80,6 @@
 
   };
 
-  hardware.acpilight.enable = true;
-
   # Required for setting GTK theme (for preferred-color-scheme in browser)
   services.dbus.packages = with pkgs; [ pkgs.dconf ];
 
@@ -103,37 +98,6 @@
     # siji # More icons for Polybar
   ];
   fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
-
-  # Gaming
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-  };
-  hardware.steam-hardware.enable = true;
-  boot.kernel.sysctl = { "abi.vsyscall32" = 0; }; # League of Legends anti-cheat
-
-  # Replace sudo with doas
-  security = {
-
-    # Remove sudo
-    sudo.enable = false;
-
-    # Add doas
-    doas = {
-      enable = true;
-
-      # No password required
-      wheelNeedsPassword = false;
-
-      # Pass environment variables from user to root
-      # Also requires removing password here
-      extraRules = [{
-        groups = [ "wheel" ];
-        noPass = true;
-        keepEnv = true;
-      }];
-    };
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noah = {
@@ -173,17 +137,7 @@
     # Mouse config
     libratbag # Mouse adjustments
     piper # Mouse adjustments GUI
-
-    # Gaming
-    steam
-    lutris
-    amdvlk
-    wine
-    openssl # Required for League of Legends
-    dconf
   ];
-
-  # environment.variables = { NIX_SKIP_KEYBASE_CHECKS = "1"; };
 
   # Reduce blue light at night
   services.redshift = {
@@ -196,10 +150,6 @@
 
   # Detect monitors (brightness)
   hardware.i2c.enable = true;
-
-  # Login to Keybase in the background
-  services.keybase.enable = true;
-  services.kbfs.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
