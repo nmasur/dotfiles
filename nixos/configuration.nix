@@ -40,7 +40,7 @@
 
     # Disable mouse acceleration
     libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "1.25";
+    libinput.mouse.accelSpeed = "1.15";
 
     # Keyboard responsiveness
     autoRepeatDelay = 250;
