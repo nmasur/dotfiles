@@ -1,9 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-{
-  imports = [ ./common.nix ./lutris.nix ];
+with lib;
+let cfg = config.modules.gaming.leagueoflegends;
 
-  config = {
+in {
+
+  options.modules.gaming.leagueoflegends = {
+    enable = mkEnableOption "leagueoflegends";
+  };
+
+  config = mkIf cfg.enable {
 
     # League of Legends anti-cheat
     boot.kernel.sysctl = { "abi.vsyscall32" = 0; };

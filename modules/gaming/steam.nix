@@ -1,8 +1,13 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }:
 
-  imports = [ ./common.nix ];
+with lib;
+let cfg = config.modules.gaming.steam;
 
-  config = {
+in {
+
+  options.modules.gaming.steam = { enable = mkEnableOption "steam"; };
+
+  config = mkIf cfg.enable {
     hardware.steam-hardware.enable = true;
     environment.systemPackages = with pkgs; [ steam ];
   };

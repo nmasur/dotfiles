@@ -1,9 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-{
+with lib;
+let cfg = config.modules.gaming.lutris;
 
-  imports = [ ./common.nix ];
+in {
 
-  config = { environment.systemPackages = with pkgs; [ lutris amdvlk wine ]; };
+  options.modules.gaming.lutris = { enable = mkEnableOption "lutris"; };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ lutris amdvlk wine ];
+  };
 
 }

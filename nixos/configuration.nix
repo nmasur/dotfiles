@@ -9,7 +9,7 @@
     /etc/nixos/hardware-configuration.nix
     ../modules/system/timezone.nix
     ../modules/system/doas.nix
-    ../modules/gaming/steam.nix
+    ../modules/gaming
   ];
 
   nixpkgs.config.allowUnfree = true;
