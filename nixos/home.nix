@@ -162,6 +162,8 @@ in {
       s = "sudo";
       sc = "systemctl";
       scs = "systemctl status";
+      reb =
+        "nixos-rebuild switch -I nixos-config=${nixos_config}/configuration.nix";
 
       # Tmux
       ta = "tmux attach-session";
