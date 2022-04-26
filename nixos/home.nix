@@ -9,6 +9,18 @@ let
   nixos_config = builtins.toString ./.;
   notes_path = "$HOME/dev/personal/notes";
 
+  ignore_patterns = ''
+    !.env*
+    !.github/
+    !.gitignore
+    !*.tfvars
+    .terraform/
+    .target/
+    /Library/
+    keybase/
+    kbfs/
+  '';
+
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -283,10 +295,13 @@ in {
     "direnvrc".text = "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
     "spectrwm/spectrwm.conf".source = ./spectrwm.conf;
   };
+  home.file = {
+    ".rgignore".text = ignore_patterns;
+    ".fdignore".text = ignore_patterns;
+  };
 
   programs.direnv = {
     enable = true;
-    enableFishIntegration = true;
     nix-direnv.enable = true;
     config = { whitelist = { prefix = [ "${dotfiles}/" ]; }; };
   };
