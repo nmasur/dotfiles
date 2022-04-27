@@ -59,7 +59,6 @@ in {
     glow
 
     # Encryption
-    keybase-gui
     gnupg
     pass
   ];
@@ -315,6 +314,7 @@ in {
     extraConfig = {
       core = { editor = "nvim"; };
       pager = { branch = "false"; };
+      safe = { directory = "${dotfiles}"; };
     };
   };
 

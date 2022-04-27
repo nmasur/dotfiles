@@ -6,10 +6,11 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ../modules/system/timezone.nix
     ../modules/system/doas.nix
     ../modules/gaming
+    ../modules/services/keybase.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -81,7 +82,8 @@
   };
 
   # Required for setting GTK theme (for preferred-color-scheme in browser)
-  services.dbus.packages = with pkgs; [ pkgs.dconf ];
+  services.dbus.packages = with pkgs; [ dconf ];
+  programs.dconf.enable = true;
 
   # Mouse config
   services.ratbagd.enable = true;
@@ -122,10 +124,10 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     fish
+    git
     vim
     wget
     curl
-    home-manager
     xclip # Clipboard
     pamixer # Audio control
     dmenu # Launcher
