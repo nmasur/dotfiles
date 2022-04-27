@@ -21,11 +21,10 @@
         config.allowUnfree = true;
       };
 
-      # Pull the library functions
-      lib = nixpkgs.lib;
+      user = "noah";
     in {
       nixosConfigurations = {
-        noah = lib.nixosSystem {
+        desktop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./nixos/configuration.nix
@@ -33,10 +32,15 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.noah = { imports = [ ./nixos/home.nix ]; };
+              home-manager.users.${user} = { imports = [ ./nixos/home.nix ]; };
             }
           ];
         };
       };
+
+      devShells.x86_64-linux.default = pkgs.mkShell {
+        buildInputs = with pkgs; [ stylua nixfmt shfmt shellcheck ];
+      };
+
     };
 }

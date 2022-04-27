@@ -6,7 +6,7 @@ let cfg = config.modules.gaming.leagueoflegends;
 in {
 
   options.modules.gaming.leagueoflegends = {
-    enable = mkEnableOption "leagueoflegends";
+    enable = mkEnableOption "League of Legends";
   };
 
   config = mkIf cfg.enable {
