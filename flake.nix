@@ -38,6 +38,9 @@
                     ./nixos/home.nix
                     ./modules/applications/firefox.nix
                     ./modules/shell/fish.nix
+                    ./modules/shell/utilities.nix
+                    ./modules/shell/git.nix
+                    ./modules/shell/github.nix
                     ./modules/editor/neovim.nix
                     ./modules/applications/alacritty.nix
                   ];

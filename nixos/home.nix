@@ -2,7 +2,6 @@
 
 let
 
-  name = "Noah Masur";
   editor = "nvim";
   font = "Victor Mono";
   dotfiles = builtins.toString ../.;
@@ -24,6 +23,7 @@ let
 in {
   options = with lib; {
     user = mkOption { default = "noah"; };
+    fullName = mkOption { default = "Noah Masur"; };
     font = mkOption { default = font; };
     nixos_config = mkOption { default = nixos_config; };
     dotfiles = mkOption { default = dotfiles; };
@@ -42,24 +42,6 @@ in {
       sxiv # Image viewer
       zathura # PDF viewer
       qbittorrent
-
-      # Utilities
-      unzip
-      rsync
-      fzf
-      ripgrep
-      bat
-      fd
-      exa
-      sd
-      zoxide
-      jq
-      tealdeer
-      gh
-      direnv
-      tree
-      htop
-      glow
 
       # Encryption
       gnupg
@@ -93,22 +75,6 @@ in {
       enable = true;
       nix-direnv.enable = true;
       config = { whitelist = { prefix = [ "${dotfiles}/" ]; }; };
-    };
-
-    programs.git = {
-      enable = true;
-      userName = "${name}";
-      userEmail = "7386960+nmasur@users.noreply.github.com";
-      extraConfig = {
-        pager = { branch = "false"; };
-        safe = { directory = "${dotfiles}"; };
-      };
-    };
-
-    programs.gh = {
-      enable = true;
-      enableGitCredentialHelper = true;
-      settings.git_protocol = "https";
     };
 
     # Email
