@@ -38,6 +38,7 @@
                     ./nixos/home.nix
                     ./modules/applications/firefox.nix
                     ./modules/shell/fish.nix
+                    ./modules/editor/neovim.nix
                     ./modules/applications/alacritty.nix
                   ];
                 };

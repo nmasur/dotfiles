@@ -126,4 +126,24 @@
     shellAliases = { };
     shellInit = "";
   };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  xdg.configFile = {
+    "starship.toml".source = ../../starship/starship.toml.configlink;
+    "fish/functions".source = ../../fish.configlink/functions;
+  };
 }

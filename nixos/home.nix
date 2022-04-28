@@ -34,7 +34,6 @@ in {
 
     home.packages = with pkgs; [
       # Applications
-      neovim
       _1password-gui
       discord
       # neomutt
@@ -46,8 +45,6 @@ in {
 
       # Utilities
       unzip
-      gcc # for tree-sitter
-      starship
       rsync
       fzf
       ripgrep
@@ -80,26 +77,8 @@ in {
       NOTES_PATH = "${notes_path}";
     };
 
-    programs.starship = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
-    programs.fzf = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
-    programs.zoxide = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
     # Other configs
     xdg.configFile = {
-      "starship.toml".source = ../starship/starship.toml.configlink;
-      "nvim/init.lua".source = ../nvim.configlink/init.lua;
-      "fish/functions".source = ../fish.configlink/functions;
       "awesome/rc.lua".source = ./awesomerc.lua;
       "qtile/config.py".source = ./qtile.py;
       "direnvrc".text = "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
@@ -121,7 +100,6 @@ in {
       userName = "${name}";
       userEmail = "7386960+nmasur@users.noreply.github.com";
       extraConfig = {
-        core = { editor = "nvim"; };
         pager = { branch = "false"; };
         safe = { directory = "${dotfiles}"; };
       };
