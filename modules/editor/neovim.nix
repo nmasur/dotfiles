@@ -16,4 +16,7 @@
 
   };
 
+  # Used for icons in Vim
+  fonts.fonts = with pkgs; [ nerdfonts ];
+
 }

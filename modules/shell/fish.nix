@@ -1,5 +1,7 @@
 { pkgs, user, ... }: {
 
+  users.users.${user}.shell = pkgs.fish;
+
   home-manager.users.${user} = {
     programs.fish = {
       enable = true;

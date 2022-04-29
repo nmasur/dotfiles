@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, user, ... }:
+{ config, pkgs, user, font, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -22,61 +22,6 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    windowManager = { i3 = { enable = true; }; };
-
-    # Enable touchpad support
-    libinput.enable = true;
-
-    # Disable mouse acceleration
-    libinput.mouse.accelProfile = "flat";
-    libinput.mouse.accelSpeed = "1.15";
-
-    # Keyboard responsiveness
-    autoRepeatDelay = 250;
-    autoRepeatInterval = 40;
-
-    # Configure keymap in X11
-    layout = "us";
-    xkbOptions = "eurosign:e,caps:swapescape";
-
-    # Login screen
-    displayManager = {
-      lightdm = {
-        enable = true;
-
-        # Make the login screen dark
-        greeters.gtk.theme.name = "Adwaita-dark";
-
-        # Put the login screen on the left monitor
-        greeters.gtk.extraConfig = ''
-          active-monitor=0
-        '';
-      };
-      setupCommands = ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 \
-                                            --mode 1920x1200 \
-                                            --pos 1920x0 \
-                                            --rotate left \
-                                        --output HDMI-0 \
-                                            --primary \
-                                            --mode 1920x1080 \
-                                            --pos 0x559 \
-                                            --rotate normal \
-                                        --output DVI-0 --off \
-                                        --output DVI-1 --off \
-      '';
-    };
-
-  };
-
-  # Required for setting GTK theme (for preferred-color-scheme in browser)
-  services.dbus.packages = with pkgs; [ dconf ];
-  programs.dconf.enable = true;
-
   # Mouse config
   services.ratbagd.enable = true;
 
@@ -86,31 +31,11 @@
 
   # Install fonts
   fonts.fonts = with pkgs; [
-    victor-mono # Used for Vim and Terminal
-    nerdfonts # Used for icons in Vim
+    font.package # Used for Vim and Terminal
     font-awesome # Icons for i3
     # siji # More icons for Polybar
   ];
-  fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
-
-    # Create a home directory for human user
-    isNormalUser = true;
-
-    # Automatically create a password to start
-    initialPassword = "changeme";
-
-    # Enable sudo privileges
-    extraGroups = [
-      "wheel" # Sudo privileges
-      "i2c" # Access to external monitors
-    ];
-
-    # Use the fish shell
-    shell = pkgs.fish;
-  };
+  fonts.fontconfig.defaultFonts.monospace = [ font.name ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

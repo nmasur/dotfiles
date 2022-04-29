@@ -41,8 +41,11 @@
             ./nixos/configuration.nix
             ./nixos/hardware-configuration.nix
             ./nixos/home.nix
+            ./modules/desktop/xorg.nix
+            ./modules/desktop/i3.nix
             ./modules/system/timezone.nix
             ./modules/system/doas.nix
+            ./modules/system/user.nix
             ./modules/gaming
             ./modules/services/keybase.nix
             ./modules/applications/firefox.nix
