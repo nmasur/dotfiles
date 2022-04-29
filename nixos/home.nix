@@ -1,27 +1,12 @@
-{ pkgs, user, lib, ... }:
+{ pkgs, lib, user, ... }:
 
 let
 
   notes_path = "$HOME/dev/personal/notes";
 
-  ignore_patterns = ''
-    !.env*
-    !.github/
-    !.gitignore
-    !*.tfvars
-    .terraform/
-    .target/
-    /Library/
-    keybase/
-    kbfs/
-  '';
-
 in {
-  options = with lib; {
-    ignorePatterns = mkOption { default = ignore_patterns; };
-  };
+  home-manager.users.${user} = {
 
-  config = {
     nixpkgs.config.allowUnfree = true;
 
     home.packages = with pkgs; [

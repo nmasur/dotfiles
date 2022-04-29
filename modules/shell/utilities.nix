@@ -1,4 +1,20 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+let
+
+  ignorePatterns = ''
+    !.env*
+    !.github/
+    !.gitignore
+    !*.tfvars
+    .terraform/
+    .target/
+    /Library/
+    keybase/
+    kbfs/
+  '';
+
+in {
 
   home.packages = with pkgs; [
     unzip
@@ -20,8 +36,8 @@
   ];
 
   home.file = {
-    ".rgignore".text = config.ignorePatterns;
-    ".fdignore".text = config.ignorePatterns;
+    ".rgignore".text = ignorePatterns;
+    ".fdignore".text = ignorePatterns;
   };
 
 }

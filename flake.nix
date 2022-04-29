@@ -39,6 +39,7 @@
           modules = [
             ./nixos/configuration.nix
             ./nixos/hardware-configuration.nix
+            ./nixos/home.nix
             ./modules/system/timezone.nix
             ./modules/system/doas.nix
             ./modules/gaming
@@ -55,7 +56,6 @@
                 };
                 users.${user} = {
                   imports = [
-                    ./nixos/home.nix
                     ./modules/applications/alacritty.nix
                     ./modules/shell/fish.nix
                     ./modules/shell/utilities.nix
