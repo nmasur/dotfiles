@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, user, ... }: {
 
   # Timezone required for Redshift schedule
   imports = [ ../system/timezone.nix ];
@@ -19,6 +19,9 @@
 
   # Detect monitors (brightness)
   hardware.i2c.enable = true;
+
+  # Grant user access to external monitors
+  users.users.${user}.extraGroups = [ "i2c" ];
 
   services.xserver.displayManager = {
 

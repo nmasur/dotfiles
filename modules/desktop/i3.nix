@@ -1,5 +1,8 @@
 { pkgs, ... }: {
 
+  # Requires Xorg to work
+  imports = [ ./xorg.nix ];
+
   services.xserver.windowManager = { i3 = { enable = true; }; };
 
   environment.systemPackages = with pkgs; [
