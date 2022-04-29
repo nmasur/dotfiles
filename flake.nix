@@ -27,6 +27,7 @@
         package = pkgs.victor-mono;
         name = "Victor Mono";
       };
+      hostname = "nixos";
 
     in {
       nixosConfigurations = {
@@ -34,7 +35,7 @@
           inherit system;
           specialArgs = {
             gui = true;
-            inherit user fullName font;
+            inherit user fullName font hostname;
           };
           modules = [
             home-manager.nixosModules.home-manager
@@ -43,10 +44,13 @@
             ./nixos/home.nix
             ./modules/desktop/xorg.nix
             ./modules/desktop/i3.nix
+            ./modules/desktop/fonts.nix
+            ./modules/hardware/boot.nix
             ./modules/hardware/mouse.nix
             ./modules/hardware/keyboard.nix
             ./modules/hardware/monitors.nix
             ./modules/hardware/audio.nix
+            ./modules/hardware/networking.nix
             ./modules/system/timezone.nix
             ./modules/system/doas.nix
             ./modules/system/user.nix
