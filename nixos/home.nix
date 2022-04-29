@@ -2,8 +2,6 @@
 
 let
 
-  dotfiles = builtins.toString ../.;
-  nixos_config = builtins.toString ./.;
   notes_path = "$HOME/dev/personal/notes";
 
   ignore_patterns = ''
@@ -20,11 +18,6 @@ let
 
 in {
   options = with lib; {
-    testuser = mkOption { default = user; };
-    fullName = mkOption { default = "Noah Masur"; };
-    font = mkOption { default = "Victor Mono"; };
-    nixos_config = mkOption { default = nixos_config; };
-    dotfiles = mkOption { default = dotfiles; };
     ignorePatterns = mkOption { default = ignore_patterns; };
   };
 
@@ -51,8 +44,8 @@ in {
     gtk.theme = { name = "Adwaita-dark"; };
 
     home.sessionVariables = {
-      NIXOS_CONFIG = "${nixos_config}";
-      DOTS = "${dotfiles}";
+      NIXOS_CONFIG = builtins.toString ./.;
+      DOTS = builtins.toString ../.;
       NOTES_PATH = "${notes_path}";
     };
 
@@ -66,7 +59,7 @@ in {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
-      config = { whitelist = { prefix = [ "${dotfiles}/" ]; }; };
+      config = { whitelist = { prefix = [ "${builtins.toString ../.}/" ]; }; };
     };
 
     # Email

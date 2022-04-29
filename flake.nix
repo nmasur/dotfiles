@@ -22,11 +22,17 @@
       };
 
       user = "noah";
+      fullName = "Noah Masur";
+      font = {
+        package = pkgs.victor-mono;
+        name = "Victor Mono";
+      };
+
     in {
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit user; };
+          specialArgs = { inherit user fullName font; };
           modules = [
             ./nixos/configuration.nix
             home-manager.nixosModules.home-manager
@@ -34,7 +40,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit user; };
+                extraSpecialArgs = { inherit user fullName font; };
                 users.${user} = {
                   imports = [
                     ./nixos/home.nix

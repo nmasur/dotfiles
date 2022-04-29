@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
 
   programs.fish = {
     enable = true;
@@ -25,8 +25,9 @@
       s = "sudo";
       sc = "systemctl";
       scs = "systemctl status";
-      reb =
-        "nixos-rebuild switch -I nixos-config=${config.nixos_config}/configuration.nix";
+      reb = "nixos-rebuild switch -I nixos-config=${
+          builtins.toString ../../nixos/.
+        }/configuration.nix";
 
       # Tmux
       ta = "tmux attach-session";
@@ -37,7 +38,7 @@
       v = "vim";
       vl = "vim -c 'normal! `0'";
       vll = "vim -c 'Telescope oldfiles'";
-      vimrc = "vim ${config.dotfiles}/nvim.configlink/init.lua";
+      vimrc = "vim ${builtins.toString ../../.}/nvim.configlink/init.lua";
 
       # Notes
       qn = "quicknote";

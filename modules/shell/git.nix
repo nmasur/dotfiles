@@ -1,12 +1,12 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, fullName, ... }: {
 
   programs.git = {
     enable = true;
-    userName = "${config.fullName}";
+    userName = fullName;
     userEmail = "7386960+nmasur@users.noreply.github.com";
     extraConfig = {
       pager = { branch = "false"; };
-      safe = { directory = "${config.dotfiles}"; };
+      safe = { directory = builtins.toString ../../.; };
     };
   };
 
