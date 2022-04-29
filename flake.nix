@@ -26,6 +26,7 @@
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit user; };
           modules = [
             ./nixos/configuration.nix
             home-manager.nixosModules.home-manager
@@ -33,16 +34,17 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraSpecialArgs = { inherit user; };
                 users.${user} = {
                   imports = [
                     ./nixos/home.nix
                     ./modules/applications/firefox.nix
+                    ./modules/applications/alacritty.nix
                     ./modules/shell/fish.nix
                     ./modules/shell/utilities.nix
                     ./modules/shell/git.nix
                     ./modules/shell/github.nix
                     ./modules/editor/neovim.nix
-                    ./modules/applications/alacritty.nix
                   ];
                 };
               };

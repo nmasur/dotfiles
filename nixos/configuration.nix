@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, user, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -102,7 +102,7 @@
   fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.noah = {
+  users.users.${user} = {
 
     # Create a home directory for human user
     isNormalUser = true;

@@ -8,5 +8,6 @@
   xdg.configFile = { "nvim/init.lua".source = ../../nvim.configlink/init.lua; };
 
   programs.git.extraConfig.core.editor = "nvim";
+  home.sessionVariables = { EDITOR = "nvim"; };
 
 }

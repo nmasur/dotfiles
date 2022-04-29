@@ -90,6 +90,8 @@
     shellInit = "";
   };
 
+  home.sessionVariables = { fish_greeting = ""; };
+
   programs.starship = {
     enable = true;
     enableFishIntegration = true;

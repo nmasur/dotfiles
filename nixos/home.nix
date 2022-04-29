@@ -1,9 +1,7 @@
-{ pkgs, lib, ... }:
+{ pkgs, user, lib, ... }:
 
 let
 
-  editor = "nvim";
-  font = "Victor Mono";
   dotfiles = builtins.toString ../.;
   nixos_config = builtins.toString ./.;
   notes_path = "$HOME/dev/personal/notes";
@@ -22,11 +20,12 @@ let
 
 in {
   options = with lib; {
-    user = mkOption { default = "noah"; };
+    testuser = mkOption { default = user; };
     fullName = mkOption { default = "Noah Masur"; };
-    font = mkOption { default = font; };
+    font = mkOption { default = "Victor Mono"; };
     nixos_config = mkOption { default = nixos_config; };
     dotfiles = mkOption { default = dotfiles; };
+    ignorePatterns = mkOption { default = ignore_patterns; };
   };
 
   config = {
@@ -52,8 +51,6 @@ in {
     gtk.theme = { name = "Adwaita-dark"; };
 
     home.sessionVariables = {
-      fish_greeting = "";
-      EDITOR = "${editor}";
       NIXOS_CONFIG = "${nixos_config}";
       DOTS = "${dotfiles}";
       NOTES_PATH = "${notes_path}";
@@ -66,11 +63,6 @@ in {
       "direnvrc".text = "source $HOME/.nix-profile/share/nix-direnv/direnvrc";
       "spectrwm/spectrwm.conf".source = ./spectrwm.conf;
     };
-    home.file = {
-      ".rgignore".text = ignore_patterns;
-      ".fdignore".text = ignore_patterns;
-    };
-
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
