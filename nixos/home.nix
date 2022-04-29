@@ -5,6 +5,8 @@ let
   notes_path = "$HOME/dev/personal/notes";
 
 in {
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
   home-manager.users.${user} = {
 
     nixpkgs.config.allowUnfree = true;

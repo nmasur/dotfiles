@@ -37,6 +37,7 @@
             inherit user fullName font;
           };
           modules = [
+            home-manager.nixosModules.home-manager
             ./nixos/configuration.nix
             ./nixos/hardware-configuration.nix
             ./nixos/home.nix
@@ -45,27 +46,12 @@
             ./modules/gaming
             ./modules/services/keybase.nix
             ./modules/applications/firefox.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  gui = true;
-                  inherit user fullName font;
-                };
-                users.${user} = {
-                  imports = [
-                    ./modules/applications/alacritty.nix
-                    ./modules/shell/fish.nix
-                    ./modules/shell/utilities.nix
-                    ./modules/shell/git.nix
-                    ./modules/shell/github.nix
-                    ./modules/editor/neovim.nix
-                  ];
-                };
-              };
-            }
+            ./modules/applications/alacritty.nix
+            ./modules/shell/fish.nix
+            ./modules/shell/utilities.nix
+            ./modules/shell/git.nix
+            ./modules/shell/github.nix
+            ./modules/editor/neovim.nix
           ];
         };
       };

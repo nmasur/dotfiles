@@ -1,13 +1,19 @@
-{ config, pkgs, ... }: {
+{ pkgs, user, ... }: {
 
-  home.packages = with pkgs; [
-    neovim
-    gcc # for tree-sitter
-  ];
+  home-manager.users.${user} = {
 
-  xdg.configFile = { "nvim/init.lua".source = ../../nvim.configlink/init.lua; };
+    home.packages = with pkgs; [
+      neovim
+      gcc # for tree-sitter
+    ];
 
-  programs.git.extraConfig.core.editor = "nvim";
-  home.sessionVariables = { EDITOR = "nvim"; };
+    xdg.configFile = {
+      "nvim/init.lua".source = ../../nvim.configlink/init.lua;
+    };
+
+    programs.git.extraConfig.core.editor = "nvim";
+    home.sessionVariables = { EDITOR = "nvim"; };
+
+  };
 
 }
