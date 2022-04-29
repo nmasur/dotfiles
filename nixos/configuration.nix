@@ -5,14 +5,6 @@
 { config, pkgs, user, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ../modules/system/timezone.nix
-    ../modules/system/doas.nix
-    ../modules/gaming
-    ../modules/services/keybase.nix
-  ];
-
   nixpkgs.config.allowUnfree = true;
   nix.extraOptions = "experimental-features = nix-command flakes";
 

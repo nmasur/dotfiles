@@ -32,19 +32,30 @@
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit user fullName font; };
+          specialArgs = {
+            gui = true;
+            inherit user fullName font;
+          };
           modules = [
             ./nixos/configuration.nix
+            ./nixos/hardware-configuration.nix
+            ./modules/system/timezone.nix
+            ./modules/system/doas.nix
+            ./modules/gaming
+            ./modules/services/keybase.nix
+            ./modules/applications/firefox.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit user fullName font; };
+                extraSpecialArgs = {
+                  gui = true;
+                  inherit user fullName font;
+                };
                 users.${user} = {
                   imports = [
                     ./nixos/home.nix
-                    ./modules/applications/firefox.nix
                     ./modules/applications/alacritty.nix
                     ./modules/shell/fish.nix
                     ./modules/shell/utilities.nix

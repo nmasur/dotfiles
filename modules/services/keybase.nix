@@ -1,13 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, user, gui, ... }: {
 
-let gui = config.gui;
+  services.keybase.enable = true;
+  services.kbfs.enable = true;
 
-in {
+  home-manager.users.${user}.home.packages =
+    [ (lib.mkIf gui pkgs.keybase-gui) ];
 
-  config = {
-    services.keybase.enable = true;
-    services.kbfs.enable = true;
-
-    # home.packages = with lib; with pkgs; [ (mkIf gui.enable keybase-gui) ];
-  };
 }

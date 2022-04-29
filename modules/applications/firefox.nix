@@ -1,5 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, lib, user, gui, ... }:
 
 {
-  home.packages = with pkgs; [ firefox ];
+  home-manager.users.${user}.home.packages = [ (lib.mkIf gui pkgs.firefox) ];
 }
