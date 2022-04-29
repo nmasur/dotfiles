@@ -28,6 +28,7 @@
         name = "Victor Mono";
       };
       hostname = "nixos";
+      gtkTheme = "Adwaita-dark";
 
     in {
       nixosConfigurations = {
@@ -35,7 +36,7 @@
           inherit system;
           specialArgs = {
             gui = true;
-            inherit user fullName font hostname;
+            inherit user fullName font hostname gtkTheme;
           };
           modules = [
             home-manager.nixosModules.home-manager

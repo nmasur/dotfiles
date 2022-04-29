@@ -1,8 +1,4 @@
-{ pkgs, user, gui, ... }:
-
-let gtkTheme = "Adwaita-dark";
-
-in {
+{ pkgs, user, gui, gtkTheme, ... }: {
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -28,11 +24,6 @@ in {
     [
       xclip # Clipboard
     ];
-
-  home-manager.users.${user}.gtk = {
-    enable = true;
-    theme = { name = gtkTheme; };
-  };
 
 }
 
