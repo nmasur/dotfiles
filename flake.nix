@@ -38,11 +38,15 @@
           };
           modules = [
             home-manager.nixosModules.home-manager
-            ./nixos/configuration.nix
             ./nixos/hardware-configuration.nix
+            ./nixos/configuration.nix
             ./nixos/home.nix
             ./modules/desktop/xorg.nix
             ./modules/desktop/i3.nix
+            ./modules/hardware/mouse.nix
+            ./modules/hardware/keyboard.nix
+            ./modules/hardware/monitors.nix
+            ./modules/hardware/audio.nix
             ./modules/system/timezone.nix
             ./modules/system/doas.nix
             ./modules/system/user.nix

@@ -22,13 +22,6 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
-  # Mouse config
-  services.ratbagd.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   # Install fonts
   fonts.fonts = with pkgs; [
     font.package # Used for Vim and Terminal
@@ -39,36 +32,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    fish
-    git
-    vim
-    wget
-    curl
-    xclip # Clipboard
-    pamixer # Audio control
-    dmenu # Launcher
-    feh # Wallpaper
-    playerctl # Media control
-    polybarFull # Polybar + PulseAudio
-    ddcutil # Monitor brightness control
-
-    # Mouse config
-    libratbag # Mouse adjustments
-    piper # Mouse adjustments GUI
-  ];
-
-  # Reduce blue light at night
-  services.redshift = {
-    enable = true;
-    brightness = {
-      day = "1.0";
-      night = "1.0";
-    };
-  };
-
-  # Detect monitors (brightness)
-  hardware.i2c.enable = true;
+  environment.systemPackages = with pkgs; [ fish git vim wget curl ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
