@@ -115,5 +115,11 @@
       "starship.toml".source = ../../starship/starship.toml.configlink;
       "fish/functions".source = ../../fish.configlink/functions;
     };
+
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      config = { whitelist = { prefix = [ "${builtins.toString ../.}/" ]; }; };
+    };
   };
 }

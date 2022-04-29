@@ -9,6 +9,7 @@ in {
 
   config = mkIf cfg.enable {
     hardware.steam-hardware.enable = true;
+    nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [ steam ];
   };
 

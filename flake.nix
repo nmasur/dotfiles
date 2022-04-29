@@ -58,6 +58,7 @@
             ./modules/services/keybase.nix
             ./modules/applications/firefox.nix
             ./modules/applications/alacritty.nix
+            ./modules/applications/media.nix
             ./modules/shell/fish.nix
             ./modules/shell/utilities.nix
             ./modules/shell/git.nix
