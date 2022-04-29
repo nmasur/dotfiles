@@ -19,6 +19,13 @@ function obj:init()
         -- and move the window to the next screen setting the same unitRect
         win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
     end)
+
+    hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "m", function()
+        -- get the focused window
+        local win = hs.window.focusedWindow()
+        -- maximize if possible
+        win:maximize()
+    end)
 end
 
 return obj
