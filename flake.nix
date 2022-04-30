@@ -61,6 +61,7 @@
             ./modules/applications/alacritty.nix
             ./modules/applications/media.nix
             ./modules/applications/1password.nix
+            ./modules/applications/discord.nix
             ./modules/shell/fish.nix
             ./modules/shell/utilities.nix
             ./modules/shell/git.nix

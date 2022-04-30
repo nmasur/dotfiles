@@ -1,6 +1,7 @@
 { pkgs, user, font, ... }: {
 
   home-manager.users.${user} = {
+    xsession.windowManager.i3.config.terminal = "alacritty";
     programs.alacritty = {
       enable = true;
       settings = {
