@@ -13,30 +13,43 @@ let
 
 in {
 
-  home-manager.users.${user}.home = {
+  home-manager.users.${user} = {
 
-    packages = with pkgs; [
+    home.packages = with pkgs; [
       unzip
       rsync
-      fzf
       ripgrep
       bat
       fd
-      exa
       sd
-      zoxide
       jq
       tealdeer
-      gh
-      direnv
       tree
       htop
       glow
+      prettyping
+      qrencode
     ];
 
-    file = {
+    home.file = {
       ".rgignore".text = ignorePatterns;
       ".fdignore".text = ignorePatterns;
+    };
+
+    programs.fish.shellAbbrs = {
+      cat = "bat"; # Swap cat with bat
+    };
+
+    programs.fish.functions = {
+      ping = {
+        description = "Improved ping";
+        argumentNames = "target";
+        body = "prettyping --nolegend $target";
+      };
+      qr = {
+        body =
+          "qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png"; # Fix for non-macOS
+      };
     };
 
   };

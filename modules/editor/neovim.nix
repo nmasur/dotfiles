@@ -13,6 +13,13 @@
 
     programs.git.extraConfig.core.editor = "nvim";
     home.sessionVariables = { EDITOR = "nvim"; };
+    programs.fish = {
+      shellAliases = { vim = "nvim"; };
+      shellAbbrs = {
+        vll = "vim -c 'Telescope oldfiles'";
+        vimrc = "vim ${builtins.toString ../../.}/nvim.configlink/init.lua";
+      };
+    };
 
   };
 

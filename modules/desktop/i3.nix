@@ -227,6 +227,7 @@
         window = {
           border = 1;
           hideEdgeBorders = "both";
+          titlebar = false;
         };
         workspaceAutoBackAndForth = false;
         workspaceOutputAssign = [ ];

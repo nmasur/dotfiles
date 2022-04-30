@@ -3,15 +3,69 @@
   users.users.${user}.shell = pkgs.fish;
 
   home-manager.users.${user} = {
+    home.packages = with pkgs; [ fzf exa fd bat ripgrep ];
     programs.fish = {
       enable = true;
-      functions = { };
+      functions = {
+        commandline-git-commits = {
+          description = "Insert commit into commandline";
+          body = builtins.readFile
+            ../../fish.configlink/functions/commandline-git-commits.fish;
+        };
+        copy = {
+          description = "Copy file contents into clipboard";
+          body = "cat $argv | pbcopy"; # Need to fix for non-macOS
+        };
+        edit = {
+          description = "Open a file in Vim";
+          body = builtins.readFile ../../fish.configlink/functions/edit.fish;
+        };
+        envs = {
+          description = "Evaluate a bash-like environment variables file";
+          body = ''set -gx (cat $argv | tr "=" " " | string split ' ')'';
+        };
+        fcd = {
+          description = "Jump to directory";
+          argumentNames = "directory";
+          body = builtins.readFile ../../fish.configlink/functions/fcd.fish;
+        };
+        fish_user_key_bindings = {
+          body = builtins.readFile
+            ../../fish.configlink/functions/fish_user_key_bindings.fish;
+        };
+        ip = {
+          body = builtins.readFile ../../fish.configlink/functions/ip.fish;
+        };
+        json = {
+          description = "Tidy up JSON using jq";
+          body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
+        };
+        note = {
+          description = "Edit or create a note";
+          argumentNames = "filename";
+          body = builtins.readFile ../../fish.configlink/functions/note.fish;
+        };
+        projects = {
+          description = "Jump to a project";
+          body = ''
+            set projdir (ls $PROJ | fzf)
+            and cd $PROJ/$projdir
+            and commandline -f execute
+          '';
+        };
+        recent = {
+          description = "Open a recent file in Vim";
+          body = builtins.readFile ../../fish.configlink/functions/recent.fish;
+        };
+        syncnotes = {
+          description = "Full git commit on notes";
+          body =
+            builtins.readFile ../../fish.configlink/functions/syncnotes.fish;
+        };
+      };
       interactiveShellInit = "";
       loginShellInit = "";
-      shellAliases = {
-        vim = "nvim";
-        sudo = "doas";
-      };
+      shellAliases = { ls = "exa"; };
       shellAbbrs = {
 
         # Directory aliases
@@ -40,17 +94,11 @@
         # Vim
         v = "vim";
         vl = "vim -c 'normal! `0'";
-        vll = "vim -c 'Telescope oldfiles'";
-        vimrc = "vim ${builtins.toString ../../.}/nvim.configlink/init.lua";
 
         # Notes
-        qn = "quicknote";
         sn = "syncnotes";
-        to = "today";
-        work = "vim $NOTES_PATH/work.md";
 
         # CLI Tools
-        cat = "bat"; # Swap cat with bat
         h = "http -Fh --all"; # Curl site for headers
         m = "make"; # For makefiles
 
@@ -90,7 +138,6 @@
         ca = "cargo";
 
       };
-      shellAliases = { };
       shellInit = "";
     };
 
@@ -113,7 +160,6 @@
 
     xdg.configFile = {
       "starship.toml".source = ../../starship/starship.toml.configlink;
-      "fish/functions".source = ../../fish.configlink/functions;
     };
 
     programs.direnv = {

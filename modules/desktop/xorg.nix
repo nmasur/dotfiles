@@ -25,5 +25,10 @@
       xclip # Clipboard
     ];
 
+  home-manager.users.${user}.programs.fish.shellAliases = {
+    pbcopy = "xclip -selection clipboard -in";
+    pbpaste = "xclip -selection clipboard -out";
+  };
+
 }
 
