@@ -10,9 +10,6 @@
       playerctl # Media control
     ];
 
-    # Icons for i3
-    fonts.fonts = with pkgs; [ font-awesome ];
-
     home-manager.users.${identity.user}.xsession.windowManager.i3 = {
       enable = true;
       config = let
@@ -30,10 +27,10 @@
       in {
         modifier = modifier;
         assigns = {
-          "${ws1}" = [{ class = "^Firefox$"; }];
-          "${ws2}" = [{ class = "^Alacritty$"; }];
-          "${ws3}" = [{ class = "^Discord$"; }];
-          "${ws4}" = [{ class = "^Steam$"; }];
+          "${ws1}" = [{ class = "Firefox"; }];
+          "${ws2}" = [{ class = "Alacritty"; }];
+          "${ws3}" = [{ class = "Discord"; }];
+          "${ws4}" = [{ class = "Steam"; }];
         };
         bars = [{ command = "echo"; }]; # Disable i3bar
         colors = let
