@@ -12,6 +12,7 @@ in {
       extraConfig = {
         pager = { branch = "false"; };
         safe = { directory = builtins.toString ../../.; };
+        pull = { ff = "only"; };
       };
     };
 

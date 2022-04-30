@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-doas -u localtimed localtimed

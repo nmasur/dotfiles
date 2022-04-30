@@ -16,24 +16,27 @@ in {
   home-manager.users.${identity.user} = {
 
     home.packages = with pkgs; [
-      unzip
-      rsync
-      ripgrep
-      bat
-      fd
-      sd
-      jq
-      tealdeer
-      tree
-      htop
-      glow
-      prettyping
-      qrencode
+      unzip # Extract zips
+      rsync # Copy folders
+      ripgrep # grep
+      bat # cat
+      fd # find
+      sd # sed
+      jq # JSON manipulation
+      tealdeer # Cheatsheets
+      tree # View directory hierarchy
+      htop # Show system processes
+      glow # Pretty markdown previews
+      prettyping # ping
+      qrencode # Generate qr codes
+      vimv # Batch rename files
+      dig # DNS lookup
     ];
 
     home.file = {
       ".rgignore".text = ignorePatterns;
       ".fdignore".text = ignorePatterns;
+      ".digrc".text = "+noall +answer"; # Cleaner dig commands
     };
 
     programs.fish.shellAbbrs = {

@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-home-manager switch -f "/home/noah/dev/personal/dotfiles/nixos/home.nix"
