@@ -13,9 +13,7 @@
     ];
 
     home.sessionVariables = {
-      NIXOS_CONFIG = builtins.toString ./.;
-      DOTS = builtins.toString ../.;
-      NOTES_PATH = "$HOME/dev/personal/notes";
+      NOTES_PATH = "/home/${identity.user}/dev/personal/notes";
     };
 
   };

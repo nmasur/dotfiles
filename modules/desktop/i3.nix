@@ -1,17 +1,4 @@
-{ config, pkgs, lib, identity, ... }:
-
-let
-
-  polybarReload = pkgs.writeShellScriptBin "polybarReload" ''
-    pkill polybar
-    while pgrep -x polybar > /dev/null; do sleep 1; done
-    polybar &
-  '';
-
-  i3 =
-    config.home-manager.users.${identity.user}.xsession.windowManager.i3.config;
-
-in {
+{ config, pkgs, lib, identity, ... }: {
 
   config = lib.mkIf config.services.xserver.enable {
 
@@ -21,7 +8,6 @@ in {
       dmenu # Launcher
       feh # Wallpaper
       playerctl # Media control
-      polybarFull # Polybar + PulseAudio
     ];
 
     # Icons for i3
@@ -30,7 +16,7 @@ in {
     home-manager.users.${identity.user}.xsession.windowManager.i3 = {
       enable = true;
       config = let
-        modifier = i3.modifier;
+        modifier = "Mod4"; # Super key
         ws1 = "1:";
         ws2 = "2:";
         ws3 = "3:";
@@ -42,7 +28,7 @@ in {
         ws9 = "9:";
         ws10 = "10:";
       in {
-        modifier = "Mod4"; # Super key
+        modifier = modifier;
         assigns = {
           "${ws1}" = [{ class = "^Firefox$"; }];
           "${ws2}" = [{ class = "^Alacritty$"; }];
@@ -213,28 +199,9 @@ in {
             notification = false;
           }
           {
-            command = builtins.toString polybarReload;
-            always = true;
-            notification = false;
-          }
-          {
-            # Start XDG autostart .desktop files using dex. See also
-            # https://wiki.archlinux.org/index.php/XDG_Autostart
-            command = "dex --autostart --environment i3";
-            always = false;
-            notification = false;
-          }
-          {
             # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
             # screen before suspend. Use loginctl lock-session to lock your screen.
             command = "xss-lock --transfer-sleep-lock -- i3lock --nofork";
-            always = false;
-            notification = false;
-          }
-          {
-            # NetworkManager is the most popular way to manage wireless networks on Linux,
-            # and nm-applet is a desktop environment-independent system tray GUI for it.
-            command = "nm-applet";
             always = false;
             notification = false;
           }
