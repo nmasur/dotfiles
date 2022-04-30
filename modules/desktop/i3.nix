@@ -1,4 +1,14 @@
-{ config, pkgs, lib, user, ... }: {
+{ config, pkgs, lib, user, ... }:
+
+let
+
+  polybarReload = pkgs.writeShellScriptBin "polybarReload" ''
+    pkill polybar
+    while pgrep -x polybar > /dev/null; do sleep 1; done
+    polybar &
+  '';
+
+in {
 
   config = lib.mkIf config.services.xserver.enable {
 
@@ -198,7 +208,7 @@
             notification = false;
           }
           {
-            command = "~/.config/i3/polybar.sh";
+            command = builtins.toString polybarReload;
             always = true;
             notification = false;
           }
