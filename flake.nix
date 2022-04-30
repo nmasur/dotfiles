@@ -12,31 +12,29 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
-      # Set the system type globally (changeme)
-      system = "x86_64-linux";
-
-      # Gather the Nix packages
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
+      # Gather packages
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      identity = {
+        user = "noah";
+        name = "Noah Masur";
+        hostname = "nixos";
+        gitEmail = "7386960+nmasur@users.noreply.github.com";
       };
-
-      user = "noah";
-      fullName = "Noah Masur";
-      font = {
-        package = pkgs.victor-mono;
-        name = "Victor Mono";
+      gui = {
+        enable = false;
+        font = {
+          package = pkgs.victor-mono;
+          name = "Victor Mono";
+        };
+        gtkTheme = "Adwaita-dark";
       };
-      hostname = "nixos";
-      gtkTheme = "Adwaita-dark";
-
     in {
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
           specialArgs = {
-            gui = true;
-            inherit user fullName font hostname gtkTheme;
+            gui = gui // { enable = true; };
+            inherit identity;
           };
           modules = [
             home-manager.nixosModules.home-manager

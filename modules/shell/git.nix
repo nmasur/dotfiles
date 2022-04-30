@@ -1,14 +1,14 @@
-{ config, pkgs, lib, user, fullName, ... }:
+{ config, pkgs, lib, identity, ... }:
 
-let home-packages = config.home-manager.users.${user}.home.packages;
+let home-packages = config.home-manager.users.${identity.user}.home.packages;
 
 in {
 
-  home-manager.users.${user} = {
+  home-manager.users.${identity.user} = {
     programs.git = {
       enable = true;
-      userName = fullName;
-      userEmail = "7386960+nmasur@users.noreply.github.com";
+      userName = identity.name;
+      userEmail = identity.gitEmail;
       extraConfig = {
         pager = { branch = "false"; };
         safe = { directory = builtins.toString ../../.; };

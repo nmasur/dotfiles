@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, identity, ... }:
 
 let
 
@@ -13,7 +13,7 @@ let
 
 in {
 
-  home-manager.users.${user} = {
+  home-manager.users.${identity.user} = {
 
     home.packages = with pkgs; [
       unzip

@@ -1,6 +1,6 @@
-{ pkgs, user, ... }: {
+{ pkgs, identity, ... }: {
 
-  home-manager.users.${user} = {
+  home-manager.users.${identity.user} = {
 
     home.packages = with pkgs; [
       neovim

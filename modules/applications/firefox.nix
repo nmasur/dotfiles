@@ -1,12 +1,12 @@
-{ pkgs, lib, user, gui, gtkTheme, ... }:
+{ pkgs, lib, identity, gui, ... }:
 
 {
-  config = lib.mkIf gui {
-    home-manager.users.${user} = {
+  config = lib.mkIf gui.enable {
+    home-manager.users.${identity.user} = {
       home.packages = [ pkgs.firefox ];
       gtk = {
         enable = true;
-        theme = { name = gtkTheme; };
+        theme = { name = gui.gtkTheme; };
       };
     };
 

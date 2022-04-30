@@ -1,7 +1,7 @@
-{ pkgs, lib, user, ... }: {
+{ pkgs, lib, identity, ... }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.${user} = {
+  home-manager.users.${identity.user} = {
 
     home.packages = with pkgs; [
       # neomutt

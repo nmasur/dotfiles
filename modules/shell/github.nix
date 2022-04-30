@@ -1,8 +1,8 @@
-{ pkgs, user, ... }: {
+{ pkgs, identity, ... }: {
 
   imports = [ ./git.nix ];
 
-  home-manager.users.${user} = {
+  home-manager.users.${identity.user} = {
     programs.gh = {
       enable = true;
       enableGitCredentialHelper = true;

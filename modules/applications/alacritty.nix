@@ -1,6 +1,6 @@
-{ pkgs, user, font, ... }: {
+{ pkgs, identity, gui, ... }: {
 
-  home-manager.users.${user} = {
+  home-manager.users.${identity.user} = {
     xsession.windowManager.i3.config.terminal = "alacritty";
     programs.alacritty = {
       enable = true;
@@ -18,7 +18,7 @@
         scrolling.history = 10000;
         font = {
           size = 14.0;
-          normal = { family = font.name; };
+          normal = { family = gui.font.name; };
         };
         key_bindings = [
           {

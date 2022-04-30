@@ -1,6 +1,6 @@
-{ hostname, ... }: {
+{ identity, ... }: {
 
-  networking.hostName = hostname; # Define your hostname.
+  networking.hostName = identity.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.

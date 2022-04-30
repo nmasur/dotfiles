@@ -1,6 +1,6 @@
 # Replace sudo with doas
 
-{ user, ... }: {
+{ identity, ... }: {
 
   security = {
 
@@ -24,5 +24,7 @@
     };
   };
 
-  home-manager.users.${user}.programs.fish.shellAliases = { sudo = "doas"; };
+  home-manager.users.${identity.user}.programs.fish.shellAliases = {
+    sudo = "doas";
+  };
 }

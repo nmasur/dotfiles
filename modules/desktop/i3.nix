@@ -1,4 +1,4 @@
-{ config, pkgs, lib, user, ... }:
+{ config, pkgs, lib, identity, ... }:
 
 let
 
@@ -7,6 +7,9 @@ let
     while pgrep -x polybar > /dev/null; do sleep 1; done
     polybar &
   '';
+
+  i3 =
+    config.home-manager.users.${identity.user}.xsession.windowManager.i3.config;
 
 in {
 
@@ -21,11 +24,13 @@ in {
       polybarFull # Polybar + PulseAudio
     ];
 
-    home-manager.users.${user}.xsession.windowManager.i3 = {
+    # Icons for i3
+    fonts.fonts = with pkgs; [ font-awesome ];
+
+    home-manager.users.${identity.user}.xsession.windowManager.i3 = {
       enable = true;
       config = let
-        modifier =
-          config.home-manager.users.${user}.xsession.windowManager.i3.config.modifier;
+        modifier = i3.modifier;
         ws1 = "1:";
         ws2 = "2:";
         ws3 = "3:";
@@ -118,16 +123,16 @@ in {
 
           # Launchers
           "${modifier}+Return" = "exec alacritty";
-          "${modifier}+d" = "exec --no-startup-id dmenu_run";
+          "${modifier}+space" = "exec --no-startup-id dmenu_run";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
-          "${modifier}+Shift+e" = ''
+          "${modifier}+Shift+q" = ''
             exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
           "${modifier}+Shift+x" = ''exec i3lock --color "#2f343f"'';
           "${modifier}+Shift+t" = "exec alacritty";
 
           # Window options
-          "${modifier}+Shift+q" = "kill";
+          "${modifier}+q" = "kill";
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
           "${modifier}+k" = "focus up";
@@ -149,10 +154,10 @@ in {
           "${modifier}+i" = "split h";
           "${modifier}+v" = "split v";
           "${modifier}+s" = "layout stacking";
-          "${modifier}+w" = "layout tabbed";
+          "${modifier}+t" = "layout tabbed";
           "${modifier}+e" = "layout toggle split";
           "${modifier}+Shift+space" = "floating toggle";
-          "${modifier}+space" = "focus mode_toggle";
+          "${modifier}+Control+space" = "focus mode_toggle";
           "${modifier}+a" = "focus parent";
 
           # Workspaces
