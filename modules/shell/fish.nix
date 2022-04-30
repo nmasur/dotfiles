@@ -3,7 +3,9 @@
   users.users.${user}.shell = pkgs.fish;
 
   home-manager.users.${user} = {
-    home.packages = with pkgs; [ fzf exa fd bat ripgrep ];
+
+    home.packages = with pkgs; [ exa fd bat ripgrep ];
+
     programs.fish = {
       enable = true;
       functions = {
@@ -40,6 +42,7 @@
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
+        ls = { body = "exa $argv"; };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";
@@ -63,9 +66,19 @@
             builtins.readFile ../../fish.configlink/functions/syncnotes.fish;
         };
       };
-      interactiveShellInit = "";
+      interactiveShellInit = ''
+        bind yy fish_clipboard_copy
+        bind Y fish_clipboard_copy
+        bind -M visual y fish_clipboard_copy
+        bind p fish_clipboard_paste
+        set -g fish_vi_force_cursor
+        set -g fish_cursor_default block
+        set -g fish_cursor_insert line
+        set -g fish_cursor_visual block
+        set -g fish_cursor_replace_one underscore
+      '';
       loginShellInit = "";
-      shellAliases = { ls = "exa"; };
+      shellAliases = { };
       shellAbbrs = {
 
         # Directory aliases
@@ -141,8 +154,6 @@
       shellInit = "";
     };
 
-    home.sessionVariables = { fish_greeting = ""; };
-
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
@@ -151,6 +162,14 @@
     programs.fzf = {
       enable = true;
       enableFishIntegration = true;
+    };
+
+    home.sessionVariables = let fzfCommand = "fd --type file";
+    in {
+      fish_greeting = "";
+      FZF_DEFAULT_COMMAND = fzfCommand;
+      FZF_CTRL_T_COMMAND = fzfCommand;
+      FZF_DEFAULT_OPTS = "-m --height 50% --border";
     };
 
     programs.zoxide = {
