@@ -41,18 +41,10 @@
             ./nixos/hardware-configuration.nix
             ./nixos/configuration.nix
             ./nixos/home.nix
-            ./modules/desktop/xorg.nix
-            ./modules/desktop/i3.nix
-            ./modules/desktop/fonts.nix
-            ./modules/hardware/boot.nix
-            ./modules/hardware/mouse.nix
-            ./modules/hardware/keyboard.nix
-            ./modules/hardware/monitors.nix
-            ./modules/hardware/audio.nix
-            ./modules/hardware/networking.nix
-            ./modules/system/timezone.nix
-            ./modules/system/doas.nix
-            ./modules/system/user.nix
+            ./modules/desktop
+            ./modules/hardware
+            ./modules/system
+            ./modules/shell
             ./modules/gaming
             ./modules/services/keybase.nix
             ./modules/applications/firefox.nix
@@ -60,10 +52,6 @@
             ./modules/applications/media.nix
             ./modules/applications/1password.nix
             ./modules/applications/discord.nix
-            ./modules/shell/fish.nix
-            ./modules/shell/utilities.nix
-            ./modules/shell/git.nix
-            ./modules/shell/github.nix
             ./modules/editor/neovim.nix
           ];
         };

@@ -1,34 +1,37 @@
-{ config, pkgs, identity, gui, ... }: {
+{ config, pkgs, lib, identity, gui, ... }: {
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = gui.enable;
+  config = lib.mkIf gui.enable {
 
-    # Enable touchpad support
-    libinput.enable = true;
+    # Enable the X11 windowing system.
+    services.xserver = {
+      enable = gui.enable;
 
-    # Login screen
-    displayManager = {
-      lightdm = {
-        enable = config.services.xserver.enable;
+      # Enable touchpad support
+      libinput.enable = true;
 
-        # Make the login screen dark
-        greeters.gtk.theme.name = gui.gtkTheme;
+      # Login screen
+      displayManager = {
+        lightdm = {
+          enable = config.services.xserver.enable;
 
+          # Make the login screen dark
+          greeters.gtk.theme.name = gui.gtkTheme;
+
+        };
       };
+
+    };
+
+    environment.systemPackages = with pkgs;
+      [
+        xclip # Clipboard
+      ];
+
+    home-manager.users.${identity.user}.programs.fish.shellAliases = {
+      pbcopy = "xclip -selection clipboard -in";
+      pbpaste = "xclip -selection clipboard -out";
     };
 
   };
 
-  environment.systemPackages = with pkgs;
-    [
-      xclip # Clipboard
-    ];
-
-  home-manager.users.${identity.user}.programs.fish.shellAliases = {
-    pbcopy = "xclip -selection clipboard -in";
-    pbpaste = "xclip -selection clipboard -out";
-  };
-
 }
-

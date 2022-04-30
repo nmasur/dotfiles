@@ -1,11 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, lib, gui, ... }: {
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  config = lib.mkIf gui.enable {
+    sound.enable = true;
+    hardware.pulseaudio.enable = true;
 
-  environment.systemPackages = with pkgs;
-    [
-      pamixer # Audio control
-    ];
+    environment.systemPackages = with pkgs;
+      [
+        pamixer # Audio control
+      ];
+  };
 
 }
