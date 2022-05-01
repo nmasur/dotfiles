@@ -14,16 +14,26 @@
       enable = true;
       config = let
         modifier = "Mod4"; # Super key
-        ws1 = "1:";
-        ws2 = "2:";
-        ws3 = "3:";
-        ws4 = "4:";
-        ws5 = "5:";
-        ws6 = "6:";
-        ws7 = "7:";
-        ws8 = "8:";
-        ws9 = "9:";
-        ws10 = "10:";
+        ws1 = "I";
+        ws2 = "II";
+        ws3 = "III";
+        ws4 = "IV";
+        ws5 = "V";
+        ws6 = "VI";
+        ws7 = "VII";
+        ws8 = "VIII";
+        ws9 = "IX";
+        ws10 = "X";
+        # ws1 = "1:";
+        # ws2 = "2:";
+        # ws3 = "3:";
+        # ws4 = "4:";
+        # ws5 = "5:";
+        # ws6 = "6:";
+        # ws7 = "7:";
+        # ws8 = "8:";
+        # ws9 = "9:";
+        # ws10 = "10:";
       in {
         modifier = modifier;
         assigns = {
@@ -191,7 +201,7 @@
         };
         startup = [
           {
-            command = "feh --bg-scale $HOME/Downloads/basic-wallpaper.webp";
+            command = "feh --bg-scale $HOME/Downloads/nord-desert.png";
             always = true;
             notification = false;
           }

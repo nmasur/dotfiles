@@ -2,22 +2,22 @@
 
   config = lib.mkIf config.services.xserver.enable {
 
-    environment.systemPackages = with pkgs;
-      [
-        polybarFull # Includes PulseAudio
-      ];
-
     # Used for icons
-    fonts.fonts = with pkgs; [ font-awesome ];
+    fonts.fonts = with pkgs; [ jetbrains-mono font-awesome ];
 
     home-manager.users.${identity.user} = {
 
       services.polybar = {
         enable = true;
+        package = pkgs.polybar.override {
+          i3GapsSupport = true;
+          pulseSupport = true;
+          githubSupport = true;
+        };
         script = "polybar &";
         config = let
           colors = {
-            background = "#282A2E";
+            background = "#282828";
             background-alt = "#373B41";
             foreground = "#C5C8C6";
             primary = "#F0C674";
@@ -27,35 +27,41 @@
           };
         in {
           "bar/main" = {
+            bottom = false;
             width = "100%";
-            height = "24pt";
-            radius = 6;
+            height = "22pt";
+            radius = 0;
+            # offset-y = "5%";
             # dpi = 96;
             background = colors.background;
             foreground = colors.foreground;
             line-size = "3pt";
-            border-size = "4pt";
-            border-color = "#00000000";
-            padding-left = 0;
-            padding-right = 1;
+            border-top-size = 0;
+            border-right-size = 0;
+            border-left-size = 0;
+            border-bottom-size = "4pt";
+            border-color = "#1d2021";
+            padding-left = 2;
+            padding-right = 2;
             module-margin = 1;
-            separator = "|";
-            separator-foreground = colors.disabled;
-            font-0 = "monospace;2";
-            font-1 = "Font Awesome 5 Free";
-            font-2 = "Font Awesome 5 Free Solid";
-            font-3 = "Font Awesome 5 Brands";
-            modules-left = "xworkspaces xwindow";
-            modules-right =
-              "filesystem pulseaudio xkeyboard memory cpu wlan eth date";
+            # separator = "|";
+            # separator-foreground = colors.disabled;
+            font-0 = "JetBrainsMono:size=10;2";
+            # font-0 = "monospace;2";
+            font-1 = "Font Awesome 5 Free:size=10";
+            font-2 = "Font Awesome 5 Free Solid:size=10";
+            font-3 = "Font Awesome 5 Brands:size=10";
+            modules-left = "xworkspaces";
+            modules-center = "xwindow";
+            modules-right = "pulseaudio date";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
-            # tray-position = right
-            # wm-restack = generic
-            # wm-restack = bspwm
-            # wm-restack = i3
-            # override-redirect = true
+            tray-position = "right";
+            # wm-restack = "generic";
+            # wm-restack = "bspwm";
+            # wm-restack = "i3";
+            # override-redirect = true;
           };
           "module/xworkspaces" = {
             type = "internal/xworkspaces";
@@ -88,10 +94,13 @@
             type = "internal/pulseaudio";
             format-volume-prefix = "VOL ";
             format-volume-prefix-foreground = colors.primary;
-            format-volume = "<label-volume>";
+            format-volume = "<ramp-volume> <label-volume>";
             label-volume = "%percentage%%";
-            label-muted = "muted";
+            label-muted = "";
             label-muted-foreground = colors.disabled;
+            ramp-volume-0 = "";
+            ramp-volume-1 = "";
+            ramp-volume-2 = "";
           };
           # "module/xkeyboard" = {
           # type = "internal/xkeyboard";
@@ -137,14 +146,14 @@
           "module/date" = {
             type = "internal/date";
             interval = 1;
-            date = "%H:%M";
+            date = "%H:%M:%S";
             date-alt = "%Y-%m-%d %H:%M:%S";
-            label = "%date%";
+            label = " %date%";
             label-foreground = colors.primary;
           };
           "settings" = {
             screenchange-reload = true;
-            pseudo-transparency = true;
+            pseudo-transparency = false;
           };
         };
       };
