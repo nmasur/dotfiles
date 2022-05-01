@@ -12,8 +12,6 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
-      # Gather packages
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
       identity = {
         user = "noah";
         name = "Noah Masur";
@@ -23,7 +21,7 @@
       gui = {
         enable = false;
         font = {
-          package = pkgs.victor-mono;
+          package = "victor-mono";
           name = "Victor Mono";
         };
         gtkTheme = "Adwaita-dark";
@@ -56,10 +54,13 @@
           ];
         };
       };
-
-      devShells.x86_64-linux.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ stylua nixfmt shfmt shellcheck ];
-      };
+      devShells.x86_64-linux =
+        let pkgs = import nixpkgs { system = "x86_64-linux"; };
+        in {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [ stylua nixfmt shfmt shellcheck ];
+          };
+        };
 
     };
 }
