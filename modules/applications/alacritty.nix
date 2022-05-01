@@ -14,6 +14,7 @@
             x = 20;
             y = 20;
           };
+          opacity = 0.7;
         };
         scrolling.history = 10000;
         font = {

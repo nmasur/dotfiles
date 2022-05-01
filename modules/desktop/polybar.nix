@@ -3,7 +3,8 @@
   config = lib.mkIf config.services.xserver.enable {
 
     # Used for icons
-    fonts.fonts = with pkgs; [ jetbrains-mono font-awesome ];
+    fonts.fonts = with pkgs;
+      [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
 
     home-manager.users.${identity.user} = {
 
@@ -46,11 +47,11 @@
             module-margin = 1;
             # separator = "|";
             # separator-foreground = colors.disabled;
-            font-0 = "JetBrainsMono:size=10;2";
+            font-0 = "JetBrainsMono Nerd Font:size=10;2";
             # font-0 = "monospace;2";
-            font-1 = "Font Awesome 5 Free:size=10";
-            font-2 = "Font Awesome 5 Free Solid:size=10";
-            font-3 = "Font Awesome 5 Brands:size=10";
+            # font-1 = "Font Awesome 5 Free:size=10";
+            # font-2 = "Font Awesome 5 Free Solid:size=10";
+            # font-3 = "Font Awesome 5 Brands:size=10";
             modules-left = "xworkspaces";
             modules-center = "xwindow";
             modules-right = "pulseaudio date";
@@ -92,14 +93,14 @@
           # };
           "module/pulseaudio" = {
             type = "internal/pulseaudio";
-            format-volume-prefix = "VOL ";
-            format-volume-prefix-foreground = colors.primary;
+            # format-volume-prefix = "VOL ";
+            # format-volume-prefix-foreground = colors.primary;
             format-volume = "<ramp-volume> <label-volume>";
             label-volume = "%percentage%%";
-            label-muted = "";
+            label-muted = "ﱝ ---";
             label-muted-foreground = colors.disabled;
             ramp-volume-0 = "";
-            ramp-volume-1 = "";
+            ramp-volume-1 = "墳";
             ramp-volume-2 = "";
           };
           # "module/xkeyboard" = {
@@ -146,7 +147,7 @@
           "module/date" = {
             type = "internal/date";
             interval = 1;
-            date = "%H:%M:%S";
+            date = "%H:%M";
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = " %date%";
             label-foreground = colors.primary;

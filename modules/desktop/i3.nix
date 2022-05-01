@@ -82,7 +82,7 @@
         floating.modifier = modifier;
         focus = {
           mouseWarping = true;
-          newWindow = "smart";
+          newWindow = "urgent";
         };
         fonts = {
           names = [ "pango:Victor Mono" "FontAwesome 12" ];
@@ -201,7 +201,7 @@
         };
         startup = [
           {
-            command = "feh --bg-scale $HOME/Downloads/nord-desert.png";
+            command = "feh --bg-scale $HOME/Downloads/carbon-fiber.jpg";
             always = true;
             notification = false;
           }

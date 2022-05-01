@@ -1,5 +1,5 @@
 { ... }: {
 
-  imports = [ ./xorg.nix ./fonts.nix ./i3.nix ./polybar.nix ];
+  imports = [ ./xorg.nix ./fonts.nix ./i3.nix ./polybar.nix ./picom.nix ];
 
 }
