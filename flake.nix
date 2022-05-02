@@ -36,9 +36,8 @@
           };
           modules = [
             home-manager.nixosModules.home-manager
-            ./nixos/hardware-configuration.nix
-            ./nixos/configuration.nix
-            ./nixos/home.nix
+            ./hosts/desktop/hardware-configuration.nix
+            ./modules/common.nix
             ./modules/desktop
             ./modules/hardware
             ./modules/system
@@ -51,6 +50,7 @@
             ./modules/applications/1password.nix
             ./modules/applications/discord.nix
             ./modules/editor/neovim.nix
+            ./modules/editor/notes.nix
           ];
         };
       };

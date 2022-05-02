@@ -38,3 +38,8 @@ programs:
 
 python: brews
 	npm install -g pyright
+
+nix:
+	git add -A
+	nixos-rebuild build --flake ".#desktop"
+	doas ./result/bin/switch-to-configuration switch

@@ -31,6 +31,8 @@ in {
       qrencode # Generate qr codes
       vimv # Batch rename files
       dig # DNS lookup
+      # gnupg
+      # pass
     ];
 
     home.file = {
