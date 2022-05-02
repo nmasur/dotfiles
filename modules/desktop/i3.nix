@@ -2,7 +2,12 @@
 
   config = lib.mkIf config.services.xserver.enable {
 
-    services.xserver.windowManager = { i3 = { enable = true; }; };
+    services.xserver.windowManager = {
+      i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       dmenu # Launcher
@@ -12,6 +17,7 @@
 
     home-manager.users.${identity.user}.xsession.windowManager.i3 = {
       enable = true;
+      package = pkgs.i3-gaps;
       config = let
         modifier = "Mod4"; # Super key
         ws1 = "I";
@@ -24,16 +30,6 @@
         ws8 = "VIII";
         ws9 = "IX";
         ws10 = "X";
-        # ws1 = "1:";
-        # ws2 = "2:";
-        # ws3 = "3:";
-        # ws4 = "4:";
-        # ws5 = "5:";
-        # ws6 = "6:";
-        # ws7 = "7:";
-        # ws8 = "8:";
-        # ws9 = "9:";
-        # ws10 = "10:";
       in {
         modifier = modifier;
         assigns = {
@@ -46,21 +42,23 @@
         colors = let
           background = "#2f343f";
           inactiveBackground = "#2f343f";
+          border = "#F0C674";
+          inactiveBorder = "#E2B860";
           text = "#f3f4f5";
           inactiveText = "#676E7D";
           urgentBackground = "#E53935";
-          indicator = "#00ff00";
+          # indicator = "#00ff00";
+          indicator = "#00000000";
         in {
           background = background;
           focused = {
-            inherit background indicator text;
-            border = background;
+            inherit background indicator text border;
             childBorder = background;
           };
           focusedInactive = {
             inherit indicator;
             background = inactiveBackground;
-            border = inactiveBackground;
+            border = inactiveBorder;
             childBorder = inactiveBackground;
             text = inactiveText;
           };
@@ -68,7 +66,7 @@
           unfocused = {
             inherit indicator;
             background = inactiveBackground;
-            border = inactiveBackground;
+            border = inactiveBorder;
             childBorder = inactiveBackground;
             text = inactiveText;
           };
@@ -214,12 +212,24 @@
           }
         ];
         window = {
-          border = 1;
-          hideEdgeBorders = "both";
+          border = 0;
+          hideEdgeBorders = "smart";
           titlebar = false;
         };
         workspaceAutoBackAndForth = false;
         workspaceOutputAssign = [ ];
+        gaps = {
+          bottom = 0;
+          top = 0;
+          left = 0;
+          right = 0;
+          horizontal = 0;
+          vertical = 0;
+          inner = 0;
+          outer = 0;
+          smartBorders = "off";
+          smartGaps = false;
+        };
       };
       extraConfig = "";
     };

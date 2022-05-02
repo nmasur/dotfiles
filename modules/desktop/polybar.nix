@@ -34,7 +34,7 @@
             radius = 0;
             # offset-y = "5%";
             # dpi = 96;
-            background = colors.background;
+            background = "#00000000";
             foreground = colors.foreground;
             line-size = "3pt";
             border-top-size = 0;
@@ -96,6 +96,8 @@
             # format-volume-prefix = "VOL ";
             # format-volume-prefix-foreground = colors.primary;
             format-volume = "<ramp-volume> <label-volume>";
+            # format-volume-background = colors.background;
+            # label-volume-background = colors.background;
             label-volume = "%percentage%%";
             label-muted = "ﱝ ---";
             label-muted-foreground = colors.disabled;
@@ -151,6 +153,7 @@
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = " %date%";
             label-foreground = colors.primary;
+            # format-background = colors.background;
           };
           "settings" = {
             screenchange-reload = true;
