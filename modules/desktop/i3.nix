@@ -42,8 +42,10 @@
         colors = let
           background = "#2f343f";
           inactiveBackground = "#2f343f";
-          border = "#F0C674";
-          inactiveBorder = "#E2B860";
+          border = "#2f343f";
+          inactiveBorder = "#2f343f";
+          # border = "#F0C674";
+          # inactiveBorder = "#E2B860";
           text = "#f3f4f5";
           inactiveText = "#676E7D";
           urgentBackground = "#E53935";
