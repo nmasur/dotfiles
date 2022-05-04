@@ -34,14 +34,14 @@
             radius = 0;
             # offset-y = "5%";
             # dpi = 96;
-            background = "#00000000";
-            foreground = colors.foreground;
+            background = config.theme.colors.primary.background;
+            foreground = config.theme.colors.primary.foreground;
             line-size = "3pt";
             border-top-size = 0;
             border-right-size = 0;
             border-left-size = 0;
             border-bottom-size = "4pt";
-            border-color = "#1d2021";
+            border-color = config.theme.colors.cursor.text;
             padding-left = 2;
             padding-right = 2;
             module-margin = 1;
@@ -67,16 +67,17 @@
           "module/xworkspaces" = {
             type = "internal/xworkspaces";
             label-active = "%name%";
-            label-active-background = colors.background-alt;
-            label-active-underline = colors.primary;
+            label-active-background = config.theme.colors.primary.foreground;
+            label-active-foreground = config.theme.colors.primary.background;
+            # label-active-underline = config.theme.colors.normal.yellow;
             label-active-padding = 1;
             label-occupied = "%name%";
             label-occupied-padding = 1;
             label-urgent = "%name%";
-            label-urgent-background = colors.alert;
+            label-urgent-background = config.theme.colors.bright.red;
             label-urgent-padding = 1;
             label-empty = "%name%";
-            label-empty-foreground = colors.disabled;
+            label-empty-foreground = config.theme.colors.normal.white;
             label-empty-padding = 1;
           };
           "module/xwindow" = {
@@ -98,9 +99,10 @@
             format-volume = "<ramp-volume> <label-volume>";
             # format-volume-background = colors.background;
             # label-volume-background = colors.background;
+            format-volume-foreground = config.theme.colors.primary.foreground;
             label-volume = "%percentage%%";
             label-muted = "ﱝ ---";
-            label-muted-foreground = colors.disabled;
+            label-muted-foreground = config.theme.colors.normal.white;
             ramp-volume-0 = "";
             ramp-volume-1 = "墳";
             ramp-volume-2 = "";
@@ -149,10 +151,10 @@
           "module/date" = {
             type = "internal/date";
             interval = 1;
-            date = "%H:%M";
+            date = "%H:%M %p";
             date-alt = "%Y-%m-%d %H:%M:%S";
-            label = " %date%";
-            label-foreground = colors.primary;
+            label = "%date%";
+            # label-foreground = config.theme.colors.normal.yellow;
             # format-background = colors.background;
           };
           "settings" = {

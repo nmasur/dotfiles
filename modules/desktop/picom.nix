@@ -4,26 +4,35 @@
     home-manager.users.${identity.user} = {
 
       services.picom = {
-        enable = true;
-        blur = false;
+        enable = false;
+        blur = true;
         blurExclude = [ ];
         # extraOptions = ''
-        # shadow-radius = 60
-        # corner-radius = 20
+        # shadow-radius = 20
         # '';
+        extraOptions = ''
+          shadow-radius = 20
+          corner-radius = 10
+          blur-size = 20
+          rounded-corners-exclude = [ 
+            "window_type = 'dock'",
+            "class_g = 'i3-frame'"
+          ]
+        '';
         fade = false;
         experimentalBackends = true;
         inactiveDim = "0.05";
         inactiveOpacity = "1.0";
         menuOpacity = "1.0";
         noDNDShadow = false;
+        noDockShadow = false;
         opacityRule = [
           "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'" # Hide tabbed windows
         ];
-        shadow = false;
+        shadow = true;
         shadowExclude = [ ];
-        shadowOffsets = [ (-30) (-30) ];
-        shadowOpacity = "0.25";
+        shadowOffsets = [ (-10) (-10) ];
+        shadowOpacity = "0.5";
         vSync = false;
       };
 

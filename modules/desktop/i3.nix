@@ -201,7 +201,8 @@
         };
         startup = [
           {
-            command = "feh --bg-scale $HOME/Downloads/carbon-fiber.jpg";
+            command =
+              "feh --bg-fill ${builtins.toString config.theme.wallpaper}";
             always = true;
             notification = false;
           }
@@ -220,18 +221,18 @@
         };
         workspaceAutoBackAndForth = false;
         workspaceOutputAssign = [ ];
-        gaps = {
-          bottom = 0;
-          top = 0;
-          left = 0;
-          right = 0;
-          horizontal = 0;
-          vertical = 0;
-          inner = 0;
-          outer = 0;
-          smartBorders = "off";
-          smartGaps = false;
-        };
+        # gaps = {
+        # bottom = 8;
+        # top = 8;
+        # left = 8;
+        # right = 8;
+        # horizontal = 15;
+        # vertical = 15;
+        # inner = 15;
+        # outer = 0;
+        # smartBorders = "off";
+        # smartGaps = false;
+        # };
       };
       extraConfig = "";
     };

@@ -24,6 +24,7 @@
           package = "victor-mono";
           name = "Victor Mono";
         };
+        theme = "gruvbox";
         gtkTheme = "Adwaita-dark";
       };
     in {
@@ -39,6 +40,7 @@
             ./hosts/desktop/hardware-configuration.nix
             ./modules/common.nix
             ./modules/desktop
+            ./modules/theme
             ./modules/hardware
             ./modules/system
             ./modules/shell
