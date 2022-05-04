@@ -102,7 +102,7 @@
             format-volume-foreground = config.theme.colors.primary.foreground;
             label-volume = "%percentage%%";
             label-muted = "ﱝ ---";
-            label-muted-foreground = config.theme.colors.normal.white;
+            label-muted-foreground = config.theme.colors.bright.black;
             ramp-volume-0 = "";
             ramp-volume-1 = "墳";
             ramp-volume-2 = "";
@@ -151,7 +151,7 @@
           "module/date" = {
             type = "internal/date";
             interval = 1;
-            date = "%H:%M %p";
+            date = "%l:%M %p";
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = "%date%";
             # label-foreground = config.theme.colors.normal.yellow;

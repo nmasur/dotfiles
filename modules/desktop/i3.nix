@@ -116,7 +116,8 @@
 
           # Launchers
           "${modifier}+Return" = "exec alacritty";
-          "${modifier}+space" = "exec --no-startup-id dmenu_run";
+          "${modifier}+space" =
+            "exec --no-startup-id ${config.launcherCommand}";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
           "${modifier}+Shift+q" = ''
