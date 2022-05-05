@@ -81,7 +81,7 @@
         };
         floating.modifier = modifier;
         focus = {
-          mouseWarping = true;
+          mouseWarping = false;
           newWindow = "urgent";
         };
         fonts = {

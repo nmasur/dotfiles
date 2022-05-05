@@ -32,6 +32,7 @@
             width = "100%";
             height = "22pt";
             radius = 0;
+            # offset-y = -5;
             # offset-y = "5%";
             # dpi = 96;
             background = config.theme.colors.primary.background;

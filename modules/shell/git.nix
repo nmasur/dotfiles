@@ -4,6 +4,11 @@ let home-packages = config.home-manager.users.${identity.user}.home.packages;
 
 in {
 
+  home-manager.users.root.programs.git = {
+    enable = true;
+    extraConfig.safe.directory = "/home/${identity.user}/dev/personal/dotfiles";
+  };
+
   home-manager.users.${identity.user} = {
     programs.git = {
       enable = true;
@@ -11,7 +16,7 @@ in {
       userEmail = identity.gitEmail;
       extraConfig = {
         pager = { branch = "false"; };
-        safe = { directory = builtins.toString ../../.; };
+        safe = { directory = "/home/${identity.user}/dev/personal/dotfiles"; };
         pull = { ff = "only"; };
       };
     };
