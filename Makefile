@@ -41,4 +41,4 @@ python: brews
 
 nix:
 	git add -A
-	doas nixos-rebuild build --flake ".#desktop"
+	doas nixos-rebuild switch --flake .

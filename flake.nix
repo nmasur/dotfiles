@@ -37,6 +37,7 @@
           };
           modules = [
             home-manager.nixosModules.home-manager
+            { networking.hostName = "desktop"; }
             ./hosts/desktop/hardware-configuration.nix
             ./modules/common.nix
             ./modules/desktop
