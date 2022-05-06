@@ -35,6 +35,8 @@ in {
       # pass
     ];
 
+    programs.zoxide.enable = true; # Shortcut jump command
+
     home.file = {
       ".rgignore".text = ignorePatterns;
       ".fdignore".text = ignorePatterns;

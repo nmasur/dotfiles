@@ -1,10 +1,10 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   users.users.${config.user}.shell = pkgs.fish;
 
   home-manager.users.${config.user} = {
 
-    home.packages = with pkgs; [ exa fd bat ripgrep ];
+    home.packages = with pkgs; [ exa fd bat ripgrep curl ];
 
     programs.fish = {
       enable = true;
@@ -48,14 +48,6 @@
           argumentNames = "filename";
           body = builtins.readFile ../../fish.configlink/functions/note.fish;
         };
-        projects = {
-          description = "Jump to a project";
-          body = ''
-            set projdir (ls $PROJ | fzf)
-            and cd $PROJ/$projdir
-            and commandline -f execute
-          '';
-        };
         recent = {
           description = "Open a recent file in Vim";
           body = builtins.readFile ../../fish.configlink/functions/recent.fish;
@@ -86,7 +78,6 @@
         lh = "ls -lh";
         ll = "ls -alhF";
         la = "ls -a";
-        lf = "ls -lh | fzf";
         c = "cd";
         "-" = "cd -";
         mkd = "mkdir -pv";
@@ -95,9 +86,7 @@
         s = "sudo";
         sc = "systemctl";
         scs = "systemctl status";
-        reb = "nixos-rebuild switch -I nixos-config=${
-            builtins.toString ../../nixos/.
-          }/configuration.nix";
+        m = "make";
 
         # Tmux
         ta = "tmux attach-session";
@@ -110,10 +99,6 @@
 
         # Notes
         sn = "syncnotes";
-
-        # CLI Tools
-        h = "http -Fh --all"; # Curl site for headers
-        m = "make"; # For makefiles
 
         # Fun CLI Tools
         weather = "curl wttr.in/$WEATHER_CITY";
@@ -154,37 +139,11 @@
       shellInit = "";
     };
 
-    programs.starship = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    home.sessionVariables.fish_greeting = "";
 
-    programs.fzf = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    programs.starship.enableFishIntegration = true;
+    programs.zoxide.enableFishIntegration = true;
+    programs.fzf.enableFishIntegration = true;
 
-    home.sessionVariables = let fzfCommand = "fd --type file";
-    in {
-      fish_greeting = "";
-      FZF_DEFAULT_COMMAND = fzfCommand;
-      FZF_CTRL_T_COMMAND = fzfCommand;
-      FZF_DEFAULT_OPTS = "-m --height 50% --border";
-    };
-
-    programs.zoxide = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
-    xdg.configFile = {
-      "starship.toml".source = ../../starship/starship.toml.configlink;
-    };
-
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      config = { whitelist = { prefix = [ "${builtins.toString ../.}/" ]; }; };
-    };
   };
 }
