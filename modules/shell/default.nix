@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./fish.nix
+    ./fish
     ./starship.nix
     ./fzf.nix
     ./direnv.nix

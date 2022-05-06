@@ -11,8 +11,7 @@
       functions = {
         commandline-git-commits = {
           description = "Insert commit into commandline";
-          body = builtins.readFile
-            ../../fish.configlink/functions/commandline-git-commits.fish;
+          body = builtins.readFile ./functions/commandline-git-commits.fish;
         };
         copy = {
           description = "Copy file contents into clipboard";
@@ -20,7 +19,7 @@
         };
         edit = {
           description = "Open a file in Vim";
-          body = builtins.readFile ../../fish.configlink/functions/edit.fish;
+          body = builtins.readFile ./functions/edit.fish;
         };
         envs = {
           description = "Evaluate a bash-like environment variables file";
@@ -29,15 +28,12 @@
         fcd = {
           description = "Jump to directory";
           argumentNames = "directory";
-          body = builtins.readFile ../../fish.configlink/functions/fcd.fish;
+          body = builtins.readFile ./functions/fcd.fish;
         };
         fish_user_key_bindings = {
-          body = builtins.readFile
-            ../../fish.configlink/functions/fish_user_key_bindings.fish;
+          body = builtins.readFile ./functions/fish_user_key_bindings.fish;
         };
-        ip = {
-          body = builtins.readFile ../../fish.configlink/functions/ip.fish;
-        };
+        ip = { body = builtins.readFile ./functions/ip.fish; };
         json = {
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
@@ -46,16 +42,15 @@
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";
-          body = builtins.readFile ../../fish.configlink/functions/note.fish;
+          body = builtins.readFile ./functions/note.fish;
         };
         recent = {
           description = "Open a recent file in Vim";
-          body = builtins.readFile ../../fish.configlink/functions/recent.fish;
+          body = builtins.readFile ./functions/recent.fish;
         };
         syncnotes = {
           description = "Full git commit on notes";
-          body =
-            builtins.readFile ../../fish.configlink/functions/syncnotes.fish;
+          body = builtins.readFile ./functions/syncnotes.fish;
         };
       };
       interactiveShellInit = ''

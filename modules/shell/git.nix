@@ -66,17 +66,13 @@ in {
 
       programs.fish.functions = lib.mkIf (builtins.elem pkgs.fzf home-packages
         && builtins.elem pkgs.bat home-packages) {
-          git = {
-            body = builtins.readFile ../../fish.configlink/functions/git.fish;
-          };
+          git = { body = builtins.readFile ./fish/functions/git.fish; };
           git-add-fuzzy = {
-            body = builtins.readFile
-              ../../fish.configlink/functions/git-add-fuzzy.fish;
+            body = builtins.readFile ./fish/functions/git-add-fuzzy.fish;
           };
           git-fuzzy-branch = {
             argumentNames = "header";
-            body = builtins.readFile
-              ../../fish.configlink/functions/git-fuzzy-branch.fish;
+            body = builtins.readFile ./fish/functions/git-fuzzy-branch.fish;
           };
           git-checkout-fuzzy = {
             body = ''
@@ -103,26 +99,21 @@ in {
             '';
           };
           git-show-fuzzy = {
-            body = builtins.readFile
-              ../../fish.configlink/functions/git-show-fuzzy.fish;
+            body = builtins.readFile ./fish/functions/git-show-fuzzy.fish;
           };
           git-commits = {
-            body = builtins.readFile
-              ../../fish.configlink/functions/git-commits.fish;
+            body = builtins.readFile ./fish/functions/git-commits.fish;
           };
           git-history = {
-            body = builtins.readFile
-              ../../fish.configlink/functions/git-history.fish;
+            body = builtins.readFile ./fish/functions/git-history.fish;
           };
           git-push-upstream = {
             description = "Create upstream branch";
-            body = builtins.readFile
-              ../../fish.configlink/functions/git-push-upstream.fish;
+            body = builtins.readFile ./fish/functions/git-push-upstream.fish;
           };
           uncommitted = {
             description = "Find uncommitted git repos";
-            body = builtins.readFile
-              ../../fish.configlink/functions/uncommitted.fish;
+            body = builtins.readFile ./fish/functions/uncommitted.fish;
           };
         };
     };
