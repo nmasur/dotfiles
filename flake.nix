@@ -20,7 +20,7 @@
         gitEmail = "7386960+nmasur@users.noreply.github.com";
         gui = {
           colorscheme = (import ./modules/colorscheme/gruvbox);
-          wallpaper = ./modules/theme/gruvbox/gray-forest.jpg;
+          wallpaper = ./media/wallpaper/gray-forest.jpg;
           gtkTheme = "Adwaita-dark";
         };
       };
