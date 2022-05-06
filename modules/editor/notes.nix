@@ -1,8 +1,9 @@
-{ identity, ... }: {
-  home-manager.users.${identity.user} = {
+{ config, ... }: {
+
+  home-manager.users.${config.user} = {
 
     home.sessionVariables = {
-      NOTES_PATH = "/home/${identity.user}/dev/personal/notes";
+      NOTES_PATH = "/home/${config.user}/dev/personal/notes";
     };
 
   };

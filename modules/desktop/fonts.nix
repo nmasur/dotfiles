@@ -1,13 +1,12 @@
-{ pkgs, lib, gui, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = lib.mkIf gui.enable {
+  config = lib.mkIf config.gui.enable {
 
     fonts.fonts = with pkgs;
       [
-        pkgs."${gui.font.package}" # Used for Vim and Terminal
-        # siji # More icons for Polybar
+        pkgs.victor-mono # Used for Vim and Terminal
       ];
-    fonts.fontconfig.defaultFonts.monospace = [ gui.font.name ];
+    fonts.fontconfig.defaultFonts.monospace = [ "Victor Mono" ];
 
   };
 

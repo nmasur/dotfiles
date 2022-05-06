@@ -1,6 +1,6 @@
-{ config, pkgs, identity, gui, ... }: {
+{ config, pkgs, ... }: {
 
-  home-manager.users.${identity.user} = {
+  home-manager.users.${config.user} = {
     xsession.windowManager.i3.config.terminal = "alacritty";
     programs.alacritty = {
       enable = true;
@@ -14,12 +14,15 @@
             x = 20;
             y = 20;
           };
-          opacity = config.theme.opacity;
+          opacity = 1.0;
         };
         scrolling.history = 10000;
         font = {
           size = 14.0;
-          normal = { family = gui.font.name; };
+          normal = {
+            family =
+              builtins.head config.fonts.fontconfig.defaultFonts.monospace;
+          };
         };
         key_bindings = [
           {
@@ -39,37 +42,36 @@
             action = "ToggleViMode";
           }
         ];
-        colors = config.theme.colors;
-        # colors = {
-        # primary = {
-        # background = "#282828";
-        # foreground = "#d5c4a1";
-        # };
-        # cursor = {
-        # text = "#1d2021";
-        # cursor = "#d5c4a1";
-        # };
-        # normal = {
-        # black = "#1d2021";
-        # red = "#fb4934";
-        # green = "#b8bb26";
-        # yellow = "#fabd2f";
-        # blue = "#83a598";
-        # magenta = "#d3869b";
-        # cyan = "#8ec07c";
-        # white = "#d5c4a1";
-        # };
-        # bright = {
-        # black = "#665c54";
-        # red = "#fe8019";
-        # green = "#3c3836";
-        # yellow = "#504945";
-        # blue = "#bdae93";
-        # magenta = "#ebdbb2";
-        # cyan = "#d65d0e";
-        # white = "#fbf1c7";
-        # };
-        # };
+        colors = {
+          primary = {
+            background = config.gui.colorscheme.base00;
+            foreground = config.gui.colorscheme.base05;
+          };
+          cursor = {
+            text = "#1d2021";
+            cursor = config.gui.colorscheme.base05;
+          };
+          normal = {
+            black = "#1d2021";
+            red = config.gui.colorscheme.base08;
+            green = config.gui.colorscheme.base0B;
+            yellow = config.gui.colorscheme.base0A;
+            blue = config.gui.colorscheme.base0D;
+            magenta = config.gui.colorscheme.base0E;
+            cyan = config.gui.colorscheme.base0C;
+            white = config.gui.colorscheme.base05;
+          };
+          bright = {
+            black = config.gui.colorscheme.base03;
+            red = config.gui.colorscheme.base09;
+            green = config.gui.colorscheme.base01;
+            yellow = config.gui.colorscheme.base02;
+            blue = config.gui.colorscheme.base04;
+            magenta = config.gui.colorscheme.base06;
+            cyan = config.gui.colorscheme.base0F;
+            white = config.gui.colorscheme.base07;
+          };
+        };
         draw_bold_text_with_bright_colors = false;
       };
     };

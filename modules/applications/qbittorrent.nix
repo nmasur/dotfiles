@@ -1,8 +1,8 @@
-{ config, pkgs, lib, gui, identity, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = lib.mkIf gui.enable {
+  config = lib.mkIf config.gui.enable {
 
-    home-manager.users.${identity.user} = {
+    home-manager.users.${config.user} = {
 
       home.packages = with pkgs; [ qbittorrent ];
 

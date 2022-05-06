@@ -1,7 +1,7 @@
-{ pkgs, lib, identity, gui, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = lib.mkIf gui.enable {
-    home-manager.users.${identity.user} = {
+  config = lib.mkIf config.gui.enable {
+    home-manager.users.${config.user} = {
       nixpkgs.config.allowUnfree = true;
       home.packages = with pkgs; [ discord ];
     };

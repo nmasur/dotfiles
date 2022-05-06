@@ -10,11 +10,35 @@
     ./rofi.nix
   ];
 
-  options = {
-    launcherCommand = lib.mkOption {
-      type = lib.types.str;
-      description = "Command to use for launching";
+  options = with lib; {
+
+    gui = {
+      enable = mkEnableOption {
+        description = "Enable graphics";
+        default = false;
+      };
+      compositor.enable = mkEnableOption {
+        description = "Enable transparency, blur, shadows";
+        default = false;
+      };
+      launcherCommand = mkOption {
+        type = types.str;
+        description = "Command to use for launching";
+      };
+      gtkTheme = mkOption {
+        type = types.str;
+        description = "Theme for GTK applications";
+      };
+      colorscheme = mkOption {
+        type = types.attrs;
+        description = "Base16 color scheme";
+      };
+      wallpaper = mkOption {
+        type = types.path;
+        description = "Wallpaper background image file";
+      };
     };
+
   };
 
 }

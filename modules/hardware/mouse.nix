@@ -1,6 +1,6 @@
-{ pkgs, lib, gui, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = lib.mkIf gui.enable {
+  config = lib.mkIf config.gui.enable {
 
     # Mouse config
     services.ratbagd.enable = true;

@@ -1,9 +1,9 @@
-{ pkgs, lib, gui, identity, ... }: {
+{ config, pkgs, lib, ... }: {
 
   # Timezone required for Redshift schedule
   imports = [ ../system/timezone.nix ];
 
-  config = lib.mkIf gui.enable {
+  config = lib.mkIf config.gui.enable {
 
     environment.systemPackages = with pkgs;
       [
@@ -23,7 +23,7 @@
     hardware.i2c.enable = true;
 
     # Grant user access to external monitors
-    users.users.${identity.user}.extraGroups = [ "i2c" ];
+    users.users.${config.user}.extraGroups = [ "i2c" ];
 
     services.xserver.displayManager = {
 

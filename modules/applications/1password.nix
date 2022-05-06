@@ -1,8 +1,8 @@
-{ pkgs, lib, gui, identity, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = lib.mkIf gui.enable {
+  config = lib.mkIf config.gui.enable {
     nixpkgs.config.allowUnfree = true;
-    home-manager.users.${identity.user} = {
+    home-manager.users.${config.user} = {
       home.packages = with pkgs; [ _1password-gui ];
     };
   };

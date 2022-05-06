@@ -1,4 +1,4 @@
-{ lib, gui, ... }: {
+{ ... }: {
 
   imports = [
     ./audio.nix
@@ -7,6 +7,7 @@
     ./monitors.nix
     ./mouse.nix
     ./networking.nix
+    ./wifi.nix
   ];
 
 }

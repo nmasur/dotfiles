@@ -1,17 +1,36 @@
-{ identity, ... }: {
+{ config, lib, ... }: {
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${identity.user} = {
+  options = {
 
-    # Create a home directory for human user
-    isNormalUser = true;
+    user = lib.mkOption {
+      type = lib.types.str;
+      description = "Primary user of the system";
+      default = "nixos";
+    };
 
-    # Automatically create a password to start
-    initialPassword = "changeme";
+    passwordHash = lib.mkOption {
+      type = lib.types.str;
+      description = "Password created with mkpasswd -m sha-512";
+    };
 
-    extraGroups = [
-      "wheel" # Sudo privileges
-    ];
+  };
+
+  config = {
+
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.${config.user} = {
+
+      # Create a home directory for human user
+      isNormalUser = true;
+
+      # Automatically create a password to start
+      hashedPassword = config.passwordHash;
+
+      extraGroups = [
+        "wheel" # Sudo privileges
+      ];
+
+    };
 
   };
 

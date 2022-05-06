@@ -12,38 +12,35 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
-      identity = {
+      globals = {
         user = "noah";
-        name = "Noah Masur";
-        hostname = "nixos";
+        fullName = "Noah Masur";
+        passwordHash =
+          "$6$J15o3OLElCEncVB3$0FW.R7YFBMgtBp320kkZO.TdKvYDLHmnP6dgktdrVYCC3LUvzXj0Fj0elR/fXo9geYwwWi.EAHflCngL5T.3g/";
         gitEmail = "7386960+nmasur@users.noreply.github.com";
-      };
-      gui = {
-        enable = false;
-        font = {
-          package = "victor-mono";
-          name = "Victor Mono";
+        gui = {
+          colorscheme = (import ./modules/colorscheme/gruvbox);
+          wallpaper = ./modules/theme/gruvbox/gray-forest.jpg;
+          gtkTheme = "Adwaita-dark";
         };
-        theme = "gruvbox";
-        gtkTheme = "Adwaita-dark";
       };
     in {
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            gui = gui // { enable = true; };
-            inherit identity;
-          };
+          specialArgs = { };
           modules = [
+            globals
+            {
+              networking.hostName = "desktop";
+              gui.enable = true;
+            }
             home-manager.nixosModules.home-manager
-            { networking.hostName = "desktop"; }
             ./hosts/desktop/hardware-configuration.nix
             ./modules/common.nix
-            ./modules/desktop
-            ./modules/theme
             ./modules/hardware
             ./modules/system
+            ./modules/desktop
             ./modules/shell
             ./modules/gaming
             ./modules/services/keybase.nix

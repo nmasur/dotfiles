@@ -1,4 +1,4 @@
-{ config, pkgs, lib, identity, ... }: {
+{ config, pkgs, lib, ... }: {
 
   config = lib.mkIf config.services.xserver.enable {
 
@@ -6,7 +6,7 @@
     fonts.fonts = with pkgs;
       [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
 
-    home-manager.users.${identity.user} = {
+    home-manager.users.${config.user} = {
 
       services.polybar = {
         enable = true;
@@ -16,17 +16,7 @@
           githubSupport = true;
         };
         script = "polybar &";
-        config = let
-          colors = {
-            background = "#282828";
-            background-alt = "#373B41";
-            foreground = "#C5C8C6";
-            primary = "#F0C674";
-            secondary = "#8ABEB7";
-            alert = "#A54242";
-            disabled = "#707880";
-          };
-        in {
+        config = {
           "bar/main" = {
             bottom = false;
             width = "100%";
@@ -35,14 +25,14 @@
             # offset-y = -5;
             # offset-y = "5%";
             # dpi = 96;
-            background = config.theme.colors.primary.background;
-            foreground = config.theme.colors.primary.foreground;
+            background = config.gui.colorscheme.base00;
+            foreground = config.gui.colorscheme.base07;
             line-size = "3pt";
             border-top-size = 0;
             border-right-size = 0;
             border-left-size = 0;
             border-bottom-size = "4pt";
-            border-color = config.theme.colors.cursor.text;
+            border-color = config.gui.colorscheme.base02;
             padding-left = 2;
             padding-right = 2;
             module-margin = 1;
@@ -68,17 +58,17 @@
           "module/xworkspaces" = {
             type = "internal/xworkspaces";
             label-active = "%name%";
-            label-active-background = config.theme.colors.primary.foreground;
-            label-active-foreground = config.theme.colors.primary.background;
+            label-active-background = config.gui.colorscheme.base07;
+            label-active-foreground = config.gui.colorscheme.base00;
             # label-active-underline = config.theme.colors.normal.yellow;
             label-active-padding = 1;
             label-occupied = "%name%";
             label-occupied-padding = 1;
             label-urgent = "%name%";
-            label-urgent-background = config.theme.colors.bright.red;
+            label-urgent-background = config.gui.colorscheme.base08;
             label-urgent-padding = 1;
             label-empty = "%name%";
-            label-empty-foreground = config.theme.colors.normal.white;
+            label-empty-foreground = config.gui.colorscheme.base06;
             label-empty-padding = 1;
           };
           "module/xwindow" = {
@@ -100,10 +90,10 @@
             format-volume = "<ramp-volume> <label-volume>";
             # format-volume-background = colors.background;
             # label-volume-background = colors.background;
-            format-volume-foreground = config.theme.colors.primary.foreground;
+            format-volume-foreground = config.gui.colorscheme.base07;
             label-volume = "%percentage%%";
             label-muted = "ﱝ ---";
-            label-muted-foreground = config.theme.colors.bright.black;
+            label-muted-foreground = config.gui.colorscheme.base03;
             ramp-volume-0 = "";
             ramp-volume-1 = "墳";
             ramp-volume-2 = "";

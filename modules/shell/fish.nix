@@ -1,8 +1,8 @@
-{ pkgs, identity, ... }: {
+{ config, pkgs, ... }: {
 
-  users.users.${identity.user}.shell = pkgs.fish;
+  users.users.${config.user}.shell = pkgs.fish;
 
-  home-manager.users.${identity.user} = {
+  home-manager.users.${config.user} = {
 
     home.packages = with pkgs; [ exa fd bat ripgrep ];
 

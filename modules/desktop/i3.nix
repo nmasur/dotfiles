@@ -1,4 +1,4 @@
-{ config, pkgs, lib, identity, ... }: {
+{ config, pkgs, lib, ... }: {
 
   config = lib.mkIf config.services.xserver.enable {
 
@@ -15,7 +15,7 @@
       playerctl # Media control
     ];
 
-    home-manager.users.${identity.user}.xsession.windowManager.i3 = {
+    home-manager.users.${config.user}.xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
       config = let
@@ -40,19 +40,16 @@
         };
         bars = [{ command = "echo"; }]; # Disable i3bar
         colors = let
-          background = "#2f343f";
-          inactiveBackground = "#2f343f";
-          border = "#2f343f";
-          inactiveBorder = "#2f343f";
-          # border = "#F0C674";
-          # inactiveBorder = "#E2B860";
-          text = "#f3f4f5";
-          inactiveText = "#676E7D";
-          urgentBackground = "#E53935";
-          # indicator = "#00ff00";
+          background = config.gui.colorscheme.base00;
+          inactiveBackground = config.gui.colorscheme.base01;
+          border = config.gui.colorscheme.base01;
+          inactiveBorder = config.gui.colorscheme.base01;
+          text = config.gui.colorscheme.base07;
+          inactiveText = config.gui.colorscheme.base04;
+          urgentBackground = config.gui.colorscheme.base08;
           indicator = "#00000000";
         in {
-          background = background;
+          background = config.gui.colorscheme.base00;
           focused = {
             inherit background indicator text border;
             childBorder = background;
@@ -117,12 +114,13 @@
           # Launchers
           "${modifier}+Return" = "exec alacritty";
           "${modifier}+space" =
-            "exec --no-startup-id ${config.launcherCommand}";
+            "exec --no-startup-id ${config.gui.launcherCommand}";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
           "${modifier}+Shift+q" = ''
             exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
-          "${modifier}+Shift+x" = ''exec i3lock --color "#2f343f"'';
+          "${modifier}+Shift+x" =
+            ''exec i3lock --color "${config.gui.colorscheme.base00}"'';
           "${modifier}+Shift+t" = "exec alacritty";
 
           # Window options
@@ -202,8 +200,7 @@
         };
         startup = [
           {
-            command =
-              "feh --bg-fill ${builtins.toString config.theme.wallpaper}";
+            command = "feh --bg-fill ${builtins.toString config.gui.wallpaper}";
             always = true;
             notification = false;
           }
