@@ -80,6 +80,7 @@
         focus = {
           mouseWarping = false;
           newWindow = "urgent";
+          followMouse = false;
         };
         fonts = {
           names = [ "pango:Victor Mono" "FontAwesome 12" ];
