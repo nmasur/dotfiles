@@ -58,7 +58,7 @@
         let pkgs = import nixpkgs { system = "x86_64-linux"; };
         in {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ stylua nixfmt shfmt shellcheck ];
+            buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
           };
         };
 

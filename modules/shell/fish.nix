@@ -82,7 +82,7 @@
       shellAbbrs = {
 
         # Directory aliases
-        l = "ls";
+        l = "ls -lh";
         lh = "ls -lh";
         ll = "ls -alhF";
         la = "ls -a";
