@@ -23,7 +23,6 @@
           foreground-color = mkLiteral config.gui.colorscheme.base07;
           text-color = mkLiteral config.gui.colorscheme.base07;
           border-color = mkLiteral config.gui.colorscheme.base04;
-          width = 512;
         };
 
         # Holds the entire window
@@ -34,9 +33,7 @@
           border = mkLiteral "4px";
           border-color = mkLiteral config.gui.colorscheme.base04;
           border-radius = mkLiteral "4px";
-          width = mkLiteral "600px";
-          x-offset = 10;
-          y-offset = 40;
+          width = mkLiteral "850px";
           padding = mkLiteral "15px";
         };
 
@@ -85,7 +82,7 @@
           background-color = mkLiteral config.gui.colorscheme.base00;
           padding = mkLiteral "0px";
           columns = 1;
-          lines = 8;
+          lines = 12;
           spacing = "5px";
           cycle = true;
           dynamic = true;
@@ -119,8 +116,9 @@
 
         # Not sure how to get icons
         "#element-icon" = {
-          size = mkLiteral "64px";
+          size = mkLiteral "18px";
           border = mkLiteral "0px";
+          padding = mkLiteral "2px 5px 2px 2px";
           background-color = mkLiteral config.gui.colorscheme.base00;
         };
         "#element-icon.selected" = {
@@ -130,8 +128,11 @@
 
       };
       xoffset = 0;
-      yoffset = 0;
-      extraConfig = { kb-cancel = "Escape,Super+space"; };
+      yoffset = -20;
+      extraConfig = {
+        show-icons = true;
+        kb-cancel = "Escape,Super+space";
+      };
     };
     gui.launcherCommand = "${pkgs.rofi}/bin/rofi -show run";
 
