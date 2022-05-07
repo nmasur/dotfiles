@@ -8,9 +8,14 @@
     ];
 
     xdg.configFile = {
-      "nvim/init.lua".text = lib.mkOrder 100 ''
-        ${builtins.readFile ./init.lua}
-      '';
+      "nvim/init.lua".text = lib.mkMerge [
+        (lib.mkOrder 100 ''
+          ${builtins.readFile ./packer.lua}
+          ${builtins.readFile ./settings.lua}
+          ${builtins.readFile ./functions.lua}
+          ${builtins.readFile ./keybinds.lua}
+        '')
+      ];
     };
 
     programs.git.extraConfig.core.editor = "nvim";

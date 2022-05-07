@@ -36,9 +36,6 @@ programs:
 	./scripts/setup_cheatsheet
 	./scripts/setup_ytfzf
 
-python: brews
-	npm install -g pyright
-
 nix:
 	git add -A
 	doas nixos-rebuild switch --flake .
