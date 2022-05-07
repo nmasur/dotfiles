@@ -51,7 +51,7 @@
             label-active = "%name%";
             label-active-background = config.gui.colorscheme.base05;
             label-active-foreground = config.gui.colorscheme.base01;
-            label-active-underline = config.gui.colorscheme.base04;
+            label-active-underline = config.gui.colorscheme.base03;
             label-active-padding = 1;
             label-occupied = "%name%";
             label-occupied-padding = 1;
