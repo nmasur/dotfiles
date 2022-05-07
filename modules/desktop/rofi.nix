@@ -67,7 +67,7 @@
           placeholder-color = mkLiteral config.gui.colorscheme.base03;
           expand = true;
           horizontal-align = "0";
-          placeholder = "Search Applications";
+          placeholder = "Launch Program";
           padding = mkLiteral "0px 0px 0px 5px";
           blink = true;
         };

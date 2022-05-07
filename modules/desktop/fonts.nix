@@ -6,10 +6,10 @@ in {
 
   config = lib.mkIf config.gui.enable {
 
-    fonts.fonts = with pkgs;
-      [
-        pkgs.victor-mono # Used for Vim and Terminal
-      ];
+    fonts.fonts = with pkgs; [
+      victor-mono # Used for Vim and Terminal
+      (nerdfonts.override { fonts = [ "Hack" ]; }) # For Polybar, Rofi
+    ];
     fonts.fontconfig.defaultFonts.monospace = [ fontName ];
 
     home-manager.users.${config.user} = {
@@ -18,7 +18,8 @@ in {
         # style = "Regular";
         # size = 11.0;
       };
-      programs.rofi.font = "${fontName} 14";
+      services.polybar.config."bar/main".font-0 = "Hack Nerd Font:size=10;2";
+      programs.rofi.font = "Hack Nerd Font 14";
     };
 
   };

@@ -2,10 +2,6 @@
 
   config = lib.mkIf config.services.xserver.enable {
 
-    # Used for icons
-    fonts.fonts = with pkgs;
-      [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
-
     home-manager.users.${config.user} = {
 
       services.polybar = {
@@ -26,7 +22,7 @@
             # offset-y = "5%";
             # dpi = 96;
             background = config.gui.colorscheme.base00;
-            foreground = config.gui.colorscheme.base07;
+            foreground = config.gui.colorscheme.base05;
             line-size = "3pt";
             border-top-size = 0;
             border-right-size = 0;
@@ -38,11 +34,6 @@
             module-margin = 1;
             # separator = "|";
             # separator-foreground = colors.disabled;
-            font-0 = "JetBrainsMono Nerd Font:size=10;2";
-            # font-0 = "monospace;2";
-            # font-1 = "Font Awesome 5 Free:size=10";
-            # font-2 = "Font Awesome 5 Free Solid:size=10";
-            # font-3 = "Font Awesome 5 Brands:size=10";
             modules-left = "xworkspaces";
             modules-center = "xwindow";
             modules-right = "pulseaudio date";
@@ -90,7 +81,7 @@
             format-volume = "<ramp-volume> <label-volume>";
             # format-volume-background = colors.background;
             # label-volume-background = colors.background;
-            format-volume-foreground = config.gui.colorscheme.base07;
+            format-volume-foreground = config.gui.colorscheme.base0B;
             label-volume = "%percentage%%";
             label-muted = "ﱝ ---";
             label-muted-foreground = config.gui.colorscheme.base03;
@@ -145,7 +136,7 @@
             date = "%l:%M %p";
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = "%date%";
-            # label-foreground = config.theme.colors.normal.yellow;
+            label-foreground = config.gui.colorscheme.base0A;
             # format-background = colors.background;
           };
           "settings" = {
