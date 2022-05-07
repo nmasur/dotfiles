@@ -121,6 +121,7 @@
 
           # Window options
           "${modifier}+q" = "kill";
+          "${modifier}+f" = "fullscreen toggle";
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
           "${modifier}+k" = "focus up";

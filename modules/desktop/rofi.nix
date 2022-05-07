@@ -10,7 +10,6 @@
       location = "center";
       pass = { };
       plugins = [ pkgs.rofi-calc pkgs.rofi-emoji ];
-      terminal = "${pkgs.alacritty}/bin/alacritty";
       theme = let
         inherit (config.home-manager.users.${config.user}.lib.formats.rasi)
           mkLiteral;

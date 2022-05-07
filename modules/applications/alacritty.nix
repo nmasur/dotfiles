@@ -2,6 +2,7 @@
 
   home-manager.users.${config.user} = {
     xsession.windowManager.i3.config.terminal = "alacritty";
+    programs.rofi.terminal = "${pkgs.alacritty}/bin/alacritty";
     programs.alacritty = {
       enable = true;
       settings = {
