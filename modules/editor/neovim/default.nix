@@ -10,7 +10,30 @@
     xdg.configFile = {
       "nvim/init.lua".text = lib.mkMerge [
         (lib.mkOrder 100 ''
-          ${builtins.readFile ./packer.lua}
+          ${builtins.readFile ./bootstrap.lua}
+          require("packer").startup(function(use)
+          ${builtins.readFile ./packer-basics.lua}
+        '')
+        (lib.mkOrder 200 ''
+          ${builtins.readFile ./colors.lua}
+        '')
+        (lib.mkOrder 300 ''
+          ${builtins.readFile ./lsp.lua}
+        '')
+        (lib.mkOrder 400 ''
+          ${builtins.readFile ./completion.lua}
+        '')
+        (lib.mkOrder 500 ''
+          ${builtins.readFile ./syntax.lua}
+        '')
+        (lib.mkOrder 600 ''
+          ${builtins.readFile ./telescope.lua}
+        '')
+        (lib.mkOrder 700 ''
+          ${builtins.readFile ./packer-sync.lua}
+          end)
+        '')
+        (lib.mkOrder 800 ''
           ${builtins.readFile ./settings.lua}
           ${builtins.readFile ./functions.lua}
           ${builtins.readFile ./keybinds.lua}
@@ -22,10 +45,7 @@
     home.sessionVariables = { EDITOR = "nvim"; };
     programs.fish = {
       shellAliases = { vim = "nvim"; };
-      shellAbbrs = {
-        vll = "vim -c 'Telescope oldfiles'";
-        vimrc = "vim ${builtins.toString ../../.}/nvim.configlink/init.lua";
-      };
+      shellAbbrs = { vll = "vim -c 'Telescope oldfiles'"; };
     };
 
   };
