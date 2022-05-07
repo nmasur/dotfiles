@@ -78,14 +78,9 @@
         };
         floating.modifier = modifier;
         focus = {
-          mouseWarping = false;
+          mouseWarping = true;
           newWindow = "urgent";
           followMouse = false;
-        };
-        fonts = {
-          names = [ "pango:Victor Mono" "FontAwesome 12" ];
-          # style = "Regular";
-          # size = 11.0;
         };
         keybindings = {
 

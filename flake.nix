@@ -34,10 +34,11 @@
             {
               networking.hostName = "desktop";
               gui.enable = true;
+              gui.compositor.enable = true;
             }
             home-manager.nixosModules.home-manager
             ./hosts/desktop/hardware-configuration.nix
-            ./modules/common.nix
+            ./hosts/common.nix
             ./modules/hardware
             ./modules/system
             ./modules/desktop
