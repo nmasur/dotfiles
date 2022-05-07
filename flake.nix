@@ -7,10 +7,11 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur.url = "github:nix-community/nur";
 
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, nur }:
     let
       globals = {
         user = "noah";
@@ -37,6 +38,7 @@
               gui.compositor.enable = true;
             }
             home-manager.nixosModules.home-manager
+            { nixpkgs.overlays = [ nur.overlay ]; }
             ./hosts/desktop/hardware-configuration.nix
             ./hosts/common.nix
             ./modules/hardware
