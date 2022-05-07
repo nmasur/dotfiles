@@ -52,7 +52,7 @@
             ./modules/applications/media.nix
             ./modules/applications/1password.nix
             ./modules/applications/discord.nix
-            ./modules/editor/neovim.nix
+            ./modules/editor/neovim
             ./modules/editor/notes.nix
           ];
         };

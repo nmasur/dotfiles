@@ -353,7 +353,7 @@ require("packer").startup(function(use)
                     zoxide = {},
                     --neoclip = {},
                     project = {
-                        base_dirs = { "~/dev/work" },
+                        base_dirs = { "~/dev" },
                     },
                 },
             })
@@ -388,43 +388,6 @@ require("packer").startup(function(use)
         config = function()
             require("telescope").load_extension("file_browser")
         end,
-    })
-
-    -- Clipboard history
-    -- use({
-    --     "AckslD/nvim-neoclip.lua",
-    --     branch = "main",
-    --     requires = {
-    --         { "tami5/sqlite.lua", module = "sqlite" },
-    --         { "nvim-telescope/telescope.nvim" },
-    --     },
-    --     config = function()
-    --         require("neoclip").setup({
-    --             enable_persistant_history = true,
-    --             default_register = { "+", '"' },
-    --             keys = {
-    --                 telescope = {
-    --                     i = { paste = "<c-v>" },
-    --                 },
-    --             },
-    --         })
-    --         require("telescope").load_extension("neoclip")
-    --     end,
-    -- })
-
-    -- Project bookmarks
-    use({
-        "ThePrimeagen/harpoon",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
-    })
-
-    -- TLDR Lookup
-    use({
-        "mrjones2014/tldr.nvim",
-        requires = { "nvim-telescope/telescope.nvim" },
     })
 
     -- =======================================================================
@@ -591,17 +554,6 @@ choose_project = function()
     require("telescope").extensions.project.project(opts)
 end
 
--- clipboard_history = function()
---     local opts = require("telescope.themes").get_cursor({
---         layout_config = {
---             cursor = {
---                 width = 150,
---             },
---         },
---     })
---     require("telescope").extensions.neoclip.neoclip(opts)
--- end
-
 command_history = function()
     local opts = require("telescope.themes").get_ivy({
         layout_config = {
@@ -671,13 +623,6 @@ key("n", "<Leader>gf", ":Telescope git_bcommits<CR>")
 key("n", "<Leader>gb", ":Telescope git_branches<CR>")
 key("n", "<Leader>gs", ":Telescope git_status<CR>")
 key("n", "<C-p>", "<Cmd>lua choose_project()<CR>")
-
--- Harpoon
-key("n", "<Leader>m", "<Cmd>lua require('harpoon.mark').add_file()<CR><Esc>")
-key("n", "<Leader>`", "<Cmd>lua require('harpoon.ui').toggle_quick_menu()<CR><Esc>")
-key("n", "<Leader>1", "<Cmd>lua require('harpoon.ui').nav_file(1)<CR><Esc>")
-key("n", "<Leader>2", "<Cmd>lua require('harpoon.ui').nav_file(2)<CR><Esc>")
-key("n", "<Leader>3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR><Esc>")
 
 -- LSP
 key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { silent = true })

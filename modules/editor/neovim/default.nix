@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   home-manager.users.${config.user} = {
 
@@ -8,7 +8,9 @@
     ];
 
     xdg.configFile = {
-      "nvim/init.lua".source = ../../nvim.configlink/init.lua;
+      "nvim/init.lua".text = lib.mkOrder 100 ''
+        ${builtins.readFile ./init.lua}
+      '';
     };
 
     programs.git.extraConfig.core.editor = "nvim";
