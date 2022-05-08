@@ -4,7 +4,7 @@
     home-manager.users.${config.user}.home.packages = with pkgs; [
       mpv # Video viewer
       sxiv # Image viewer
-      zathura # PDF viewer
+      mupdf # PDF viewer
     ];
   };
 

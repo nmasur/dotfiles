@@ -20,22 +20,22 @@
       package = pkgs.i3-gaps;
       config = let
         modifier = "Mod4"; # Super key
-        ws1 = "I";
-        ws2 = "II";
-        ws3 = "III";
-        ws4 = "IV";
-        ws5 = "V";
-        ws6 = "VI";
-        ws7 = "VII";
-        ws8 = "VIII";
-        ws9 = "IX";
-        ws10 = "X";
+        ws1 = "1:I";
+        ws2 = "2:II";
+        ws3 = "3:III";
+        ws4 = "4:IV";
+        ws5 = "5:V";
+        ws6 = "6:VI";
+        ws7 = "7:VII";
+        ws8 = "8:VIII";
+        ws9 = "9:IX";
+        ws10 = "10:X";
       in {
         modifier = modifier;
         assigns = {
           "${ws1}" = [{ class = "Firefox"; }];
           "${ws2}" = [{ class = "Alacritty"; }];
-          "${ws3}" = [{ class = "Discord"; }];
+          "${ws3}" = [{ class = "discord"; }];
           "${ws4}" = [{ class = "Steam"; }];
         };
         bars = [{ command = "echo"; }]; # Disable i3bar

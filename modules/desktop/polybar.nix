@@ -32,9 +32,7 @@
             padding-left = 2;
             padding-right = 2;
             module-margin = 1;
-            # separator = "|";
-            # separator-foreground = colors.disabled;
-            modules-left = "xworkspaces";
+            modules-left = "i3";
             modules-center = "xwindow";
             modules-right = "pulseaudio date";
             cursor-click = "pointer";
@@ -45,6 +43,32 @@
             # wm-restack = "bspwm";
             # wm-restack = "i3";
             # override-redirect = true;
+          };
+          "module/i3" = let padding = 2;
+          in {
+            type = "internal/i3";
+            pin-workspaces = false;
+            show-urgent = true;
+            strip-wsnumbers = true;
+            index-sort = true;
+            enable-click = true;
+            wrapping-scroll = true;
+            fuzzy-match = true;
+            format = "<label-state> <label-mode>";
+            label-focused = "%name%";
+            label-focused-foreground = config.gui.colorscheme.base01;
+            label-focused-background = config.gui.colorscheme.base05;
+            label-focused-underline = config.gui.colorscheme.base03;
+            label-focused-padding = padding;
+            label-unfocused = "%name%";
+            label-unfocused-padding = padding;
+            label-visible = "%name%";
+            label-visible-underline = config.gui.colorscheme.base01;
+            label-visible-padding = padding;
+            label-urgent = "%name%";
+            label-urgent-foreground = config.gui.colorscheme.base00;
+            label-urgent-background = config.gui.colorscheme.base08;
+            label-urgent-padding = padding;
           };
           "module/xworkspaces" = {
             type = "internal/xworkspaces";
@@ -156,4 +180,3 @@
   };
 
 }
-
