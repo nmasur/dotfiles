@@ -40,7 +40,10 @@
               true; # Allow userChrome.css
           };
           userChrome = ''
-            @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+            :root {
+              --focus-outline-color: ${config.gui.colorscheme.base04} !important;
+              --toolbar-color: ${config.gui.colorscheme.base07} !important;
+            }
             /* Background of tab bar */
             .toolbar-items {
               background-color: ${config.gui.colorscheme.base00} !important;
@@ -63,16 +66,38 @@
               background: ${config.gui.colorscheme.base01} !important;
             }
             /* URL bar in nav bar */
-            #urlbar-background {
+            #urlbar[focused=true] {
+              color: ${config.gui.colorscheme.base07} !important;
+              background: ${config.gui.colorscheme.base02} !important;
+              caret-color: ${config.gui.colorscheme.base05} !important;
+            }
+            #urlbar:not([focused=true]) {
+              color: ${config.gui.colorscheme.base04} !important;
               background: ${config.gui.colorscheme.base02} !important;
             }
+            #urlbar ::-moz-selection {
+              color: ${config.gui.colorscheme.base07} !important;
+              background: ${config.gui.colorscheme.base02} !important;
+            }
+            #urlbar-input-container {
+              border: 1px solid ${config.gui.colorscheme.base01} !important;
+            }
+            #urlbar-background {
+              background: ${config.gui.colorscheme.base01} !important;
+            }
             /* Text in URL bar */
-            #urlbar-input, #urlbar-scheme,
-            .searchbar-textbox {
+            #urlbar-input, #urlbar-scheme, .searchbar-textbox {
               color: ${config.gui.colorscheme.base07} !important;
             }
           '';
-          userContent = "";
+          userContent = ''
+            @-moz-document url-prefix(about:blank) {
+              * {
+                background-color:${config.gui.colorscheme.base01} !important;
+              }
+            }
+          '';
+
           extraConfig = "";
         };
 
