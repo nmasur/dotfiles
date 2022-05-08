@@ -41,7 +41,7 @@
                                         --output HDMI-0 \
                                             --primary \
                                             --mode 1920x1080 \
-                                            --pos 0x559 \
+                                            --pos 0x560 \
                                             --rotate normal \
                                         --output DVI-0 --off \
                                         --output DVI-1 --off \
