@@ -43,6 +43,7 @@
             :root {
               --focus-outline-color: ${config.gui.colorscheme.base04} !important;
               --toolbar-color: ${config.gui.colorscheme.base07} !important;
+              --tab-min-height: 20px !important;
             }
             /* Background of tab bar */
             .toolbar-items {
