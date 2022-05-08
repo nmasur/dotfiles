@@ -11,7 +11,6 @@ use({
 
 -- Important tweaks
 use("tpope/vim-surround") --- Manipulate parentheses
-use("tpope/vim-commentary") --- Use gc or gcc to add comments
 
 -- Convenience tweaks
 use("tpope/vim-eunuch") --- File manipulation in Vim
@@ -19,6 +18,14 @@ use("tpope/vim-vinegar") --- Fixes netrw file explorer
 use("tpope/vim-fugitive") --- Git commands and syntax
 use("tpope/vim-repeat") --- Actually repeat using .
 use("christoomey/vim-tmux-navigator") --- Hotkeys for tmux panes
+
+-- Use gc or gcc to add comments
+use({
+    "numToStr/Comment.nvim",
+    config = function()
+        require("Comment").setup()
+    end,
+})
 
 -- Git next to line numbers
 use({
