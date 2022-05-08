@@ -1,18 +1,28 @@
 {
   description = "My system";
 
+  # Other flakes that we want to pull from
   inputs = {
+
+    # Used for system packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Used for user packages
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows =
+        "nixpkgs"; # Use system packages list where available
     };
+
+    # Community packages; used for Firefox extensions
     nur.url = "github:nix-community/nur";
 
   };
 
   outputs = { self, nixpkgs, home-manager, nur }:
     let
+
+      # Global configuration for my systems
       globals = {
         user = "noah";
         fullName = "Noah Masur";
@@ -25,38 +35,16 @@
           gtkTheme = "Adwaita-dark";
         };
       };
+
     in {
+
+      # Define my systems
       nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { };
-          modules = [
-            globals
-            {
-              networking.hostName = "desktop";
-              gui.enable = true;
-              gui.compositor.enable = true;
-            }
-            home-manager.nixosModules.home-manager
-            { nixpkgs.overlays = [ nur.overlay ]; }
-            ./hosts/desktop/hardware-configuration.nix
-            ./hosts/common.nix
-            ./modules/hardware
-            ./modules/system
-            ./modules/desktop
-            ./modules/shell
-            ./modules/gaming
-            ./modules/services/keybase.nix
-            ./modules/applications/firefox.nix
-            ./modules/applications/alacritty.nix
-            ./modules/applications/media.nix
-            ./modules/applications/1password.nix
-            ./modules/applications/discord.nix
-            ./modules/editor/neovim
-            ./modules/editor/notes.nix
-          ];
-        };
+        desktop =
+          import ./hosts/desktop { inherit nixpkgs home-manager nur globals; };
       };
+
+      # Used to run commands and editing in this repo
       devShells.x86_64-linux =
         let pkgs = import nixpkgs { system = "x86_64-linux"; };
         in {
