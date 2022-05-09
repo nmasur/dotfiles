@@ -32,6 +32,22 @@
 
     };
 
+    home-manager.users.${config.user}.xdg = {
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+        documents = "$HOME/documents";
+        download = "$HOME/downloads";
+        music = "$HOME/media/music";
+        pictures = "$HOME/media/images";
+        videos = "$HOME/media/videos";
+        desktop = "$HOME/other/desktop";
+        publicShare = "$HOME/other/public";
+        templates = "$HOME/other/templates";
+        extraConfig = { XDG_DEV_DIR = "$HOME/dev"; };
+      };
+    };
+
   };
 
 }

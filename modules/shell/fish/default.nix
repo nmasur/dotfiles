@@ -140,5 +140,12 @@
     programs.zoxide.enableFishIntegration = true;
     programs.fzf.enableFishIntegration = true;
 
+    # Provides "command-not-found" options
+    # Requires activating a manual download
+    programs.nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
   };
 }

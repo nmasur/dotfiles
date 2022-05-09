@@ -31,7 +31,7 @@
         gitEmail = "7386960+nmasur@users.noreply.github.com";
         gui = {
           colorscheme = (import ./modules/colorscheme/gruvbox);
-          wallpaper = ../../../Downloads/nix.jpg;
+          wallpaper = ../../../downloads/nix.jpg;
           gtkTheme = "Adwaita-dark";
         };
       };

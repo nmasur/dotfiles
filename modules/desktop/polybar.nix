@@ -68,6 +68,7 @@
             label-urgent = "%name%";
             label-urgent-foreground = config.gui.colorscheme.base00;
             label-urgent-background = config.gui.colorscheme.base08;
+            label-urgent-underline = config.gui.colorscheme.base0F;
             label-urgent-padding = padding;
           };
           "module/xworkspaces" = {

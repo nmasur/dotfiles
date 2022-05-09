@@ -21,7 +21,7 @@ end
 find_downloads = function()
     local opts = {
         prompt_title = "Find Downloads",
-        cwd = "~/Downloads",
+        cwd = "~/downloads",
     }
     require("telescope").extensions.file_browser.file_browser(opts)
 end
