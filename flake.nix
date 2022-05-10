@@ -39,6 +39,9 @@
     in {
 
       # Define my systems
+      # You can load it from an empty system with:
+      # nix-shell -p nixFlakes
+      # sudo nixos-rebuild switch --flake github:nmasur/dotfiles#desktop
       nixosConfigurations = {
         desktop =
           import ./hosts/desktop { inherit nixpkgs home-manager nur globals; };

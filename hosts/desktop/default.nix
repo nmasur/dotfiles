@@ -20,6 +20,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/shell
     ../../modules/gaming
     ../../modules/services/keybase.nix
+    ../../modules/services/gnupg.nix
     ../../modules/applications/firefox.nix
     ../../modules/applications/alacritty.nix
     ../../modules/applications/media.nix
