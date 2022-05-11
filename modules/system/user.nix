@@ -13,6 +13,15 @@
       description = "Password created with mkpasswd -m sha-512";
     };
 
+    userDirs = {
+      # Required to prevent infinite recursion with himalaya
+      download = lib.mkOption {
+        type = lib.types.str;
+        description = "XDG directory for downloads";
+        default = "$HOME/downloads";
+      };
+    };
+
   };
 
   config = {
@@ -37,7 +46,7 @@
         enable = true;
         createDirectories = true;
         documents = "$HOME/documents";
-        download = "$HOME/downloads";
+        download = config.userDirs.download;
         music = "$HOME/media/music";
         pictures = "$HOME/media/images";
         videos = "$HOME/media/videos";

@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/desktop
     ../../modules/shell
     ../../modules/gaming
+    ../../modules/mail/himalaya.nix
     ../../modules/services/keybase.nix
     ../../modules/services/gnupg.nix
     ../../modules/applications/firefox.nix

@@ -38,12 +38,13 @@
             "extensions.pocket.enabled" = false;
             "toolkit.legacyUserProfileCustomizations.stylesheets" =
               true; # Allow userChrome.css
+            "layout.css.color-mix.enabled" = true;
           };
           userChrome = ''
             :root {
               --focus-outline-color: ${config.gui.colorscheme.base04} !important;
               --toolbar-color: ${config.gui.colorscheme.base07} !important;
-              --tab-min-height: 20px !important;
+              --tab-min-height: 30px !important;
             }
             /* Background of tab bar */
             .toolbar-items {
@@ -53,12 +54,17 @@
             .tabbrowser-tab .tab-stack {
               border-radius: 5px 5px 0 0;
               overflow: hidden;
+              background-color: ${config.gui.colorscheme.base00};
+              color: ${config.gui.colorscheme.base06} !important;
             }
             .tab-content {
-              background-color: ${config.gui.colorscheme.base00} !important;
+              border-bottom: 2px solid color-mix(in srgb, var(--identity-tab-color) 40%, transparent);
+              border-radius: 5px 5px 0 0;
+              background-color: ${config.gui.colorscheme.base00};
               color: ${config.gui.colorscheme.base06} !important;
             }
             .tab-content[selected=true] {
+              border-bottom: 2px solid color-mix(in srgb, var(--identity-tab-color) 25%, transparent);
               background-color: ${config.gui.colorscheme.base01} !important;
               color: ${config.gui.colorscheme.base07} !important;
             }

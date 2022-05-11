@@ -158,7 +158,7 @@
           "module/date" = {
             type = "internal/date";
             interval = 1;
-            date = "%l:%M %p";
+            date = "%d %b  %l:%M %p";
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = "%date%";
             label-foreground = config.gui.colorscheme.base0A;
