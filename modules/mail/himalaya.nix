@@ -11,6 +11,8 @@
 
     home-manager.users.${config.user} = {
 
+      home.packages = with pkgs; [ age ];
+
       programs.himalaya = { enable = true; };
 
       accounts.email = {
@@ -59,7 +61,9 @@
             mu.enable = false;
             notmuch.enable = false;
             passwordCommand =
-              "cat /home/${config.user}/.config/himalaya/passwd";
+              "${pkgs.age}/bin/age --decrypt --identity /home/${config.user}/.ssh/id_rsa ${
+                builtins.toString ./mailpass.age
+              }";
             smtp = {
               host = serverHostname;
               port = 587;
