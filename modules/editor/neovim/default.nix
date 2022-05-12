@@ -42,7 +42,10 @@
     };
 
     programs.git.extraConfig.core.editor = "nvim";
-    home.sessionVariables = { EDITOR = "nvim"; };
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      MANPAGER = "nvim +Man!";
+    };
     programs.fish = {
       shellAliases = { vim = "nvim"; };
       shellAbbrs = { vll = "vim -c 'Telescope oldfiles'"; };
