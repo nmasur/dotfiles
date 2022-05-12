@@ -1,4 +1,11 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let
+
+  lockCmd =
+    ''exec i3lock --no-fork --color "${config.gui.colorscheme.base00}"'';
+
+in {
 
   config = lib.mkIf config.services.xserver.enable {
 
@@ -108,15 +115,14 @@
           "XF86AudioPrev" = "exec playerctl previous";
 
           # Launchers
-          "${modifier}+Return" = "exec alacritty";
+          "${modifier}+Return" = "exec alacritty; layout tabbed";
           "${modifier}+space" =
             "exec --no-startup-id ${config.gui.launcherCommand}";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
           "${modifier}+Shift+q" = ''
             exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
-          "${modifier}+Shift+x" =
-            ''exec i3lock --color "${config.gui.colorscheme.base00}"'';
+          "${modifier}+Shift+x" = lockCmd;
           "${modifier}+Shift+t" = "exec alacritty";
 
           # Window options
