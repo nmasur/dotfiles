@@ -15,7 +15,10 @@
           enable = config.services.xserver.enable;
 
           # Make the login screen dark
-          greeters.gtk.theme = { name = config.gui.gtkTheme; };
+          greeters.gtk.theme = {
+            name = config.gui.gtk.theme.name;
+            package = pkgs."${config.gui.gtk.theme.package}";
+          };
 
         };
       };

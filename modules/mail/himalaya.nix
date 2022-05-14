@@ -37,7 +37,10 @@
             getmail = { };
             himalaya = {
               enable = true;
-              settings = { downloads-dir = config.userDirs.download; };
+              settings = {
+                downloads-dir = config.userDirs.download;
+                smtp-insecure = true;
+              };
             };
             imap = {
               host = serverHostname;

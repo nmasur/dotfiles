@@ -25,9 +25,15 @@
         type = types.str;
         description = "Command to use for launching";
       };
-      gtkTheme = mkOption {
-        type = types.str;
-        description = "Theme for GTK applications";
+      gtk.theme = {
+        name = mkOption {
+          type = types.str;
+          description = "Theme name for GTK applications";
+        };
+        package = mkOption {
+          type = types.str;
+          description = "Theme package name for GTK applications";
+        };
       };
       colorscheme = mkOption {
         type = types.attrs;

@@ -35,6 +35,8 @@
             "browser.startup.page" = 3; # Restore previous session
             "browser.newtabpage.enabled" = false; # Make new tabs blank
             "general.autoScroll" = true; # Drag middle-mouse to scroll
+            "services.sync.prefs.sync.general.autoScroll" =
+              false; # Prevent disabling autoscroll
             "extensions.pocket.enabled" = false;
             "toolkit.legacyUserProfileCustomizations.stylesheets" =
               true; # Allow userChrome.css
