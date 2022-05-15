@@ -25,6 +25,10 @@
         type = types.str;
         description = "Command to use for launching";
       };
+      toggleBarCommand = lib.mkOption {
+        type = lib.types.str;
+        description = "Command to hide and show the status bar.";
+      };
       gtk.theme = {
         name = mkOption {
           type = types.str;

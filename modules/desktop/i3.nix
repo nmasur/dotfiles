@@ -6,13 +6,6 @@ let
 
 in {
 
-  options = {
-    toggleBarCmd = lib.mkOption {
-      type = lib.types.str;
-      description = "Command to hide and show the status bar.";
-    };
-  };
-
   config = lib.mkIf config.services.xserver.enable {
 
     services.xserver.windowManager = {
@@ -121,7 +114,8 @@ in {
           "XF86AudioPrev" = "exec playerctl previous";
 
           # Launchers
-          "${modifier}+Return" = "exec alacritty; layout tabbed";
+          "${modifier}+Return" =
+            "exec alacritty; workspace ${ws2}; layout tabbed";
           "${modifier}+space" =
             "exec --no-startup-id ${config.gui.launcherCommand}";
           "${modifier}+Shift+c" = "reload";
@@ -132,7 +126,7 @@ in {
 
           # Window options
           "${modifier}+q" = "kill";
-          "${modifier}+b" = "exec ${config.toggleBarCmd}";
+          "${modifier}+b" = "exec ${config.gui.toggleBarCommand}";
           "${modifier}+f" = "fullscreen toggle";
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
@@ -208,11 +202,17 @@ in {
           "${modifier}+Control+Shift+l" = "resize grow width 10 px or 10 ppt";
         };
         modes = { };
-        startup = [{
-          command = "feh --bg-fill ${config.gui.wallpaper}";
-          always = true;
-          notification = false;
-        }];
+        startup = [
+          {
+            command = "feh --bg-fill ${config.gui.wallpaper}";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "i3-msg workspace ${ws1}";
+            notification = false;
+          }
+        ];
         window = {
           border = 0;
           hideEdgeBorders = "smart";

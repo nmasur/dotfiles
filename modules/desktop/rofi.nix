@@ -131,11 +131,11 @@
       extraConfig = {
         show-icons = true;
         kb-cancel = "Escape,Super+space";
+        modi = "window,run,ssh,emoji,calc";
       };
     };
-    gui.launcherCommand = "${pkgs.rofi}/bin/rofi -show run";
+    gui.launcherCommand = "${pkgs.rofi}/bin/rofi -show run -modi run";
 
   };
 
 }
-
