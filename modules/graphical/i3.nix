@@ -99,13 +99,13 @@ in {
 
           # Adjust screen brightness
           "Shift+F12" =
-            "exec ddcutil --display 1 setvcp 10 + 20; exec ddcutil --display 2 setvcp 10 + 20";
+            "exec ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ddcutil --display 2 setvcp 10 + 30";
           "Shift+F11" =
-            "exec ddcutil --display 1 setvcp 10 - 20; exec ddcutil --display 2 setvcp 10 - 20";
+            "exec ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ddcutil --display 2 setvcp 10 - 30";
           "XF86MonBrightnessUp" =
-            "exec ddcutil --display 1 setvcp 10 + 20; exec ddcutil --display 2 setvcp 10 + 20";
+            "exec ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ddcutil --display 2 setvcp 10 + 30";
           "XF86MonBrightnessDown" =
-            "exec ddcutil --display 1 setvcp 10 - 20; exec ddcutil --display 2 setvcp 10 - 20";
+            "exec ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ddcutil --display 2 setvcp 10 - 30";
 
           # Media player controls
           "XF86AudioPlay" = "exec playerctl play-pause";
