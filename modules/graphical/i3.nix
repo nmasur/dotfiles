@@ -118,6 +118,8 @@ in {
             "exec alacritty; workspace ${ws2}; layout tabbed";
           "${modifier}+space" =
             "exec --no-startup-id ${config.gui.launcherCommand}";
+          "${modifier}+Shift+s" =
+            "exec --no-startup-id ${config.gui.systemdSearch}";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
           "${modifier}+Shift+q" = ''

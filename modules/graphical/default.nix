@@ -25,6 +25,10 @@
         type = types.str;
         description = "Command to use for launching";
       };
+      systemdSearch = mkOption {
+        type = types.str;
+        description = "Command to use for interacting with systemd";
+      };
       toggleBarCommand = lib.mkOption {
         type = lib.types.str;
         description = "Command to hide and show the status bar.";

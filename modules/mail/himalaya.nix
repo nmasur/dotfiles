@@ -64,7 +64,7 @@
             mu.enable = false;
             notmuch.enable = false;
             passwordCommand =
-              "${pkgs.age}/bin/age --decrypt --identity /home/${config.user}/.ssh/id_rsa ${
+              "${pkgs.age}/bin/age --decrypt --identity /home/${config.user}/.ssh/id_ed25519 ${
                 builtins.toString ./mailpass.age
               }";
             smtp = {
