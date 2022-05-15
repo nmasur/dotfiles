@@ -32,7 +32,7 @@
         mailServer = "noahmasur.com";
         gui = {
           colorscheme = (import ./modules/colorscheme/gruvbox);
-          wallpaper = ../../../downloads/nix.jpg;
+          wallpaper = ./media/wallpaper/road.jpg;
           gtk.theme = { name = "Adwaita-dark"; };
         };
       };

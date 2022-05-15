@@ -2,8 +2,7 @@
 
 let
 
-  lockCmd =
-    ''exec i3lock --no-fork --color "${config.gui.colorscheme.base00}"'';
+  lockCmd = ''exec i3lock --nofork --color "${config.gui.colorscheme.base00}"'';
 
 in {
 
@@ -123,7 +122,6 @@ in {
           "${modifier}+Shift+q" = ''
             exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
           "${modifier}+Shift+x" = lockCmd;
-          "${modifier}+Shift+t" = "exec alacritty";
 
           # Window options
           "${modifier}+q" = "kill";
@@ -202,20 +200,11 @@ in {
           "${modifier}+Control+Shift+l" = "resize grow width 10 px or 10 ppt";
         };
         modes = { };
-        startup = [
-          {
-            command = "feh --bg-fill ${builtins.toString config.gui.wallpaper}";
-            always = true;
-            notification = false;
-          }
-          {
-            # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-            # screen before suspend. Use loginctl lock-session to lock your screen.
-            command = "xss-lock --transfer-sleep-lock -- i3lock --nofork";
-            always = false;
-            notification = false;
-          }
-        ];
+        startup = [{
+          command = "feh --bg-fill ${config.gui.wallpaper}";
+          always = true;
+          notification = false;
+        }];
         window = {
           border = 0;
           hideEdgeBorders = "smart";
