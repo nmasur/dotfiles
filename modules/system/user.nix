@@ -26,6 +26,9 @@
 
   config = {
 
+    # Allows us to declaritively set password
+    users.mutableUsers = false;
+
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${config.user} = {
 

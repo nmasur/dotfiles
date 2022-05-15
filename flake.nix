@@ -27,7 +27,7 @@
         user = "noah";
         fullName = "Noah Masur";
         passwordHash =
-          "$6$J15o3OLElCEncVB3$0FW.R7YFBMgtBp320kkZO.TdKvYDLHmnP6dgktdrVYCC3LUvzXj0Fj0elR/fXo9geYwwWi.EAHflCngL5T.3g/";
+          "$6$PZYiMGmJIIHAepTM$Wx5EqTQ5GApzXx58nvi8azh16pdxrN6Qrv1wunDlzveOgawitWzcIxuj76X9V868fsPi/NOIEO8yVXqwzS9UF.";
         gitEmail = "7386960+nmasur@users.noreply.github.com";
         mailServer = "noahmasur.com";
         gui = {
