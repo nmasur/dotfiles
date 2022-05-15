@@ -1,4 +1,13 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let
+
+  gtkTheme = {
+    name = config.gui.gtk.theme.name;
+    package = pkgs.${config.gui.gtk.theme.package};
+  };
+
+in {
 
   config = lib.mkIf config.gui.enable {
 
@@ -15,10 +24,7 @@
           enable = config.services.xserver.enable;
 
           # Make the login screen dark
-          greeters.gtk.theme = {
-            name = config.gui.gtk.theme.name;
-            package = pkgs."${config.gui.gtk.theme.package}";
-          };
+          greeters.gtk.theme = gtkTheme;
 
         };
       };
@@ -30,11 +36,27 @@
         xclip # Clipboard
       ];
 
+    # Required for setting GTK theme (for preferred-color-scheme in browser)
+    services.dbus.packages = [ pkgs.dconf ];
+    programs.dconf.enable = true;
+
+    environment.sessionVariables = { GTK_THEME = config.gui.gtk.theme.name; };
+
     home-manager.users.${config.user} = {
+
       programs.fish.shellAliases = {
         pbcopy = "xclip -selection clipboard -in";
         pbpaste = "xclip -selection clipboard -out";
       };
+
+      gtk = let gtkExtraConfig = { gtk-application-prefer-dark-theme = true; };
+      in {
+        enable = true;
+        theme = gtkTheme;
+        gtk3.extraConfig = gtkExtraConfig;
+        gtk4.extraConfig = gtkExtraConfig;
+      };
+
     };
 
   };

@@ -111,17 +111,7 @@
         };
 
       };
-
-      gtk = {
-        enable = true;
-        theme =
-          config.services.xserver.displayManager.lightdm.greeters.gtk.theme;
-      };
     };
-
-    # Required for setting GTK theme (for preferred-color-scheme in browser)
-    services.dbus.packages = [ pkgs.dconf ];
-    programs.dconf.enable = true;
 
   };
 

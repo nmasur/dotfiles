@@ -33,10 +33,7 @@
         gui = {
           colorscheme = (import ./modules/colorscheme/gruvbox);
           wallpaper = ../../../downloads/nix.jpg;
-          gtk.theme = {
-            name = "Adwaita-dark";
-            package = "gnome-themes-extra";
-          };
+          gtk.theme = { name = "Adwaita-dark"; };
         };
       };
 

@@ -33,6 +33,7 @@
         package = mkOption {
           type = types.str;
           description = "Theme package name for GTK applications";
+          default = "gnome-themes-extra";
         };
       };
       colorscheme = mkOption {
