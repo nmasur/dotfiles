@@ -2,6 +2,8 @@
 
   config = lib.mkIf config.services.xserver.enable {
 
+    toggleBarCmd = "polybar-msg cmd toggle";
+
     home-manager.users.${config.user} = {
 
       services.polybar = {

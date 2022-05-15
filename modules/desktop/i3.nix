@@ -6,6 +6,13 @@ let
 
 in {
 
+  options = {
+    toggleBarCmd = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to hide and show the status bar.";
+    };
+  };
+
   config = lib.mkIf config.services.xserver.enable {
 
     services.xserver.windowManager = {
@@ -125,6 +132,7 @@ in {
 
           # Window options
           "${modifier}+q" = "kill";
+          "${modifier}+b" = "exec ${config.toggleBarCmd}";
           "${modifier}+f" = "fullscreen toggle";
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
