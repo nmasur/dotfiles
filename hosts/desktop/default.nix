@@ -16,7 +16,7 @@ nixpkgs.lib.nixosSystem {
     ../common.nix
     ../../modules/hardware
     ../../modules/system
-    ../../modules/desktop
+    ../../modules/graphical
     ../../modules/shell
     ../../modules/gaming
     ../../modules/mail/himalaya.nix
