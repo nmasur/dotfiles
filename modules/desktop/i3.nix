@@ -185,22 +185,13 @@ in {
 
           # Resizing
           "${modifier}+r" = ''mode "resize"'';
+          "${modifier}+Control+Shift+h" = "resize shrink width 10 px or 10 ppt";
+          "${modifier}+Control+Shift+j" = "resize grow height 10 px or 10 ppt";
+          "${modifier}+Control+Shift+k" =
+            "resize shrink height 10 px or 10 ppt";
+          "${modifier}+Control+Shift+l" = "resize grow width 10 px or 10 ppt";
         };
-        modes = {
-          resize = {
-            h = "resize shrink width 10 px or 10 ppt";
-            j = "resize grow height 10 px or 10 ppt";
-            k = "resize shrink height 10 px or 10 ppt";
-            l = "resize grow width 10 px or 10 ppt";
-            Left = "resize shrink width 10 px or 10 ppt";
-            Down = "resize grow height 10 px or 10 ppt";
-            Up = "resize shrink height 10 px or 10 ppt";
-            Right = "resize grow width 10 px or 10 ppt";
-            Return = ''mode "default"'';
-            Caps_Lock = ''mode "default"'';
-            "${modifier}+r" = ''mode "default"'';
-          };
-        };
+        modes = { };
         startup = [
           {
             command = "feh --bg-fill ${builtins.toString config.gui.wallpaper}";
