@@ -31,6 +31,7 @@ in {
           pager = { branch = "false"; };
           safe = { directory = "/home/${config.user}/dev/personal/dotfiles"; };
           pull = { ff = "only"; };
+          init = { defaultBranch = "master"; };
         };
       };
 
