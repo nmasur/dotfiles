@@ -20,6 +20,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nur }:
+
     let
 
       # Global configuration for my systems
@@ -37,6 +38,13 @@
         };
       };
 
+      # System types to support.
+      supportedSystems =
+        [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+
+      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
     in {
 
       # Define my systems
@@ -49,13 +57,13 @@
       };
 
       # Used to run commands and editing in this repo
-      devShells.x86_64-linux =
-        let pkgs = import nixpkgs { system = "x86_64-linux"; };
+      devShells = forAllSystems (system:
+        let pkgs = import nixpkgs { inherit system; };
         in {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
           };
-        };
+        });
 
     };
 }
