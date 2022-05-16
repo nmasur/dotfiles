@@ -27,6 +27,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/applications/media.nix
     ../../modules/applications/1password.nix
     ../../modules/applications/discord.nix
+    ../../modules/applications/calibre.nix
     ../../modules/editor/neovim
     ../../modules/editor/notes.nix
   ];
