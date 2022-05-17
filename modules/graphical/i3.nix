@@ -2,7 +2,7 @@
 
 let
 
-  lockCmd = ''exec i3lock --nofork --color "${config.gui.colorscheme.base00}"'';
+  lockCmd = ''i3lock --nofork --color "${config.gui.colorscheme.base00}"'';
 
 in {
 
@@ -124,7 +124,7 @@ in {
           "${modifier}+Shift+r" = "restart";
           "${modifier}+Shift+q" = ''
             exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
-          "${modifier}+Shift+x" = lockCmd;
+          "${modifier}+Shift+x" = "exec ${lockCmd}";
 
           # Window options
           "${modifier}+q" = "kill";
@@ -236,6 +236,19 @@ in {
         # };
       };
       extraConfig = "";
+    };
+
+    systemd.services.lock = {
+      description = "Lock the screen on resume from suspend";
+      before = [ "sleep.target" "suspend.target" ];
+      serviceConfig = {
+        User = config.user;
+        Type = "forking";
+        Environment = "DISPLAY=:0";
+        ExecStart = ''
+          ${pkgs.i3lock}/bin/i3lock --color "${config.gui.colorscheme.base00}"'';
+      };
+      wantedBy = [ "sleep.target" "suspend.target" ];
     };
 
   };
