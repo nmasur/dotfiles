@@ -27,12 +27,9 @@ in {
       tree # View directory hierarchy
       htop # Show system processes
       glow # Pretty markdown previews
-      prettyping # ping
       qrencode # Generate qr codes
       vimv # Batch rename files
       dig # DNS lookup
-      # gnupg
-      # pass
     ];
 
     programs.zoxide.enable = true; # Shortcut jump command
@@ -51,11 +48,11 @@ in {
       ping = {
         description = "Improved ping";
         argumentNames = "target";
-        body = "prettyping --nolegend $target";
+        body = "${pkgs.prettyping}/bin/prettyping --nolegend $target";
       };
       qr = {
         body =
-          "qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png"; # Fix for non-macOS
+          "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png"; # Fix for non-macOS
       };
     };
 

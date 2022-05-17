@@ -11,8 +11,6 @@
 
     home-manager.users.${config.user} = {
 
-      home.packages = with pkgs; [ age ];
-
       programs.himalaya = { enable = true; };
       programs.mbsync = { enable = true; };
       services.mbsync = {

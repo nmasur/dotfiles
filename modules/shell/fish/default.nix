@@ -4,7 +4,7 @@
 
   home-manager.users.${config.user} = {
 
-    home.packages = with pkgs; [ exa fd bat ripgrep curl ];
+    home.packages = with pkgs; [ curl ];
 
     programs.fish = {
       enable = true;
@@ -38,7 +38,7 @@
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
-        ls = { body = "exa $argv"; };
+        ls = { body = "${pkgs.exa}/bin/pkgs $argv"; };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";
