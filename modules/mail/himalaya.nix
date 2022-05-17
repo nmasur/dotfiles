@@ -14,11 +14,16 @@
       home.packages = with pkgs; [ age ];
 
       programs.himalaya = { enable = true; };
+      programs.mbsync = { enable = true; };
+      services.mbsync = {
+        enable = true;
+        frequency = "*:0/5";
+      };
 
       accounts.email = {
         maildirBasePath = "/home/${config.user}/mail";
         accounts = {
-          main = let
+          home = let
             address = "${config.user}@${config.mailServer}";
             serverHostname = "mail.${config.mailServer}";
           in {
@@ -55,7 +60,7 @@
             };
             maildir = { path = "main"; };
             mbsync = {
-              enable = false;
+              enable = true;
               create = "maildir";
               expunge = "none";
               remove = "none";

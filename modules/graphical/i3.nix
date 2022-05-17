@@ -115,7 +115,7 @@ in {
 
           # Launchers
           "${modifier}+Return" =
-            "exec alacritty; workspace ${ws2}; layout tabbed";
+            "exec --no-startup-id alacritty; workspace ${ws2}; layout tabbed";
           "${modifier}+space" =
             "exec --no-startup-id ${config.gui.launcherCommand}";
           "${modifier}+Shift+s" =
