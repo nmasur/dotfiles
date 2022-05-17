@@ -3,13 +3,14 @@
   services.keybase.enable = true;
   services.kbfs = {
     enable = true;
-    enableRedirector = true;
+    # enableRedirector = true;
     mountPoint = "/run/user/1000/keybase/kbfs";
   };
   security.wrappers.keybase-redirector = {
     setuid = true;
     owner = "root";
     group = "root";
+    source = "${pkgs.kbfs}/bin/redirector";
   };
 
   home-manager.users.${config.user} = {
