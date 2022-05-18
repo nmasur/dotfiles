@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   users.users.${config.user}.shell = pkgs.fish;
+  programs.fish.enable = true; # Needed for LightDM to remember username
 
   home-manager.users.${config.user} = {
 
@@ -38,7 +39,7 @@
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
-        ls = { body = "${pkgs.exa}/bin/pkgs $argv"; };
+        ls = { body = "${pkgs.exa}/bin/exa $argv"; };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";

@@ -22,6 +22,7 @@ in {
       displayManager = {
         lightdm = {
           enable = config.services.xserver.enable;
+          background = config.gui.wallpaper;
 
           # Make the login screen dark
           greeters.gtk.theme = gtkTheme;
