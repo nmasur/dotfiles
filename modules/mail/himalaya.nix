@@ -21,9 +21,7 @@
       accounts.email = {
         maildirBasePath = "/home/${config.user}/mail";
         accounts = {
-          home = let
-            address = "${config.user}@${config.mailServer}";
-            serverHostname = "mail.${config.mailServer}";
+          home = let address = "${config.user}@${config.mailServer}";
           in {
             userName = address;
             realName = config.fullName;
@@ -46,7 +44,7 @@
               };
             };
             imap = {
-              host = serverHostname;
+              host = "imap.purelymail.com";
               port = 993;
               tls.enable = true;
             };
@@ -71,8 +69,8 @@
                 builtins.toString ./mailpass.age
               }";
             smtp = {
-              host = serverHostname;
-              port = 587;
+              host = "smtp.purelymail.com";
+              port = 465;
               tls.enable = true;
             };
           };
