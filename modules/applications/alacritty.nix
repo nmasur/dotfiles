@@ -42,6 +42,13 @@
             mode = "Vi";
             action = "ToggleViMode";
           }
+          # Used to enable $ keybind in Vi mode
+          {
+            key = 5; # Scancode for key4
+            mods = "Shift";
+            mode = "Vi|~Search";
+            action = "Last";
+          }
         ];
         colors = {
           primary = {
