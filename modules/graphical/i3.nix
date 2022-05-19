@@ -252,14 +252,17 @@ in {
 
     };
 
+    # Ref: https://github.com/betterlockscreen/betterlockscreen/blob/next/system/betterlockscreen%40.service
     systemd.services.lock = {
       description = "Lock the screen on resume from suspend";
       before = [ "sleep.target" "suspend.target" ];
       serviceConfig = {
         User = config.user;
-        Type = "forking";
+        Type = "simple";
         Environment = "DISPLAY=:0";
+        TimeoutSec = "infinity";
         ExecStart = lockCmd;
+        ExecStartPost = "${pkgs.coreutils-full}/bin/sleep 1";
       };
       wantedBy = [ "sleep.target" "suspend.target" ];
     };
