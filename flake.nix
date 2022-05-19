@@ -56,7 +56,7 @@
           import ./hosts/desktop { inherit nixpkgs home-manager nur globals; };
       };
 
-      # Used to run commands and editing in this repo
+      # Used to run commands and edit files in this repo
       devShells = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
         in {

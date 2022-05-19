@@ -1,17 +1,18 @@
 { nixpkgs, home-manager, nur, globals, ... }:
 
+# System configuration for my desktop
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
     globals
+    home-manager.nixosModules.home-manager
     {
       networking.hostName = "desktop";
       gui.enable = true;
       gui.compositor.enable = true;
+      nixpkgs.overlays = [ nur.overlay ];
     }
-    home-manager.nixosModules.home-manager
-    { nixpkgs.overlays = [ nur.overlay ]; }
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/hardware
