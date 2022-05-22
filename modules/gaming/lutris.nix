@@ -1,13 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-with lib;
-let cfg = config.modules.gaming.lutris;
+  options.gaming.lutris = lib.mkEnableOption "Lutris";
 
-in {
-
-  options.modules.gaming.lutris = { enable = mkEnableOption "Lutris"; };
-
-  config = mkIf cfg.enable {
+  config = lib.mkIf (config.gaming.lutris || config.gaming.leagueoflegends) {
     environment.systemPackages = with pkgs; [ lutris amdvlk wine ];
   };
 

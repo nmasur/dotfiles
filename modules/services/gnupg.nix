@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   home-manager.users.${config.user} = {
     programs.gpg.enable = true;
@@ -10,7 +10,7 @@
       maxCacheTtlSsh = 34560000; # Can never reset
       pinentryFlavor = "tty";
     };
-    home.packages = with pkgs; [ pinentry ];
+    home = lib.mkIf config.gui.enable { packages = with pkgs; [ pinentry ]; };
   };
 
 }

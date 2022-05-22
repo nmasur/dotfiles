@@ -1,13 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-with lib;
-let cfg = config.modules.gaming.steam;
+  options.gaming.steam = lib.mkEnableOption "Steam";
 
-in {
-
-  options.modules.gaming.steam = { enable = mkEnableOption "Steam"; };
-
-  config = mkIf cfg.enable {
+  config = lib.mkIf config.gaming.steam {
     hardware.steam-hardware.enable = true;
     nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs; [ steam ];

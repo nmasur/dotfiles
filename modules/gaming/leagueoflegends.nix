@@ -1,15 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-with lib;
-let cfg = config.modules.gaming.leagueoflegends;
+  options.gaming.leagueoflegends = lib.mkEnableOption "League of Legends";
 
-in {
-
-  options.modules.gaming.leagueoflegends = {
-    enable = mkEnableOption "League of Legends";
-  };
-
-  config = mkIf cfg.enable {
+  config = lib.mkIf config.gaming.leagueoflegends {
 
     # League of Legends anti-cheat
     boot.kernel.sysctl = { "abi.vsyscall32" = 0; };
