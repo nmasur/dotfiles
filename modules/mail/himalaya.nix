@@ -61,6 +61,9 @@
               expunge = "none";
               remove = "none";
               patterns = [ "*" ];
+              extraConfig.channel = {
+                CopyArrivalDate = "yes"; # Sync time of original message
+              };
             };
             mu.enable = false;
             notmuch.enable = false;
