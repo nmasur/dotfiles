@@ -4,10 +4,26 @@
 
   config = lib.mkIf config.gaming.leagueoflegends {
 
-    # League of Legends anti-cheat
+    nixpkgs.config.allowUnfree = true;
+
+    # League of Legends anti-cheat requirement
     boot.kernel.sysctl = { "abi.vsyscall32" = 0; };
 
-    environment.systemPackages = with pkgs; [ openssl dconf ];
+    environment.systemPackages = with pkgs; [
+
+      # Lutris requirement to install the game
+      lutris
+      amdvlk
+      wine
+
+      # Required according to https://lutris.net/games/league-of-legends/
+      openssl
+      gnome.zenity
+
+      # Don't remember if this is required
+      dconf
+
+    ];
 
   };
 }
