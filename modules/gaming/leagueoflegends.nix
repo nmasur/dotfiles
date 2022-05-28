@@ -14,7 +14,7 @@
       # Lutris requirement to install the game
       lutris
       amdvlk
-      wine
+      wineWowPackages.stable
 
       # Required according to https://lutris.net/games/league-of-legends/
       openssl

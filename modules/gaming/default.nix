@@ -1,6 +1,6 @@
 { config, ... }: {
 
-  imports = [ ./leagueoflegends.nix ./lutris.nix ./steam.nix ];
+  imports = [ ./leagueoflegends.nix ./lutris.nix ./steam.nix ./legendary.nix ];
 
   config = {
     hardware.opengl = {

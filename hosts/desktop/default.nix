@@ -12,8 +12,9 @@ nixpkgs.lib.nixosSystem {
       gui.enable = true;
       gui.compositor.enable = true;
       nixpkgs.overlays = [ nur.overlay ];
-      gaming.leagueoflegends = true;
       gaming.steam = true;
+      gaming.leagueoflegends = true;
+      gaming.legendary = true;
     }
     ./hardware-configuration.nix
     ../common.nix
