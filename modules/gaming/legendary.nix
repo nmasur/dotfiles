@@ -7,7 +7,7 @@
     environment.systemPackages = with pkgs; [
       legendary-gl
       rare # GUI for Legendary (not working)
-      wineWowPackages.stable # 32-bit and 64-bit wineWowPackages
+      wineWowPackages.stable # 32-bit and 64-bit wineWowPackages, see https://nixos.wiki/wiki/Wine
     ];
 
     home-manager.users.${config.user} = {

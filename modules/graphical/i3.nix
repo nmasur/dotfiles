@@ -93,13 +93,6 @@ in {
           };
           keybindings = {
 
-            # PulseAudio adjust volume
-            "XF86AudioRaiseVolume" = "exec --no-startup-id pamixer -i 2";
-            "XF86AudioLowerVolume" = "exec --no-startup-id pamixer -d 2";
-            "XF86AudioMute" = "exec --no-startup-id pamixer -t";
-            "XF86AudioMicMute" =
-              "exec --no-startup-id pamixer --default-source -t";
-
             # Adjust screen brightness
             "Shift+F12" =
               "exec ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ddcutil --display 2 setvcp 10 + 30";
