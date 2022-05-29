@@ -11,14 +11,33 @@
     ../modules/mail/himalaya.nix
   ];
 
+  options = with lib; {
+    dotfilesPath = mkOption {
+      type = types.path;
+      description = "Path of dotfiles repository.";
+      default = builtins.toPath "/home/${config.user}/dev/personal/dotfiles";
+    };
+  };
+
   config = {
 
+    # Enable features in Nix commands
     nix.extraOptions = "experimental-features = nix-command flakes";
 
+    # Basic common system packages for all devices
+    environment.systemPackages = with pkgs; [ git vim wget curl ];
+
+    # Use the system-level nixpkgs instead of Home Manager's
     home-manager.useGlobalPkgs = true;
+
+    # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+    # using multiple profiles
     home-manager.useUserPackages = true;
 
-    environment.systemPackages = with pkgs; [ git vim wget curl ];
+    # Set a variable for dotfiles repo, not necessary but convenient
+    home-manager.users.${config.user} = {
+      home.sessionVariables = { DOTS = config.dotfilesPath; };
+    };
 
   };
 

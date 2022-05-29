@@ -19,10 +19,10 @@
       };
     };
 
-    # Detect monitors (brightness)
+    # Detect monitors (brightness) for ddcutil
     hardware.i2c.enable = true;
 
-    # Grant user access to external monitors
+    # Grant main user access to external monitors
     users.users.${config.user}.extraGroups = [ "i2c" ];
 
     services.xserver.displayManager = {

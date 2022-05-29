@@ -2,7 +2,7 @@
 
   config = lib.mkIf config.gui.enable {
 
-    # Mouse config
+    # Mouse customization
     services.ratbagd.enable = true;
 
     environment.systemPackages = with pkgs; [

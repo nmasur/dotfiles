@@ -19,7 +19,7 @@ in {
 
     home-manager.users.root.programs.git = {
       enable = true;
-      extraConfig.safe.directory = "/home/${config.user}/dev/personal/dotfiles";
+      extraConfig.safe.directory = config.dotfilesPath;
     };
 
     home-manager.users.${config.user} = {
@@ -29,7 +29,7 @@ in {
         userEmail = config.gitEmail;
         extraConfig = {
           pager = { branch = "false"; };
-          safe = { directory = "/home/${config.user}/dev/personal/dotfiles"; };
+          safe = { directory = config.dotfilesPath; };
           pull = { ff = "only"; };
           init = { defaultBranch = "master"; };
         };

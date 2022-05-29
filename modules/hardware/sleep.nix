@@ -2,8 +2,7 @@
 
   # Prevent wake from keyboard
   powerManagement.powerDownCommands = ''
-    echo disabled > /sys/bus/usb/devices/1-6/power/wakeup
-    echo disabled > /sys/bus/usb/devices/1-8/power/wakeup
+    for wakeup in /sys/bus/usb/devices/1-*/power/wakeup; do echo disabled > $wakeup; done
   '';
 
 }

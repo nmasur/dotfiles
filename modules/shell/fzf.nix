@@ -18,6 +18,7 @@
       shellAbbrs = { lf = "ls -lh | fzf"; };
     };
 
+    # Global fzf configuration
     home.sessionVariables = let fzfCommand = "fd --type file";
     in {
       FZF_DEFAULT_COMMAND = fzfCommand;

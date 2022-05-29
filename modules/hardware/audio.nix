@@ -32,8 +32,11 @@ in {
 
   config = lib.mkIf config.gui.enable {
     sound.enable = true;
+
+    # Enable PulseAudio
     hardware.pulseaudio.enable = true;
 
+    # These aren't necessary, but helpful for the user
     environment.systemPackages = with pkgs; [
       pamixer # Audio control
       volnoti # Volume notifications
@@ -44,15 +47,28 @@ in {
       # Graphical volume notifications
       services.volnoti.enable = true;
 
-      # i3 keybinds for changing the volume
-      xsession.windowManager.i3.config.keybindings = {
-        "XF86AudioRaiseVolume" =
-          "exec --no-startup-id ${increaseVolume}/bin/increaseVolume";
-        "XF86AudioLowerVolume" =
-          "exec --no-startup-id ${decreaseVolume}/bin/decreaseVolume";
-        "XF86AudioMute" = "exec --no-startup-id ${toggleMute}/bin/toggleMute";
-        "XF86AudioMicMute" =
-          "exec --no-startup-id pamixer --default-source --toggle-mute";
+      xsession.windowManager.i3.config = {
+
+        # Make sure that Volnoti actually starts (home-manager doesn't start
+        # user daemon's automatically)
+        startup = [{
+          command = "systemctl --user restart volnoti";
+          always = true;
+          notification = false;
+        }];
+
+        # i3 keybinds for changing the volume
+        keybindings = {
+          "XF86AudioRaiseVolume" =
+            "exec --no-startup-id ${increaseVolume}/bin/increaseVolume";
+          "XF86AudioLowerVolume" =
+            "exec --no-startup-id ${decreaseVolume}/bin/decreaseVolume";
+          "XF86AudioMute" = "exec --no-startup-id ${toggleMute}/bin/toggleMute";
+          # We can mute the mic by adding "--default-source"
+          "XF86AudioMicMute" =
+            "exec --no-startup-id ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute";
+        };
+
       };
 
     };

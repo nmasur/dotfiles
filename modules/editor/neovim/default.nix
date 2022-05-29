@@ -47,8 +47,11 @@
       MANPAGER = "nvim +Man!";
     };
     programs.fish = {
-      shellAliases = { vim = "nvim"; };
-      shellAbbrs = { vll = "vim -c 'Telescope oldfiles'"; };
+      shellAbbrs = {
+        v = lib.mkForce "nvim";
+        vl = lib.mkForce "nvim -c 'normal! `0'";
+        vll = "nvim -c 'Telescope oldfiles'";
+      };
     };
 
   };

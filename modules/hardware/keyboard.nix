@@ -1,13 +1,16 @@
 { ... }: {
 
   services.xserver = {
+
+    layout = "us";
+
     # Keyboard responsiveness
     autoRepeatDelay = 250;
     autoRepeatInterval = 40;
 
-    # Configure keymap in X11
-    layout = "us";
+    # Swap escape key with caps lock key
     xkbOptions = "eurosign:e,caps:swapescape";
+
   };
 
 }
