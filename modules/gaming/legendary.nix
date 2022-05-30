@@ -21,7 +21,7 @@
         ; Set install directory
         install_dir = /home/${config.user}/media/games
         ; Make output quiet
-        log_level = warning
+        log_level = error
       '';
 
       home.file = let
