@@ -47,6 +47,7 @@
       MANPAGER = "nvim +Man!";
     };
     programs.fish = {
+      shellAliases = { vim = "nvim"; };
       shellAbbrs = {
         v = lib.mkForce "nvim";
         vl = lib.mkForce "nvim -c 'normal! `0'";
