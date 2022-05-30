@@ -5,7 +5,7 @@
     home-manager.users.${config.user} = {
       home.packages = with pkgs; [
         gnome.nautilus
-        gnome.sushi # Quick preview
+        gnome.sushi # Quick preview with spacebar
       ];
     };
   };
