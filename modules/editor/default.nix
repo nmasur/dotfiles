@@ -1,5 +1,5 @@
 { ... }: {
 
-  imports = [ ./neovim ./notes.nix ];
+  imports = [ ./neovim ./notes.nix ./dotfiles.nix ];
 
 }
