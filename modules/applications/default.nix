@@ -8,6 +8,7 @@
     ./firefox.nix
     ./media.nix
     ./qbittorrent.nix
+    ./nautilus.nix
   ];
 
 }
