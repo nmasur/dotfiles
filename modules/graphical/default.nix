@@ -29,6 +29,10 @@
         type = types.str;
         description = "Command to use for interacting with systemd";
       };
+      altTabCommand = mkOption {
+        type = types.str;
+        description = "Command to use for choosing windows";
+      };
       toggleBarCommand = lib.mkOption {
         type = lib.types.str;
         description = "Command to hide and show the status bar.";

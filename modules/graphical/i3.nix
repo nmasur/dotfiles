@@ -116,6 +116,7 @@ in {
               "exec --no-startup-id ${config.gui.launcherCommand}";
             "${modifier}+Shift+s" =
               "exec --no-startup-id ${config.gui.systemdSearch}";
+            "Mod1+Tab" = "exec --no-startup-id ${config.gui.altTabCommand}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+q" = ''

@@ -146,6 +146,7 @@
 
     gui.launcherCommand = "${pkgs.rofi}/bin/rofi -show run -modi run";
     gui.systemdSearch = "${pkgs.rofi-systemd}/bin/rofi-systemd";
+    gui.altTabCommand = "${pkgs.rofi}/bin/rofi -show window -modi window";
 
   };
 
