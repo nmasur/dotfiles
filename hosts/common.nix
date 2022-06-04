@@ -17,6 +17,10 @@
       description = "Path of dotfiles repository.";
       default = builtins.toPath "/home/${config.user}/dev/personal/dotfiles";
     };
+    dotfilesRepo = mkOption {
+      type = types.str;
+      description = "Link to dotfiles repository.";
+    };
   };
 
   config = {
