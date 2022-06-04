@@ -15,6 +15,7 @@
       lutris
       amdvlk
       wineWowPackages.stable
+      # vulkan-tools
 
       # Required according to https://lutris.net/games/league-of-legends/
       openssl
@@ -24,6 +25,8 @@
       dconf
 
     ];
+
+    environment.sessionVariables = { QT_X11_NO_MITSHM = "1"; };
 
   };
 }

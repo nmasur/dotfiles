@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let home-packages = config.home-manager.users.${config.user}.home.packages;
+
+in {
 
   options.gaming.legendary =
     lib.mkEnableOption "Legendary - Epic Games Launcher";
@@ -32,6 +36,21 @@
         ".rgignore".text = ignorePatterns;
         ".fdignore".text = ignorePatterns;
       };
+
+      programs.fish.functions =
+        lib.mkIf (builtins.elem pkgs.fzf home-packages) {
+          epic-games = {
+            body = ''
+              set game (legendary list 2>/dev/null \
+                  | tail -n +3 \
+                  | head -n -2 \
+                  | sed -e 's/ (.*)$//' -e 's/ \* //' \
+                  | awk '!/^  / { print $0; }' \
+                  | fzf)
+              and legendary launch "$game" 2>/dev/null
+            '';
+          };
+        };
 
     };
   };
