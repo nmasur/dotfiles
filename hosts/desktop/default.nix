@@ -20,5 +20,6 @@ nixpkgs.lib.nixosSystem {
     ../common.nix
     ../../modules/services/keybase.nix
     ../../modules/services/gnupg.nix
+    ../../modules/services/mullvad.nix
   ];
 }
