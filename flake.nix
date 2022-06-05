@@ -48,14 +48,23 @@
 
     in {
 
-      # Define my systems
-      # You can load it from an empty system with:
+      # You can load it from any NixOS system with:
       # nix-shell -p nixFlakes
       # sudo nixos-rebuild switch --flake github:nmasur/dotfiles#desktop
       nixosConfigurations = {
         desktop =
           import ./hosts/desktop { inherit nixpkgs home-manager nur globals; };
       };
+
+      # You can partition, format, and install with:
+      # nix-shell -p nixFlakes
+      # nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop
+      # Will erase drives; use at your own risk!
+      apps = forAllSystems (system:
+        let pkgs = import nixpkgs { inherit system; };
+        in {
+          installer = import ./modules/system/installer.nix { inherit pkgs; };
+        });
 
       # Used to run commands and edit files in this repo
       devShells = forAllSystems (system:
