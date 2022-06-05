@@ -6,6 +6,10 @@
   location = { provider = "geoclue2"; };
 
   # Enable local time based on time zone
-  services.localtime.enable = true;
+  services.localtimed.enable = true;
+
+  # Required to get localtimed to talk to geoclue2
+  services.geoclue2.appConfig.localtimed.isSystem = true;
+  services.geoclue2.appConfig.localtimed.isAllowed = true;
 
 }
