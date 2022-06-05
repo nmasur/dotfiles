@@ -3,12 +3,7 @@
 {
   config = lib.mkIf config.gui.enable {
 
-    # nixpkgs.config.allowUnfreePredicate = pkg:
-    #   builtins.elem (lib.getName pkg) [ "onepassword-password-manager" ];
-    nixpkgs.config.allowlistedLicenses = [
-      pkgs.nur.repos.rycee.firefox-addons.onepassword-password-manager.meta.license
-      pkgs.nur.repos.rycee.firefox-addons.okta-browser-plugin.meta.license
-    ];
+    unfreePackages = [ "onepassword-password-manager" "okta-browser-plugin" ];
 
     home-manager.users.${config.user} = {
 
