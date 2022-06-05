@@ -42,12 +42,10 @@ in {
           epic-games = {
             body = ''
               set game (legendary list 2>/dev/null \
-                  | tail -n +3 \
-                  | head -n -2 \
+                  | awk '/^ \* / { print $0; }' \
                   | sed -e 's/ (.*)$//' -e 's/ \* //' \
-                  | awk '!/^  / { print $0; }' \
                   | fzf)
-              and legendary launch "$game" 2>/dev/null
+              and legendary launch "$game" &> /dev/null
             '';
           };
         };

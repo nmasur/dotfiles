@@ -21,6 +21,11 @@
       type = types.str;
       description = "Link to dotfiles repository.";
     };
+    unfreePackages = mkOption {
+      type = types.listOf types.str;
+      description = "List of unfree packages to allow.";
+      default = [ ];
+    };
   };
 
   config = {
@@ -35,8 +40,12 @@
     home-manager.useGlobalPkgs = true;
 
     # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-    # using multiple profiles
+    # using multiple profiles for one user
     home-manager.useUserPackages = true;
+
+    # Allow specified unfree packages (identified elsewhere)
+    nixpkgs.config.allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) config.unfreePackages;
 
     # Set a variable for dotfiles repo, not necessary but convenient
     home-manager.users.${config.user} = {

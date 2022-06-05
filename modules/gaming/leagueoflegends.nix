@@ -4,8 +4,6 @@
 
   config = lib.mkIf config.gaming.leagueoflegends {
 
-    nixpkgs.config.allowUnfree = true;
-
     # League of Legends anti-cheat requirement
     boot.kernel.sysctl = { "abi.vsyscall32" = 0; };
 

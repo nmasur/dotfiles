@@ -57,6 +57,12 @@ key("n", "<Leader>gb", ":Telescope git_branches<CR>")
 key("n", "<Leader>gs", ":Telescope git_status<CR>")
 key("n", "<C-p>", "<Cmd>lua choose_project()<CR>")
 
+-- Buffer tabs (tmux interferes)
+-- key("n", "<C-L>", "gt")
+-- key("i", "<C-L>", "<Esc>gt")
+-- key("n", "<C-H>", "gT")
+-- key("i", "<C-H>", "<Esc>gT")
+
 -- LSP
 key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { silent = true })
 key("n", "gT", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { silent = true })
