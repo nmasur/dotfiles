@@ -7,6 +7,12 @@
     # Used for system packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Used for MacOS system config
+    darwin = {
+      url = "github:/lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Used for user packages
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -19,7 +25,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nur }:
+  outputs = { self, nixpkgs, darwin, home-manager, nur }:
 
     let
 
@@ -56,7 +62,13 @@
           import ./hosts/desktop { inherit nixpkgs home-manager nur globals; };
       };
 
-      # You can partition, format, and install with:
+      darwinConfigurations = {
+        macbook = import ./hosts/macbook {
+          inherit nixpkgs darwin home-manager nur globals;
+        };
+      };
+
+      # You can partition, format, and install from a live disk with:
       # nix-shell -p nixFlakes
       # nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop
       # Will erase drives; use at your own risk!
