@@ -14,7 +14,7 @@
     };
 
     userDirs = {
-      # Required to prevent infinite recursion with himalaya
+      # Required to prevent infinite recursion when referenced by himalaya
       download = lib.mkOption {
         type = lib.types.str;
         description = "XDG directory for downloads";
