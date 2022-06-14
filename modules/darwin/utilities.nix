@@ -65,6 +65,29 @@
       noti # Create notifications programmatically
     ];
 
+    programs.alacritty.settings.keybindings = [
+      {
+        key = "F";
+        mods = "Super";
+        action = "ToggleSimpleFullscreen";
+      }
+      {
+        key = "L";
+        mods = "Super";
+        chars = "\\x1F";
+      }
+      {
+        key = "H";
+        mods = "Super|Shift";
+        action = "x02p"; # Previous tmux window
+      }
+      {
+        key = "L";
+        mods = "Super|Shift";
+        action = "x02n"; # Next tmux window
+      }
+    ];
+
     fonts.fonts = with pkgs;
       [ (nerdfonts.override { fonts = [ "fira-mono" ]; }) ];
 
