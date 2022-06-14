@@ -16,6 +16,13 @@
 
     };
 
+    programs.fish = {
+      shellAbbrs = {
+        nr = lib.mkIf pkgs.stdenv.isLinux
+          "doas nixos-rebuild switch --flake ${config.dotfilesPath}";
+      };
+    };
+
   };
 
 }
