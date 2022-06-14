@@ -108,71 +108,69 @@
       screencapture.location = "~/Downloads";
 
     };
-  };
 
-  # echo "Disable disk image verification"
-  # defaults write com.apple.frameworks.diskimages skip-verify -bool true
-  # defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-  # defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-  #
-  # echo "Avoid creating .DS_Store files on network volumes"
-  # defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-  #
-  # # echo "Enable snap-to-grid for desktop icons"
-  # # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-  #
-  # echo "Disable the warning before emptying the Trash"
-  # defaults write com.apple.finder WarnOnEmptyTrash -bool false
-  #
-  # echo "Require password immediately after sleep or screen saver begins"
-  # defaults write com.apple.screensaver askForPassword -int 1
-  # defaults write com.apple.screensaver askForPasswordDelay -int 0
-  #
-  # echo "Show the ~/Library folder"
-  # chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
-  #
-  # # Noah Prefs
-  # echo "Enable dock magnification"
-  # defaults write com.apple.dock magnification -bool true
-  #
-  # echo "Set dock size"
-  # defaults write com.apple.dock largesize -int 48
-  #
-  # echo "Choose and order dock icons"
-  # __dock_item() {
-  #     printf '%s%s%s%s%s' \
-  #            '<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
-  #            '<key>_CFURLString</key><string>' \
-  #            "$1" \
-  #            '</string><key>_CFURLStringType</key><integer>0</integer>' \
-  #            '</dict></dict></dict>'
-  # }
-  #
-  # defaults write com.apple.dock persistent-apps -array \
-  #     "$(__dock_item /Applications/1Password\ 7.app)" \
-  #     "$(__dock_item /Applications/Slack.app)" \
-  #     "$(__dock_item /System/Applications/Calendar.app)" \
-  #     "$(__dock_item /Applications/Firefox.app)" \
-  #     "$(__dock_item /System/Applications/Messages.app)" \
-  #     "$(__dock_item /System/Applications/Mail.app)" \
-  #     "$(__dock_item /Applications/Mimestream.app)" \
-  #     "$(__dock_item /Applications/zoom.us.app)" \
-  #     "$(__dock_item /Applications/Obsidian.app)" \
-  #     "$(__dock_item /Applications/Alacritty.app)" \
-  #     "$(__dock_item /System/Applications/System\ Preferences.app)"
-  #
-  # echo "Turn on Scroll Reverser"
-  # open /Applications/Scroll\ Reverser.app
-  # osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Scroll Reverser.app", hidden:false}'
-  #
-  # echo "Allow apps from anywhere"
-  # SPCTL=$(spctl --status)
-  # if ! [ "$SPCTL" = "assessments disabled" ]
-  # then
-  #     sudo spctl --master-disable
-  # fi
-  #
-  # echo "Show the ~/Library folder"
-  # chflags nohidden ~/Library
+    activationScripts.otherSettings.text = ''
+      echo "Disable disk image verification"
+      defaults write com.apple.frameworks.diskimages skip-verify -bool true
+      defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+      defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
+      echo "Avoid creating .DS_Store files on network volumes"
+      defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+      echo "Disable the warning before emptying the Trash"
+      defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+      echo "Require password immediately after sleep or screen saver begins"
+      defaults write com.apple.screensaver askForPassword -int 1
+      defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+      echo "Show the ~/Library folder"
+      chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+
+      echo "Enable dock magnification"
+      defaults write com.apple.dock magnification -bool true
+
+      echo "Set dock magnification size"
+      defaults write com.apple.dock largesize -int 48
+
+      echo "Choose and order dock icons"
+      __dock_item() {
+          printf '%s%s%s%s%s' \
+                 '<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
+                 '<key>_CFURLString</key><string>' \
+                 "$1" \
+                 '</string><key>_CFURLStringType</key><integer>0</integer>' \
+                 '</dict></dict></dict>'
+      }
+
+      defaults write com.apple.dock persistent-apps -array \
+          "$(__dock_item /Applications/1Password\ 7.app)" \
+          "$(__dock_item /Applications/Slack.app)" \
+          "$(__dock_item /System/Applications/Calendar.app)" \
+          "$(__dock_item /Applications/Firefox.app)" \
+          "$(__dock_item /System/Applications/Messages.app)" \
+          "$(__dock_item /System/Applications/Mail.app)" \
+          "$(__dock_item /Applications/Mimestream.app)" \
+          "$(__dock_item /Applications/zoom.us.app)" \
+          "$(__dock_item /Applications/Obsidian.app)" \
+          "$(__dock_item /Applications/Alacritty.app)" \
+          "$(__dock_item /System/Applications/System\ Preferences.app)"
+
+      echo "Turn on Scroll Reverser"
+      open /Applications/Scroll\ Reverser.app
+      osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Scroll Reverser.app", hidden:false}'
+
+      echo "Allow apps from anywhere"
+      SPCTL=$(spctl --status)
+      if ! [ "$SPCTL" = "assessments disabled" ]
+      then
+          sudo spctl --master-disable
+      fi
+
+      echo "Show the ~/Library folder"
+      chflags nohidden ~/Library
+    '';
+  };
 
 }
