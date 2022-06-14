@@ -91,6 +91,8 @@
     fonts.fonts = with pkgs;
       [ (nerdfonts.override { fonts = [ "fira-mono" ]; }) ];
 
+    home.file.hammerspoon = { source = ./hammerspoon; };
+
   };
 
   homebrew = {
