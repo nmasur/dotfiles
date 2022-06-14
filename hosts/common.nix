@@ -1,15 +1,6 @@
 { config, lib, pkgs, ... }: {
 
-  imports = [
-    ../modules/hardware
-    ../modules/system
-    ../modules/graphical
-    ../modules/shell
-    ../modules/gaming
-    ../modules/applications
-    ../modules/editor
-    ../modules/mail/himalaya.nix
-  ];
+  imports = [ ../modules/shell ../modules/editor ../modules/mail/himalaya.nix ];
 
   options = with lib; {
     dotfilesPath = mkOption {

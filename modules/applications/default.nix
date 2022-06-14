@@ -7,6 +7,7 @@
     ./discord.nix
     ./firefox.nix
     ./media.nix
+    ./obsidian.nix
     ./qbittorrent.nix
     ./nautilus.nix
   ];

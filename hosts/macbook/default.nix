@@ -8,11 +8,15 @@ darwin.lib.darwinSystem {
     globals
     home-manager.darwinModules.home-manager
     {
-      networking.hostName = "desktop";
       gui.enable = true;
-      gui.compositor.enable = true;
       nixpkgs.overlays = [ nur.overlay ];
     }
     ../common.nix
+    ../../modules/darwin
+    ../../modules/applications/1password.nix
+    ../../modules/applications/alacritty.nix
+    ../../modules/applications/discord.nix
+    ../../modules/applications/firefox.nix
+    ../../modules/applications/obsidian.nix
   ];
 }
