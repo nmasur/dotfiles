@@ -37,13 +37,6 @@
 
     xdg.configFile.hammerspoon = { source = ./hammerspoon; };
 
-    programs.fish = {
-      shellAbbrs = {
-        nr =
-          "sudo darwin-rebuild switch --flake ${config.dotfilesPath}#macbook";
-      };
-    };
-
   };
 
   system.activationScripts.hammerspoon.text = ''

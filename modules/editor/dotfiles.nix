@@ -16,10 +16,21 @@
 
     };
 
-    programs.fish = {
-      shellAbbrs = {
-        nr = lib.mkIf pkgs.stdenv.isLinux
-          "doas nixos-rebuild switch --flake ${config.dotfilesPath}";
+    programs.fish = let
+      system = if pkgs.stdenv.isDarwin then "darwin" else "nixos";
+      sudo = if pkgs.stdenv.isDarwin then "doas" else "sudo";
+    in {
+      shellAbbrs = { nr = lib.mkIf pkgs.stdenv.isLinux "rebuild-${system}"; };
+      functions = {
+        rebuild-nixos = {
+          body = ''
+            pushd ${config.dotfilesPath}
+            git add --all
+            popd
+            echo "${sudo} ${system}-rebuild switch --flake ${config.dotfilesPath}"
+            ${sudo} ${system}-rebuild switch --flake ${config.dotfilesPath}
+          '';
+        };
       };
     };
 
