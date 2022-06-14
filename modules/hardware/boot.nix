@@ -15,7 +15,19 @@
 
       # Don't install GRUB, required for UEFI?
       device = "nodev";
+
+      # Display menu indefinitely if holding shift key
+      extraConfig = ''
+        if keystatus --shift ; then
+            set timeout=-1
+        else
+            set timeout=0
+        fi
+      '';
     };
+
+    # Always display menu indefinitely; default is 5 seconds
+    # timeout = null;
 
     # Allows GRUB to interact with the UEFI/BIOS I guess
     efi.canTouchEfiVariables = true;
