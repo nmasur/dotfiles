@@ -35,12 +35,6 @@
     fonts.fonts = with pkgs;
       [ (nerdfonts.override { fonts = [ "fira-mono" ]; }) ];
 
-    xdg.configFile.hammerspoon = { source = ./hammerspoon; };
-
   };
-
-  system.activationScripts.hammerspoon.text = ''
-    defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-  '';
 
 }

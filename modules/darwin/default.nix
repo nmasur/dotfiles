@@ -1,5 +1,5 @@
 { ... }: {
 
-  imports = [ ./system.nix ./tmux.nix ./utilities.nix ];
+  imports = [ ./system.nix ./tmux.nix ./utilities.nix ./hammerspoon.nix ];
 
 }

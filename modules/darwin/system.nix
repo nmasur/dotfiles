@@ -109,6 +109,7 @@
 
     };
 
+    # Settings that don't have an option in nix-darwin
     activationScripts.otherSettings.text = ''
       echo "Disable disk image verification"
       defaults write com.apple.frameworks.diskimages skip-verify -bool true
