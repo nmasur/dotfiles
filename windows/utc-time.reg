@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+; Changes registry to expect UTC from the hardware clock
+; More info here: https://wiki.archlinux.org/title/System_time#UTC_in_Microsoft_Windows
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]
+"RealTimeIsUniversal"=dword:00000001
