@@ -23,9 +23,15 @@
     # Community packages; used for Firefox extensions
     nur.url = "github:nix-community/nur";
 
+    # Wallpapers
+    wallpapers = {
+      url = "gitlab:exorcist365/wallpapers";
+      flake = false;
+    };
+
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, nur }:
+  outputs = { self, nixpkgs, darwin, home-manager, nur, wallpapers }:
 
     let
 
@@ -40,7 +46,7 @@
         dotfilesRepo = "https://github.com/nmasur/dotfiles";
         gui = {
           colorscheme = (import ./modules/colorscheme/gruvbox);
-          wallpaper = ./media/wallpaper/road.jpg;
+          wallpaper = "${wallpapers}/gruvbox/road.jpg";
           gtk.theme = { name = "Adwaita-dark"; };
         };
       };

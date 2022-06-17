@@ -78,7 +78,24 @@
         "darwin": "darwin",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "nur": "nur",
+        "wallpapers": "wallpapers"
+      }
+    },
+    "wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1653239252,
+        "narHash": "sha256-Fiw5P+XULgqlLRGf+GKaRZ+Nw0UIx5TaYa7ipiA0+X4=",
+        "owner": "exorcist365",
+        "repo": "wallpapers",
+        "rev": "4e0a72a8d67264e58fa0424693fd93cb24bc527c",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "exorcist365",
+        "repo": "wallpapers",
+        "type": "gitlab"
       }
     }
   },
