@@ -13,7 +13,7 @@
 
       programs.himalaya = { enable = true; };
       programs.mbsync = { enable = true; };
-      services.mbsync = {
+      services.mbsync = lib.mkIf pkgs.stdenv.isLinux {
         enable = true;
         frequency = "*:0/5";
       };
@@ -39,7 +39,7 @@
             himalaya = {
               enable = true;
               settings = {
-                downloads-dir = config.userDirs.download;
+                downloads-dir = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else config.userDirs.download;
                 smtp-insecure = true;
               };
             };

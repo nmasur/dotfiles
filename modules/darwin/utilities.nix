@@ -2,7 +2,7 @@
 
   home-manager.users.${config.user} = {
 
-    home.packages = [
+    home.packages = with pkgs; [
       visidata # CSV inspector
       dos2unix # Convert Windows text files
       inetutils # Includes telnet
@@ -32,9 +32,11 @@
       ];
     };
 
-    fonts.fonts = with pkgs;
-      [ (nerdfonts.override { fonts = [ "fira-mono" ]; }) ];
-
   };
+
+
+    fonts.fonts = with pkgs;
+      [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+
 
 }

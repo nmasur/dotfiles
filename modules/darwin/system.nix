@@ -14,7 +14,7 @@
         AppleInterfaceStyle = "Dark";
 
         # Don't change from dark to light automatically
-        AppleInterfaceSwitchesAutomatically = false;
+        # AppleInterfaceSwitchesAutomatically = false;
 
         # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
         AppleKeyboardUIMode = 3;

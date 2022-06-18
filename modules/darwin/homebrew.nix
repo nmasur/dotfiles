@@ -11,6 +11,8 @@
       "trash" # Delete files and folders to trash instead of rm
     ];
     casks = [
+      "firefox" # Firefox packaging on Nix is broken for MacOS
+      "1password" # 1Password packaging on Nix is broken for MacOS
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "meetingbar" # Show meetings in menu bar
       "gitify" # Git notifications in menu bar

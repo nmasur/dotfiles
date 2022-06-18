@@ -23,7 +23,7 @@
             size = 14.0;
             normal = {
               family =
-                builtins.head config.fonts.fontconfig.defaultFonts.monospace;
+                builtins.head (if pkgs.stdenv.isDarwin then config.fonts.fonts else config.fonts.fontconfig.defaultFonts.monospace);
             };
           };
           key_bindings = [

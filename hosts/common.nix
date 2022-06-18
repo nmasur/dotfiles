@@ -25,7 +25,7 @@
     nix.extraOptions = "experimental-features = nix-command flakes";
 
     # Pin a state version to prevent warnings
-    system.stateVersion = "22.11";
+    # system.stateVersion = "22.11";
 
     # Basic common system packages for all devices
     environment.systemPackages = with pkgs; [ git vim wget curl ];
