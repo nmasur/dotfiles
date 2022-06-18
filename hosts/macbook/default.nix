@@ -12,6 +12,7 @@ darwin.lib.darwinSystem {
       gitEmail = globals.gitEmail;
       mailServer = globals.mailServer;
       dotfilesRepo = globals.dotfilesRepo;
+      dotfilesPath = "/Users/Noah.Masur/dev/dotfiles";
       gui = {
           enable = true;
           colorscheme = globals.gui.colorscheme;

@@ -1,4 +1,6 @@
 { ... }: {
+    
+  services.nix-daemon.enable = true;
 
   system = {
 
@@ -97,12 +99,12 @@
       # Disable trackpad tap to click
       trackpad.Clicking = false;
 
-      universalaccess = {
+      # universalaccess = {
 
-        # Zoom in with Control + Scroll Wheel
-        closeViewScrollWheelToggle = true;
-        closeViewZoomFollowsFocus = true;
-      };
+      #   # Zoom in with Control + Scroll Wheel
+      #   closeViewScrollWheelToggle = true;
+      #   closeViewZoomFollowsFocus = true;
+      # };
 
       # Where to save screenshots
       screencapture.location = "~/Downloads";
