@@ -22,8 +22,10 @@
           font = {
             size = 14.0;
             normal = {
-              family =
-                builtins.head (if pkgs.stdenv.isDarwin then config.fonts.fonts else config.fonts.fontconfig.defaultFonts.monospace);
+              family = builtins.head (if pkgs.stdenv.isDarwin then
+                [ "FiraCode Nerd Font Mono" ]
+              else
+                config.fonts.fontconfig.defaultFonts.monospace);
             };
           };
           key_bindings = [

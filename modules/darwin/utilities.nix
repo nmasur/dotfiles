@@ -14,6 +14,7 @@
       kubectl
       k9s
       noti # Create notifications programmatically
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
     programs.alacritty.settings = {
@@ -34,9 +35,7 @@
 
   };
 
-
-    # fonts.fonts = with pkgs;
-    #  [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
-
+  #fonts.fonts = with pkgs;
+  #  [ (nerdfonts.override { fonts = [ "Victor Mono" ]; }) ];
 
 }

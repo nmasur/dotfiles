@@ -1,13 +1,13 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
 
-  users.users."${user}" = { # macOS user
-    home = "/Users/${user}";
+  users.users."${config.user}" = { # macOS user
+    home = "/Users/${config.user}";
     shell = pkgs.zsh; # Default shell
   };
 
-  networking = {
-    computerName = "MacBook"; # Host name
-    hostName = "MacBook";
-  };
+  #networking = {
+  #  computerName = "MacBook"; # Host name
+  #  hostName = "MacBook";
+  #};
 
 }
