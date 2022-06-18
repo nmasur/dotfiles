@@ -244,6 +244,16 @@ in {
         };
       };
 
+      # Update lock screen cache only if cache is empty
+      home.activation.updateLockScreenCache =
+        let cacheDir = "/home/${config.user}/.cache/betterlockscreen/current";
+        in config.home-manager.users.${config.user}.lib.dag.entryAfter
+        [ "writeBoundary" ] ''
+          if [ ! -d ${cacheDir} ] || [ -z "$(ls ${cacheDir})" ]; then
+              $DRY_RUN_CMD ${lockUpdate}
+          fi
+        '';
+
     };
 
     # Ref: https://github.com/betterlockscreen/betterlockscreen/blob/next/system/betterlockscreen%40.service
