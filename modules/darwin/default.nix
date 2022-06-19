@@ -1,7 +1,13 @@
 { lib, ... }: {
 
-  imports =
-    [ ./system.nix ./user.nix ./tmux.nix ./utilities.nix ./hammerspoon.nix ];
+  imports = [
+    ./system.nix
+    ./user.nix
+    ./tmux.nix
+    ./utilities.nix
+    ./hammerspoon.nix
+    ./alacritty.nix
+  ];
 
   options = with lib; {
 

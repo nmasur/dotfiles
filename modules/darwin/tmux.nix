@@ -57,16 +57,16 @@
         "--init-command"
         "tmux attach-session -t noah || tmux new-session -s noah"
       ];
-      keybindings = [
+      key_bindings = [
         {
           key = "H";
           mods = "Super|Shift";
-          action = "x02p"; # Previous tmux window
+          chars = "\\x02p"; # Previous tmux window
         }
         {
           key = "L";
           mods = "Super|Shift";
-          action = "x02n"; # Next tmux window
+          chars = "\\x02n"; # Next tmux window
         }
       ];
     };
