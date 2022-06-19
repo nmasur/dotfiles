@@ -148,7 +148,7 @@
       }
 
       defaults write com.apple.dock persistent-apps -array \
-          "$(__dock_item /Applications/1Password\ 7.app)" \
+          "$(__dock_item /Applications/1Password.app)" \
           "$(__dock_item /Applications/Slack.app)" \
           "$(__dock_item /System/Applications/Calendar.app)" \
           "$(__dock_item /Applications/Firefox.app)" \
@@ -159,10 +159,6 @@
           "$(__dock_item /Applications/Obsidian.app)" \
           "$(__dock_item /Applications/Alacritty.app)" \
           "$(__dock_item /System/Applications/System\ Preferences.app)"
-
-      echo "Turn on Scroll Reverser"
-      open /Applications/Scroll\ Reverser.app
-      osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Scroll Reverser.app", hidden:false}'
 
       echo "Allow apps from anywhere"
       SPCTL=$(spctl --status)

@@ -19,6 +19,7 @@
       "gitify" # Git notifications in menu bar
       "logitech-g-hub" # Mouse and keyboard management
       "mimestream" # Gmail client
+      "obsidian" # Obsidian packaging on Nix is not available for MacOS
     ];
     global.brewfile = true; # Run brew bundle from anywhere
     global.noLock = true; # Don't save lockfile (since running from anywhere)
