@@ -3,7 +3,7 @@
   # MacOS-specific settings for Alacritty
   home-manager.users.${config.user} = {
     programs.alacritty.settings = {
-      font.size = lib.mkForce 18.0;
+      font.size = lib.mkForce 20.0;
       shell.program = "${pkgs.fish}/bin/fish";
       key_bindings = [
         {

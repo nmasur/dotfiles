@@ -18,17 +18,23 @@
 
     programs.fish = let
       system = if pkgs.stdenv.isDarwin then "darwin" else "nixos";
-      sudo = if pkgs.stdenv.isDarwin then "doas" else "sudo";
+      sudo = if pkgs.stdenv.isDarwin then "" else "doas";
     in {
-      shellAbbrs = { nr = lib.mkIf pkgs.stdenv.isLinux "rebuild-${system}"; };
+      shellAbbrs = {
+        nr = "rebuild-${system}";
+        nro = "rebuild-${system} offline";
+      };
       functions = {
-        rebuild-nixos = {
+        "rebuild-${system}" = {
           body = ''
+            if test "$argv[1]" = "offline"
+                set option "--option substitute false"
+            end
             pushd ${config.dotfilesPath}
             git add --all
             popd
-            echo "${sudo} ${system}-rebuild switch --flake ${config.dotfilesPath}"
-            ${sudo} ${system}-rebuild switch --flake ${config.dotfilesPath}
+            echo "${sudo} ${system}-rebuild switch $option --flake ${config.dotfilesPath}"
+            ${sudo} ${system}-rebuild switch $option --flake ${config.dotfilesPath}
           '';
         };
       };
