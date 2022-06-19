@@ -1,5 +1,5 @@
 { ... }: {
-    
+
   services.nix-daemon.enable = true;
 
   system = {
@@ -112,7 +112,7 @@
     };
 
     # Settings that don't have an option in nix-darwin
-    activationScripts.otherSettings.text = ''
+    activationScripts.postActivation.text = ''
       echo "Disable disk image verification"
       defaults write com.apple.frameworks.diskimages skip-verify -bool true
       defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
@@ -129,7 +129,7 @@
       defaults write com.apple.screensaver askForPasswordDelay -int 0
 
       echo "Show the ~/Library folder"
-      chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+      chflags nohidden ~/Library
 
       echo "Enable dock magnification"
       defaults write com.apple.dock magnification -bool true

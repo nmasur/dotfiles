@@ -7,6 +7,7 @@
     ./utilities.nix
     ./hammerspoon.nix
     ./alacritty.nix
+    ./homebrew.nix
   ];
 
   options = with lib; {
