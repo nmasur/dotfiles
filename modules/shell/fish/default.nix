@@ -57,6 +57,7 @@
         };
       };
       interactiveShellInit = ''
+        fish_vi_key_bindings
         bind yy fish_clipboard_copy
         bind Y fish_clipboard_copy
         bind -M visual y fish_clipboard_copy

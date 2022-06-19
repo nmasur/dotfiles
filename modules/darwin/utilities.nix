@@ -17,25 +17,6 @@
       (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
-    programs.alacritty.settings = {
-      shell.program = "${pkgs.fish}/bin/fish";
-      keybindings = [
-        {
-          key = "F";
-          mods = "Super";
-          action = "ToggleSimpleFullscreen";
-        }
-        {
-          key = "L";
-          mods = "Super";
-          chars = "\\x1F";
-        }
-      ];
-    };
-
   };
-
-  #fonts.fonts = with pkgs;
-  #  [ (nerdfonts.override { fonts = [ "Victor Mono" ]; }) ];
 
 }

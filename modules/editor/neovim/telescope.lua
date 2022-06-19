@@ -4,6 +4,7 @@
 
 use({
     "nvim-telescope/telescope.nvim",
+    branch = "master",
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
         -- Telescope: quit instantly with escape
