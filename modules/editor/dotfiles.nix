@@ -30,7 +30,7 @@
             pushd ${config.dotfilesPath}
             git add --all
             popd
-            commandline -r doas nixos-rebuild switch $option --flake ${config.dotfilesPath}
+            commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}"
             commandline -f execute
           '';
         };

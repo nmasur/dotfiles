@@ -26,10 +26,15 @@
         description = "Base16 color scheme";
       };
     };
-    dotfilesPath = mkOption {
+    dotfilesPath = let
+      homePath = if pkgs.stdenv.isDarwin then
+        "/Users/${config.user}"
+      else
+        "/home/${config.user}";
+    in mkOption {
       type = types.path;
       description = "Path of dotfiles repository.";
-      default = builtins.toPath "$HOME/dev/personal/dotfiles";
+      default = builtins.toPath "${homePath}/dev/personal/dotfiles";
     };
     dotfilesRepo = mkOption {
       type = types.str;

@@ -16,7 +16,7 @@ nixpkgs.lib.nixosSystem {
       gui = {
         enable = true;
         compositor.enable = true;
-        colorscheme = (import ../modules/colorscheme/gruvbox);
+        colorscheme = (import ../../modules/colorscheme/gruvbox);
         wallpaper = "${wallpapers}/gruvbox/road.jpg";
         gtk.theme = { name = "Adwaita-dark"; };
       };
