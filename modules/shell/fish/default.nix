@@ -51,6 +51,10 @@
           description = "Open a recent file in Vim";
           body = builtins.readFile ./functions/recent.fish;
         };
+        search-and-edit = {
+          description = "Search and open the relevant file in Vim";
+          body = builtins.readFile ./functions/search-and-edit.fish;
+        };
         syncnotes = {
           description = "Full git commit on notes";
           body = builtins.readFile ./functions/syncnotes.fish;

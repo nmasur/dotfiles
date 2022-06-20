@@ -9,7 +9,14 @@
         projects = {
           description = "Jump to a project";
           body = ''
-            set projdir (ls ${config.homePath}/dev/personal | fzf)
+            set projdir ( \
+                fd \
+                    --search-path $HOME \
+                    --type directory \
+                    --hidden \
+                    --exclude ".local/**" \
+                    "^.git\$" \
+                | fzf)
             and cd ${config.homePath}/dev/personal/$projdir
             and commandline -f execute
           '';

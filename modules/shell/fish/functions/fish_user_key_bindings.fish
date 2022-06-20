@@ -1,5 +1,7 @@
 bind -M insert \co edit
 bind -M default \co edit
+bind -M insert \cs search-and-edit
+bind -M default \cs search-and-edit
 bind -M insert \ca 'cd ~; and edit; and commandline -a "; cd -"; commandline -f execute'
 bind -M default \ca 'cd ~; and edit; and commandline -a "; cd -"; commandline -f execute'
 bind -M insert \ce recent
