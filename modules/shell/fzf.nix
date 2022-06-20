@@ -9,8 +9,8 @@
         projects = {
           description = "Jump to a project";
           body = ''
-            set projdir (ls /home/${config.user}/dev/personal | fzf)
-            and cd /home/${config.user}/dev/personal/$projdir
+            set projdir (ls ${config.homePath}/dev/personal | fzf)
+            and cd ${config.homePath}/dev/personal/$projdir
             and commandline -f execute
           '';
         };

@@ -23,7 +23,7 @@ in {
         ; Disables the notice about an available update on exit
         disable_update_notice = true
         ; Set install directory
-        install_dir = /home/${config.user}/media/games
+        install_dir = ${config.homePath}/media/games
         ; Make output quiet
         log_level = error
       '';
