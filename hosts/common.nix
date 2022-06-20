@@ -3,10 +3,33 @@
   imports = [ ../modules/shell ../modules/editor ../modules/mail/himalaya.nix ];
 
   options = with lib; {
+    user = mkOption {
+      type = types.str;
+      description = "Primary user of the system";
+    };
+    userDirs = {
+      # Required to prevent infinite recursion when referenced by himalaya
+      download = lib.mkOption {
+        type = lib.types.str;
+        description = "XDG directory for downloads";
+        default =
+          if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
+      };
+    };
+    gui = {
+      enable = mkEnableOption {
+        description = "Enable graphics";
+        default = false;
+      };
+      colorscheme = mkOption {
+        type = types.attrs;
+        description = "Base16 color scheme";
+      };
+    };
     dotfilesPath = mkOption {
       type = types.path;
       description = "Path of dotfiles repository.";
-      default = builtins.toPath "/home/${config.user}/dev/personal/dotfiles";
+      default = builtins.toPath "$HOME/dev/personal/dotfiles";
     };
     dotfilesRepo = mkOption {
       type = types.str;
@@ -23,9 +46,6 @@
 
     # Enable features in Nix commands
     nix.extraOptions = "experimental-features = nix-command flakes";
-
-    # Pin a state version to prevent warnings
-    # system.stateVersion = "22.11";
 
     # Basic common system packages for all devices
     environment.systemPackages = with pkgs; [ git vim wget curl ];

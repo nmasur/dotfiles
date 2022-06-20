@@ -20,6 +20,7 @@ in {
       };
       services.polybar.config."bar/main".font-0 = "Hack Nerd Font:size=10;2";
       programs.rofi.font = "Hack Nerd Font 14";
+      programs.alacritty.settings.font.normal.family = fontName;
     };
 
   };

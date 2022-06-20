@@ -14,7 +14,6 @@
       kubectl
       k9s
       noti # Create notifications programmatically
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
   };

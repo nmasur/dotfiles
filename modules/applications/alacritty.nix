@@ -19,15 +19,7 @@
             opacity = 1.0;
           };
           scrolling.history = 10000;
-          font = {
-            size = 14.0;
-            normal = {
-              family = builtins.head (if pkgs.stdenv.isDarwin then
-                [ "FiraCode Nerd Font Mono" ]
-              else
-                config.fonts.fontconfig.defaultFonts.monospace);
-            };
-          };
+          font = { size = 14.0; };
           key_bindings = [
             {
               key = "L";

@@ -2,24 +2,9 @@
 
   options = {
 
-    user = lib.mkOption {
-      type = lib.types.str;
-      description = "Primary user of the system";
-      default = "nixos";
-    };
-
     passwordHash = lib.mkOption {
       type = lib.types.str;
       description = "Password created with mkpasswd -m sha-512";
-    };
-
-    userDirs = {
-      # Required to prevent infinite recursion when referenced by himalaya
-      download = lib.mkOption {
-        type = lib.types.str;
-        description = "XDG directory for downloads";
-        default = "$HOME/downloads";
-      };
     };
 
   };

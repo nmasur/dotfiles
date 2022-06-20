@@ -5,9 +5,4 @@
     shell = pkgs.zsh; # Default shell
   };
 
-  #networking = {
-  #  computerName = "MacBook"; # Host name
-  #  hostName = "MacBook";
-  #};
-
 }

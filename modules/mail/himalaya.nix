@@ -39,7 +39,7 @@
             himalaya = {
               enable = true;
               settings = {
-                downloads-dir = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else config.userDirs.download;
+                downloads-dir = config.userDirs.download;
                 smtp-insecure = true;
               };
             };

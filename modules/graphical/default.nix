@@ -13,10 +13,6 @@
   options = with lib; {
 
     gui = {
-      enable = mkEnableOption {
-        description = "Enable graphics";
-        default = false;
-      };
       compositor.enable = mkEnableOption {
         description = "Enable transparency, blur, shadows";
         default = false;
@@ -47,10 +43,6 @@
           description = "Theme package name for GTK applications";
           default = "gnome-themes-extra";
         };
-      };
-      colorscheme = mkOption {
-        type = types.attrs;
-        description = "Base16 color scheme";
       };
       wallpaper = mkOption {
         type = types.path;
