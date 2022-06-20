@@ -1,10 +1,19 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  imports = [ ./common.nix ];
+  options.gaming.steam = lib.mkEnableOption "Steam";
 
-  config = {
+  config = lib.mkIf config.gaming.steam {
     hardware.steam-hardware.enable = true;
-    environment.systemPackages = with pkgs; [ steam ];
+    unfreePackages = [ "steam" "steam-original" "steamcmd" ];
+    environment.systemPackages = with pkgs; [
+
+      steam
+
+      # Enable terminal interaction
+      steamPackages.steamcmd
+      steam-tui
+
+    ];
   };
 
 }

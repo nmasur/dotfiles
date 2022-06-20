@@ -1,14 +1,30 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }: {
 
-{
-  imports = [ ./common.nix ./lutris.nix ];
+  options.gaming.leagueoflegends = lib.mkEnableOption "League of Legends";
 
-  config = {
+  config = lib.mkIf config.gaming.leagueoflegends {
 
-    # League of Legends anti-cheat
+    # League of Legends anti-cheat requirement
     boot.kernel.sysctl = { "abi.vsyscall32" = 0; };
 
-    environment.systemPackages = with pkgs; [ openssl dconf ];
+    environment.systemPackages = with pkgs; [
+
+      # Lutris requirement to install the game
+      lutris
+      amdvlk
+      wineWowPackages.stable
+      # vulkan-tools
+
+      # Required according to https://lutris.net/games/league-of-legends/
+      openssl
+      gnome.zenity
+
+      # Don't remember if this is required
+      dconf
+
+    ];
+
+    environment.sessionVariables = { QT_X11_NO_MITSHM = "1"; };
 
   };
 }
