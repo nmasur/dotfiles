@@ -101,11 +101,11 @@
     };
 
     programs.alacritty.settings = {
-      shell.args = [
-        "--login"
-        "--init-command"
-        "tmux attach-session -t noah || tmux new-session -s noah"
-      ];
+      # shell.args = [
+      #   "--login"
+      #   "--init-command"
+      #   "tmux attach-session -t noah || tmux new-session -s noah"
+      # ];
       key_bindings = [
         {
           key = "H";

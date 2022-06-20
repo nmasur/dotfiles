@@ -1,7 +1,16 @@
 { config, ... }: {
 
   # Homebrew - Mac-specific packages that aren't in Nix
-  # Requires Homebrew to be installed (works if you rebuild twice)
+
+  # Requires Homebrew to be installed
+  system.activationScripts.preUserActivation.text = ''
+    if ! xcode-select --version 2>/dev/null; then
+      $DRY_RUN_CMD xcode-select --install
+    fi
+    if ! /usr/local/bin/brew --version 2>/dev/null; then
+      $DRY_RUN_CMD /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+  '';
 
   homebrew = {
     enable = true;
@@ -31,22 +40,6 @@
   home-manager.users.${config.user} = {
 
     programs.fish.shellAbbrs.t = "trash";
-
-    home.activation = {
-
-      # Always install homebrew if it doesn't exist
-      installHomeBrew =
-        config.home-manager.users.${config.user}.lib.dag.entryAfter
-        [ "writeBoundary" ] ''
-          if ! xcode-select --version 2>/dev/null; then
-            $DRY_RUN_CMD xcode-select --install
-          fi
-          if ! /usr/local/bin/brew --version 2>/dev/null; then
-            $DRY_RUN_CMD /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          fi
-        '';
-
-    };
 
   };
 

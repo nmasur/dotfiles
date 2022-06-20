@@ -16,8 +16,9 @@
                     --hidden \
                     --exclude ".local/**" \
                     "^.git\$" \
+                | xargs dirname \
                 | fzf)
-            and cd ${config.homePath}/dev/personal/$projdir
+            and cd $projdir
             and commandline -f execute
           '';
         };

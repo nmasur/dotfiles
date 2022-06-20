@@ -8,7 +8,7 @@
 
   homebrew.casks = [ "hammerspoon" ];
 
-  system.activationScripts.hammerspoon.text = ''
+  system.activationScripts.postUserActivation.text = ''
     defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
   '';
 
