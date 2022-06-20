@@ -10,6 +10,7 @@ darwin.lib.darwinSystem {
     {
       gui.enable = true;
       gui.colorscheme = (import ../../modules/colorscheme/gruvbox);
+      mailUser = globals.user;
       nixpkgs.overlays = [ nur.overlay ];
     }
     ../common.nix

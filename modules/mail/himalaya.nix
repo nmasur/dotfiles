@@ -1,6 +1,11 @@
 { config, pkgs, lib, ... }: {
 
   options = {
+    mailUser = lib.mkOption {
+      type = lib.types.str;
+      description = "User name for the email address.";
+      default = config.user;
+    };
     mailServer = lib.mkOption {
       type = lib.types.str;
       description = "Server name for the email address.";
@@ -21,7 +26,7 @@
       accounts.email = {
         maildirBasePath = "$HOME/mail";
         accounts = {
-          home = let address = "${config.user}@${config.mailServer}";
+          home = let address = "${config.mailUser}@${config.mailServer}";
           in {
             userName = address;
             realName = config.fullName;
