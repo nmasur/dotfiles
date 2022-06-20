@@ -5,12 +5,11 @@ darwin.lib.darwinSystem {
   system = "x86_64-darwin";
   specialArgs = { };
   modules = [
-    globals
+    (globals // { user = "Noah.Masur"; })
     home-manager.darwinModules.home-manager
     {
-      user = "Noah.Masur";
       gui.enable = true;
-      gui.colorscheme = (import ../modules/colorscheme/gruvbox);
+      gui.colorscheme = (import ../../modules/colorscheme/gruvbox);
       nixpkgs.overlays = [ nur.overlay ];
     }
     ../common.nix

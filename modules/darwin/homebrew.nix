@@ -30,6 +30,8 @@
 
   home-manager.users.${config.user} = {
 
+    programs.fish.shellAbbrs.t = "trash";
+
     home.activation = {
 
       # Always install homebrew if it doesn't exist
