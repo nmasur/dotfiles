@@ -17,6 +17,7 @@ darwin.lib.darwinSystem {
     ../../modules/darwin
     ../../modules/applications/alacritty.nix
     ../../modules/applications/discord.nix
+    ../../modules/programming/nix.nix
     ../../modules/programming/terraform.nix
     ../../modules/programming/lua.nix
   ];
