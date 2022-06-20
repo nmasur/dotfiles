@@ -53,7 +53,8 @@ in {
         gl = "git log --graph --decorate --oneline -20";
         gll = "git log --graph --decorate --oneline";
         gco = "git checkout";
-        gcom = "git switch master";
+        gcom = ''
+          git switch (git symbolic-ref refs/remotes/origin/HEAD | cut -d"/" -f4)'';
         gcob = "git switch -c";
         gb = "git branch";
         gbd = "git branch -d";
