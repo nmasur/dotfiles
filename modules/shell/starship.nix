@@ -9,7 +9,6 @@
         "$git_branch"
         "$git_commit"
         "$git_status"
-        "$nix_shell"
         "$cmd_duration"
         "$character"
       ];
