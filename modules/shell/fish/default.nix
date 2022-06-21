@@ -71,7 +71,6 @@
         set -g fish_cursor_insert line
         set -g fish_cursor_visual block
         set -g fish_cursor_replace_one underscore
-        set -x DIRENV_LOG_FORMAT ""
       '';
       loginShellInit = "";
       shellAliases = { };
