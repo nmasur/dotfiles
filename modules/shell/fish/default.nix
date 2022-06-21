@@ -71,6 +71,7 @@
         set -g fish_cursor_insert line
         set -g fish_cursor_visual block
         set -g fish_cursor_replace_one underscore
+        set -x DIRENV_LOG_FORMAT ""
       '';
       loginShellInit = "";
       shellAliases = { };
@@ -91,11 +92,6 @@
         scs = "systemctl status";
         m = "make";
 
-        # Tmux
-        ta = "tmux attach-session";
-        tan = "tmux attach-session -t noah";
-        tnn = "tmux new-session -s noah";
-
         # Vim (overwritten by Neovim)
         v = "vim";
         vl = "vim -c 'normal! `0'";
@@ -114,21 +110,13 @@
         publickey = "ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub";
         forloop = "for i in (seq 1 100)";
 
+        # Nix
+        ns = "nix-shell -p";
+
         # Docker
         dc = "$DOTS/bin/docker_cleanup";
         dr = "docker run --rm -it";
         db = "docker build . -t";
-
-        # Terraform
-        te = "terraform";
-
-        # Kubernetes
-        k = "kubectl";
-        pods = "kubectl get pods -A";
-        nodes = "kubectl get nodes";
-        deploys = "kubectl get deployments -A";
-        dash = "kube-dashboard";
-        ks = "k9s";
 
         # Python
         py = "python";

@@ -20,5 +20,6 @@ darwin.lib.darwinSystem {
     ../../modules/programming/nix.nix
     ../../modules/programming/terraform.nix
     ../../modules/programming/lua.nix
+    ../../modules/programming/kubernetes.nix
   ];
 }

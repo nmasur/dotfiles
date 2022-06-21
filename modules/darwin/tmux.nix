@@ -120,6 +120,12 @@
       ];
     };
 
+    programs.fish.shellAbbrs = {
+      ta = "tmux attach-session";
+      tan = "tmux attach-session -t noah";
+      tnn = "tmux new-session -s noah";
+    };
+
   };
 
 }
