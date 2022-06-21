@@ -31,9 +31,16 @@ function obj:init()
         -- get the focused window
         local win = hs.window.focusedWindow()
         -- maximize if possible
-        for i = 1, 8 do
-            win:maximize()
-        end
+        win:maximize()
+        win:maximize()
+        win:maximize()
+        win:maximize()
+        win:maximize()
+        win:maximize()
+        win:maximize()
+        -- for i = 1, 8 do
+        --     win:maximize()
+        -- end
     end)
 end
 

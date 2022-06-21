@@ -11,10 +11,9 @@
           body = ''
             set projdir ( \
                 fd \
-                    --search-path $HOME \
+                    --search-path $HOME/dev \
                     --type directory \
                     --hidden \
-                    --exclude ".local/**" \
                     "^.git\$" \
                 | xargs dirname \
                 | fzf)

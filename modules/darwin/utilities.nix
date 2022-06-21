@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   home-manager.users.${config.user} = {
 
@@ -15,6 +15,11 @@
       k9s
       noti # Create notifications programmatically
     ];
+
+    programs.fish.shellAbbrs = {
+      # Add noti for ghpr in Darwin
+      ghpr = lib.mkForce "gh pr create && sleep 3 && noti gh run watch";
+    };
 
   };
 

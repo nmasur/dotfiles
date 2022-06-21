@@ -24,8 +24,8 @@ key("n", "<CR>", ":noh<CR><CR>", { silent = true })
 -- Shuffle lines around
 key("n", "<A-j>", ":m .+1<CR>==")
 key("n", "<A-k>", ":m .-2<CR>==")
-key("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
-key("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+-- key("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+-- key("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 key("v", "<A-j>", ":m '>+1<CR>gv=gv")
 key("v", "<A-k>", ":m '<-2<CR>gv=gv")
 

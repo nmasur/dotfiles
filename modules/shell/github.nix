@@ -18,6 +18,7 @@
           grw = "gh run watch";
           grf = "gh run view --log-failed";
           grl = "gh run view --log";
+          ghpr = "gh pr create && sleep 3 && gh run watch";
         };
         functions = {
           repos = {
