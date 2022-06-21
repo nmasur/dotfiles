@@ -9,7 +9,7 @@
         "$git_branch"
         "$git_commit"
         "$git_status"
-        "$python"
+        "$nix_shell"
         "$cmd_duration"
         "$character"
       ];
@@ -47,7 +47,8 @@
         deleted = "✘";
         style = "red";
       };
-      python = { format = "[\\($virtualenv\\)]($style)"; };
+      nix_shell = { format = "[$symbol]($style)"; };
+      python = { format = "[\${version}\\(\${virtualenv}\\)]($style)"; };
     };
   };
 

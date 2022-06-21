@@ -1,0 +1,4 @@
+.direnv
+result
+*.pyc
+.DS_Store

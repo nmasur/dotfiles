@@ -87,5 +87,13 @@
           };
         });
 
+      # Templates for starting other projects quickly
+      templates = {
+        poetry = {
+          path = ./templates/poetry;
+          description = "Poetry template";
+        };
+      };
+
     };
 }

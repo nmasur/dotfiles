@@ -20,7 +20,6 @@ in {
     home-manager.users.root.programs.git = {
       enable = true;
       extraConfig.safe.directory = config.dotfilesPath;
-      ignores = [ ".direnv/**" "result" ];
     };
 
     home-manager.users.${config.user} = {
@@ -34,6 +33,7 @@ in {
           pull = { ff = "only"; };
           init = { defaultBranch = "master"; };
         };
+        ignores = [ ".direnv/**" "result" ];
       };
 
       programs.fish.shellAbbrs = {
