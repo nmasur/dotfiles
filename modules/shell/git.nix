@@ -20,7 +20,7 @@ in {
     home-manager.users.root.programs.git = {
       enable = true;
       extraConfig.safe.directory = config.dotfilesPath;
-      ignores = [ ".direnv/**" ];
+      ignores = [ ".direnv/**" "result" ];
     };
 
     home-manager.users.${config.user} = {
