@@ -31,16 +31,12 @@ function obj:init()
         -- get the focused window
         local win = hs.window.focusedWindow()
         -- maximize if possible
-        win:maximize()
-        win:maximize()
-        win:maximize()
-        win:maximize()
-        win:maximize()
-        win:maximize()
-        win:maximize()
-        -- for i = 1, 8 do
-        --     win:maximize()
-        -- end
+        -- first maximize to grid
+        hs.grid.maximizeWindow(win)
+        -- they spam maximize
+        for i = 1, 8 do
+            win:maximize()
+        end
     end)
 end
 
