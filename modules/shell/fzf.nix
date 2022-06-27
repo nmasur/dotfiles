@@ -16,7 +16,10 @@
                     --hidden \
                     "^.git\$" \
                 | xargs dirname \
-                | fzf)
+                | fzf \
+                    --delimiter '/' \
+                    --with-nth 6.. \
+            )
             and cd $projdir
             and commandline -f execute
           '';

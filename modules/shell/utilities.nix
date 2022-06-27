@@ -30,6 +30,7 @@ in {
       qrencode # Generate qr codes
       vimv # Batch rename files
       dig # DNS lookup
+      lf # File viewer
     ];
 
     programs.zoxide.enable = true; # Shortcut jump command
