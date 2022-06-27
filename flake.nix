@@ -93,6 +93,10 @@
           path = ./templates/poetry;
           description = "Poetry template";
         };
+        python = {
+          path = ./templates/python;
+          description = "Legacy Python template";
+        };
       };
 
     };
