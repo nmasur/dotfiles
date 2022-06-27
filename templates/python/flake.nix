@@ -1,20 +1,18 @@
 {
   description = "Python pip flake";
 
-  inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+  inputs.mach-nix.url = "github:mach-nix/3.5.0";
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        pythonEnv = pkgs.python310.withPackages (pypi:
-          with pypi;
-          [
-            # Add requirements here
-            requests
-          ]);
-      in {
-        devShells.default = pkgs.mkShell { buildInputs = [ pythonEnv ]; };
-      });
+  outputs = { self, nixpkgs, mach-nix }@inp:
+    let
+      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      forAllSystems = f:
+        nixpkgs.lib.genAttrs supportedSystems
+        (system: f system (import nixpkgs { inherit system; }));
+    in {
+      devShell = forAllSystems (system: pkgs:
+        mach-nix.lib."${system}".mkPythonShell {
+          requirements = builtins.readFile ./requirements.txt;
+        });
+    };
 }
