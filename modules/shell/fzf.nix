@@ -25,7 +25,7 @@
           '';
         };
       };
-      shellAbbrs = { lf = "ls -lh | fzf"; };
+      shellAbbrs = { lsf = "ls -lh | fzf"; };
     };
 
     # Global fzf configuration

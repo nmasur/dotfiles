@@ -34,5 +34,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/keybase.nix
     ../../modules/services/gnupg.nix
     ../../modules/services/mullvad.nix
+    ../../modules/programming/nix.nix
   ];
 }
