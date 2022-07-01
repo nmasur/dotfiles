@@ -111,6 +111,7 @@
 
         # Nix
         ns = "nix-shell -p";
+        nps = "nix repl '<nixpkgs>'";
 
         # Docker
         dc = "$DOTS/bin/docker_cleanup";
