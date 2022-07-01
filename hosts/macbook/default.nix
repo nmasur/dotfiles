@@ -19,7 +19,7 @@ darwin.lib.darwinSystem {
     ../../modules/applications/discord.nix
     ../../modules/programming/nix.nix
     ../../modules/programming/terraform.nix
-    # ../../modules/programming/python.nix
+    ../../modules/programming/python.nix
     ../../modules/programming/lua.nix
     ../../modules/programming/kubernetes.nix
   ];
