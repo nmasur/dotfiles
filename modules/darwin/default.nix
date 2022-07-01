@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
 
   imports = [
     ./alacritty.nix
@@ -11,5 +11,8 @@
     ./user.nix
     ./utilities.nix
   ];
+
+  home-manager.users.${config.user}.home.stateVersion = "22.11";
+  home-manager.users.root.home.stateVersion = "22.11";
 
 }

@@ -32,6 +32,48 @@
         };
       };
 
+    home.packages = [
+      (pkgs.writeShellScriptBin "gh-repos" ''
+        #!/bin/sh
+
+        case $1 in
+            t2) organization="take-two" ;;
+            d2c) organization="take-two-t2gp" ;;
+            t2gp) organization="take-two-t2gp" ;;
+            pd) organization="private-division" ;;
+            dots) organization="playdots" ;;
+            *) organization="nmasur" ;;
+        esac
+
+        selected=$(gh repo list "$organization" \
+            --limit 50 \
+            --no-archived \
+            --json=name,description,isPrivate,updatedAt,primaryLanguage \
+            | jq -r '.[] | .name + "," + if .description == "" then "-" else .description |= gsub(","; " ") | .description end + "," + .updatedAt + "," + .primaryLanguage.name' \
+            | (echo "REPO,DESCRIPTION,UPDATED,LANGUAGE"; cat -) \
+            | column -s , -t \
+            | fzf \
+                --header-lines=1 \
+                --layout=reverse \
+                --bind "ctrl-o:execute:gh repo view -w ''${organization}/{1}" \
+                --bind "shift-up:preview-half-page-up" \
+                --bind "shift-down:preview-half-page-down" \
+                --preview "GH_FORCE_TTY=49% gh repo view ''${organization}/{1} | glow -" \
+                --preview-window up
+        )
+        [ -n "''${selected}" ] && {
+            directory="$HOME/dev/work"
+            if [ $organization = "nmasur" ]; then directory="$HOME/dev/personal"; fi
+            repo=$(echo "''${selected}" | awk '{print $1}')
+            repo_full="''${organization}/''${repo}"
+            if [ ! -d "''${directory}/''${repo}" ]; then
+                gh repo clone "$repo_full" "''${directory}/''${repo}"
+            fi
+            echo "''${directory}/''${repo}"
+        }
+      '')
+    ];
+
   };
 
 }

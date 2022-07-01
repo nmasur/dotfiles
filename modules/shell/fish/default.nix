@@ -117,11 +117,6 @@
         dr = "docker run --rm -it";
         db = "docker build . -t";
 
-        # Python
-        py = "python";
-        po = "poetry";
-        pr = "poetry run python";
-
         # Rust
         ca = "cargo";
 
