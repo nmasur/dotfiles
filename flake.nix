@@ -97,6 +97,10 @@
           path = ./templates/python;
           description = "Legacy Python template";
         };
+        haskell = {
+          path = ./templates/haskell;
+          description = "Haskell template";
+        };
       };
 
     };

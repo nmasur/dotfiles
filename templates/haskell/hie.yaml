@@ -1,0 +1,16 @@
+cradle:
+  multi:
+    # - path: "ignore/"
+    #   config: {cradle: {none: }}
+
+    - path: "src"
+      config: {cradle: {cabal: {component: "lib:hello"}}}
+
+    - path: "app"
+      config: {cradle: {cabal: {component: "hello:hello-exe"}}}
+
+    - path: "test"
+      config: {cradle: {cabal: {component: "hello:hello-test"}}}
+
+    - path: "bench"
+      config: {cradle: {cabal: {component: "hello:hello-bench"}}}

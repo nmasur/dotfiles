@@ -35,5 +35,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/gnupg.nix
     ../../modules/services/mullvad.nix
     ../../modules/programming/nix.nix
+    ../../modules/programming/haskell.nix
   ];
 }

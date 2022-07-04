@@ -1,0 +1,12 @@
+# template-haskell example hlint file
+
+# Generalise map to fmap, ++ to <>. Off by default
+- group:
+    name: generalise
+    enabled: true
+
+- ignore:
+    name: Use section
+
+- ignore:
+    name: Use infix
