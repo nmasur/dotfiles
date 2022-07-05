@@ -27,11 +27,9 @@
             if test "$argv[1]" = "offline"
                 set option "--option substitute false"
             end
-            pushd ${config.dotfilesPath}
-            git add --all
-            popd
+            git -C ${config.dotfilesPath} add --all
             commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}"
-            commandline -f execute
+            commandline --function execute
           '';
         };
       };
