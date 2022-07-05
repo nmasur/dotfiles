@@ -8,7 +8,7 @@
       black # Python formatter
     ];
 
-    programs.fish.shellAbbrs = { py = "python"; };
+    programs.fish.shellAbbrs = { py = "python3"; };
 
   };
 

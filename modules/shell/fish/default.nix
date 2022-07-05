@@ -45,7 +45,7 @@
         nix-shell-run = {
           body = ''
             set program $argv[1]
-            commandline -r "nix-shell -p $program --run $program"
+            commandline -r "nix-shell -p $program --run \"$program $argv[2..-1]\""
             commandline -f execute
           '';
         };
