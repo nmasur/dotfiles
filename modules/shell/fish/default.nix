@@ -42,6 +42,13 @@
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
         ls = { body = "${pkgs.exa}/bin/exa $argv"; };
+        nix-shell-run = {
+          body = ''
+            set program $argv[1]
+            commandline -r "nix-shell -p $program --run $program"
+            commandline -f execute
+          '';
+        };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";
@@ -111,6 +118,7 @@
 
         # Nix
         ns = "nix-shell -p";
+        nsr = "nix-shell-run";
         nps = "nix repl '<nixpkgs>'";
         nixo = "man configuration.nix";
         nixh = "man home-configuration.nix";
