@@ -5,6 +5,8 @@
     home.packages = with pkgs; [
       neovim
       gcc # for tree-sitter
+      shfmt # used everywhere
+      shellcheck # used everywhere
     ];
 
     xdg.configFile = {
