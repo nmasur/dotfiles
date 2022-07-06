@@ -45,7 +45,11 @@
         nix-shell-run = {
           body = ''
             set program $argv[1]
-            commandline -r "nix-shell -p $program --run \"$program $argv[2..-1]\""
+            if test (count $argv) -ge 1
+                commandline -r "nix run nixpkgs#$program -- $argv[2..-1]"
+            else
+                commandline -r "nix run nixpkgs#$program"
+            end
             commandline -f execute
           '';
         };
