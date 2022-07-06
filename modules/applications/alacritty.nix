@@ -21,10 +21,17 @@
           scrolling.history = 10000;
           font = { size = 14.0; };
           key_bindings = [
+            # Used for word completion in fish_user_key_bindings
             {
               key = "L";
               mods = "Control|Shift";
               chars = "\\x1F";
+            }
+            # Used for searching nixpkgs in fish_user_key_bindings
+            {
+              key = "N";
+              mods = "Control|Shift";
+              chars = "\\x11F";
             }
             {
               key = "K";

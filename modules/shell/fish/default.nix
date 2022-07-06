@@ -42,17 +42,6 @@
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
         ls = { body = "${pkgs.exa}/bin/exa $argv"; };
-        nix-shell-run = {
-          body = ''
-            set program $argv[1]
-            if test (count $argv) -ge 1
-                commandline -r "nix run nixpkgs#$program -- $argv[2..-1]"
-            else
-                commandline -r "nix run nixpkgs#$program"
-            end
-            commandline -f execute
-          '';
-        };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";
@@ -120,13 +109,6 @@
         publickey = "ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub";
         forloop = "for i in (seq 1 100)";
 
-        # Nix
-        ns = "nix-shell -p";
-        nsr = "nix-shell-run";
-        nps = "nix repl '<nixpkgs>'";
-        nixo = "man configuration.nix";
-        nixh = "man home-configuration.nix";
-
         # Docker
         dc = "$DOTS/bin/docker_cleanup";
         dr = "docker run --rm -it";
@@ -144,13 +126,6 @@
     programs.starship.enableFishIntegration = true;
     programs.zoxide.enableFishIntegration = true;
     programs.fzf.enableFishIntegration = true;
-
-    # Provides "command-not-found" options
-    # Requires activating a manual download
-    programs.nix-index = {
-      enable = true;
-      enableFishIntegration = true;
-    };
 
   };
 }

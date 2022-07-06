@@ -16,25 +16,6 @@
 
     };
 
-    programs.fish = {
-      shellAbbrs = {
-        nr = "rebuild-nixos";
-        nro = "rebuild-nixos offline";
-      };
-      functions = {
-        rebuild-nixos = {
-          body = ''
-            if test "$argv[1]" = "offline"
-                set option "--option substitute false"
-            end
-            git -C ${config.dotfilesPath} add --all
-            commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}"
-            commandline --function execute
-          '';
-        };
-      };
-    };
-
   };
 
 }
