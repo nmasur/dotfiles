@@ -13,6 +13,11 @@
           action = "ToggleSimpleFullscreen";
         }
         {
+          key = "F";
+          mods = "Control|Shift";
+          action = "SearchForward";
+        }
+        {
           key = "L";
           mods = "Super";
           chars = "\\x1F";
@@ -45,7 +50,7 @@
         }
         {
           key = "PageUp";
-          mode = "Alt";
+          mods = "Alt";
           chars = "\\x1B[5~";
         }
         {
@@ -59,7 +64,7 @@
         }
         {
           key = "PageDown";
-          mode = "Alt";
+          mods = "Alt";
           chars = "\\x1B[6~";
         }
         {
@@ -73,7 +78,7 @@
         }
         {
           key = "Home";
-          mode = "Alt";
+          mods = "Alt";
           chars = "\\x1BOH";
         }
         {
@@ -87,7 +92,7 @@
         }
         {
           key = "End";
-          mode = "Alt";
+          mods = "Alt";
           chars = "\\x1BOF";
         }
         {
