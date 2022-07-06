@@ -9,6 +9,8 @@ obj.version = "0.1"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 function obj:init()
+    hs.window.animationDuration = 0
+    dofile(hs.spoons.resourcePath("worklayout.lua"))()
     -- bind hotkey
     hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "n", function()
         -- get the focused window
@@ -30,13 +32,20 @@ function obj:init()
     hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "m", function()
         -- get the focused window
         local win = hs.window.focusedWindow()
+        local frame = win:frame()
         -- maximize if possible
-        -- first maximize to grid
-        hs.grid.maximizeWindow(win)
-        -- they spam maximize
-        for i = 1, 8 do
-            win:maximize()
-        end
+        local max = win:screen():fullFrame()
+        frame.x = max.x
+        frame.y = max.y
+        frame.w = max.w
+        frame.h = max.h
+        win:setFrame(frame)
+        -- -- first maximize to grid
+        -- hs.grid.maximizeWindow(win)
+        -- -- then spam maximize
+        -- for i = 1, 8 do
+        --     win:maximize()
+        -- end
     end)
 end
 
