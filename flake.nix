@@ -60,6 +60,7 @@
         desktop = import ./hosts/desktop {
           inherit nixpkgs home-manager nur globals wallpapers;
         };
+        wsl = import ./hosts/wsl { inherit nixpkgs home-manager globals; };
       };
 
       darwinConfigurations = {

@@ -3,6 +3,7 @@
 
     programs.fish = {
       shellAbbrs = {
+        n = "nix";
         ns = "nix-shell -p";
         nsr = "nix-shell-run";
         nps = "nix repl '<nixpkgs>'";

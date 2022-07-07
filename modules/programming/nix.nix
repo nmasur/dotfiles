@@ -7,8 +7,6 @@
         nixfmt # Nix file formatter
       ];
 
-    programs.fish.shellAbbrs = { n = "nix"; };
-
   };
 
 }
