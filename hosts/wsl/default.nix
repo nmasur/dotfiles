@@ -22,6 +22,7 @@ nixpkgs.lib.nixosSystem {
       };
     }
     ../common.nix
+    ../../modules/wsl
     ../../modules/system
     ../../modules/programming/nix.nix
     ../../modules/programming/lua.nix
