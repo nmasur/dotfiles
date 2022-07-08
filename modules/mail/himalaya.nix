@@ -24,7 +24,7 @@
       };
 
       accounts.email = {
-        maildirBasePath = "$HOME/mail";
+        maildirBasePath = "${config.homePath}/mail";
         accounts = {
           home = let address = "${config.mailUser}@${config.mailServer}";
           in {

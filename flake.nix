@@ -13,6 +13,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Used for Windows Subsystem for Linux compatibility
+    wsl.url = "github:nix-community/NixOS-WSL";
+
     # Used for user packages
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -31,7 +34,7 @@
 
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, nur, wallpapers }:
+  outputs = { self, nixpkgs, darwin, wsl, home-manager, nur, wallpapers }:
 
     let
 
@@ -60,7 +63,7 @@
         desktop = import ./hosts/desktop {
           inherit nixpkgs home-manager nur globals wallpapers;
         };
-        wsl = import ./hosts/wsl { inherit nixpkgs home-manager globals; };
+        wsl = import ./hosts/wsl { inherit nixpkgs wsl home-manager globals; };
       };
 
       darwinConfigurations = {
