@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem {
         automountPath = "/mnt";
         defaultUser = globals.user;
         startMenuLaunchers = true;
+        wslConf.network.generateResolvConf = true;
       };
     }
     ../common.nix
