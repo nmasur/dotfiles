@@ -18,4 +18,26 @@
   base0D = "#83a598"; # blue
   base0E = "#d3869b"; # purple
   base0F = "#d65d0e"; # brown
+  neovimConfig = ''
+    local M = {}
+
+    M.packer = function(use)
+        use({
+            "morhetz/gruvbox",
+            config = function()
+                vim.g.gruvbox_italic = 1
+                -- vim.api.nvim_create_autocmd("ColorScheme", {
+                --     pattern = "*",
+                --     command = "colorscheme gruvbox",
+                -- })
+                vim.cmd([[
+                  autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+                  colorscheme gruvbox
+                ]])
+            end,
+        })
+    end
+
+    return M
+  '';
 }

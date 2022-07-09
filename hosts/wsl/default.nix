@@ -12,6 +12,7 @@ nixpkgs.lib.nixosSystem {
     {
       networking.hostName = "wsl";
       gui.enable = false;
+      gui.colorscheme = (import ../../modules/colorscheme/gruvbox);
       passwordHash =
         "$6$PZYiMGmJIIHAepTM$Wx5EqTQ5GApzXx58nvi8azh16pdxrN6Qrv1wunDlzveOgawitWzcIxuj76X9V868fsPi/NOIEO8yVXqwzS9UF.";
       wsl = {

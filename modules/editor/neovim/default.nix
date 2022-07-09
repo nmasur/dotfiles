@@ -11,7 +11,11 @@
 
     xdg.configFile = {
       "nvim/init.lua".source = ./init.lua;
-      "nvim/lua".source = ./lua;
+      "nvim/lua" = {
+        source = ./lua;
+        recursive = true; # Allows adding more files
+      };
+      "nvim/lua/packer/colors.lua".text = config.gui.colorscheme.neovimConfig;
     };
 
     programs.git.extraConfig.core.editor = "nvim";
