@@ -61,6 +61,10 @@ key("n", "<Leader>gs", telescope.git_status)
 -- key("n", "<C-H>", "gT")
 -- key("i", "<C-H>", "<Esc>gT")
 
+-- Swap buffers
+key("n", "L", ":bnext<CR>")
+key("n", "H", ":bprevious<CR>")
+
 -- LSP
 key("n", "gd", vim.lsp.buf.definition, { silent = true })
 key("n", "gT", vim.lsp.buf.type_definition, { silent = true })
@@ -110,6 +114,12 @@ key("i", ",", ",<C-g>u")
 key("i", ".", ".<C-g>u")
 key("i", "!", "!<C-g>u")
 key("i", "?", "?<C-g>u")
+
+-- Resize with arrows
+key("n", "<C-Up>", ":resize +2<CR>", { silent = true })
+key("n", "<C-Down>", ":resize -2<CR>", { silent = true })
+key("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
+key("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
 -- Other
 key("t", "<A-CR>", "<C-\\><C-n>") --- Exit terminal mode

@@ -23,17 +23,10 @@
 
     M.packer = function(use)
         use({
-            "morhetz/gruvbox",
+            "lifepillar/vim-gruvbox8",
             config = function()
-                vim.g.gruvbox_italic = 1
-                -- vim.api.nvim_create_autocmd("ColorScheme", {
-                --     pattern = "*",
-                --     command = "colorscheme gruvbox",
-                -- })
-                vim.cmd([[
-                  autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-                  colorscheme gruvbox
-                ]])
+                vim.g.gruvbox_italicize_strings = 0
+                vim.cmd("colorscheme gruvbox8")
             end,
         })
     end
