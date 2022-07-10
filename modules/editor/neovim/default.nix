@@ -32,6 +32,13 @@
       };
     };
 
+    # Always run packer.nvim sync
+    home.activation.nvimPackerSync =
+      config.home-manager.users.${config.user}.lib.dag.entryAfter
+      [ "writeBoundary" ] ''
+        $DRY_RUN_CMD nvim +PackerSync +qa
+      '';
+
   };
 
   # Used for icons in Vim
