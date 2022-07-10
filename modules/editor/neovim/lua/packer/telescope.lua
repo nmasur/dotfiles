@@ -28,9 +28,8 @@ M.packer = function(use)
                 },
                 extensions = {
                     fzy_native = {},
-                    tmux = {},
+                    -- tmux = {},
                     zoxide = {},
-                    --neoclip = {},
                     project = {
                         base_dirs = { "~/dev" },
                     },
@@ -43,7 +42,7 @@ M.packer = function(use)
     use("nvim-telescope/telescope-fzy-native.nvim")
 
     -- Jump around tmux sessions
-    use("camgraff/telescope-tmux.nvim")
+    -- use("camgraff/telescope-tmux.nvim")
 
     -- Jump directories
     use({
