@@ -21,6 +21,7 @@ M.packer = function(use)
                     "yaml",
                     "json",
                 },
+                auto_install = true,
                 highlight = { enable = true },
                 indent = { enable = true },
             })

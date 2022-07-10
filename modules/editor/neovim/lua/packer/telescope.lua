@@ -57,6 +57,19 @@ M.packer = function(use)
         requires = { "nvim-telescope/telescope.nvim" },
         config = function()
             require("telescope").load_extension("project")
+
+            choose_project = function()
+                local opts = require("telescope.themes").get_ivy({
+                    layout_config = {
+                        bottom_pane = {
+                            height = 10,
+                        },
+                    },
+                })
+                require("telescope").extensions.project.project(opts)
+            end
+
+            vim.keymap.set("n", "<C-p>", choose_project)
         end,
     })
 

@@ -26,17 +26,6 @@ find_downloads = function()
     require("telescope").extensions.file_browser.file_browser(opts)
 end
 
-choose_project = function()
-    local opts = require("telescope.themes").get_ivy({
-        layout_config = {
-            bottom_pane = {
-                height = 10,
-            },
-        },
-    })
-    require("telescope").extensions.project.project(opts)
-end
-
 command_history = function()
     local opts = require("telescope.themes").get_ivy({
         layout_config = {

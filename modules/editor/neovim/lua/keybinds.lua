@@ -5,8 +5,7 @@
 -- Function to cut down config boilerplate
 local key = function(mode, key_sequence, action, params)
     params = params or {}
-    params["noremap"] = true
-    vim.api.nvim_set_keymap(mode, key_sequence, action, params)
+    vim.keymap.set(mode, key_sequence, action, params)
 end
 
 -- Remap space as leader key
@@ -34,9 +33,9 @@ key("n", "<Leader>k", ":Telescope keymaps<CR>")
 key("n", "<Leader>/", ":Telescope live_grep<CR>")
 key("n", "<Leader>ff", ":Telescope find_files<CR>")
 key("n", "<Leader>fp", ":Telescope git_files<CR>")
-key("n", "<Leader>fN", "<Cmd>lua find_notes()<CR>")
-key("n", "<Leader>N", "<Cmd>lua grep_notes()<CR>")
-key("n", "<Leader>fD", "<Cmd>lua find_downloads()<CR>")
+key("n", "<Leader>fN", find_notes)
+key("n", "<Leader>N", grep_notes)
+key("n", "<Leader>fD", find_downloads)
 key("n", "<Leader>fa", ":Telescope file_browser<CR>")
 key("n", "<Leader>fw", ":Telescope grep_string<CR>")
 key("n", "<Leader>wt", ":Telescope tmux sessions<CR>")
@@ -48,14 +47,11 @@ key("n", "<Leader>hh", ":Telescope help_tags<CR>")
 key("n", "<Leader>fr", ":Telescope oldfiles<CR>")
 key("n", "<Leader>cc", ":Telescope commands<CR>")
 key("n", "<Leader>cr", "<Cmd>lua command_history()<CR>")
-key("n", "<Leader>y", "<Cmd>lua clipboard_history()<CR>")
-key("i", "<c-y>", "<Cmd>lua clipboard_history()<CR>")
 key("n", "<Leader>s", ":Telescope current_buffer_fuzzy_find<CR>")
 key("n", "<Leader>gc", ":Telescope git_commits<CR>")
 key("n", "<Leader>gf", ":Telescope git_bcommits<CR>")
 key("n", "<Leader>gb", ":Telescope git_branches<CR>")
 key("n", "<Leader>gs", ":Telescope git_status<CR>")
-key("n", "<C-p>", "<Cmd>lua choose_project()<CR>")
 
 -- Buffer tabs (tmux interferes)
 -- key("n", "<C-L>", "gt")
@@ -64,10 +60,10 @@ key("n", "<C-p>", "<Cmd>lua choose_project()<CR>")
 -- key("i", "<C-H>", "<Esc>gT")
 
 -- LSP
-key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { silent = true })
-key("n", "gT", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", { silent = true })
-key("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { silent = true })
-key("n", "gh", "<Cmd>lua vim.lsp.buf.hover()<CR>", { silent = true })
+key("n", "gd", vim.lsp.buf.definition, { silent = true })
+key("n", "gT", vim.lsp.buf.type_definition, { silent = true })
+key("n", "gi", vim.lsp.buf.implementation, { silent = true })
+key("n", "gh", vim.lsp.buf.hover, { silent = true })
 key("n", "gr", "<Cmd>Telescope lsp_references<CR>", { silent = true })
 key("n", "<Leader>R", "<Cmd>lua vim.lsp.buf.rename()<CR>", { silent = true })
 key("n", "]e", "<Cmd>lua vim.diagnostic.goto_next()<CR>", { silent = true })
