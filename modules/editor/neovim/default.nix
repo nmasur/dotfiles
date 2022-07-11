@@ -36,7 +36,7 @@
     home.activation.nvimPackerSync =
       config.home-manager.users.${config.user}.lib.dag.entryAfter
       [ "writeBoundary" ] ''
-        $DRY_RUN_CMD nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+        $DRY_RUN_CMD ${pkgs.neovim}/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
       '';
 
   };

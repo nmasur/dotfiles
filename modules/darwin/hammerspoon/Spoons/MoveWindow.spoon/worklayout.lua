@@ -41,7 +41,7 @@ function worklayout()
         local u = hs.geometry.unitrect
         -- set the layout
         local left = {
-            { "Alacritty", nil, WORK_LEFT_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
+            -- { "Alacritty", nil, WORK_LEFT_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
         }
         local right = {
             { "Slack", nil, WORK_RIGHT_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
