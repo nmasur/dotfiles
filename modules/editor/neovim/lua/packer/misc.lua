@@ -20,7 +20,14 @@ M.packer = function(use)
     })
 
     -- Alignment tool
-    use("godlygeek/tabular")
+    use({
+        "godlygeek/tabular",
+        config = function()
+            vim.keymap.set("", "<Leader>ta", ":Tabularize /")
+            vim.keymap.set("", "<Leader>t#", ":Tabularize /#<CR>")
+            vim.keymap.set("", "<Leader>tl", ":Tabularize /---<CR>")
+        end,
+    })
 
     -- Markdown renderer / wiki notes
     use("vimwiki/vimwiki")
