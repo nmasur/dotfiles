@@ -35,7 +35,7 @@
     # Always run packer.nvim sync
     home.activation.nvimPackerSync =
       config.home-manager.users.${config.user}.lib.dag.entryAfter
-      [ "writeBoundary" ] ''
+      [ "onFilesChange" ] ''
         $DRY_RUN_CMD nvim +PackerSync +qa
       '';
 

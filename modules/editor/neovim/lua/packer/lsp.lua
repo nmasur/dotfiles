@@ -4,19 +4,32 @@
 
 local M = {}
 
-function on_path(program)
-    return vim.fn.executable(program) == 1
-end
-
 M.packer = function(use)
     -- Language server engine
     use({
         "neovim/nvim-lspconfig",
         requires = { "hrsh7th/cmp-nvim-lsp" },
         config = function()
+            local function on_path(program)
+                return vim.fn.executable(program) == 1
+            end
+
             local capabilities = require("cmp_nvim_lsp").update_capabilities(
                 vim.lsp.protocol.make_client_capabilities()
             )
+            if on_path("lua-language-server") then
+                require("lspconfig").sumneko_lua.setup({
+                    capabilities = capabilities,
+                    -- Turn off errors for vim global variable
+                    settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = { "vim" },
+                            },
+                        },
+                    },
+                })
+            end
             if on_path("rust-analyzer") then
                 require("lspconfig").rust_analyzer.setup({ capabilities = capabilities })
             end
@@ -50,6 +63,10 @@ M.packer = function(use)
             "neovim/nvim-lspconfig",
         },
         config = function()
+            local function on_path(program)
+                return vim.fn.executable(program) == 1
+            end
+
             require("null-ls").setup({
                 sources = {
                     require("null-ls").builtins.formatting.stylua.with({

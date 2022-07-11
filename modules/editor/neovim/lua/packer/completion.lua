@@ -21,11 +21,15 @@ M.packer = function(use)
         config = function()
             local cmp = require("cmp")
             cmp.setup({
+
+                -- Setup snippet completion
                 snippet = {
                     expand = function(args)
                         require("luasnip").lsp_expand(args.body)
                     end,
                 },
+
+                -- Setup completion keybinds
                 mapping = {
                     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
                     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
@@ -36,8 +40,6 @@ M.packer = function(use)
                         })
                         vim.cmd("stopinsert") --- Abort and leave insert mode
                     end,
-                    -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-                    -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
                     ["<CR>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
@@ -52,11 +54,13 @@ M.packer = function(use)
                         end
                     end, { "i", "s" }),
                 },
+
+                -- Setup completion engines
                 sources = {
                     { name = "nvim_lua" },
                     { name = "nvim_lsp" },
-                    { name = "path" },
                     { name = "luasnip" },
+                    { name = "path" },
                     { name = "buffer", keyword_length = 3, max_item_count = 10 },
                     {
                         name = "rg",
@@ -65,6 +69,30 @@ M.packer = function(use)
                         option = { additional_arguments = "--ignore-case" },
                     },
                 },
+
+                -- Visual presentation
+                formatting = {
+                    fields = { "abbr", "menu" },
+                    format = function(entry, vim_item)
+                        vim_item.menu = ({
+                            luasnip = "[Snippet]",
+                            buffer = "[Buffer]",
+                            path = "[Path]",
+                            rg = "[Grep]",
+                            nvim_lsp = "[LSP]",
+                            nvim_lua = "[Lua]",
+                        })[entry.source.name]
+                        return vim_item
+                    end,
+                },
+
+                -- Docs
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+
+                -- Extra features
                 experimental = {
                     native_menu = false, --- Use cmp menu instead of Vim menu
                     ghost_text = true, --- Show preview auto-completion

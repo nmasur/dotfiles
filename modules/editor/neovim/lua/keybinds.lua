@@ -74,7 +74,7 @@ key("n", "gr", telescope.lsp_references, { silent = true })
 key("n", "<Leader>R", vim.lsp.buf.rename, { silent = true })
 key("n", "]e", vim.diagnostic.goto_next, { silent = true })
 key("n", "[e", vim.diagnostic.goto_prev, { silent = true })
-key("n", "<Leader>e", vim.lsp.diagnostic.show_line_diagnostics, { silent = true })
+key("n", "<Leader>e", vim.diagnostic.open_float, { silent = true })
 key("n", "<Leader>E", vim.lsp.buf.code_action, { silent = true })
 
 -- File commands
