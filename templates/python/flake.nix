@@ -1,7 +1,7 @@
 {
   description = "Python pip flake";
 
-  inputs.mach-nix.url = "github:mach-nix/3.5.0";
+  inputs.mach-nix.url = "github:DavHau/mach-nix/3.5.0";
 
   outputs = { self, nixpkgs, mach-nix }@inp:
     let
@@ -9,10 +9,12 @@
       forAllSystems = f:
         nixpkgs.lib.genAttrs supportedSystems
         (system: f system (import nixpkgs { inherit system; }));
-    in {
-      devShell = forAllSystems (system: pkgs:
-        mach-nix.lib."${system}".mkPythonShell {
+    in rec {
+      defaultApp = forAllSystems (system: pkgs:
+        mach-nix.lib."${system}".mkPython {
           requirements = builtins.readFile ./requirements.txt;
         });
+      devShell = forAllSystems (system: pkgs:
+        pkgs.mkShell { buildInputs = [ defaultApp."${system}" ]; });
     };
 }
