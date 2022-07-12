@@ -57,7 +57,7 @@ M.packer = function(use)
             vim.keymap.set("n", "<Leader>R", vim.lsp.buf.rename)
             vim.keymap.set("n", "]e", vim.diagnostic.goto_next)
             vim.keymap.set("n", "[e", vim.diagnostic.goto_prev)
-            vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
+            vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float)
             vim.keymap.set("n", "<Leader>E", vim.lsp.buf.code_action)
         end,
     })

@@ -27,7 +27,7 @@
       shellAliases = { vim = "nvim"; };
       shellAbbrs = {
         v = lib.mkForce "nvim";
-        vl = lib.mkForce "nvim -c 'normal! `0'";
+        vl = lib.mkForce "vim -c 'normal! `0' -c 'bdelete 1'";
         vll = "nvim -c 'Telescope oldfiles'";
       };
     };
