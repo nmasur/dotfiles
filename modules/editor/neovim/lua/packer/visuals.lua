@@ -13,6 +13,7 @@ M.packer = function(use)
             vim.keymap.set("n", "<Leader>gp", gitsigns.preview_hunk)
             vim.keymap.set("v", "<Leader>gp", gitsigns.preview_hunk)
             vim.keymap.set("n", "<Leader>gd", gitsigns.diffthis)
+            vim.keymap.set("v", "<Leader>gd", gitsigns.diffthis)
             vim.keymap.set("n", "<Leader>rgf", gitsigns.reset_buffer)
             vim.keymap.set("v", "<Leader>hs", gitsigns.stage_hunk)
             vim.keymap.set("v", "<Leader>hs", gitsigns.reset_hunk)
@@ -37,7 +38,7 @@ M.packer = function(use)
     use({
         "akinsho/bufferline.nvim",
         tag = "v2.*",
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" },
         config = function()
             require("bufferline").setup({
                 options = {
@@ -47,7 +48,18 @@ M.packer = function(use)
                     offsets = { { filetype = "NvimTree" } },
                 },
             })
-            vim.keymap.set("n", "<Leader>x", " :bdelete<CR>")
+            -- Move buffers
+            vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>")
+            vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>")
+
+            -- Kill buffer
+            vim.keymap.set("n", "<Leader>x", " :Bdelete<CR>")
+
+            -- Shift buffers
+            -- vim.keymap.set("n", "<C-L>", ":BufferLineMoveNext<CR>")
+            -- vim.keymap.set("i", "<C-L>", "<Esc>:BufferLineMoveNext<CR>i")
+            -- vim.keymap.set("n", "<C-H>", ":BufferLineMovePrev<CR>")
+            -- vim.keymap.set("i", "<C-H>", "<Esc>:BufferLineMovePrev<CR>i")
         end,
     })
 
@@ -56,8 +68,39 @@ M.packer = function(use)
         "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" },
         config = function()
-            require("nvim-tree").setup()
-            vim.keymap.set("n", "<Leader>e", ":NvimTreeToggle")
+            require("nvim-tree").setup({
+                disable_netrw = true,
+                hijack_netrw = true,
+                diagnostics = {
+                    enable = true,
+                    icons = {
+                        hint = "",
+                        info = "",
+                        warning = "",
+                        error = "",
+                    },
+                },
+                view = {
+                    width = 30,
+                    height = 30,
+                    hide_root_folder = false,
+                    side = "left",
+                    mappings = {
+                        custom_only = false,
+                        list = {
+                            {
+                                key = { "l", "<CR>", "o" },
+                                cb = require("nvim-tree.config").nvim_tree_callback("edit"),
+                            },
+                            { key = "h", cb = require("nvim-tree.config").nvim_tree_callback("close_node") },
+                            { key = "v", cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
+                        },
+                    },
+                    number = false,
+                    relativenumber = false,
+                },
+            })
+            vim.keymap.set("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>")
         end,
     })
 

@@ -26,15 +26,11 @@ key("n", "<A-k>", ":m .-2<CR>==")
 key("v", "<A-j>", ":m '>+1<CR>gv=gv")
 key("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
--- Buffer tabs
-key("n", "<C-L>", "gt")
-key("i", "<C-L>", "<Esc>gt")
-key("n", "<C-H>", "gT")
-key("i", "<C-H>", "<Esc>gT")
-
--- Move buffers
-key("n", "L", ":bnext<CR>")
-key("n", "H", ":bprevious<CR>")
+-- Better window navigation
+key("n", "<C-h>", "<C-w>h")
+key("n", "<C-j>", "<C-w>j")
+key("n", "<C-k>", "<C-w>k")
+key("n", "<C-l>", "<C-w>l")
 
 -- File commands
 key("n", "<Leader>q", ":quit<CR>")
@@ -80,3 +76,4 @@ key("n", "<A-CR>", ":noh<CR>", { silent = true }) --- Clear search in VimWiki
 key("n", "Y", "y$") --- Copy to end of line
 key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
 key("v", "D", "y'>gp") --- Duplicate selected
+key("v", "p", '"_dP') -- Don't overwrite register when pasting

@@ -9,7 +9,6 @@ M.packer = function(use)
     use("tpope/vim-vinegar") --- Fixes netrw file explorer
     use("tpope/vim-fugitive") --- Git commands and syntax
     use("tpope/vim-repeat") --- Actually repeat using .
-    use("christoomey/vim-tmux-navigator") --- Hotkeys for tmux panes
 
     -- Use gc or gcc to add comments
     use({
