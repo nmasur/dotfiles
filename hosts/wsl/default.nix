@@ -20,7 +20,9 @@ nixpkgs.lib.nixosSystem {
         automountPath = "/mnt";
         defaultUser = globals.user;
         startMenuLaunchers = true;
-        wslConf.network.generateResolvConf = true;
+        wslConf.network.generateResolvConf = true; # Turn off if breaking VPN
+        interop.includePath =
+          false; # Including Windows PATH will slow down Neovim
       };
     }
     ../common.nix

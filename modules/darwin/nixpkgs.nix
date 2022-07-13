@@ -13,7 +13,7 @@
             if test "$argv[1]" = "offline"
                 set option "--option substitute false"
             end
-            git -C ${config.dotfilesPath} add --all
+            git -C ${config.dotfilesPath} add --intent-to-add --all
             commandline -r "darwin-rebuild switch $option --flake ${config.dotfilesPath}#macbook"
             commandline --function execute
           '';

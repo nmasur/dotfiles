@@ -24,7 +24,7 @@ M.packer = function(use)
                     settings = {
                         Lua = {
                             diagnostics = {
-                                globals = { "vim" },
+                                globals = { "vim", "hs" },
                             },
                         },
                     },

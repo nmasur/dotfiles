@@ -49,11 +49,11 @@ M.packer = function(use)
                 },
             })
             -- Move buffers
-            vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>")
-            vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>")
+            vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>", { silent = true })
+            vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>", { silent = true })
 
             -- Kill buffer
-            vim.keymap.set("n", "<Leader>x", " :Bdelete<CR>")
+            vim.keymap.set("n", "<Leader>x", " :Bdelete<CR>", { silent = true })
 
             -- Shift buffers
             -- vim.keymap.set("n", "<C-L>", ":BufferLineMoveNext<CR>")
@@ -100,7 +100,7 @@ M.packer = function(use)
                     relativenumber = false,
                 },
             })
-            vim.keymap.set("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>")
+            vim.keymap.set("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", { silent = true })
         end,
     })
 
