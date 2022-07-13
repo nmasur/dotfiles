@@ -48,6 +48,9 @@ M.packer = function(use)
                     capabilities = capabilities,
                 })
             end
+            if on_path("rnix-lsp") then
+                require("lspconfig").rnix.setup({ capabilities = capabilities })
+            end
 
             vim.keymap.set("n", "gd", vim.lsp.buf.definition)
             vim.keymap.set("n", "gT", vim.lsp.buf.type_definition)

@@ -52,6 +52,15 @@ M.packer = function(use)
 
             cmp.setup({
 
+                -- Only enable on non-prompt buffers
+                -- So don't use in telescope
+                enabled = function()
+                    if vim.bo.buftype == "prompt" then
+                        return false
+                    end
+                    return true
+                end,
+
                 -- Setup snippet completion
                 snippet = {
                     expand = function(args)
@@ -65,6 +74,7 @@ M.packer = function(use)
                     ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
                     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
                     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+                    ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" }),
                     ["<Esc>"] = function(_)
                         cmp.mapping({
                             i = cmp.mapping.abort(),

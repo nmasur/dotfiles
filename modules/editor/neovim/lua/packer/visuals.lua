@@ -80,6 +80,21 @@ M.packer = function(use)
                         error = "",
                     },
                 },
+                renderer = {
+                    icons = {
+                        glyphs = {
+                            git = {
+                                unstaged = "~",
+                                staged = "+",
+                                unmerged = "",
+                                renamed = "➜",
+                                deleted = "",
+                                untracked = "?",
+                                ignored = "◌",
+                            },
+                        },
+                    },
+                },
                 view = {
                     width = 30,
                     height = 30,
