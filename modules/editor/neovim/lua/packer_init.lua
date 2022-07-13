@@ -25,6 +25,7 @@ require("packer").startup(function(use)
     require("packer.completion").packer(use)
     require("packer.syntax").packer(use)
     require("packer.telescope").packer(use)
+    require("packer.toggleterm").packer(use)
 
     -- Auto-install after bootstrapping
     if PACKER_BOOTSTRAP then

@@ -49,9 +49,9 @@ key("n", "<Leader>wh", ":split<CR>")
 key("n", "<Leader>wm", ":only<CR>")
 
 -- Vimrc editing
-key("n", "<Leader>rr", ":luafile $MYVIMRC<CR>")
-key("n", "<Leader>rp", ":luafile $MYVIMRC<CR>:PackerInstall<CR>:")
-key("n", "<Leader>rc", ":luafile $MYVIMRC<CR>:PackerCompile<CR>")
+key("n", "<Leader>rr", ":luafile $HOME/.config/nvim/init.lua<CR>")
+key("n", "<Leader>rp", ":luafile $HOME/.config/nvim/init.lua<CR>:PackerInstall<CR>:")
+key("n", "<Leader>rc", ":luafile $HOME/.config/nvim/init.lua<CR>:PackerCompile<CR>")
 
 -- Keep cursor in place
 key("n", "n", "nzz")
@@ -71,7 +71,6 @@ key("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
 key("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
 -- Other
-key("t", "<A-CR>", "<C-\\><C-n>") --- Exit terminal mode
 key("n", "<A-CR>", ":noh<CR>", { silent = true }) --- Clear search in VimWiki
 key("n", "Y", "y$") --- Copy to end of line
 key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
