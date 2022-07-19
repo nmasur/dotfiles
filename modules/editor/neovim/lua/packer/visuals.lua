@@ -71,6 +71,11 @@ M.packer = function(use)
             require("nvim-tree").setup({
                 disable_netrw = true,
                 hijack_netrw = true,
+                update_focused_file = {
+                    enable = true,
+                    update_cwd = true,
+                    ignore_list = {},
+                },
                 diagnostics = {
                     enable = true,
                     icons = {

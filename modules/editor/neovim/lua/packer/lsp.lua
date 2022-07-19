@@ -14,9 +14,8 @@ M.packer = function(use)
                 return vim.fn.executable(program) == 1
             end
 
-            local capabilities = require("cmp_nvim_lsp").update_capabilities(
-                vim.lsp.protocol.make_client_capabilities()
-            )
+            local capabilities =
+                require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
             if on_path("lua-language-server") then
                 require("lspconfig").sumneko_lua.setup({
                     capabilities = capabilities,
@@ -91,6 +90,11 @@ M.packer = function(use)
                     require("null-ls").builtins.formatting.black.with({
                         condition = function()
                             return on_path("black")
+                        end,
+                    }),
+                    require("null-ls").builtins.diagnostics.flake8.with({
+                        condition = function()
+                            return on_path("flake8")
                         end,
                     }),
                     require("null-ls").builtins.formatting.fish_indent.with({
