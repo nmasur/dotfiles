@@ -56,9 +56,6 @@
 
     in {
 
-      # You can load it from any NixOS system with:
-      # nix-shell -p nixFlakes
-      # sudo nixos-rebuild switch --flake github:nmasur/dotfiles#desktop
       nixosConfigurations = {
         desktop = import ./hosts/desktop {
           inherit nixpkgs home-manager nur globals wallpapers;
@@ -72,10 +69,7 @@
         };
       };
 
-      # You can partition, format, and install from a live disk with:
-      # nix-shell -p nixFlakes
-      # nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop
-      # Will erase drives; use at your own risk!
+      # Format and install from nothing
       apps = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
         in {
