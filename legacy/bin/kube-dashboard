@@ -1,6 +1,13 @@
 #!/bin/sh
 
-kubectl -n kube-system get secret $(kubectl -n kube-system get secret | grep dashboard-admin | awk '{print $1}') -o json | jq -j --raw-output '.data.token' | base64 --decode | pbcopy
+kubectl -n kube-system get secret "$(
+    kubectl -n kube-system get secret |
+        grep dashboard-admin |
+        awk '{print $1}'
+)" -o json |
+    jq -j --raw-output '.data.token' |
+    base64 --decode |
+    pbcopy
 
 open http://localhost:8001/api/v1/namespaces/default/services/https:kubernetes-dashboard:https/proxy/#!/login
 
