@@ -9,7 +9,7 @@ darwin.lib.darwinSystem {
     home-manager.darwinModules.home-manager
     {
       gui.enable = true;
-      gui.colorscheme = (import ../../modules/colorscheme/gruvbox);
+      colorscheme = (import ../../modules/colorscheme/gruvbox);
       mailUser = globals.user;
       nixpkgs.overlays = [ nur.overlay ];
     }
@@ -18,6 +18,7 @@ darwin.lib.darwinSystem {
     ../../modules/applications/alacritty.nix
     ../../modules/applications/discord.nix
     ../../modules/mail/himalaya.nix
+    ../../modules/repositories/notes.nix
     ../../modules/programming/nix.nix
     ../../modules/programming/terraform.nix
     ../../modules/programming/python.nix

@@ -54,32 +54,32 @@
           ];
           colors = {
             primary = {
-              background = config.gui.colorscheme.base00;
-              foreground = config.gui.colorscheme.base05;
+              background = config.colorscheme.base00;
+              foreground = config.colorscheme.base05;
             };
             cursor = {
               text = "#1d2021";
-              cursor = config.gui.colorscheme.base05;
+              cursor = config.colorscheme.base05;
             };
             normal = {
               black = "#1d2021";
-              red = config.gui.colorscheme.base08;
-              green = config.gui.colorscheme.base0B;
-              yellow = config.gui.colorscheme.base0A;
-              blue = config.gui.colorscheme.base0D;
-              magenta = config.gui.colorscheme.base0E;
-              cyan = config.gui.colorscheme.base0C;
-              white = config.gui.colorscheme.base05;
+              red = config.colorscheme.base08;
+              green = config.colorscheme.base0B;
+              yellow = config.colorscheme.base0A;
+              blue = config.colorscheme.base0D;
+              magenta = config.colorscheme.base0E;
+              cyan = config.colorscheme.base0C;
+              white = config.colorscheme.base05;
             };
             bright = {
-              black = config.gui.colorscheme.base03;
-              red = config.gui.colorscheme.base09;
-              green = config.gui.colorscheme.base01;
-              yellow = config.gui.colorscheme.base02;
-              blue = config.gui.colorscheme.base04;
-              magenta = config.gui.colorscheme.base06;
-              cyan = config.gui.colorscheme.base0F;
-              white = config.gui.colorscheme.base07;
+              black = config.colorscheme.base03;
+              red = config.colorscheme.base09;
+              green = config.colorscheme.base01;
+              yellow = config.colorscheme.base02;
+              blue = config.colorscheme.base04;
+              magenta = config.colorscheme.base06;
+              cyan = config.colorscheme.base0F;
+              white = config.colorscheme.base07;
             };
           };
           draw_bold_text_with_bright_colors = false;

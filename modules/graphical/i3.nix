@@ -49,16 +49,16 @@ in {
           };
           bars = [{ command = "echo"; }]; # Disable i3bar
           colors = let
-            background = config.gui.colorscheme.base00;
-            inactiveBackground = config.gui.colorscheme.base01;
-            border = config.gui.colorscheme.base01;
-            inactiveBorder = config.gui.colorscheme.base01;
-            text = config.gui.colorscheme.base07;
-            inactiveText = config.gui.colorscheme.base04;
-            urgentBackground = config.gui.colorscheme.base08;
+            background = config.colorscheme.base00;
+            inactiveBackground = config.colorscheme.base01;
+            border = config.colorscheme.base01;
+            inactiveBorder = config.colorscheme.base01;
+            text = config.colorscheme.base07;
+            inactiveText = config.colorscheme.base04;
+            urgentBackground = config.colorscheme.base08;
             indicator = "#00000000";
           in {
-            background = config.gui.colorscheme.base00;
+            background = config.colorscheme.base00;
             focused = {
               inherit background indicator text border;
               childBorder = background;

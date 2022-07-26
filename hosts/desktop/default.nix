@@ -32,6 +32,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/gaming
     ../../modules/applications
     ../../modules/mail/himalaya.nix
+    ../../modules/repositories/notes.nix
     ../../modules/services/keybase.nix
     ../../modules/services/gnupg.nix
     ../../modules/services/mullvad.nix

@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }: {
 
-  imports = [
-    ../modules/shell
-    ../modules/neovim
-    ../modules/repositories/notes.nix
-    ../modules/repositories/dotfiles.nix
-  ];
+  imports =
+    [ ../modules/shell ../modules/neovim ../modules/repositories/dotfiles.nix ];
 
   options = with lib; {
     user = mkOption {
@@ -26,10 +22,10 @@
         description = "Enable graphics";
         default = false;
       };
-      colorscheme = mkOption {
-        type = types.attrs;
-        description = "Base16 color scheme";
-      };
+    };
+    colorscheme = mkOption {
+      type = types.attrs;
+      description = "Base16 color scheme";
     };
     homePath = mkOption {
       type = types.path;
