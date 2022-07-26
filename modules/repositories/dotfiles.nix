@@ -16,6 +16,9 @@
 
     };
 
+    # Set a variable for dotfiles repo, not necessary but convenient
+    home.sessionVariables.DOTS = config.dotfilesPath;
+
   };
 
 }

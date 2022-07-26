@@ -6,7 +6,6 @@ nixpkgs.lib.nixosSystem {
   specialArgs = { };
   modules = [
     globals
-    home-manager.nixosModules.home-manager
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     {
@@ -20,14 +19,15 @@ nixpkgs.lib.nixosSystem {
         automountPath = "/mnt";
         defaultUser = globals.user;
         startMenuLaunchers = true;
-        wslConf.network.generateResolvConf = true; # Turn off if breaking VPN
+        wslConf.network.generateResolvConf = true; # Turn off if it breaks VPN
         interop.includePath =
-          false; # Including Windows PATH will slow down Neovim
+          false; # Including Windows PATH will slow down Neovim command mode
       };
     }
     ../common.nix
     ../../modules/wsl
-    ../../modules/system
+    ../../modules/nixos
+    ../../modules/mail/himalaya.nix
     ../../modules/programming/nix.nix
     ../../modules/programming/lua.nix
   ];

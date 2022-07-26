@@ -46,7 +46,6 @@
     };
 
     # Provides "command-not-found" options
-    # Requires activating a manual download
     programs.nix-index = {
       enable = true;
       enableFishIntegration = true;
@@ -54,7 +53,7 @@
 
   };
 
-  # Set system channels for nix-shell
+  # Set system channels, used for nix-shell commands
   nix = { nixPath = [ "nixpkgs=${pkgs.path}" ]; };
 
 }

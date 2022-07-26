@@ -1,6 +1,11 @@
 { config, lib, pkgs, ... }: {
 
-  imports = [ ../modules/shell ../modules/editor ../modules/mail/himalaya.nix ];
+  imports = [
+    ../modules/shell
+    ../modules/neovim
+    ../modules/repositories/notes.nix
+    ../modules/repositories/dotfiles.nix
+  ];
 
   options = with lib; {
     user = mkOption {
@@ -50,7 +55,8 @@
     };
   };
 
-  config = {
+  config = let stateVersion = "22.11";
+  in {
 
     # Enable features in Nix commands
     nix.extraOptions = "experimental-features = nix-command flakes";
@@ -69,10 +75,9 @@
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) config.unfreePackages;
 
-    # Set a variable for dotfiles repo, not necessary but convenient
-    home-manager.users.${config.user} = {
-      home.sessionVariables = { DOTS = config.dotfilesPath; };
-    };
+    # Pin a state version to prevent warnings
+    home-manager.users.${config.user}.home.stateVersion = stateVersion;
+    home-manager.users.root.home.stateVersion = stateVersion;
 
   };
 

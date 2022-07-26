@@ -15,7 +15,7 @@
         source = ./lua;
         recursive = true; # Allows adding more files
       };
-      "nvim/lua/packer/colors.lua".text = config.gui.colorscheme.neovimConfig;
+      "nvim/lua/packer/colors.lua".source = config.gui.colorscheme.neovimConfig;
     };
 
     programs.git.extraConfig.core.editor = "nvim";

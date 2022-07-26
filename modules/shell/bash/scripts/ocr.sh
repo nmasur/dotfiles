@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p tesseract
 
 # Yoinked from https://github.com/JJGO/dotfiles
 # Adapted from https://github.com/sdushantha/bin
@@ -12,18 +13,6 @@ function notify-send() {
 }
 
 PATH="/usr/local/bin/:$PATH"
-
-# Check if the needed dependencies are installed
-dependencies=(tesseract)
-for dependency in "${dependencies[@]}"; do
-    type -p "$dependency" &>/dev/null || {
-        # The reason why we are sending the error as a notification is because
-        # user is most likely going to run this script by binding it to their
-        # keyboard, therefor they cant see any text that is outputed using echo
-        notify-send "ocr" "Could not find '${dependency}', is it installed?"
-        exit 1
-    }
-done
 
 # Take screenshot by selecting the area
 screencapture -i "$IMAGE_FILE"
@@ -47,7 +36,7 @@ tesseract "$IMAGE_FILE" "${TEXT_FILE//\.txt/}"
 
 # Check if the text was detected by checking number
 # of lines in the file
-LINES=$(wc -l < $TEXT_FILE)
+LINES=$(wc -l <$TEXT_FILE)
 if [ "$LINES" -eq 0 ]; then
     notify-send "ocr" "no text was detected"
     exit 1
@@ -55,10 +44,10 @@ fi
 
 # Copy text to clipboard
 # xclip -selection clip < "$TEXT_FILE"
-pbcopy < "$TEXT_FILE"
+pbcopy <"$TEXT_FILE"
 
 # Send a notification with the text that was grabbed using OCR
-# notify-send "ocr" "$(cat $TEXT_FILE)"
+notify-send "ocr" "$(cat $TEXT_FILE)"
 
 # Clean up
 # "Always leave the area better than you found it"

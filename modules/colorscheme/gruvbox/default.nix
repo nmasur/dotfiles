@@ -18,19 +18,5 @@
   base0D = "#83a598"; # blue
   base0E = "#d3869b"; # purple
   base0F = "#d65d0e"; # brown
-  neovimConfig = ''
-    local M = {}
-
-    M.packer = function(use)
-        use({
-            "lifepillar/vim-gruvbox8",
-            config = function()
-                vim.g.gruvbox_italicize_strings = 0
-                vim.cmd("colorscheme gruvbox8")
-            end,
-        })
-    end
-
-    return M
-  '';
+  neovimConfig = ./neovim.lua;
 }

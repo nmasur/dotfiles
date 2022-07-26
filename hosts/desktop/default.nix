@@ -27,10 +27,11 @@ nixpkgs.lib.nixosSystem {
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/hardware
-    ../../modules/system
+    ../../modules/nixos
     ../../modules/graphical
     ../../modules/gaming
     ../../modules/applications
+    ../../modules/mail/himalaya.nix
     ../../modules/services/keybase.nix
     ../../modules/services/gnupg.nix
     ../../modules/services/mullvad.nix

@@ -72,9 +72,7 @@
       # Format and install from nothing
       apps = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
-        in {
-          installer = import ./modules/system/installer.nix { inherit pkgs; };
-        });
+        in { installer = import ./apps/installer.nix { inherit pkgs; }; });
 
       # Used to run commands and edit files in this repo
       devShells = forAllSystems (system:
