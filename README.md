@@ -60,6 +60,16 @@ Then switch to the macOS configuration:
 darwin-rebuild switch --flake .#macbook
 ```
 
+### Dealing with corporate MITM SSL certificates:
+
+```bash
+# Get the certificates
+openssl s_client -showcerts -verify 5 -connect cache.nixos.org:443 < /dev/null
+
+# Paste them in here
+sudo nvim $NIX_SSL_CERT_FILE
+```
+
 ## Flake Templates
 
 You can also use the templates as flakes for starting new projects:
