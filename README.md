@@ -1,9 +1,9 @@
-# Config Files
-
 This repository contains configuration files for my NixOS, macOS, and WSL
 hosts.
 
 ---
+
+# Installation
 
 ## NixOS - From Live Disk
 
@@ -57,7 +57,7 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 Then switch to the macOS configuration:
 
 ```bash
-darwin-rebuild switch --flake .#macbook
+darwin-rebuild switch --flake github:nmasur/dotfiles#macbook
 ```
 
 ### Dealing with corporate MITM SSL certificates:
@@ -70,9 +70,12 @@ openssl s_client -showcerts -verify 5 -connect cache.nixos.org:443 < /dev/null
 sudo nvim $NIX_SSL_CERT_FILE
 ```
 
-## Flake Templates
+---
 
-You can also use the templates as flakes for starting new projects:
+# Flake Templates
+
+You can also use the [templates](./templates/) as flakes for starting new
+projects:
 
 ```bash
 nix flake init --template github:nmasur/dotfiles#poetry
