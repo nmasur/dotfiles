@@ -137,7 +137,7 @@
       echo "Set dock magnification size"
       defaults write com.apple.dock largesize -int 48
 
-      echo "Choose and order dock icons"
+      echo "Define dock icon function"
       __dock_item() {
           printf '%s%s%s%s%s' \
                  '<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
@@ -147,6 +147,7 @@
                  '</dict></dict></dict>'
       }
 
+      echo "Choose and order dock icons"
       defaults write com.apple.dock persistent-apps -array \
           "$(__dock_item /Applications/1Password.app)" \
           "$(__dock_item /Applications/Slack.app)" \
@@ -160,15 +161,22 @@
           "$(__dock_item /Applications/Alacritty.app)" \
           "$(__dock_item /System/Applications/System\ Preferences.app)"
 
+      echo "Enable sudo Touch ID"
+      echo "# sudo: auth account password session" > /tmp/sudofile
+      echo "auth       sufficient     pam_smartcard.so" >> /tmp/sudofile
+      echo "auth       sufficient     pam_tid.so " >> /tmp/sudofile
+      echo "auth       required       pam_opendirectory.so" >> /tmp/sudofile
+      echo "account    required       pam_permit.so" >> /tmp/sudofile
+      echo "password   required       pam_deny.so" >> /tmp/sudofile
+      echo "session    required       pam_permit.so" >> /tmp/sudofile
+      sudo mv /tmp/sudofile /etc/pam.d/sudo
+
       echo "Allow apps from anywhere"
       SPCTL=$(spctl --status)
-      if ! [ "$SPCTL" = "assessments disabled" ]
-      then
+      if ! [ "$SPCTL" = "assessments disabled" ]; then
           sudo spctl --master-disable
       fi
 
-      echo "Show the ~/Library folder"
-      chflags nohidden ~/Library
     '';
   };
 

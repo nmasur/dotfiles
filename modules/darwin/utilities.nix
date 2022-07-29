@@ -14,7 +14,7 @@
       kubectl
       k9s
       noti # Create notifications programmatically
-      (pkgs.writeShellScriptBin "ocr"
+      (pkgs.writeScriptBin "ocr"
         (builtins.readFile ../shell/bash/scripts/ocr.sh))
     ];
 
