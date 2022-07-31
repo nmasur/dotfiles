@@ -17,4 +17,5 @@
   base0D = "#EBCB8B";
   base0E = "#A3BE8C";
   base0F = "#B48EAD";
+  neovimConfig = ./neovim.lua;
 }
