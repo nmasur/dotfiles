@@ -85,6 +85,10 @@
 
       # Templates for starting other projects quickly
       templates = {
+        basic = {
+          path = ./templates/basic;
+          description = "Basic program template";
+        };
         poetry = {
           path = ./templates/poetry;
           description = "Poetry template";
