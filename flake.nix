@@ -69,10 +69,18 @@
         };
       };
 
-      # Format and install from nothing
       apps = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
-        in { installer = import ./apps/installer.nix { inherit pkgs; }; });
+        in rec {
+          default = readme;
+
+          # Format and install from nothing
+          installer = import ./apps/installer.nix { inherit pkgs; };
+
+          # Display the readme for this repository
+          readme = import ./apps/readme.nix { inherit pkgs; };
+
+        });
 
       # Used to run commands and edit files in this repo
       devShells = forAllSystems (system:

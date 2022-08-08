@@ -5,7 +5,7 @@
 
   type = "app";
 
-  program = pkgs.writeShellScriptBin "installer" ''
+  program = builtins.toString (pkgs.writeShellScript "installer" ''
     #!${pkgs.stdenv.shell}
 
     set -e
@@ -39,6 +39,6 @@
     mount /dev/disk/by-label/boot /mnt/boot
 
     nixos-install --flake github:nmasur/dotfiles#''${FLAKE}
-  '';
+  '');
 
 }
