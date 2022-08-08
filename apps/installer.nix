@@ -6,8 +6,6 @@
   type = "app";
 
   program = builtins.toString (pkgs.writeShellScript "installer" ''
-    #!${pkgs.stdenv.shell}
-
     set -e
 
     DISK=$1
