@@ -92,7 +92,8 @@
         });
 
       # Templates for starting other projects quickly
-      templates = {
+      templates = rec {
+        default = basic;
         basic = {
           path = ./templates/basic;
           description = "Basic program template";
