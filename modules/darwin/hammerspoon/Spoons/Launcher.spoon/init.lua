@@ -8,11 +8,11 @@ obj.name = "Launcher"
 obj.version = "0.1"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
-function drawSwitcher()
+function DrawSwitcher()
     -- Drawing
-    width = hs.screen.mainScreen():fullFrame().w
-    switcherWidth = 500
-    canv = hs.canvas.new({
+    local width = hs.screen.mainScreen():fullFrame().w
+    local switcherWidth = 500
+    local canv = hs.canvas.new({
         x = width / 2 - switcherWidth / 2,
         y = 1,
         h = 3,
@@ -39,8 +39,9 @@ function obj:init()
     -- Behaviors on enter
     function self.launcher:entered()
         -- hs.alert("Entered mode")
-        self.canv = drawSwitcher()
+        self.canv = DrawSwitcher()
     end
+
     -- Behaviors on exit
     function self.launcher:exited()
         -- hs.alert("Exited mode")
@@ -54,10 +55,6 @@ function obj:init()
 
     -- Launcher shortcuts
     self.launcher:bind("ctrl", "space", function() end)
-    self.launcher:bind("", "space", function()
-        hs.hints.windowHints()
-        self.launcher:exit()
-    end)
     self.launcher:bind("", "return", function()
         self:switch("Alacritty.app")
     end)
