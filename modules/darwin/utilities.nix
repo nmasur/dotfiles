@@ -22,6 +22,7 @@
     programs.fish.shellAbbrs = {
       # Add noti for ghpr in Darwin
       ghpr = lib.mkForce "gh pr create && sleep 3 && noti gh run watch";
+      grw = lib.mkForce "noti gh run watch";
 
       # Shortcut to edit hosts file
       hosts = "sudo nvim /etc/hosts";
