@@ -37,7 +37,7 @@ M.packer = function(use)
     -- Buffer line ("tabs")
     use({
         "akinsho/bufferline.nvim",
-        tag = "v2.*",
+        tag = "v2.4.0",
         requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" },
         config = function()
             require("bufferline").setup({
