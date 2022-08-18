@@ -28,7 +28,7 @@ in {
       htop # Show system processes
       glow # Pretty markdown previews
       qrencode # Generate qr codes
-      vimv # Batch rename files
+      vimv-rs # Batch rename files
       dig # DNS lookup
       lf # File viewer
     ];
