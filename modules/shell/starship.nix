@@ -12,6 +12,7 @@
         "$cmd_duration"
         "$character"
       ];
+      right_format = "$nix_shell";
       character = {
         success_symbol = "[❯](bold green)";
         error_symbol = "[❯](bold red)";
@@ -46,7 +47,10 @@
         deleted = "✘";
         style = "red";
       };
-      nix_shell = { format = "[$symbol]($style)"; };
+      nix_shell = {
+        format = "[$symbol]($style)";
+        symbol = "❄️";
+      };
       python = { format = "[\${version}\\(\${virtualenv}\\)]($style)"; };
     };
   };
