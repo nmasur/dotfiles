@@ -4,7 +4,7 @@
     programs.fish = {
       shellAbbrs = {
         n = "nix";
-        ns = "nix-shell -p";
+        ns = "nix-shell --run fish -p";
         nsr = "nix-shell-run";
         nps = "nix repl '<nixpkgs>'";
         nixo = "man configuration.nix";

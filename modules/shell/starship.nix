@@ -48,7 +48,7 @@
         style = "red";
       };
       nix_shell = {
-        format = "[$symbol]($style)";
+        format = "[$symbol $name]($style)";
         symbol = "❄️";
       };
       python = { format = "[\${version}\\(\${virtualenv}\\)]($style)"; };
