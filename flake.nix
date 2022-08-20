@@ -89,6 +89,18 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
           };
+          devops = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git
+              terraform
+              consul
+              vault
+              awscli2
+              google-cloud-sdk
+              kustomize
+              fluxcd
+            ];
+          };
         });
 
       # Templates for starting other projects quickly
