@@ -82,13 +82,16 @@
 
         });
 
-      # Used to run commands and edit files in this repo
       devShells = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
         in {
+
+          # Used to run commands and edit files in this repo
           default = pkgs.mkShell {
             buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
           };
+
+          # Used for cloud and systems development and administration
           devops = pkgs.mkShell {
             buildInputs = with pkgs; [
               git
@@ -101,6 +104,7 @@
               fluxcd
             ];
           };
+
         });
 
       # Templates for starting other projects quickly
