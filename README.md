@@ -70,6 +70,12 @@ openssl s_client -showcerts -verify 5 -connect cache.nixos.org:443 < /dev/null
 sudo nvim $NIX_SSL_CERT_FILE
 ```
 
+### Dealing with Neovim issues:
+
+Update Neovim Packer plugins: `:PackerSync`
+
+Update TreeSitter languages: `:TSUpdateSync`
+
 ---
 
 # Flake Templates
