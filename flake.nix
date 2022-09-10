@@ -101,6 +101,8 @@
               vault
               awscli2
               google-cloud-sdk
+              kubectl
+              kubernetes-helm
               kustomize
               fluxcd
             ];
