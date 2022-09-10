@@ -8,6 +8,10 @@
       type = types.str;
       description = "Primary user of the system";
     };
+    fullName = lib.mkOption {
+      type = lib.types.str;
+      description = "Human readable name of the user";
+    };
     userDirs = {
       # Required to prevent infinite recursion when referenced by himalaya
       download = lib.mkOption {

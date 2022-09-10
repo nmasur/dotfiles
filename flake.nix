@@ -39,9 +39,10 @@
     let
 
       # Global configuration for my systems
-      globals = {
+      globals = rec {
         user = "noah";
         fullName = "Noah Masur";
+        gitName = fullName;
         gitEmail = "7386960+nmasur@users.noreply.github.com";
         mailServer = "noahmasur.com";
         dotfilesRepo = "https://github.com/nmasur/dotfiles";

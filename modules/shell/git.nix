@@ -5,9 +5,9 @@ let home-packages = config.home-manager.users.${config.user}.home.packages;
 in {
 
   options = {
-    fullName = lib.mkOption {
+    gitName = lib.mkOption {
       type = lib.types.str;
-      description = "Human readable name of the user";
+      description = "Name to use for git commits";
     };
     gitEmail = lib.mkOption {
       type = lib.types.str;
@@ -25,7 +25,7 @@ in {
     home-manager.users.${config.user} = {
       programs.git = {
         enable = true;
-        userName = config.fullName;
+        userName = config.gitName;
         userEmail = config.gitEmail;
         extraConfig = {
           pager = { branch = "false"; };

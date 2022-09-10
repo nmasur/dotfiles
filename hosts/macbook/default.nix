@@ -1,11 +1,15 @@
 { nixpkgs, darwin, home-manager, nur, globals, ... }:
 
-# System configuration for my MacBook
+# System configuration for my work MacBook
 darwin.lib.darwinSystem {
   system = "x86_64-darwin";
   specialArgs = { };
   modules = [
-    (globals // { user = "Noah.Masur"; })
+    (globals // {
+      user = "Noah.Masur";
+      gitName = "Noah-Masur_1701";
+      gitEmail = "Noah.Masur@take2games.com";
+    })
     home-manager.darwinModules.home-manager
     {
       gui.enable = true;
