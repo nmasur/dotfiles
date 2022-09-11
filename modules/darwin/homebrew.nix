@@ -14,8 +14,15 @@
 
   homebrew = {
     enable = true;
-    autoUpdate = false; # Don't update during rebuild
-    cleanup = "zap"; # Uninstall all programs not declared
+    onActivation = {
+      autoUpdate = false; # Don't update during rebuild
+      cleanup = "zap"; # Uninstall all programs not declared
+      upgrade = true;
+    };
+    global = {
+      brewfile = true; # Run brew bundle from anywhere
+      lockfiles = false; # Don't save lockfile (since running from anywhere)
+    };
     taps = [
       "homebrew/cask" # Required for casks
       "homebrew/cask-drivers" # Used for Logitech G-Hub
@@ -34,8 +41,6 @@
       "obsidian" # Obsidian packaging on Nix is not available for MacOS
       "steam" # Not packaged for Nix
     ];
-    global.brewfile = true; # Run brew bundle from anywhere
-    global.noLock = true; # Don't save lockfile (since running from anywhere)
   };
 
   home-manager.users.${config.user} = {
