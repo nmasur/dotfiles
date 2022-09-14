@@ -67,6 +67,9 @@ in {
         cdg = "cd (git rev-parse --show-toplevel)";
       };
 
+      # Required for fish commands
+      home.packages = with pkgs; [ fish fzf bat ];
+
       programs.fish.functions = lib.mkIf (builtins.elem pkgs.fzf home-packages
         && builtins.elem pkgs.bat home-packages) {
           git = { body = builtins.readFile ./fish/functions/git.fish; };

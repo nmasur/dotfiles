@@ -75,3 +75,4 @@ key("n", "<A-CR>", ":noh<CR>", { silent = true }) --- Clear search in VimWiki
 key("n", "Y", "y$") --- Copy to end of line
 key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
 key("v", "D", "y'>gp") --- Duplicate selected
+key("x", "<Leader>p", '"_dP') --- Paste but keep register
