@@ -10,6 +10,8 @@ nixpkgs.lib.nixosSystem {
     home-manager.nixosModules.home-manager
     {
       networking.hostName = "wsl";
+      # Set registry to flake packages, used for nix X commands
+      nix.registry.nixpkgs.flake = nixpkgs;
       gui.enable = false;
       colorscheme = (import ../../modules/colorscheme/gruvbox);
       passwordHash =

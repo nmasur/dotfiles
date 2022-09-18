@@ -16,6 +16,8 @@ darwin.lib.darwinSystem {
       colorscheme = (import ../../modules/colorscheme/gruvbox);
       mailUser = globals.user;
       nixpkgs.overlays = [ nur.overlay ];
+      # Set registry to flake packages, used for nix X commands
+      nix.registry.nixpkgs.flake = nixpkgs;
     }
     ../common.nix
     ../../modules/darwin
