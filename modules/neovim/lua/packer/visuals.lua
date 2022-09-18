@@ -121,6 +121,10 @@ M.packer = function(use)
                 },
             })
             vim.keymap.set("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", { silent = true })
+
+            -- https://github.com/kyazdani42/nvim-tree.lua/commit/fb8735e96cecf004fbefb086ce85371d003c5129
+            vim.g.loaded = 1
+            vim.g.loaded_netrwPlugin = 1
         end,
     })
 

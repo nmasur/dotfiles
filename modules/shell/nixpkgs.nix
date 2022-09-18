@@ -53,7 +53,11 @@
 
   };
 
-  # Set system channels, used for nix-shell commands
-  nix = { nixPath = [ "nixpkgs=${pkgs.path}" ]; };
+  nix = {
+
+    # Set channel to flake packages, used for nix-shell commands
+    nixPath = [ "nixpkgs=${pkgs.path}" ];
+
+  };
 
 }

@@ -10,6 +10,8 @@ nixpkgs.lib.nixosSystem {
     {
       networking.hostName = "desktop";
       nixpkgs.overlays = [ nur.overlay ];
+      # Set registry to flake packages, used for nix X commands
+      registry.nixpkgs.flake = nixpkgs;
       gaming.steam = true;
       gaming.leagueoflegends = true;
       gaming.legendary = true;
