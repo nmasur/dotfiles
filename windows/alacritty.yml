@@ -133,7 +133,7 @@ font:
     # The `style` can be specified to pick a specific face.
     #style: Bold Italic
   # Point size
-  size: 18.0
+  size: 16.0
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
@@ -416,7 +416,7 @@ colors:
 shell:
   program: "C:\\Windows\\System32\\wsl.exe"
   args:
-    - "~"
+    - --cd "/home/noah"
 # Startup directory
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
