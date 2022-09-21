@@ -6,6 +6,7 @@
     ./hammerspoon.nix
     ./homebrew.nix
     ./nixpkgs.nix
+    ./ssl.nix
     ./system.nix
     ./tmux.nix
     ./user.nix
