@@ -118,7 +118,7 @@
 
       # Package servers into images with a generator
       packages.x86_64-linux = with inputs; {
-        aws = import ./generators/aws.nix {
+        aws = import ./generators/aws {
           inherit nixpkgs nixos-generators home-manager globals;
           system = "x86_64-linux";
         };
