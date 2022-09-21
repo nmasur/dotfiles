@@ -101,6 +101,7 @@
               vault
               awscli2
               google-cloud-sdk
+              ansible
               kubectl
               kubernetes-helm
               kustomize

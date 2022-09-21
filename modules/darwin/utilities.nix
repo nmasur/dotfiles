@@ -3,7 +3,7 @@
   home-manager.users.${config.user} = {
 
     home.packages = with pkgs; [
-      # visidata # CSV inspector
+      visidata # CSV inspector
       dos2unix # Convert Windows text files
       inetutils # Includes telnet
       youtube-dl # Convert web videos
@@ -11,8 +11,10 @@
       mpd # TUI slideshows
       awscli2
       awslogs
-      kubectl
-      k9s
+      google-cloud-sdk
+      ansible
+      vault
+      consul
       noti # Create notifications programmatically
       ipcalc
       (pkgs.writeScriptBin "ocr"
