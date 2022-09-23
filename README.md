@@ -1,6 +1,17 @@
 This repository contains configuration files for my NixOS, macOS, and WSL
 hosts.
 
+They are organized and managed by [Nix](https://nixos.org), so some of the
+configuration may be difficult to translate to a non-Nix system.
+
+However, some of the configurations are easier to lift directly:
+
+- [Neovim](https://github.com/nmasur/dotfiles/tree/master/modules/neovim/lua)
+- [Fish functions](https://github.com/nmasur/dotfiles/tree/master/modules/shell/fish/functions)
+- [More fish aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/fish/default.nix)
+- [Git aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/git.nix)
+- [Hammerspoon](https://github.com/nmasur/dotfiles/tree/master/modules/darwin/hammerspoon)
+
 ---
 
 # Installation
