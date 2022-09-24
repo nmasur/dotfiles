@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./age.nix
+    ./charm.nix
     ./direnv.nix
     ./fish
     ./fzf.nix
