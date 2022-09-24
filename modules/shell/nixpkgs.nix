@@ -38,7 +38,7 @@
                 set option "--option substitute false"
             end
             git -C ${config.dotfilesPath} add --intent-to-add --all
-            commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}"
+            commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}#${config.networking.hostName}"
             commandline --function execute
           '';
         };
