@@ -50,6 +50,12 @@ nix-shell -p nixFlakes
 sudo nixos-rebuild switch --flake github:nmasur/dotfiles#wsl
 ```
 
+You should also download the
+[FiraCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip)
+font and install it on Windows. Install [Alacritty](https://alacritty.org/) and
+move the `windows/alacritty.yml` file to
+`C:\Users\<user>\AppData\Roaming\alacritty`.
+
 ## macOS
 
 To get started on a bare macOS installation, first install Nix:
