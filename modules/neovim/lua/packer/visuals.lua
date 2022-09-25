@@ -16,7 +16,29 @@ M.packer = function(use)
             vim.keymap.set("v", "<Leader>gd", gitsigns.diffthis)
             vim.keymap.set("n", "<Leader>rgf", gitsigns.reset_buffer)
             vim.keymap.set("v", "<Leader>hs", gitsigns.stage_hunk)
-            vim.keymap.set("v", "<Leader>hs", gitsigns.reset_hunk)
+            vim.keymap.set("v", "<Leader>hr", gitsigns.reset_hunk)
+            vim.keymap.set("v", "<Leader>hr", gitsigns.reset_hunk)
+
+            -- Navigation
+            vim.keymap.set("n", "]g", function()
+                if vim.wo.diff then
+                    return "]g"
+                end
+                vim.schedule(function()
+                    gitsigns.next_hunk()
+                end)
+                return "<Ignore>"
+            end, { expr = true })
+
+            vim.keymap.set("n", "[g", function()
+                if vim.wo.diff then
+                    return "[g"
+                end
+                vim.schedule(function()
+                    gitsigns.prev_hunk()
+                end)
+                return "<Ignore>"
+            end, { expr = true })
         end,
     })
 
