@@ -13,10 +13,12 @@
     PARTITION_PREFIX=""
 
     if [ -z "$DISK" ] || [ -z "$FLAKE" ]; then
-        echo "Missing required parameter."
-        echo "Usage: installer -- <disk> <host>"
-        echo "Example: installer -- nvme0n1 desktop"
-        echo "Flake example: nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop"
+        ${pkgs.gum}/bin/gum style --width 50 --margin "1 2" --padding "2 4" \
+            --foreground "#fb4934" \
+            "Missing required parameter." \
+            "Usage: installer -- <disk> <host>" \
+            "Example: installer -- nvme0n1 desktop" \
+            "Flake example: nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop"
         echo "(exiting)"
         exit 1
     fi
@@ -25,10 +27,14 @@
         PARTITION_PREFIX="p"
     esac
 
-    parted /dev/''${DISK} -- mklabel gpt
-    parted /dev/''${DISK} -- mkpart primary 512MiB 100%
-    parted /dev/''${DISK} -- mkpart ESP fat32 1MiB 512MiB
-    parted /dev/''${DISK} -- set 3 esp on
+    ${pkgs.gum}/bin/gum confirm \
+        "This will ERASE ALL DATA on the disk /dev/''${DISK}. Are you sure you want to continue?" \
+        --default=false
+
+    ${pkgs.parted}/bin/parted /dev/''${DISK} -- mklabel gpt
+    ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart primary 512MiB 100%
+    ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart ESP fat32 1MiB 512MiB
+    ${pkgs.parted}/bin/parted /dev/''${DISK} -- set 3 esp on
     mkfs.ext4 -L nixos /dev/''${DISK}''${PARTITION_PREFIX}1
     mkfs.fat -F 32 -n boot /dev/''${DISK}''${PARTITION_PREFIX}2
 
@@ -36,7 +42,7 @@
     mkdir --parents /mnt/boot
     mount /dev/disk/by-label/boot /mnt/boot
 
-    nixos-install --flake github:nmasur/dotfiles#''${FLAKE}
+    ${pkgs.nixos-install-tools}/bin/nixos-install --flake github:nmasur/dotfiles#''${FLAKE}
   '');
 
 }
