@@ -15,6 +15,7 @@ darwin.lib.darwinSystem {
       gui.enable = true;
       colorscheme = (import ../../modules/colorscheme/gruvbox);
       mailUser = globals.user;
+      networking.hostName = "noah-masur-mac";
       nixpkgs.overlays = [ nur.overlay ];
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;

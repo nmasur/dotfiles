@@ -2,7 +2,8 @@
 
   networking = {
     computerName = "${config.fullName}'\\''s Mac";
-    hostName = "${config.user}-mac";
+    # Adjust if necessary
+    # hostName = "";
   };
 
 }
