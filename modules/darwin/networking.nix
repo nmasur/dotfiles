@@ -1,8 +1,8 @@
-{ ... }: {
+{ config, ... }: {
 
   networking = {
-    computerName = "MacBook"; # Host name
-    hostName = "MacBook";
+    computerName = "${config.fullName}'\\''s Mac";
+    hostName = "${config.user}-mac";
   };
 
 }

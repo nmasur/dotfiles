@@ -141,12 +141,12 @@
 
       echo "Define dock icon function"
       __dock_item() {
-          printf '%s%s%s%s%s' \
-                 '<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
-                 '<key>_CFURLString</key><string>' \
+          printf "%s%s%s%s%s" \
+                 "<dict><key>tile-data</key><dict><key>file-data</key><dict>" \
+                 "<key>_CFURLString</key><string>" \
                  "$1" \
-                 '</string><key>_CFURLStringType</key><integer>0</integer>' \
-                 '</dict></dict></dict>'
+                 "</string><key>_CFURLStringType</key><integer>0</integer>" \
+                 "</dict></dict></dict>"
       }
 
       echo "Choose and order dock icons"
