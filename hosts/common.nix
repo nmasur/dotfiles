@@ -55,31 +55,33 @@
     };
   };
 
-  config = let stateVersion = "22.11";
-  in {
+  config =
+    let stateVersion = "22.11";
+    in
+    {
 
-    # Enable features in Nix commands
-    nix.extraOptions = "experimental-features = nix-command flakes";
+      # Enable features in Nix commands
+      nix.extraOptions = "experimental-features = nix-command flakes";
 
-    # Basic common system packages for all devices
-    environment.systemPackages = with pkgs; [ git vim wget curl ];
+      # Basic common system packages for all devices
+      environment.systemPackages = with pkgs; [ git vim wget curl ];
 
-    # Use the system-level nixpkgs instead of Home Manager's
-    home-manager.useGlobalPkgs = true;
+      # Use the system-level nixpkgs instead of Home Manager's
+      home-manager.useGlobalPkgs = true;
 
-    # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-    # using multiple profiles for one user
-    home-manager.useUserPackages = true;
+      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+      # using multiple profiles for one user
+      home-manager.useUserPackages = true;
 
-    # Allow specified unfree packages (identified elsewhere)
-    # Retrieves package object based on string name
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) config.unfreePackages;
+      # Allow specified unfree packages (identified elsewhere)
+      # Retrieves package object based on string name
+      nixpkgs.config.allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) config.unfreePackages;
 
-    # Pin a state version to prevent warnings
-    home-manager.users.${config.user}.home.stateVersion = stateVersion;
-    home-manager.users.root.home.stateVersion = stateVersion;
+      # Pin a state version to prevent warnings
+      home-manager.users.${config.user}.home.stateVersion = stateVersion;
+      home-manager.users.root.home.stateVersion = stateVersion;
 
-  };
+    };
 
 }
