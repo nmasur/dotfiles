@@ -29,17 +29,19 @@
     ];
     brews = [
       "trash" # Delete files and folders to trash instead of rm
+      "openjdk" # Required by Apache Directory Studio
     ];
     casks = [
-      "firefox" # Firefox packaging on Nix is broken for MacOS
-      "1password" # 1Password packaging on Nix is broken for MacOS
+      "firefox" # Firefox packaging on Nix is broken for macOS
+      "1password" # 1Password packaging on Nix is broken for macOS
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "meetingbar" # Show meetings in menu bar
       "gitify" # Git notifications in menu bar
       "logitech-g-hub" # Mouse and keyboard management
       "mimestream" # Gmail client
-      "obsidian" # Obsidian packaging on Nix is not available for MacOS
+      "obsidian" # Obsidian packaging on Nix is not available for macOS
       "steam" # Not packaged for Nix
+      "apache-directory-studio" # Packaging on Nix is not available for macOS
     ];
   };
 
