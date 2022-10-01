@@ -32,9 +32,15 @@
       flake = false;
     };
 
+    # Used to generate NixOS images for other platforms
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, darwin, wsl, home-manager, nur, wallpapers }:
+  outputs = { self, nixpkgs, ... }@inputs:
 
     let
 
@@ -57,14 +63,14 @@
 
     in {
 
-      nixosConfigurations = {
+      nixosConfigurations = with inputs; {
         desktop = import ./hosts/desktop {
           inherit nixpkgs home-manager nur globals wallpapers;
         };
         wsl = import ./hosts/wsl { inherit nixpkgs wsl home-manager globals; };
       };
 
-      darwinConfigurations = {
+      darwinConfigurations = with inputs; {
         macbook = import ./hosts/macbook {
           inherit nixpkgs darwin home-manager nur globals;
         };
@@ -110,6 +116,14 @@
           };
 
         });
+
+      # Package servers into images with a generator
+      packages.x86_64-linux = with inputs; {
+        aws = import ./generators/aws {
+          inherit nixpkgs nixos-generators home-manager globals;
+          system = "x86_64-linux";
+        };
+      };
 
       # Templates for starting other projects quickly
       templates = rec {
