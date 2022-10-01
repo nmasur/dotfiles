@@ -18,6 +18,7 @@ nixpkgs.lib.nixosSystem {
     }
     ../common.nix
     ../../modules/nixos
+    ../../modules/hardware/server.nix
     ../../modules/services/sshd.nix
   ];
 }
