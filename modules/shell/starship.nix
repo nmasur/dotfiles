@@ -9,6 +9,7 @@
         "$git_branch"
         "$git_commit"
         "$git_status"
+        "$hostname"
         "$cmd_duration"
         "$character"
       ];
@@ -46,6 +47,10 @@
         renamed = "»";
         deleted = "✘";
         style = "red";
+      };
+      hostname = {
+        ssh_only = true;
+        format = "on [$hostname](bold red) ";
       };
       nix_shell = {
         format = "[$symbol $name]($style)";
