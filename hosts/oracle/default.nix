@@ -21,5 +21,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/nixos
     ../../modules/hardware/server.nix
     ../../modules/services/sshd.nix
+    ../../modules/services/calibre.nix
   ];
 }
