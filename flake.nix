@@ -51,7 +51,7 @@
         gitName = fullName;
         gitEmail = "7386960+nmasur@users.noreply.github.com";
         mailServer = "noahmasur.com";
-        dotfilesRepo = "https://github.com/nmasur/dotfiles";
+        dotfilesRepo = "git@github.com:nmasur/dotfiles";
       };
 
       # System types to support.
