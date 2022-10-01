@@ -16,6 +16,7 @@ nixpkgs.lib.nixosSystem {
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
     }
+    ./hardware-configuration.nix
     ../common.nix
     ../../modules/nixos
     ../../modules/hardware/server.nix
