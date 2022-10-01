@@ -25,7 +25,7 @@ installer disk:
 
 ```bash
 lsblk # Choose the disk you want to wipe
-nix-shell -p nixFlakes
+nix-shell -p nixVersions.stable
 nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop
 ```
 
@@ -35,7 +35,7 @@ If you're already running NixOS, you can switch to this configuration with the
 following command:
 
 ```bash
-nix-shell -p nixFlakes
+nix-shell -p nixVersions.stable
 sudo nixos-rebuild switch --flake github:nmasur/dotfiles#desktop
 ```
 
@@ -46,7 +46,7 @@ WSL](https://xeiaso.net/blog/nix-flakes-4-wsl-2022-05-01), you can switch to
 the WSL configuration:
 
 ```
-nix-shell -p nixFlakes
+nix-shell -p nixVersions.stable
 sudo nixos-rebuild switch --flake github:nmasur/dotfiles#wsl
 ```
 
