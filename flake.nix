@@ -68,6 +68,8 @@
           inherit nixpkgs home-manager nur globals wallpapers;
         };
         wsl = import ./hosts/wsl { inherit nixpkgs wsl home-manager globals; };
+        oracle =
+          import ./hosts/oracle { inherit nixpkgs home-manager globals; };
       };
 
       darwinConfigurations = with inputs; {
