@@ -20,6 +20,7 @@ nixpkgs.lib.nixosSystem {
     ../common.nix
     ../../modules/nixos
     ../../modules/hardware/server.nix
+    ../../modules/services/oracle.nix
     ../../modules/services/sshd.nix
     ../../modules/services/calibre.nix
   ];
