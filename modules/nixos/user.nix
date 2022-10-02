@@ -3,7 +3,7 @@
   options = {
 
     passwordHash = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Password created with mkpasswd -m sha-512";
       # Test it by running: mkpasswd -m sha-512 --salt "PZYiMGmJIIHAepTM"
     };
