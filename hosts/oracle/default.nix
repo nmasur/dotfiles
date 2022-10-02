@@ -10,6 +10,7 @@ nixpkgs.lib.nixosSystem {
     {
       networking.hostName = "oracle";
       bookServer = "books.masu.rs";
+      streamServer = "stream.masu.rs";
       gui.enable = false;
       colorscheme = (import ../../modules/colorscheme/gruvbox);
       passwordHash = null;
@@ -23,5 +24,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/oracle.nix
     ../../modules/services/sshd.nix
     ../../modules/services/calibre.nix
+    ../../modules/services/jellyfin.nix
   ];
 }

@@ -28,17 +28,14 @@ in {
       };
     };
 
-    caddyServers.calibre = {
-      listen = [ ":443" ];
-      routes = [{
-        match = [{ host = [ config.bookServer ]; }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:8083"; }];
-          headers.request.add."X-Script-Name" = [ "/calibre-web" ];
-        }];
+    caddyRoutes = [{
+      match = [{ host = [ config.bookServer ]; }];
+      handle = [{
+        handler = "reverse_proxy";
+        upstreams = [{ dial = "localhost:8083"; }];
+        headers.request.add."X-Script-Name" = [ "/calibre-web" ];
       }];
-    };
+    }];
 
     networking.firewall.interfaces.calibre = { allowedTCPPorts = [ 80 443 ]; };
 

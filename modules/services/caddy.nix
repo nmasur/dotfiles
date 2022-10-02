@@ -5,9 +5,9 @@ let
 in {
 
   options = {
-    caddyServers = lib.mkOption {
-      type = lib.types.attrs;
-      description = "Caddy JSON configs for http servers";
+    caddyRoutes = lib.mkOption {
+      type = lib.types.listOf lib.types.attrs;
+      description = "Caddy JSON routes for http servers";
     };
   };
 
@@ -16,8 +16,12 @@ in {
     services.caddy = {
       enable = true;
       adapter = "''"; # Required to enable JSON
-      configFile = pkgs.writeText "Caddyfile"
-        (builtins.toJSON { apps.http.servers = config.caddyServers; });
+      configFile = pkgs.writeText "Caddyfile" (builtins.toJSON {
+        apps.http.servers.main = {
+          listen = [ ":443" ];
+          routes = config.caddyRoutes;
+        };
+      });
 
     };
 
