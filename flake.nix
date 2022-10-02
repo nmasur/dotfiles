@@ -89,6 +89,9 @@
           # Display the readme for this repository
           readme = import ./apps/readme.nix { inherit pkgs; };
 
+          # Load the SSH key for this machine
+          loadkey = import ./apps/loadkey.nix { inherit pkgs; };
+
         });
 
       devShells = forAllSystems (system:
