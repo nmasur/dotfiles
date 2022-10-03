@@ -72,10 +72,11 @@
             };
             mu.enable = false;
             notmuch.enable = false;
-            passwordCommand =
-              "${pkgs.age}/bin/age --decrypt --identity ${config.homePath}/.ssh/id_ed25519 ${
-                builtins.toString ./mailpass.age
-              }";
+            passwordCommand = ''
+              ${pkgs.age}/bin/age --decrypt \
+                --identity ${config.identityFile} \
+                ${builtins.toString ./mailpass.age}
+            '';
             smtp = {
               host = "smtp.purelymail.com";
               port = 465;

@@ -6,6 +6,8 @@ let
 
 in {
 
+  imports = [ ../shell/age.nix ];
+
   options = {
 
     nextcloudServer = lib.mkOption {
@@ -65,20 +67,13 @@ in {
     }];
 
     # Create credentials files
-    system.activationScripts.nextcloud.text =
-      let identityFile = "${config.homePath}/.ssh/id_ed25519";
-      in ''
-        if [ ! -f "${identityFile}" ]; then
-          $DRY_RUN_CMD echo -e \nEnter the seed phrase for your SSH key...\n
-          $DRY_RUN_CMD echo -e \nThen press ^D when complete.\n\n
-          $DRY_RUN_CMD ${pkgs.melt}/bin/melt restore ${identityFile}
-          $DRY_RUN_CMD chown ${config.user}:wheel ${identityFile}*
-          $DRY_RUN_CMD echo -e \n\nContinuing activation.\n\n
-        fi
+    system.activationScripts.nextcloud = {
+      deps = [ "age" ];
+      text = ''
         if [ ! -f "${adminpassFile}" ]; then
           $DRY_RUN_CMD mkdir --parents $VERBOSE_ARG $(dirname ${adminpassFile})
           $DRY_RUN_CMD ${pkgs.age}/bin/age --decrypt \
-            --identity ${identityFile} \
+            --identity ${config.identityFile} \
             --output ${adminpassFile} \
             ${builtins.toString ../../private/nextcloud.age}
           $DRY_RUN_CMD chown nextcloud:nextcloud ${adminpassFile}
@@ -86,12 +81,13 @@ in {
         if [ ! -f "${s3SecretFile}" ]; then
           $DRY_RUN_CMD mkdir --parents $VERBOSE_ARG $(dirname ${s3SecretFile})
           $DRY_RUN_CMD ${pkgs.age}/bin/age --decrypt \
-            --identity ${identityFile} \
+            --identity ${config.identityFile} \
             --output ${s3SecretFile} \
             ${builtins.toString ../../private/nextcloud-s3.age}
           $DRY_RUN_CMD chown nextcloud:nextcloud ${s3SecretFile}
         fi
       '';
+    };
 
   };
 
