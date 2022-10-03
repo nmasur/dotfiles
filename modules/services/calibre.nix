@@ -37,8 +37,6 @@ in {
       }];
     }];
 
-    networking.firewall.interfaces.calibre = { allowedTCPPorts = [ 80 443 ]; };
-
     # Create directory and set permissions
     system.activationScripts.calibreLibrary.text = ''
       if [ ! -d "${libraryPath}" ]; then

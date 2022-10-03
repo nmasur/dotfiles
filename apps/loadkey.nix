@@ -1,4 +1,4 @@
-{ globals, pkgs, ... }: {
+{ pkgs, ... }: {
 
   type = "app";
 
