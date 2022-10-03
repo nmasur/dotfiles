@@ -75,7 +75,7 @@
             passwordCommand = ''
               ${pkgs.age}/bin/age --decrypt \
                 --identity ${config.identityFile} \
-                ${builtins.toString ./mailpass.age}
+                ${builtins.toString ../../private/mailpass.age}
             '';
             smtp = {
               host = "smtp.purelymail.com";
