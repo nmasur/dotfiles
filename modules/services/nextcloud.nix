@@ -22,6 +22,7 @@ in {
       package = pkgs.nextcloud24; # Required to specify
       https = true;
       hostName = "localhost";
+      maxUploadSize = "50G";
       config = {
         adminpassFile = adminpassFile;
         extraTrustedDomains = [ config.nextcloudServer ];
