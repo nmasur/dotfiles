@@ -1,6 +1,10 @@
 { nixpkgs, home-manager, globals, ... }:
 
 # System configuration for an Oracle free server
+
+# How to install:
+# https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
+
 nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { };
@@ -8,20 +12,29 @@ nixpkgs.lib.nixosSystem {
     (removeAttrs globals [ "mailServer" ])
     home-manager.nixosModules.home-manager
     {
+      gui.enable = false;
+      colorscheme = (import ../../modules/colorscheme/gruvbox);
+
+      # FQDNs for various services
       networking.hostName = "oracle";
       bookServer = "books.masu.rs";
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
-      gui.enable = false;
-      colorscheme = (import ../../modules/colorscheme/gruvbox);
+
+      # Disable passwords, only use SSH key
       passwordHash = null;
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
+
+      # Store Nextcloud data in cloud object storage
       nextcloudS3 = {
         bucket = "noahmasur-nextcloud";
         hostname = "s3.us-west-002.backblazeb2.com";
         key = "0026b0e73b2e2c80000000003";
       };
+
+      # Grant access to Jellyfin directories from nextcloud
+      users.users.nextcloud.extraGroups = [ "jellyfin" ];
     }
     ./hardware-configuration.nix
     ../common.nix
