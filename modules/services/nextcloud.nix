@@ -1,12 +1,10 @@
 { config, pkgs, lib, ... }:
 
-let
-  adminpassFile = "/var/lib/nextcloud/creds";
-  s3SecretFile = "/var/lib/nextcloud/creds-s3";
+let adminpassFile = "/var/lib/nextcloud/creds";
 
 in {
 
-  imports = [ ../shell/age.nix ];
+  imports = [ ./caddy.nix ../shell/age.nix ];
 
   options = {
 
@@ -15,20 +13,6 @@ in {
       description = "Hostname for Nextcloud";
     };
 
-    nextcloudS3 = {
-      bucket = lib.mkOption {
-        type = lib.types.str;
-        description = "S3 bucket name for Nextcloud storage";
-      };
-      hostname = lib.mkOption {
-        type = lib.types.str;
-        description = "S3 endpoint for Nextcloud storage";
-      };
-      key = lib.mkOption {
-        type = lib.types.str;
-        description = "S3 access key for Nextcloud storage";
-      };
-    };
   };
 
   config = {
@@ -41,14 +25,6 @@ in {
       config = {
         adminpassFile = adminpassFile;
         extraTrustedDomains = [ config.nextcloudServer ];
-        objectstore.s3 = {
-          enable = true;
-          bucket = config.nextcloudS3.bucket;
-          hostname = config.nextcloudS3.hostname;
-          key = config.nextcloudS3.key;
-          autocreate = false;
-          secretFile = s3SecretFile;
-        };
       };
     };
 
@@ -77,14 +53,6 @@ in {
             --output ${adminpassFile} \
             ${builtins.toString ../../private/nextcloud.age}
           $DRY_RUN_CMD chown nextcloud:nextcloud ${adminpassFile}
-        fi
-        if [ ! -f "${s3SecretFile}" ]; then
-          $DRY_RUN_CMD mkdir --parents $VERBOSE_ARG $(dirname ${s3SecretFile})
-          $DRY_RUN_CMD ${pkgs.age}/bin/age --decrypt \
-            --identity ${config.identityFile} \
-            --output ${s3SecretFile} \
-            ${builtins.toString ../../private/nextcloud-s3.age}
-          $DRY_RUN_CMD chown nextcloud:nextcloud ${s3SecretFile}
         fi
       '';
     };
