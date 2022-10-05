@@ -25,8 +25,18 @@ in {
         calibreLibrary = libraryPath;
         reverseProxyAuth.enable = false;
         enableBookConversion = true;
+        enableBookUploading = true;
       };
     };
+
+    # Fix: https://github.com/janeczku/calibre-web/issues/2422
+    nixpkgs.overlays = [
+      (final: prev: {
+        calibre-web = prev.calibre-web.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [ ./calibre-web-cloudflare.patch ];
+        });
+      })
+    ];
 
     caddyRoutes = [{
       match = [{ host = [ config.bookServer ]; }];

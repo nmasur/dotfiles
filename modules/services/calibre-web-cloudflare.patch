@@ -1,0 +1,25 @@
+diff --git a/cps/__init__.py b/cps/__init__.py
+index 0b912d23..ad5d1fa9 100644
+--- a/cps/__init__.py
++++ b/cps/__init__.py
+@@ -83,7 +83,6 @@ app.config.update(
+ lm = MyLoginManager()
+ lm.login_view = 'web.login'
+ lm.anonymous_user = ub.Anonymous
+-lm.session_protection = 'strong'
+ 
+ if wtf_present:
+     csrf = CSRFProtect()
+diff --git a/cps/admin.py b/cps/admin.py
+index 1004ee78..e295066e 100644
+--- a/cps/admin.py
++++ b/cps/admin.py
+@@ -98,8 +98,6 @@ def before_request():
+     # make remember me function work
+     if current_user.is_authenticated:
+         confirm_login()
+-    if not ub.check_user_session(current_user.id, flask_session.get('_id')) and 'opds' not in request.path:
+-        logout_user()
+     g.constants = constants
+     g.user = current_user
+     g.allow_registration = config.config_public_reg
