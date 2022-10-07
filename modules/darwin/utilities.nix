@@ -16,7 +16,8 @@
       vault
       consul
       noti # Create notifications programmatically
-      ipcalc
+      ipcalc # Make IP network calculations
+      whois # Lookup IPs
       (pkgs.writeScriptBin "ocr"
         (builtins.readFile ../shell/bash/scripts/ocr.sh))
     ];

@@ -31,6 +31,7 @@ in {
       vimv-rs # Batch rename files
       dig # DNS lookup
       lf # File viewer
+      whois # Lookup IPs
     ];
 
     programs.zoxide.enable = true; # Shortcut jump command
