@@ -26,6 +26,13 @@ nixpkgs.lib.nixosSystem {
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
 
+      # Backup config
+      backupS3 = {
+        endpoint = "s3.us-west-002.backblazeb2.com";
+        bucket = "noahmasur-backup";
+        accessKeyId = "0026b0e73b2e2c80000000004";
+      };
+
       # Grant access to Jellyfin directories from nextcloud
       users.users.nextcloud.extraGroups = [ "jellyfin" ];
     }
