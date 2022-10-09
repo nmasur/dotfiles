@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
+
   adminpassFile = "/var/lib/nextcloud/creds";
   backupS3File = "/var/lib/nextcloud/backup-creds";
 
@@ -147,7 +148,7 @@ in {
       before = [ "litestream.service" ];
       serviceConfig = {
         Type = "oneshot";
-        User = "root";
+        RemainAfterExit = true;
       };
       script = ''
         echo \

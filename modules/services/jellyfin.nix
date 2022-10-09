@@ -20,13 +20,18 @@
     }];
 
     # Create videos directory, allow anyone in Jellyfin group to manage it
-    system.activationScripts.jellyfin = let videosDirectory = "/var/videos";
-    in {
-      text = ''
-        if [ ! -d "${videosDirectory}" ]; then
-          $DRY_RUN_CMD mkdir --parents $VERBOSE_ARG ${videosDirectory}
-          $DRY_RUN_CMD chmod 775 $VERBOSE_ARG ${videosDirectory}
-        fi
+    systemd.services.videos-library = {
+      wantedBy = [ "jellyfin.service" ];
+      requiredBy = [ "jellyfin.service" ];
+      before = [ "jellyfin.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = let videosDirectory = "/var/videos";
+      in ''
+        mkdir --parents --mode 0755 ${videosDirectory}
+        chown jellyfin:jellyfin ${videosDirectory}
       '';
     };
 
