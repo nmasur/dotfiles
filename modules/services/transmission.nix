@@ -60,6 +60,7 @@ in {
       };
       wantedBy = [ "multi-user.target" ];
       script = ''
+        ${pkgs.iproute2}/bin/ip netns exec wg ${pkgs.iproute2}/bin/ip link set dev lo up
         ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr exec:'${pkgs.iproute2}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:10.66.13.200:9091"',nofork
       '';
     };
