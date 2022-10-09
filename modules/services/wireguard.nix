@@ -33,15 +33,15 @@ in {
 
         }];
 
-        # Namespaces
+        # Move to network namespace for isolating programs
         interfaceNamespace = "wg";
-        # socketNamespace = "wg";
 
       };
     };
   };
 
   # Create namespace for Wireguard
+  # This allows us to isolate specific programs to Wireguard
   systemd.services."netns@" = {
     description = "%I network namespace";
     before = [ "network.target" ];
@@ -53,7 +53,7 @@ in {
     };
   };
 
-  # Private key file for wireguard
+  # Create private key file for wireguard
   systemd.services.wireguard-private-key = {
     wantedBy = [ "wireguard-wg0.service" ];
     requiredBy = [ "wireguard-wg0.service" ];

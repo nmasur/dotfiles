@@ -37,7 +37,7 @@ in {
       requires = [ "network-online.target" ];
       after = [ "wireguard-wg0.service" ];
       unitConfig.JoinsNamespaceOf = "netns@wg.service";
-      serviceConfig = { PrivateNetwork = true; };
+      serviceConfig.NetworkNamespacePath = "/var/run/netns/wg";
     };
 
     # Create reverse proxy for web UI
@@ -51,12 +51,10 @@ in {
 
     # Allow inbound connections to reach namespace
     systemd.services.transmission-web-netns = {
-      description = "Forward to transmission in netns";
+      description = "Forward to transmission in wireguard namespace";
       requires = [ "transmission.service" ];
       after = [ "transmission.service" ];
       serviceConfig = {
-        User = "transmission";
-        Group = "transmission";
         Restart = "on-failure";
         TimeoutStopSec = 300;
       };
