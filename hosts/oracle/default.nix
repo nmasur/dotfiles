@@ -20,6 +20,7 @@ nixpkgs.lib.nixosSystem {
       bookServer = "books.masu.rs";
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
+      transmissionServer = "download.masu.rs";
 
       # Disable passwords, only use SSH key
       passwordHash = null;
@@ -44,5 +45,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/calibre.nix
     ../../modules/services/jellyfin.nix
     ../../modules/services/nextcloud.nix
+    ../../modules/services/transmission.nix
   ];
 }
