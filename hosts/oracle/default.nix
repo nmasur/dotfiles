@@ -78,5 +78,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/nextcloud.nix
     ../../modules/services/transmission.nix
     ../../modules/services/metrics.nix
+    ../../modules/gaming/minecraft-server.nix
   ];
 }
