@@ -21,11 +21,16 @@ nixpkgs.lib.nixosSystem {
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
       transmissionServer = "download.masu.rs";
+      metricsServer = "metrics.masu.rs";
 
       # Disable passwords, only use SSH key
       passwordHash = null;
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
+
+      # Password for metrics server
+      metricsPasswordHashed =
+        "$2a$14$rr.lPIF8ktl5bepks1iD3OXu5Se11/uAog01wlFMwgk0MCb1Rm3PG";
 
       # Nextcloud backup config
       backupS3 = {
@@ -77,5 +82,6 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/jellyfin.nix
     ../../modules/services/nextcloud.nix
     ../../modules/services/transmission.nix
+    ../../modules/services/metrics.nix
   ];
 }
