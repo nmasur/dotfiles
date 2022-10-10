@@ -15,6 +15,8 @@ in {
 
   config = let
     namespace = config.networking.wireguard.interfaces.wg0.interfaceNamespace;
+    vpnIp = lib.strings.removeSuffix "/32"
+      (builtins.head config.networking.wireguard.interfaces.wg0.ips);
   in {
 
     # Setup transmission
@@ -28,7 +30,8 @@ in {
         rpc-username = config.user;
         rpc-host-whitelist = config.transmissionServer;
         rpc-host-whitelist-enabled = true;
-        rpc-whitelist-enabled = false;
+        rpc-whitelist = "127.0.0.1,${vpnIp}";
+        rpc-whitelist-enabled = true;
       };
       credentialsFile = credentialsFile;
     };
@@ -63,7 +66,7 @@ in {
       wantedBy = [ "multi-user.target" ];
       script = ''
         ${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.iproute2}/bin/ip link set dev lo up
-        ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr exec:'${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:10.66.13.200:9091"',nofork
+        ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr exec:'${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:${vpnIp}:9091"',nofork
       '';
     };
 
