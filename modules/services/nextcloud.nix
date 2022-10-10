@@ -146,10 +146,7 @@ in {
     systemd.services.litestream-s3 = {
       requiredBy = [ "litestream.service" ];
       before = [ "litestream.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
+      serviceConfig = { Type = "oneshot"; };
       script = ''
         echo \
           LITESTREAM_SECRET_ACCESS_KEY=$(${pkgs.age}/bin/age --decrypt \

@@ -92,6 +92,9 @@
           # Load the SSH key for this machine
           loadkey = import ./apps/loadkey.nix { inherit pkgs; };
 
+          # Connect machine metrics to Netdata Cloud
+          netdata = import ./apps/netdata-cloud.nix { inherit pkgs; };
+
         });
 
       devShells = forAllSystems (system:
