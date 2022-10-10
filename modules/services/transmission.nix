@@ -13,7 +13,9 @@ in {
     };
   };
 
-  config = {
+  config = let
+    namespace = config.networking.wireguard.interfaces.wg0.interfaceNamespace;
+  in {
 
     # Setup transmission
     services.transmission = {
@@ -33,11 +35,11 @@ in {
 
     # Bind transmission to wireguard namespace
     systemd.services.transmission = {
-      bindsTo = [ "netns@wg.service" ];
+      bindsTo = [ "netns@${namespace}.service" ];
       requires = [ "network-online.target" ];
       after = [ "wireguard-wg0.service" ];
-      unitConfig.JoinsNamespaceOf = "netns@wg.service";
-      serviceConfig.NetworkNamespacePath = "/var/run/netns/wg";
+      unitConfig.JoinsNamespaceOf = "netns@${namespace}.service";
+      serviceConfig.NetworkNamespacePath = "/var/run/netns/${namespace}";
     };
 
     # Create reverse proxy for web UI
@@ -60,8 +62,8 @@ in {
       };
       wantedBy = [ "multi-user.target" ];
       script = ''
-        ${pkgs.iproute2}/bin/ip netns exec wg ${pkgs.iproute2}/bin/ip link set dev lo up
-        ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr exec:'${pkgs.iproute2}/bin/ip netns exec wg ${pkgs.socat}/bin/socat STDIO "tcp-connect:10.66.13.200:9091"',nofork
+        ${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.iproute2}/bin/ip link set dev lo up
+        ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr exec:'${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:10.66.13.200:9091"',nofork
       '';
     };
 

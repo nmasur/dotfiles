@@ -1,77 +1,71 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }: {
 
-let privateKeyFile = "/private/wireguard/wg0";
+  options.networking.wireguard = {
 
-in {
+    encryptedPrivateKey = lib.mkOption {
+      type = lib.types.path;
+      description = "Nix path to age-encrypted client private key";
+      default = ../../private/wireguard.age;
+    };
 
-  networking.wireguard = {
-    enable = true;
-    interfaces = {
-      wg0 = {
+  };
 
-        # The local IPs for this machine within the Wireguard network
-        # Any inbound traffic bound for these IPs should be kept on localhost
-        ips = [ "10.66.13.200/32" "fc00:bbbb:bbbb:bb01::3:dc7/128" ];
+  config = {
 
-        # Establishes identity of this machine
-        generatePrivateKeyFile = false;
-        privateKeyFile = privateKeyFile;
+    networking.wireguard = {
+      enable = true;
+      interfaces = {
+        wg0 = {
 
-        peers = [{
+          # Establishes identity of this machine
+          generatePrivateKeyFile = false;
+          privateKeyFile = "/private/wireguard/wg0";
 
-          # Identity of Wireguard target peer (VPN)
-          publicKey = "bOOP5lIjqCdDx5t+mP/kEcSbHS4cZqE0rMlBI178lyY=";
+          # Move to network namespace for isolating programs
+          interfaceNamespace = "wg";
 
-          # Which outgoing IP ranges should be sent through Wireguard
-          allowedIPs = [ "0.0.0.0/0" "::0/0" ];
-
-          # The public internet address of the target peer
-          endpoint = "86.106.143.132:51820";
-
-          # Send heartbeat signal within the network
-          persistentKeepalive = 25;
-
-        }];
-
-        # Move to network namespace for isolating programs
-        interfaceNamespace = "wg";
-
+        };
       };
     };
-  };
 
-  # Create namespace for Wireguard
-  # This allows us to isolate specific programs to Wireguard
-  systemd.services."netns@" = {
-    description = "%I network namespace";
-    before = [ "network.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${pkgs.iproute2}/bin/ip netns add %I";
-      ExecStop = "${pkgs.iproute2}/bin/ip netns del %I";
+    # Create namespace for Wireguard
+    # This allows us to isolate specific programs to Wireguard
+    systemd.services."netns@" = {
+      description = "%I network namespace";
+      before = [ "network.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.iproute2}/bin/ip netns add %I";
+        ExecStop = "${pkgs.iproute2}/bin/ip netns del %I";
+      };
     };
-  };
 
-  # Create private key file for wireguard
-  systemd.services.wireguard-private-key = {
-    wantedBy = [ "wireguard-wg0.service" ];
-    requiredBy = [ "wireguard-wg0.service" ];
-    before = [ "wireguard-wg0.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
+    # Create private key file for wireguard
+    systemd.services.wireguard-private-key = {
+      wantedBy = [ "wireguard-wg0.service" ];
+      requiredBy = [ "wireguard-wg0.service" ];
+      before = [ "wireguard-wg0.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = let
+        encryptedPrivateKey = config.networking.wireguard.encryptedPrivateKey;
+        privateKeyFile =
+          config.networking.wireguard.interfaces.wg0.privateKeyFile;
+      in ''
+        mkdir --parents --mode 0755 ${builtins.dirOf privateKeyFile}
+        if [ ! -f "${privateKeyFile}" ]; then
+          ${pkgs.age}/bin/age --decrypt \
+            --identity ${config.identityFile} \
+            --output ${privateKeyFile} \
+            ${builtins.toString encryptedPrivateKey}
+          chmod 0700 ${privateKeyFile}
+        fi
+      '';
     };
-    script = ''
-      mkdir --parents --mode 0755 ${builtins.dirOf privateKeyFile}
-      if [ ! -f "${privateKeyFile}" ]; then
-        ${pkgs.age}/bin/age --decrypt \
-          --identity ${config.identityFile} \
-          --output ${privateKeyFile} \
-          ${builtins.toString ../../private/wireguard.age}
-        chmod 0700 ${privateKeyFile}
-      fi
-    '';
+
   };
 
 }
