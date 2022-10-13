@@ -25,6 +25,9 @@
 
     users.users.${config.user}.openssh.authorizedKeys.keys =
       [ config.publicKey ];
+
+    # Implement a simple fail2ban service for sshd
+    services.sshguard.enable = true;
   };
 
 }
