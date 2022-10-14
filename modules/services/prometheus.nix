@@ -3,7 +3,6 @@
   options.metricsServer = lib.mkOption {
     type = lib.types.str;
     description = "Hostname of the Grafana server.";
-    default = "grafana.masu.rs";
   };
 
   config = {

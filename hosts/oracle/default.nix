@@ -21,6 +21,7 @@ nixpkgs.lib.nixosSystem {
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
       transmissionServer = "download.masu.rs";
+      metricsServer = "metrics.masu.rs";
 
       # Disable passwords, only use SSH key
       passwordHash = null;
