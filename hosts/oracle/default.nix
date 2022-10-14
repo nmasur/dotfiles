@@ -77,7 +77,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/jellyfin.nix
     ../../modules/services/nextcloud.nix
     ../../modules/services/transmission.nix
-    ../../modules/services/metrics.nix
+    ../../modules/services/prometheus.nix
     ../../modules/gaming/minecraft-server.nix
   ];
 }
