@@ -74,10 +74,7 @@ in {
     systemd.services.transmission-creds = {
       requiredBy = [ "transmission.service" ];
       before = [ "transmission.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
+      serviceConfig = { Type = "oneshot"; };
       script = ''
         if [ ! -f "${credentialsFile}" ]; then
           mkdir --parents ${builtins.dirOf credentialsFile}

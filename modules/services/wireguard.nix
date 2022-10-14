@@ -46,10 +46,7 @@
       wantedBy = [ "wireguard-wg0.service" ];
       requiredBy = [ "wireguard-wg0.service" ];
       before = [ "wireguard-wg0.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
+      serviceConfig = { Type = "oneshot"; };
       script = let
         encryptedPrivateKey = config.networking.wireguard.encryptedPrivateKey;
         privateKeyFile =
