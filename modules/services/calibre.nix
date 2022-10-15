@@ -1,11 +1,4 @@
-{ config, pkgs, lib, ... }:
-
-let
-
-  # Must set group owner to calibre-web
-  libraryPath = "/var/books";
-
-in {
+{ config, pkgs, lib, ... }: {
 
   imports = [ ./caddy.nix ];
 
@@ -22,7 +15,6 @@ in {
       enable = true;
       openFirewall = true;
       options = {
-        calibreLibrary = libraryPath;
         reverseProxyAuth.enable = false;
         enableBookConversion = true;
         enableBookUploading = true;
@@ -46,22 +38,6 @@ in {
         headers.request.add."X-Script-Name" = [ "/calibre-web" ];
       }];
     }];
-
-    # Create directory and set permissions
-    systemd.services.calibre-library = {
-      requiredBy = [ "calibre-web.service" ];
-      before = [ "calibre-web.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-      };
-      script = ''
-        mkdir --parents ${libraryPath}
-        chown -R calibre-web:calibre-web ${libraryPath}
-        chmod 0775 ${libraryPath}
-        chmod -R 0640 ${libraryPath}/*
-      '';
-    };
 
   };
 
