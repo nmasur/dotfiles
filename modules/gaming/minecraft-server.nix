@@ -3,7 +3,7 @@
 let
 
   localPort = 25564;
-  publicPort = 25565;
+  publicPort = 49732;
   rconPort = 25575;
   rconPassword = "thiscanbeanything";
 
