@@ -77,6 +77,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/calibre.nix
     ../../modules/services/jellyfin.nix
     ../../modules/services/nextcloud.nix
+    ../../modules/services/cloudflare.nix
     ../../modules/services/transmission.nix
     ../../modules/services/prometheus.nix
     ../../modules/gaming/minecraft-server.nix

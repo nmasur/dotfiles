@@ -20,20 +20,8 @@
     }];
 
     # Create videos directory, allow anyone in Jellyfin group to manage it
-    systemd.services.videos-library = {
-      wantedBy = [ "jellyfin.service" ];
-      requiredBy = [ "jellyfin.service" ];
-      before = [ "jellyfin.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-      script = let videosDirectory = "/var/videos";
-      in ''
-        mkdir --parents --mode 0755 ${videosDirectory}
-        chown jellyfin:jellyfin ${videosDirectory}
-      '';
-    };
+    systemd.tmpfiles.rules =
+      [ "d /var/lib/jellyfin/library 0775 jellyfin jellyfin" ];
 
   };
 
