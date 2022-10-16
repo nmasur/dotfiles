@@ -60,12 +60,11 @@
       lib.mkForce "0770";
 
     # Allow litestream and nextcloud to share a sqlite database
-    users.users.litestream.extraGroups = [ "nextcloud" "backup" ];
+    users.users.litestream.extraGroups = [ "nextcloud" ];
     users.users.nextcloud.extraGroups = [ "litestream" ];
 
     # Backup sqlite database with litestream
     services.litestream = {
-      enable = true;
       settings = {
         dbs = [{
           path = "${config.services.nextcloud.datadir}/data/nextcloud.db";
@@ -75,14 +74,12 @@
           }];
         }];
       };
-      environmentFile = config.secrets.backup.dest;
     };
 
     # Don't start litestream unless nextcloud is up
     systemd.services.litestream = {
-      after = [ "phpfpm-nextcloud.service" "backup-secret.service" ];
-      requires = [ "phpfpm-nextcloud.service" "backup-secret.service" ];
-      environment.AWS_ACCESS_KEY_ID = config.backupS3.accessKeyId;
+      after = [ "phpfpm-nextcloud.service" ];
+      requires = [ "phpfpm-nextcloud.service" ];
     };
 
   };

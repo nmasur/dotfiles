@@ -32,6 +32,20 @@
       permissions = "0440";
     };
 
+    users.users.litestream.extraGroups = [ "backup" ];
+
+    services.litestream = {
+      enable = true;
+      environmentFile = config.secrets.backup.dest;
+    };
+
+    # Wait for secret to exist
+    systemd.services.litestream = {
+      after = [ "backup-secret.service" ];
+      requires = [ "backup-secret.service" ];
+      environment.AWS_ACCESS_KEY_ID = config.backupS3.accessKeyId;
+    };
+
     # # Backup library to object storage
     # services.restic.backups.calibre = {
     #   user = "calibre-web";
