@@ -60,6 +60,10 @@ in {
     # Open to groups, allowing for backups
     systemd.services.gitea.serviceConfig.StateDirectoryMode =
       lib.mkForce "0770";
+    systemd.tmpfiles.rules = [
+      "d ${giteaPath}/data 0775 gitea gitea"
+      "f ${giteaPath}/data/gitea.db 0660 gitea gitea"
+    ];
 
     # Allow litestream and gitea to share a sqlite database
     users.users.litestream.extraGroups = [ "gitea" ];
