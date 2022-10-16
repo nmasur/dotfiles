@@ -22,6 +22,7 @@ nixpkgs.lib.nixosSystem {
       nextcloudServer = "cloud.masu.rs";
       transmissionServer = "download.masu.rs";
       metricsServer = "metrics.masu.rs";
+      vaultwardenServer = "vault.masu.rs";
 
       # Disable passwords, only use SSH key
       passwordHash = null;
@@ -80,6 +81,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/cloudflare.nix
     ../../modules/services/transmission.nix
     ../../modules/services/prometheus.nix
+    ../../modules/services/vaultwarden.nix
     ../../modules/gaming/minecraft-server.nix
   ];
 }
