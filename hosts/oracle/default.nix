@@ -23,6 +23,7 @@ nixpkgs.lib.nixosSystem {
       transmissionServer = "download.masu.rs";
       metricsServer = "metrics.masu.rs";
       vaultwardenServer = "vault.masu.rs";
+      giteaServer = "git.masu.rs";
 
       # Disable passwords, only use SSH key
       passwordHash = null;
@@ -82,6 +83,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/services/transmission.nix
     ../../modules/services/prometheus.nix
     ../../modules/services/vaultwarden.nix
+    ../../modules/services/gitea.nix
     ../../modules/gaming/minecraft-server.nix
   ];
 }
