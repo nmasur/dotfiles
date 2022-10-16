@@ -1,35 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-let
-
-  adminpassFile = "${config.services.nextcloud.datadir}/creds";
-  backupS3File = "${config.services.nextcloud.datadir}/backup-creds";
-
-in {
-
-  imports = [ ./caddy.nix ../shell/age.nix ];
+  imports = [ ./caddy.nix ./secrets.nix ./backups.nix ];
 
   options = {
 
     nextcloudServer = lib.mkOption {
       type = lib.types.str;
       description = "Hostname for Nextcloud";
-    };
-
-    # Options for backup
-    backupS3 = {
-      endpoint = lib.mkOption {
-        type = lib.types.str;
-        description = "S3 endpoint for backups";
-      };
-      bucket = lib.mkOption {
-        type = lib.types.str;
-        description = "S3 bucket for backups";
-      };
-      accessKeyId = lib.mkOption {
-        type = lib.types.str;
-        description = "S3 access key ID for backups";
-      };
     };
 
   };
@@ -43,7 +20,7 @@ in {
       hostName = "localhost";
       maxUploadSize = "50G";
       config = {
-        adminpassFile = adminpassFile;
+        adminpassFile = config.secrets.nextcloud.dest;
         extraTrustedDomains = [ config.nextcloudServer ];
       };
     };
@@ -54,6 +31,7 @@ in {
       port = 8080;
     }];
 
+    # Point Caddy to Nginx
     caddyRoutes = [{
       match = [{ host = [ config.nextcloudServer ]; }];
       handle = [{
@@ -63,22 +41,16 @@ in {
     }];
 
     # Create credentials file for nextcloud
-    systemd.services.nextcloud-creds = {
+    secrets.nextcloud = {
+      source = ../../private/nextcloud.age;
+      dest = "${config.secretsDirectory}/nextcloud";
+      owner = "nextcloud";
+      group = "nextcloud";
+      permissions = "0440";
+    };
+    systemd.services.nextcloud-secret = {
       requiredBy = [ "nextcloud-setup.service" ];
       before = [ "nextcloud-setup.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-      };
-      script = ''
-        mkdir --parents $(dirname ${adminpassFile})
-        ${pkgs.age}/bin/age --decrypt \
-          --identity ${config.identityFile} \
-          --output ${adminpassFile} \
-          ${builtins.toString ../../private/nextcloud.age}
-        chown nextcloud:nextcloud ${adminpassFile}
-        chmod 0700 ${adminpassFile}
-      '';
     };
 
     ## Backup config
@@ -103,30 +75,14 @@ in {
           }];
         }];
       };
-      environmentFile = backupS3File;
+      environmentFile = config.secrets.backup.dest;
     };
 
     # Don't start litestream unless nextcloud is up
     systemd.services.litestream = {
-      after = [ "phpfpm-nextcloud.service" ];
-      requires = [ "phpfpm-nextcloud.service" ];
-      environment.LITESTREAM_ACCESS_KEY_ID = config.backupS3.accessKeyId;
-    };
-
-    # Create credentials file for litestream
-    systemd.services.litestream-s3 = {
-      requiredBy = [ "litestream.service" ];
-      before = [ "litestream.service" ];
-      serviceConfig = { Type = "oneshot"; };
-      script = ''
-        echo \
-          LITESTREAM_SECRET_ACCESS_KEY=$(${pkgs.age}/bin/age --decrypt \
-            --identity ${config.identityFile} \
-            ${builtins.toString ../../private/backup.age} \
-          ) > ${backupS3File}
-        chown litestream:litestream ${backupS3File}
-        chmod 0700 ${backupS3File}
-      '';
+      after = [ "phpfpm-nextcloud.service" "backup-secret.service" ];
+      requires = [ "phpfpm-nextcloud.service" "backup-secret.service" ];
+      environment.AWS_ACCESS_KEY_ID = config.backupS3.accessKeyId;
     };
 
   };

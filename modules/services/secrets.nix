@@ -13,11 +13,11 @@
       default = "/etc/ssh/ssh_host_ed25519_key";
     };
 
-    # secretsDirectory = lib.mkOption {
-    #   type = lib.types.str;
-    #   description = "Default path to place secrets.";
-    #   default = "/var/lib/private";
-    # };
+    secretsDirectory = lib.mkOption {
+      type = lib.types.str;
+      description = "Default path to place secrets.";
+      default = "/var/private";
+    };
 
     secrets = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule {
@@ -57,7 +57,7 @@
 
     # Create a default directory to place secrets
 
-    # systemd.tmpfiles.rules = [ "d ${config.secretsDirectory} 0750 root wheel" ];
+    systemd.tmpfiles.rules = [ "d ${config.secretsDirectory} 0755 root wheel" ];
 
     # Declare oneshot service to decrypt secret using SSH host key
     # - Requires that the secret is already encrypted for the host

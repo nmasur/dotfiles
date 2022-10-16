@@ -1,14 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  options.networking.wireguard = {
-
-    encryptedPrivateKey = lib.mkOption {
-      type = lib.types.path;
-      description = "Nix path to age-encrypted client private key";
-      default = ../../private/wireguard.age;
-    };
-
-  };
+  imports = [ ./secrets.nix ];
 
   config = {
 
@@ -19,7 +11,7 @@
 
           # Establishes identity of this machine
           generatePrivateKeyFile = false;
-          privateKeyFile = "/private/wireguard/wg0";
+          privateKeyFile = config.secrets.wireguard.dest;
 
           # Move to network namespace for isolating programs
           interfaceNamespace = "wg";
@@ -42,25 +34,9 @@
     };
 
     # Create private key file for wireguard
-    systemd.services.wireguard-private-key = {
-      wantedBy = [ "wireguard-wg0.service" ];
-      requiredBy = [ "wireguard-wg0.service" ];
-      before = [ "wireguard-wg0.service" ];
-      serviceConfig = { Type = "oneshot"; };
-      script = let
-        encryptedPrivateKey = config.networking.wireguard.encryptedPrivateKey;
-        privateKeyFile =
-          config.networking.wireguard.interfaces.wg0.privateKeyFile;
-      in ''
-        mkdir --parents --mode 0755 ${builtins.dirOf privateKeyFile}
-        if [ ! -f "${privateKeyFile}" ]; then
-          ${pkgs.age}/bin/age --decrypt \
-            --identity ${config.identityFile} \
-            --output ${privateKeyFile} \
-            ${builtins.toString encryptedPrivateKey}
-          chmod 0700 ${privateKeyFile}
-        fi
-      '';
+    secrets.wireguard = {
+      source = ../../private/wireguard.age;
+      dest = "${config.secretsDirectory}/wireguard";
     };
 
   };

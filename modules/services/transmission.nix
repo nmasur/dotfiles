@@ -69,7 +69,7 @@
     # Create credentials file for transmission
     secrets.transmission = {
       source = ../../private/transmission.json.age;
-      dest = "/var/lib/private/transmission.json";
+      dest = "${config.secretsDirectory}/transmission.json";
       owner = "transmission";
       group = "transmission";
     };
