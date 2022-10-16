@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }: {
 
+  imports = [ ./secrets.nix ];
+
   options = {
 
     backupS3 = {
