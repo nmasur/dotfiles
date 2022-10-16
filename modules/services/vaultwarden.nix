@@ -66,7 +66,7 @@ in {
       "f ${vaultwardenPath}/db.sqlite3-wal 0660 vaultwarden vaultwarden"
     ];
 
-    # Allow litestream and nextcloud to share a sqlite database
+    # Allow litestream and vaultwarden to share a sqlite database
     users.users.litestream.extraGroups = [ "vaultwarden" ];
     users.users.vaultwarden.extraGroups = [ "litestream" ];
 
