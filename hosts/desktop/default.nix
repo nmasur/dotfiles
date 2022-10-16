@@ -12,6 +12,7 @@ nixpkgs.lib.nixosSystem {
       nixpkgs.overlays = [ nur.overlay ];
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
+      identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gaming.steam = true;
       gaming.leagueoflegends = true;
       gaming.legendary = true;
