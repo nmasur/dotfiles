@@ -1,10 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-let credentialsFile = "/var/lib/private/transmission.json";
-
-in {
-
-  imports = [ ./wireguard.nix ];
+  imports = [ ./wireguard.nix ./secrets.nix ];
 
   options = {
     transmissionServer = lib.mkOption {
@@ -33,14 +29,14 @@ in {
         rpc-whitelist = "127.0.0.1,${vpnIp}";
         rpc-whitelist-enabled = true;
       };
-      credentialsFile = credentialsFile;
+      credentialsFile = config.secrets.transmission.dest;
     };
 
     # Bind transmission to wireguard namespace
     systemd.services.transmission = {
       bindsTo = [ "netns@${namespace}.service" ];
-      requires = [ "network-online.target" ];
-      after = [ "wireguard-wg0.service" ];
+      requires = [ "network-online.target" "transmission-secret.service" ];
+      after = [ "wireguard-wg0.service" "transmission-secret.service" ];
       unitConfig.JoinsNamespaceOf = "netns@${namespace}.service";
       serviceConfig.NetworkNamespacePath = "/var/run/netns/${namespace}";
     };
@@ -71,21 +67,11 @@ in {
     };
 
     # Create credentials file for transmission
-    systemd.services.transmission-creds = {
-      requiredBy = [ "transmission.service" ];
-      before = [ "transmission.service" ];
-      serviceConfig = { Type = "oneshot"; };
-      script = ''
-        if [ ! -f "${credentialsFile}" ]; then
-          mkdir --parents ${builtins.dirOf credentialsFile}
-          ${pkgs.age}/bin/age --decrypt \
-            --identity ${config.identityFile} \
-            --output ${credentialsFile} \
-            ${builtins.toString ../../private/transmission.json.age}
-          chown transmission:transmission ${credentialsFile}
-          chmod 0700 ${credentialsFile}
-        fi
-      '';
+    secrets.transmission = {
+      source = ../../private/transmission.json.age;
+      dest = "/var/lib/private/transmission.json";
+      owner = "transmission";
+      group = "transmission";
     };
 
   };

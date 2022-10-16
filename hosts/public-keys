@@ -1,0 +1,4 @@
+# Scan hosts: ssh-keyscan -t ed25519 <hostnames>
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s noah
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHVknmPi7sG6ES0G0jcsvebzKGWWaMfJTYgvOue6EULI oracle.masu.rs
