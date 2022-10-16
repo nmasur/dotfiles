@@ -101,7 +101,6 @@ in {
       OnCalendar = "*-*-* *:*:0/20"; # Every 20 seconds
       Unit = "stop-minecraft.service";
     };
-    wantedBy = [ "timers.target" ];
   };
 
   # If no players are connected, then stop services and prepare to resume again
