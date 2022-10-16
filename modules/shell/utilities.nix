@@ -32,6 +32,7 @@ in {
       dig # DNS lookup
       lf # File viewer
       whois # Lookup IPs
+      age # Encryption
     ];
 
     programs.zoxide.enable = true; # Shortcut jump command
