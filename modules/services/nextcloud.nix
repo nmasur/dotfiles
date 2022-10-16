@@ -60,7 +60,7 @@
       lib.mkForce "0770";
 
     # Allow litestream and nextcloud to share a sqlite database
-    users.users.litestream.extraGroups = [ "nextcloud" ];
+    users.users.litestream.extraGroups = [ "nextcloud" "backup" ];
     users.users.nextcloud.extraGroups = [ "litestream" ];
 
     # Backup sqlite database with litestream

@@ -23,9 +23,13 @@
 
   config = {
 
+    users.groups.backup = { };
+
     secrets.backup = {
       source = ../../private/backup.age;
       dest = "${config.secretsDirectory}/backup";
+      group = "backup";
+      permissions = "0440";
     };
 
     # # Backup library to object storage

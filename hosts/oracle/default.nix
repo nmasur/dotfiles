@@ -32,7 +32,7 @@ nixpkgs.lib.nixosSystem {
       backupS3 = {
         endpoint = "s3.us-west-002.backblazeb2.com";
         bucket = "noahmasur-backup";
-        accessKeyId = "0026b0e73b2e2c80000000004";
+        accessKeyId = "0026b0e73b2e2c80000000005";
       };
 
       # Grant access to Jellyfin directories from Nextcloud
