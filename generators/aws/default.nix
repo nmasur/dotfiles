@@ -21,9 +21,9 @@ nixos-generators.nixosGenerate {
       # AWS settings require this
       permitRootLogin = "prohibit-password";
     }
-    ../hosts/common.nix
-    ../modules/nixos
-    ../modules/services/sshd.nix
+    ../../hosts/common.nix
+    ../../modules/nixos
+    ../../modules/services/sshd.nix
   ] ++ [
     # Required to fix diskSize errors during build
     ({ ... }: { amazonImage.sizeMB = 16 * 1024; })
