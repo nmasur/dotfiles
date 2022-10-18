@@ -4,3 +4,5 @@
 **/.direnv/**
 result
 .luarc.json
+private/**
+!private/**.age
