@@ -25,7 +25,8 @@
     nixpkgs.overlays = [
       (final: prev: {
         calibre-web = prev.calibre-web.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [ ./calibre-web-cloudflare.patch ];
+          patches = (old.patches or [ ])
+            ++ [ ../../patches/calibre-web-cloudflare.patch ];
         });
       })
     ];
