@@ -78,6 +78,14 @@
         };
       };
 
+      # Package servers into images with a generator
+      packages.x86_64-linux = with inputs; {
+        aws = import ./hosts/aws {
+          inherit nixpkgs nixos-generators home-manager globals;
+          system = "x86_64-linux";
+        };
+      };
+
       apps = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
         in rec {
@@ -131,14 +139,6 @@
           };
 
         });
-
-      # Package servers into images with a generator
-      packages.x86_64-linux = with inputs; {
-        aws = import ./generators/aws {
-          inherit nixpkgs nixos-generators home-manager globals;
-          system = "x86_64-linux";
-        };
-      };
 
       # Templates for starting other projects quickly
       templates = rec {
