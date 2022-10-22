@@ -1,8 +1,5 @@
 { config, pkgs, lib, ... }: {
 
-  # Required to place identity file on machine
-  imports = [ ../shell/age.nix ];
-
   options = {
     mailUser = lib.mkOption {
       type = lib.types.str;

@@ -83,34 +83,3 @@ vim.g.netrw_banner = 0 -- Remove useless banner
 vim.g.netrw_winsize = 15 -- Explore window takes % of page
 vim.g.netrw_browse_split = 4 -- Open in previous window
 vim.g.netrw_altv = 1 -- Always split left
-
--- VimWiki
-vim.g.vimwiki_list = {
-    {
-        ["path"] = "$NOTES_PATH",
-        ["syntax"] = "markdown",
-        ["index"] = "home",
-        ["ext"] = ".md",
-    },
-}
-vim.g.vimwiki_key_mappings = {
-    ["all_maps"] = 1,
-    ["mouse"] = 1,
-}
-vim.g.vimwiki_auto_chdir = 1 -- Set local dir to Wiki when open
-vim.g.vimwiki_create_link = 0 -- Don't automatically create new links
-vim.g.vimwiki_listsyms = " x" -- Set checkbox symbol progression
-vim.g.vimwiki_table_mappings = 0 -- VimWiki table keybinds interfere with tab completion
-vim.api.nvim_exec(
-    [[
-    au FileType markdown inoremap ;tt <Esc>:AddTag<CR>
-
-    function! PInsert(item)
-        let @z=a:item
-        norm "zpx
-    endfunction
-
-    command! AddTag call fzf#run({'source': 'rg "#[A-Za-z/]+[ |\$]" -o --no-filename --no-line-number | sort | uniq', 'sink': function('PInsert')})
-]],
-    false
-)

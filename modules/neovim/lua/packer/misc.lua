@@ -29,7 +29,37 @@ M.packer = function(use)
     })
 
     -- Markdown renderer / wiki notes
-    use("vimwiki/vimwiki")
+    -- use("vimwiki/vimwiki")
+    use({
+        "jakewvincent/mkdnflow.nvim",
+        config = function()
+            require("mkdnflow").setup({
+                modules = {
+                    bib = false,
+                    conceal = true,
+                    folds = false,
+                },
+                perspective = {
+                    priority = "current",
+                    fallback = "first",
+                    nvim_wd_heel = false, -- Don't change working dir
+                },
+                links = {
+                    style = "markdown",
+                    conceal = true,
+                },
+                wrap = true,
+                to_do = {
+                    symbols = { " ", "-", "x" },
+                },
+            })
+            -- Save when moving to new buffer
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "markdown",
+                command = "set autowriteall",
+            })
+        end,
+    })
 end
 
 return M
