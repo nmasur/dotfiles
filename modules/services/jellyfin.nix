@@ -20,8 +20,10 @@
     }];
 
     # Create videos directory, allow anyone in Jellyfin group to manage it
-    systemd.tmpfiles.rules =
-      [ "d /var/lib/jellyfin/library 0775 jellyfin jellyfin" ];
+    systemd.tmpfiles.rules = [
+      "d /var/lib/jellyfin 0775 jellyfin jellyfin"
+      "d /var/lib/jellyfin/library 0775 jellyfin jellyfin"
+    ];
 
   };
 
