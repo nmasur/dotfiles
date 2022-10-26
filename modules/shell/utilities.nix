@@ -31,7 +31,7 @@ in {
       vimv-rs # Batch rename files
       dig # DNS lookup
       lf # File viewer
-      whois # Lookup IPs
+      # whois # Lookup IPs
       age # Encryption
     ];
 

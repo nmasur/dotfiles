@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p tesseract
+#!/usr/bin/env bash
 
 # Yoinked from https://github.com/JJGO/dotfiles
 # Adapted from https://github.com/sdushantha/bin
@@ -9,13 +8,13 @@ TEXT_FILE="/tmp/ocr.txt"
 IMAGE_FILE="/tmp/ocr.png"
 
 function notify-send() {
-    osascript -e "display notification \"$2\" with title \"OCR\""
+    /usr/bin/osascript -e "display notification \"$2\" with title \"OCR\""
 }
 
 PATH="/usr/local/bin/:$PATH"
 
 # Take screenshot by selecting the area
-screencapture -i "$IMAGE_FILE"
+/usr/sbin/screencapture -i "$IMAGE_FILE"
 
 # Get the exit code of the previous command.
 # So in this case, it is the screenshot command. If it did not exit with an
@@ -44,7 +43,7 @@ fi
 
 # Copy text to clipboard
 # xclip -selection clip < "$TEXT_FILE"
-pbcopy <"$TEXT_FILE"
+/usr/bin/pbcopy <"$TEXT_FILE"
 
 # Send a notification with the text that was grabbed using OCR
 notify-send "ocr" "$(cat $TEXT_FILE)"

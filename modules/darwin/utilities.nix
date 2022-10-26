@@ -1,4 +1,19 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let
+
+  # Quickly package shell scripts with their dependencies
+  # From https://discourse.nixos.org/t/how-to-create-a-script-with-dependencies/7970/6
+  mkScript = { name, file, env ? [ ] }:
+    pkgs.writeScriptBin name ''
+      for i in ${lib.concatStringsSep " " env}; do
+        export PATH="$i/bin:$PATH"
+      done
+
+      exec ${pkgs.bash}/bin/bash ${file} $@
+    '';
+
+in {
 
   home-manager.users.${config.user} = {
 
@@ -17,9 +32,11 @@
       consul
       noti # Create notifications programmatically
       ipcalc # Make IP network calculations
-      whois # Lookup IPs
-      (pkgs.writeScriptBin "ocr"
-        (builtins.readFile ../shell/bash/scripts/ocr.sh))
+      (mkScript {
+        name = "ocr";
+        file = ../shell/bash/scripts/ocr.sh;
+        env = [ tesseract ];
+      })
     ];
 
     programs.fish.shellAbbrs = {
