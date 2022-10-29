@@ -10,6 +10,9 @@
       # Check for other OSes and make them available
       useOSProber = true;
 
+      # Attempt to display GRUB on widescreen monitor
+      gfxmodeEfi = "1920x1080";
+
       # Install GRUB onto the boot disk
       # device = config.fileSystems."/boot".device;
 
