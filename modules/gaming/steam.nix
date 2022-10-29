@@ -4,7 +4,7 @@
 
   config = lib.mkIf config.gaming.steam {
     hardware.steam-hardware.enable = true;
-    unfreePackages = [ "steam" "steam-original" "steamcmd" ];
+    unfreePackages = [ "steam" "steam-original" "steamcmd" "steam-run" ];
     environment.systemPackages = with pkgs; [
 
       steam

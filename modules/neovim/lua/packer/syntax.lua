@@ -8,7 +8,7 @@ M.packer = function(use)
     -- Syntax engine
     use({
         "nvim-treesitter/nvim-treesitter",
-        commit = "989c75046c46d2ed96bb65c5badd6b8f785e7f09",
+        commit = "9ada5f70f98d51e9e3e76018e783b39fd1cd28f7",
         run = ":TSUpdate",
         config = function()
             require("nvim-treesitter.configs").setup({

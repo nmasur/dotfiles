@@ -133,14 +133,14 @@ M.packer = function(use)
                 },
                 -- Format on save
                 on_attach = function(client)
-                    if client.resolved_capabilities.document_formatting then
+                    if client.server_capabilities.document_formatting then
                         local id = vim.api.nvim_create_augroup("LspFormatting", {
                             clear = true,
                         })
                         vim.api.nvim_create_autocmd("BufWritePre", {
                             group = id,
                             pattern = "*",
-                            callback = vim.lsp.buf.formatting_seq_sync,
+                            callback = vim.lsp.buf.format,
                         })
                     end
                 end,
