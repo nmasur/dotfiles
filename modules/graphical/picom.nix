@@ -6,6 +6,7 @@
 
         services.picom = {
           enable = true;
+          backend = "glx";
           settings = {
             blur = false;
             blurExclude = [ ];
