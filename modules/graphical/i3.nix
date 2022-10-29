@@ -9,11 +9,11 @@ let
 
 in {
 
-  config = lib.mkIf config.services.xserver.enable {
+  config = {
 
     services.xserver.windowManager = {
       i3 = {
-        enable = true;
+        enable = config.services.xserver.enable;
         package = pkgs.i3-gaps;
       };
     };
@@ -25,7 +25,7 @@ in {
 
     home-manager.users.${config.user} = {
       xsession.windowManager.i3 = {
-        enable = true;
+        enable = config.services.xserver.enable;
         package = pkgs.i3-gaps;
         config = let
           modifier = "Mod4"; # Super key
@@ -238,7 +238,7 @@ in {
       };
 
       programs.fish.functions = {
-        update-lock-screen = {
+        update-lock-screen = lib.mkIf config.services.xserver.enable {
           description = "Update lockscreen with wallpaper";
           body = lockUpdate;
         };
@@ -247,17 +247,19 @@ in {
       # Update lock screen cache only if cache is empty
       home.activation.updateLockScreenCache =
         let cacheDir = "${config.homePath}/.cache/betterlockscreen/current";
-        in config.home-manager.users.${config.user}.lib.dag.entryAfter
-        [ "writeBoundary" ] ''
-          if [ ! -d ${cacheDir} ] || [ -z "$(ls ${cacheDir})" ]; then
-              $DRY_RUN_CMD ${lockUpdate}
-          fi
-        '';
+        in lib.mkIf config.services.xserver.enable
+        (config.home-manager.users.${config.user}.lib.dag.entryAfter
+          [ "writeBoundary" ] ''
+            if [ ! -d ${cacheDir} ] || [ -z "$(ls ${cacheDir})" ]; then
+                $DRY_RUN_CMD ${lockUpdate}
+            fi
+          '');
 
     };
 
     # Ref: https://github.com/betterlockscreen/betterlockscreen/blob/next/system/betterlockscreen%40.service
     systemd.services.lock = {
+      enable = config.services.xserver.enable;
       description = "Lock the screen on resume from suspend";
       before = [ "sleep.target" "suspend.target" ];
       serviceConfig = {

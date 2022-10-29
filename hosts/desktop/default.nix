@@ -14,7 +14,6 @@ nixpkgs.lib.nixosSystem {
       nix.registry.nixpkgs.flake = nixpkgs;
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gaming.steam = true;
-      gaming.leagueoflegends = true;
       gaming.legendary = true;
       gui = {
         enable = true;

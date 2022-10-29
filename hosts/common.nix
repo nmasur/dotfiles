@@ -23,7 +23,7 @@
     };
     identityFile = lib.mkOption {
       type = lib.types.str;
-      description = "Path to existing identity file.";
+      description = "Path to existing private key file.";
       default = "/etc/ssh/ssh_host_ed25519_key";
     };
     gui = {
