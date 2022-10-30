@@ -79,6 +79,7 @@ M.packer = function(use)
                 return vim.fn.executable(program) == 1
             end
 
+            local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
             require("null-ls").setup({
                 sources = {
                     require("null-ls").builtins.formatting.stylua.with({
@@ -132,15 +133,15 @@ M.packer = function(use)
                     -- require("null-ls").builtins.diagnostics.pylint,
                 },
                 -- Format on save
-                on_attach = function(client)
-                    if client.server_capabilities.document_formatting then
-                        local id = vim.api.nvim_create_augroup("LspFormatting", {
-                            clear = true,
-                        })
+                on_attach = function(client, bufnr)
+                    if client.supports_method("textDocument/formatting") then
+                        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
                         vim.api.nvim_create_autocmd("BufWritePre", {
-                            group = id,
-                            pattern = "*",
-                            callback = vim.lsp.buf.format,
+                            group = augroup,
+                            buffer = bufnr,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = bufnr })
+                            end,
                         })
                     end
                 end,

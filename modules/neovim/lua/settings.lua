@@ -32,8 +32,6 @@ vim.opt.completeopt = {
     "menuone",
     "noselect",
 }
--- Required until 0.6.0: do not source the default filetype.vim
-vim.g.did_load_filetypes = 1
 
 -- Remember last position when reopening file
 vim.api.nvim_exec(
@@ -76,6 +74,13 @@ vim.api.nvim_exec(
 ]],
     false
 )
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*.eml",
+    callback = function()
+        vim.o.wrapmargin = 79 -- Wrap text automatically
+    end,
+})
 
 -- Netrw
 vim.g.netrw_liststyle = 3 -- Change style to 'tree' view

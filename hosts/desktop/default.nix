@@ -33,7 +33,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/graphical
     ../../modules/gaming
     ../../modules/applications
-    ../../modules/mail/himalaya.nix
+    ../../modules/mail/default.nix
     ../../modules/repositories/notes.nix
     ../../modules/services/keybase.nix
     ../../modules/services/gnupg.nix

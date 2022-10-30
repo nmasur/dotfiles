@@ -53,10 +53,12 @@ M.packer = function(use)
                     symbols = { " ", "-", "x" },
                 },
             })
-            -- Save when moving to new buffer
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = "markdown",
-                command = "set autowriteall",
+                callback = function()
+                    vim.o.autowriteall = true -- Save in new buffer
+                    vim.o.wrapmargin = 79 -- Wrap text automatically
+                end,
             })
         end,
     })
