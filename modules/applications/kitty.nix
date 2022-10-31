@@ -65,6 +65,9 @@
           # Window
           window_padding_width = 4;
 
+          tab_bar_edge = "top";
+          tab_bar_style = "slant";
+
           # macos_traditional_fullscreen = true;
         };
       };
