@@ -25,9 +25,10 @@ darwin.lib.darwinSystem {
     }
     ../common.nix
     ../../modules/darwin
+    ../../modules/mail
     ../../modules/applications/alacritty.nix
+    ../../modules/applications/kitty.nix
     ../../modules/applications/discord.nix
-    ../../modules/mail/himalaya.nix
     ../../modules/repositories/notes.nix
     ../../modules/programming/nix.nix
     ../../modules/programming/terraform.nix

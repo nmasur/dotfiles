@@ -56,7 +56,7 @@ function obj:init()
     -- Launcher shortcuts
     self.launcher:bind("ctrl", "space", function() end)
     self.launcher:bind("", "return", function()
-        self:switch("Alacritty.app")
+        self:switch("kitty.app")
     end)
     self.launcher:bind("", "C", function()
         self:switch("Calendar.app")

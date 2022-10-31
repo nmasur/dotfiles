@@ -1,8 +1,9 @@
 { config, pkgs, lib, ... }: {
 
-  users.users."${config.user}" = { # macOS user
+  users.users."${config.user}" = {
+    # macOS user
     home = config.homePath;
-    shell = pkgs.zsh; # Default shell
+    shell = pkgs.fish; # Default shell
   };
 
 }

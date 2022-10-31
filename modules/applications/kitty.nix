@@ -6,7 +6,6 @@
       # programs.rofi.terminal = "${pkgs.kitty}/bin/kitty";
       programs.kitty = {
         enable = true;
-        darwinLaunchOptions = null;
         environment = { };
         extraConfig = "";
         font.size = 14;
@@ -63,12 +62,10 @@
             ${pkgs.neovim}/bin/nvim -c 'setlocal nonumber nolist showtabline=0 foldcolumn=0|Man!' -c "autocmd VimEnter * normal G" -'';
 
           # Window
-          window_padding_width = 4;
+          window_padding_width = 6;
 
           tab_bar_edge = "top";
           tab_bar_style = "slant";
-
-          # macos_traditional_fullscreen = true;
         };
       };
     };
