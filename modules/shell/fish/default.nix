@@ -7,10 +7,11 @@
   home-manager.users.${config.user} = {
 
     # Packages used in abbreviations and aliases
-    home.packages = with pkgs; [ curl ];
+    home.packages = with pkgs; [ curl exa ];
 
     programs.fish = {
       enable = true;
+      shellAliases = { ls = "exa"; };
       functions = {
         commandline-git-commits = {
           description = "Insert commit into commandline";
@@ -41,7 +42,6 @@
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
-        ls = { body = "${pkgs.exa}/bin/exa $argv"; };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";
