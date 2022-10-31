@@ -33,6 +33,7 @@
           settings = {
             "browser.aboutConfig.showWarning" = false;
             "browser.warnOnQuit" = false;
+            "browser.quitShortcut.disabled" = true;
             "browser.theme.dark-private-windows" = true;
             "browser.toolbars.bookmarks.visibility" = "newtab";
             "browser.startup.page" = 3; # Restore previous session
