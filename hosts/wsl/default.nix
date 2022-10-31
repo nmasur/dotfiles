@@ -1,4 +1,6 @@
-{ nixpkgs, wsl, home-manager, globals, ... }:
+{ inputs, globals, ... }:
+
+with inputs;
 
 # System configuration for WSL
 nixpkgs.lib.nixosSystem {

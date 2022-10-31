@@ -61,27 +61,31 @@
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-    in {
+    in rec {
 
-      nixosConfigurations = with inputs; {
-        desktop = import ./hosts/desktop {
-          inherit nixpkgs home-manager nur globals wallpapers;
-        };
-        wsl = import ./hosts/wsl { inherit nixpkgs wsl home-manager globals; };
-        oracle =
-          import ./hosts/oracle { inherit nixpkgs home-manager globals; };
+      nixosConfigurations = {
+        desktop = import ./hosts/desktop { inherit inputs globals; };
+        wsl = import ./hosts/wsl { inherit inputs globals; };
+        oracle = import ./hosts/oracle { inherit inputs globals; };
       };
 
-      darwinConfigurations = with inputs; {
-        macbook = import ./hosts/macbook {
-          inherit nixpkgs darwin home-manager nur globals;
-        };
+      darwinConfigurations = {
+        macbook = import ./hosts/macbook { inherit inputs globals; };
+      };
+
+      # For quickly applying local settings with:
+      # home-manager switch --flake .#desktop
+      homeConfigurations = {
+        desktop =
+          nixosConfigurations.desktop.config.home-manager.users.${globals.user}.home;
+        macbook =
+          darwinConfigurations.macbook.config.home-manager.users."Noah.Masur".home;
       };
 
       # Package servers into images with a generator
       packages.x86_64-linux = with inputs; {
         aws = import ./hosts/aws {
-          inherit nixpkgs nixos-generators home-manager globals;
+          inherit inputs globals;
           system = "x86_64-linux";
         };
       };

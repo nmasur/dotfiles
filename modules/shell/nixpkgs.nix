@@ -12,6 +12,7 @@
         nixh = "man home-configuration.nix";
         nr = "rebuild-nixos";
         nro = "rebuild-nixos offline";
+        hm = "rebuild-home";
       };
       functions = {
         nix-shell-run = {
@@ -40,6 +41,13 @@
             end
             git -C ${config.dotfilesPath} add --intent-to-add --all
             commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}#${config.networking.hostName}"
+            commandline --function execute
+          '';
+        };
+        rebuild-home = {
+          body = ''
+            git -C ${config.dotfilesPath} add --intent-to-add --all
+            commandline -r "${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName}";
             commandline --function execute
           '';
         };

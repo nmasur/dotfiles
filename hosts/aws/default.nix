@@ -1,4 +1,6 @@
-{ nixpkgs, system, nixos-generators, home-manager, globals, ... }:
+{ inputs, globals, ... }:
+
+with inputs;
 
 nixos-generators.nixosGenerate {
   inherit system;

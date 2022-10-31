@@ -1,4 +1,6 @@
-{ nixpkgs, darwin, home-manager, nur, globals, ... }:
+{ inputs, globals, ... }:
+
+with inputs;
 
 # System configuration for my work MacBook
 darwin.lib.darwinSystem {

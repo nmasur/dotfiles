@@ -1,4 +1,6 @@
-{ nixpkgs, home-manager, globals, ... }:
+{ inputs, globals, ... }:
+
+with inputs;
 
 # System configuration for an Oracle free server
 

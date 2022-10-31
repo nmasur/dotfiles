@@ -18,6 +18,13 @@
             commandline --function execute
           '';
         };
+        rebuild-home = lib.mkForce {
+          body = ''
+            git -C ${config.dotfilesPath} add --intent-to-add --all
+            commandline -r ${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName}";
+            commandline --function execute
+          '';
+        };
       };
     };
 

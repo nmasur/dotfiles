@@ -1,4 +1,6 @@
-{ nixpkgs, home-manager, nur, globals, wallpapers, ... }:
+{ inputs, globals, ... }:
+
+with inputs;
 
 # System configuration for my desktop
 nixpkgs.lib.nixosSystem {
