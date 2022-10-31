@@ -27,6 +27,11 @@ in {
           # Make the login screen dark
           greeters.gtk.theme = gtkTheme;
 
+          # Show default user
+          extraSeatDefaults = ''
+            greeter-hide-users = false
+          '';
+
         };
       };
 
