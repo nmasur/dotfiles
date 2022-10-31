@@ -65,7 +65,10 @@
   in {
 
     # Enable features in Nix commands
-    nix.extraOptions = "experimental-features = nix-command flakes";
+    nix.extraOptions = ''
+      experimental-features = nix-command flakes
+      warn-dirty = false
+    '';
 
     # Basic common system packages for all devices
     environment.systemPackages = with pkgs; [ git vim wget curl ];
