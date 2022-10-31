@@ -34,8 +34,8 @@
               chars = "\\x11F";
             }
             {
-              key = "K";
-              mods = "Control";
+              key = "H";
+              mods = "Control|Shift";
               mode = "~Vi";
               action = "ToggleViMode";
             }

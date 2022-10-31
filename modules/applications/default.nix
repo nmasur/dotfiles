@@ -6,6 +6,7 @@
     ./calibre.nix
     ./discord.nix
     ./firefox.nix
+    ./kitty.nix
     ./media.nix
     ./obsidian.nix
     ./qbittorrent.nix

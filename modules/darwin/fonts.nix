@@ -9,6 +9,11 @@
       font.normal.family = "FiraCode Nerd Font Mono";
     };
 
+    programs.kitty.font = {
+      package = pkgs.nerdfonts;
+      name = "FiraCode";
+    };
+
   };
 
 }

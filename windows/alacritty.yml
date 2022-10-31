@@ -723,7 +723,7 @@ key_bindings:
   - { key: L, mods: Control|Shift, chars: "\x1F" }
   # Used for searching nixpkgs in fish_user_key_bindings
   - { key: N, mods: Control|Shift, chars: "\x11F" }
-  - { key: K, mods: Control, mode: ~Vi, action: ToggleViMode }
+  - { key: H, mods: Control|Shift, mode: ~Vi, action: ToggleViMode }
   - { key: Return, mode: Vi, action: ToggleViMode }
   # Used to enable $ keybind in Vi mode
   - { key: 5, mods: Shift, mode: Vi|~Search, action: Last }
