@@ -33,8 +33,11 @@ in {
   config = lib.mkIf config.gui.enable {
     sound.enable = true;
 
-    # Enable PulseAudio
-    hardware.pulseaudio.enable = true;
+    # Enable PipeWire
+    services.pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
 
     # These aren't necessary, but helpful for the user
     environment.systemPackages = with pkgs; [
