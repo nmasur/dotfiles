@@ -720,7 +720,7 @@ shell:
 # in the order they were defined in.
 key_bindings:
   # Used for word completion in fish_user_key_bindings
-  - { key: L, mods: Control|Shift, chars: "\x1F" }
+  - { key: Return, mods: Shift, chars: "\x1F" }
   # Used for searching nixpkgs in fish_user_key_bindings
   - { key: N, mods: Control|Shift, chars: "\x11F" }
   - { key: H, mods: Control|Shift, mode: ~Vi, action: ToggleViMode }

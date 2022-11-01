@@ -9,7 +9,10 @@
         environment = { };
         extraConfig = "";
         font.size = 14;
-        keybindings = { };
+        keybindings = {
+          "shift+enter" = "send_text all \\x1F";
+          "super+f" = "toggle_fullscreen";
+        };
         settings = {
 
           # Colors (adapted from: https://github.com/kdrag0n/base16-kitty/blob/master/templates/default-256.mustache)
