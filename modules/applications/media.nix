@@ -5,6 +5,7 @@
       mpv # Video viewer
       sxiv # Image viewer
       mupdf # PDF viewer
+      zathura # PDF viewer
     ];
   };
 

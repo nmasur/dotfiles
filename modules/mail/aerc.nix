@@ -51,7 +51,7 @@
 
             "<Enter>" = ":view<Enter>";
             d = ":prompt 'Really delete this message?' 'delete-message'<Enter>";
-            D = ":delete<Enter>";
+            D = ":move Trash<Enter>";
             A = ":archive flat<Enter>";
 
             C = ":compose<Enter>";
@@ -81,7 +81,7 @@
             O = ":open<Enter>";
             S = ":save<space>";
             "|" = ":pipe<space>";
-            D = ":delete<Enter>";
+            D = ":move Trash<Enter>";
             A = ":archive flat<Enter>";
 
             "<C-l>" = ":open-link <space>";
@@ -167,13 +167,14 @@
             "message/rfc822" =
               "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/share/aerc/filters/colorize";
             "application/x-sh" = "${pkgs.bat}/bin/bat -fP -l sh";
+            "application/pdf" = "${pkgs.zathura}/bin/zathura -";
           };
         };
       };
       accounts.email.accounts.home.aerc = {
         enable = true;
         extraAccounts = {
-          check-mail = "1m";
+          check-mail = "5m";
           check-mail-cmd = "${pkgs.isync}/bin/mbsync -a";
         };
       };
