@@ -55,7 +55,8 @@ in {
         # Make sure that Volnoti actually starts (home-manager doesn't start
         # user daemon's automatically)
         startup = [{
-          command = "systemctl --user restart volnoti";
+          command =
+            "systemctl --user restart volnoti --alpha 0.15 --radius 40 --timeout 0.2";
           always = true;
           notification = false;
         }];
