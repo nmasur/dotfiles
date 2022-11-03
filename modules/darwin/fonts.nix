@@ -3,15 +3,13 @@
   home-manager.users.${config.user} = {
 
     home.packages = with pkgs;
-      [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+      [ (nerdfonts.override { fonts = [ "Victor Mono" ]; }) ];
 
-    programs.alacritty.settings = {
-      font.normal.family = "FiraCode Nerd Font Mono";
-    };
+    programs.alacritty.settings = { font.normal.family = "Victor Mono"; };
 
     programs.kitty.font = {
       package = pkgs.nerdfonts;
-      name = "FiraCode";
+      name = "Victor Mono";
     };
 
   };

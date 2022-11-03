@@ -1,6 +1,8 @@
-{ ... }: {
+{ pkgs, ... }: {
 
   services.nix-daemon.enable = true;
+
+  environment.shells = [ pkgs.fish ];
 
   security.pam.enableSudoTouchIdAuth = true;
 
