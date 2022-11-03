@@ -14,7 +14,7 @@ darwin.lib.darwinSystem {
     })
     home-manager.darwinModules.home-manager
     {
-      identityFile = "/home/${globals.user}/.ssh/id_ed25519";
+      identityFile = "/Users/Noah.Masur/.ssh/id_ed25519";
       gui.enable = true;
       colorscheme = (import ../../modules/colorscheme/gruvbox);
       mailUser = globals.user;
