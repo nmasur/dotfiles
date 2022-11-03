@@ -6,3 +6,4 @@ result
 .luarc.json
 private/**
 !private/**.age
+!private/**.sha512

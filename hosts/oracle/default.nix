@@ -28,7 +28,6 @@ nixpkgs.lib.nixosSystem {
       giteaServer = "git.masu.rs";
 
       # Disable passwords, only use SSH key
-      passwordHash = null;
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
 
