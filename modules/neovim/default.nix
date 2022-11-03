@@ -15,7 +15,12 @@
         source = ./lua;
         recursive = true; # Allows adding more files
       };
-      "nvim/lua/packer/colors.lua".source = config.colorscheme.neovimConfig;
+      "nvim/lua/packer/colors.lua".source = config.theme.colors.neovimConfig;
+      "nvim/lua/background.lua".text = ''
+        vim.cmd("set background=${
+          if config.theme.dark == true then "dark" else "light"
+        }")
+      '';
     };
 
     programs.git.extraConfig.core.editor = "nvim";

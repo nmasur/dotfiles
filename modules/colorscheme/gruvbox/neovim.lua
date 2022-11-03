@@ -6,6 +6,7 @@ M.packer = function(use)
         config = function()
             vim.g.gruvbox_italicize_strings = 0
             vim.cmd("colorscheme gruvbox8")
+            vim.cmd("set background=dark")
         end,
     })
 end

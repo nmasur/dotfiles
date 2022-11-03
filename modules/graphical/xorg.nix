@@ -1,15 +1,25 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-let
-
-  gtkTheme = {
-    name = config.gui.gtk.theme.name;
-    package = pkgs.${config.gui.gtk.theme.package};
+  options = {
+    gtk.theme = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        description = "Theme name for GTK applications";
+      };
+      package = lib.mkOption {
+        type = lib.types.str;
+        description = "Theme package name for GTK applications";
+        default = "gnome-themes-extra";
+      };
+    };
   };
 
-in {
-
-  config = lib.mkIf config.gui.enable {
+  config = let
+    gtkTheme = {
+      name = config.gtk.theme.name;
+      package = pkgs."${config.gtk.theme.package}";
+    };
+  in lib.mkIf config.gui.enable {
 
     # Enable the X11 windowing system.
     services.xserver = {
@@ -22,7 +32,7 @@ in {
       displayManager = {
         lightdm = {
           enable = config.services.xserver.enable;
-          background = config.gui.wallpaper;
+          background = config.wallpaper;
 
           # Make the login screen dark
           greeters.gtk.theme = gtkTheme;
@@ -46,7 +56,7 @@ in {
     services.dbus.packages = [ pkgs.dconf ];
     programs.dconf.enable = true;
 
-    environment.sessionVariables = { GTK_THEME = config.gui.gtk.theme.name; };
+    environment.sessionVariables = { GTK_THEME = config.gtk.theme.name; };
 
     home-manager.users.${config.user} = {
 
@@ -55,7 +65,10 @@ in {
         pbpaste = "xclip -selection clipboard -out";
       };
 
-      gtk = let gtkExtraConfig = { gtk-application-prefer-dark-theme = true; };
+      gtk = let
+        gtkExtraConfig = {
+          gtk-application-prefer-dark-theme = config.theme.dark;
+        };
       in {
         enable = true;
         theme = gtkTheme;

@@ -15,15 +15,13 @@ nixpkgs.lib.nixosSystem {
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
-      gaming.steam = true;
-      gaming.legendary = true;
-      gui = {
-        enable = true;
-        compositor.enable = true;
-        wallpaper = "${wallpapers}/gruvbox/road.jpg";
-        gtk.theme = { name = "Adwaita-dark"; };
+      gui.enable = true;
+      theme = {
+        colors = (import ../../modules/colorscheme/gruvbox).dark;
+        dark = true;
       };
-      colorscheme = (import ../../modules/colorscheme/gruvbox);
+      wallpaper = "${wallpapers}/gruvbox/road.jpg";
+      gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
       passwordHash =
         "$6$PZYiMGmJIIHAepTM$Wx5EqTQ5GApzXx58nvi8azh16pdxrN6Qrv1wunDlzveOgawitWzcIxuj76X9V868fsPi/NOIEO8yVXqwzS9UF.";
     }
@@ -33,14 +31,17 @@ nixpkgs.lib.nixosSystem {
     ../../modules/hardware
     ../../modules/nixos
     ../../modules/graphical
-    ../../modules/gaming
-    ../../modules/applications
+    ../../modules/gaming/steam.nix
+    ../../modules/gaming/legendary.nix
+    ../../modules/applications/media.nix
+    ../../modules/applications/firefox.nix
+    ../../modules/applications/kitty.nix
+    ../../modules/applications/discord.nix
+    ../../modules/applications/nautilus.nix
     ../../modules/mail/default.nix
     ../../modules/repositories/notes.nix
     ../../modules/services/keybase.nix
-    ../../modules/services/gnupg.nix
     ../../modules/services/mullvad.nix
     ../../modules/programming/nix.nix
-    ../../modules/programming/haskell.nix
   ];
 }

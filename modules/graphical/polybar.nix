@@ -2,7 +2,7 @@
 
   config = lib.mkIf config.services.xserver.enable {
 
-    gui.toggleBarCommand = "polybar-msg cmd toggle";
+    toggleBarCommand = "polybar-msg cmd toggle";
 
     home-manager.users.${config.user} = {
 
@@ -23,14 +23,14 @@
             # offset-y = -5;
             # offset-y = "5%";
             # dpi = 96;
-            background = config.colorscheme.base01;
-            foreground = config.colorscheme.base05;
+            background = config.theme.colors.base01;
+            foreground = config.theme.colors.base05;
             line-size = "3pt";
             border-top-size = 0;
             border-right-size = 0;
             border-left-size = 0;
             border-bottom-size = "4pt";
-            border-color = config.colorscheme.base00;
+            border-color = config.theme.colors.base00;
             padding-left = 2;
             padding-right = 2;
             module-margin = 1;
@@ -58,35 +58,35 @@
             fuzzy-match = true;
             format = "<label-state> <label-mode>";
             label-focused = "%name%";
-            label-focused-foreground = config.colorscheme.base01;
-            label-focused-background = config.colorscheme.base05;
-            label-focused-underline = config.colorscheme.base03;
+            label-focused-foreground = config.theme.colors.base01;
+            label-focused-background = config.theme.colors.base05;
+            label-focused-underline = config.theme.colors.base03;
             label-focused-padding = padding;
             label-unfocused = "%name%";
             label-unfocused-padding = padding;
             label-visible = "%name%";
-            label-visible-underline = config.colorscheme.base01;
+            label-visible-underline = config.theme.colors.base01;
             label-visible-padding = padding;
             label-urgent = "%name%";
-            label-urgent-foreground = config.colorscheme.base00;
-            label-urgent-background = config.colorscheme.base08;
-            label-urgent-underline = config.colorscheme.base0F;
+            label-urgent-foreground = config.theme.colors.base00;
+            label-urgent-background = config.theme.colors.base08;
+            label-urgent-underline = config.theme.colors.base0F;
             label-urgent-padding = padding;
           };
           "module/xworkspaces" = {
             type = "internal/xworkspaces";
             label-active = "%name%";
-            label-active-background = config.colorscheme.base05;
-            label-active-foreground = config.colorscheme.base01;
-            label-active-underline = config.colorscheme.base03;
+            label-active-background = config.theme.colors.base05;
+            label-active-foreground = config.theme.colors.base01;
+            label-active-underline = config.theme.colors.base03;
             label-active-padding = 1;
             label-occupied = "%name%";
             label-occupied-padding = 1;
             label-urgent = "%name%";
-            label-urgent-background = config.colorscheme.base08;
+            label-urgent-background = config.theme.colors.base08;
             label-urgent-padding = 1;
             label-empty = "%name%";
-            label-empty-foreground = config.colorscheme.base06;
+            label-empty-foreground = config.theme.colors.base06;
             label-empty-padding = 1;
           };
           "module/xwindow" = {
@@ -108,10 +108,10 @@
             format-volume = "<ramp-volume> <label-volume>";
             # format-volume-background = colors.background;
             # label-volume-background = colors.background;
-            format-volume-foreground = config.colorscheme.base0B;
+            format-volume-foreground = config.theme.colors.base0B;
             label-volume = "%percentage%%";
             label-muted = "ﱝ ---";
-            label-muted-foreground = config.colorscheme.base03;
+            label-muted-foreground = config.theme.colors.base03;
             ramp-volume-0 = "";
             ramp-volume-1 = "墳";
             ramp-volume-2 = "";
@@ -163,7 +163,7 @@
             date = "%d %b  %l:%M %p";
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = "%date%";
-            label-foreground = config.colorscheme.base0A;
+            label-foreground = config.theme.colors.base0A;
             # format-background = colors.background;
           };
           "settings" = {

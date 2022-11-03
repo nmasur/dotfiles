@@ -3,9 +3,9 @@
   imports =
     [ ../modules/shell ../modules/neovim ../modules/repositories/dotfiles.nix ];
 
-  options = with lib; {
-    user = mkOption {
-      type = types.str;
+  options = rec {
+    user = lib.mkOption {
+      type = lib.types.str;
       description = "Primary user of the system";
     };
     fullName = lib.mkOption {
@@ -27,17 +27,30 @@
       default = "/etc/ssh/ssh_host_ed25519_key";
     };
     gui = {
-      enable = mkEnableOption {
-        description = "Enable graphics";
+      enable = lib.mkEnableOption {
+        description = "Enable graphics.";
         default = false;
       };
     };
-    colorscheme = mkOption {
-      type = types.attrs;
-      description = "Base16 color scheme";
+    theme = {
+      colors = lib.mkOption {
+        type = lib.types.attrs;
+        description = "Base16 color scheme.";
+        default = (import ../modules/colorscheme/gruvbox).dark;
+      };
+      dark = lib.mkOption {
+        type = lib.types.bool;
+        description = "Enable dark mode.";
+        default = true;
+      };
     };
-    homePath = mkOption {
-      type = types.path;
+
+    # colorscheme = lib.mkOption {
+    #   type = types.attrs;
+    #   description = "Base16 color scheme";
+    # };
+    homePath = lib.mkOption {
+      type = lib.types.path;
       description = "Path of user's home directory.";
       default = builtins.toPath (if pkgs.stdenv.isDarwin then
         "/Users/${config.user}"
@@ -45,17 +58,17 @@
         "/home/${config.user}");
     };
 
-    dotfilesPath = mkOption {
-      type = types.path;
+    dotfilesPath = lib.mkOption {
+      type = lib.types.path;
       description = "Path of dotfiles repository.";
       default = config.homePath + "/dev/personal/dotfiles";
     };
-    dotfilesRepo = mkOption {
-      type = types.str;
+    dotfilesRepo = lib.mkOption {
+      type = lib.types.str;
       description = "Link to dotfiles repository.";
     };
-    unfreePackages = mkOption {
-      type = types.listOf types.str;
+    unfreePackages = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
       description = "List of unfree packages to allow.";
       default = [ ];
     };

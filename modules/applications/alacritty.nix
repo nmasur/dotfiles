@@ -54,32 +54,32 @@
           ];
           colors = {
             primary = {
-              background = config.colorscheme.base00;
-              foreground = config.colorscheme.base05;
+              background = config.theme.colors.base00;
+              foreground = config.theme.colors.base05;
             };
             cursor = {
               text = "#1d2021";
-              cursor = config.colorscheme.base05;
+              cursor = config.theme.colors.base05;
             };
             normal = {
               black = "#1d2021";
-              red = config.colorscheme.base08;
-              green = config.colorscheme.base0B;
-              yellow = config.colorscheme.base0A;
-              blue = config.colorscheme.base0D;
-              magenta = config.colorscheme.base0E;
-              cyan = config.colorscheme.base0C;
-              white = config.colorscheme.base05;
+              red = config.theme.colors.base08;
+              green = config.theme.colors.base0B;
+              yellow = config.theme.colors.base0A;
+              blue = config.theme.colors.base0D;
+              magenta = config.theme.colors.base0E;
+              cyan = config.theme.colors.base0C;
+              white = config.theme.colors.base05;
             };
             bright = {
-              black = config.colorscheme.base03;
-              red = config.colorscheme.base09;
-              green = config.colorscheme.base01;
-              yellow = config.colorscheme.base02;
-              blue = config.colorscheme.base04;
-              magenta = config.colorscheme.base06;
-              cyan = config.colorscheme.base0F;
-              white = config.colorscheme.base07;
+              black = config.theme.colors.base03;
+              red = config.theme.colors.base09;
+              green = config.theme.colors.base01;
+              yellow = config.theme.colors.base02;
+              blue = config.theme.colors.base04;
+              magenta = config.theme.colors.base06;
+              cyan = config.theme.colors.base0F;
+              white = config.theme.colors.base07;
             };
           };
           draw_bold_text_with_bright_colors = false;
