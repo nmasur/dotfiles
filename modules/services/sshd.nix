@@ -28,6 +28,9 @@
 
     # Implement a simple fail2ban service for sshd
     services.sshguard.enable = true;
+
+    # Add terminfo for SSH from popular terminal emulators
+    environment.enableAllTerminfo = true;
   };
 
 }
