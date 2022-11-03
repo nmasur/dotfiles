@@ -14,7 +14,7 @@ bind -M insert \cp projects
 bind -M default \cp projects
 bind -M insert \x1F accept-autosuggestion
 bind -M default \x1F accept-autosuggestion
-bind -M insert \cn 'commandline -r "nix run github:NixOS/nixpkgs/nixpkgs-unstable#"'
-bind -M default \cn 'commandline -r "nix run github:NixOS/nixpkgs/nixpkgs-unstable#"'
+bind -M insert \cn 'commandline -r "nix run nixpkgs#"'
+bind -M default \cn 'commandline -r "nix run nixpkgs#"'
 bind -M insert \x11F nix-fzf
 bind -M default \x11F nix-fzf

@@ -19,9 +19,9 @@
           body = ''
             set program $argv[1]
             if test (count $argv) -ge 2
-                commandline -r "nix run github:NixOS/nixpkgs/nixpkgs-unstable#$program -- $argv[2..-1]"
+                commandline -r "nix run nixpkgs#$program -- $argv[2..-1]"
             else
-                commandline -r "nix run github:NixOS/nixpkgs/nixpkgs-unstable#$program"
+                commandline -r "nix run nixpkgs#$program"
             end
             commandline -f execute
           '';
