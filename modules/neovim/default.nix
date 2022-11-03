@@ -5,6 +5,8 @@
     home.packages = with pkgs; [
       neovim
       gcc # for tree-sitter
+      tree-sitter # for tree-sitter-gitignore parser
+      nodejs # for tree-sitter-gitignore parser
       shfmt # used everywhere
       shellcheck # used everywhere
     ];
