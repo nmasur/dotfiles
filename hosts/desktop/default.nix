@@ -30,14 +30,16 @@ nixpkgs.lib.nixosSystem {
     ../../modules/hardware
     ../../modules/nixos
     ../../modules/graphical
-    ../../modules/gaming/steam.nix
-    ../../modules/gaming/legendary.nix
     ../../modules/applications/media.nix
     ../../modules/applications/firefox.nix
     ../../modules/applications/kitty.nix
+    ../../modules/applications/1password.nix
     ../../modules/applications/discord.nix
     ../../modules/applications/nautilus.nix
+    ../../modules/applications/obsidian.nix
     ../../modules/mail/default.nix
+    ../../modules/gaming/steam.nix
+    ../../modules/gaming/legendary.nix
     ../../modules/repositories/notes.nix
     ../../modules/services/keybase.nix
     ../../modules/services/mullvad.nix
