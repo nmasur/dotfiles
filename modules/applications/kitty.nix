@@ -69,6 +69,9 @@
 
           tab_bar_edge = "top";
           tab_bar_style = "slant";
+
+          # Audio
+          enable_audio_bell = false;
         };
       };
     };
