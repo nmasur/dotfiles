@@ -19,9 +19,9 @@
       };
       "nvim/lua/packer/colors.lua".source = config.theme.colors.neovimConfig;
       "nvim/lua/background.lua".text = ''
-        vim.cmd("set background=${
+        vim.o.background = "${
           if config.theme.dark == true then "dark" else "light"
-        }")
+        }"
       '';
     };
 

@@ -13,50 +13,59 @@ let
 
 in {
 
-  home-manager.users.${config.user} = {
+  config = {
 
-    home.packages = with pkgs; [
-      unzip # Extract zips
-      rsync # Copy folders
-      ripgrep # grep
-      bat # cat
-      fd # find
-      sd # sed
-      jq # JSON manipulation
-      tealdeer # Cheatsheets
-      tree # View directory hierarchy
-      htop # Show system processes
-      glow # Pretty markdown previews
-      qrencode # Generate qr codes
-      vimv-rs # Batch rename files
-      dig # DNS lookup
-      lf # File viewer
-      # whois # Lookup IPs
-      age # Encryption
-    ];
+    home-manager.users.${config.user} = {
 
-    programs.zoxide.enable = true; # Shortcut jump command
+      home.packages = with pkgs; [
+        unzip # Extract zips
+        rsync # Copy folders
+        ripgrep # grep
+        fd # find
+        sd # sed
+        jq # JSON manipulation
+        tealdeer # Cheatsheets
+        tree # View directory hierarchy
+        htop # Show system processes
+        glow # Pretty markdown previews
+        qrencode # Generate qr codes
+        vimv-rs # Batch rename files
+        dig # DNS lookup
+        lf # File viewer
+        inetutils # Includes telnet, whois
+        age # Encryption
+      ];
 
-    home.file = {
-      ".rgignore".text = ignorePatterns;
-      ".fdignore".text = ignorePatterns;
-      ".digrc".text = "+noall +answer"; # Cleaner dig commands
-    };
+      programs.zoxide.enable = true; # Shortcut jump command
 
-    programs.fish.shellAbbrs = {
-      cat = "bat"; # Swap cat with bat
-    };
-
-    programs.fish.functions = {
-      ping = {
-        description = "Improved ping";
-        argumentNames = "target";
-        body = "${pkgs.prettyping}/bin/prettyping --nolegend $target";
+      home.file = {
+        ".rgignore".text = ignorePatterns;
+        ".fdignore".text = ignorePatterns;
+        ".digrc".text = "+noall +answer"; # Cleaner dig commands
       };
-      qr = {
-        body =
-          "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | open /tmp/qr.png"; # Fix for non-macOS
+
+      programs.bat = {
+        enable = true; # cat replacement
+        config = { theme = config.theme.colors.batTheme; };
       };
+
+      programs.fish.shellAbbrs = {
+        cat = "bat"; # Swap cat with bat
+      };
+
+      programs.fish.functions = {
+        ping = {
+          description = "Improved ping";
+          argumentNames = "target";
+          body = "${pkgs.prettyping}/bin/prettyping --nolegend $target";
+        };
+        qr = {
+          # Fix for non-macOS
+          body =
+            "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | ${pkgs.gnome.sushi}/bin/sushi /tmp/qr.png";
+        };
+      };
+
     };
 
   };

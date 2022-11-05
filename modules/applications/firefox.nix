@@ -45,6 +45,8 @@
             "toolkit.legacyUserProfileCustomizations.stylesheets" =
               true; # Allow userChrome.css
             "layout.css.color-mix.enabled" = true;
+            "ui.systemUsesDarkTheme" =
+              if config.theme.dark == true then 1 else 0;
           };
           userChrome = ''
             :root {
