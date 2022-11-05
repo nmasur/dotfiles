@@ -17,8 +17,8 @@ nixpkgs.lib.nixosSystem {
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gui.enable = true;
       theme = {
-        colors = (import ../../modules/colorscheme/gruvbox).light;
-        dark = false;
+        colors = (import ../../modules/colorscheme/gruvbox).dark;
+        dark = true;
       };
       wallpaper = "${wallpapers}/gruvbox/road.jpg";
       gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
