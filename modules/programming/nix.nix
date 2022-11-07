@@ -4,7 +4,7 @@
 
     home.packages = with pkgs; [
       nixfmt # Nix file formatter
-      rnix-lsp # Nix language server
+      nil # Nix language server
     ];
 
   };
