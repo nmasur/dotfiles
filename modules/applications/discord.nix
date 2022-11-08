@@ -15,5 +15,6 @@
         }
       '';
     };
+    programs.noisetorch.enable = true;
   };
 }
