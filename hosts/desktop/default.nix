@@ -37,7 +37,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules/applications/discord.nix
     ../../modules/applications/nautilus.nix
     ../../modules/applications/obsidian.nix
-    ../../modules/mail/default.nix
+    ../../modules/mail
     ../../modules/gaming/steam.nix
     ../../modules/gaming/legendary.nix
     ../../modules/repositories/notes.nix

@@ -16,7 +16,10 @@ nixpkgs.lib.nixosSystem {
       nix.registry.nixpkgs.flake = nixpkgs;
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gui.enable = false;
-      colorscheme = (import ../../modules/colorscheme/gruvbox);
+      theme = {
+        colors = (import ../../modules/colorscheme/gruvbox).dark;
+        dark = true;
+      };
       passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
       wsl = {
         enable = true;
@@ -31,7 +34,7 @@ nixpkgs.lib.nixosSystem {
     ../common.nix
     ../../modules/wsl
     ../../modules/nixos
-    ../../modules/mail/himalaya.nix
+    ../../modules/mail
     ../../modules/repositories/notes.nix
     ../../modules/programming/nix.nix
     ../../modules/programming/lua.nix
