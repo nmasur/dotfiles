@@ -39,6 +39,9 @@ in {
       pulse.enable = true;
     };
 
+    # Provides audio source with background noise filtered
+    programs.noisetorch.enable = true;
+
     # These aren't necessary, but helpful for the user
     environment.systemPackages = with pkgs; [
       pamixer # Audio control
