@@ -59,11 +59,6 @@ in {
           argumentNames = "target";
           body = "${pkgs.prettyping}/bin/prettyping --nolegend $target";
         };
-        qr = {
-          # Fix for non-macOS
-          body =
-            "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | ${pkgs.gnome.sushi}/bin/sushi /tmp/qr.png";
-        };
       };
 
     };
