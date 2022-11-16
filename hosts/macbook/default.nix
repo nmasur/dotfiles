@@ -16,7 +16,10 @@ darwin.lib.darwinSystem {
     {
       identityFile = "/Users/Noah.Masur/.ssh/id_ed25519";
       gui.enable = true;
-      colorscheme = (import ../../modules/colorscheme/gruvbox);
+      theme = {
+        colors = (import ../../modules/colorscheme/gruvbox).dark;
+        dark = true;
+      };
       mailUser = globals.user;
       networking.hostName = "noah-masur-mac";
       nixpkgs.overlays = [ nur.overlay ];
