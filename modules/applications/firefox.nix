@@ -38,6 +38,7 @@
             "browser.toolbars.bookmarks.visibility" = "newtab";
             "browser.startup.page" = 3; # Restore previous session
             "browser.newtabpage.enabled" = false; # Make new tabs blank
+            "dom.forms.autocomplete.formautofill" = false; # Disable autofill
             "general.autoScroll" = true; # Drag middle-mouse to scroll
             "services.sync.prefs.sync.general.autoScroll" =
               false; # Prevent disabling autoscroll
