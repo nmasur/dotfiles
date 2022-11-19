@@ -83,12 +83,10 @@
       };
 
       # Package servers into images with a generator
-      packages.x86_64-linux = with inputs; {
-        aws = import ./hosts/aws {
-          inherit inputs globals;
-          system = "x86_64-linux";
-        };
-      };
+      packages.aws = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ]
+        (system: {
+          "${system}" = import ./hosts/aws { inherit inputs globals system; };
+        });
 
       apps = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
