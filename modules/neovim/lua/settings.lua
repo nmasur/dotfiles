@@ -75,6 +75,11 @@ vim.api.nvim_exec(
     false
 )
 
+vim.filetype.add({
+    pattern = {
+        [".*%.tfvars"] = "terraform",
+    },
+})
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*.eml",
     callback = function()
