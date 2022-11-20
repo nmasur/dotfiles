@@ -50,7 +50,7 @@ M.packer = function(use)
             vim.keymap.set("n", "<Leader>t", TERM_TOGGLE)
             vim.keymap.set("n", "<Leader>P", NIXPKGS_TOGGLE)
             vim.keymap.set("n", "<Leader>gw", GITWATCH_TOGGLE)
-            vim.keymap.set("n", "<C-k>", K9S_TOGGLE)
+            vim.keymap.set("n", "<Leader>9", K9S_TOGGLE)
         end,
     })
 
