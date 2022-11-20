@@ -9,7 +9,6 @@ M.packer = function(use)
                 open_mapping = [[<c-\>]],
                 hide_numbers = true,
                 direction = "float",
-                shell = "fish", -- Force fish for everything
             })
 
             vim.keymap.set("t", "<A-CR>", "<C-\\><C-n>") --- Exit terminal mode
