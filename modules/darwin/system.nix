@@ -132,6 +132,16 @@
       defaults write com.apple.screensaver askForPassword -int 1
       defaults write com.apple.screensaver askForPasswordDelay -int 0
 
+      echo "Allow apps from anywhere"
+      SPCTL=$(spctl --status)
+      if ! [ "$SPCTL" = "assessments disabled" ]; then
+          sudo spctl --master-disable
+      fi
+
+    '';
+
+    # User-level settings
+    activationScripts.postUserActivation.text = ''
       echo "Show the ~/Library folder"
       chflags nohidden ~/Library
 
@@ -162,16 +172,10 @@
           "$(__dock_item /Applications/Mimestream.app)" \
           "$(__dock_item /Applications/zoom.us.app)" \
           "$(__dock_item /Applications/Obsidian.app)" \
-          "$(__dock_item /Applications/Alacritty.app)" \
+          "$(__dock_item ${pkgs.kitty}/Applications/kitty.app)" \
           "$(__dock_item /System/Applications/System\ Preferences.app)"
-
-      echo "Allow apps from anywhere"
-      SPCTL=$(spctl --status)
-      if ! [ "$SPCTL" = "assessments disabled" ]; then
-          sudo spctl --master-disable
-      fi
-
     '';
+
   };
 
 }
