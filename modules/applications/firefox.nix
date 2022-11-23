@@ -9,6 +9,7 @@
 
       programs.firefox = {
         enable = true;
+        package = lib.mkIf pkgs.stdenv.isDarwin pkgs.firefox-bin;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
           vimium

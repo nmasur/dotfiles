@@ -26,6 +26,9 @@
     # Community packages; used for Firefox extensions
     nur.url = "github:nix-community/nur";
 
+    # Use official Firefox binary for macOS
+    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+
     # Wallpapers
     wallpapers = {
       url = "gitlab:exorcist365/wallpapers";

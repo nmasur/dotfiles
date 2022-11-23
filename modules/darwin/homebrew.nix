@@ -32,7 +32,6 @@
       "openjdk" # Required by Apache Directory Studio
     ];
     casks = [
-      "firefox" # Firefox packaging on Nix is broken for macOS
       "1password" # 1Password packaging on Nix is broken for macOS
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "meetingbar" # Show meetings in menu bar

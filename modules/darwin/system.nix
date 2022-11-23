@@ -166,7 +166,7 @@
           "$(__dock_item /Applications/1Password.app)" \
           "$(__dock_item /Applications/Slack.app)" \
           "$(__dock_item /System/Applications/Calendar.app)" \
-          "$(__dock_item /Applications/Firefox.app)" \
+          "$(__dock_item ${pkgs.firefox-bin}/Applications/Firefox.app)" \
           "$(__dock_item /System/Applications/Messages.app)" \
           "$(__dock_item /System/Applications/Mail.app)" \
           "$(__dock_item /Applications/Mimestream.app)" \
