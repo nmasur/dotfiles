@@ -8,6 +8,15 @@
   # Display the readme for this repository
   readme = import ./readme.nix { inherit pkgs; };
 
+  # Rebuild
+  rebuild = {
+    type = "app";
+    program = builtins.toString (pkgs.writeShellScript "rebuild" ''
+      echo ${pkgs.system}
+      echo ${if pkgs.stdenv.isDarwin then "darwin" else "linux"}
+    '');
+  };
+
   # Load the SSH key for this machine
   loadkey = import ./loadkey.nix { inherit pkgs; };
 
