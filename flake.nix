@@ -41,6 +41,93 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Convert Nix to Neovim config
+    nix2vim = {
+      url = "github:gytis-ivaskevicius/nix2vim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nix language server
+    nil.url = "github:oxalica/nil";
+
+    # Neovim plugins
+    nvim-lspconfig-src = {
+      url = "github:neovim/nvim-lspconfig";
+      flake = false;
+    };
+    cmp-nvim-lsp-src = {
+      url = "github:hrsh7th/cmp-nvim-lsp";
+      flake = false;
+    };
+    cmp-buffer-src = {
+      url = "github:hrsh7th/cmp-buffer";
+      flake = false;
+    };
+    plenary-nvim-src = {
+      url = "github:nvim-lua/plenary.nvim";
+      flake = false;
+    };
+    null-ls-nvim-src = {
+      url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
+    vim-surround-src = {
+      url = "github:tpope/vim-surround";
+      flake = false;
+    };
+    vim-repeat-src = {
+      url = "github:tpope/vim-repeat";
+      flake = false;
+    };
+    Comment-nvim-src = {
+      url = "github:numToStr/Comment.nvim";
+      flake = false;
+    };
+    impatient-nvim-src = {
+      url = "github:lewis6991/impatient.nvim";
+      flake = false;
+    };
+    nvim-treesitter-src = {
+      url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
+    telescope-nvim-src = {
+      url = "github:nvim-telescope/telescope.nvim";
+      flake = false;
+    };
+    telescope-project-nvim-src = {
+      url = "github:nvim-telescope/telescope-project.nvim";
+      flake = false;
+    };
+    toggleterm-nvim-src = {
+      url = "github:akinsho/toggleterm.nvim";
+      flake = false;
+    };
+    gitsigns-nvim-src = {
+      url = "github:lewis6991/gitsigns.nvim";
+      flake = false;
+    };
+    lualine-nvim-src = {
+      url = "github:hoob3rt/lualine.nvim";
+      flake = false;
+    };
+    nvim-web-devicons-src = {
+      url = "github:kyazdani42/nvim-web-devicons";
+      flake = false;
+    };
+    bufferline-nvim-src = {
+      url = "github:akinsho/bufferline.nvim";
+      flake = false;
+    };
+    vim-bbye-src = {
+      url = "github:moll/vim-bbye";
+      flake = false;
+    };
+    nvim-tree-lua-src = {
+      url = "github:kyazdani42/nvim-tree.lua";
+      flake = false;
+    };
+
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -86,10 +173,23 @@
       };
 
       # Package servers into images with a generator
-      packages.aws = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ]
-        (system: {
+      packages = forAllSystems (system: {
+
+        aws = {
           "${system}" = import ./hosts/aws { inherit inputs globals system; };
-        });
+        };
+
+        neovim = let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              (import ./modules/neovim/plugins-overlay.nix inputs)
+              inputs.nix2vim.overlay
+            ];
+          };
+        in pkgs.neovimBuilder { package = pkgs.neovim-unwrapped; };
+
+      });
 
       apps = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
