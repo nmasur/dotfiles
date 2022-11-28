@@ -177,6 +177,7 @@
             ./modules/neovim/plugins/bufferline.nix
             ./modules/neovim/plugins/telescope.nix
             ./modules/neovim/plugins/lsp.nix
+            ./modules/neovim/plugins/completion.nix
           ];
         };
 
