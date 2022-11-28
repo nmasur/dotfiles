@@ -176,6 +176,7 @@
             ./modules/neovim/plugins/statusline.nix
             ./modules/neovim/plugins/bufferline.nix
             ./modules/neovim/plugins/telescope.nix
+            ./modules/neovim/plugins/lsp.nix
           ];
         };
 

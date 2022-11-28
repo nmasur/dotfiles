@@ -1,13 +1,13 @@
-{ pkgs, lib, ... }: {
+{ pkgs, dsl, lib, ... }: {
   plugins = [
-    pkgs.vimPlugins.vim-surround
-    pkgs.vimPlugins.vim-eunuch
-    pkgs.vimPlugins.vim-vinegar
-    pkgs.vimPlugins.vim-fugitive
-    pkgs.vimPlugins.vim-repeat
-    pkgs.vimPlugins.comment-nvim
-    pkgs.vimPlugins.impatient-nvim
+    pkgs.vimPlugins.vim-surround # Keybinds for surround characters
+    pkgs.vimPlugins.vim-eunuch # File manipulation commands
+    pkgs.vimPlugins.vim-fugitive # Git commands
+    pkgs.vimPlugins.vim-repeat # Better repeat using .
+    pkgs.vimPlugins.comment-nvim # Smart comment commands
+    pkgs.vimPlugins.impatient-nvim # Faster load times
   ];
+
   setup.Comment = { };
 
   vim.o.termguicolors = true; # Set to truecolor
@@ -33,6 +33,12 @@
   vim.o.mouse = "nv"; # Mouse interaction / scrolling
   vim.o.inccommand = "split"; # Live preview search and replace
 
+  # Better backup, swap and undo storage
+  vim.o.backup = true; # Easier to recover and more secure
+  vim.bo.swapfile = false; # Instead of swaps, create backups
+  vim.bo.undofile = true; # Keeps undos after quit
+  vim.o.backupdir = dsl.rawLua ''vim.fn.stdpath("cache") .. "/backup"'';
+
   # Required for nvim-cmp completion
   vim.opt.completeopt = [ "menu" "menuone" "noselect" ];
 
@@ -40,5 +46,17 @@
     require("impatient")
     ${builtins.readFile ../lua/keybinds.lua};
     ${builtins.readFile ../lua/settings.lua};
+  '';
+
+  vimscript = ''
+    " Remember last position when reopening file
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+    " LaTeX options
+    au FileType tex inoremap ;bf \textbf{}<Esc>i
+    au BufWritePost *.tex silent! execute "!pdflatex -output-directory=%:p:h % >/dev/null 2>&1" | redraw!
+
+    " Flash highlight when yanking
+    au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250 }
   '';
 }

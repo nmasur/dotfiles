@@ -1,8 +1,4 @@
-{ pkgs, dsl, ... }:
-
-with dsl;
-
-{
+{ pkgs, dsl, ... }: {
 
   plugins = [
     pkgs.vimPlugins.telescope-nvim
@@ -16,7 +12,7 @@ with dsl;
     defaults = {
       mappings = {
         i = {
-          "['<esc>']" = rawLua "require('telescope.actions').close";
+          "['<esc>']" = dsl.rawLua "require('telescope.actions').close";
           "['<C-h>']" = "which_key";
         };
       };
