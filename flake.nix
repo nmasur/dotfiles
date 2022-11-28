@@ -63,32 +63,20 @@
       url = "github:hrsh7th/cmp-buffer";
       flake = false;
     };
-    plenary-nvim-src = {
-      url = "github:nvim-lua/plenary.nvim";
-      flake = false;
-    };
     null-ls-nvim-src = {
       url = "github:jose-elias-alvarez/null-ls.nvim";
-      flake = false;
-    };
-    vim-surround-src = {
-      url = "github:tpope/vim-surround";
-      flake = false;
-    };
-    vim-repeat-src = {
-      url = "github:tpope/vim-repeat";
       flake = false;
     };
     Comment-nvim-src = {
       url = "github:numToStr/Comment.nvim";
       flake = false;
     };
-    impatient-nvim-src = {
-      url = "github:lewis6991/impatient.nvim";
-      flake = false;
-    };
     nvim-treesitter-src = {
       url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
+    vim-matchup-src = {
+      url = "github:andymass/vim-matchup";
       flake = false;
     };
     telescope-nvim-src = {
@@ -111,16 +99,8 @@
       url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
-    nvim-web-devicons-src = {
-      url = "github:kyazdani42/nvim-web-devicons";
-      flake = false;
-    };
     bufferline-nvim-src = {
       url = "github:akinsho/bufferline.nvim";
-      flake = false;
-    };
-    vim-bbye-src = {
-      url = "github:moll/vim-bbye";
       flake = false;
     };
     nvim-tree-lua-src = {
@@ -192,48 +172,10 @@
           imports = [
             ./modules/neovim/plugins/gitsigns.nix
             ./modules/neovim/plugins/misc.nix
-            # ({ pkgs, dsl, ... }:
-            #   # with dsl; 
-            #   {
-            #     plugins = [ pkgs.vimPlugins.gitsigns-nvim ];
-            #     setup.gitsigns = { };
-            #     lua = ''
-            #       vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
-            #       vim.g.mapleader = " "
-            #       vim.g.maplocalleader = " "
-            #       local gitsigns = require("gitsigns")
-            #       vim.keymap.set("n", "<Leader>gB", gitsigns.blame_line)
-            #       vim.keymap.set("n", "<Leader>gp", gitsigns.preview_hunk)
-            #       vim.keymap.set("v", "<Leader>gp", gitsigns.preview_hunk)
-            #       vim.keymap.set("n", "<Leader>gd", gitsigns.diffthis)
-            #       vim.keymap.set("v", "<Leader>gd", gitsigns.diffthis)
-            #       vim.keymap.set("n", "<Leader>rgf", gitsigns.reset_buffer)
-            #       vim.keymap.set("v", "<Leader>hs", gitsigns.stage_hunk)
-            #       vim.keymap.set("v", "<Leader>hr", gitsigns.reset_hunk)
-            #       vim.keymap.set("v", "<Leader>hr", gitsigns.reset_hunk)
-            #
-            #       -- Navigation
-            #       vim.keymap.set("n", "]g", function()
-            #           if vim.wo.diff then
-            #               return "]g"
-            #           end
-            #           vim.schedule(function()
-            #               gitsigns.next_hunk()
-            #           end)
-            #           return "<Ignore>"
-            #       end, { expr = true })
-            #
-            #       vim.keymap.set("n", "[g", function()
-            #           if vim.wo.diff then
-            #               return "[g"
-            #           end
-            #           vim.schedule(function()
-            #               gitsigns.prev_hunk()
-            #           end)
-            #           return "<Ignore>"
-            #       end, { expr = true })
-            #     '';
-            #   })
+            ./modules/neovim/plugins/syntax.nix
+            ./modules/neovim/plugins/statusline.nix
+            ./modules/neovim/plugins/bufferline.nix
+            ./modules/neovim/plugins/telescope.nix
           ];
         };
 

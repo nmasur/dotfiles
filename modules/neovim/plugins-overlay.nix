@@ -24,13 +24,10 @@ in {
   cmp-buffer = (withSrc prev.vimPlugins.cmp-buffer inputs.cmp-buffer);
   plenary-nvim = (withSrc prev.vimPlugins.plenary-nvim inputs.plenary-nvim);
   null-ls-nvim = (withSrc prev.vimPlugins.null-ls-nvim inputs.null-ls-nvim);
-  vim-surround = (withSrc prev.vimPlugins.vim-surround inputs.vim-surround);
-  vim-repeat = (withSrc prev.vimPlugins.vim-repeat inputs.vim-repeat);
   comment-nvim = (withSrc prev.vimPlugins.comment-nvim inputs.comment-nvim);
-  impatient-nvim =
-    (withSrc prev.vimPlugins.impatient-nvim inputs.impatient-nvim);
   nvim-treesitter =
     (withSrc prev.vimPlugins.nvim-treesitter inputs.nvim-treesitter);
+  vim-matchup = (withSrc prev.vimPlugins.vim-matchup inputs.vim-matchup);
   telescope-nvim =
     (withSrc prev.vimPlugins.telescope-nvim inputs.telescope-nvim);
   telescope-project-nvim = (withSrc prev.vimPlugins.telescope-project-nvim
@@ -39,11 +36,8 @@ in {
     (withSrc prev.vimPlugins.toggleterm-nvim inputs.toggleterm-nvim);
   gitsigns-nvim = (withSrc prev.vimPlugins.gitsigns-nvim inputs.gitsigns-nvim);
   lualine-nvim = (withSrc prev.vimPlugins.lualine-nvim inputs.lualine-nvim);
-  nvim-web-devicons =
-    (withSrc prev.vimPlugins.nvim-web-devicons inputs.nvim-web-devicons);
   bufferline-nvim =
     (withSrc prev.vimPlugins.bufferline-nvim inputs.bufferline-nvim);
-  vim-bbye = (withSrc prev.vimPlugins.vim-bbye inputs.vim-bbye);
   nvim-tree-lua = (withSrc prev.vimPlugins.nvim-tree-lua inputs.nvim-tree-lua);
 
   # Packaging plugins with Nix
