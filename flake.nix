@@ -179,6 +179,7 @@
             ./modules/neovim/plugins/lsp.nix
             ./modules/neovim/plugins/completion.nix
             ./modules/neovim/plugins/toggleterm.nix
+            ./modules/colorscheme/gruvbox/neovim-gruvbox.nix
           ];
         };
 
