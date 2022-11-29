@@ -26,30 +26,6 @@
 
   vim.api.nvim_create_augroup = dsl.callWith [ "LspFormatting" { } ];
 
-  # setup."null-ls" = {
-  #   sources = [
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.formatting.black.with({ command = ${pkgs.black}/bin/black })")
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.formatting.flake8.with({ command = ${pkgs.python310Packages.flake8}/bin/flake8 })")
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.formatting.fish_indent.with({ command = ${pkgs.fish}/bin/fish_indent })")
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.formatting.nixfmt.with({ command = ${pkgs.nixfmt}/bin/nixfmt })")
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.formatting.rustfmt.with({ command = ${pkgs.rustfmt}/bin/rustfmt })")
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.diagnostics.shellcheck.with({ command = ${pkgs.shellcheck}/bin/shellcheck })")
-  #     (dsl.rawLua ''
-  #       require('null-ls').builtins.formatting.shfmt.with(
-  #           command = {${pkgs.shfmt}/bin/shfmt },
-  #           extra_args = { '-i', '4', '-ci' },
-  #       )'')
-  #     (dsl.rawLua
-  #       "require('null-ls').builtins.formatting.terraform_fmt.with({ command = ${pkgs.terraform}/bin/terraform })")
-  #   ];
-  # };
-
   lua = ''
     ${builtins.readFile ./lsp.lua}
 

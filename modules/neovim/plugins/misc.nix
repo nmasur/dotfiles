@@ -13,28 +13,33 @@
   setup.Comment = { };
   setup.colorizer = { };
 
-  vim.o.termguicolors = true; # Set to truecolor
-  vim.o.hidden = true; # Don't unload buffers when leaving them
-  vim.wo.number = true; # Show line numbers
-  vim.wo.relativenumber = true; # Relative numbers instead of absolute
-  vim.o.list = true; # Reveal whitespace with dashes
-  vim.o.expandtab = true; # Tabs into spaces
-  vim.o.shiftwidth = 4; # Amount to shift with > key
-  vim.o.softtabstop = 4; # Amount to shift with <TAB> key
-  vim.o.ignorecase = true; # Ignore case when searching
-  vim.o.smartcase = true; # Check case when using capitals in search
-  vim.o.infercase = true; # Don't match cases when completing suggestions
-  vim.o.incsearch = true; # Search while typing
-  vim.o.visualbell = true; # No sounds
-  vim.o.scrolljump = 1; # Number of lines to scroll
-  vim.o.scrolloff = 3; # Margin of lines to see while scrolling
-  vim.o.splitright = true; # Vertical splits on the right side
-  vim.o.splitbelow = true; # Horizontal splits on the bottom side
-  vim.o.pastetoggle = "<F3>"; # Use F3 to enter raw paste mode
-  vim.o.clipboard = "unnamedplus"; # Uses system clipboard for yanking
-  vim.o.updatetime = 300; # Faster diagnostics
-  vim.o.mouse = "nv"; # Mouse interaction / scrolling
-  vim.o.inccommand = "split"; # Live preview search and replace
+  vim.o = {
+    termguicolors = true; # Set to truecolor
+    hidden = true; # Don't unload buffers when leaving them
+    list = true; # Reveal whitespace with dashes
+    expandtab = true; # Tabs into spaces
+    shiftwidth = 4; # Amount to shift with > key
+    softtabstop = 4; # Amount to shift with <TAB> key
+    ignorecase = true; # Ignore case when searching
+    smartcase = true; # Check case when using capitals in search
+    infercase = true; # Don't match cases when completing suggestions
+    incsearch = true; # Search while typing
+    visualbell = true; # No sounds
+    scrolljump = 1; # Number of lines to scroll
+    scrolloff = 3; # Margin of lines to see while scrolling
+    splitright = true; # Vertical splits on the right side
+    splitbelow = true; # Horizontal splits on the bottom side
+    pastetoggle = "<F3>"; # Use F3 to enter raw paste mode
+    clipboard = "unnamedplus"; # Uses system clipboard for yanking
+    updatetime = 300; # Faster diagnostics
+    mouse = "nv"; # Mouse interaction / scrolling
+    inccommand = "split"; # Live preview search and replace
+  };
+
+  vim.wo = {
+    number = true; # Show line numbers
+    relativenumber = true; # Relative numbers instead of absolute
+  };
 
   # Better backup, swap and undo storage
   vim.o.backup = true; # Easier to recover and more secure

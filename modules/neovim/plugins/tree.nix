@@ -4,8 +4,10 @@
 
   # Disable netrw eagerly
   # https://github.com/kyazdani42/nvim-tree.lua/commit/fb8735e96cecf004fbefb086ce85371d003c5129
-  vim.g.loaded = 1;
-  vim.g.loaded_netrwPlugin = 1;
+  vim.g = {
+    loaded = 1;
+    loaded_netrwPlugin = 1;
+  };
 
   setup.nvim-tree = {
     disable_netrw = true;
