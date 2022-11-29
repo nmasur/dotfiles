@@ -21,21 +21,16 @@ in {
   nvim-lspconfig =
     (withSrc prev.vimPlugins.nvim-lspconfig inputs.nvim-lspconfig);
   cmp-nvim-lsp = (withSrc prev.vimPlugins.cmp-nvim-lsp inputs.cmp-nvim-lsp);
-  cmp-buffer = (withSrc prev.vimPlugins.cmp-buffer inputs.cmp-buffer);
-  plenary-nvim = (withSrc prev.vimPlugins.plenary-nvim inputs.plenary-nvim);
   null-ls-nvim = (withSrc prev.vimPlugins.null-ls-nvim inputs.null-ls-nvim);
   comment-nvim = (withSrc prev.vimPlugins.comment-nvim inputs.comment-nvim);
   nvim-treesitter =
     (withSrc prev.vimPlugins.nvim-treesitter inputs.nvim-treesitter);
-  vim-matchup = (withSrc prev.vimPlugins.vim-matchup inputs.vim-matchup);
   telescope-nvim =
     (withSrc prev.vimPlugins.telescope-nvim inputs.telescope-nvim);
   telescope-project-nvim = (withSrc prev.vimPlugins.telescope-project-nvim
     inputs.telescope-project-nvim);
   toggleterm-nvim =
     (withSrc prev.vimPlugins.toggleterm-nvim inputs.toggleterm-nvim);
-  gitsigns-nvim = (withSrc prev.vimPlugins.gitsigns-nvim inputs.gitsigns-nvim);
-  lualine-nvim = (withSrc prev.vimPlugins.lualine-nvim inputs.lualine-nvim);
   bufferline-nvim =
     (withSrc prev.vimPlugins.bufferline-nvim inputs.bufferline-nvim);
   nvim-tree-lua = (withSrc prev.vimPlugins.nvim-tree-lua inputs.nvim-tree-lua);

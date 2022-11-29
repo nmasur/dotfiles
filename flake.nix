@@ -59,10 +59,6 @@
       url = "github:hrsh7th/cmp-nvim-lsp";
       flake = false;
     };
-    cmp-buffer-src = {
-      url = "github:hrsh7th/cmp-buffer";
-      flake = false;
-    };
     null-ls-nvim-src = {
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
@@ -75,10 +71,6 @@
       url = "github:nvim-treesitter/nvim-treesitter";
       flake = false;
     };
-    vim-matchup-src = {
-      url = "github:andymass/vim-matchup";
-      flake = false;
-    };
     telescope-nvim-src = {
       url = "github:nvim-telescope/telescope.nvim";
       flake = false;
@@ -89,14 +81,6 @@
     };
     toggleterm-nvim-src = {
       url = "github:akinsho/toggleterm.nvim";
-      flake = false;
-    };
-    gitsigns-nvim-src = {
-      url = "github:lewis6991/gitsigns.nvim";
-      flake = false;
-    };
-    lualine-nvim-src = {
-      url = "github:hoob3rt/lualine.nvim";
       flake = false;
     };
     bufferline-nvim-src = {
