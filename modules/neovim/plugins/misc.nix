@@ -6,9 +6,12 @@
     pkgs.vimPlugins.vim-repeat # Better repeat using .
     pkgs.vimPlugins.comment-nvim # Smart comment commands
     pkgs.vimPlugins.impatient-nvim # Faster load times
+    pkgs.vimPlugins.glow-nvim # Markdown preview popup
+    pkgs.vimPlugins.nvim-colorizer-lua # Hex color previews
   ];
 
   setup.Comment = { };
+  setup.colorizer = { };
 
   vim.o.termguicolors = true; # Set to truecolor
   vim.o.hidden = true; # Don't unload buffers when leaving them
