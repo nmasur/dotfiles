@@ -22,7 +22,7 @@
   };
 
   use.lspconfig.terraformls.setup =
-    dsl.callWith { cmd = [ "${pkgs.terraform-ls}/bin/terraform-lsp" ]; };
+    dsl.callWith { cmd = [ "${pkgs.terraform-ls}/bin/terraform-ls" "serve" ]; };
 
   vim.api.nvim_create_augroup = dsl.callWith [ "LspFormatting" { } ];
 
