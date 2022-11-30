@@ -6,11 +6,23 @@ configuration may be difficult to translate to a non-Nix system.
 
 However, some of the configurations are easier to lift directly:
 
-- [Neovim](https://github.com/nmasur/dotfiles/tree/master/modules/neovim/lua)
+- [Neovim](https://github.com/nmasur/dotfiles/tree/master/modules/neovim/config)
 - [Fish functions](https://github.com/nmasur/dotfiles/tree/master/modules/shell/fish/functions)
 - [More fish aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/fish/default.nix)
 - [Git aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/git.nix)
 - [Hammerspoon](https://github.com/nmasur/dotfiles/tree/master/modules/darwin/hammerspoon)
+
+Try out my Neovim config:
+
+```bash
+nix run github:nmasur/dotfiles#neovim
+```
+
+Or build it as a package:
+
+```bash
+nix build github:nmasur/dotfiles#neovim
+```
 
 ---
 
@@ -86,12 +98,6 @@ openssl s_client -showcerts -verify 5 -connect cache.nixos.org:443 < /dev/null
 # Paste them in here
 sudo nvim $NIX_SSL_CERT_FILE
 ```
-
-### Dealing with Neovim issues:
-
-Update Neovim Packer plugins: `:PackerSync`
-
-Update TreeSitter languages: `:TSUpdateSync`
 
 ---
 

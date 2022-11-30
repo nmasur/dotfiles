@@ -1,4 +1,4 @@
-{ inputs, globals, ... }:
+{ inputs, globals, overlays, ... }:
 
 with inputs;
 
@@ -22,7 +22,7 @@ darwin.lib.darwinSystem {
       };
       mailUser = globals.user;
       networking.hostName = "noah-masur-mac";
-      nixpkgs.overlays = [ nur.overlay firefox-darwin.overlay ];
+      nixpkgs.overlays = [ firefox-darwin.overlay ] ++ overlays;
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
     }

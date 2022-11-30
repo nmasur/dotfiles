@@ -1,54 +1,39 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
 
-  home-manager.users.${config.user} = {
+let
 
-    home.packages = with pkgs; [
-      neovim
-      gcc # for tree-sitter
-      tree-sitter # for tree-sitter-gitignore parser
-      nodejs # for tree-sitter-gitignore parser
-      shfmt # used everywhere
-      shellcheck # used everywhere
-    ];
-
-    xdg.configFile = {
-      "nvim/init.lua".source = ./init.lua;
-      "nvim/lua" = {
-        source = ./lua;
-        recursive = true; # Allows adding more files
-      };
-      "nvim/lua/packer/colors.lua".source = config.theme.colors.neovimConfig;
-      "nvim/lua/background.lua".text = ''
-        vim.o.background = "${
-          if config.theme.dark == true then "dark" else "light"
-        }"
-      '';
-    };
-
-    programs.git.extraConfig.core.editor = "nvim";
-    home.sessionVariables = {
-      EDITOR = "nvim";
-      MANPAGER = "nvim +Man!";
-    };
-    programs.fish = {
-      shellAliases = { vim = "nvim"; };
-      shellAbbrs = {
-        v = lib.mkForce "nvim";
-        vl = lib.mkForce "vim -c 'normal! `0' -c 'bdelete 1'";
-        vll = "nvim -c 'Telescope oldfiles'";
-      };
-    };
-
-    # Always run packer.nvim sync
-    home.activation.nvimPackerSync =
-      config.home-manager.users.${config.user}.lib.dag.entryAfter
-      [ "writeBoundary" ] ''
-        $DRY_RUN_CMD ${pkgs.neovim}/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-      '';
-
+  neovim = import ./package {
+    inherit pkgs;
+    colors = import config.theme.colors.neovimConfig { inherit pkgs; };
   };
 
-  # Used for icons in Vim
-  fonts.fonts = with pkgs; [ nerdfonts ];
+in {
+
+  home-manager.users.${config.user} =
+
+    {
+
+      home.packages = [ neovim ];
+
+      programs.git.extraConfig.core.editor = "nvim";
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        MANPAGER = "nvim +Man!";
+      };
+      programs.fish = {
+        shellAliases = { vim = "nvim"; };
+        shellAbbrs = {
+          v = lib.mkForce "nvim";
+          vl = lib.mkForce "nvim -c 'normal! `0' -c 'bdelete 1'";
+          vll = "nvim -c 'Telescope oldfiles'";
+        };
+      };
+      programs.kitty.settings.scrollback_pager = lib.mkForce ''
+        ${neovim}/bin/nvim -c 'setlocal nonumber nolist showtabline=0 foldcolumn=0|Man!' -c "autocmd VimEnter * normal G" -'';
+
+    };
+
+  # # Used for icons in Vim
+  # fonts.fonts = with pkgs; [ nerdfonts ];
 
 }

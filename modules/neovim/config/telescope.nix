@@ -1,0 +1,34 @@
+{ pkgs, dsl, ... }: {
+
+  plugins = [
+    pkgs.vimPlugins.telescope-nvim
+    pkgs.vimPlugins.telescope-project-nvim
+    pkgs.vimPlugins.telescope-fzy-native-nvim
+    pkgs.vimPlugins.telescope-file-browser-nvim
+    pkgs.vimPlugins.telescope-zoxide
+  ];
+
+  setup.telescope = {
+    defaults = {
+      mappings = {
+        i = {
+          "['<esc>']" = dsl.rawLua "require('telescope.actions').close";
+          "['<C-h>']" = "which_key";
+        };
+      };
+    };
+    pickers = {
+      find_files = { theme = "ivy"; };
+      oldfiles = { theme = "ivy"; };
+      buffers = { theme = "dropdown"; };
+    };
+    extensions = {
+      fzy_native = { };
+      zoxide = { };
+      project = { base_dirs = [ "~/dev" ]; };
+    };
+  };
+
+  lua = builtins.readFile ./telescope.lua;
+
+}

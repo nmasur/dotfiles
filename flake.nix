@@ -41,6 +41,57 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Convert Nix to Neovim config
+    nix2vim = {
+      url = "github:gytis-ivaskevicius/nix2vim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nix language server
+    nil.url = "github:oxalica/nil";
+
+    # Neovim plugins
+    nvim-lspconfig-src = {
+      url = "github:neovim/nvim-lspconfig";
+      flake = false;
+    };
+    cmp-nvim-lsp-src = {
+      url = "github:hrsh7th/cmp-nvim-lsp";
+      flake = false;
+    };
+    null-ls-nvim-src = {
+      url = "github:jose-elias-alvarez/null-ls.nvim";
+      flake = false;
+    };
+    Comment-nvim-src = {
+      url = "github:numToStr/Comment.nvim";
+      flake = false;
+    };
+    nvim-treesitter-src = {
+      url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
+    telescope-nvim-src = {
+      url = "github:nvim-telescope/telescope.nvim";
+      flake = false;
+    };
+    telescope-project-nvim-src = {
+      url = "github:nvim-telescope/telescope-project.nvim";
+      flake = false;
+    };
+    toggleterm-nvim-src = {
+      url = "github:akinsho/toggleterm.nvim";
+      flake = false;
+    };
+    bufferline-nvim-src = {
+      url = "github:akinsho/bufferline.nvim";
+      flake = false;
+    };
+    nvim-tree-lua-src = {
+      url = "github:kyazdani42/nvim-tree.lua";
+      flake = false;
+    };
+
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -57,6 +108,13 @@
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
       };
 
+      # Common overlays to always use
+      overlays = [
+        inputs.nur.overlay
+        inputs.nix2vim.overlay
+        (import ./modules/neovim/plugins-overlay.nix inputs)
+      ];
+
       # System types to support.
       supportedSystems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
@@ -67,13 +125,13 @@
     in rec {
 
       nixosConfigurations = {
-        desktop = import ./hosts/desktop { inherit inputs globals; };
-        wsl = import ./hosts/wsl { inherit inputs globals; };
-        oracle = import ./hosts/oracle { inherit inputs globals; };
+        desktop = import ./hosts/desktop { inherit inputs globals overlays; };
+        wsl = import ./hosts/wsl { inherit inputs globals overlays; };
+        oracle = import ./hosts/oracle { inherit inputs globals overlays; };
       };
 
       darwinConfigurations = {
-        macbook = import ./hosts/macbook { inherit inputs globals; };
+        macbook = import ./hosts/macbook { inherit inputs globals overlays; };
       };
 
       # For quickly applying local settings with:
@@ -86,17 +144,29 @@
       };
 
       # Package servers into images with a generator
-      packages.aws = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ]
-        (system: {
-          "${system}" = import ./hosts/aws { inherit inputs globals system; };
-        });
+      packages = forAllSystems (system: {
+
+        aws = {
+          "${system}" =
+            import ./hosts/aws { inherit inputs globals system overlays; };
+        };
+
+        neovim = let pkgs = import nixpkgs { inherit system overlays; };
+        in import ./modules/neovim/package {
+          inherit pkgs;
+          colors = import ./modules/colorscheme/gruvbox/neovim-gruvbox.nix {
+            inherit pkgs;
+          };
+        };
+
+      });
 
       apps = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system; };
+        let pkgs = import nixpkgs { inherit system overlays; };
         in import ./apps { inherit pkgs; });
 
       devShells = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system; };
+        let pkgs = import nixpkgs { inherit system overlays; };
         in {
 
           # Used to run commands and edit files in this repo

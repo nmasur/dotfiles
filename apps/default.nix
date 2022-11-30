@@ -29,4 +29,19 @@
   # Connect machine metrics to Netdata Cloud
   netdata = import ./netdata-cloud.nix { inherit pkgs; };
 
+  # Run neovim as an app
+  neovim = {
+    type = "app";
+    program = "${
+        (import ../modules/neovim/package {
+          inherit pkgs;
+          colors = import ../modules/colorscheme/gruvbox/neovim-gruvbox.nix {
+            inherit pkgs;
+          };
+        })
+      }/bin/nvim";
+  };
+
+  nvim = neovim;
+
 }
