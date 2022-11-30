@@ -19,7 +19,7 @@
     base0D = "#83a598"; # blue
     base0E = "#d3869b"; # purple
     base0F = "#d65d0e"; # brown
-    neovimConfig = ./neovim.lua;
+    neovimConfig = ./neovim-gruvbox.nix;
     batTheme = "gruvbox-dark";
   };
   light = {
@@ -39,7 +39,7 @@
     base0D = "#076678"; # blue
     base0E = "#8f3f71"; # purple
     base0F = "#d65d0e"; # brown
-    neovimConfig = ./neovim.lua;
+    neovimConfig = ./neovim-gruvbox.nix;
     batTheme = "gruvbox-light";
   };
 }

@@ -108,6 +108,13 @@
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
       };
 
+      # Common overlays to always use
+      overlays = [
+        inputs.nur.overlay
+        inputs.nix2vim.overlay
+        (import ./modules/neovim/plugins-overlay.nix inputs)
+      ];
+
       # System types to support.
       supportedSystems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
@@ -118,13 +125,13 @@
     in rec {
 
       nixosConfigurations = {
-        desktop = import ./hosts/desktop { inherit inputs globals; };
-        wsl = import ./hosts/wsl { inherit inputs globals; };
-        oracle = import ./hosts/oracle { inherit inputs globals; };
+        desktop = import ./hosts/desktop { inherit inputs globals overlays; };
+        wsl = import ./hosts/wsl { inherit inputs globals overlays; };
+        oracle = import ./hosts/oracle { inherit inputs globals overlays; };
       };
 
       darwinConfigurations = {
-        macbook = import ./hosts/macbook { inherit inputs globals; };
+        macbook = import ./hosts/macbook { inherit inputs globals overlays; };
       };
 
       # For quickly applying local settings with:
@@ -140,42 +147,26 @@
       packages = forAllSystems (system: {
 
         aws = {
-          "${system}" = import ./hosts/aws { inherit inputs globals system; };
+          "${system}" =
+            import ./hosts/aws { inherit inputs globals system overlays; };
         };
 
-        neovim = let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              (import ./modules/neovim/plugins-overlay.nix inputs)
-              inputs.nix2vim.overlay
-            ];
+        neovim = let pkgs = import nixpkgs { inherit system overlays; };
+        in import ./modules/neovim/package {
+          inherit pkgs;
+          colors = import ./modules/colorscheme/gruvbox/neovim-gruvbox.nix {
+            inherit pkgs;
           };
-        in pkgs.neovimBuilder {
-          package = pkgs.neovim-unwrapped;
-          imports = [
-            ./modules/neovim/plugins/gitsigns.nix
-            ./modules/neovim/plugins/misc.nix
-            ./modules/neovim/plugins/syntax.nix
-            ./modules/neovim/plugins/statusline.nix
-            ./modules/neovim/plugins/bufferline.nix
-            ./modules/neovim/plugins/telescope.nix
-            ./modules/neovim/plugins/lsp.nix
-            ./modules/neovim/plugins/completion.nix
-            ./modules/neovim/plugins/toggleterm.nix
-            ./modules/neovim/plugins/tree.nix
-            ./modules/colorscheme/gruvbox/neovim-gruvbox.nix
-          ];
         };
 
       });
 
       apps = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system; };
+        let pkgs = import nixpkgs { inherit system overlays; };
         in import ./apps { inherit pkgs; });
 
       devShells = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system; };
+        let pkgs = import nixpkgs { inherit system overlays; };
         in {
 
           # Used to run commands and edit files in this repo
