@@ -1,20 +1,20 @@
 diff --git a/cps/__init__.py b/cps/__init__.py
-index 0b912d23..ad5d1fa9 100644
+index 1ba1f778..da0bc718 100644
 --- a/cps/__init__.py
 +++ b/cps/__init__.py
-@@ -83,7 +83,6 @@ app.config.update(
- lm = MyLoginManager()
- lm.login_view = 'web.login'
- lm.anonymous_user = ub.Anonymous
--lm.session_protection = 'strong'
+@@ -100,7 +100,6 @@ updater_thread = Updater()
+ def create_app():
+     lm.login_view = 'web.login'
+     lm.anonymous_user = ub.Anonymous
+-    lm.session_protection = 'strong'
  
- if wtf_present:
-     csrf = CSRFProtect()
+     if csrf:
+         csrf.init_app(app)
 diff --git a/cps/admin.py b/cps/admin.py
-index 1004ee78..e295066e 100644
+index 09a553b4..5c646e46 100644
 --- a/cps/admin.py
 +++ b/cps/admin.py
-@@ -98,8 +98,6 @@ def before_request():
+@@ -104,8 +104,6 @@ def before_request():
      # make remember me function work
      if current_user.is_authenticated:
          confirm_login()

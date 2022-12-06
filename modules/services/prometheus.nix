@@ -8,6 +8,10 @@
   config = {
 
     services.grafana.enable = true;
+
+    # Required to fix error in latest nixpkgs
+    services.grafana.settings = { };
+
     services.prometheus = {
       enable = true;
       exporters.node.enable = true;

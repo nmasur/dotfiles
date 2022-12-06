@@ -50,6 +50,10 @@
       }];
     }];
 
+    # Caddy and Transmission both try to set rmem_max for larger UDP packets.
+    # We will choose Transmission's recommendation (4 MB).
+    boot.kernel.sysctl."net.core.rmem_max" = 4194304;
+
     # Allow inbound connections to reach namespace
     systemd.services.transmission-web-netns = {
       description = "Forward to transmission in wireguard namespace";

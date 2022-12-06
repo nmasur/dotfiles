@@ -1,4 +1,4 @@
-{ inputs, globals, ... }:
+{ inputs, globals, overlays, ... }:
 
 with inputs;
 
@@ -15,7 +15,8 @@ nixpkgs.lib.nixosSystem {
     home-manager.nixosModules.home-manager
     {
       gui.enable = false;
-      colorscheme = (import ../../modules/colorscheme/gruvbox);
+      theme = { colors = (import ../../modules/colorscheme/gruvbox).dark; };
+      nixpkgs.overlays = overlays;
 
       # FQDNs for various services
       networking.hostName = "oracle";

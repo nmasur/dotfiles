@@ -15,7 +15,7 @@
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud24; # Required to specify
+      package = pkgs.nextcloud25; # Required to specify
       https = true;
       hostName = "localhost";
       maxUploadSize = "50G";

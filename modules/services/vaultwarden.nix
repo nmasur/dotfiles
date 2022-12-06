@@ -52,6 +52,7 @@ in {
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:8222"; }];
+        headers.request.add."X-Real-IP" = [ "{http.request.remote.host}" ];
       }];
     }];
 
