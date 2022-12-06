@@ -7,9 +7,9 @@
       programs.himalaya = { enable = true; };
       accounts.email.accounts.home.himalaya = {
         enable = true;
+        backend = "imap";
+        sender = "smtp";
         settings = {
-          backend = "imap";
-          sender = "smtp";
           downloads-dir = config.userDirs.download;
           smtp-insecure = true;
         };
