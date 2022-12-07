@@ -24,6 +24,10 @@ Or build it as a package:
 nix build github:nmasur/dotfiles#neovim
 ```
 
+If you already have a Neovim configuration, you may need to move it out of
+`~/.config/nvim` or set `XDG_CONFIG_HOME` to another value; otherwise, both
+configs might conflict with each other.
+
 ---
 
 # Installation
