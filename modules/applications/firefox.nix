@@ -7,9 +7,10 @@
 
     home-manager.users.${config.user} = {
 
-      programs.firefox = {
+      programs.firefox = rec {
         enable = true;
-        package = lib.mkIf pkgs.stdenv.isDarwin pkgs.firefox-bin;
+        package =
+          if pkgs.stdenv.isDarwin then pkgs.firefox-bin else pkgs.firefox;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
           vimium
@@ -20,26 +21,33 @@
           okta-browser-plugin
           sponsorblock
           reddit-enhancement-suite
+          return-youtube-dislikes
           bypass-paywalls-clean
           markdownload
           darkreader
           snowflake
           don-t-fuck-with-paste
           i-dont-care-about-cookies
+          wappalyzer
         ];
-        profiles.Profile0 = {
+        profiles.default = {
           id = 0;
           name = "default";
           isDefault = true;
           settings = {
+            "app.update.auto" = false;
             "browser.aboutConfig.showWarning" = false;
             "browser.warnOnQuit" = false;
-            "browser.quitShortcut.disabled" = lib.mkIf pkgs.stdenv.isLinux true;
+            "browser.quitShortcut.disabled" =
+              if pkgs.stdenv.isLinux then true else false;
             "browser.theme.dark-private-windows" = true;
             "browser.toolbars.bookmarks.visibility" = "newtab";
             "browser.startup.page" = 3; # Restore previous session
             "browser.newtabpage.enabled" = false; # Make new tabs blank
             "dom.forms.autocomplete.formautofill" = false; # Disable autofill
+            "extensions.formautofill.creditCards.enabled" =
+              false; # Disable credit cards
+            "dom.payments.defaults.saveAddress" = false; # Disable address save
             "general.autoScroll" = true; # Drag middle-mouse to scroll
             "services.sync.prefs.sync.general.autoScroll" =
               false; # Prevent disabling autoscroll
@@ -59,6 +67,22 @@
             /* Background of tab bar */
             .toolbar-items {
               background-color: ${config.theme.colors.base00} !important;
+            }
+            /* Extra tab bar sides on macOS */
+            .titlebar-spacer {
+              background-color: ${config.theme.colors.base00} !important;
+            }
+            .titlebar-buttonbox-container {
+              background-color: ${config.theme.colors.base00} !important;
+            }
+            #tabbrowser-tabs {
+              border-inline-start: 0 !important;
+            }
+            /* Private Browsing indicator on macOS */
+            #private-browsing-indicator-with-label {
+              background-color: ${config.theme.colors.base00} !important;
+              margin-inline: 0 !important;
+              padding-inline: 7px;
             }
             /* Tabs themselves */
             .tabbrowser-tab .tab-stack {
