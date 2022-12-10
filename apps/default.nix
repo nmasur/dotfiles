@@ -32,7 +32,12 @@
     type = "app";
     program = builtins.toString (pkgs.writeShellScript "rebuild" ''
       echo ${pkgs.system}
-      echo ${if pkgs.stdenv.isDarwin then "darwin" else "linux"}
+      SYSTEM=${if pkgs.stdenv.isDarwin then "darwin" else "linux"}
+      if [ "$SYSTEM" == "darwin" ]; then
+          darwin-rebuild switch --flake github:nmasur/dotfiles#macbook
+      else
+          nixos-rebuild switch --flake github:nmasur/dotfiles
+      fi
     '');
   };
 
