@@ -174,7 +174,7 @@
           "$(__dock_item ${pkgs.discord}/Applications/Discord.app)" \
           "$(__dock_item /Applications/Obsidian.app)" \
           "$(__dock_item ${pkgs.kitty}/Applications/kitty.app)" \
-          "$(__dock_item /System/Applications/System\ Preferences.app)"
+          "$(__dock_item /System/Applications/System\ Settings.app)"
     '';
 
   };

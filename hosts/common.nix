@@ -3,7 +3,7 @@
   imports =
     [ ../modules/shell ../modules/neovim ../modules/repositories/dotfiles.nix ];
 
-  options = rec {
+  options = {
     user = lib.mkOption {
       type = lib.types.str;
       description = "Primary user of the system";
@@ -74,7 +74,7 @@
     };
   };
 
-  config = let stateVersion = "22.11";
+  config = let stateVersion = "23.05";
   in {
 
     # Enable features in Nix commands
