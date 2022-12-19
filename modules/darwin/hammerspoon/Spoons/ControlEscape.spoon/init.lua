@@ -69,7 +69,7 @@ function obj:init()
     -- If any other key is pressed, don't send escape
     self.asModifier = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(_)
         self.sendEscape = false
-        print("Don't sent escape")
+        -- print("Don't sent escape")
     end)
 
     -- If mouse is moving significantly, don't send escape
