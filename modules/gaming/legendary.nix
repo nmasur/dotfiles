@@ -4,9 +4,10 @@ let home-packages = config.home-manager.users.${config.user}.home.packages;
 
 in {
 
-  imports = [ ./. ];
+  options.gaming.legendary.enable =
+    lib.mkEnableOption "Legendary Epic Games launcher.";
 
-  config = {
+  config = lib.mkIf config.gaming.legendary.enable {
     environment.systemPackages = with pkgs; [
       legendary-gl
       rare # GUI for Legendary (not working)

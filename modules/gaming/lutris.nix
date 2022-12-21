@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }: {
 
-  options.gaming.lutris = lib.mkEnableOption "Lutris";
+  options.gaming.lutris.enable = lib.mkEnableOption "Lutris game installer.";
 
-  config = lib.mkIf config.gaming.lutris {
+  config = lib.mkIf config.gaming.lutris.enable {
     environment.systemPackages = with pkgs; [
       lutris
       amdvlk # Vulkan drivers (probably already installed)

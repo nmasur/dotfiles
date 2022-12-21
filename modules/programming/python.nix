@@ -1,15 +1,21 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  home-manager.users.${config.user} = {
+  options.python.enable = lib.mkEnableOption "Python programming language.";
 
-    home.packages = with pkgs; [
-      # python310 # Standard Python interpreter
-      nodePackages.pyright # Python language server
-      black # Python formatter
-      python310Packages.flake8 # Python linter
-    ];
+  config = lib.mkIf config.python.enable {
 
-    programs.fish.shellAbbrs = { py = "python3"; };
+    home-manager.users.${config.user} = {
+
+      home.packages = with pkgs; [
+        # python310 # Standard Python interpreter
+        nodePackages.pyright # Python language server
+        black # Python formatter
+        python310Packages.flake8 # Python linter
+      ];
+
+      programs.fish.shellAbbrs = { py = "python3"; };
+
+    };
 
   };
 

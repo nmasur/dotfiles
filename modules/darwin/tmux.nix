@@ -1,6 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  home-manager.users.${config.user} = {
+  options.tmux.enable = lib.mkEnableOption "Tmux terminal multiplexer";
+
+  home-manager.users.${config.user} = lib.mkIf config.tmux.enable {
 
     programs.tmux = {
       enable = true;

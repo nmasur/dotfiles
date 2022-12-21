@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   # MacOS-specific settings for Alacritty
-  home-manager.users.${config.user} = {
+  home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
     programs.alacritty.settings = {
       font.size = lib.mkForce 20.0;
       shell.program = "${pkgs.fish}/bin/fish";

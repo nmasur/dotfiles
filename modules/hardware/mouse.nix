@@ -1,21 +1,22 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf config.gui.enable {
+  config =
+    lib.mkIf (config.gui.enable && config.physical && pkgs.stdenv.isLinux) {
 
-    # Mouse customization
-    services.ratbagd.enable = true;
+      # Mouse customization
+      services.ratbagd.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      libratbag # Mouse adjustments
-      piper # Mouse adjustments GUI
-    ];
+      environment.systemPackages = with pkgs; [
+        libratbag # Mouse adjustments
+        piper # Mouse adjustments GUI
+      ];
 
-    services.xserver.libinput.mouse = {
-      # Disable mouse acceleration
-      accelProfile = "flat";
-      accelSpeed = "1.15";
+      services.xserver.libinput.mouse = {
+        # Disable mouse acceleration
+        accelProfile = "flat";
+        accelSpeed = "1.15";
+      };
+
     };
-
-  };
 
 }

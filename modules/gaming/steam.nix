@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./. ];
+  options.gaming.steam.enable = lib.mkEnableOption "Steam game launcher.";
 
-  config = {
+  config = lib.mkIf (config.gaming.steam.enable && pkgs.stdenv.isLinux) {
     hardware.steam-hardware.enable = true;
     unfreePackages = [ "steam" "steam-original" "steamcmd" "steam-run" ];
     environment.systemPackages = with pkgs; [

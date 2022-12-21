@@ -12,7 +12,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf (pkgs.stdenv.isLinux && !config.wsl.enable) {
     services.openssh = {
       enable = true;
       ports = [ 22 ];

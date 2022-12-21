@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }: {
 
-  home-manager.users.${config.user} = {
+  options.gpg.enable = lib.mkEnableOption "GnuPG encryption.";
+
+  home-manager.users.${config.user} = lib.mkIf config.gpg.enable {
     programs.gpg.enable = true;
     services.gpg-agent = {
       enable = true;

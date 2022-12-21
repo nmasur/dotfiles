@@ -104,7 +104,7 @@
         fullName = "Noah Masur";
         gitName = fullName;
         gitEmail = "7386960+nmasur@users.noreply.github.com";
-        mailServer = "noahmasur.com";
+        mail.server = "noahmasur.com";
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
       };
 
@@ -154,9 +154,8 @@
         neovim = let pkgs = import nixpkgs { inherit system overlays; };
         in import ./modules/neovim/package {
           inherit pkgs;
-          colors = import ./modules/colorscheme/gruvbox/neovim-gruvbox.nix {
-            inherit pkgs;
-          };
+          colors =
+            import ./colorscheme/gruvbox/neovim-gruvbox.nix { inherit pkgs; };
         };
 
       });

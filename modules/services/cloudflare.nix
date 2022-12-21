@@ -1,6 +1,6 @@
 # This module is necessary for hosts that are serving through Cloudflare.
 
-{ ... }:
+{ config, lib, ... }:
 
 let
 
@@ -36,12 +36,12 @@ let
 
 in {
 
-  imports = [ ./caddy.nix ];
+  options.cloudflare.enable = lib.mkEnableOption "Use Cloudflare.";
 
-  config = {
+  config = lib.mkIf config.cloudflare.enable {
 
     # Forces Caddy to error if coming from a non-Cloudflare IP
-    caddyBlocks = [{
+    caddy.blocks = [{
       match = [{ not = [{ remote_ip.ranges = cloudflareIpRanges; }]; }];
       handle = [{
         handler = "static_response";

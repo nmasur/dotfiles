@@ -1,7 +1,20 @@
 { config, lib, pkgs, ... }: {
 
-  imports =
-    [ ../modules/shell ../modules/neovim ../modules/repositories/dotfiles.nix ];
+  imports = [
+    ./applications
+    ./darwin
+    ./gaming
+    ./graphical
+    ./hardware
+    ./mail
+    ./neovim
+    ./nixos
+    ./programming
+    ./repositories
+    ./services
+    ./shell
+    ./wsl
+  ];
 
   options = {
     user = lib.mkOption {
@@ -36,7 +49,7 @@
       colors = lib.mkOption {
         type = lib.types.attrs;
         description = "Base16 color scheme.";
-        default = (import ../modules/colorscheme/gruvbox).dark;
+        default = (import ../colorscheme/gruvbox).dark;
       };
       dark = lib.mkOption {
         type = lib.types.bool;

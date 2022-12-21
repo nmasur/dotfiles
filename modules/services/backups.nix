@@ -1,21 +1,22 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./secrets.nix ];
-
   options = {
 
-    backupS3 = {
+    backup.s3 = {
       endpoint = lib.mkOption {
         type = lib.types.str;
         description = "S3 endpoint for backups";
+        default = null;
       };
       bucket = lib.mkOption {
         type = lib.types.str;
         description = "S3 bucket for backups";
+        default = null;
       };
       accessKeyId = lib.mkOption {
         type = lib.types.str;
         description = "S3 access key ID for backups";
+        default = null;
       };
     };
 

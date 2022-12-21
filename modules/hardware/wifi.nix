@@ -1,9 +1,13 @@
-{ ... }: {
+{ config, pkgs, lib, ... }: {
 
-  # Enables wireless support via wpa_supplicant.
-  networking.wireless.enable = true;
+  config = lib.mkIf (config.physical && config.isLinux) {
 
-  # Allows the user to control the WiFi settings.
-  networking.wireless.userControlled.enable = true;
+    # Enables wireless support via wpa_supplicant.
+    networking.wireless.enable = true;
+
+    # Allows the user to control the WiFi settings.
+    networking.wireless.userControlled.enable = true;
+
+  };
 
 }

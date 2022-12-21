@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   # MacOS-specific settings for Kitty
-  home-manager.users.${config.user} = {
+  home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
     programs.kitty = {
       darwinLaunchOptions = [ "--start-as=fullscreen" ];
       font.size = lib.mkForce 20;

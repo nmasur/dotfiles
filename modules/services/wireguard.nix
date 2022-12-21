@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./secrets.nix ];
+  options.wireguard.enable = lib.mkEnableOption "Wireguard VPN setup.";
 
-  config = {
+  config = lib.mkIf (pkgs.stdenv.isLinux && config.wireguard.enable) {
 
     networking.wireguard = {
       enable = true;

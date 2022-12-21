@@ -1,17 +1,16 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./caddy.nix ./secrets.nix ./backups.nix ];
-
   options = {
 
     nextcloudServer = lib.mkOption {
       type = lib.types.str;
       description = "Hostname for Nextcloud";
+      default = null;
     };
 
   };
 
-  config = {
+  config = lib.mkIf config.nextcloudServer != null {
 
     services.nextcloud = {
       enable = true;
@@ -32,7 +31,7 @@
     }];
 
     # Point Caddy to Nginx
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.nextcloudServer ]; }];
       handle = [{
         handler = "reverse_proxy";

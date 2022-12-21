@@ -59,9 +59,8 @@
     program = "${
         (import ../modules/neovim/package {
           inherit pkgs;
-          colors = import ../modules/colorscheme/gruvbox/neovim-gruvbox.nix {
-            inherit pkgs;
-          };
+          colors =
+            import ../colorscheme/gruvbox/neovim-gruvbox.nix { inherit pkgs; };
         })
       }/bin/nvim";
   };

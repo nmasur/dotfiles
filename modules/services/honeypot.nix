@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 # Currently has some issues that don't make this viable.
 
@@ -38,7 +38,9 @@ let
 
 in {
 
-  networking.firewall = {
+  options.honeypot.enable = lib.mkEnableOption "Honeypot fail2ban system.";
+
+  networking.firewall = lib.mkIf config.honeypot.enable {
 
     extraPackages = [ pkgs.ipset ];
     # allowedTCPPorts = portsToBlock;

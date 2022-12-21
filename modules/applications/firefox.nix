@@ -1,13 +1,26 @@
 { config, pkgs, lib, ... }:
 
 {
-  config = lib.mkIf config.gui.enable {
 
-    unfreePackages = [ "onepassword-password-manager" "okta-browser-plugin" ];
+  options = {
+    firefox = {
+      enable = lib.mkEnableOption {
+        description = "Enable Firefox.";
+        default = false;
+      };
+    };
+  };
+
+  config = lib.mkIf (config.gui.enable && config.firefox.enable) {
+
+    unfreePackages = [
+      (lib.mkIf config."1password".enable "onepassword-password-manager")
+      "okta-browser-plugin"
+    ];
 
     home-manager.users.${config.user} = {
 
-      programs.firefox = rec {
+      programs.firefox = {
         enable = true;
         package =
           if pkgs.stdenv.isDarwin then pkgs.firefox-bin else pkgs.firefox;
@@ -17,7 +30,7 @@
           multi-account-containers
           facebook-container
           temporary-containers
-          onepassword-password-manager
+          (lib.mkIf config."1password".enable onepassword-password-manager)
           okta-browser-plugin
           sponsorblock
           reddit-enhancement-suite

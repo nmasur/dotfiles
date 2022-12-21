@@ -9,7 +9,7 @@ let
 
 in {
 
-  config = {
+  config = lib.mkIf pkgs.stdenv.isLinux {
 
     services.xserver.windowManager = {
       i3 = {

@@ -30,7 +30,7 @@ let
 
 in {
 
-  config = lib.mkIf config.gui.enable {
+  config = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
     sound.enable = true;
 
     # Enable PipeWire

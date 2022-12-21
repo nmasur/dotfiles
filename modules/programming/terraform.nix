@@ -1,15 +1,21 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  home-manager.users.${config.user} = {
-    programs.fish.shellAbbrs = {
-      # Terraform
-      te = "terraform";
+  options.terraform.enable = lib.mkEnableOption "Terraform tools.";
+
+  config = lib.mkIf config.terraform.enable {
+
+    home-manager.users.${config.user} = {
+      programs.fish.shellAbbrs = {
+        # Terraform
+        te = "terraform";
+      };
+      home.packages = with pkgs; [
+        terraform # Terraform executable
+        terraform-ls # Language server
+        tflint # Linter
+      ];
+
     };
-    home.packages = with pkgs; [
-      terraform # Terraform executable
-      terraform-ls # Language server
-      tflint # Linter
-    ];
 
   };
 

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = {
+  options.mail.aerc.enable = lib.mkEnableOption "Aerc email.";
+
+  config = lib.mkIf config.mail.aerc.enable {
 
     home-manager.users.${config.user} = {
 

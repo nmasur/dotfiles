@@ -1,11 +1,10 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./wireguard.nix ./secrets.nix ];
-
   options = {
     transmissionServer = lib.mkOption {
       type = lib.types.str;
       description = "Hostname for Transmission";
+      default = null;
     };
   };
 
@@ -13,7 +12,7 @@
     namespace = config.networking.wireguard.interfaces.wg0.interfaceNamespace;
     vpnIp = lib.strings.removeSuffix "/32"
       (builtins.head config.networking.wireguard.interfaces.wg0.ips);
-  in {
+  in lib.mkIf (config.wireguard.enable && config.transmissionServer != null) {
 
     # Setup transmission
     services.transmission = {

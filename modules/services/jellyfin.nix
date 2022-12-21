@@ -4,14 +4,15 @@
     streamServer = lib.mkOption {
       type = lib.types.str;
       description = "Hostname for Jellyfin library";
+      default = null;
     };
   };
 
-  config = {
+  config = lib.mkIf config.streamServer != null {
 
     services.jellyfin.enable = true;
 
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.streamServer ]; }];
       handle = [{
         handler = "reverse_proxy";

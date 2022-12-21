@@ -1,15 +1,14 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./caddy.nix ./backups.nix ];
-
   options = {
     bookServer = lib.mkOption {
       type = lib.types.str;
       description = "Hostname for Calibre library";
+      default = null;
     };
   };
 
-  config = {
+  config = lib.mkIf config.bookServer != null {
 
     services.calibre-web = {
       enable = true;
@@ -31,7 +30,7 @@
       })
     ];
 
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.bookServer ]; }];
       handle = [{
         handler = "reverse_proxy";

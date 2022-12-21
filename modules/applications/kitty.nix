@@ -1,6 +1,15 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf config.gui.enable {
+  options = {
+    kitty = {
+      enable = lib.mkEnableOption {
+        description = "Enable Kitty.";
+        default = false;
+      };
+    };
+  };
+
+  config = lib.mkIf (config.gui.enable && config.kitty.enable) {
     home-manager.users.${config.user} = {
       # xsession.windowManager.i3.config.terminal = "kitty";
       # programs.rofi.terminal = "${pkgs.kitty}/bin/kitty";

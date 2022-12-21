@@ -1,6 +1,8 @@
-{ config, ... }: {
+{ config, lib, ... }: {
 
-  config = {
+  options.mail.himalaya.enable = lib.mkEnableOption "Himalaya email.";
+
+  config = lib.mkIf config.mail.himalaya.enable {
 
     home-manager.users.${config.user} = {
 

@@ -10,6 +10,7 @@ nixpkgs.lib.nixosSystem {
     globals
     home-manager.nixosModules.home-manager
     {
+      physical = true;
       networking.hostName = "desktop";
       nixpkgs.overlays = [ nur.overlay ];
       # Set registry to flake packages, used for nix X commands
@@ -17,32 +18,32 @@ nixpkgs.lib.nixosSystem {
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gui.enable = true;
       theme = {
-        colors = (import ../../modules/colorscheme/gruvbox).dark;
+        colors = (import ../../colorscheme/gruvbox).dark;
         dark = true;
       };
       wallpaper = "${wallpapers}/gruvbox/road.jpg";
       gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
       passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
+
+      media.enable = true;
+      firefox.enable = true;
+      kitty.enable = true;
+      "1password".enable = true;
+      discord.enable = true;
+      nautilus.enable = true;
+      obsidian.enable = true;
+      mail.aerc.enable = true;
+      mail.himalaya.enable = true;
+      gaming.enable = true;
+      gaming.steam.enable = true;
+      gaming.legendary.enable = true;
+      keybase.enable = true;
+      mullvad.enable = true;
+      nixlang.enable = true;
+      dotfiles.enable = true;
     }
 
     ./hardware-configuration.nix
-    ../common.nix
-    ../../modules/hardware
-    ../../modules/nixos
-    ../../modules/graphical
-    ../../modules/applications/media.nix
-    ../../modules/applications/firefox.nix
-    ../../modules/applications/kitty.nix
-    ../../modules/applications/1password.nix
-    ../../modules/applications/discord.nix
-    ../../modules/applications/nautilus.nix
-    ../../modules/applications/obsidian.nix
-    ../../modules/mail
-    ../../modules/gaming/steam.nix
-    ../../modules/gaming/legendary.nix
-    ../../modules/repositories/notes.nix
-    ../../modules/services/keybase.nix
-    ../../modules/services/mullvad.nix
-    ../../modules/programming/nix.nix
+    ../../modules
   ];
 }

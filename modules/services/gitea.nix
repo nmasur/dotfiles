@@ -4,18 +4,17 @@ let giteaPath = "/var/lib/gitea"; # Default service directory
 
 in {
 
-  imports = [ ./caddy.nix ./backups.nix ];
-
   options = {
 
     giteaServer = lib.mkOption {
       description = "Hostname for Gitea.";
       type = lib.types.str;
+      default = null;
     };
 
   };
 
-  config = {
+  config = lib.mkIf config.giteaServer != null {
     services.gitea = {
       enable = true;
       httpPort = 3001;
@@ -47,7 +46,7 @@ in {
 
     networking.firewall.allowedTCPPorts = [ 122 ];
 
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.giteaServer ]; }];
       handle = [{
         handler = "reverse_proxy";

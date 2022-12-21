@@ -10,6 +10,7 @@ nixpkgs.lib.nixosSystem {
     globals
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
+    ../../modules
     {
       networking.hostName = "wsl";
       # Set registry to flake packages, used for nix X commands
@@ -17,7 +18,7 @@ nixpkgs.lib.nixosSystem {
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gui.enable = false;
       theme = {
-        colors = (import ../../modules/colorscheme/gruvbox).dark;
+        colors = (import ../../colorscheme/gruvbox).dark;
         dark = true;
       };
       passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
@@ -30,13 +31,12 @@ nixpkgs.lib.nixosSystem {
         interop.includePath =
           false; # Including Windows PATH will slow down Neovim command mode
       };
+
+      mail.aerc.enable = true;
+      mail.himalaya.enable = true;
+      dotfiles.enable = true;
+      nixlang.enable = true;
+      lua.enable = true;
     }
-    ../common.nix
-    ../../modules/wsl
-    ../../modules/nixos
-    ../../modules/mail
-    ../../modules/repositories/notes.nix
-    ../../modules/programming/nix.nix
-    ../../modules/programming/lua.nix
   ];
 }

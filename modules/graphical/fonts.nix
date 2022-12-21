@@ -4,7 +4,7 @@ let fontName = "Victor Mono";
 
 in {
 
-  config = lib.mkIf config.gui.enable {
+  config = lib.mkIf (config.gui.enable && pkgs.stdenv.isLinux) {
 
     fonts.fonts = with pkgs; [
       victor-mono # Used for Vim and Terminal

@@ -11,11 +11,14 @@ nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { };
   modules = [
-    (removeAttrs globals [ "mailServer" ])
+    ./hardware-configuration.nix
+    ../../modules
+    (removeAttrs globals [ "mail.server" ])
     home-manager.nixosModules.home-manager
     {
+      server = true;
       gui.enable = false;
-      theme = { colors = (import ../../modules/colorscheme/gruvbox).dark; };
+      theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
 
       # FQDNs for various services
@@ -33,7 +36,7 @@ nixpkgs.lib.nixosSystem {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
 
       # Nextcloud backup config
-      backupS3 = {
+      backup.s3 = {
         endpoint = "s3.us-west-002.backblazeb2.com";
         bucket = "noahmasur-backup";
         accessKeyId = "0026b0e73b2e2c80000000005";
@@ -72,20 +75,16 @@ nixpkgs.lib.nixosSystem {
 
       # Grant access to Transmission directories from Jellyfin
       users.users.jellyfin.extraGroups = [ "transmission" ];
+
+      # Proxy traffic with Cloudflare
+      cloudflare.enable = true;
+
+      # Setup Minecraft server
+      gaming.minecraft-server.enable = true;
+
+      # Clone dotfiles
+      dotfiles.enable = true;
+
     }
-    ./hardware-configuration.nix
-    ../common.nix
-    ../../modules/nixos
-    ../../modules/hardware/server.nix
-    ../../modules/services/sshd.nix
-    ../../modules/services/calibre.nix
-    ../../modules/services/jellyfin.nix
-    ../../modules/services/nextcloud.nix
-    ../../modules/services/cloudflare.nix
-    ../../modules/services/transmission.nix
-    ../../modules/services/prometheus.nix
-    ../../modules/services/vaultwarden.nix
-    ../../modules/services/gitea.nix
-    ../../modules/gaming/minecraft-server.nix
   ];
 }

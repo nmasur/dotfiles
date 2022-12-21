@@ -1,6 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  home-manager.users.${config.user} = {
+  options.charm.enable = lib.mkEnableOption "Charm utilities.";
+
+  home-manager.users.${config.user} = lib.mkIf config.charm.enable {
 
     home.packages = with pkgs; [
       glow # Markdown previews

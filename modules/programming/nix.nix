@@ -1,11 +1,17 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  home-manager.users.${config.user} = {
+  options.nixlang.enable = lib.mkEnableOption "Nix programming language.";
 
-    home.packages = with pkgs; [
-      nixfmt # Nix file formatter
-      nil # Nix language server
-    ];
+  config = lib.mkIf config.nixlang.enable {
+
+    home-manager.users.${config.user} = {
+
+      home.packages = with pkgs; [
+        nixfmt # Nix file formatter
+        nil # Nix language server
+      ];
+
+    };
 
   };
 

@@ -3,18 +3,18 @@
   imports = [ ./himalaya.nix ./aerc.nix ];
 
   options = {
-    mailUser = lib.mkOption {
+    mail.user = lib.mkOption {
       type = lib.types.str;
       description = "User name for the email address.";
       default = config.user;
     };
-    mailServer = lib.mkOption {
+    mail.server = lib.mkOption {
       type = lib.types.str;
       description = "Server name for the email address.";
     };
   };
 
-  config = {
+  config = lib.mkIf (config.mail.user != null && config.mail.server != null) {
 
     home-manager.users.${config.user} = {
       programs.mbsync = { enable = true; };
@@ -25,13 +25,13 @@
       accounts.email = {
         maildirBasePath = "${config.homePath}/mail";
         accounts = {
-          home = let address = "${config.mailUser}@${config.mailServer}";
+          home = let address = "${config.mail.user}@${config.mail.server}";
           in {
             userName = address;
             realName = config.fullName;
             primary = true;
             inherit address;
-            aliases = map (mailUser: "${mailUser}@${config.mailServer}") [
+            aliases = map (user: "${user}@${config.mail.server}") [
               "me"
               "hey"
               "admin"

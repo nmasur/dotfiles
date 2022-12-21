@@ -1,30 +1,35 @@
 # Replace sudo with doas
 
-{ config, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  security = {
+  config = lib.mkIf pkgs.stdenv.isLinux {
 
-    # Remove sudo
-    sudo.enable = false;
+    security = {
 
-    # Add doas
-    doas = {
-      enable = true;
+      # Remove sudo
+      sudo.enable = false;
 
-      # No password required
-      wheelNeedsPassword = false;
+      # Add doas
+      doas = {
+        enable = true;
 
-      # Pass environment variables from user to root
-      # Also requires removing password here
-      extraRules = [{
-        groups = [ "wheel" ];
-        noPass = true;
-        keepEnv = true;
-      }];
+        # No password required
+        wheelNeedsPassword = false;
+
+        # Pass environment variables from user to root
+        # Also requires removing password here
+        extraRules = [{
+          groups = [ "wheel" ];
+          noPass = true;
+          keepEnv = true;
+        }];
+      };
     };
+
+    home-manager.users.${config.user}.programs.fish.shellAliases = {
+      sudo = "doas";
+    };
+
   };
 
-  home-manager.users.${config.user}.programs.fish.shellAliases = {
-    sudo = "doas";
-  };
 }

@@ -1,6 +1,15 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf config.gui.enable {
+  options = {
+    alacritty = {
+      enable = lib.mkEnableOption {
+        description = "Enable Alacritty.";
+        default = false;
+      };
+    };
+  };
+
+  config = lib.mkIf (config.gui.enable && config.alacritty.enable) {
     home-manager.users.${config.user} = {
       xsession.windowManager.i3.config.terminal = "alacritty";
       programs.rofi.terminal = "${pkgs.alacritty}/bin/alacritty";

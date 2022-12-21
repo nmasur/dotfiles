@@ -1,6 +1,15 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf config.gui.enable {
+  options = {
+    media = {
+      enable = lib.mkEnableOption {
+        description = "Enable media programs.";
+        default = false;
+      };
+    };
+  };
+
+  config = lib.mkIf (config.gui.enable && config.media.enable) {
     home-manager.users.${config.user}.home.packages = with pkgs; [
       mpv # Video viewer
       sxiv # Image viewer

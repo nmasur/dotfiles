@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, pkgs, lib, ... }: {
 
   options = {
 
@@ -11,7 +11,7 @@
 
   };
 
-  config = {
+  config = lib.mkIf (pkgs.stdenv.isLinux) {
 
     # Allows us to declaritively set password
     users.mutableUsers = false;

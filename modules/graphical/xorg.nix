@@ -15,11 +15,13 @@
   };
 
   config = let
+
     gtkTheme = {
       name = config.gtk.theme.name;
       package = pkgs."${config.gtk.theme.package}";
     };
-  in lib.mkIf config.gui.enable {
+
+  in lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
 
     # Enable the X11 windowing system.
     services.xserver = {

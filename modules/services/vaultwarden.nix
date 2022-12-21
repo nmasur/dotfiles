@@ -4,18 +4,17 @@ let vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory
 
 in {
 
-  imports = [ ./caddy.nix ./secrets.nix ./backups.nix ];
-
   options = {
 
     vaultwardenServer = lib.mkOption {
       description = "Hostname for Vaultwarden.";
       type = lib.types.str;
+      default = null;
     };
 
   };
 
-  config = {
+  config = lib.mkIf config.vaultwardenServer != null {
     services.vaultwarden = {
       enable = true;
       config = {

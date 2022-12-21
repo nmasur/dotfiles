@@ -3,9 +3,10 @@
   options.metricsServer = lib.mkOption {
     type = lib.types.str;
     description = "Hostname of the Grafana server.";
+    default = null;
   };
 
-  config = {
+  config = lib.mkIf config.metricsServer != null {
 
     services.grafana.enable = true;
 
@@ -21,7 +22,7 @@
       }];
     };
 
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.metricsServer ]; }];
       handle = [{
         handler = "reverse_proxy";
