@@ -44,6 +44,8 @@
             "browser.toolbars.bookmarks.visibility" = "newtab";
             "browser.startup.page" = 3; # Restore previous session
             "browser.newtabpage.enabled" = false; # Make new tabs blank
+            "trailhead.firstrun.didSeeAboutWelcome" =
+              true; # Disable welcome splash
             "dom.forms.autocomplete.formautofill" = false; # Disable autofill
             "extensions.formautofill.creditCards.enabled" =
               false; # Disable credit cards
