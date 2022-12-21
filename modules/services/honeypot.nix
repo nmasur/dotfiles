@@ -40,7 +40,7 @@ in {
 
   options.honeypot.enable = lib.mkEnableOption "Honeypot fail2ban system.";
 
-  networking.firewall = lib.mkIf config.honeypot.enable {
+  config.networking.firewall = lib.mkIf config.honeypot.enable {
 
     extraPackages = [ pkgs.ipset ];
     # allowedTCPPorts = portsToBlock;

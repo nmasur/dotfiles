@@ -6,7 +6,7 @@
     default = null;
   };
 
-  config = lib.mkIf config.metricsServer != null {
+  config = lib.mkIf (config.metricsServer != null) {
 
     services.grafana.enable = true;
 

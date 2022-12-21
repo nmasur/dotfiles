@@ -14,7 +14,7 @@ in {
 
   };
 
-  config = lib.mkIf config.giteaServer != null {
+  config = lib.mkIf (config.giteaServer != null) {
     services.gitea = {
       enable = true;
       httpPort = 3001;

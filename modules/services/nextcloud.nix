@@ -10,7 +10,7 @@
 
   };
 
-  config = lib.mkIf config.nextcloudServer != null {
+  config = lib.mkIf (config.nextcloudServer != null) {
 
     services.nextcloud = {
       enable = true;

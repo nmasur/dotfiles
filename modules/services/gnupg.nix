@@ -2,7 +2,7 @@
 
   options.gpg.enable = lib.mkEnableOption "GnuPG encryption.";
 
-  home-manager.users.${config.user} = lib.mkIf config.gpg.enable {
+  config.home-manager.users.${config.user} = lib.mkIf config.gpg.enable {
     programs.gpg.enable = true;
     services.gpg-agent = {
       enable = true;

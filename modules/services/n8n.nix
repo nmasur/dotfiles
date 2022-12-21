@@ -8,7 +8,7 @@
     };
   };
 
-  config = lib.mkIf config.n8nServer != null {
+  config = lib.mkIf (config.n8nServer != null) {
 
     services.n8n = {
       enable = true;

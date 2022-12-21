@@ -41,7 +41,7 @@
     };
 
     # Create reverse proxy for web UI
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.transmissionServer ]; }];
       handle = [{
         handler = "reverse_proxy";

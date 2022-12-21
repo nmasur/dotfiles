@@ -14,7 +14,7 @@ in {
 
   };
 
-  config = lib.mkIf config.vaultwardenServer != null {
+  config = lib.mkIf (config.vaultwardenServer != null) {
     services.vaultwarden = {
       enable = true;
       config = {
@@ -46,7 +46,7 @@ in {
 
     networking.firewall.allowedTCPPorts = [ 3012 ];
 
-    caddyRoutes = [{
+    caddy.routes = [{
       match = [{ host = [ config.vaultwardenServer ]; }];
       handle = [{
         handler = "reverse_proxy";

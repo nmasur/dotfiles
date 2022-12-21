@@ -8,7 +8,7 @@
     };
   };
 
-  config = lib.mkIf config.bookServer != null {
+  config = lib.mkIf (config.bookServer != null) {
 
     services.calibre-web = {
       enable = true;

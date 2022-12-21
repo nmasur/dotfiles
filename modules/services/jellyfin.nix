@@ -8,7 +8,7 @@
     };
   };
 
-  config = lib.mkIf config.streamServer != null {
+  config = lib.mkIf (config.streamServer != null) {
 
     services.jellyfin.enable = true;
 
