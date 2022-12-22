@@ -7,6 +7,7 @@
     ./monitors.nix
     ./mouse.nix
     ./networking.nix
+    ./server.nix
     ./sleep.nix
     ./wifi.nix
   ];

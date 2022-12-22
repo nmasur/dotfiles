@@ -23,6 +23,7 @@ nixpkgs.lib.nixosSystem {
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
       wsl.enable = false;
+      caddy.enable = true;
 
       # FQDNs for various services
       networking.hostName = "oracle";
@@ -49,6 +50,7 @@ nixpkgs.lib.nixosSystem {
       users.users.nextcloud.extraGroups = [ "jellyfin" ];
 
       # Wireguard config for Transmission
+      wireguard.enable = true;
       networking.wireguard.interfaces.wg0 = {
 
         # The local IPs for this machine within the Wireguard network
@@ -87,6 +89,8 @@ nixpkgs.lib.nixosSystem {
 
       # Clone dotfiles
       dotfiles.enable = true;
+
+      neovim.enable = true;
 
     }
   ];
