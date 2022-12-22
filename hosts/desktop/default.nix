@@ -7,6 +7,9 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
+    ./hardware-configuration.nix
+    ../../modules
+    ../../nixos
     globals
     home-manager.nixosModules.home-manager
     {
@@ -42,8 +45,5 @@ nixpkgs.lib.nixosSystem {
       nixlang.enable = true;
       dotfiles.enable = true;
     }
-
-    ./hardware-configuration.nix
-    ../../modules
   ];
 }

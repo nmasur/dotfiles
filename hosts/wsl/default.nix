@@ -11,6 +11,7 @@ nixpkgs.lib.nixosSystem {
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     ../../modules
+    ../../nixos
     {
       networking.hostName = "wsl";
       # Set registry to flake packages, used for nix X commands

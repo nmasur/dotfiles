@@ -1,20 +1,7 @@
 { config, lib, pkgs, ... }: {
 
-  imports = [
-    ./applications
-    ./darwin
-    ./gaming
-    ./graphical
-    ./hardware
-    ./mail
-    ./neovim
-    ./nixos
-    ./programming
-    ./repositories
-    ./services
-    ./shell
-    ./wsl
-  ];
+  imports =
+    [ ./applications ./mail ./neovim ./programming ./repositories ./shell ];
 
   options = {
     user = lib.mkOption {

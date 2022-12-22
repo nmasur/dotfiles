@@ -8,6 +8,7 @@ darwin.lib.darwinSystem {
   specialArgs = { };
   modules = [
     ../../modules
+    ../../darwin
     (globals // {
       user = "Noah.Masur";
       gitName = "Noah-Masur_1701";
@@ -26,7 +27,6 @@ darwin.lib.darwinSystem {
       nixpkgs.overlays = [ firefox-darwin.overlay ] ++ overlays;
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
-
       mail.aerc.enable = true;
       mail.himalaya.enable = true;
       kitty.enable = true;

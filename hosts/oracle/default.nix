@@ -13,6 +13,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ./hardware-configuration.nix
     ../../modules
+    ../../nixos
     (removeAttrs globals [ "mail.server" ])
     home-manager.nixosModules.home-manager
     {
