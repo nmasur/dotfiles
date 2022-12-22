@@ -3,6 +3,7 @@
   imports = [ ./himalaya.nix ./aerc.nix ];
 
   options = {
+    mail.enable = lib.mkEnableOption "Mail service.";
     mail.user = lib.mkOption {
       type = lib.types.str;
       description = "User name for the email address.";
@@ -14,7 +15,7 @@
     };
   };
 
-  config = lib.mkIf (config.mail.user != null && config.mail.server != null) {
+  config = lib.mkIf config.mail.enable {
 
     home-manager.users.${config.user} = {
       programs.mbsync = { enable = true; };

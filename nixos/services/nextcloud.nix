@@ -69,7 +69,7 @@
           path = "${config.services.nextcloud.datadir}/data/nextcloud.db";
           replicas = [{
             url =
-              "s3://${config.backupS3.bucket}.${config.backupS3.endpoint}/nextcloud";
+              "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/nextcloud";
           }];
         }];
       };

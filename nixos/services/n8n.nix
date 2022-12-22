@@ -2,7 +2,7 @@
 
   options = {
     n8nServer = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Hostname for n8n automation";
       default = null;
     };

@@ -75,7 +75,7 @@ in {
           path = "${giteaPath}/data/gitea.db";
           replicas = [{
             url =
-              "s3://${config.backupS3.bucket}.${config.backupS3.endpoint}/gitea";
+              "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/gitea";
           }];
         }];
       };

@@ -1,8 +1,5 @@
 { config, pkgs, lib, ... }: {
 
-  # Timezone required for Redshift schedule
-  imports = [ ../nixos/timezone.nix ];
-
   config =
     lib.mkIf (config.gui.enable && config.physical && pkgs.stdenv.isLinux) {
 

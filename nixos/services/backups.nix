@@ -44,14 +44,14 @@
     systemd.services.litestream = {
       after = [ "backup-secret.service" ];
       requires = [ "backup-secret.service" ];
-      environment.AWS_ACCESS_KEY_ID = config.backupS3.accessKeyId;
+      environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
     };
 
     # # Backup library to object storage
     # services.restic.backups.calibre = {
     #   user = "calibre-web";
     #   repository =
-    #     "s3://${config.backupS3.endpoint}/${config.backupS3.bucket}/calibre";
+    #     "s3://${config.backup.s3.endpoint}/${config.backup.s3.bucket}/calibre";
     #   paths = [
     #     "/var/books"
     #     "/var/lib/calibre-web/app.db"
@@ -59,7 +59,7 @@
     #   ];
     #   initialize = true;
     #   timerConfig = { OnCalendar = "00:05:00"; };
-    #   environmentFile = backupS3File;
+    #   environmentFile = backup.s3File;
     # };
 
   };

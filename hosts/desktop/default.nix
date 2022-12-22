@@ -11,6 +11,7 @@ nixpkgs.lib.nixosSystem {
     ../../modules
     ../../nixos
     globals
+    wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     {
       physical = true;
@@ -27,6 +28,7 @@ nixpkgs.lib.nixosSystem {
       wallpaper = "${wallpapers}/gruvbox/road.jpg";
       gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
       passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
+      wsl.enable = false;
 
       media.enable = true;
       firefox.enable = true;
@@ -35,6 +37,7 @@ nixpkgs.lib.nixosSystem {
       discord.enable = true;
       nautilus.enable = true;
       obsidian.enable = true;
+      mail.enable = true;
       mail.aerc.enable = true;
       mail.himalaya.enable = true;
       gaming.enable = true;

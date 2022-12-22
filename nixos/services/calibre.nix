@@ -53,7 +53,7 @@
       let libraryPath = "/var/lib/calibre-web"; # Default location
       in {
         description = "Backup Calibre data";
-        environment.AWS_ACCESS_KEY_ID = config.backupS3.accessKeyId;
+        environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
         serviceConfig = {
           Type = "oneshot";
           User = "calibre-web";
@@ -63,8 +63,8 @@
         script = ''
           ${pkgs.awscli2}/bin/aws s3 sync \
               ${libraryPath}/ \
-              s3://${config.backupS3.bucket}/calibre/ \
-              --endpoint-url=https://${config.backupS3.endpoint}
+              s3://${config.backup.s3.bucket}/calibre/ \
+              --endpoint-url=https://${config.backup.s3.endpoint}
         '';
       };
 

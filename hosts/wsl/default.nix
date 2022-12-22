@@ -7,11 +7,11 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
+    ../../modules
+    ../../nixos
     globals
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
-    ../../modules
-    ../../nixos
     {
       networking.hostName = "wsl";
       # Set registry to flake packages, used for nix X commands
@@ -33,6 +33,7 @@ nixpkgs.lib.nixosSystem {
           false; # Including Windows PATH will slow down Neovim command mode
       };
 
+      mail.enable = true;
       mail.aerc.enable = true;
       mail.himalaya.enable = true;
       dotfiles.enable = true;

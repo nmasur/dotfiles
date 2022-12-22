@@ -77,7 +77,7 @@ in {
           path = "${vaultwardenPath}/db.sqlite3";
           replicas = [{
             url =
-              "s3://${config.backupS3.bucket}.${config.backupS3.endpoint}/vaultwarden";
+              "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/vaultwarden";
           }];
         }];
       };
@@ -101,7 +101,7 @@ in {
     # Backup other Vaultwarden data to object storage
     systemd.services.vaultwarden-backup = {
       description = "Backup Vaultwarden files";
-      environment.AWS_ACCESS_KEY_ID = config.backupS3.accessKeyId;
+      environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
       serviceConfig = {
         Type = "oneshot";
         User = "vaultwarden";
@@ -111,8 +111,8 @@ in {
       script = ''
         ${pkgs.awscli2}/bin/aws s3 sync \
             ${vaultwardenPath}/ \
-            s3://${config.backupS3.bucket}/vaultwarden/ \
-            --endpoint-url=https://${config.backupS3.endpoint} \
+            s3://${config.backup.s3.bucket}/vaultwarden/ \
+            --endpoint-url=https://${config.backup.s3.endpoint} \
             --exclude "*db.sqlite3*" \
             --exclude ".db.sqlite3*"
       '';

@@ -21,7 +21,7 @@
       package = pkgs."${config.gtk.theme.package}";
     };
 
-  in lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
+  in lib.mkIf config.gui.enable {
 
     # Enable the X11 windowing system.
     services.xserver = {

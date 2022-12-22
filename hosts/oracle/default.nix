@@ -15,12 +15,14 @@ nixpkgs.lib.nixosSystem {
     ../../modules
     ../../nixos
     (removeAttrs globals [ "mail.server" ])
+    wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     {
       server = true;
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
+      wsl.enable = false;
 
       # FQDNs for various services
       networking.hostName = "oracle";
