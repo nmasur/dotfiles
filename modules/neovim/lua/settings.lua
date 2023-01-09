@@ -4,7 +4,8 @@
 
 vim.filetype.add({
     pattern = {
-        [".*%.tfvars"] = "terraform",
+        [".*%.tfvars"] = "hcl",
+        [".*%.tf"] = "hcl",
     },
 })
 

@@ -42,7 +42,10 @@
                 command = "${pkgs.shfmt}/bin/shfmt",
                 extra_args = { "-i", "4", "-ci" },
             }),
-            require("null-ls").builtins.formatting.terraform_fmt.with({ command = "${pkgs.terraform}/bin/terraform" }),
+            require("null-ls").builtins.formatting.terraform_fmt.with({
+                command = "${pkgs.terraform}/bin/terraform",
+                extra_filetypes = { "hcl" },
+            }),
         },
 
         on_attach = function(client, bufnr)
