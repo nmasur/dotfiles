@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf (config.physical && config.isLinux) {
+  config = lib.mkIf (config.physical && pkgs.stdenv.isLinux) {
 
     # Enables wireless support via wpa_supplicant.
     networking.wireless.enable = true;

@@ -24,7 +24,6 @@
           # '';
         };
         fade = false;
-        experimentalBackends = true;
         inactiveOpacity = 1.0;
         menuOpacity = 1.0;
         opacityRules = [

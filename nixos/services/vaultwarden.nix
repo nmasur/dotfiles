@@ -8,7 +8,7 @@ in {
 
     vaultwardenServer = lib.mkOption {
       description = "Hostname for Vaultwarden.";
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       default = null;
     };
 

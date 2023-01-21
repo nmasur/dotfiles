@@ -2,7 +2,7 @@
 
   options = {
     streamServer = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Hostname for Jellyfin library";
       default = null;
     };

@@ -1,4 +1,4 @@
-{ inputs, globals, ... }:
+{ inputs, globals, overlays, ... }:
 
 with inputs;
 
@@ -16,7 +16,7 @@ nixpkgs.lib.nixosSystem {
     {
       physical = true;
       networking.hostName = "desktop";
-      nixpkgs.overlays = [ nur.overlay ];
+      nixpkgs.overlays = [ nur.overlay ] ++ overlays;
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
@@ -29,7 +29,9 @@ nixpkgs.lib.nixosSystem {
       gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
       passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
       wsl.enable = false;
+      publicKey = null;
 
+      neovim.enable = true;
       media.enable = true;
       firefox.enable = true;
       kitty.enable = true;

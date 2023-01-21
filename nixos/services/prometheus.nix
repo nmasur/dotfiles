@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   options.metricsServer = lib.mkOption {
-    type = lib.types.str;
+    type = lib.types.nullOr lib.types.str;
     description = "Hostname of the Grafana server.";
     default = null;
   };

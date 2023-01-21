@@ -8,7 +8,7 @@ in {
 
     giteaServer = lib.mkOption {
       description = "Hostname for Gitea.";
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       default = null;
     };
 
