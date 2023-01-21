@@ -12,10 +12,7 @@ in {
   config = lib.mkIf pkgs.stdenv.isLinux {
 
     services.xserver.windowManager = {
-      i3 = {
-        enable = config.services.xserver.enable;
-        package = pkgs.i3-gaps;
-      };
+      i3 = { enable = config.services.xserver.enable; };
     };
 
     environment.systemPackages = with pkgs; [
@@ -26,7 +23,6 @@ in {
     home-manager.users.${config.user} = {
       xsession.windowManager.i3 = {
         enable = config.services.xserver.enable;
-        package = pkgs.i3-gaps;
         config = let
           modifier = "Mod4"; # Super key
           ws1 = "1:I";

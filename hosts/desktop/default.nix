@@ -46,7 +46,7 @@ nixpkgs.lib.nixosSystem {
       gaming.steam.enable = true;
       gaming.legendary.enable = true;
       keybase.enable = true;
-      mullvad.enable = true;
+      # mullvad.enable = true;
       nixlang.enable = true;
       dotfiles.enable = true;
     }
