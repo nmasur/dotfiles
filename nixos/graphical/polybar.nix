@@ -11,6 +11,7 @@
         package = pkgs.polybar.override {
           pulseSupport = true;
           githubSupport = true;
+          i3Support = true;
         };
         script = "polybar &";
         config = {
