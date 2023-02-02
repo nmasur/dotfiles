@@ -17,6 +17,20 @@ in {
 
     home-manager.users.${config.user} = {
 
+      # Fix: age won't build
+      nixpkgs.overlays = [
+        (final: prev: {
+          age = prev.age.overrideAttrs (old: {
+            src = prev.fetchFromGitHub {
+              owner = "FiloSottile";
+              repo = "age";
+              rev = "7354aa0d08a06eac42c635670a55f858bd23c943";
+              sha256 = "H80mNTgZmExDMgubONIXP7jmLBvNMVqXee6NiZJhPFY=";
+            };
+          });
+        })
+      ];
+
       home.packages = with pkgs; [
         unzip # Extract zips
         rsync # Copy folders

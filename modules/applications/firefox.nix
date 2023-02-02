@@ -54,7 +54,7 @@
             "browser.quitShortcut.disabled" =
               if pkgs.stdenv.isLinux then true else false;
             "browser.theme.dark-private-windows" = true;
-            "browser.toolbars.bookmarks.visibility" = "newtab";
+            "browser.toolbars.bookmarks.visibility" = false;
             "browser.startup.page" = 3; # Restore previous session
             "browser.newtabpage.enabled" = false; # Make new tabs blank
             "trailhead.firstrun.didSeeAboutWelcome" =
