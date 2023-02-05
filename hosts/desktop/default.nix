@@ -42,13 +42,19 @@ nixpkgs.lib.nixosSystem {
       mail.enable = true;
       mail.aerc.enable = true;
       mail.himalaya.enable = true;
-      gaming.enable = true;
-      gaming.steam.enable = true;
-      gaming.legendary.enable = true;
       keybase.enable = true;
       # mullvad.enable = true;
       nixlang.enable = true;
       dotfiles.enable = true;
+
+      gaming = {
+        enable = true;
+        steam.enable = true;
+        legendary.enable = true;
+        lutris.enable = true;
+        leagueoflegends.enable = true;
+      };
+
     }
   ];
 }
