@@ -125,22 +125,23 @@
     in rec {
 
       nixosConfigurations = {
-        desktop = import ./hosts/desktop { inherit inputs globals overlays; };
-        wsl = import ./hosts/wsl { inherit inputs globals overlays; };
-        oracle = import ./hosts/oracle { inherit inputs globals overlays; };
+        tempest = import ./hosts/tempest { inherit inputs globals overlays; };
+        hydra = import ./hosts/hydra { inherit inputs globals overlays; };
+        flame = import ./hosts/flame { inherit inputs globals overlays; };
       };
 
       darwinConfigurations = {
-        macbook = import ./hosts/macbook { inherit inputs globals overlays; };
+        lookingglass =
+          import ./hosts/macbook { inherit inputs globals overlays; };
       };
 
       # For quickly applying local settings with:
-      # home-manager switch --flake .#desktop
+      # home-manager switch --flake .#tempest
       homeConfigurations = {
-        desktop =
-          nixosConfigurations.desktop.config.home-manager.users.${globals.user}.home;
-        macbook =
-          darwinConfigurations.macbook.config.home-manager.users."Noah.Masur".home;
+        tempest =
+          nixosConfigurations.tempest.config.home-manager.users.${globals.user}.home;
+        lookingglass =
+          darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };
 
       # Package servers into images with a generator

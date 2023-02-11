@@ -1,11 +1,12 @@
-{ inputs, globals, overlays, ... }:
-
-with inputs;
-
+# The Flame
 # System configuration for an Oracle free server
 
 # How to install:
 # https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
+
+{ inputs, globals, overlays, ... }:
+
+with inputs;
 
 nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
@@ -26,7 +27,7 @@ nixpkgs.lib.nixosSystem {
       caddy.enable = true;
 
       # FQDNs for various services
-      networking.hostName = "oracle";
+      networking.hostName = "flame";
       bookServer = "books.masu.rs";
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";

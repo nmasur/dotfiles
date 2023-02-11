@@ -1,8 +1,10 @@
+# The Looking Glass
+# System configuration for my work Macbook
+
 { inputs, globals, overlays, ... }:
 
 with inputs;
 
-# System configuration for my work MacBook
 darwin.lib.darwinSystem {
   system = "x86_64-darwin";
   specialArgs = { };

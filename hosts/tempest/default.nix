@@ -1,8 +1,10 @@
+# The Tempest
+# System configuration for my desktop
+
 { inputs, globals, overlays, ... }:
 
 with inputs;
 
-# System configuration for my desktop
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
@@ -15,7 +17,7 @@ nixpkgs.lib.nixosSystem {
     home-manager.nixosModules.home-manager
     {
       physical = true;
-      networking.hostName = "desktop";
+      networking.hostName = "tempest";
       nixpkgs.overlays = [ nur.overlay ] ++ overlays;
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
