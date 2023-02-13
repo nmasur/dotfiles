@@ -24,29 +24,29 @@
         enable = true;
         package =
           if pkgs.stdenv.isDarwin then pkgs.firefox-bin else pkgs.firefox;
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-          vimium
-          multi-account-containers
-          facebook-container
-          temporary-containers
-          (lib.mkIf config."1password".enable onepassword-password-manager)
-          okta-browser-plugin
-          sponsorblock
-          reddit-enhancement-suite
-          return-youtube-dislikes
-          bypass-paywalls-clean
-          markdownload
-          darkreader
-          snowflake
-          don-t-fuck-with-paste
-          i-dont-care-about-cookies
-          wappalyzer
-        ];
         profiles.default = {
           id = 0;
           name = "default";
           isDefault = true;
+          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            ublock-origin
+            vimium
+            multi-account-containers
+            facebook-container
+            temporary-containers
+            (lib.mkIf config."1password".enable onepassword-password-manager)
+            okta-browser-plugin
+            sponsorblock
+            reddit-enhancement-suite
+            return-youtube-dislikes
+            bypass-paywalls-clean
+            markdownload
+            darkreader
+            snowflake
+            don-t-fuck-with-paste
+            i-dont-care-about-cookies
+            wappalyzer
+          ];
           settings = {
             "app.update.auto" = false;
             "browser.aboutConfig.showWarning" = false;

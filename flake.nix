@@ -132,7 +132,7 @@
 
       darwinConfigurations = {
         lookingglass =
-          import ./hosts/macbook { inherit inputs globals overlays; };
+          import ./hosts/lookingglass { inherit inputs globals overlays; };
       };
 
       # For quickly applying local settings with:
