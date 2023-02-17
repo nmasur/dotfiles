@@ -35,4 +35,9 @@
     # Allows GRUB to interact with the UEFI/BIOS I guess
     efi.canTouchEfiVariables = true;
   };
+
+  # Allow reading from Windows drives
+  boot.supportedFilesystems =
+    lib.mkIf (config.physical && pkgs.stdenv.isLinux) [ "ntfs" ];
+
 }
