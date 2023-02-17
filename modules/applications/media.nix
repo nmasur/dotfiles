@@ -10,12 +10,21 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.media.enable) {
-    home-manager.users.${config.user}.home.packages = with pkgs; [
-      mpv # Video viewer
-      sxiv # Image viewer
-      mupdf # PDF viewer
-      zathura # PDF viewer
-    ];
+    home-manager.users.${config.user} = {
+      home.packages = with pkgs; [
+        mpv # Video viewer
+        sxiv # Image viewer
+        mupdf # PDF viewer
+        zathura # PDF viewer
+      ];
+
+      # Set default for opening PDFs
+      xdg.mimeApps.defaultApplications."application/pdf" =
+        [ "zathura.desktop" ];
+      xdg.mimeApps.defaultApplications."image/*" = [ "sxiv.desktop" ];
+
+    };
+
   };
 
 }

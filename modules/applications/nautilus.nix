@@ -17,6 +17,10 @@
         gnome.sushi # Quick preview with spacebar
       ];
 
+      # Set default for opening directories
+      xdg.mimeApps.defaultApplications."inode/directory" =
+        [ "nautilus.desktop" ];
+
       programs.fish.functions = {
         qr = {
           body =
