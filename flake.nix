@@ -128,6 +128,7 @@
         tempest = import ./hosts/tempest { inherit inputs globals overlays; };
         hydra = import ./hosts/hydra { inherit inputs globals overlays; };
         flame = import ./hosts/flame { inherit inputs globals overlays; };
+        swan = import ./hosts/swan { inherit inputs globals overlays; };
       };
 
       darwinConfigurations = {
@@ -149,7 +150,13 @@
 
         aws = {
           "${system}" =
-            import ./hosts/aws { inherit inputs globals system overlays; };
+            import ./generators/aws { inherit inputs globals system overlays; };
+        };
+
+        staff = {
+          "${system}" = import ./generators/staff {
+            inherit inputs globals system overlays;
+          };
         };
 
         neovim = let pkgs = import nixpkgs { inherit system overlays; };
