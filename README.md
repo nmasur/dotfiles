@@ -52,7 +52,7 @@ following command:
 
 ```bash
 nix-shell -p nixVersions.stable
-sudo nixos-rebuild switch --flake github:nmasur/dotfiles#desktop
+sudo nixos-rebuild switch --flake github:nmasur/dotfiles#tempest
 ```
 
 ## Windows - From NixOS WSL
