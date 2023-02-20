@@ -14,7 +14,7 @@
   config = lib.mkIf (config.gui.enable && config.firefox.enable) {
 
     unfreePackages = [
-      (lib.mkIf config."1password".enable "onepassword-password-manager")
+      (lib.mkIf config._1password.enable "onepassword-password-manager")
       "okta-browser-plugin"
     ];
 
@@ -34,7 +34,7 @@
             multi-account-containers
             facebook-container
             temporary-containers
-            (lib.mkIf config."1password".enable onepassword-password-manager)
+            (lib.mkIf config._1password.enable onepassword-password-manager)
             okta-browser-plugin
             sponsorblock
             reddit-enhancement-suite

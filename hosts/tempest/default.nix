@@ -37,7 +37,7 @@ nixpkgs.lib.nixosSystem {
       media.enable = true;
       firefox.enable = true;
       kitty.enable = true;
-      "1password".enable = true;
+      _1password.enable = true;
       discord.enable = true;
       nautilus.enable = true;
       obsidian.enable = true;
