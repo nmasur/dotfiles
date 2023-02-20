@@ -39,7 +39,6 @@
             sponsorblock
             reddit-enhancement-suite
             return-youtube-dislikes
-            bypass-paywalls-clean
             markdownload
             darkreader
             snowflake
