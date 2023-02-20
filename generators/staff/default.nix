@@ -1,7 +1,7 @@
 # The Staff
 # ISO configuration for my USB drive
 
-{ inputs, globals, overlays, ... }:
+{ inputs, globals, system, overlays, ... }:
 
 with inputs;
 
