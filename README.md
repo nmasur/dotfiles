@@ -1,3 +1,5 @@
+# System Configurations
+
 This repository contains configuration files for my NixOS, macOS, and WSL
 hosts.
 
@@ -12,25 +14,25 @@ However, some of the configurations are easier to lift directly:
 - [Git aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/git.nix)
 - [Hammerspoon](https://github.com/nmasur/dotfiles/tree/master/modules/darwin/hammerspoon)
 
-Try out my Neovim config:
+Try out my Neovim config (requires [nix](https://nixos.org/download.html)):
 
 ```bash
 nix run github:nmasur/dotfiles#neovim
 ```
 
-Or build it as a package:
+Or build it as a package (requires [nix](https://nixos.org/download.html)):
 
 ```bash
 nix build github:nmasur/dotfiles#neovim
 ```
 
 If you already have a Neovim configuration, you may need to move it out of
-`~/.config/nvim` or set `XDG_CONFIG_HOME` to another value; otherwise, both
+`~/.config/nvim` or set `XDG_CONFIG_HOME` to another value; otherwise both
 configs might conflict with each other.
 
 ---
 
-# Installation
+# Full Installation
 
 ## NixOS - From Live Disk
 
@@ -42,7 +44,7 @@ installer disk:
 ```bash
 lsblk # Choose the disk you want to wipe
 nix-shell -p nixVersions.stable
-nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop
+nix run github:nmasur/dotfiles#installer -- nvme0n1 tempest
 ```
 
 ## NixOS - From Existing System
@@ -63,7 +65,7 @@ the WSL configuration:
 
 ```
 nix-shell -p nixVersions.stable
-sudo nixos-rebuild switch --flake github:nmasur/dotfiles#flame
+sudo nixos-rebuild switch --flake github:nmasur/dotfiles#hydra
 ```
 
 You should also download the
