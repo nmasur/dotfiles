@@ -17,7 +17,7 @@
         --identity ~/.ssh/id_ed25519 $encryptedfile > $tmpfile
       echo "Encrypting ''${encryptedfile}..."
       ${pkgs.age}/bin/age --encrypt --armor --recipients-file ${
-        builtins.toString ../hosts/public-keys
+        builtins.toString ../public-keys
       } $tmpfile > $encryptedfile
       rm $tmpfile
     done
