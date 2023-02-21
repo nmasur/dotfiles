@@ -1,4 +1,0 @@
-#!/usr/local/bin/nu
-
-ls | sort-by size | reverse | keep 10
-

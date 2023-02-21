@@ -1,3 +1,0 @@
-#!/usr/local/bin/nu
-
-ls | sort-by modified | keep 5

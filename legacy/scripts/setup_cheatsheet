@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "downloading cheatsheet"
-curl https://cht.sh/:cht.sh > ~/.local/bin/cheat
-chmod 755 ~/.local/bin/cheat
-echo "cheatsheet ✓"
