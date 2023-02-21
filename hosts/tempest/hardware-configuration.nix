@@ -15,12 +15,12 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/f0313f58-971a-46e3-9191-909fe5eb7f7e";
+    device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/FB26-799C";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
@@ -34,7 +34,7 @@
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
