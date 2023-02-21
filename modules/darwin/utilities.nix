@@ -34,7 +34,7 @@ in {
       ipcalc # Make IP network calculations
       (mkScript {
         name = "ocr";
-        file = ../modules/shell/bash/scripts/ocr.sh;
+        file = ../../modules/common/shell/bash/scripts/ocr.sh;
         env = [ tesseract ];
       })
     ];

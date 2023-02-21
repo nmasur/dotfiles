@@ -8,10 +8,10 @@ configuration may be difficult to translate to a non-Nix system.
 
 However, some of the configurations are easier to lift directly:
 
-- [Neovim](https://github.com/nmasur/dotfiles/tree/master/modules/neovim/config)
-- [Fish functions](https://github.com/nmasur/dotfiles/tree/master/modules/shell/fish/functions)
-- [More fish aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/fish/default.nix)
-- [Git aliases](https://github.com/nmasur/dotfiles/blob/master/modules/shell/git.nix)
+- [Neovim](https://github.com/nmasur/dotfiles/tree/master/modules/common/neovim/config)
+- [Fish functions](https://github.com/nmasur/dotfiles/tree/master/modules/common/shell/fish/functions)
+- [More fish aliases](https://github.com/nmasur/dotfiles/blob/master/modules/common/shell/fish/default.nix)
+- [Git aliases](https://github.com/nmasur/dotfiles/blob/master/modules/common/shell/git.nix)
 - [Hammerspoon](https://github.com/nmasur/dotfiles/tree/master/modules/darwin/hammerspoon)
 
 Try out my Neovim config (requires [nix](https://nixos.org/download.html)):

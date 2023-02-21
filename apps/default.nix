@@ -57,7 +57,7 @@
   neovim = {
     type = "app";
     program = "${
-        (import ../modules/neovim/package {
+        (import ../modules/common/neovim/package {
           inherit pkgs;
           colors =
             import ../colorscheme/gruvbox/neovim-gruvbox.nix { inherit pkgs; };

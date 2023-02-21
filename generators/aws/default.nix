@@ -15,16 +15,16 @@ nixos-generators.nixosGenerate {
       gitEmail = globals.gitEmail;
       networking.hostName = "sheep";
       gui.enable = false;
-      colorscheme = (import ../modules/colorscheme/gruvbox);
+      colorscheme = (import ../colorscheme/gruvbox);
       passwordHash = null;
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
       # AWS settings require this
       permitRootLogin = "prohibit-password";
     }
-    ../../hosts/common.nix
+    ../../modules/common
     ../../modules/nixos
-    ../../modules/services/sshd.nix
+    ../../modules/common/services/sshd.nix
   ] ++ [
     # Required to fix diskSize errors during build
     ({ ... }: { amazonImage.sizeMB = 16 * 1024; })

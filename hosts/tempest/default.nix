@@ -10,8 +10,8 @@ nixpkgs.lib.nixosSystem {
   specialArgs = { };
   modules = [
     ./hardware-configuration.nix
-    ../../modules
-    ../../nixos
+    ../../modules/common
+    ../../modules/nixos
     globals
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager

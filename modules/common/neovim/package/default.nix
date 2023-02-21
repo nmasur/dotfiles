@@ -13,16 +13,16 @@
 # in pkgs.neovimBuilder {
 #   package = pkgs.neovim-unwrapped;
 #   imports = [
-#     ./modules/neovim/plugins/bufferline.nix
-#     ./modules/neovim/plugins/completion.nix
-#     ./modules/neovim/plugins/gitsigns.nix
-#     ./modules/neovim/plugins/lsp.nix
-#     ./modules/neovim/plugins/misc.nix
-#     ./modules/neovim/plugins/statusline.nix
-#     ./modules/neovim/plugins/syntax.nix
-#     ./modules/neovim/plugins/telescope.nix
-#     ./modules/neovim/plugins/toggleterm.nix
-#     ./modules/neovim/plugins/tree.nix
+#     ./modules/common/neovim/plugins/bufferline.nix
+#     ./modules/common/neovim/plugins/completion.nix
+#     ./modules/common/neovim/plugins/gitsigns.nix
+#     ./modules/common/neovim/plugins/lsp.nix
+#     ./modules/common/neovim/plugins/misc.nix
+#     ./modules/common/neovim/plugins/statusline.nix
+#     ./modules/common/neovim/plugins/syntax.nix
+#     ./modules/common/neovim/plugins/telescope.nix
+#     ./modules/common/neovim/plugins/toggleterm.nix
+#     ./modules/common/neovim/plugins/tree.nix
 #   ] ++ extraConfig;
 # }
 

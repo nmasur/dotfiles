@@ -9,8 +9,8 @@ darwin.lib.darwinSystem {
   system = "x86_64-darwin";
   specialArgs = { };
   modules = [
-    ../../modules
-    ../../darwin
+    ../../modules/common
+    ../../modules/darwin
     (globals // {
       user = "Noah.Masur";
       gitName = "Noah-Masur_1701";

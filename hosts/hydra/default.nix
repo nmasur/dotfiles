@@ -9,8 +9,8 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
-    ../../modules
-    ../../nixos
+    ../../modules/common
+    ../../modules/nixos
     globals
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
