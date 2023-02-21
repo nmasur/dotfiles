@@ -33,6 +33,7 @@ nixpkgs.lib.nixosSystem {
       wsl.enable = false;
       publicKey = null;
 
+      charm.enable = true;
       neovim.enable = true;
       media.enable = true;
       firefox.enable = true;

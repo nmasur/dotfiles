@@ -41,7 +41,6 @@ in {
         tealdeer # Cheatsheets
         tree # View directory hierarchy
         htop # Show system processes
-        glow # Pretty markdown previews
         qrencode # Generate qr codes
         vimv-rs # Batch rename files
         dig # DNS lookup

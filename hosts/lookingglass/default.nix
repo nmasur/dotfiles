@@ -29,6 +29,7 @@ darwin.lib.darwinSystem {
       nixpkgs.overlays = [ firefox-darwin.overlay ] ++ overlays;
       # Set registry to flake packages, used for nix X commands
       nix.registry.nixpkgs.flake = nixpkgs;
+      charm.enable = true;
       neovim.enable = true;
       mail.enable = true;
       mail.aerc.enable = true;
@@ -42,7 +43,7 @@ darwin.lib.darwinSystem {
       python.enable = true;
       lua.enable = true;
       kubernetes.enable = true;
-      "1password".enable = true;
+      _1password.enable = true;
     }
   ];
 }
