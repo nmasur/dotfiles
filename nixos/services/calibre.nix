@@ -20,16 +20,6 @@
       };
     };
 
-    # Fix: https://github.com/janeczku/calibre-web/issues/2422
-    nixpkgs.overlays = [
-      (final: prev: {
-        calibre-web = prev.calibre-web.overrideAttrs (old: {
-          patches = (old.patches or [ ])
-            ++ [ ../../patches/calibre-web-cloudflare.patch ];
-        });
-      })
-    ];
-
     caddy.routes = [{
       match = [{ host = [ config.bookServer ]; }];
       handle = [{

@@ -112,7 +112,8 @@
       overlays = [
         inputs.nur.overlay
         inputs.nix2vim.overlay
-        (import ./modules/neovim/plugins-overlay.nix inputs)
+        (import ./overlays/neovim-plugins.nix inputs)
+        (import ./overlays/calibre-web.nix)
       ];
 
       # System types to support.
