@@ -5,7 +5,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs";
   inputs.poetry2nix.url = "github:nix-community/poetry2nix";
 
-  outputs = { self, nixpkgs, flake-utils, poetry2nix }:
+  outputs = { nixpkgs, flake-utils, poetry2nix }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {

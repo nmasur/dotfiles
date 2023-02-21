@@ -1,7 +1,7 @@
 { pkgs, ... }: {
 
   plugins = [
-    (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins:
+    (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins:
       with pkgs.tree-sitter-grammars; [
         tree-sitter-hcl
         tree-sitter-python

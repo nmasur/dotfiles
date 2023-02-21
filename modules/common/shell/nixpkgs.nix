@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   home-manager.users.${config.user} = {
 
     programs.fish = {

@@ -94,7 +94,7 @@
 
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { nixpkgs, ... }@inputs:
 
     let
 

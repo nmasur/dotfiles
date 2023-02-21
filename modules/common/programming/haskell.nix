@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   options.haskell.enable = lib.mkEnableOption "Haskell programming language.";
 

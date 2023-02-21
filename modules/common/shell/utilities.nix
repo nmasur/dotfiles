@@ -19,8 +19,8 @@ in {
 
       # Fix: age won't build
       nixpkgs.overlays = [
-        (final: prev: {
-          age = prev.age.overrideAttrs (old: {
+        (_final: prev: {
+          age = prev.age.overrideAttrs (_old: {
             src = prev.fetchFromGitHub {
               owner = "FiloSottile";
               repo = "age";

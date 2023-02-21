@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
 
   users.users.${config.user}.shell = pkgs.fish;
   programs.fish.enable =

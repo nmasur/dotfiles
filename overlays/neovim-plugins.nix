@@ -1,18 +1,18 @@
 # Adopted from here: https://github.com/DieracDelta/vimconfig/blob/801b62dd56cfee59574639904a6c95b525725f66/plugins.nix
 
-inputs: final: prev:
+inputs: _final: prev:
 
 let
 
   # Use nixpkgs vimPlugin but with source directly from plugin author
   withSrc = pkg: src: pkg.overrideAttrs (_: { inherit src; });
 
-  # Package plugin
-  plugin = pname: src:
-    prev.vimUtils.buildVimPluginFrom2Nix {
-      inherit pname src;
-      version = "master";
-    };
+  # Package plugin - disabling until in use
+  # plugin = pname: src:
+  #   prev.vimUtils.buildVimPluginFrom2Nix {
+  #     inherit pname src;
+  #     version = "master";
+  #   };
 
 in {
 

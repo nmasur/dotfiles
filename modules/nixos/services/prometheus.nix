@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   options.metricsServer = lib.mkOption {
     type = lib.types.nullOr lib.types.str;

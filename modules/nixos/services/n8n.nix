@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   options = {
     n8nServer = lib.mkOption {

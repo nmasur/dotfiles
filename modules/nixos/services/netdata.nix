@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   options.netdata.enable = lib.mkEnableOption "Netdata metrics.";
 
