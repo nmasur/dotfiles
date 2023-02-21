@@ -63,7 +63,7 @@ the WSL configuration:
 
 ```
 nix-shell -p nixVersions.stable
-sudo nixos-rebuild switch --flake github:nmasur/dotfiles#wsl
+sudo nixos-rebuild switch --flake github:nmasur/dotfiles#flame
 ```
 
 You should also download the
@@ -90,17 +90,7 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 Then switch to the macOS configuration:
 
 ```bash
-darwin-rebuild switch --flake github:nmasur/dotfiles#macbook
-```
-
-### Dealing with corporate MITM SSL certificates:
-
-```bash
-# Get the certificates
-openssl s_client -showcerts -verify 5 -connect cache.nixos.org:443 < /dev/null
-
-# Paste them in here
-sudo nvim $NIX_SSL_CERT_FILE
+darwin-rebuild switch --flake github:nmasur/dotfiles#lookingglass
 ```
 
 ---
