@@ -40,4 +40,7 @@
   boot.supportedFilesystems =
     lib.mkIf (config.physical && pkgs.stdenv.isLinux) [ "ntfs" ];
 
+  # Use latest released Linux kernel by default
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+
 }
