@@ -10,10 +10,9 @@ nixpkgs.lib.nixosSystem {
   specialArgs = { };
   modules = [
     ./hardware-configuration.nix
-    ./disks.nix
     ../../modules/common
     ../../modules/nixos
-    (removeAttrs globals [ "mail.server" ])
+    (import ./disks.nix)
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     disko.nixosModules.disko
