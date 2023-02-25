@@ -29,6 +29,12 @@
     # Use official Firefox binary for macOS
     firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
 
+    # Manage disk format and partitioning
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Wallpapers
     wallpapers = {
       url = "gitlab:exorcist365/wallpapers";
@@ -145,6 +151,8 @@
         lookingglass =
           darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };
+
+      diskoConfiguration = { swan = import ./hosts/swan/disks.nix { }; };
 
       # Package servers into images with a generator
       packages = forAllSystems (system: {

@@ -10,11 +10,13 @@ nixpkgs.lib.nixosSystem {
   specialArgs = { };
   modules = [
     ./hardware-configuration.nix
+    ./disks.nix
     ../../modules/common
     ../../modules/nixos
     (removeAttrs globals [ "mail.server" ])
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
+    disko.nixosModules.disko
     {
       server = true;
       gui.enable = false;
@@ -37,11 +39,11 @@ nixpkgs.lib.nixosSystem {
       boot.zfs.enabled = true;
       boot.kernelPackages =
         config.boot.zfs.package.latestCompatibleLinuxPackages;
-      boot.zfs.extraPools = [ "mypool" ];
-      services.zfs.autoScrub.enable = true;
-      services.zfs.autoScrub.interval = "daily";
+      # boot.zfs.extraPools = [ "mypool" ];
+      # services.zfs.autoScrub.enable = true;
+      # services.zfs.autoScrub.interval = "daily";
 
-      services.nfs.server.enable = true;
+      # services.nfs.server.enable = true;
 
     }
   ];

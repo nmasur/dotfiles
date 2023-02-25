@@ -69,6 +69,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1677116397,
+        "narHash": "sha256-2OHwhv4k1SDEuNxhq+zluvrd5pbW8d4TP9NKW4B8iO8=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "8fddb2fd721365fa77ff68b709539639d4dc65d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "firefox-darwin": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -396,6 +416,7 @@
         "bufferline-nvim-src": "bufferline-nvim-src",
         "cmp-nvim-lsp-src": "cmp-nvim-lsp-src",
         "darwin": "darwin",
+        "disko": "disko",
         "firefox-darwin": "firefox-darwin",
         "home-manager": "home-manager",
         "nil": "nil",
