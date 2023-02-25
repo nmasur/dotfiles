@@ -16,7 +16,11 @@
                 $DRY_RUN_CMD mkdir --parents $VERBOSE_ARG $(dirname "${config.dotfilesPath}")
 
                 # Force HTTPS because anonymous SSH doesn't work
-                $DRY_RUN_CMD GIT_CONFIG_KEY_0="url.https://github.com/.insteadOf" ${pkgs.git}/bin/git clone ${config.dotfilesRepo} "${config.dotfilesPath}"
+                GIT_CONFIG_COUNT=1 \
+                    GIT_CONFIG_KEY_0="url.https://github.com/.insteadOf" \
+                    GIT_CONFIG_VALUE_0="git@github.com:" \
+                    $DRY_RUN_CMD \
+                    ${pkgs.git}/bin/git clone ${config.dotfilesRepo} "${config.dotfilesPath}"
             fi
           '';
 
