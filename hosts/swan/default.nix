@@ -10,7 +10,6 @@ nixpkgs.lib.nixosSystem {
   specialArgs = { };
   modules = [
     ./hardware-configuration.nix
-    ./disks.nix
     ../../modules/common
     ../../modules/nixos
     (removeAttrs globals [ "mail.server" ])
@@ -18,6 +17,7 @@ nixpkgs.lib.nixosSystem {
     home-manager.nixosModules.home-manager
     disko.nixosModules.disko
     {
+      disko.devices = import ./disks.nix;
       server = true;
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
