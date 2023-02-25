@@ -17,11 +17,13 @@
       services.openssh = {
         enable = true;
         ports = [ 22 ];
-        passwordAuthentication = false;
-        gatewayPorts = "no";
-        forwardX11 = false;
         allowSFTP = true;
-        permitRootLogin = config.permitRootLogin;
+        settings = {
+          GatewayPorts = "no";
+          X11Forwarding = false;
+          PasswordAuthentication = false;
+          PermitRootLogin = config.permitRootLogin;
+        };
       };
 
       users.users.${config.user}.openssh.authorizedKeys.keys =
