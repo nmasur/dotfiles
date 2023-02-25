@@ -6,10 +6,10 @@
     pkgs.vimPlugins.null-ls-nvim
   ];
 
-  use.lspconfig.sumneko_lua.setup = dsl.callWith {
+  use.lspconfig.lua_ls.setup = dsl.callWith {
     settings = { Lua = { diagnostics = { globals = [ "vim" "hs" ]; }; }; };
     capabilities = dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
-    cmd = [ "${pkgs.sumneko-lua-language-server}/bin/lua-language-server" ];
+    cmd = [ "${pkgs.lua-language-server}/bin/lua-language-server" ];
   };
 
   use.lspconfig.nil_ls.setup = dsl.callWith {
