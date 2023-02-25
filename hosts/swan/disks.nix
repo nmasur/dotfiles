@@ -1,4 +1,5 @@
 { ... }: {
+  disko.enableConfig = false;
   disko.devices = {
     disk = {
       boot = {
