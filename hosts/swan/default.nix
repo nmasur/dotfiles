@@ -19,6 +19,7 @@ nixpkgs.lib.nixosSystem {
     disko.nixosModules.disko
     {
       server = true;
+      zfs.enable = true;
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
@@ -36,9 +37,9 @@ nixpkgs.lib.nixosSystem {
 
       neovim.enable = true;
 
-      boot.zfs.enabled = true;
-      boot.kernelPackages =
-        config.boot.zfs.package.latestCompatibleLinuxPackages;
+      # boot.zfs.enabled = true;
+      # boot.kernelPackages =
+      # config.boot.zfs.package.latestCompatibleLinuxPackages;
       # boot.zfs.extraPools = [ "mypool" ];
       # services.zfs.autoScrub.enable = true;
       # services.zfs.autoScrub.interval = "daily";

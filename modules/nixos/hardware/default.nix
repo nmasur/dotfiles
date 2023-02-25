@@ -10,6 +10,7 @@
     ./server.nix
     ./sleep.nix
     ./wifi.nix
+    ./zfs.nix
   ];
 
   options = {
