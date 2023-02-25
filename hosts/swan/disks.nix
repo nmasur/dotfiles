@@ -19,7 +19,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                extraArgs = "--label boot";
+                extraArgs = [ "--label boot" ];
               };
             }
             {
@@ -33,7 +33,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                extraArgs = "--label nixos";
+                extraArgs = [ "--label nixos" ];
               };
             }
           ];
