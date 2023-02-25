@@ -152,7 +152,7 @@
           darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };
 
-      diskoConfigurations = { swan = import ./hosts/swan/disks.nix { }; };
+      diskoConfigurations = { swan = import ./hosts/swan/disks.nix; };
 
       # Package servers into images with a generator
       packages = forAllSystems (system: {
