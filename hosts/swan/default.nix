@@ -20,6 +20,10 @@ nixpkgs.lib.nixosSystem {
     {
       server = true;
       zfs.enable = true;
+
+      # head -c 8 /etc/machine-id
+      networking.hostId = "600279f4"; # Random ID required for ZFS
+
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;

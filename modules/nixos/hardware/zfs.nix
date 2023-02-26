@@ -8,6 +8,8 @@
       # Only use compatible Linux kernel, since ZFS can be behind
       boot.kernelPackages =
         config.boot.zfs.package.latestCompatibleLinuxPackages;
+      boot.kernelParams = [ "nohibernate" ];
+      boot.supportedFilesystems = [ "zfs" ];
 
     };
 
