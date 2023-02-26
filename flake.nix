@@ -153,6 +153,7 @@
       };
 
       diskoConfigurations = {
+        root = import ./disks/root.nix;
         swan = { ... }: (import ./hosts/swan/disks.nix { }).disko.devices;
       };
 
