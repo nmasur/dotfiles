@@ -1,7 +1,7 @@
 # The Staff
 # ISO configuration for my USB drive
 
-{ inputs, system, ... }:
+{ inputs, system, overlays, ... }:
 
 with inputs;
 
@@ -9,6 +9,7 @@ nixos-generators.nixosGenerate {
   inherit system;
   format = "install-iso";
   modules = [{
+    nixpkgs.overlays = overlays;
     networking.hostName = "staff";
     users.extraUsers.root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s"
@@ -25,11 +26,22 @@ nixos-generators.nixosGenerate {
       };
     };
     environment.systemPackages =
-      with (import inputs.nixpkgs { inherit system; }); [
+      let pkgs = import inputs.nixpkgs { inherit system overlays; };
+      in with pkgs; [
         git
         vim
         wget
         curl
+        (import ../../modules/common/neovim/package {
+          inherit pkgs;
+          # colors = import ../../colorscheme/gruvbox.dark.neovimConfig {
+          #   inherit pkgs;
+          # };
+        })
       ];
+    nix.extraOptions = ''
+      experimental-features = nix-command flakes
+      warn-dirty = false
+    '';
   }];
 }
