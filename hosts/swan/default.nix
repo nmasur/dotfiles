@@ -22,7 +22,7 @@ nixpkgs.lib.nixosSystem {
 
       disko = {
         enableConfig = true;
-        devices.disks = import ../../disks/root.nix { disk = "/dev/nvme0n1"; };
+        devices = import ../../disks/root.nix { disk = "/dev/nvme0n1"; };
       };
 
       # head -c 8 /etc/machine-id
