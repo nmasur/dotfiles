@@ -1,8 +1,8 @@
-{ disks ? [ ], ... }: {
+{ disk, ... }: {
   disk = {
     boot = {
       type = "disk";
-      device = builtins.elemAt disks 0;
+      device = disk;
       content = {
         type = "table";
         format = "gpt";

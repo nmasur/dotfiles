@@ -23,7 +23,7 @@
         --mode create \
         --dry-run \
         --flake "path:$(pwd)#root" \
-        --arg disks '[ "/dev/$DISK" ]'
+        --arg disk \""/dev/''${DISK}"\"
 
     ${pkgs.gum}/bin/gum confirm \
         "This will ERASE ALL DATA on the disk /dev/''${DISK}. Are you sure you want to continue?" \
@@ -32,7 +32,7 @@
     ${pkgs.disko-packaged}/bin/disko \
         --mode create \
         --flake "path:$(pwd)#root" \
-        --arg disks '[ '"/dev/$DISK"' ]'
+        --arg disk "/dev/''${DISK}"
 
   '');
 
