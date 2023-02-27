@@ -1,4 +1,4 @@
-{ disks, ... }: {
+{ disks ? [ ], ... }: {
   disk = {
     boot = {
       type = "disk";

@@ -152,10 +152,8 @@
           darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };
 
-      diskoConfigurations = {
-        root = import ./disks/root.nix;
-        swan = { ... }: (import ./hosts/swan/disks.nix { }).disko.devices;
-      };
+      # Disk formatting
+      diskoConfigurations = { root = import ./disks/root.nix; };
 
       # Package servers into images with a generator
       packages = forAllSystems (system: {
@@ -181,7 +179,15 @@
       });
 
       apps = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system overlays; };
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = overlays ++ [
+              (final: prev: {
+                disko-packaged = inputs.disko.packages.${system}.disko;
+              })
+            ];
+          };
         in import ./apps { inherit pkgs; });
 
       devShells = forAllSystems (system:

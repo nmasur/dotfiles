@@ -1,45 +1,19 @@
 { pkgs, ... }: rec {
 
-  default = {
-    type = "app";
-    program = builtins.toString (pkgs.writeShellScript "default" ''
-      ${pkgs.gum}/bin/gum style --margin "1 2" --padding "0 2" --foreground "15" --background "55" "Options"
-      ${pkgs.gum}/bin/gum format --type=template -- '  {{ Italic "Run with" }} {{ Color "15" "69" " nix run github:nmasur/dotfiles#" }}{{ Color "15" "62" "someoption" }}{{ Color "15" "69" " " }}.'
-      echo ""
-      echo ""
-      ${pkgs.gum}/bin/gum format --type=template -- \
-          '  • {{ Color "15" "57" " readme " }} {{ Italic "Documentation for this repository." }}' \
-          '  • {{ Color "15" "57" " rebuild " }} {{ Italic "Switch to this configuration." }}' \
-          '  • {{ Color "15" "57" " installer " }} {{ Italic "Format and install from nothing." }}' \
-          '  • {{ Color "15" "57" " neovim " }} {{ Italic "Test out the Neovim package." }}' \
-          '  • {{ Color "15" "57" " loadkey " }} {{ Italic "Load an ssh key for this machine using melt." }}' \
-          '  • {{ Color "15" "57" " encrypt-secret " }} {{ Italic "Encrypt a secret for all machines." }}' \
-          '  • {{ Color "15" "57" " reencrypt-secrets " }} {{ Italic "Reencrypt all secrets when new machine is added." }}' \
-          '  • {{ Color "15" "57" " netdata " }} {{ Italic "Connect a machine to Netdata cloud." }}'
-      echo ""
-      echo ""
-    '');
-  };
+  # Show quick helper
+  default = import ./help.nix { inherit pkgs; };
 
-  # Format and install from nothing
+  # Format primary disk
+  format-root = import ./format-root.nix { inherit pkgs; };
+
+  # Format and install from nothing (deprecated)
   installer = import ./installer.nix { inherit pkgs; };
 
   # Display the readme for this repository
   readme = import ./readme.nix { inherit pkgs; };
 
   # Rebuild
-  rebuild = {
-    type = "app";
-    program = builtins.toString (pkgs.writeShellScript "rebuild" ''
-      echo ${pkgs.system}
-      SYSTEM=${if pkgs.stdenv.isDarwin then "darwin" else "linux"}
-      if [ "$SYSTEM" == "darwin" ]; then
-          darwin-rebuild switch --flake github:nmasur/dotfiles#lookingglass
-      else
-          nixos-rebuild switch --flake github:nmasur/dotfiles
-      fi
-    '');
-  };
+  rebuild = import ./rebuild.nix { inherit pkgs; };
 
   # Load the SSH key for this machine
   loadkey = import ./loadkey.nix { inherit pkgs; };
@@ -54,17 +28,7 @@
   netdata = import ./netdata-cloud.nix { inherit pkgs; };
 
   # Run neovim as an app
-  neovim = {
-    type = "app";
-    program = "${
-        (import ../modules/common/neovim/package {
-          inherit pkgs;
-          colors =
-            import ../colorscheme/gruvbox/neovim-gruvbox.nix { inherit pkgs; };
-        })
-      }/bin/nvim";
-  };
-
+  neovim = import ./neovim.nix { inherit pkgs; };
   nvim = neovim;
 
 }

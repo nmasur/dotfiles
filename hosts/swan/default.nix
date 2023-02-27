@@ -10,7 +10,6 @@ nixpkgs.lib.nixosSystem {
   specialArgs = { };
   modules = [
     ./hardware-configuration.nix
-    ./disks.nix
     ../../modules/common
     ../../modules/nixos
     (removeAttrs globals [ "mail.server" ])
@@ -20,6 +19,12 @@ nixpkgs.lib.nixosSystem {
     {
       server = true;
       zfs.enable = true;
+
+      disko = {
+        enableConfig = true;
+        devices.disks =
+          import ../../disks/root.nix { disks = [ "/dev/nvme0n1" ]; };
+      };
 
       # head -c 8 /etc/machine-id
       networking.hostId = "600279f4"; # Random ID required for ZFS
