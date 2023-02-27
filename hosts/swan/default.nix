@@ -18,8 +18,12 @@ nixpkgs.lib.nixosSystem {
     disko.nixosModules.disko
     {
       server = true;
-      zfs.enable = true;
+      networking.hostName = "swan";
 
+      # head -c 8 /etc/machine-id
+      networking.hostId = "600279f4"; # Random ID required for ZFS
+
+      zfs.enable = true;
       disko = {
         enableConfig = true;
         devices = (import ../../disks/root.nix { disk = "/dev/nvme0n1"; });
@@ -28,17 +32,14 @@ nixpkgs.lib.nixosSystem {
         #   disks = [ "/dev/sda" "/dev/sdb" "/dev/sdc" ];
         # });
       };
-
-      # head -c 8 /etc/machine-id
-      networking.hostId = "600279f4"; # Random ID required for ZFS
+      boot.zfs.extraPools = [ "tank" ];
 
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
+      neovim.enable = true;
       wsl.enable = false;
       caddy.enable = true;
-
-      networking.hostName = "swan";
 
       # Disable passwords, only use SSH key
       publicKey =
@@ -46,15 +47,6 @@ nixpkgs.lib.nixosSystem {
 
       # Clone dotfiles
       dotfiles.enable = true;
-
-      neovim.enable = true;
-
-      # boot.zfs.enabled = true;
-      # boot.kernelPackages =
-      # config.boot.zfs.package.latestCompatibleLinuxPackages;
-      # boot.zfs.extraPools = [ "mypool" ];
-      # services.zfs.autoScrub.enable = true;
-      # services.zfs.autoScrub.interval = "daily";
 
       # services.nfs.server.enable = true;
 
