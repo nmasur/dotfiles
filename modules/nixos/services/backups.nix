@@ -27,7 +27,7 @@
     users.groups.backup = { };
 
     secrets.backup = {
-      source = ../../private/backup.age;
+      source = ../../../private/backup.age;
       dest = "${config.secretsDirectory}/backup";
       group = "backup";
       permissions = "0440";
@@ -38,6 +38,7 @@
     services.litestream = {
       enable = true;
       environmentFile = config.secrets.backup.dest;
+      settings = { };
     };
 
     # Wait for secret to exist
