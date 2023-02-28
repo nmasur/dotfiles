@@ -17,9 +17,6 @@
         gnome.sushi # Quick preview with spacebar
       ];
 
-      # Allow browsing Samba shares
-      services.gvfs.enable = true;
-
       # Set default for opening directories
       xdg.mimeApps.defaultApplications."inode/directory" =
         [ "nautilus.desktop" ];
@@ -31,6 +28,10 @@
         };
       };
     };
+
+    # Allow browsing Samba shares
+    services.gvfs.enable = true;
+
   };
 
 }
