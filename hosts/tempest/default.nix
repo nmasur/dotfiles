@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem {
       };
       wallpaper = "${wallpapers}/gruvbox/road.jpg";
       gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
-      passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
+      passwordHash = nixpkgs.lib.fileContents ../../password.sha512;
       wsl.enable = false;
       publicKey = null;
 

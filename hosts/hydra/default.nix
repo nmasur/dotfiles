@@ -25,7 +25,7 @@ nixpkgs.lib.nixosSystem {
         colors = (import ../../colorscheme/gruvbox).dark;
         dark = true;
       };
-      passwordHash = nixpkgs.lib.fileContents ../../private/password.sha512;
+      passwordHash = nixpkgs.lib.fileContents ../../password.sha512;
       wsl = {
         enable = true;
         wslConf.automount.root = "/mnt";
