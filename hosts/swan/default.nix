@@ -38,8 +38,8 @@ nixpkgs.lib.nixosSystem {
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
       neovim.enable = true;
-      wsl.enable = false;
       caddy.enable = true;
+      streamServer = "stream.masu.rs";
 
       backup.s3 = {
         endpoint = "s3.us-west-002.backblazeb2.com";

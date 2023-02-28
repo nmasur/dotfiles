@@ -29,7 +29,7 @@ nixpkgs.lib.nixosSystem {
       # FQDNs for various services
       networking.hostName = "flame";
       bookServer = "books.masu.rs";
-      streamServer = "stream.masu.rs";
+      # streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
       transmissionServer = "download.masu.rs";
       metricsServer = "metrics.masu.rs";

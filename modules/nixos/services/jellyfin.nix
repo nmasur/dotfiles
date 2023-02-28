@@ -20,6 +20,9 @@
       }];
     }];
 
+    # Grant user access to Jellyfin directories
+    users.users.${config.user}.extraGroups = [ "jellyfin" ];
+
     # Create videos directory, allow anyone in Jellyfin group to manage it
     systemd.tmpfiles.rules = [
       "d /var/lib/jellyfin 0775 jellyfin jellyfin"
