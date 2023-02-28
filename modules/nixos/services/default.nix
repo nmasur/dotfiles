@@ -15,6 +15,7 @@
     ./netdata.nix
     ./nextcloud.nix
     ./prometheus.nix
+    ./samba.nix
     ./secrets.nix
     ./sshd.nix
     ./transmission.nix
