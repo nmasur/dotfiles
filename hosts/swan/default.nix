@@ -40,6 +40,7 @@ nixpkgs.lib.nixosSystem {
       neovim.enable = true;
       caddy.enable = true;
       streamServer = "stream.masu.rs";
+      nextcloudServer = "cloud.masu.rs";
       samba.enable = true;
 
       backup.s3 = {
