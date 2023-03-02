@@ -10,7 +10,7 @@ obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 function obj:init()
     hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "k", function()
-        hs.osascript.javascriptFromFile("Spoons/DismissAlerts.spoon/close_notifications_applescript.js")
+        hs.osascript.applescriptFromFile("Spoons/DismissAlerts.spoon/close_notifications.applescript")
     end)
 end
 
