@@ -29,9 +29,6 @@
       };
     };
 
-    # Allow browsing Samba shares
-    services.gvfs.enable = true;
-
   };
 
 }
