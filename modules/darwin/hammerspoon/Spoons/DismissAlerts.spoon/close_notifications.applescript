@@ -1,3 +1,5 @@
+# Credit: https://github.com/Ptujec/LaunchBar/blob/f7b5a0dba9919c2fec879513f68a044f78748539/Notifications/Dismiss%20all%20notifications.lbaction/Contents/Scripts/default.applescript
+
 tell application "System Events"
 	try
 		set _groups to groups of UI element 1 of scroll area 1 of group 1 of window "Notification Center" of application process "NotificationCenter"
