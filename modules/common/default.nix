@@ -77,11 +77,28 @@
   config = let stateVersion = "23.05";
   in {
 
-    # Enable features in Nix commands
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-      warn-dirty = false
-    '';
+    nix = {
+
+      # Enable features in Nix commands
+      extraOptions = ''
+        experimental-features = nix-command flakes
+        warn-dirty = false
+      '';
+
+      settings = {
+
+        # Add community Cachix to binary cache
+        substituters = [ "https://nix-community.cachix.org" ];
+        trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        ];
+
+        # Scans and hard links identical files in the store
+        auto-optimise-store = true;
+
+      };
+
+    };
 
     # Basic common system packages for all devices
     environment.systemPackages = with pkgs; [ git vim wget curl ];
