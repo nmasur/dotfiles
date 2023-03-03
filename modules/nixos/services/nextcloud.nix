@@ -15,6 +15,7 @@
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud25; # Required to specify
+      datadir = "/data/nextcloud";
       https = true;
       hostName = "localhost";
       maxUploadSize = "50G";
@@ -51,6 +52,9 @@
       requiredBy = [ "nextcloud-setup.service" ];
       before = [ "nextcloud-setup.service" ];
     };
+
+    # Grant user access to Nextcloud directories
+    users.users.${config.user}.extraGroups = [ "nextcloud" ];
 
     ## Backup config
 
