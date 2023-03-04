@@ -41,6 +41,7 @@ nixpkgs.lib.nixosSystem {
       caddy.enable = true;
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
+      bookServer = "books.masu.rs";
       samba.enable = true;
 
       backup.s3 = {
