@@ -8,13 +8,13 @@
       enable = true;
       openFirewall = true;
       shares.video = {
-        path = "/data/video";
+        path = "/data";
         browseable = "yes";
         "read only" = "no";
         "guest ok" = "no";
         "force user" = config.user;
         "force group" = config.user;
-        comment = "Movies and TV";
+        comment = "NAS";
       };
     };
 
