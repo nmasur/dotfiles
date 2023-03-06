@@ -45,12 +45,6 @@
       ];
     };
 
-    home-manager.users.${config.user} = {
-
-      programs.fish.shellAbbrs.t = "trash";
-
-    };
-
   };
 
 }
