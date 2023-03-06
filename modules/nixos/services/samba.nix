@@ -7,7 +7,7 @@
     services.samba = lib.mkIf (config.samba.enable) {
       enable = true;
       openFirewall = true;
-      shares.video = {
+      shares.data = {
         path = "/data";
         browseable = "yes";
         "read only" = "no";
@@ -17,6 +17,11 @@
         comment = "NAS";
       };
     };
+
+    # Allows Windows clients to discover server
+    services.samba-wsdd.enable = true;
+    networking.firewall.allowedTCPPorts = [ 5357 ];
+    networking.firewall.allowedUDPPorts = [ 3702 ];
 
     # Allow browsing Samba shares
     services.gvfs =

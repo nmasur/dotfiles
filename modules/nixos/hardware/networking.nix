@@ -9,6 +9,8 @@
     networking.interfaces.enp5s0.useDHCP = true;
     networking.interfaces.wlp4s0.useDHCP = true;
 
+    networking.firewall.allowPing = lib.mkIf config.server true;
+
   };
 
 }
