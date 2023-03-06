@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   users.users.${config.user}.shell = pkgs.fish;
   programs.fish.enable =
@@ -11,7 +11,10 @@
 
     programs.fish = {
       enable = true;
-      shellAliases = { ls = "exa"; };
+      shellAliases = {
+        ls = "exa";
+        trash = lib.mkIf pkgs.stdenv.isLinux "${pkgs.trash-cli}/bin/trash-put";
+      };
       functions = {
         commandline-git-commits = {
           description = "Insert commit into commandline";
@@ -90,6 +93,7 @@
         sc = "systemctl";
         scs = "systemctl status";
         m = "make";
+        t = "trash";
 
         # Vim (overwritten by Neovim)
         v = "vim";
