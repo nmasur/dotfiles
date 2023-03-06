@@ -5,15 +5,20 @@
   config = lib.mkIf (config.gaming.steam.enable && pkgs.stdenv.isLinux) {
     hardware.steam-hardware.enable = true;
     unfreePackages = [ "steam" "steam-original" "steamcmd" "steam-run" ];
-    environment.systemPackages = with pkgs; [
 
-      steam
+    programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+    };
+
+    environment.systemPackages = with pkgs; [
 
       # Enable terminal interaction
       steamPackages.steamcmd
       steam-tui
 
     ];
+
   };
 
 }
