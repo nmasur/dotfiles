@@ -3,6 +3,7 @@
   imports = [
     ./audio.nix
     ./boot.nix
+    ./disk.nix
     ./keyboard.nix
     ./monitors.nix
     ./mouse.nix
