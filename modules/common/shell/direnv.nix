@@ -6,4 +6,10 @@
     config = { whitelist = { prefix = [ config.dotfilesPath ]; }; };
   };
 
+  # Prevent garbage collection
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+
 }
