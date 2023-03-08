@@ -16,7 +16,7 @@
     # Used for Windows Subsystem for Linux compatibility
     wsl.url = "github:nix-community/NixOS-WSL";
 
-    # Used for user packages
+    # Used for user packages and dotfiles
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows =
@@ -134,6 +134,8 @@
 
     in rec {
 
+      # Contains my full system builds, including home-manager
+      # nixos-rebuild switch --flake .#tempest
       nixosConfigurations = {
         tempest = import ./hosts/tempest { inherit inputs globals overlays; };
         hydra = import ./hosts/hydra { inherit inputs globals overlays; };
@@ -141,6 +143,8 @@
         swan = import ./hosts/swan { inherit inputs globals overlays; };
       };
 
+      # Contains my full Mac system builds, including home-manager
+      # darwin-rebuild switch --flake .#lookingglass
       darwinConfigurations = {
         lookingglass =
           import ./hosts/lookingglass { inherit inputs globals overlays; };
@@ -155,23 +159,24 @@
           darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };
 
-      # Disk formatting
+      # Disk formatting, only used once
       diskoConfigurations = { root = import ./disks/root.nix; };
 
-      # Package servers into images with a generator
+      # Other packages, such as system images or programs
       packages = forAllSystems (system: {
 
+        # Package servers into images with a generator
         aws = {
           "${system}" =
             import ./generators/aws { inherit inputs globals system overlays; };
         };
-
         staff = {
           "${system}" = import ./generators/staff {
             inherit inputs globals system overlays;
           };
         };
 
+        # Package Neovim config into standalone package
         neovim = let pkgs = import nixpkgs { inherit system overlays; };
         in import ./modules/common/neovim/package {
           inherit pkgs;
@@ -181,6 +186,7 @@
 
       });
 
+      # Programs that can be run by calling this flake
       apps = forAllSystems (system:
         let
           pkgs = import nixpkgs {
@@ -193,6 +199,7 @@
           };
         in import ./apps { inherit pkgs; });
 
+      # Development environments
       devShells = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system overlays; };
         in {

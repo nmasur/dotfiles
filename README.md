@@ -6,21 +6,56 @@ hosts.
 They are organized and managed by [Nix](https://nixos.org), so some of the
 configuration may be difficult to translate to a non-Nix system.
 
-However, some of the configurations are easier to lift directly:
+## System Features
 
-- [Neovim](https://github.com/nmasur/dotfiles/tree/master/modules/common/neovim/config)
-- [Fish functions](https://github.com/nmasur/dotfiles/tree/master/modules/common/shell/fish/functions)
-- [More fish aliases](https://github.com/nmasur/dotfiles/blob/master/modules/common/shell/fish/default.nix)
-- [Git aliases](https://github.com/nmasur/dotfiles/blob/master/modules/common/shell/git.nix)
-- [Hammerspoon](https://github.com/nmasur/dotfiles/tree/master/modules/darwin/hammerspoon)
+| Feature        | Program                                             | Configuration                                 |
+| ---            | ---                                                 | ---                                           |
+| OS             | [NixOS](https://nixos.org)                          | [Link](./modules/nixos)                       |
+| Display Server | [X11](https://www.x.org/wiki/)                      | [Link](./modules/nixos/graphical/xorg.nix)    |
+| Compositor     | [Picom](https://github.com/yshui/picom)             | [Link](./modules/nixos/graphical/picom.nix)   |
+| Window Manager | [i3](https://i3wm.org/)                             | [Link](./modules/nixos/graphical/i3.nix)      |
+| Panel          | [Polybar](https://polybar.github.io/)               | [Link](./modules/nixos/graphical/polybar.nix) |
+| Font           | [Victor Mono](https://rubjo.github.io/victor-mono/) | [Link](./modules/nixos/graphical/fonts.nix)   |
+| Launcher       | [Rofi](https://github.com/davatorium/rofi)          | [Link](./modules/nixos/graphical/rofi.nix)    |
 
-Try out my Neovim config (requires [nix](https://nixos.org/download.html)):
+## User Features
+
+| Feature      | Program                                                                          | Configuration                                      |
+| ---          | ---                                                                              | ---                                                |
+| Dotfiles     | [Home-Manager](https://github.com/nix-community/home-manager)                    | [Link](./modules/common)                           |
+| Terminal     | [Kitty](https://sw.kovidgoyal.net/kitty/)                                        | [Link](./modules/common/applications/kitty.nix)    |
+| Shell        | [Fish](https://fishshell.com/)                                                   | [Link](./modules/common/shell/fish)                |
+| Shell Prompt | [Starship](https://starship.rs/)                                                 | [Link](./modules/common/shell/starhip.nix)         |
+| Colorscheme  | [Gruvbox](https://github.com/morhetz/gruvbox)                                    | [Link](./colorscheme/gruvbox)                      |
+| Wallpaper    | [Road](https://gitlab.com/exorcist365/wallpapers/-/blob/master/gruvbox/road.jpg) | [Link](./hosts/tempest/default.nix)
+| Text Editor  | [Neovim](https://neovim.io/)                                                     | [Link](./modules/common/neovim/config)             |
+| Browser      | [Firefox](https://www.mozilla.org/en-US/firefox/new/)                            | [Link](./modules/common/applications/firefox.nix)  |
+| E-Mail       | [Aerc](https://aerc-mail.org/)                                                   | [Link](./modules/common/mail/aerc.nix)             |
+| File Manager | [Nautilus](https://wiki.gnome.org/action/show/Apps/Files)                        | [Link](./modules/common/applications/nautilus.nix) |
+| PDF Reader   | [Zathura](https://pwmt.org/projects/zathura/)                                    | [Link](./modules/common/applications/media.nix)    |
+| Video Player | [mpv](https://mpv.io/)                                                           | [Link](./modules/common/applications/media.nix)    |
+
+## macOS Features
+
+| Feature  | Program                                     | Configuration                        |
+| ---      | ---                                         | ---                                  |
+| Keybinds | [Hammerspoon](https://www.hammerspoon.org/) | [Link](./modules/darwin/hammerspoon) |
+
+---
+
+# Installation
+
+Click [here](./docs/installation.md) for detailed installation instructions.
+
+# Neovim
+
+Try out my Neovim config with nix:
 
 ```bash
 nix run github:nmasur/dotfiles#neovim
 ```
 
-Or build it as a package (requires [nix](https://nixos.org/download.html)):
+Or build it as a package:
 
 ```bash
 nix build github:nmasur/dotfiles#neovim
@@ -29,73 +64,6 @@ nix build github:nmasur/dotfiles#neovim
 If you already have a Neovim configuration, you may need to move it out of
 `~/.config/nvim` or set `XDG_CONFIG_HOME` to another value; otherwise both
 configs might conflict with each other.
-
----
-
-# Full Installation
-
-## NixOS - From Live Disk
-
-Format drives and build system from any NixOS host, including the live
-installer disk:
-
-**This will erase your drives; use at your own risk!**
-
-```bash
-lsblk # Choose the disk you want to wipe
-nix-shell -p nixVersions.stable
-nix run github:nmasur/dotfiles#installer -- nvme0n1 tempest
-```
-
-## NixOS - From Existing System
-
-If you're already running NixOS, you can switch to this configuration with the
-following command:
-
-```bash
-nix-shell -p nixVersions.stable
-sudo nixos-rebuild switch --flake github:nmasur/dotfiles#tempest
-```
-
-## Windows - From NixOS WSL
-
-After [installing NixOS on
-WSL](https://xeiaso.net/blog/nix-flakes-4-wsl-2022-05-01), you can switch to
-the WSL configuration:
-
-```
-nix-shell -p nixVersions.stable
-sudo nixos-rebuild switch --flake github:nmasur/dotfiles#hydra
-```
-
-You should also download the
-[FiraCode](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip)
-font and install it on Windows. Install [Alacritty](https://alacritty.org/) and
-move the `windows/alacritty.yml` file to
-`C:\Users\<user>\AppData\Roaming\alacritty`.
-
-## macOS
-
-To get started on a bare macOS installation, first install Nix:
-
-```bash
-sh -c "$(curl -L https://nixos.org/nix/install)"
-```
-
-Then use Nix to build nix-darwin:
-
-```bash
-nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-./result/bin/darwin-installer
-```
-
-Then switch to the macOS configuration:
-
-```bash
-darwin-rebuild switch --flake github:nmasur/dotfiles#lookingglass
-```
-
----
 
 # Flake Templates
 
