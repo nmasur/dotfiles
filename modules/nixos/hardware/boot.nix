@@ -13,6 +13,9 @@
       # Attempt to display GRUB on widescreen monitor
       gfxmodeEfi = "1920x1080";
 
+      # Limit the total number of configurations to rollback
+      configurationLimit = 25;
+
       # Install GRUB onto the boot disk
       # device = config.fileSystems."/boot".device;
 
