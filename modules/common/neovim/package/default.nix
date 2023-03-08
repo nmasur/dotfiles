@@ -31,6 +31,7 @@
 pkgs.neovimBuilder {
   package = pkgs.neovim-unwrapped;
   imports = [
+    ../config/align.nix
     ../config/bufferline.nix
     ../config/completion.nix
     ../config/gitsigns.nix
