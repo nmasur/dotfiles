@@ -32,6 +32,11 @@
     };
 
     home-manager.users.${config.user}.xdg = {
+
+      # Allow Nix to manage the default applications list
+      mimeApps.enable = true;
+
+      # Set directories for application defaults
       userDirs = {
         enable = true;
         createDirectories = true;

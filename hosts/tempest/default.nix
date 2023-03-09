@@ -49,6 +49,7 @@ nixpkgs.lib.nixosSystem {
       # mullvad.enable = true;
       nixlang.enable = true;
       dotfiles.enable = true;
+      yt-dlp.enable = true;
 
       gaming = {
         enable = true;

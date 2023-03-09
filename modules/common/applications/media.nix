@@ -16,7 +16,6 @@
         sxiv # Image viewer
         mupdf # PDF viewer
         zathura # PDF viewer
-        yt-dlp # Video downloader
       ];
 
       # Set default for opening PDFs

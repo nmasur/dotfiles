@@ -10,6 +10,7 @@
     ./obsidian.nix
     ./qbittorrent.nix
     ./nautilus.nix
+    ./yt-dlp.nix
   ];
 
 }
