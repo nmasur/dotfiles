@@ -34,11 +34,11 @@ in {
         programs.kitty.settings.scrollback_pager = lib.mkForce ''
           ${neovim}/bin/nvim -c 'setlocal nonumber nolist showtabline=0 foldcolumn=0|Man!' -c "autocmd VimEnter * normal G" -'';
 
-        xdg.desktopEntries.nvim = {
+        xdg.desktopEntries.nvim = lib.mkIf pkgs.stdenv.isLinux {
           name = "Neovim wrapper";
           exec = "kitty nvim %F";
         };
-        xdg.mimeApps = {
+        xdg.mimeApps = lib.mkIf pkgs.stdenv.isLinux {
           defaultApplications."text/markdown" = [ "nvim.desktop" ];
         };
 
