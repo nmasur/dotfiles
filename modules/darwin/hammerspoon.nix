@@ -16,6 +16,7 @@
           firefox = "${pkgs.firefox-bin}/Applications/Firefox.app";
           discord = "${pkgs.discord}/Applications/Discord.app";
           kitty = "${pkgs.kitty}/Applications/kitty.app";
+          slack = "${pkgs.slack}/Applications/Slack.app";
         };
       xdg.configFile."hammerspoon/Spoons/MoveWindow.spoon".source =
         ./hammerspoon/Spoons/MoveWindow.spoon;
