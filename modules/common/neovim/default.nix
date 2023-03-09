@@ -34,6 +34,14 @@ in {
         programs.kitty.settings.scrollback_pager = lib.mkForce ''
           ${neovim}/bin/nvim -c 'setlocal nonumber nolist showtabline=0 foldcolumn=0|Man!' -c "autocmd VimEnter * normal G" -'';
 
+        xdg.desktopEntries.nvim = {
+          name = "Neovim wrapper";
+          exec = "kitty nvim %F";
+        };
+        xdg.mimeApps = {
+          defaultApplications."text/markdown" = [ "nvim.desktop" ];
+        };
+
       };
 
     # # Used for icons in Vim
