@@ -19,9 +19,17 @@
       ];
 
       # Set default for opening PDFs
-      xdg.mimeApps.defaultApplications."application/pdf" =
-        [ "zathura.desktop" ];
-      xdg.mimeApps.defaultApplications."image/*" = [ "sxiv.desktop" ];
+      xdg.mimeApps = {
+        associations.added = {
+          "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
+          "image/*" = [ "sxiv.desktop" ];
+        };
+        associations.removed = { "application/pdf" = [ "mupdf.desktop" ]; };
+        defaultApplications = {
+          "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
+          "image/*" = [ "sxiv.desktop" ];
+        };
+      };
 
     };
 
