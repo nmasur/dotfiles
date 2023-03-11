@@ -12,11 +12,18 @@
   config = lib.mkIf (config.gui.enable && config.media.enable) {
     home-manager.users.${config.user} = {
       home.packages = with pkgs; [
-        mpv # Video viewer
         sxiv # Image viewer
         mupdf # PDF viewer
         zathura # PDF viewer
       ];
+
+      # Video player
+      programs.mpv = {
+        enable = true;
+        bindings = { };
+        config = { image-display-duration = 2; };
+        scripts = [ pkgs.mpvScripts.autoload ];
+      };
 
       # Set default for opening PDFs
       xdg.mimeApps = {
