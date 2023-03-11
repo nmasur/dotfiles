@@ -14,7 +14,7 @@ in {
 
   config = lib.mkIf config.gaming.minecraft-server.enable {
 
-    unfreePackages = [ "minecraft-server" ];
+    unfreePackages = [ pkgs.minecraft-server ];
 
     services.minecraft-server = {
       enable = true;

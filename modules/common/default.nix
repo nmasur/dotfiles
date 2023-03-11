@@ -68,7 +68,7 @@
       description = "Link to dotfiles repository.";
     };
     unfreePackages = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
+      type = lib.types.listOf lib.types.package;
       description = "List of unfree packages to allow.";
       default = [ ];
     };
@@ -113,8 +113,10 @@
 
     # Allow specified unfree packages (identified elsewhere)
     # Retrieves package object based on string name
+    # Idea: https://discourse.nixos.org/t/how-to-use-packages-directly-in-allowunfreepredicate/22455/6
     nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) config.unfreePackages;
+      builtins.elem (pkg.name or (builtins.parseDrvName pkg.pname).name)
+      (map lib.getName config.unfreePackages);
 
     # Pin a state version to prevent warnings
     home-manager.users.${config.user}.home.stateVersion = stateVersion;

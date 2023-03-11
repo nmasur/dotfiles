@@ -13,9 +13,9 @@
 
   config = lib.mkIf (config.gui.enable && config.firefox.enable) {
 
-    unfreePackages = [
-      (lib.mkIf config._1password.enable "onepassword-password-manager")
-      "okta-browser-plugin"
+    unfreePackages = with pkgs.nur.repos.rycee.firefox-addons; [
+      (lib.mkIf config._1password.enable onepassword-password-manager)
+      okta-browser-plugin
     ];
 
     home-manager.users.${config.user} = {

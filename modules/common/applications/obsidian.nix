@@ -10,7 +10,7 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.obsidian.enable) {
-    unfreePackages = [ "obsidian" ];
+    unfreePackages = [ pkgs.obsidian ];
     home-manager.users.${config.user} = {
       home.packages = with pkgs; [ obsidian ];
     };

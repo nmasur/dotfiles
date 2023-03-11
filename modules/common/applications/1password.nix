@@ -11,7 +11,7 @@
 
   config = lib.mkIf
     (config.gui.enable && config._1password.enable && pkgs.stdenv.isLinux) {
-      unfreePackages = [ "1password" "_1password-gui" ];
+      unfreePackages = with pkgs; [ _1password _1password-gui ];
       home-manager.users.${config.user} = {
         home.packages = with pkgs; [ _1password-gui ];
       };
