@@ -1,10 +1,8 @@
-{ config, lib, ... }:
-
-{
+{ config, lib, ... }: {
 
   options = {
     arrServer = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Hostname for arr services";
       default = null;
     };
