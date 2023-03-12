@@ -12,7 +12,6 @@ nixpkgs.lib.nixosSystem {
     ./hardware-configuration.nix
     ../../modules/common
     ../../modules/nixos
-    (removeAttrs globals [ "mail.server" ])
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     disko.nixosModules.disko

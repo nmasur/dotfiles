@@ -181,6 +181,11 @@
         };
       };
 
+      xdg.desktopEntries.aerc = lib.mkIf pkgs.stdenv.isLinux {
+        name = "aerc";
+        exec = "kitty aerc %u";
+      };
+
       programs.fish.shellAbbrs = { ae = "aerc"; };
 
     };

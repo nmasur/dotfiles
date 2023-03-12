@@ -10,8 +10,16 @@
       default = config.user;
     };
     mail.server = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Server name for the email address.";
+    };
+    mail.imapHost = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Server host for IMAP (reading mail).";
+    };
+    mail.smtpHost = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Server host for SMTP (sending mail).";
     };
   };
 
@@ -42,7 +50,7 @@
             folders = { };
             getmail = { };
             imap = {
-              host = "imap.purelymail.com";
+              host = config.mail.imapHost;
               port = 993;
               tls.enable = true;
             };
@@ -55,9 +63,9 @@
             maildir = { path = "main"; };
             mbsync = {
               enable = true;
-              create = "maildir";
-              expunge = "none";
-              remove = "none";
+              create = "both";
+              expunge = "both";
+              remove = "both";
               patterns = [ "*" ];
               extraConfig.channel = {
                 CopyArrivalDate = "yes"; # Sync time of original message
@@ -70,7 +78,7 @@
                 builtins.toString ../../../private/mailpass.age
               }";
             smtp = {
-              host = "smtp.purelymail.com";
+              host = config.mail.smtpHost;
               port = 465;
               tls.enable = true;
             };

@@ -111,6 +111,8 @@
         gitName = fullName;
         gitEmail = "7386960+nmasur@users.noreply.github.com";
         mail.server = "noahmasur.com";
+        mail.imapHost = "imap.purelymail.com";
+        mail.smtpHost = "smtp.purelymail.com";
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
       };
 
