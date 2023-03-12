@@ -24,6 +24,16 @@
           listen = [ ":443" ];
           routes = config.caddy.routes;
           errors.routes = config.caddy.blocks;
+          # logs = { }; # Uncomment to collect access logs
+        };
+        logging.logs.main = {
+          encoder = { format = "console"; };
+          writer = {
+            output = "file";
+            filename = "${config.services.caddy.logDir}/caddy.log";
+            roll = true;
+          };
+          level = "INFO";
         };
       });
 
