@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./bash
     ./charm.nix
     ./direnv.nix
     ./fish

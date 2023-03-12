@@ -76,7 +76,6 @@
         set -g fish_cursor_replace_one underscore
       '';
       loginShellInit = "";
-      shellAliases = { };
       shellAbbrs = {
 
         # Directory aliases
