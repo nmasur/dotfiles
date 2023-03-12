@@ -41,7 +41,9 @@
     };
 
     # Create reverse proxy for web UI
-    caddy.routes = [{
+    caddy.routes = lib.mkAfter [{
+      group =
+        lib.mkIf (config.arrServer == config.transmissionServer) "download";
       match = [{ host = [ config.transmissionServer ]; }];
       handle = [{
         handler = "reverse_proxy";

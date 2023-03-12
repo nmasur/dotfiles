@@ -42,6 +42,7 @@ nixpkgs.lib.nixosSystem {
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
       bookServer = "books.masu.rs";
+      arrServer = "download.masu.rs";
       samba.enable = true;
 
       backup.s3 = {

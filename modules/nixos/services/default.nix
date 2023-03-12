@@ -1,6 +1,7 @@
 { ... }: {
 
   imports = [
+    ./arr.nix
     ./backups.nix
     ./caddy.nix
     ./calibre.nix
