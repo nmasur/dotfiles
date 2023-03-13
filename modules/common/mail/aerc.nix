@@ -185,6 +185,12 @@
         name = "aerc";
         exec = "kitty aerc %u";
       };
+      xsession.windowManager.i3.config.keybindings =
+        lib.mkIf pkgs.stdenv.isLinux {
+          "${
+            config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
+          }+Shift+e" = "exec --no-startup-id kitty aerc";
+        };
 
       programs.fish.shellAbbrs = { ae = "aerc"; };
 
