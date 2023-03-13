@@ -18,21 +18,22 @@ in {
     home-manager.users.${config.user} = {
 
       home.packages = with pkgs; [
-        unzip # Extract zips
+        age # Encryption
+        bc # Calculator
+        dig # DNS lookup
+        fd # find
+        htop # Show system processes
+        inetutils # Includes telnet, whois
+        jq # JSON manipulation
+        lf # File viewer
+        qrencode # Generate qr codes
         rsync # Copy folders
         ripgrep # grep
-        fd # find
         sd # sed
-        jq # JSON manipulation
         tealdeer # Cheatsheets
         tree # View directory hierarchy
-        htop # Show system processes
-        qrencode # Generate qr codes
         vimv-rs # Batch rename files
-        dig # DNS lookup
-        lf # File viewer
-        inetutils # Includes telnet, whois
-        age # Encryption
+        unzip # Extract zips
       ];
 
       programs.zoxide.enable = true; # Shortcut jump command
