@@ -144,9 +144,13 @@
 
     };
 
-    launcherCommand = "${pkgs.rofi}/bin/rofi -show run -modi run";
+    launcherCommand = "${
+        config.home-manager.users.${config.user}.programs.rofi.finalPackage
+      }/bin/rofi -show run -modi run";
     systemdSearch = "${pkgs.rofi-systemd}/bin/rofi-systemd";
-    altTabCommand = "${pkgs.rofi}/bin/rofi -show window -modi window";
+    altTabCommand = "${
+        config.home-manager.users.${config.user}.programs.rofi.finalPackage
+      }/bin/rofi -show window -modi window";
 
   };
 

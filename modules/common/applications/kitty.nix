@@ -10,9 +10,21 @@
   };
 
   config = lib.mkIf (config.gui.enable && config.kitty.enable) {
+
+    # Set the Rofi-Systemd terminal for viewing logs
+    environment.sessionVariables.ROFI_SYSTEMD_TERM =
+      lib.mkIf pkgs.stdenv.isLinux "${pkgs.kitty}/bin/kitty";
+
     home-manager.users.${config.user} = {
-      # xsession.windowManager.i3.config.terminal = "kitty";
-      # programs.rofi.terminal = "${pkgs.kitty}/bin/kitty";
+
+      # Set the i3 terminal
+      xsession.windowManager.i3.config.terminal =
+        lib.mkIf pkgs.stdenv.isLinux "kitty";
+
+      # Set the Rofi terminal for running programs
+      programs.rofi.terminal =
+        lib.mkIf pkgs.stdenv.isLinux "${pkgs.kitty}/bin/kitty";
+
       programs.kitty = {
         enable = true;
         environment = { };
