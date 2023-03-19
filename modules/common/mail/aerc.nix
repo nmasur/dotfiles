@@ -170,6 +170,8 @@
               "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/share/aerc/filters/colorize";
             "application/x-sh" = "${pkgs.bat}/bin/bat -fP -l sh";
             "application/pdf" = "${pkgs.zathura}/bin/zathura -";
+            "audio/*" = "${pkgs.mpv}/bin/mpv -";
+            "image/*" = "${pkgs.feh}/bin/feh -";
           };
         };
       };

@@ -12,7 +12,7 @@
   config = lib.mkIf (config.gui.enable && config.media.enable) {
     home-manager.users.${config.user} = {
       home.packages = with pkgs; [
-        sxiv # Image viewer
+        nsxiv # Image viewer
         mupdf # PDF viewer
         zathura # PDF viewer
       ];
@@ -29,12 +29,12 @@
       xdg.mimeApps = {
         associations.added = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
-          "image/*" = [ "sxiv.desktop" ];
+          "image/*" = [ "nsxiv.desktop" ];
         };
         associations.removed = { "application/pdf" = [ "mupdf.desktop" ]; };
         defaultApplications = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
-          "image/*" = [ "sxiv.desktop" ];
+          "image/*" = [ "nsxiv.desktop" ];
         };
       };
 
