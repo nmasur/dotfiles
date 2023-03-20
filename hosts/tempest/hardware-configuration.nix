@@ -46,10 +46,11 @@
     DEVNAME=hwmon0=amdgpu
     FCTEMPS=hwmon0/pwm1=hwmon0/temp1_input
     FCFANS= hwmon0/pwm1=hwmon0/fan1_input
-    MINTEMP=hwmon0/pwm1=30
+    MINTEMP=hwmon0/pwm1=50
     MAXTEMP=hwmon0/pwm1=70
-    MINSTART=hwmon0/pwm1=150
-    MINSTOP=hwmon0/pwm1=12
-    MINPWM=hwmon0/pwm1=12
+    MINSTART=hwmon0/pwm1=100
+    MINSTOP=hwmon0/pwm1=10
+    MINPWM=hwmon0/pwm1=10
+    MAXPWM=hwmon0/pwm1=240
   '';
 }
