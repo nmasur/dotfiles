@@ -41,6 +41,9 @@ in {
       }];
     }];
 
+    # Grant user access to Calibre directories
+    users.users.${config.user}.extraGroups = [ "calibre-web" ];
+
     # Run a backup on a schedule
     systemd.timers.calibre-backup = lib.mkIf config.backups.calibre {
       timerConfig = {

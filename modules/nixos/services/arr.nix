@@ -15,6 +15,11 @@
     services.bazarr.enable = true;
     services.prowlarr.enable = true;
 
+    # Grant users access to destination directories
+    users.users.sonarr.extraGroups = [ "jellyfin" ];
+    users.users.radarr.extraGroups = [ "jellyfin" ];
+    users.users.bazarr.extraGroups = [ "jellyfin" ];
+
     # Requires updating the base_url config value in each service
     # If you try to rewrite the URL, the service won't redirect properly
     caddy.routes = [
