@@ -12,8 +12,11 @@
   config = lib.mkIf (config.gui.enable && config.kitty.enable) {
 
     # Set the Rofi-Systemd terminal for viewing logs
-    environment.sessionVariables.ROFI_SYSTEMD_TERM =
-      lib.mkIf pkgs.stdenv.isLinux "${pkgs.kitty}/bin/kitty";
+    # Using optionalAttrs because only available in NixOS
+    environment = { } // lib.attrsets.optionalAttrs
+      (builtins.hasAttr "sessionVariables" config.environment) {
+        sessionVariables.ROFI_SYSTEMD_TERM = "${pkgs.kitty}/bin/kitty";
+      };
 
     home-manager.users.${config.user} = {
 

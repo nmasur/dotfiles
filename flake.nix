@@ -201,6 +201,8 @@
             buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
           };
 
+          test = pkgs.mkShell { buildInputs = with pkgs; [ age ]; };
+
           # Used for cloud and systems development and administration
           devops = pkgs.mkShell {
             buildInputs = with pkgs; [

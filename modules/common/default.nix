@@ -44,11 +44,6 @@
         default = true;
       };
     };
-
-    # colorscheme = lib.mkOption {
-    #   type = types.attrs;
-    #   description = "Base16 color scheme";
-    # };
     homePath = lib.mkOption {
       type = lib.types.path;
       description = "Path of user's home directory.";
@@ -57,7 +52,6 @@
       else
         "/home/${config.user}");
     };
-
     dotfilesPath = lib.mkOption {
       type = lib.types.path;
       description = "Path of dotfiles repository.";
@@ -95,7 +89,8 @@
         ];
 
         # Scans and hard links identical files in the store
-        auto-optimise-store = true;
+        # Not working with macOS: https://github.com/NixOS/nix/issues/7273
+        auto-optimise-store = lib.mkIf (!pkgs.stdenv.isDarwin) true;
 
       };
 
