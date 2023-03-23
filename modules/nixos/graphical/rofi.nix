@@ -152,7 +152,7 @@ in {
 
     };
 
-    launcherCommand = "${rofi}/bin/rofi -show run -modi run";
+    launcherCommand = "${rofi}/bin/rofi -modes drun -show drun";
     systemdSearch = "${pkgs.rofi-systemd}/bin/rofi-systemd";
     altTabCommand = "${rofi}/bin/rofi -show window -modi window";
     audioSwitchCommand = "${
