@@ -112,6 +112,8 @@ in {
               "exec --no-startup-id ${config.launcherCommand}";
             "${modifier}+Shift+s" =
               "exec --no-startup-id ${config.systemdSearch}";
+            "${modifier}+Shift+a" =
+              "exec --no-startup-id ${config.audioSwitchCommand}";
             "Mod1+Tab" = "exec --no-startup-id ${config.altTabCommand}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";

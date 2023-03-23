@@ -155,7 +155,16 @@
     altTabCommand = "${
         config.home-manager.users.${config.user}.programs.rofi.finalPackage
       }/bin/rofi -show window -modi window";
-
+    audioSwitchCommand = "${
+        (pkgs.extraLib.mkScript {
+          name = "switch-audio";
+          file = ./rofi/pulse-sink.sh;
+          env = [
+            pkgs.ponymix
+            config.home-manager.users.${config.user}.programs.rofi.finalPackage
+          ];
+        })
+      }/bin/switch-audio";
   };
 
 }

@@ -17,6 +17,10 @@
       type = lib.types.str;
       description = "Command to use for choosing windows";
     };
+    audioSwitchCommand = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to use for switching audio sink";
+    };
     toggleBarCommand = lib.mkOption {
       type = lib.types.str;
       description = "Command to hide and show the status bar.";

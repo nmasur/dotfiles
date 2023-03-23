@@ -1,19 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let
-
-  # Quickly package shell scripts with their dependencies
-  # From https://discourse.nixos.org/t/how-to-create-a-script-with-dependencies/7970/6
-  mkScript = { name, file, env ? [ ] }:
-    pkgs.writeScriptBin name ''
-      for i in ${lib.concatStringsSep " " env}; do
-        export PATH="$i/bin:$PATH"
-      done
-
-      exec ${pkgs.bash}/bin/bash ${file} $@
-    '';
-
-in {
+{
 
   home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
 
@@ -32,7 +19,7 @@ in {
       consul
       noti # Create notifications programmatically
       ipcalc # Make IP network calculations
-      (mkScript {
+      (pkgs.extraLib.mkScript {
         name = "ocr";
         file = ../../modules/common/shell/bash/scripts/ocr.sh;
         env = [ tesseract ];

@@ -121,6 +121,7 @@
         inputs.nur.overlay
         inputs.nix2vim.overlay
         (import ./overlays/neovim-plugins.nix inputs)
+        (import ./overlays/lib.nix)
         (import ./overlays/calibre-web.nix)
       ];
 
