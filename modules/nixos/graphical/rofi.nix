@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+
+  rofi = config.home-manager.users.${config.user}.programs.rofi.finalPackage;
+
+in {
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
 
@@ -148,21 +152,14 @@
 
     };
 
-    launcherCommand = "${
-        config.home-manager.users.${config.user}.programs.rofi.finalPackage
-      }/bin/rofi -show run -modi run";
+    launcherCommand = "${rofi}/bin/rofi -show run -modi run";
     systemdSearch = "${pkgs.rofi-systemd}/bin/rofi-systemd";
-    altTabCommand = "${
-        config.home-manager.users.${config.user}.programs.rofi.finalPackage
-      }/bin/rofi -show window -modi window";
+    altTabCommand = "${rofi}/bin/rofi -show window -modi window";
     audioSwitchCommand = "${
         (pkgs.extraLib.mkScript {
           name = "switch-audio";
           file = ./rofi/pulse-sink.sh;
-          env = [
-            pkgs.ponymix
-            config.home-manager.users.${config.user}.programs.rofi.finalPackage
-          ];
+          env = [ pkgs.ponymix rofi ];
         })
       }/bin/switch-audio";
   };
