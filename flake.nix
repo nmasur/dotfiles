@@ -74,7 +74,7 @@
       flake = false;
     };
     nvim-treesitter-src = {
-      url = "github:nvim-treesitter/nvim-treesitter";
+      url = "github:nvim-treesitter/nvim-treesitter/v0.8.5.2";
       flake = false;
     };
     telescope-nvim-src = {
