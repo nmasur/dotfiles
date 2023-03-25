@@ -22,7 +22,28 @@
         enable = true;
         bindings = { };
         config = { image-display-duration = 2; };
-        scripts = [ pkgs.mpvScripts.autoload ];
+        scripts = [
+
+          # Automatically load playlist entries before and after current file
+          pkgs.mpvScripts.autoload
+
+          # Delete current file after quitting
+          (pkgs.stdenv.mkDerivation rec {
+            pname = "mpv-delete-file";
+            version = "0.1"; # made-up
+            src = pkgs.fetchFromGitHub {
+              owner = "zenyd";
+              repo = "mpv-scripts";
+              rev = "19ea069abcb794d1bf8fac2f59b50d71ab992130";
+              sha256 = "sha256-OBCuzCtgfSwj0i/rBNranuu4LRc47jObwQIJgQQoerg=";
+            } + "/delete_file.lua";
+            dontBuild = true;
+            dontUnpack = true;
+            installPhase =
+              "install -Dm644 ${src} $out/share/mpv/scripts/delete_file.lua";
+            passthru.scriptName = "delete_file.lua";
+          })
+        ];
       };
 
       # Set default for opening PDFs
