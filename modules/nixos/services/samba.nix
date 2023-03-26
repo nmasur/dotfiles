@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   options = { samba.enable = lib.mkEnableOption "Enable Samba sharing."; };
 
@@ -12,8 +12,6 @@
         browseable = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "force user" = config.user;
-        "force group" = config.user;
         comment = "NAS";
       };
     };
