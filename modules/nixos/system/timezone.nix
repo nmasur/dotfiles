@@ -14,6 +14,10 @@
     services.geoclue2.appConfig.localtimed.isSystem = true;
     services.geoclue2.appConfig.localtimed.isAllowed = true;
 
+    # Fix "Failed to set timezone"
+    # https://github.com/NixOS/nixpkgs/issues/68489#issuecomment-1484030107
+    services.geoclue2.enableDemoAgent = lib.mkForce true;
+
   };
 
 }
