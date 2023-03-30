@@ -13,9 +13,8 @@
                 fd \
                     --search-path $HOME/dev \
                     --type directory \
-                    --hidden \
-                    "^.git\$" \
-                | xargs dirname \
+                    --exact-depth 2 \
+                | sed 's/\\/$//' \
                 | fzf \
                     --delimiter '/' \
                     --with-nth 6.. \
