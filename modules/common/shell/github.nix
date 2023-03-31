@@ -19,6 +19,9 @@
           grf = "gh run view --log-failed";
           grl = "gh run view --log";
           ghpr = "gh pr create && sleep 3 && gh run watch";
+
+          # https://github.com/cli/cli/discussions/4067
+          prs = "gh search prs --state=open --review-requested=@me";
         };
         functions = {
           repos = {
