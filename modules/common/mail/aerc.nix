@@ -191,7 +191,17 @@
         lib.mkIf pkgs.stdenv.isLinux {
           "${
             config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
-          }+Shift+e" = "exec --no-startup-id kitty aerc";
+          }+Shift+e" = "exec ${
+            # Don't name the script `aerc` or it will affect grep
+              builtins.toString (pkgs.writeShellScript "focus-mail.sh" ''
+                count=$(ps aux | grep -c aerc)
+                if [ "$count" -eq 1 ]; then
+                    i3-msg "exec --no-startup-id kitty --class aerc aerc"
+                    sleep 0.25
+                fi
+                i3-msg "[class=aerc] focus"
+              '')
+            }";
         };
 
       programs.fish.shellAbbrs = { ae = "aerc"; };

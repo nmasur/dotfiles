@@ -39,7 +39,11 @@ in {
           modifier = modifier;
           assigns = {
             "${ws1}" = [{ class = "Firefox"; }];
-            "${ws2}" = [{ class = "kitty"; }];
+            "${ws2}" = [
+              { class = "kitty"; }
+              { class = "aerc"; }
+              { class = "obsidian"; }
+            ];
             "${ws3}" = [{ class = "discord"; }];
             "${ws4}" = [{ class = "Steam"; }];
           };

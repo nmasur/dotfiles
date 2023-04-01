@@ -157,6 +157,24 @@
         };
 
       };
+
+      xsession.windowManager.i3.config.keybindings =
+        lib.mkIf pkgs.stdenv.isLinux {
+          "${
+            config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
+          }+Shift+b" = "exec ${
+            # Don't name the script `firefox` or it will affect grep
+              builtins.toString (pkgs.writeShellScript "focus-ff.sh" ''
+                count=$(ps aux | grep -c firefox)
+                if [ "$count" -eq 1 ]; then
+                    i3-msg "exec --no-startup-id firefox"
+                    sleep 0.5
+                fi
+                i3-msg "[class=firefox] focus"
+              '')
+            }";
+        };
+
     };
 
   };
