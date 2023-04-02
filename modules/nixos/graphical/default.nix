@@ -21,6 +21,10 @@
       type = lib.types.str;
       description = "Command to use for switching audio sink";
     };
+    brightnessCommand = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to use for adjusting brightness";
+    };
     toggleBarCommand = lib.mkOption {
       type = lib.types.str;
       description = "Command to hide and show the status bar.";

@@ -33,11 +33,6 @@
   vpn-textbox-prompt-colon-padding:     @network-textbox-prompt-colon-padding;
 }
 
-#window {
-  width: 980px;
-  height: 230px;
-}
-
 /**
  * Settings used in every rofi option menu:
  */

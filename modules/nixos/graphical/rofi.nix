@@ -6,7 +6,7 @@ let
 
 in {
 
-  imports = [ ./rofi/power.nix ];
+  imports = [ ./rofi/power.nix ./rofi/brightness.nix ];
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
 

@@ -23,7 +23,10 @@ in {
         "$suspend" \
         "$log_out" \
         | ${rofi}/bin/rofi \
-        -theme-str '@import "power.rasi"' \
+            -theme-str '@import "power.rasi"' \
+            -hover-select \
+            -me-select-entry ''' \
+            -me-accept-entry MousePrimary \
             -dmenu \
             -sep ';' \
             -selected-row 2)
