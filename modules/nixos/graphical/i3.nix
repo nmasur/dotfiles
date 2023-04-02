@@ -128,6 +128,10 @@ in {
             "${modifier}+Shift+q" = ''
               exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
             "${modifier}+Shift+x" = "exec ${lockCmd}";
+            "${modifier}+Mod1+h" =
+              "exec --no-startup-id kitty sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName} && ${pkgs.libnotify}/bin/notify-send --transient --expire-time 3000 \"Rebuilt home.\" || read'";
+            "${modifier}+Mod1+r" =
+              "exec --no-startup-id kitty sh -c 'doas nixos-rebuild switch --flake ${config.dotfilesPath}#${config.networking.hostName} && ${pkgs.libnotify}/bin/notify-send --transient --expire-time 3000 \"Rebuilt NixOS.\" || read'";
 
             # Window options
             "${modifier}+q" = "kill";

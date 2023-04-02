@@ -1,7 +1,14 @@
 { lib, ... }: {
 
-  imports =
-    [ ./xorg.nix ./fonts.nix ./i3.nix ./polybar.nix ./picom.nix ./rofi.nix ];
+  imports = [
+    ./dunst.nix
+    ./fonts.nix
+    ./i3.nix
+    ./picom.nix
+    ./polybar.nix
+    ./rofi.nix
+    ./xorg.nix
+  ];
 
   options = {
 

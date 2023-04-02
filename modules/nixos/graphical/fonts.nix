@@ -22,6 +22,7 @@ in {
       programs.rofi.font = "Hack Nerd Font 14";
       programs.alacritty.settings.font.normal.family = fontName;
       programs.kitty.font.name = fontName;
+      services.dunst.settings.global.font = "Hack Nerd Font 14";
     };
 
   };
