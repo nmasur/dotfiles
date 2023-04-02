@@ -6,9 +6,9 @@
     echo ${pkgs.system}
     SYSTEM=${if pkgs.stdenv.isDarwin then "darwin" else "linux"}
     if [ "$SYSTEM" == "darwin" ]; then
-        darwin-rebuild switch --flake github:nmasur/dotfiles#lookingglass
+        sudo darwin-rebuild switch --flake ${builtins.toString ../.}
     else
-        nixos-rebuild switch --flake github:nmasur/dotfiles
+        doas nixos-rebuild switch --flake ${builtins.toString ../.}
     fi
   '');
 
