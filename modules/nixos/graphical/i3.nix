@@ -119,6 +119,8 @@ in {
             "${modifier}+Shift+a" =
               "exec --no-startup-id ${config.audioSwitchCommand}";
             "Mod1+Tab" = "exec --no-startup-id ${config.altTabCommand}";
+            "${modifier}+Shift+period" =
+              "exec --no-startup-id ${config.powerCommand}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+q" = ''

@@ -1,0 +1,62 @@
+/**
+ * Allows to change the settings of every menu simply by editing this file
+ * https://gitlab.com/vahnrr/rofi-menus/-/blob/b1f0e8a676eda5552e27ef631b0d43e660b23b8e/themes/shared/settings.rasi
+ */
+
+* {
+  /* General */
+  font:                                 "Hack Nerd Font 60";
+
+  /* option menus: i3-layout, music, power and screenshot
+   *
+   * Values bellow are 'no-padding' ones for a size 60 (@icon-font) font, played
+   * around using this character: ■
+   * We then add add 100 actual padding around the icons.
+   *                                    -12px 0px   -19px -96px */
+  option-element-padding:               1% 1% 1% 1%;
+  option-5-window-padding:              4% 4%;
+  option-5-listview-spacing:            15px;
+
+  prompt-text-font:                     "Hack Nerd Font 18";
+  prompt-window-height:                 300px;
+  prompt-window-width:                  627px;
+  prompt-window-border:                 2px;
+  prompt-prompt-padding:                20px 30px;
+  prompt-prompt-margin:                 8px;
+  prompt-listview-padding:              60px 114px 0px 114px;
+  /* Values bellow are 'no-padding' ones for a size 18 (@prompt-text-font) font,
+   * played around using this character: ■
+   * We then add add 30 actual padding around the text.
+   *                                    -4px  -1px  -6px  -28px */
+  prompt-element-padding:               26px  29px  24px  2px;
+
+  vpn-textbox-prompt-colon-padding:     @network-textbox-prompt-colon-padding;
+}
+
+#window {
+  width: 980px;
+  height: 230px;
+}
+
+/**
+ * Settings used in every rofi option menu:
+ */
+#window {
+  children: [ horibox ];
+}
+#horibox {
+  children: [ listview ];
+}
+#listview {
+  layout: horizontal;
+}
+element {
+  padding: 40px 68px 43px 30px;
+}
+#window {
+  padding: 20px;
+}
+#listview {
+  spacing: 10px;
+  lines: 5;
+}

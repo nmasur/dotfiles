@@ -1,0 +1,49 @@
+/**
+ * This theme is intended for a 2 items option menu with a headerbar.
+ * https://gitlab.com/vahnrr/rofi-menus/-/blob/b1f0e8a676eda5552e27ef631b0d43e660b23b8e/themes/prompt.rasi
+ */
+@import "common.rasi"
+* {
+  font: @text-font;
+}
+#window {
+  height: @prompt-window-height;
+  width: @prompt-window-width;
+  children: [ inputbar, horibox ];
+  border: @prompt-window-border;
+  border-color: @accent;
+}
+#inputbar {
+  enabled: false;
+}
+#prompt {
+  padding: @prompt-prompt-padding;
+  margin: @prompt-prompt-margin;
+  background-color: @accent;
+  text-color: @background-light;
+}
+#listview {
+  padding: @prompt-listview-padding;
+  spacing: @option-5-listview-spacing;
+  lines: 2;
+}
+#element {
+  font: @prompt-text-font;
+  padding: @prompt-element-padding;
+}
+element.alternate.active,
+element.normal.active,
+element.alternate.urgent,
+element.normal.urgent {
+  background-color: @background-light;
+  text-color: @foreground;
+}
+element.selected.urgent {
+  background-color: @off;
+  text-color: @background;
+}
+element.selected.active {
+  background-color: @on;
+  text-color: @background;
+}
+

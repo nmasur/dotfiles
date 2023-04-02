@@ -6,6 +6,8 @@ let
 
 in {
 
+  imports = [ ./rofi/power.nix ];
+
   config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
 
     # Set the Rofi-Systemd terminal for viewing logs
@@ -78,7 +80,7 @@ in {
             placeholder-color = mkLiteral config.theme.colors.base03;
             expand = true;
             horizontal-align = "0";
-            placeholder = "Launch Program";
+            placeholder = "";
             padding = mkLiteral "0px 0px 0px 5px";
             blink = true;
           };
@@ -147,12 +149,20 @@ in {
           show-icons = true;
           kb-cancel = "Escape,Super+space";
           modi = "window,run,ssh,emoji,calc,systemd";
+          sort = true;
+          # levenshtein-sort = true;
         };
+      };
+
+      home.file.".local/share/rofi/themes" = {
+        recursive = true;
+        source = ./rofi/themes;
       };
 
     };
 
-    launcherCommand = "${rofi}/bin/rofi -modes drun -show drun";
+    launcherCommand = ''
+      ${rofi}/bin/rofi -modes drun -show drun -theme-str '@import "launcher.rasi"' '';
     systemdSearch = "${pkgs.rofi-systemd}/bin/rofi-systemd";
     altTabCommand = "${rofi}/bin/rofi -show window -modi window";
     audioSwitchCommand = "${
