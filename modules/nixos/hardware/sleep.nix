@@ -4,16 +4,17 @@
 
     # Prevent wake from keyboard
     powerManagement.powerDownCommands = ''
-      # for power in /sys/bus/usb/devices/*/power; do echo disabled > ''${power}/wakeup; done
+      set +e
 
-      # AMD issue: https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Instantaneous_wakeups_from_suspend
-      for power in /sys/bus/i2c/devices/i2c-*/device/power; do echo disabled > ''${power}/wakeup; done
+      for power in /sys/bus/i2c/devices/i2c-*/device/power; do echo disabled > ''${power}/wakeup || true; done
+      for power in /sys/bus/usb/devices/1-*/device/power; do echo disabled > ''${power}/wakeup || true; done
+
+      # Fix for Gigabyte motherboard
+      # /r/archlinux/comments/y7b97e/my_computer_wakes_up_immediately_after_i_suspend/isu99sr/
+      echo GPP0 > /proc/acpi/wakeup
+
+      set -e
     '';
-
-    # From here: https://www.reddit.com/r/NixOS/comments/wcu34f/how_would_i_do_this_in_nix/
-    # services.udev.extraRules = ''
-    #   ACTION=="add", SUBSYSTEM=="i2c", ATTRS{idVendor}=="<vendor>", ATTRS{idProduct}=="<product>" RUN+="${pkgs.bash}/bin/bash -c 'echo disabled > /sys/bus/i2c/devices/i2c-*/power/wakeup'"
-    # '';
 
   };
 
