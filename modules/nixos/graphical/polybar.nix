@@ -36,7 +36,7 @@
             module-margin = 1;
             modules-left = "i3";
             modules-center = "xwindow";
-            modules-right = "pulseaudio date";
+            modules-right = "pulseaudio date power";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
@@ -115,6 +115,7 @@
             ramp-volume-0 = "";
             ramp-volume-1 = "墳";
             ramp-volume-2 = "";
+            click-right = config.audioSwitchCommand;
           };
           # "module/xkeyboard" = {
           # type = "internal/xkeyboard";
@@ -166,6 +167,12 @@
             label-foreground = config.theme.colors.base0A;
             # format-background = colors.background;
           };
+          "module/power" = {
+            type = "custom/text";
+            content = "  ";
+            click-left = config.powerCommand;
+            content-foreground = config.theme.colors.base04;
+          };
           "settings" = {
             screenchange-reload = true;
             pseudo-transparency = false;
@@ -174,7 +181,7 @@
       };
 
       xsession.windowManager.i3.config.startup = [{
-        command = "systemctl --user restart polybar";
+        command = "pkill polybar; polybar -r main";
         always = true;
         notification = false;
       }];
