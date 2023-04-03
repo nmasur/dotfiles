@@ -29,6 +29,7 @@ function obj:init()
         win:moveToScreen(screen:previous(), true, true, 0)
     end)
 
+    -- Maximize
     hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "m", function()
         -- get the focused window
         local win = hs.window.focusedWindow()
@@ -46,6 +47,34 @@ function obj:init()
         -- for i = 1, 8 do
         --     win:maximize()
         -- end
+    end)
+
+    -- Half-maximize (right)
+    hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "o", function()
+        -- get the focused window
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        -- maximize if possible
+        local max = win:screen():fullFrame()
+        frame.x = max.w / 2
+        frame.y = max.y
+        frame.w = max.w / 2
+        frame.h = max.h
+        win:setFrame(frame)
+    end)
+
+    -- Half-maximize (left)
+    hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "u", function()
+        -- get the focused window
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        -- maximize if possible
+        local max = win:screen():fullFrame()
+        frame.x = max.x
+        frame.y = max.y
+        frame.w = max.w / 2
+        frame.h = max.h
+        win:setFrame(frame)
     end)
 end
 
