@@ -36,7 +36,7 @@
             module-margin = 1;
             modules-left = "i3";
             modules-center = "xwindow";
-            modules-right = "pulseaudio date power";
+            modules-right = "mailcount pulseaudio date power";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
@@ -101,6 +101,22 @@
           # label-unmounted = "%mountpoint% not mounted";
           # label-unmounted-foreground = colors.disabled;
           # };
+          "module/mailcount" = {
+            type = "custom/script";
+            interval = 10;
+            format = "<label>";
+            exec = builtins.toString (pkgs.writeShellScript "mailcount.sh" ''
+              UNREAD=$(${pkgs.notmuch}/bin/notmuch count is:inbox and is:unread)
+              if [ $UNREAD = "0" ]; then
+                echo "%{T3}%{T-} "
+              else
+                echo "%{T2}%{T-} $UNREAD "
+              fi
+            '');
+            click-left =
+              "i3-msg 'exec --no-startup-id kitty --class aerc aerc'; sleep 0.15; i3-msg '[class=aerc] focus'";
+
+          };
           "module/pulseaudio" = {
             type = "internal/pulseaudio";
             # format-volume-prefix = "VOL ";

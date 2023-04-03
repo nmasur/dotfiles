@@ -27,10 +27,8 @@
 
     home-manager.users.${config.user} = {
       programs.mbsync = { enable = true; };
-      services.mbsync = lib.mkIf pkgs.stdenv.isLinux {
-        enable = true;
-        frequency = "*:0/5";
-      };
+      services.imapnotify.enable = pkgs.stdenv.isLinux && config.physical;
+      programs.notmuch.enable = true;
       accounts.email = {
         maildirBasePath = "${config.homePath}/mail";
         accounts = {
@@ -55,10 +53,11 @@
               tls.enable = true;
             };
             imapnotify = {
-              enable = false;
-              boxes = [ ];
-              onNotify = "";
-              onNotifyPost = "";
+              enable = true;
+              boxes = [ "Inbox" ];
+              onNotify = "${pkgs.isync}/bin/mbsync -a";
+              onNotifyPost =
+                "${pkgs.libnotify}/bin/notify-send 'New mail arrived'";
             };
             maildir = { path = "main"; };
             mbsync = {
@@ -72,7 +71,7 @@
               };
             };
             mu.enable = false;
-            notmuch.enable = false;
+            notmuch.enable = true;
             passwordCommand =
               "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
                 builtins.toString ../../../private/mailpass.age
