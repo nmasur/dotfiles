@@ -106,6 +106,7 @@
             interval = 10;
             format = "<label>";
             exec = builtins.toString (pkgs.writeShellScript "mailcount.sh" ''
+              ${pkgs.notmuch}/bin/notmuch new > /dev/null
               UNREAD=$(${pkgs.notmuch}/bin/notmuch count is:inbox and is:unread)
               if [ $UNREAD = "0" ]; then
                 echo "%{T3}%{T-} "
