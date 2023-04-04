@@ -27,6 +27,11 @@
 
     home-manager.users.${config.user} = {
       programs.mbsync = { enable = true; };
+      services.mbsync = lib.mkIf pkgs.stdenv.isLinux {
+        enable = true;
+        frequency = "*:0/5";
+        postExec = "${pkgs.notmuch}/bin/notmuch new";
+      };
       services.imapnotify.enable = pkgs.stdenv.isLinux && config.physical;
       programs.notmuch.enable = true;
       accounts.email = {
