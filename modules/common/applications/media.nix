@@ -50,11 +50,15 @@
       xdg.mimeApps = {
         associations.added = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
+          "image/jpeg" = [ "nsxiv.desktop" ];
           "image/*" = [ "nsxiv.desktop" ];
         };
-        associations.removed = { "application/pdf" = [ "mupdf.desktop" ]; };
+        associations.removed = {
+          "application/pdf" = [ "mupdf.desktop" "wine-extension-pdf.desktop" ];
+        };
         defaultApplications = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
+          "image/jpeg" = [ "nsxiv.desktop" ];
           "image/*" = [ "nsxiv.desktop" ];
         };
       };

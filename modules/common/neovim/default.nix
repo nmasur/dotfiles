@@ -38,8 +38,9 @@ in {
           name = "Neovim wrapper";
           exec = "kitty nvim %F";
         };
-        xdg.mimeApps = lib.mkIf pkgs.stdenv.isLinux {
-          defaultApplications."text/markdown" = [ "nvim.desktop" ];
+        xdg.mimeApps.defaultApplications = lib.mkIf pkgs.stdenv.isLinux {
+          "text/plain" = [ "nvim.desktop" ];
+          "text/markdown" = [ "nvim.desktop" ];
         };
 
       };
