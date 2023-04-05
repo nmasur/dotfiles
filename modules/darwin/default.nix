@@ -2,6 +2,7 @@
 
   imports = [
     ./alacritty.nix
+    ./fish.nix
     ./fonts.nix
     ./hammerspoon.nix
     ./homebrew.nix
