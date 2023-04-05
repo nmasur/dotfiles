@@ -11,14 +11,14 @@ darwin.lib.darwinSystem {
   modules = [
     ../../modules/common
     ../../modules/darwin
-    (globals // {
+    (globals // rec {
       user = "Noah.Masur";
       gitName = "Noah-Masur_1701";
-      gitEmail = "Noah.Masur@take2games.com";
+      gitEmail = "${user}@take2games.com";
     })
     home-manager.darwinModules.home-manager
     {
-      networking.hostName = "noah-masur-mac";
+      networking.hostName = "lookingglass";
       identityFile = "/Users/Noah.Masur/.ssh/id_ed25519";
       gui.enable = true;
       theme = {
