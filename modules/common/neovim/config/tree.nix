@@ -12,9 +12,11 @@
   setup.nvim-tree = {
     disable_netrw = true;
     hijack_netrw = true;
+    sync_root_with_cwd = true;
+    respect_buf_cwd = true;
     update_focused_file = {
       enable = true;
-      update_cwd = true;
+      update_root = true;
       ignore_list = { };
     };
     diagnostics = {

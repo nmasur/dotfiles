@@ -45,7 +45,7 @@ end)
 vim.keymap.set("n", "<Leader>fz", require("telescope").extensions.zoxide.list)
 
 -- Project
-require("telescope").load_extension("project")
+require("telescope").load_extension("projects")
 vim.keymap.set("n", "<C-p>", function()
     local opts = require("telescope.themes").get_ivy({
         layout_config = {
@@ -54,7 +54,7 @@ vim.keymap.set("n", "<C-p>", function()
             },
         },
     })
-    require("telescope").extensions.project.project(opts)
+    require("telescope").extensions.projects.projects(opts)
 end)
 
 -- File browser

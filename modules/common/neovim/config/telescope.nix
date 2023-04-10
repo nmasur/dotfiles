@@ -2,7 +2,7 @@
 
   plugins = [
     pkgs.vimPlugins.telescope-nvim
-    pkgs.vimPlugins.telescope-project-nvim
+    pkgs.vimPlugins.project-nvim
     pkgs.vimPlugins.telescope-fzy-native-nvim
     pkgs.vimPlugins.telescope-file-browser-nvim
     pkgs.vimPlugins.telescope-zoxide
@@ -25,9 +25,10 @@
     extensions = {
       fzy_native = { };
       zoxide = { };
-      project = { base_dirs = [ "~/dev" ]; };
     };
   };
+
+  setup.project_nvim = { };
 
   lua = builtins.readFile ./telescope.lua;
 
