@@ -123,6 +123,8 @@ in {
               "exec --no-startup-id ${config.powerCommand}";
             "${modifier}+Shift+m" =
               "exec --no-startup-id ${config.brightnessCommand}";
+            "${modifier}+c" =
+              "exec --no-startup-id ${config.calculatorCommand}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+q" = ''

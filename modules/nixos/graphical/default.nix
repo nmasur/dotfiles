@@ -32,6 +32,10 @@
       type = lib.types.str;
       description = "Command to use for adjusting brightness";
     };
+    calculatorCommand = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to use for quick calculations";
+    };
     toggleBarCommand = lib.mkOption {
       type = lib.types.str;
       description = "Command to hide and show the status bar.";
