@@ -165,6 +165,7 @@ in {
       ${rofi}/bin/rofi -modes drun -show drun -theme-str '@import "launcher.rasi"' '';
     systemdSearch = "${pkgs.rofi-systemd}/bin/rofi-systemd";
     altTabCommand = "${rofi}/bin/rofi -show window -modi window";
+    calculatorCommand = "${rofi}/bin/rofi -modes calc -show calc";
     audioSwitchCommand = "${
         (pkgs.extraLib.mkScript {
           name = "switch-audio";
