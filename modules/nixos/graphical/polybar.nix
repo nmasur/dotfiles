@@ -109,7 +109,7 @@
               ${pkgs.notmuch}/bin/notmuch new > /dev/null
               UNREAD=$(${pkgs.notmuch}/bin/notmuch count is:inbox and is:unread)
               if [ $UNREAD = "0" ]; then
-                echo "%{T3}%{T-} "
+                echo ""
               else
                 echo "%{T2}%{T-} $UNREAD "
               fi
