@@ -5,7 +5,7 @@
   config = {
 
     home-manager.users.${config.user}.services.dunst = {
-      enable = true;
+      enable = false;
       settings = {
         global = {
           width = 300;
