@@ -79,9 +79,16 @@
         warn-dirty = false
       '';
 
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+
       settings = {
 
         # Add community Cachix to binary cache
+        builders-use-substitutes = true;
         substituters = lib.mkIf (!pkgs.stdenv.isDarwin)
           [ "https://nix-community.cachix.org" ];
         trusted-public-keys = lib.mkIf (!pkgs.stdenv.isDarwin) [
