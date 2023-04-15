@@ -26,13 +26,15 @@
 #   ] ++ extraConfig;
 # }
 
-{ pkgs, colors ? { }, ... }:
+{ pkgs, colors, ... }:
 
 pkgs.neovimBuilder {
   package = pkgs.neovim-unwrapped;
+  inherit colors;
   imports = [
     ../config/align.nix
     ../config/bufferline.nix
+    ../config/colors.nix
     ../config/completion.nix
     ../config/gitsigns.nix
     ../config/lsp.nix
@@ -42,6 +44,5 @@ pkgs.neovimBuilder {
     ../config/telescope.nix
     ../config/toggleterm.nix
     ../config/tree.nix
-    colors
   ];
 }

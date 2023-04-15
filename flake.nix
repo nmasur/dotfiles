@@ -180,8 +180,7 @@
         neovim = let pkgs = import nixpkgs { inherit system overlays; };
         in import ./modules/common/neovim/package {
           inherit pkgs;
-          colors =
-            import ./colorscheme/gruvbox/neovim-gruvbox.nix { inherit pkgs; };
+          colors = (import ./colorscheme/gruvbox-dark).dark;
         };
 
       });

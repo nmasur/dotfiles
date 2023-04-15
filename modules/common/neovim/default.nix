@@ -4,7 +4,7 @@ let
 
   neovim = import ./package {
     inherit pkgs;
-    colors = import config.theme.colors.neovimConfig { inherit pkgs; };
+    colors = config.theme.colors;
   };
 
 in {

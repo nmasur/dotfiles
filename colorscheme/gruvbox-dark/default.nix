@@ -1,9 +1,11 @@
+# Gruvbox with a darker background for greater contrast
+
 {
-  name = "gruvbox"; # Dark, Medium
+  name = "gruvbox-dark"; # Dark, Medium
   author =
-    "Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)";
+    "Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox), ElRastaOk (https://www.reddit.com/user/ElRastaOk)";
   dark = {
-    base00 = "#282828"; # ----
+    base00 = "#1D2122"; # ---- This is the change from normal gruvbox
     base01 = "#3c3836"; # ---
     base02 = "#504945"; # --
     base03 = "#665c54"; # -
@@ -29,7 +31,7 @@
     base04 = "#665c54"; # +
     base05 = "#504945"; # ++
     base06 = "#3c3836"; # +++
-    base07 = "#282828"; # ++++
+    base07 = "#1D2122"; # ++++ Adjusted darker here
     base08 = "#9d0006"; # red
     base09 = "#af3a03"; # orange
     base0A = "#b57614"; # yellow

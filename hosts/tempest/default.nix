@@ -26,7 +26,7 @@ nixpkgs.lib.nixosSystem {
 
       # Theming
       theme = {
-        colors = (import ../../colorscheme/gruvbox).dark;
+        colors = (import ../../colorscheme/gruvbox-dark).dark;
         dark = true;
       };
       wallpaper = "${wallpapers}/gruvbox/road.jpg";
