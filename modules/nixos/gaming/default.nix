@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   imports = [
+    ./chiaki.nix
     ./leagueoflegends.nix
     ./legendary.nix
     ./lutris.nix
