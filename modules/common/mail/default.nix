@@ -50,8 +50,6 @@
             ];
             alot = { };
             flavor = "plain";
-            folders = { };
-            getmail = { };
             imap = {
               host = config.mail.imapHost;
               port = 993;
@@ -75,7 +73,6 @@
                 CopyArrivalDate = "yes"; # Sync time of original message
               };
             };
-            mu.enable = false;
             notmuch.enable = true;
             passwordCommand =
               "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
