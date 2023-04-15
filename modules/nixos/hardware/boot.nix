@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  boot.loader = lib.mkIf (config.physical && pkgs.stdenv.isLinux) {
+  boot.loader = lib.mkIf config.physical {
     grub = {
       enable = true;
 
@@ -40,8 +40,7 @@
   };
 
   # Allow reading from Windows drives
-  boot.supportedFilesystems =
-    lib.mkIf (config.physical && pkgs.stdenv.isLinux) [ "ntfs" ];
+  boot.supportedFilesystems = lib.mkIf config.physical [ "ntfs" ];
 
   # Use latest released Linux kernel by default
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;

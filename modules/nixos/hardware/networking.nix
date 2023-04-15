@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
-  config = lib.mkIf (config.physical && pkgs.stdenv.isLinux) {
+  config = lib.mkIf config.physical {
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
