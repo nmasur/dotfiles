@@ -13,6 +13,9 @@
       # /r/archlinux/comments/y7b97e/my_computer_wakes_up_immediately_after_i_suspend/isu99sr/
       echo GPP0 > /proc/acpi/wakeup
 
+      # Possibly need to wait a beat for settings to kick in
+      sleep 2
+
       set -e
     '';
 
