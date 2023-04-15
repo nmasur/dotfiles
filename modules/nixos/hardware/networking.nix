@@ -10,10 +10,16 @@
     networking.interfaces.wlp4s0.useDHCP = true;
 
     networking.firewall.allowPing = lib.mkIf config.server true;
-    networking.hosts = {
-      "192.168.0.120" = [ "tempest" ];
-      "192.168.0.218" = [ "swan" ];
-    };
+
+    # DNS service discovery
+    services.avahi.enable = true;
+    # services.avahi.public.enable = true;
+    # services.avahi.public.domain = true;
+    # services.avahi.public.addresses = true;
+    # services.avahi.domainName = "local";
+
+    # Resolve local hostnames using Avahi DNS
+    services.avahi.nssmdns = true;
 
   };
 
