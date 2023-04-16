@@ -59,7 +59,8 @@
               enable = true;
               boxes = [ "Inbox" ];
               onNotify = "${pkgs.isync}/bin/mbsync -a";
-              onNotifyPost =
+              onNotifyPost = lib.mkIf
+                config.home-manager.users.${config.user}.services.dunst.enable
                 "${pkgs.libnotify}/bin/notify-send 'New mail arrived'";
             };
             maildir = { path = "main"; };
