@@ -39,6 +39,7 @@ nixpkgs.lib.nixosSystem {
       nixpkgs.overlays = overlays;
       neovim.enable = true;
       caddy.enable = true;
+      cloudflare.enable = true;
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
       bookServer = "books.masu.rs";
