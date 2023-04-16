@@ -24,6 +24,7 @@ nixpkgs.lib.nixosSystem {
       boot.initrd.kernelModules = [ "amdgpu" ];
       boot.kernelModules = [ "kvm-amd" ];
       services.xserver.videoDrivers = [ "amdgpu" ];
+      hardware.enableRedistributableFirmware = true;
       powerManagement.cpuFreqGovernor = "performance";
       hardware.cpu.amd.updateMicrocode = true;
       hardware.fancontrol.enable = true;
