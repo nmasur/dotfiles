@@ -11,6 +11,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../../modules/common
     ../../modules/nixos
+    ../../modules/wsl
     globals
     wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager

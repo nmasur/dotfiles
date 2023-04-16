@@ -1,13 +1,6 @@
 { ... }: {
 
-  imports = [
-    ./applications
-    ./gaming
-    ./graphical
-    ./hardware
-    ./services
-    ./system
-    ./wsl
-  ];
+  imports =
+    [ ./applications ./gaming ./graphical ./hardware ./services ./system ];
 
 }

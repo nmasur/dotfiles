@@ -47,7 +47,7 @@
 
   };
 
-  config = lib.mkIf (pkgs.stdenv.isLinux && !config.wsl.enable) {
+  config = lib.mkIf pkgs.stdenv.isLinux {
 
     # Create a default directory to place secrets
 

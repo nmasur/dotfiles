@@ -13,7 +13,7 @@
     };
   };
 
-  config = lib.mkIf (!config.wsl.enable && config.publicKey != null) {
+  config = lib.mkIf (config.publicKey != null) {
     services.openssh = {
       enable = true;
       ports = [ 22 ];
