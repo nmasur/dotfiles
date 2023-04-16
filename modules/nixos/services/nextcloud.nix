@@ -14,7 +14,7 @@
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud25; # Required to specify
+      package = pkgs.nextcloud26; # Required to specify
       datadir = "/data/nextcloud";
       https = true;
       hostName = "localhost";
