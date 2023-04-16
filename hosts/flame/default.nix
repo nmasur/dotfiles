@@ -28,10 +28,6 @@ nixpkgs.lib.nixosSystem {
 
       # FQDNs for various services
       networking.hostName = "flame";
-      bookServer = "books.masu.rs";
-      # streamServer = "stream.masu.rs";
-      nextcloudServer = "cloud.masu.rs";
-      transmissionServer = "download.masu.rs";
       metricsServer = "metrics.masu.rs";
       vaultwardenServer = "vault.masu.rs";
       giteaServer = "git.masu.rs";
@@ -47,40 +43,40 @@ nixpkgs.lib.nixosSystem {
         accessKeyId = "0026b0e73b2e2c80000000005";
       };
 
-      # Grant access to Jellyfin directories from Nextcloud
-      users.users.nextcloud.extraGroups = [ "jellyfin" ];
+      # # Grant access to Jellyfin directories from Nextcloud
+      # users.users.nextcloud.extraGroups = [ "jellyfin" ];
 
-      # Wireguard config for Transmission
-      wireguard.enable = true;
-      networking.wireguard.interfaces.wg0 = {
+      # # Wireguard config for Transmission
+      # wireguard.enable = true;
+      # networking.wireguard.interfaces.wg0 = {
+      #
+      #   # The local IPs for this machine within the Wireguard network
+      #   # Any inbound traffic bound for these IPs should be kept on localhost
+      #   ips = [ "10.66.13.200/32" "fc00:bbbb:bbbb:bb01::3:dc7/128" ];
+      #
+      #   peers = [{
+      #
+      #     # Identity of Wireguard target peer (VPN)
+      #     publicKey = "bOOP5lIjqCdDx5t+mP/kEcSbHS4cZqE0rMlBI178lyY=";
+      #
+      #     # The public internet address of the target peer
+      #     endpoint = "86.106.143.132:51820";
+      #
+      #     # Which outgoing IP ranges should be sent through Wireguard
+      #     allowedIPs = [ "0.0.0.0/0" "::0/0" ];
+      #
+      #     # Send heartbeat signal within the network
+      #     persistentKeepalive = 25;
+      #
+      #   }];
+      #
+      # };
 
-        # The local IPs for this machine within the Wireguard network
-        # Any inbound traffic bound for these IPs should be kept on localhost
-        ips = [ "10.66.13.200/32" "fc00:bbbb:bbbb:bb01::3:dc7/128" ];
+      # # VPN port forwarding
+      # services.transmission.settings.peer-port = 57599;
 
-        peers = [{
-
-          # Identity of Wireguard target peer (VPN)
-          publicKey = "bOOP5lIjqCdDx5t+mP/kEcSbHS4cZqE0rMlBI178lyY=";
-
-          # The public internet address of the target peer
-          endpoint = "86.106.143.132:51820";
-
-          # Which outgoing IP ranges should be sent through Wireguard
-          allowedIPs = [ "0.0.0.0/0" "::0/0" ];
-
-          # Send heartbeat signal within the network
-          persistentKeepalive = 25;
-
-        }];
-
-      };
-
-      # VPN port forwarding
-      services.transmission.settings.peer-port = 57599;
-
-      # Grant access to Transmission directories from Jellyfin
-      users.users.jellyfin.extraGroups = [ "transmission" ];
+      # # Grant access to Transmission directories from Jellyfin
+      # users.users.jellyfin.extraGroups = [ "transmission" ];
 
       # Proxy traffic with Cloudflare
       cloudflare.enable = true;

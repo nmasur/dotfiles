@@ -11,6 +11,10 @@
   config = lib.mkIf (config.streamServer != null) {
 
     services.jellyfin.enable = true;
+    users.users.jellyfin = {
+      isSystemUser = true;
+      group = "jellyfin";
+    };
 
     caddy.routes = [{
       match = [{ host = [ config.streamServer ]; }];

@@ -162,28 +162,27 @@
       # Disk formatting, only used once
       diskoConfigurations = { root = import ./disks/root.nix; };
 
-      # Other packages, such as system images or programs
-      packages = forAllSystems (system: {
-
-        # Package servers into images with a generator
-        aws = {
-          "${system}" =
-            import ./generators/aws { inherit inputs globals system overlays; };
-        };
-        staff = {
-          "${system}" = import ./generators/staff {
-            inherit inputs globals system overlays;
+      packages = let
+        aws = system:
+          import ./generators/aws { inherit inputs globals overlays system; };
+        staff = system:
+          import ./generators/staff { inherit inputs globals overlays system; };
+        neovim = system:
+          let pkgs = import nixpkgs { inherit system overlays; };
+          in import ./modules/common/neovim/package {
+            inherit pkgs;
+            colors = (import ./colorscheme/gruvbox-dark).dark;
           };
-        };
+      in {
+        x86_64-linux.aws = aws "x86_64-linux";
+        x86_64-linux.staff = staff "x86_64-linux";
 
         # Package Neovim config into standalone package
-        neovim = let pkgs = import nixpkgs { inherit system overlays; };
-        in import ./modules/common/neovim/package {
-          inherit pkgs;
-          colors = (import ./colorscheme/gruvbox-dark).dark;
-        };
-
-      });
+        x86_64-linux.neovim = neovim "x86_64-linux";
+        x86_64-darwin.neovim = neovim "x86_64-darwin";
+        aarch64-linux.neovim = neovim "aarch64-linux";
+        aarch64-darwin.neovim = neovim "aarch64-darwin";
+      };
 
       # Programs that can be run by calling this flake
       apps = forAllSystems (system:
@@ -207,8 +206,6 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
           };
-
-          test = pkgs.mkShell { buildInputs = with pkgs; [ age ]; };
 
           # Used for cloud and systems development and administration
           devops = pkgs.mkShell {

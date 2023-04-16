@@ -34,9 +34,7 @@ nixos-generators.nixosGenerate {
         curl
         (import ../../modules/common/neovim/package {
           inherit pkgs;
-          # colors = import ../../colorscheme/gruvbox.dark.neovimConfig {
-          #   inherit pkgs;
-          # };
+          colors = (import ../../colorscheme/gruvbox).dark;
         })
       ];
     nix.extraOptions = ''
