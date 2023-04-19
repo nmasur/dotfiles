@@ -12,11 +12,16 @@
     networking.firewall.allowPing = lib.mkIf config.server true;
 
     # DNS service discovery
-    services.avahi.enable = true;
-    # services.avahi.public.enable = true;
-    # services.avahi.public.domain = true;
-    # services.avahi.public.addresses = true;
-    # services.avahi.domainName = "local";
+    services.avahi = {
+      enable = true;
+      domainName = "local";
+      publish = {
+        enable = true;
+        addresses = true;
+        domain = true;
+        workstation = true;
+      };
+    };
 
     # Resolve local hostnames using Avahi DNS
     services.avahi.nssmdns = true;
