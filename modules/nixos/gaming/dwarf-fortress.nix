@@ -1,0 +1,19 @@
+{ config, pkgs, lib, ... }: {
+
+  options.gaming.dwarf-fortress.enable =
+    lib.mkEnableOption "Dwarf Fortress free edition.";
+
+  config = lib.mkIf config.gaming.dwarf-fortress.enable {
+    unfreePackages = [ "dwarf-fortress" ];
+    environment.systemPackages = let
+      dfDesktopItem = pkgs.makeDesktopItem {
+        name = "dwarf-fortress";
+        desktopName = "Dwarf Fortress";
+        exec =
+          "${pkgs.dwarf-fortress-packages.dwarf-fortress-full}/bin/dwarf-fortress";
+        terminal = false;
+      };
+    in [ pkgs.dwarf-fortress-packages.dwarf-fortress-full dfDesktopItem ];
+  };
+
+}

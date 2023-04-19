@@ -85,6 +85,7 @@ nixpkgs.lib.nixosSystem {
       nixlang.enable = true;
       yt-dlp.enable = true;
       gaming = {
+        dwarf-fortress.enable = true;
         enable = true;
         steam.enable = true;
         legendary.enable = true;
