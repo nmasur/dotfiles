@@ -33,7 +33,7 @@
         sources = {
             require("null-ls").builtins.formatting.stylua.with({ command = "${pkgs.stylua}/bin/stylua" }),
             require("null-ls").builtins.formatting.black.with({ command = "${pkgs.black}/bin/black" }),
-            require("null-ls").builtins.diagnostics.flake8.with({ command = "${pkgs.python310Packages.flake8}/bin/flake8" }),
+            require("null-ls").builtins.diagnostics.ruff.with({ command = "${pkgs.ruff}/bin/ruff" }),
             require("null-ls").builtins.formatting.fish_indent.with({ command = "${pkgs.fish}/bin/fish_indent" }),
             require("null-ls").builtins.formatting.nixfmt.with({ command = "${pkgs.nixfmt}/bin/nixfmt" }),
             require("null-ls").builtins.formatting.rustfmt.with({ command = "${pkgs.rustfmt}/bin/rustfmt" }),
