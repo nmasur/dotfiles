@@ -18,6 +18,7 @@ darwin.lib.darwinSystem {
     })
     home-manager.darwinModules.home-manager
     {
+      nixpkgs.overlays = [ firefox-darwin.overlay ] ++ overlays;
       networking.hostName = "lookingglass";
       identityFile = "/Users/Noah.Masur/.ssh/id_ed25519";
       gui.enable = true;
@@ -26,9 +27,6 @@ darwin.lib.darwinSystem {
         dark = true;
       };
       mail.user = globals.user;
-      nixpkgs.overlays = [ firefox-darwin.overlay ] ++ overlays;
-      # Set registry to flake packages, used for nix X commands
-      nix.registry.nixpkgs.flake = nixpkgs;
       charm.enable = true;
       neovim.enable = true;
       mail.enable = true;

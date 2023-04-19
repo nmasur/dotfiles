@@ -8,6 +8,9 @@
     system.stateVersion =
       config.home-manager.users.${config.user}.home.stateVersion;
 
+    # This setting only applies to NixOS, different on Darwin
+    nix.gc.dates = "weekly";
+
   };
 
 }
