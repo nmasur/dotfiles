@@ -9,11 +9,21 @@
       dfDesktopItem = pkgs.makeDesktopItem {
         name = "dwarf-fortress";
         desktopName = "Dwarf Fortress";
-        exec =
-          "${pkgs.dwarf-fortress-packages.dwarf-fortress-full}/bin/dwarf-fortress";
+        exec = "${pkgs.dwarf-fortress-packages.dwarf-fortress-full}/bin/dfhack";
         terminal = false;
       };
-    in [ pkgs.dwarf-fortress-packages.dwarf-fortress-full dfDesktopItem ];
+      dtDesktopItem = pkgs.makeDesktopItem {
+        name = "dwarftherapist";
+        desktopName = "Dwarf Therapist";
+        exec =
+          "${pkgs.dwarf-fortress-packages.dwarf-fortress-full}/bin/dwarftherapist";
+        terminal = false;
+      };
+    in [
+      pkgs.dwarf-fortress-packages.dwarf-fortress-full
+      dfDesktopItem
+      dtDesktopItem
+    ];
   };
 
 }
