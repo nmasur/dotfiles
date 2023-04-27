@@ -9,7 +9,6 @@
         partitions = [
           # Boot partition
           {
-            type = "partition";
             name = "ESP";
             start = "0";
             end = "512MiB";
@@ -24,7 +23,6 @@
           }
           # Root partition ext4
           {
-            type = "partition";
             name = "root";
             start = "512MiB";
             end = "100%";
