@@ -54,7 +54,7 @@
     };
 
     # Nix language server
-    nil.url = "github:oxalica/nil";
+    nil.url = "github:oxalica/nil/2023-04-03";
 
     # Neovim plugins
     nvim-lspconfig-src = {
