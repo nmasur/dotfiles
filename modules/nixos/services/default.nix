@@ -5,6 +5,7 @@
     ./backups.nix
     ./caddy.nix
     ./calibre.nix
+    ./cloudflare-tunnel.nix
     ./cloudflare.nix
     ./gitea.nix
     ./gnupg.nix
