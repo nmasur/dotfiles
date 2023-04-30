@@ -17,9 +17,6 @@ in {
   config = lib.mkIf (config.giteaServer != null) {
     services.gitea = {
       enable = true;
-      httpPort = 3001;
-      httpAddress = "127.0.0.1";
-      rootUrl = "https://${config.giteaServer}/";
       database.type = "sqlite3";
       settings = {
         repository = {
@@ -31,6 +28,9 @@ in {
           DEFAULT_BRANCH = "main";
         };
         server = {
+          HTTP_PORT = 3001;
+          HTTP_ADDRESS = "127.0.0.1";
+          ROOT_URL = "https://${config.giteaServer}/";
           SSH_PORT = 22;
           START_SSH_SERVER = false; # Use sshd instead
           DISABLE_SSH = false;
@@ -59,10 +59,8 @@ in {
     # Open to groups, allowing for backups
     systemd.services.gitea.serviceConfig.StateDirectoryMode =
       lib.mkForce "0770";
-    systemd.tmpfiles.rules = [
-      "d ${giteaPath}/data 0775 gitea gitea"
-      "f ${giteaPath}/data/gitea.db 0660 gitea gitea"
-    ];
+    systemd.tmpfiles.rules =
+      [ "f ${giteaPath}/data/gitea.db 0660 gitea gitea" ];
 
     # Allow litestream and gitea to share a sqlite database
     users.users.litestream.extraGroups = [ "gitea" ];

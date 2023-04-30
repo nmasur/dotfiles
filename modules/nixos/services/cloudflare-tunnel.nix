@@ -16,7 +16,7 @@ in {
 
   options.cloudflareTunnel.enable = lib.mkEnableOption "Use Cloudflare Tunnel";
 
-  config = lib.mkIf config.cloudflare.enable {
+  config = lib.mkIf config.cloudflareTunnel.enable {
 
     services.cloudflared = {
       enable = true;

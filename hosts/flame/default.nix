@@ -12,29 +12,47 @@ nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { };
   modules = [
-    ./hardware-configuration.nix
+    (removeAttrs globals [ "mail.server" ])
+    home-manager.nixosModules.home-manager
     ../../modules/common
     ../../modules/nixos
-    (removeAttrs globals [ "mail.server" ])
-    wsl.nixosModules.wsl
-    home-manager.nixosModules.home-manager
     {
+      nixpkgs.overlays = overlays;
+
+      # Hardware
       server = true;
+      networking.hostName = "flame";
+
+      imports = [ (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
+      boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" ];
+
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/e1b6bd50-306d-429a-9f45-78f57bc597c3";
+        fsType = "ext4";
+      };
+
+      fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/D5CA-237A";
+        fsType = "vfat";
+      };
+
+      # Theming
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
-      nixpkgs.overlays = overlays;
-      wsl.enable = false;
-      caddy.enable = true;
-
-      # FQDNs for various services
-      networking.hostName = "flame";
-      metricsServer = "metrics.masu.rs";
-      vaultwardenServer = "vault.masu.rs";
-      giteaServer = "git.masu.rs";
 
       # Disable passwords, only use SSH key
       publicKey =
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
+
+      # Programs and services
+      caddy.enable = true;
+      cloudflare.enable = true; # Proxy traffic with Cloudflare
+      dotfiles.enable = true; # Clone dotfiles
+      gaming.minecraft-server.enable = true; # Setup Minecraft server
+      giteaServer = "git.masu.rs";
+      metricsServer = "metrics.masu.rs";
+      neovim.enable = true;
+      vaultwardenServer = "vault.masu.rs";
 
       # Nextcloud backup config
       backup.s3 = {
@@ -77,17 +95,6 @@ nixpkgs.lib.nixosSystem {
 
       # # Grant access to Transmission directories from Jellyfin
       # users.users.jellyfin.extraGroups = [ "transmission" ];
-
-      # Proxy traffic with Cloudflare
-      cloudflare.enable = true;
-
-      # Setup Minecraft server
-      gaming.minecraft-server.enable = true;
-
-      # Clone dotfiles
-      dotfiles.enable = true;
-
-      neovim.enable = true;
 
     }
   ];
