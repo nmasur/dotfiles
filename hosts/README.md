@@ -4,7 +4,7 @@
 | ---                                        | ---                 |
 | [flame](./flame/default.nix)               | Oracle cloud server |
 | [hydra](./hydra/default.nix)               | WSL config          |
-| [lookingglass](./lookingglass/default.nix) | Work macOS          |
-| [swan](./swan/default.nix)                 | Home NAS and server |
-| [tempest](./tempest/default.nix)           | Desktop             |
+| [lookingglass](./lookingglass/default.nix) | Work MacBook        |
+| [swan](./swan/default.nix)                 | Home server         |
+| [tempest](./tempest/default.nix)           | Linux desktop       |
 
