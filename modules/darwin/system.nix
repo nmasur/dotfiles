@@ -178,7 +178,6 @@
             "$(__dock_item ${pkgs.firefox-bin}/Applications/Firefox.app)" \
             "$(__dock_item /System/Applications/Messages.app)" \
             "$(__dock_item /System/Applications/Mail.app)" \
-            "$(__dock_item /Applications/Mimestream.app)" \
             "$(__dock_item /Applications/zoom.us.app)" \
             "$(__dock_item ${pkgs.discord}/Applications/Discord.app)" \
             "$(__dock_item /Applications/Obsidian.app)" \

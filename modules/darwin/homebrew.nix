@@ -39,7 +39,6 @@
         "keybase" # GUI on Nix not available for macOS
         "logitech-g-hub" # Mouse and keyboard management
         "meetingbar" # Show meetings in menu bar
-        "mimestream" # Gmail client
         "obsidian" # Obsidian packaging on Nix is not available for macOS
         "scroll-reverser" # Different scroll style for mouse vs. trackpad
         "steam" # Not packaged for Nix

@@ -31,6 +31,7 @@ in {
           pager = { branch = "false"; };
           safe = { directory = config.dotfilesPath; };
           pull = { ff = "only"; };
+          push = { autoSetupRemote = "true"; };
           init = { defaultBranch = "master"; };
         };
         ignores = [ ".direnv/**" "result" ];
