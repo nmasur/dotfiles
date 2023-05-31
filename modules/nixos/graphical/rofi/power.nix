@@ -13,7 +13,7 @@ in {
     power_off=''
     reboot=''
     lock=''
-    suspend='鈴'
+    suspend='󰒲'
     log_out=''
 
     chosen=$(printf '%s;%s;%s;%s;%s\n' \

@@ -11,9 +11,9 @@ in {
   config.brightnessCommand = builtins.toString
     (pkgs.writeShellScript "brightness" ''
 
-      dimmer=""
-      medium=""
-      brighter=""
+      dimmer="󰃝"
+      medium="󰃟"
+      brighter="󰃠"
 
       chosen=$(printf '%s;%s;%s\n' \
           "$dimmer" \
