@@ -1,25 +1,25 @@
 diff --git a/cps/__init__.py b/cps/__init__.py
-index 1ba1f778..da0bc718 100644
+index 269e4aca..e2b828a9 100644
 --- a/cps/__init__.py
 +++ b/cps/__init__.py
-@@ -100,7 +100,6 @@ updater_thread = Updater()
- def create_app():
+@@ -150,7 +150,6 @@ def create_app():
+ 
      lm.login_view = 'web.login'
      lm.anonymous_user = ub.Anonymous
--    lm.session_protection = 'strong'
+-    lm.session_protection = 'strong' if config.config_session == 1 else "basic"
  
-     if csrf:
-         csrf.init_app(app)
+     db.CalibreDB.update_config(config)
+     db.CalibreDB.setup_db(config.config_calibre_dir, cli_param.settings_path)
 diff --git a/cps/admin.py b/cps/admin.py
-index 09a553b4..5c646e46 100644
+index 20c58aac..99d2ad19 100644
 --- a/cps/admin.py
 +++ b/cps/admin.py
-@@ -104,8 +104,6 @@ def before_request():
-     # make remember me function work
-     if current_user.is_authenticated:
-         confirm_login()
+@@ -101,8 +101,6 @@ def admin_required(f):
+ 
+ @admi.before_app_request
+ def before_request():
 -    if not ub.check_user_session(current_user.id, flask_session.get('_id')) and 'opds' not in request.path:
 -        logout_user()
      g.constants = constants
-     g.user = current_user
+     g.google_site_verification = os.getenv('GOOGLE_SITE_VERIFICATION','')
      g.allow_registration = config.config_public_reg
