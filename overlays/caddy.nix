@@ -1,12 +1,13 @@
 { lib, buildGo118Module, fetchFromGitHub, plugins ? [ ] }:
 let
-  imports = lib.flip lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
+  goImports = lib.flip lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
+  goGets = lib.flip lib.concatMapStrings plugins (pkg: "go get ${pkg}\n      ");
   main = ''
     package main
     import (
     	caddycmd "github.com/caddyserver/caddy/v2/cmd"
     	_ "github.com/caddyserver/caddy/v2/modules/standard"
-    ${imports}
+    ${goImports}
     )
     func main() {
     	caddycmd.Main()
@@ -31,7 +32,7 @@ in buildGo118Module rec {
   overrideModAttrs = (_: {
     preBuild = ''
       echo '${main}' > cmd/caddy/main.go
-      go get github.com/caddy-dns/cloudflare
+      ${goGets}
     '';
     postInstall = "cp go.sum go.mod $out/ && ls $out/";
   });
