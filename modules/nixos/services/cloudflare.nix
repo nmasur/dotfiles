@@ -1,6 +1,6 @@
 # This module is necessary for hosts that are serving through Cloudflare.
 
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
 
@@ -34,6 +34,41 @@ let
 
   ];
 
+  # Build with Cloudflare plugin for DNS validation
+  # Otherwise, requires HTTPS to be disabled for issuance
+  caddy = pkgs.stdenv.mkDerivation rec {
+    pname = "caddy";
+    version = "latest";
+    dontUnpack = true;
+
+    nativeBuildInputs = with pkgs; [ git go xcaddy ];
+
+    plugins = [
+      "github.com/caddy-dns/cloudflare@a9d3ae2690a1d232bc9f8fc8b15bd4e0a6960eec"
+    ];
+
+    configurePhase = ''
+      export GOCACHE=$TMPDIR/go-cache
+      export GOPATH="$TMPDIR/go"
+    '';
+
+    buildPhase = let
+      pluginArgs =
+        lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins;
+    in ''
+      runHook preBuild
+      ${pkgs.xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
+      runHook postBuild
+    '';
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/bin
+      mv caddy $out/bin
+      runHook postInstall
+    '';
+  };
+
 in {
 
   options.cloudflare.enable = lib.mkEnableOption "Use Cloudflare.";
@@ -48,6 +83,30 @@ in {
         abort = true;
       }];
     }];
+
+    # Tell Caddy to use Cloudflare DNS for ACME challenge validation
+    services.caddy.package = caddy;
+    caddy.tlsPolicies = [{
+      issuers = [{
+        module = "acme";
+        challenges = {
+          dns.provider = {
+            name = "cloudflare";
+            api_token = "{env.CF_API_TOKEN}";
+          };
+        };
+      }];
+    }];
+    systemd.services.caddy.serviceConfig.EnvironmentFile =
+      config.secrets.cloudflareApi.dest;
+
+    # API key must have access to modify Cloudflare DNS records
+    secrets.cloudflareApi = {
+      source = ../../../private/cloudflare-api.age;
+      dest = "${config.secretsDirectory}/cloudflare-api";
+      owner = "caddy";
+      group = "caddy";
+    };
 
     # Allows Nextcloud to trust Cloudflare IPs
     services.nextcloud.config.trustedProxies = cloudflareIpRanges;

@@ -2,6 +2,11 @@
 
   options = {
     caddy.enable = lib.mkEnableOption "Caddy reverse proxy.";
+    caddy.tlsPolicies = lib.mkOption {
+      type = lib.types.listOf lib.types.attrs;
+      description = "Caddy JSON TLS policies";
+      default = [ ];
+    };
     caddy.routes = lib.mkOption {
       type = lib.types.listOf lib.types.attrs;
       description = "Caddy JSON routes for http servers";
@@ -26,6 +31,7 @@
           errors.routes = config.caddy.blocks;
           # logs = { }; # Uncomment to collect access logs
         };
+        apps.tls.automation.policies = config.caddy.tlsPolicies;
         logging.logs.main = {
           encoder = { format = "console"; };
           writer = {
