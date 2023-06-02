@@ -154,20 +154,16 @@
           general.unsafe-accounts-conf = true;
           viewer = { pager = "${pkgs.less}/bin/less -R"; };
           filters = {
-            "text/plain" =
-              "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/share/aerc/filters/colorize";
+            "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
             "text/calendar" =
-              "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/share/aerc/filters/calendar";
+              "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/libexec/aerc/filters/calendar";
             "text/html" =
-              "${pkgs.aerc}/share/aerc/filters/html"; # Requires w3m, dante
-            # "text/html" =
-            #   "${pkgs.aerc}/share/aerc/filters/html | ${pkgs.aerc}/share/aerc/filters/colorize";
+              "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
             # "text/*" =
             #   ''${pkgs.bat}/bin/bat -fP --file-name="$AERC_FILENAME "'';
             "message/delivery-status" =
-              "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/share/aerc/filters/colorize";
-            "message/rfc822" =
-              "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/share/aerc/filters/colorize";
+              "${pkgs.aerc}/libexec/aerc/filters/colorize";
+            "message/rfc822" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
             "application/x-sh" = "${pkgs.bat}/bin/bat -fP -l sh";
             "application/pdf" = "${pkgs.zathura}/bin/zathura -";
             "audio/*" = "${pkgs.mpv}/bin/mpv -";
