@@ -7,6 +7,7 @@
     ./legendary.nix
     ./lutris.nix
     ./minecraft-server.nix
+    ./ryujinx.nix
     ./steam.nix
   ];
 

@@ -91,6 +91,7 @@ nixpkgs.lib.nixosSystem {
         legendary.enable = true;
         lutris.enable = true;
         leagueoflegends.enable = true;
+        ryujinx.enable = true;
       };
 
     }
