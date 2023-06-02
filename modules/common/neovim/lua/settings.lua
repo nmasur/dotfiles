@@ -6,6 +6,7 @@ vim.filetype.add({
     pattern = {
         [".*%.tfvars"] = "hcl",
         -- [".*%.tf"] = "hcl",
+        [".*%.rasi"] = "css",
     },
 })
 
