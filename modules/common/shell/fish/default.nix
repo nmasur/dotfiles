@@ -12,6 +12,7 @@
     programs.fish = {
       enable = true;
       shellAliases = {
+        bash = "${pkgs.bashInteractive}/bin/bash";
         ls = "exa";
         trash = lib.mkIf pkgs.stdenv.isLinux "${pkgs.trash-cli}/bin/trash-put";
       };
