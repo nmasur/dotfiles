@@ -1,6 +1,6 @@
 # This module is necessary for hosts that are serving through Cloudflare.
 
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
 
@@ -48,6 +48,38 @@ in {
         abort = true;
       }];
     }];
+
+    # Tell Caddy to use Cloudflare DNS for ACME challenge validation
+    services.caddy.package = (pkgs.callPackage ../../../overlays/caddy.nix {
+      plugins = [ "github.com/caddy-dns/cloudflare" ];
+      # vendorSha256 = "sha256-K9HPZnr+hMcK5aEd1H4gEg6PXAaNrNWFvaHYm5m62JY=";
+    });
+    caddy.tlsPolicies = [{
+      issuers = [{
+        module = "acme";
+        challenges = {
+          dns = {
+            provider = {
+              name = "cloudflare";
+              api_token = "{env.CF_API_TOKEN}";
+            };
+            resolvers = [ "1.1.1.1" ];
+          };
+        };
+      }];
+    }];
+    systemd.services.caddy.serviceConfig.EnvironmentFile =
+      config.secrets.cloudflareApi.dest;
+    systemd.services.caddy.serviceConfig.AmbientCapabilities =
+      "CAP_NET_BIND_SERVICE";
+
+    # API key must have access to modify Cloudflare DNS records
+    secrets.cloudflareApi = {
+      source = ../../../private/cloudflare-api.age;
+      dest = "${config.secretsDirectory}/cloudflare-api";
+      owner = "caddy";
+      group = "caddy";
+    };
 
     # Allows Nextcloud to trust Cloudflare IPs
     services.nextcloud.config.trustedProxies = cloudflareIpRanges;
