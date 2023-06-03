@@ -11,11 +11,12 @@
 
   # Install Nautilus file manager
   config = lib.mkIf (config.gui.enable && config.nautilus.enable) {
+
+    # Quick preview with spacebar
+    services.gnome.sushi.enable = true;
+    environment.systemPackages = [ pkgs.gnome.nautilus ];
+
     home-manager.users.${config.user} = {
-      home.packages = with pkgs; [
-        gnome.nautilus
-        gnome.sushi # Quick preview with spacebar
-      ];
 
       xsession.windowManager.i3.config.keybindings = {
         "${
