@@ -9,21 +9,27 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
-    ./hardware-configuration.nix
-    ../../modules/common
-    ../../modules/nixos
     globals
-    wsl.nixosModules.wsl
     home-manager.nixosModules.home-manager
     disko.nixosModules.disko
+    ../../modules/common
+    ../../modules/nixos
     {
+      # Hardeware
       server = true;
       networking.hostName = "swan";
 
+      boot.initrd.availableKernelModules =
+        [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-intel" ];
+      powerManagement.cpuFreqGovernor = "powersave";
+      hardware.cpu.intel.updateMicrocode = true;
+
+      # ZFS
+      zfs.enable = true;
       # head -c 8 /etc/machine-id
       networking.hostId = "600279f4"; # Random ID required for ZFS
-
-      zfs.enable = true;
       disko = {
         enableConfig = true;
         devices = (import ../../disks/root.nix { disk = "/dev/nvme0n1"; });
