@@ -36,6 +36,7 @@
     # Enable VA-API for hardware transcoding
     hardware.opengl = {
       enable = true;
+      driSupport = true;
       extraPackages = [ pkgs.libva ];
     };
 
