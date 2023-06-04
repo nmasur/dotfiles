@@ -15,6 +15,7 @@
     services.bazarr.enable = true;
     services.prowlarr.enable = true;
     services.sabnzbd.enable = true;
+    services.jellyseerr.enable = true;
     unfreePackages = [ "unrar" ]; # Required for sabnzbd
 
     # Grant users access to destination directories
@@ -79,6 +80,14 @@
         handle = [{
           handler = "reverse_proxy";
           upstreams = [{ dial = "localhost:8085"; }];
+        }];
+      }
+      {
+        group = "download";
+        match = [{ host = [ config.arrServer ]; }];
+        handle = [{
+          handler = "reverse_proxy";
+          upstreams = [{ dial = "localhost:5055"; }];
         }];
       }
     ];

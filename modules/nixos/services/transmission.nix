@@ -44,7 +44,10 @@
     caddy.routes = lib.mkAfter [{
       group =
         lib.mkIf (config.arrServer == config.transmissionServer) "download";
-      match = [{ host = [ config.transmissionServer ]; }];
+      match = [{
+        host = [ config.transmissionServer ];
+        path = [ "/transmission*" ];
+      }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:9091"; }];
