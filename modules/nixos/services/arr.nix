@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   options = {
     arrServer = lib.mkOption {
@@ -15,14 +15,17 @@
     services.bazarr.enable = true;
     services.prowlarr.enable = true;
     services.sabnzbd.enable = true;
+    services.sabnzbd.configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
     services.jellyseerr.enable = true;
     unfreePackages = [ "unrar" ]; # Required for sabnzbd
 
     # Grant users access to destination directories
-    users.users.sonarr.extraGroups = [ "jellyfin" ];
-    users.users.radarr.extraGroups = [ "jellyfin" ];
-    users.users.bazarr.extraGroups = [ "jellyfin" ];
-    users.users.sabnzbd.extraGroups = [ "jellyfin" ];
+    users.users.sonarr.extraGroups = [ "jellyfin" "sabnzbd" ];
+    users.users.radarr.extraGroups = [ "jellyfin" "sabnzbd" ];
+    users.users.bazarr.extraGroups = [ "jellyfin" "sabnzbd" ];
+    users.users.sabnzbd.homeMode = "0770";
+    users.users.${config.user}.extraGroups = [ "sabnzbd" ];
+    users.users.jellyfin.extraGroups = [ "sonarr" "radarr" ];
 
     # Requires updating the base_url config value in each service
     # If you try to rewrite the URL, the service won't redirect properly
