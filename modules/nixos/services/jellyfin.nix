@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, pkgs, lib, ... }: {
 
   options = {
     streamServer = lib.mkOption {
@@ -32,6 +32,12 @@
       "d /var/lib/jellyfin 0775 jellyfin jellyfin"
       "d /var/lib/jellyfin/library 0775 jellyfin jellyfin"
     ];
+
+    # Enable VA-API for hardware transcoding
+    hardware.opengl = {
+      enable = true;
+      extraPackages = [ pkgs.libva ];
+    };
 
   };
 
