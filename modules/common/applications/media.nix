@@ -21,7 +21,10 @@
       programs.mpv = {
         enable = true;
         bindings = { };
-        config = { image-display-duration = 2; };
+        config = {
+          image-display-duration = 2;
+          hwdec = "auto-safe";
+        };
         scripts = [
 
           # Automatically load playlist entries before and after current file

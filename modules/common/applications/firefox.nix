@@ -71,6 +71,8 @@
             "layout.css.color-mix.enabled" = true;
             "ui.systemUsesDarkTheme" =
               if config.theme.dark == true then 1 else 0;
+            "media.ffmpeg.vaapi.enabled" =
+              true; # Enable hardware video acceleration
           };
           userChrome = ''
             :root {
