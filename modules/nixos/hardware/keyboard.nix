@@ -10,9 +10,12 @@
       autoRepeatDelay = 250;
       autoRepeatInterval = 40;
 
-      # Swap escape key with caps lock key
-      xkbOptions = "eurosign:e,caps:swapescape";
+    };
 
+    # Use capslock as escape and/or control
+    services.keyd = {
+      enable = true;
+      settings = { main = { capslock = "overload(control, esc)"; }; };
     };
 
     # Enable num lock on login
