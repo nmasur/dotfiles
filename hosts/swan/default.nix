@@ -22,7 +22,6 @@ nixpkgs.lib.nixosSystem {
       boot.initrd.availableKernelModules =
         [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
       boot.initrd.kernelModules = [ "amdgpu" ];
-      boot.kernelModules = [ "kvm-intel" ];
       hardware.enableRedistributableFirmware = true;
       powerManagement.cpuFreqGovernor = "powersave";
       hardware.cpu.intel.updateMicrocode = true;
