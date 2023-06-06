@@ -17,6 +17,9 @@
       steamPackages.steamcmd
       steam-tui
 
+      # Allow downloading of GE-Proton and other versions
+      protonup-qt
+
     ];
 
   };
