@@ -2,7 +2,7 @@
 
   options = {
     transmissionServer = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Hostname for Transmission";
       default = null;
     };
@@ -12,7 +12,7 @@
     namespace = config.networking.wireguard.interfaces.wg0.interfaceNamespace;
     vpnIp = lib.strings.removeSuffix "/32"
       (builtins.head config.networking.wireguard.interfaces.wg0.ips);
-  in lib.mkIf (config.wireguard.enable && config.transmissionServer != null) {
+  in lib.mkIf (config.transmissionServer != null) {
 
     # Setup transmission
     services.transmission = {
@@ -26,13 +26,13 @@
         rpc-host-whitelist = config.transmissionServer;
         rpc-host-whitelist-enabled = true;
         rpc-whitelist = "127.0.0.1,${vpnIp}";
-        rpc-whitelist-enabled = true;
+        rpc-whitelist-enabled = config.wireguard.enable;
       };
       credentialsFile = config.secrets.transmission.dest;
     };
 
     # Bind transmission to wireguard namespace
-    systemd.services.transmission = {
+    systemd.services.transmission = lib.mkIf config.wireguard.enable {
       bindsTo = [ "netns@${namespace}.service" ];
       requires = [ "network-online.target" "transmission-secret.service" ];
       after = [ "wireguard-wg0.service" "transmission-secret.service" ];
@@ -59,7 +59,7 @@
     boot.kernel.sysctl."net.core.rmem_max" = 4194304;
 
     # Allow inbound connections to reach namespace
-    systemd.services.transmission-web-netns = {
+    systemd.services.transmission-web-netns = lib.mkIf config.wireguard.enable {
       description = "Forward to transmission in wireguard namespace";
       requires = [ "transmission.service" ];
       after = [ "transmission.service" ];
