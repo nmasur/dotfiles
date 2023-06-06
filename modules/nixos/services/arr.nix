@@ -10,22 +10,33 @@
 
   config = lib.mkIf (config.arrServer != null) {
 
-    services.sonarr.enable = true;
-    services.radarr.enable = true;
-    services.bazarr.enable = true;
-    services.prowlarr.enable = true;
-    services.sabnzbd.enable = true;
-    services.sabnzbd.configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
-    services.jellyseerr.enable = true;
-    unfreePackages = [ "unrar" ]; # Required for sabnzbd
+    services = {
+      bazarr = {
+        enable = true;
+        group = "media";
+      };
+      jellyseerr.enable = true;
+      prowlarr.enable = true;
+      sabnzbd = {
+        enable = true;
+        group = "media";
+        configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
+      };
+      sonarr = {
+        enable = true;
+        group = "media";
+      };
+      radarr = {
+        enable = true;
+        group = "media";
+      };
+    };
 
-    # Grant users access to destination directories
-    users.users.sonarr.extraGroups = [ "jellyfin" "sabnzbd" ];
-    users.users.radarr.extraGroups = [ "jellyfin" "sabnzbd" ];
-    users.users.bazarr.extraGroups = [ "jellyfin" "sabnzbd" ];
+    users.groups.media = { };
+    users.users.${config.user}.extraGroups = [ "media" ];
     users.users.sabnzbd.homeMode = "0770";
-    users.users.${config.user}.extraGroups = [ "sabnzbd" ];
-    users.users.jellyfin.extraGroups = [ "sonarr" "radarr" ];
+
+    unfreePackages = [ "unrar" ]; # Required for sabnzbd
 
     # Requires updating the base_url config value in each service
     # If you try to rewrite the URL, the service won't redirect properly

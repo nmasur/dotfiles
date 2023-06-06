@@ -11,10 +11,8 @@
   config = lib.mkIf (config.streamServer != null) {
 
     services.jellyfin.enable = true;
-    users.users.jellyfin = {
-      isSystemUser = true;
-      group = "jellyfin";
-    };
+    services.jellyfin.group = "media";
+    users.users.jellyfin = { isSystemUser = true; };
 
     caddy.routes = [{
       match = [{ host = [ config.streamServer ]; }];
@@ -24,13 +22,10 @@
       }];
     }];
 
-    # Grant user access to Jellyfin directories
-    users.users.${config.user}.extraGroups = [ "jellyfin" ];
-
     # Create videos directory, allow anyone in Jellyfin group to manage it
     systemd.tmpfiles.rules = [
-      "d /var/lib/jellyfin 0775 jellyfin jellyfin"
-      "d /var/lib/jellyfin/library 0775 jellyfin jellyfin"
+      "d /var/lib/jellyfin 0775 jellyfin media"
+      "d /var/lib/jellyfin/library 0775 jellyfin media"
     ];
 
     # Enable VA-API for hardware transcoding
