@@ -73,6 +73,7 @@
               if config.theme.dark == true then 1 else 0;
             "media.ffmpeg.vaapi.enabled" =
               true; # Enable hardware video acceleration
+            "cookiebanners.ui.desktop.enabled" = true; # Reject cookie popups
           };
           userChrome = ''
             :root {
