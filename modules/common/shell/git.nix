@@ -51,7 +51,6 @@ in {
         gcae = "git commit --amend";
         gu = "git pull";
         gp = "git push";
-        gpp = "git-push-upstream";
         gl = "git log --graph --decorate --oneline -20";
         gll = "git log --graph --decorate --oneline";
         gco = "git checkout";
@@ -113,10 +112,6 @@ in {
           };
           git-history = {
             body = builtins.readFile ./fish/functions/git-history.fish;
-          };
-          git-push-upstream = {
-            description = "Create upstream branch";
-            body = builtins.readFile ./fish/functions/git-push-upstream.fish;
           };
           uncommitted = {
             description = "Find uncommitted git repos";
