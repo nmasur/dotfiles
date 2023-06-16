@@ -31,7 +31,7 @@ darwin.lib.darwinSystem {
       neovim.enable = true;
       mail.enable = true;
       mail.aerc.enable = true;
-      mail.himalaya.enable = true;
+      mail.himalaya.enable = false;
       kitty.enable = true;
       discord.enable = true;
       firefox.enable = true;
