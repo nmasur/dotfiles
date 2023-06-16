@@ -123,6 +123,7 @@
         (import ./overlays/neovim-plugins.nix inputs)
         (import ./overlays/lib.nix)
         (import ./overlays/calibre-web.nix)
+        (import ./overlays/gh-cli.nix)
       ];
 
       # System types to support.
