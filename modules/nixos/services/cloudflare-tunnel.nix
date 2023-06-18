@@ -48,6 +48,8 @@ in {
         # if there is no existing AuthenticationMethods
         AuthenticationMethods publickey
     '';
+    services.openssh.settings.Macs =
+      [ "hmac-sha2-512" ]; # Fix for failure to find matching mac
 
     # Create credentials file for Cloudflare
     secrets.cloudflared = {
