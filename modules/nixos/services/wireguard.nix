@@ -2,12 +2,15 @@
 
   options.wireguard.enable = lib.mkEnableOption "Wireguard VPN setup.";
 
-  config = lib.mkIf (pkgs.stdenv.isLinux && config.wireguard.enable) {
+  config = lib.mkIf (pkgs.stdenv.isLinux) {
 
     networking.wireguard = {
-      enable = true;
+      enable = config.wireguard.enable;
       interfaces = {
         wg0 = {
+
+          # Something to use as a default value
+          ips = lib.mkDefault [ "127.0.0.1/32" ];
 
           # Establishes identity of this machine
           generatePrivateKeyFile = false;
@@ -23,6 +26,7 @@
     # Create namespace for Wireguard
     # This allows us to isolate specific programs to Wireguard
     systemd.services."netns@" = {
+      enable = config.wireguard.enable;
       description = "%I network namespace";
       before = [ "network.target" ];
       serviceConfig = {
@@ -35,7 +39,7 @@
 
     # Create private key file for wireguard
     secrets.wireguard = {
-      source = ../../private/wireguard.age;
+      source = ../../../private/wireguard.age;
       dest = "${config.secretsDirectory}/wireguard";
     };
 

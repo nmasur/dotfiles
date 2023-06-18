@@ -42,8 +42,10 @@
 
     # Create reverse proxy for web UI
     caddy.routes = lib.mkAfter [{
-      group =
-        lib.mkIf (config.arrServer == config.transmissionServer) "download";
+      group = if (config.arrServer == config.transmissionServer) then
+        "download"
+      else
+        "transmission";
       match = [{
         host = [ config.transmissionServer ];
         path = [ "/transmission*" ];
@@ -76,7 +78,7 @@
 
     # Create credentials file for transmission
     secrets.transmission = {
-      source = ../../private/transmission.json.age;
+      source = ../../../private/transmission.json.age;
       dest = "${config.secretsDirectory}/transmission.json";
       owner = "transmission";
       group = "transmission";

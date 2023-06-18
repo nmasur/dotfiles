@@ -41,6 +41,8 @@
       "VDPAU_DRIVER" = "radeonsi";
       "LIBVA_DRIVER_NAME" = "radeonsi";
     };
+    users.users.jellyfin.extraGroups =
+      [ "render" "video" ]; # Access to /dev/dri
 
   };
 
