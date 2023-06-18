@@ -22,6 +22,13 @@ nixpkgs.lib.nixosSystem {
       boot.initrd.availableKernelModules =
         [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
       boot.initrd.kernelModules = [ "amdgpu" ];
+      boot.kernelParams = [
+        "radeon.si_support=0"
+        "amdgpu.si_support=1"
+        "radeon.cik_support=0"
+        "amdgpu.cik_support=1"
+        "amdgpu.dc=1"
+      ];
       hardware.enableRedistributableFirmware = true;
       powerManagement.cpuFreqGovernor = "powersave";
       hardware.cpu.intel.updateMicrocode = true;
