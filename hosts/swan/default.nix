@@ -53,13 +53,20 @@ nixpkgs.lib.nixosSystem {
       neovim.enable = true;
       caddy.enable = true;
       cloudflare.enable = true;
-      cloudflareTunnel.enable = true;
       streamServer = "stream.masu.rs";
       nextcloudServer = "cloud.masu.rs";
       bookServer = "books.masu.rs";
       arrServer = "download.masu.rs";
       transmissionServer = "download.masu.rs";
       samba.enable = true;
+
+      cloudflareTunnel = {
+        enable = true;
+        id = "646754ac-2149-4a58-b51a-e1d0a1f3ade2";
+        credentialsFile = ../../private/cloudflared-swan.age;
+        ca =
+          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCHF/UMtJqPFrf6f6GRY0ZFnkCW7b6sYgUTjTtNfRj1RdmNic1NoJZql7y6BrqQinZvy7nsr1UFDNWoHn6ah3tg= open-ssh-ca@cloudflareaccess.org";
+      };
 
       backup.s3 = {
         endpoint = "s3.us-west-002.backblazeb2.com";

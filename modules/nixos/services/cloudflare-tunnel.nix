@@ -4,24 +4,36 @@
 
 # nix-shell -p cloudflared
 # cloudflared tunnel login
-# cloudflared tunnel create <mytunnel>
-# nix run github:nmasur/dotfiles#encrypt-secret > private/cloudflared.age
+# cloudflared tunnel create <host>
+# nix run github:nmasur/dotfiles#encrypt-secret > private/cloudflared-<host>.age
 # Paste ~/.cloudflared/<id>.json
-# Set tunnelId = "<id>"
+# Set tunnel.id = "<id>"
 # Remove ~/.cloudflared/
 
-let tunnelId = "646754ac-2149-4a58-b51a-e1d0a1f3ade2";
+{
 
-in {
-
-  options.cloudflareTunnel.enable = lib.mkEnableOption "Use Cloudflare Tunnel";
+  options.cloudflareTunnel = {
+    enable = lib.mkEnableOption "Use Cloudflare Tunnel";
+    id = lib.mkOption {
+      type = lib.types.str;
+      description = "Cloudflare tunnel ID";
+    };
+    credentialsFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Cloudflare tunnel credentials file (age-encrypted)";
+    };
+    ca = lib.mkOption {
+      type = lib.types.str;
+      description = "Cloudflare tunnel CA public key";
+    };
+  };
 
   config = lib.mkIf config.cloudflareTunnel.enable {
 
     services.cloudflared = {
       enable = true;
       tunnels = {
-        "${tunnelId}" = {
+        "${config.cloudflareTunnel.id}" = {
           credentialsFile = config.secrets.cloudflared.dest;
           default = "http_status:404";
           ingress = { "*.masu.rs" = "ssh://localhost:22"; };
@@ -31,7 +43,7 @@ in {
 
     environment.etc = {
       "ssh/ca.pub".text = ''
-        ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCHF/UMtJqPFrf6f6GRY0ZFnkCW7b6sYgUTjTtNfRj1RdmNic1NoJZql7y6BrqQinZvy7nsr1UFDNWoHn6ah3tg= open-ssh-ca@cloudflareaccess.org
+        ${config.cloudflareTunnel.ca}
       '';
 
       # Must match the username of the email address in Cloudflare Access
@@ -53,15 +65,16 @@ in {
 
     # Create credentials file for Cloudflare
     secrets.cloudflared = {
-      source = ../../../private/cloudflared.age;
+      source = config.cloudflareTunnel.credentialsFile;
       dest = "${config.secretsDirectory}/cloudflared";
       owner = "cloudflared";
       group = "cloudflared";
       permissions = "0440";
     };
     systemd.services.cloudflared-secret = {
-      requiredBy = [ "cloudflared-tunnel-${tunnelId}.service" ];
-      before = [ "cloudflared-tunnel-${tunnelId}.service" ];
+      requiredBy =
+        [ "cloudflared-tunnel-${config.cloudflareTunnel.id}.service" ];
+      before = [ "cloudflared-tunnel-${config.cloudflareTunnel.id}.service" ];
     };
 
   };
