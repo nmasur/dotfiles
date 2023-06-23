@@ -77,7 +77,8 @@
             notmuch.enable = true;
             passwordCommand =
               "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
-                builtins.toString ../../../private/mailpass.age
+                pkgs.writeText "mailpass.age"
+                (builtins.readFile ../../../private/mailpass.age)
               }";
             smtp = {
               host = config.mail.smtpHost;
