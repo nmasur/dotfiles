@@ -1,7 +1,6 @@
 name: 'Terraform'
 env:
 
-
   AWS_ACCOUNT_NUMBER: ''
   AWS_PLAN_ROLE_NAME: github_actions_plan
   AWS_APPLY_ROLE_NAME: github_actions_admin
@@ -82,15 +81,14 @@ jobs:
 
       # Downloads the current repo code to the runner.
       - name: Checkout Repo Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Install Nix
-      - name: Install Nix
-        uses: cachix/install-nix-action@v17
-
-      # Build the image
-      - name: Build Image
-        run: nix build .#aws
+      # Enable access to KVM, required to build an image
+      - name: Enable KVM group perms
+        run: |
+            echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+            sudo udevadm control --reload-rules
+            sudo udevadm trigger --name-match=kvm
 
       # Login to AWS
       - name: AWS Assume Role
@@ -98,6 +96,28 @@ jobs:
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
+
+      # Install Nix
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+        with:
+          extra_nix_config: |
+            substituters = s3://insert-cache-bucket https://cache.nixos.org/
+            trusted-public-keys = insert-cache-bucket:M6PsZjHXcLvbQyPUBLICKEYGVoNwI84g1FBQzouRU= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+
+      # Build the image
+      - name: Build Image
+        run: nix build .#aws
+
+      # Copy the image to S3
+      - name: Upload Image to Cache
+        env:
+          NIX_CACHE_PRIVATE_KEY: ${{ secrets.NIX_CACHE_PRIVATE_KEY }}
+        run: |
+          echo "$NIX_CACHE_PRIVATE_KEY" > cache.key
+          nix store sign --key-file cache.key $(readlink result)
+          nix copy --to s3://t2-aws-nixos-test $(readlink result)
+          rm cache.key
 
       # Exports all GitHub Secrets as environment variables prefixed by
       # "TF_VAR_", which exposes them to Terraform. The name of each GitHub
