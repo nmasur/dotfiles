@@ -26,8 +26,8 @@ configuration may be difficult to translate to a non-Nix system.
 | Terminal     | [Kitty](https://sw.kovidgoyal.net/kitty/)                                        | [Link](./modules/common/applications/kitty.nix)    |
 | Shell        | [Fish](https://fishshell.com/)                                                   | [Link](./modules/common/shell/fish)                |
 | Shell Prompt | [Starship](https://starship.rs/)                                                 | [Link](./modules/common/shell/starhip.nix)         |
-| Colorscheme  | [Gruvbox](https://github.com/morhetz/gruvbox)                                    | [Link](./colorscheme/gruvbox)                      |
-| Wallpaper    | [Road](https://gitlab.com/exorcist365/wallpapers/-/blob/master/gruvbox/road.jpg) | [Link](./hosts/tempest/default.nix)
+| Colorscheme  | [Gruvbox](https://github.com/morhetz/gruvbox)                                    | [Link](./colorscheme/gruvbox/default.nix)          |
+| Wallpaper    | [Road](https://gitlab.com/exorcist365/wallpapers/-/blob/master/gruvbox/road.jpg) | [Link](./hosts/tempest/default.nix)                |
 | Text Editor  | [Neovim](https://neovim.io/)                                                     | [Link](./modules/common/neovim/config)             |
 | Browser      | [Firefox](https://www.mozilla.org/en-US/firefox/new/)                            | [Link](./modules/common/applications/firefox.nix)  |
 | E-Mail       | [Aerc](https://aerc-mail.org/)                                                   | [Link](./modules/common/mail/aerc.nix)             |
