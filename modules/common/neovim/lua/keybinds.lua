@@ -48,11 +48,6 @@ key("n", "<Leader>wv", ":vsplit<CR>")
 key("n", "<Leader>wh", ":split<CR>")
 key("n", "<Leader>wm", ":only<CR>")
 
--- Vimrc editing
-key("n", "<Leader>rr", ":luafile $HOME/.config/nvim/init.lua<CR>")
-key("n", "<Leader>rp", ":luafile $HOME/.config/nvim/init.lua<CR>:PackerInstall<CR>:")
-key("n", "<Leader>rc", ":luafile $HOME/.config/nvim/init.lua<CR>:PackerCompile<CR>")
-
 -- Keep cursor in place
 key("n", "n", "nzz")
 key("n", "N", "Nzz")
@@ -71,8 +66,8 @@ key("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
 key("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
 -- Other
-key("n", "<A-CR>", ":noh<CR>", { silent = true }) --- Clear search in VimWiki
-key("n", "Y", "y$") --- Copy to end of line
+key("n", "<A-CR>", ":noh<CR>", { silent = true })           --- Clear search in VimWiki
+key("n", "Y", "y$")                                         --- Copy to end of line
 key("v", "<C-r>", "y<Esc>:%s/<C-r>+//gc<left><left><left>") --- Substitute selected
-key("v", "D", "y'>gp") --- Duplicate selected
-key("x", "<Leader>p", '"_dP') --- Paste but keep register
+key("v", "D", "y'>gp")                                      --- Duplicate selected
+key("x", "<Leader>p", '"_dP')                               --- Paste but keep register

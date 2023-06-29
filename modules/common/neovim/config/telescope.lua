@@ -13,6 +13,7 @@ vim.keymap.set("n", "<Leader>gf", telescope.git_bcommits)
 vim.keymap.set("n", "<Leader>gb", telescope.git_branches)
 vim.keymap.set("n", "<Leader>gs", telescope.git_status)
 vim.keymap.set("n", "<Leader>s", telescope.current_buffer_fuzzy_find)
+vim.keymap.set("n", "<Leader>rr", telescope.resume)
 
 vim.keymap.set("n", "<Leader>N", function()
     local opts = {
