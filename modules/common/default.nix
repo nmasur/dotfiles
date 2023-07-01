@@ -87,6 +87,7 @@
       settings = {
 
         # Add community Cachix to binary cache
+        # Don't use with macOS because blocked by corporate firewall
         builders-use-substitutes = true;
         substituters = lib.mkIf (!pkgs.stdenv.isDarwin)
           [ "https://nix-community.cachix.org" ];
