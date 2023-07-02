@@ -3,9 +3,7 @@
 
 { inputs, globals, overlays, ... }:
 
-with inputs;
-
-darwin.lib.darwinSystem {
+inputs.darwin.lib.darwinSystem {
   system = "x86_64-darwin";
   specialArgs = { };
   modules = [
@@ -16,9 +14,9 @@ darwin.lib.darwinSystem {
       gitName = "Noah-Masur_1701";
       gitEmail = "${user}@take2games.com";
     })
-    home-manager.darwinModules.home-manager
+    inputs.home-manager.darwinModules.home-manager
     {
-      nixpkgs.overlays = [ firefox-darwin.overlay ] ++ overlays;
+      nixpkgs.overlays = [ inputs.firefox-darwin.overlay ] ++ overlays;
       networking.hostName = "lookingglass";
       identityFile = "/Users/Noah.Masur/.ssh/id_ed25519";
       gui.enable = true;

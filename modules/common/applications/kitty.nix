@@ -85,8 +85,7 @@
           # Scrollback
           scrolling_lines = 10000;
           scrollback_pager_history_size = 10; # MB
-          scrollback_pager = ''
-            ${pkgs.neovim}/bin/nvim -c 'setlocal nonumber nolist showtabline=0 foldcolumn=0|Man!' -c "autocmd VimEnter * normal G" -'';
+          scrollback_pager = "${pkgs.neovim}/bin/nvim -c 'normal G'";
 
           # Window
           window_padding_width = 6;

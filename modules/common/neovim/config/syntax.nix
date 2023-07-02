@@ -1,7 +1,17 @@
 { pkgs, ... }: {
 
   plugins = [
-    pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins:
+      with pkgs.tree-sitter-grammars; [
+        tree-sitter-hcl
+        tree-sitter-python
+        tree-sitter-lua
+        tree-sitter-nix
+        tree-sitter-fish
+        tree-sitter-toml
+        tree-sitter-yaml
+        tree-sitter-json
+      ]))
     pkgs.vimPlugins.vim-matchup # Better % jumping in languages
     pkgs.vimPlugins.nginx-vim
     pkgs.vimPlugins.vim-helm

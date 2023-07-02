@@ -6,14 +6,12 @@
 
 { inputs, globals, overlays, ... }:
 
-with inputs;
-
-nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { };
   modules = [
     (removeAttrs globals [ "mail.server" ])
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     ../../modules/common
     ../../modules/nixos
     {
@@ -23,7 +21,7 @@ nixpkgs.lib.nixosSystem {
       server = true;
       networking.hostName = "flame";
 
-      imports = [ (nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
+      imports = [ (inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
       boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" ];
 
       fileSystems."/" = {

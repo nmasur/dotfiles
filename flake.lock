@@ -3,15 +3,16 @@
     "Comment-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1686546603,
-        "narHash": "sha256-XM9yhp+SGxfAOdN/eDunzM0TMoCJhVth3wpFKNCGf3g=",
+        "lastModified": 1681214440,
+        "narHash": "sha256-48hy+hiaDJLlgWqC7IeZI3dT+VwWkRo4atQbyPxu/ys=",
         "owner": "numToStr",
         "repo": "Comment.nvim",
-        "rev": "176e85eeb63f1a5970d6b88f1725039d85ca0055",
+        "rev": "e51f2b142d88bb666dcaa77d93a07f4b419aca70",
         "type": "github"
       },
       "original": {
         "owner": "numToStr",
+        "ref": "v0.8.0",
         "repo": "Comment.nvim",
         "type": "github"
       }
@@ -19,15 +20,16 @@
     "bufferline-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687007546,
-        "narHash": "sha256-NRuk9RBj7etUv+2mBlJ3lTbJCRkYmluqZ5V2t78ile4=",
+        "lastModified": 1687763763,
+        "narHash": "sha256-wbOeylzjjScQXkrDbBU2HtrOZrp2YUK+wQ2aOkgxmRQ=",
         "owner": "akinsho",
         "repo": "bufferline.nvim",
-        "rev": "60734264a8655a7db3595159fb50076dc24c2f2c",
+        "rev": "bf2f6b7edd0abf6b0732f5e5c0a8f30e51611c75",
         "type": "github"
       },
       "original": {
         "owner": "akinsho",
+        "ref": "v4.2.0",
         "repo": "bufferline.nvim",
         "type": "github"
       }
@@ -371,15 +373,16 @@
     "nvim-lspconfig-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687509658,
-        "narHash": "sha256-t3b57T/Pc0F+rLe954gNk7cfi0L76eTrDOfiNCt14Yo=",
+        "lastModified": 1675639052,
+        "narHash": "sha256-B8IgpypxzCACZ5VcqM6KiWyClaN+KrmemtkwMznmj5Y=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "b6b34b9acf84949f0ac1c00747765e62b81fb38d",
+        "rev": "255e07ce2a05627d482d2de77308bba51b90470c",
         "type": "github"
       },
       "original": {
         "owner": "neovim",
+        "ref": "v0.1.6",
         "repo": "nvim-lspconfig",
         "type": "github"
       }
@@ -403,16 +406,16 @@
     "nvim-treesitter-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1677248832,
-        "narHash": "sha256-4TmtrufxjVpnSNfFpn6GQStEhq3KQb3JfmfMEJnSI8k=",
+        "lastModified": 1681121236,
+        "narHash": "sha256-iPsPDLhVKJ14iP1/2cCgcY9SCKK/DQz9Y0mQB1DqNiM=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "b401b7423d18c78371c5ff1a5f8d3c14292b2047",
+        "rev": "cc360a9beb1b30d172438f640e2c3450358c4086",
         "type": "github"
       },
       "original": {
         "owner": "nvim-treesitter",
-        "ref": "v0.8.5.2",
+        "ref": "v0.9.0",
         "repo": "nvim-treesitter",
         "type": "github"
       }
@@ -500,15 +503,16 @@
     "telescope-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687382735,
-        "narHash": "sha256-0wsj/v2ZoY8yFMENSB32WYJx8kHd+QtQHt9aHicZTM0=",
+        "lastModified": 1686302912,
+        "narHash": "sha256-fV3LLRwAPykVGc4ImOnUSP+WTrPp9Ad9OTfBJ6wqTMk=",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "ffe35cb433192fcb5080b557c1aef14d37092035",
+        "rev": "776b509f80dd49d8205b9b0d94485568236d1192",
         "type": "github"
       },
       "original": {
         "owner": "nvim-telescope",
+        "ref": "0.1.2",
         "repo": "telescope.nvim",
         "type": "github"
       }
@@ -532,15 +536,16 @@
     "toggleterm-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1685434137,
-        "narHash": "sha256-Qjhod1cmzAYuMl6Z0JlYtOq8CLdmQJ9esCwmynuzkYs=",
+        "lastModified": 1685434104,
+        "narHash": "sha256-oiCnBrvft6XxiQtQH8E4F842xhh348SaTpHzaeb+iDY=",
         "owner": "akinsho",
         "repo": "toggleterm.nvim",
-        "rev": "cf146a267a6a7db62b1e2aff40414b20081048a1",
+        "rev": "95204ece0f2a54c89c4395295432f9aeedca7b5f",
         "type": "github"
       },
       "original": {
         "owner": "akinsho",
+        "ref": "v2.7.0",
         "repo": "toggleterm.nvim",
         "type": "github"
       }

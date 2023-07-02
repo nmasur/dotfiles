@@ -3,17 +3,15 @@
 
 { inputs, globals, overlays, ... }:
 
-with inputs;
-
-nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     globals
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     ../../modules/common
     ../../modules/nixos
     {
-      nixpkgs.overlays = [ nur.overlay ] ++ overlays;
+      nixpkgs.overlays = overlays;
 
       # Hardware
       physical = true;
@@ -55,7 +53,7 @@ nixpkgs.lib.nixosSystem {
 
       # Must be prepared ahead
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
-      passwordHash = nixpkgs.lib.fileContents ../../password.sha512;
+      passwordHash = inputs.nixpkgs.lib.fileContents ../../password.sha512;
 
       # Theming
       gui.enable = true;
@@ -63,8 +61,8 @@ nixpkgs.lib.nixosSystem {
         colors = (import ../../colorscheme/gruvbox-dark).dark;
         dark = true;
       };
-      wallpaper = "${wallpapers}/gruvbox/road.jpg";
-      gtk.theme.name = nixpkgs.lib.mkDefault "Adwaita-dark";
+      wallpaper = "${inputs.wallpapers}/gruvbox/road.jpg";
+      gtk.theme.name = inputs.nixpkgs.lib.mkDefault "Adwaita-dark";
 
       # Programs and services
       charm.enable = true;

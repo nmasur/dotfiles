@@ -3,15 +3,13 @@
 
 { inputs, globals, overlays, ... }:
 
-with inputs;
-
-nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
     globals
-    home-manager.nixosModules.home-manager
-    disko.nixosModules.disko
+    inputs.home-manager.nixosModules.home-manager
+    inputs.disko.nixosModules.disko
     ../../modules/common
     ../../modules/nixos
     {

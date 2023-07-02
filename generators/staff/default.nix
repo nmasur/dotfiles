@@ -3,9 +3,7 @@
 
 { inputs, system, overlays, ... }:
 
-with inputs;
-
-nixos-generators.nixosGenerate {
+inputs.nixos-generators.nixosGenerate {
   inherit system;
   format = "install-iso";
   modules = [{

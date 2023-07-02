@@ -58,7 +58,7 @@
 
     # Neovim plugins
     nvim-lspconfig-src = {
-      url = "github:neovim/nvim-lspconfig";
+      url = "github:neovim/nvim-lspconfig/v0.1.6";
       flake = false;
     };
     cmp-nvim-lsp-src = {
@@ -70,15 +70,15 @@
       flake = false;
     };
     Comment-nvim-src = {
-      url = "github:numToStr/Comment.nvim";
+      url = "github:numToStr/Comment.nvim/v0.8.0";
       flake = false;
     };
     nvim-treesitter-src = {
-      url = "github:nvim-treesitter/nvim-treesitter/v0.8.5.2";
+      url = "github:nvim-treesitter/nvim-treesitter/v0.9.0";
       flake = false;
     };
     telescope-nvim-src = {
-      url = "github:nvim-telescope/telescope.nvim";
+      url = "github:nvim-telescope/telescope.nvim/0.1.2";
       flake = false;
     };
     telescope-project-nvim-src = {
@@ -86,11 +86,11 @@
       flake = false;
     };
     toggleterm-nvim-src = {
-      url = "github:akinsho/toggleterm.nvim";
+      url = "github:akinsho/toggleterm.nvim/v2.7.0";
       flake = false;
     };
     bufferline-nvim-src = {
-      url = "github:akinsho/bufferline.nvim";
+      url = "github:akinsho/bufferline.nvim/v4.2.0";
       flake = false;
     };
     nvim-tree-lua-src = {
@@ -123,6 +123,7 @@
         (import ./overlays/neovim-plugins.nix inputs)
         (import ./overlays/lib.nix)
         (import ./overlays/calibre-web.nix)
+        (import ./overlays/disko.nix inputs)
       ];
 
       # System types to support.
@@ -186,15 +187,7 @@
 
       # Programs that can be run by calling this flake
       apps = forAllSystems (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = overlays ++ [
-              (final: prev: {
-                disko-packaged = inputs.disko.packages.${system}.disko;
-              })
-            ];
-          };
+        let pkgs = import nixpkgs { inherit system overlays; };
         in import ./apps { inherit pkgs; });
 
       # Development environments
@@ -205,23 +198,6 @@
           # Used to run commands and edit files in this repo
           default = pkgs.mkShell {
             buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
-          };
-
-          # Used for cloud and systems development and administration
-          devops = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              terraform
-              consul
-              vault
-              awscli2
-              google-cloud-sdk
-              ansible
-              kubectl
-              kubernetes-helm
-              kustomize
-              fluxcd
-            ];
           };
 
         });

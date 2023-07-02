@@ -3,9 +3,7 @@
 
 { inputs, globals, overlays, ... }:
 
-with inputs;
-
-nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
@@ -13,20 +11,18 @@ nixpkgs.lib.nixosSystem {
     ../../modules/nixos
     ../../modules/wsl
     globals
-    wsl.nixosModules.wsl
-    home-manager.nixosModules.home-manager
+    inputs.wsl.nixosModules.wsl
+    inputs.home-manager.nixosModules.home-manager
     {
       networking.hostName = "hydra";
       nixpkgs.overlays = overlays;
-      # Set registry to flake packages, used for nix X commands
-      nix.registry.nixpkgs.flake = nixpkgs;
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gui.enable = false;
       theme = {
         colors = (import ../../colorscheme/gruvbox).dark;
         dark = true;
       };
-      passwordHash = nixpkgs.lib.fileContents ../../password.sha512;
+      passwordHash = inputs.nixpkgs.lib.fileContents ../../password.sha512;
       wsl = {
         enable = true;
         wslConf.automount.root = "/mnt";
