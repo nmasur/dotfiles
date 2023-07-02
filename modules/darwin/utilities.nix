@@ -19,10 +19,10 @@
       consul
       noti # Create notifications programmatically
       ipcalc # Make IP network calculations
-      (pkgs.extraLib.mkScript {
+      (writeShellApplication {
         name = "ocr";
-        file = ../../modules/common/shell/bash/scripts/ocr.sh;
-        env = [ tesseract ];
+        runtimeInputs = [ tesseract ];
+        text = builtins.readFile ../../modules/common/shell/bash/scripts/ocr.sh;
       })
     ];
 

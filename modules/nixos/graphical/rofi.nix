@@ -167,10 +167,10 @@ in {
     altTabCommand = "${rofi}/bin/rofi -show window -modi window";
     calculatorCommand = "${rofi}/bin/rofi -modes calc -show calc";
     audioSwitchCommand = "${
-        (pkgs.extraLib.mkScript {
+        (pkgs.writeShellApplication {
           name = "switch-audio";
-          file = ./rofi/pulse-sink.sh;
-          env = [ pkgs.ponymix rofi ];
+          runtimeInputs = [ pkgs.ponymix rofi ];
+          text = builtins.readFile ./rofi/pulse-sink.sh;
         })
       }/bin/switch-audio";
   };
