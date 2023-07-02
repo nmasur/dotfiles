@@ -164,9 +164,9 @@
 
       packages = let
         aws = system:
-          import ./generators/aws { inherit inputs globals overlays system; };
+          import ./hosts/aws { inherit inputs globals overlays system; };
         staff = system:
-          import ./generators/staff { inherit inputs globals overlays system; };
+          import ./hosts/staff { inherit inputs globals overlays system; };
         neovim = system:
           let pkgs = import nixpkgs { inherit system overlays; };
           in import ./modules/common/neovim/package {

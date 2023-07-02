@@ -1,12 +1,10 @@
 { inputs, system, globals, overlays, ... }:
 
-with inputs;
-
-nixos-generators.nixosGenerate {
+inputs.nixos-generators.nixosGenerate {
   inherit system;
   format = "amazon";
   modules = [
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     {
       nixpkgs.overlays = overlays;
       user = globals.user;
