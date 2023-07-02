@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
+  config = lib.mkIf config.services.xserver.enable {
     home-manager.users.${config.user} = {
 
       services.picom = {

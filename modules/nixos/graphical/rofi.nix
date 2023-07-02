@@ -8,11 +8,10 @@ in {
 
   imports = [ ./rofi/power.nix ./rofi/brightness.nix ];
 
-  config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
+  config = lib.mkIf config.services.xserver.enable {
 
     # Set the Rofi-Systemd terminal for viewing logs
-    environment.sessionVariables.ROFI_SYSTEMD_TERM =
-      lib.mkIf config.kitty.enable "${pkgs.kitty}/bin/kitty";
+    environment.sessionVariables.ROFI_SYSTEMD_TERM = config.terminal;
 
     home-manager.users.${config.user} = {
 
@@ -24,6 +23,13 @@ in {
       programs.rofi = {
         enable = true;
         cycle = true;
+        extraConfig = {
+          show-icons = true;
+          kb-cancel = "Escape,Super+space";
+          modi = "window,run,ssh,emoji,calc,systemd";
+          sort = true;
+          # levenshtein-sort = true;
+        };
         location = "center";
         pass = { };
         plugins = [ pkgs.rofi-calc pkgs.rofi-emoji pkgs.rofi-systemd ];
@@ -143,15 +149,9 @@ in {
           };
 
         };
+        terminal = config.terminal;
         xoffset = 0;
         yoffset = -20;
-        extraConfig = {
-          show-icons = true;
-          kb-cancel = "Escape,Super+space";
-          modi = "window,run,ssh,emoji,calc,systemd";
-          sort = true;
-          # levenshtein-sort = true;
-        };
       };
 
       home.file.".local/share/rofi/themes" = {

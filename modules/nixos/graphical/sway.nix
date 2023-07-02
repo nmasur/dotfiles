@@ -1,16 +1,21 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
   config = lib.mkIf config.gui.enable {
 
-    programs.sway.enable = true;
+    programs.sway = {
+      enable = true;
+      package = null; # Use home-manager Sway instead
+    };
 
   };
 
   home-manager.users.${config.user} = {
 
-    wayland.windowManager.sway.enable = true;
-    wayland.windowManager.sway.config =
-      config.home-manager.users.${config.user}.xsession.windowManager.i3.config;
+    wayland.windowManager.sway = {
+      enable = true;
+      config =
+        config.home-manager.users.${config.user}.xsession.windowManager.i3.config;
+    };
 
   };
 

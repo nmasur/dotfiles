@@ -13,14 +13,6 @@
 
   options = {
 
-    launcherCommand = lib.mkOption {
-      type = lib.types.str;
-      description = "Command to use for launching";
-    };
-    systemdSearch = lib.mkOption {
-      type = lib.types.str;
-      description = "Command to use for interacting with systemd";
-    };
     altTabCommand = lib.mkOption {
       type = lib.types.str;
       description = "Command to use for choosing windows";
@@ -37,13 +29,29 @@
       type = lib.types.str;
       description = "Command to use for quick calculations";
     };
-    toggleBarCommand = lib.mkOption {
+    launcherCommand = lib.mkOption {
       type = lib.types.str;
-      description = "Command to hide and show the status bar.";
+      description = "Command to use for launching";
+    };
+    lockScreenCommand = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to use to lock the screen";
     };
     powerCommand = lib.mkOption {
       type = lib.types.str;
       description = "Command to use for power options menu";
+    };
+    systemdSearch = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to use for interacting with systemd";
+    };
+    terminal = lib.mkOption {
+      type = lib.types.str;
+      description = "Package to use for graphical terminal";
+    };
+    toggleBarCommand = lib.mkOption {
+      type = lib.types.str;
+      description = "Command to hide and show the status bar.";
     };
     wallpaper = lib.mkOption {
       type = lib.types.path;
