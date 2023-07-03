@@ -10,6 +10,11 @@
 # Set tunnel.id = "<id>"
 # Remove ~/.cloudflared/
 
+# For SSH access:
+# Cloudflare Zero Trust -> Access -> Applications -> Create Application
+# Service Auth -> SSH -> Select Application -> Generate Certificate
+# Set ca = "<public key>"
+
 {
 
   options.cloudflareTunnel = {
