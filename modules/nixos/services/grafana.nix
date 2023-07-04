@@ -8,10 +8,11 @@
 
   config = lib.mkIf config.services.grafana.enable {
 
-    services.grafana.settings = {
+    services.grafana.settings.server = {
+      domain = config.metricsServer;
       http_addr = "127.0.0.1";
       http_port = 3000;
-      domain = config.metricsServer;
+      protocol = "http";
     };
 
     caddy.routes = [{
