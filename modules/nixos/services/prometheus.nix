@@ -19,6 +19,7 @@
       }];
       webExternalUrl = lib.mkIf config.services.grafana.enable
         "https://${config.prometheusServer}";
+      # Web config file: https://prometheus.io/docs/prometheus/latest/configuration/https/
       webConfigFile =
         lib.mkIf config.services.grafana.enable (pkgs.formats.yaml { }).generate
         "webconfig.yml" {

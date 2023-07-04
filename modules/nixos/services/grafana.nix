@@ -8,8 +8,11 @@
 
   config = lib.mkIf config.services.grafana.enable {
 
-    # Required to fix error in latest nixpkgs
-    services.grafana.settings = { };
+    services.grafana.settings = {
+      http_addr = "127.0.0.1";
+      http_port = 3000;
+      domain = config.metricsServer;
+    };
 
     caddy.routes = [{
       match = [{ host = [ config.metricsServer ]; }];
