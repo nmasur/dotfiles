@@ -20,16 +20,15 @@
       webExternalUrl = lib.mkIf config.services.grafana.enable
         "https://${config.prometheusServer}";
       # Web config file: https://prometheus.io/docs/prometheus/latest/configuration/https/
-      webConfigFile =
-        lib.mkIf config.services.grafana.enable (pkgs.formats.yaml { }).generate
-        "webconfig.yml" {
+      webConfigFile = lib.mkIf config.services.grafana.enable
+        ((pkgs.formats.yaml { }).generate "webconfig.yml" {
           basic_auth_users = {
             # Generate password: htpasswd -nBC 10 "" | tr -d ':\n'
             # Encrypt and place in private/prometheus.age
             "prometheus" =
               "$2y$10$r7FWHLHTGPAY312PdhkPEuvb05aGn9Nk1IO7qtUUUjmaDl35l6sLa";
           };
-        };
+        });
       remoteWrite = lib.mkIf (!config.services.grafana.enable) [{
         name = config.networking.hostName;
         url = "https://${config.prometheusServer}";
