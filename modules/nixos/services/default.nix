@@ -9,6 +9,7 @@
     ./cloudflare.nix
     ./gitea.nix
     ./gnupg.nix
+    ./grafana.nix
     ./honeypot.nix
     ./jellyfin.nix
     ./keybase.nix

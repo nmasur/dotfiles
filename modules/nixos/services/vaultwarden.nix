@@ -6,19 +6,18 @@ in {
 
   options = {
 
-    vaultwardenServer = lib.mkOption {
-      description = "Hostname for Vaultwarden.";
+    secretsServer = lib.mkOption {
+      description = "Hostname for passwords and secrets (Vaultwarden).";
       type = lib.types.nullOr lib.types.str;
       default = null;
     };
 
   };
 
-  config = lib.mkIf (config.vaultwardenServer != null) {
+  config = lib.mkIf config.services.vaultwarden.enable {
     services.vaultwarden = {
-      enable = true;
       config = {
-        DOMAIN = "https://${config.vaultwardenServer}";
+        DOMAIN = "https://${config.secretsServer}";
         SIGNUPS_ALLOWED = false;
         SIGNUPS_VERIFY = true;
         INVITATIONS_ALLOWED = true;
@@ -47,7 +46,7 @@ in {
     networking.firewall.allowedTCPPorts = [ 3012 ];
 
     caddy.routes = [{
-      match = [{ host = [ config.vaultwardenServer ]; }];
+      match = [{ host = [ config.secretsServer ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:8222"; }];

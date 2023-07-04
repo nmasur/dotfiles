@@ -6,23 +6,22 @@ in {
 
   options = {
 
-    giteaServer = lib.mkOption {
-      description = "Hostname for Gitea.";
+    gitServer = lib.mkOption {
+      description = "Hostname for git server (Gitea).";
       type = lib.types.nullOr lib.types.str;
       default = null;
     };
 
   };
 
-  config = lib.mkIf (config.giteaServer != null) {
+  config = lib.mkIf config.services.gitea.enable {
     services.gitea = {
-      enable = true;
       database.type = "sqlite3";
       settings = {
         repository = {
           DEFAULT_PUSH_CREATE_PRIVATE = true;
           DISABLE_HTTP_GIT = false;
-          ACCESS_CONTROL_ALLOW_ORIGIN = config.giteaServer;
+          ACCESS_CONTROL_ALLOW_ORIGIN = config.gitServer;
           ENABLE_PUSH_CREATE_USER = true;
           ENABLE_PUSH_CREATE_ORG = true;
           DEFAULT_BRANCH = "main";
@@ -30,7 +29,7 @@ in {
         server = {
           HTTP_PORT = 3001;
           HTTP_ADDRESS = "127.0.0.1";
-          ROOT_URL = "https://${config.giteaServer}/";
+          ROOT_URL = "https://${config.gitServer}/";
           SSH_PORT = 22;
           START_SSH_SERVER = false; # Use sshd instead
           DISABLE_SSH = false;
@@ -47,7 +46,7 @@ in {
     networking.firewall.allowedTCPPorts = [ 122 ];
 
     caddy.routes = [{
-      match = [{ host = [ config.giteaServer ]; }];
+      match = [{ host = [ config.gitServer ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:3001"; }];

@@ -105,7 +105,8 @@
     let
 
       # Global configuration for my systems
-      globals = rec {
+      globals = let baseName = "masu.rs";
+      in rec {
         user = "noah";
         fullName = "Noah Masur";
         gitName = fullName;
@@ -114,6 +115,14 @@
         mail.imapHost = "imap.purelymail.com";
         mail.smtpHost = "smtp.purelymail.com";
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
+        gitServer = "git.${baseName}";
+        metricsServer = "metrics.${baseName}";
+        prometheusServer = "prom.${baseName}";
+        secretsServer = "vault.${baseName}";
+        streamServer = "stream.${baseName}";
+        contentServer = "cloud.${baseName}";
+        bookServer = "books.${baseName}";
+        downloadServer = "download.${baseName}";
       };
 
       # Common overlays to always use

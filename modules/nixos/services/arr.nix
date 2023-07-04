@@ -1,14 +1,15 @@
 { config, lib, ... }: {
 
   options = {
-    arrServer = lib.mkOption {
+    arrs.enable = lib.mkEnableOption "Arr services";
+    downloadServer = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
-      description = "Hostname for arr services";
+      description = "Hostname for download services";
       default = null;
     };
   };
 
-  config = lib.mkIf (config.arrServer != null) {
+  config = lib.mkIf config.arrs.enable {
 
     services = {
       bazarr = {

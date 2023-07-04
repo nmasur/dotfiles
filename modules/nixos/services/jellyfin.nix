@@ -8,9 +8,8 @@
     };
   };
 
-  config = lib.mkIf (config.streamServer != null) {
+  config = lib.mkIf config.services.jellyfin.enable {
 
-    services.jellyfin.enable = true;
     services.jellyfin.group = "media";
     users.users.jellyfin = { isSystemUser = true; };
 

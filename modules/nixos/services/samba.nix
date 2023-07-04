@@ -1,11 +1,8 @@
 { config, lib, ... }: {
 
-  options = { samba.enable = lib.mkEnableOption "Enable Samba sharing."; };
-
   config = {
 
-    services.samba = lib.mkIf (config.samba.enable) {
-      enable = true;
+    services.samba = lib.mkIf config.services.samba.enable {
       openFirewall = true;
       shares.data = {
         path = "/data";

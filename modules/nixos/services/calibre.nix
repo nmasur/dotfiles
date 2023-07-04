@@ -19,10 +19,9 @@ in {
     };
   };
 
-  config = lib.mkIf (config.bookServer != null) {
+  config = lib.mkIf config.services.calibre-web.enable {
 
     services.calibre-web = {
-      enable = true;
       openFirewall = true;
       options = {
         reverseProxyAuth.enable = false;

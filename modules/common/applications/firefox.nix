@@ -33,7 +33,6 @@
             vimium
             multi-account-containers
             facebook-container
-            temporary-containers
             (lib.mkIf config._1password.enable onepassword-password-manager)
             okta-browser-plugin
             sponsorblock

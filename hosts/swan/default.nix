@@ -48,14 +48,16 @@ inputs.nixpkgs.lib.nixosSystem {
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
       nixpkgs.overlays = overlays;
       neovim.enable = true;
-      caddy.enable = true;
       cloudflare.enable = true;
       dotfiles.enable = true;
-      streamServer = "stream.masu.rs";
-      nextcloudServer = "cloud.masu.rs";
-      bookServer = "books.masu.rs";
-      arrServer = "download.masu.rs";
-      samba.enable = true;
+      arrs.enable = true;
+
+      services.caddy.enable = true;
+      services.jellyfin.enable = true;
+      services.nextcloud.enable = true;
+      services.calibre-web.enable = true;
+      services.prometheus.enable = true;
+      services.samba.enable = true;
 
       cloudflareTunnel = {
         enable = true;

@@ -9,10 +9,7 @@ let
 
 in {
 
-  options.gaming.minecraft-server.enable =
-    lib.mkEnableOption "Minecraft Server.";
-
-  config = lib.mkIf config.gaming.minecraft-server.enable {
+  config = lib.mkIf config.services.minecraft-server.enable {
 
     unfreePackages = [ "minecraft-server" ];
 

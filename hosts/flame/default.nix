@@ -10,7 +10,7 @@ inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { };
   modules = [
-    (removeAttrs globals [ "mail.server" ])
+    globals
     inputs.home-manager.nixosModules.home-manager
     ../../modules/common
     ../../modules/nixos
@@ -43,14 +43,16 @@ inputs.nixpkgs.lib.nixosSystem {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
 
       # Programs and services
-      caddy.enable = true;
       cloudflare.enable = true; # Proxy traffic with Cloudflare
       dotfiles.enable = true; # Clone dotfiles
-      gaming.minecraft-server.enable = true; # Setup Minecraft server
-      giteaServer = "git.masu.rs";
-      metricsServer = "metrics.masu.rs";
       neovim.enable = true;
-      vaultwardenServer = "vault.masu.rs";
+
+      services.caddy.enable = true;
+      services.grafana.enable = true;
+      services.prometheus.enable = true;
+      services.gitea.enable = true;
+      services.vaultwarden.enable = true;
+      services.minecraft-server.enable = true; # Setup Minecraft server
 
       cloudflareTunnel = {
         enable = true;
