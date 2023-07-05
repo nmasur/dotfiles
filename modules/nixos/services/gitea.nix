@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let giteaPath = "/var/lib/gitea"; # Default service directory
 
@@ -44,6 +44,7 @@ in {
     };
 
     networking.firewall.allowedTCPPorts = [ 122 ];
+    users.users.${config.user}.extraGroups = [ "gitea" ];
 
     caddy.routes = [{
       match = [{ host = [ config.gitServer ]; }];
@@ -83,6 +84,34 @@ in {
       after = [ "gitea.service" ];
       requires = [ "gitea.service" ];
     };
+
+    # Run a repository file backup on a schedule
+    systemd.timers.gitea-backup = lib.mkIf (config.backup.s3.endpoint != null) {
+      timerConfig = {
+        OnCalendar = "*-*-* 00:00:00"; # Once per day
+        Unit = "gitea-backup.service";
+      };
+      wantedBy = [ "timers.target" ];
+    };
+
+    # Backup Gitea repos to object storage
+    systemd.services.gitea-backup =
+      lib.mkIf (config.backup.s3.endpoint != null) {
+        description = "Backup Gitea data";
+        environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
+        serviceConfig = {
+          Type = "oneshot";
+          User = "gitea";
+          Group = "backup";
+          EnvironmentFile = config.secrets.backup.dest;
+        };
+        script = ''
+          ${pkgs.awscli2}/bin/aws s3 sync --exclude */gitea.db* \
+              ${giteaPath}/ \
+              s3://${config.backup.s3.bucket}/gitea-data/ \
+              --endpoint-url=https://${config.backup.s3.endpoint}
+        '';
+      };
 
   };
 
