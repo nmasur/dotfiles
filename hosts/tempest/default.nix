@@ -92,6 +92,14 @@ inputs.nixpkgs.lib.nixosSystem {
         ryujinx.enable = true;
       };
 
+      cloudflareTunnel = {
+        enable = true;
+        id = "ac133a82-31fb-480c-942a-cdbcd4c58173";
+        credentialsFile = ../../private/cloudflared-tempest.age;
+        ca =
+          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPY6C0HmdFCaxYtJxFr3qV4/1X4Q8KrYQ1hlme3u1hJXK+xW+lc9Y9glWHrhiTKilB7carYTB80US0O47gI5yU4= open-ssh-ca@cloudflareaccess.org";
+      };
+
     }
   ];
 }
