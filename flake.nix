@@ -20,14 +20,17 @@
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows =
-        "nixpkgs"; # Use system packages list where available
+        "nixpkgs"; # Use system packages list for their inputs
     };
 
     # Community packages; used for Firefox extensions
     nur.url = "github:nix-community/nur";
 
     # Use official Firefox binary for macOS
-    firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    firefox-darwin = {
+      url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Manage disk format and partitioning
     disko = {
@@ -54,7 +57,10 @@
     };
 
     # Nix language server
-    nil.url = "github:oxalica/nil/2023-04-03";
+    nil = {
+      url = "github:oxalica/nil/2023-04-03";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Neovim plugins
     nvim-lspconfig-src = {
@@ -159,7 +165,7 @@
           import ./hosts/lookingglass { inherit inputs globals overlays; };
       };
 
-      # For quickly applying local settings with:
+      # For quickly applying home-manager settings with:
       # home-manager switch --flake .#tempest
       homeConfigurations = {
         tempest =
