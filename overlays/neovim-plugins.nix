@@ -17,6 +17,7 @@ let
 in {
 
   nil = inputs.nil.packages.${prev.system}.nil;
+  vscode-terraform-snippets = inputs.vscode-terraform-snippets;
 
   nvim-lspconfig =
     (withSrc prev.vimPlugins.nvim-lspconfig inputs.nvim-lspconfig);

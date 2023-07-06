@@ -103,6 +103,10 @@
       url = "github:kyazdani42/nvim-tree.lua";
       flake = false;
     };
+    vscode-terraform-snippets = {
+      url = "github:nmasur/vscode-terraform-snippets";
+      flake = false;
+    };
 
   };
 

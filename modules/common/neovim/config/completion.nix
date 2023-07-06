@@ -135,6 +135,13 @@
   };
 
   lua = ''
+    -- Load snippets
+    -- Check status: :lua require("luasnip").log.open()
+    require("luasnip.loaders.from_vscode").lazy_load()
+    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "${
+      builtins.toString pkgs.vscode-terraform-snippets
+    }" } })
+
     -- Use buffer source for `/`
     require('cmp').setup.cmdline("/", {
         sources = {

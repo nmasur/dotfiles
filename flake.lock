@@ -413,6 +413,7 @@
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
         "toggleterm-nvim-src": "toggleterm-nvim-src",
+        "vscode-terraform-snippets": "vscode-terraform-snippets",
         "wallpapers": "wallpapers",
         "wsl": "wsl"
       }
@@ -519,6 +520,22 @@
         "owner": "akinsho",
         "ref": "v2.7.0",
         "repo": "toggleterm.nvim",
+        "type": "github"
+      }
+    },
+    "vscode-terraform-snippets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688666727,
+        "narHash": "sha256-qw6/N1nDPgZXQ2T0DRK2WoNC2KLkNTJRVm5yNqzMcIg=",
+        "owner": "nmasur",
+        "repo": "vscode-terraform-snippets",
+        "rev": "6e37735ef6fdd72352e4b73e2bfaa3706fcff7e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nmasur",
+        "repo": "vscode-terraform-snippets",
         "type": "github"
       }
     },
