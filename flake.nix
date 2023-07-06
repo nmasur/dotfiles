@@ -104,7 +104,7 @@
       flake = false;
     };
     vscode-terraform-snippets = {
-      url = "github:nmasur/vscode-terraform-snippets";
+      url = "github:run-at-scale/vscode-terraform-doc-snippets";
       flake = false;
     };
 

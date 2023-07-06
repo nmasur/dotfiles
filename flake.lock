@@ -526,16 +526,16 @@
     "vscode-terraform-snippets": {
       "flake": false,
       "locked": {
-        "lastModified": 1688666727,
-        "narHash": "sha256-qw6/N1nDPgZXQ2T0DRK2WoNC2KLkNTJRVm5yNqzMcIg=",
-        "owner": "nmasur",
-        "repo": "vscode-terraform-snippets",
-        "rev": "6e37735ef6fdd72352e4b73e2bfaa3706fcff7e0",
+        "lastModified": 1614849738,
+        "narHash": "sha256-v392tyzXV+zyBNt5OCB2NBCK7JcByrTa5Ne/nFtSCJI=",
+        "owner": "run-at-scale",
+        "repo": "vscode-terraform-doc-snippets",
+        "rev": "6ab3e44b566e660f38922cf908e6e547eaa5d4b4",
         "type": "github"
       },
       "original": {
-        "owner": "nmasur",
-        "repo": "vscode-terraform-snippets",
+        "owner": "run-at-scale",
+        "repo": "vscode-terraform-doc-snippets",
         "type": "github"
       }
     },
