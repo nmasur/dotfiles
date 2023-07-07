@@ -66,6 +66,40 @@
       description = "List of unfree packages to allow.";
       default = [ ];
     };
+    hostnames = {
+      git = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for git server (Gitea).";
+      };
+      metrics = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for metrics server.";
+      };
+      prometheus = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for Prometheus server.";
+      };
+      secrets = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for passwords and secrets (Vaultwarden).";
+      };
+      stream = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for video/media library (Jellyfin).";
+      };
+      content = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for personal content system (Nextcloud).";
+      };
+      books = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for books library (Calibre-Web).";
+      };
+      download = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for download services.";
+      };
+    };
   };
 
   config = let stateVersion = "23.05";

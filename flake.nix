@@ -125,14 +125,16 @@
         mail.imapHost = "imap.purelymail.com";
         mail.smtpHost = "smtp.purelymail.com";
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
-        gitServer = "git.${baseName}";
-        metricsServer = "metrics.${baseName}";
-        prometheusServer = "prom.${baseName}";
-        secretsServer = "vault.${baseName}";
-        streamServer = "stream.${baseName}";
-        contentServer = "cloud.${baseName}";
-        bookServer = "books.${baseName}";
-        downloadServer = "download.${baseName}";
+        hostnames = {
+          git = "git.${baseName}";
+          metrics = "metrics.${baseName}";
+          prometheus = "prom.${baseName}";
+          secrets = "vault.${baseName}";
+          stream = "stream.${baseName}";
+          content = "cloud.${baseName}";
+          books = "books.${baseName}";
+          download = "download.${baseName}";
+        };
       };
 
       # Common overlays to always use

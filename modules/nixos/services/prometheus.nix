@@ -1,11 +1,5 @@
 { config, pkgs, lib, ... }: {
 
-  options.prometheusServer = lib.mkOption {
-    type = lib.types.nullOr lib.types.str;
-    description = "Hostname of the Prometheus server.";
-    default = null;
-  };
-
   config = let
 
     # If hosting Grafana, host local Prometheus and listen for inbound jobs. If
@@ -20,7 +14,8 @@
         job_name = "local";
         static_configs = [{ targets = [ "127.0.0.1:9100" ]; }];
       }];
-      webExternalUrl = lib.mkIf isServer "https://${config.prometheusServer}";
+      webExternalUrl =
+        lib.mkIf isServer "https://${config.hostnames.prometheus}";
       # Web config file: https://prometheus.io/docs/prometheus/latest/configuration/https/
       webConfigFile = lib.mkIf isServer
         ((pkgs.formats.yaml { }).generate "webconfig.yml" {
@@ -33,7 +28,7 @@
         });
       remoteWrite = lib.mkIf (!isServer) [{
         name = config.networking.hostName;
-        url = "https://${config.prometheusServer}";
+        url = "https://${config.hostnames.prometheus}";
         basic_auth = {
           # Uses password hashed with bcrypt above
           username = "prometheus";
@@ -56,7 +51,7 @@
     };
 
     caddy.routes = lib.mkIf isServer [{
-      match = [{ host = [ config.prometheusServer ]; }];
+      match = [{ host = [ config.hostnames.prometheus ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:9090"; }];

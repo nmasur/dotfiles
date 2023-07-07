@@ -1,20 +1,12 @@
 { config, pkgs, lib, ... }: {
 
-  options = {
-    streamServer = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Hostname for Jellyfin library";
-      default = null;
-    };
-  };
-
   config = lib.mkIf config.services.jellyfin.enable {
 
     services.jellyfin.group = "media";
     users.users.jellyfin = { isSystemUser = true; };
 
     caddy.routes = [{
-      match = [{ host = [ config.streamServer ]; }];
+      match = [{ host = [ config.hostnames.stream ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:8096"; }];

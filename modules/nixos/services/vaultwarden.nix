@@ -4,20 +4,10 @@ let vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory
 
 in {
 
-  options = {
-
-    secretsServer = lib.mkOption {
-      description = "Hostname for passwords and secrets (Vaultwarden).";
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
-
-  };
-
   config = lib.mkIf config.services.vaultwarden.enable {
     services.vaultwarden = {
       config = {
-        DOMAIN = "https://${config.secretsServer}";
+        DOMAIN = "https://${config.hostnames.secrets}";
         SIGNUPS_ALLOWED = false;
         SIGNUPS_VERIFY = true;
         INVITATIONS_ALLOWED = true;
@@ -46,7 +36,7 @@ in {
     networking.firewall.allowedTCPPorts = [ 3012 ];
 
     caddy.routes = [{
-      match = [{ host = [ config.secretsServer ]; }];
+      match = [{ host = [ config.hostnames.secrets ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:8222"; }];

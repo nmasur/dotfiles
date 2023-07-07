@@ -1,15 +1,5 @@
 { config, pkgs, lib, ... }: {
 
-  options = {
-
-    contentServer = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Hostname for personal content system (Nextcloud)";
-      default = null;
-    };
-
-  };
-
   config = lib.mkIf config.services.nextcloud.enable {
 
     services.nextcloud = {
@@ -20,7 +10,7 @@
       maxUploadSize = "50G";
       config = {
         adminpassFile = config.secrets.nextcloud.dest;
-        extraTrustedDomains = [ config.contentServer ];
+        extraTrustedDomains = [ config.hostnames.content ];
       };
     };
 
@@ -32,7 +22,7 @@
 
     # Point Caddy to Nginx
     caddy.routes = [{
-      match = [{ host = [ config.contentServer ]; }];
+      match = [{ host = [ config.hostnames.content ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:8080"; }];

@@ -4,16 +4,6 @@ let giteaPath = "/var/lib/gitea"; # Default service directory
 
 in {
 
-  options = {
-
-    gitServer = lib.mkOption {
-      description = "Hostname for git server (Gitea).";
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
-
-  };
-
   config = lib.mkIf config.services.gitea.enable {
     services.gitea = {
       database.type = "sqlite3";
@@ -21,7 +11,7 @@ in {
         repository = {
           DEFAULT_PUSH_CREATE_PRIVATE = true;
           DISABLE_HTTP_GIT = false;
-          ACCESS_CONTROL_ALLOW_ORIGIN = config.gitServer;
+          ACCESS_CONTROL_ALLOW_ORIGIN = config.hostnames.git;
           ENABLE_PUSH_CREATE_USER = true;
           ENABLE_PUSH_CREATE_ORG = true;
           DEFAULT_BRANCH = "main";
@@ -29,7 +19,7 @@ in {
         server = {
           HTTP_PORT = 3001;
           HTTP_ADDRESS = "127.0.0.1";
-          ROOT_URL = "https://${config.gitServer}/";
+          ROOT_URL = "https://${config.hostnames.git}/";
           SSH_PORT = 22;
           START_SSH_SERVER = false; # Use sshd instead
           DISABLE_SSH = false;
@@ -47,7 +37,7 @@ in {
     users.users.${config.user}.extraGroups = [ "gitea" ];
 
     caddy.routes = [{
-      match = [{ host = [ config.gitServer ]; }];
+      match = [{ host = [ config.hostnames.git ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:3001"; }];

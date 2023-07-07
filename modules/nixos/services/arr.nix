@@ -1,13 +1,6 @@
 { config, lib, ... }: {
 
-  options = {
-    arrs.enable = lib.mkEnableOption "Arr services";
-    downloadServer = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Hostname for download services";
-      default = null;
-    };
-  };
+  options = { arrs.enable = lib.mkEnableOption "Arr services"; };
 
   config = lib.mkIf config.arrs.enable {
 
@@ -45,7 +38,7 @@
       {
         group = "download";
         match = [{
-          host = [ config.arrServer ];
+          host = [ config.hostnames.download ];
           path = [ "/sonarr*" ];
         }];
         handle = [{
@@ -56,7 +49,7 @@
       {
         group = "download";
         match = [{
-          host = [ config.arrServer ];
+          host = [ config.hostnames.download ];
           path = [ "/radarr*" ];
         }];
         handle = [{
@@ -67,7 +60,7 @@
       {
         group = "download";
         match = [{
-          host = [ config.arrServer ];
+          host = [ config.hostnames.download ];
           path = [ "/prowlarr*" ];
         }];
         handle = [{
@@ -78,7 +71,7 @@
       {
         group = "download";
         match = [{
-          host = [ config.arrServer ];
+          host = [ config.hostnames.download ];
           path = [ "/bazarr*" ];
         }];
         handle = [{
@@ -89,7 +82,7 @@
       {
         group = "download";
         match = [{
-          host = [ config.arrServer ];
+          host = [ config.hostnames.download ];
           path = [ "/sabnzbd*" ];
         }];
         handle = [{
@@ -99,7 +92,7 @@
       }
       {
         group = "download";
-        match = [{ host = [ config.arrServer ]; }];
+        match = [{ host = [ config.hostnames.download ]; }];
         handle = [{
           handler = "reverse_proxy";
           upstreams = [{ dial = "localhost:5055"; }];

@@ -7,11 +7,6 @@ let
 in {
 
   options = {
-    bookServer = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Hostname for Calibre library";
-      default = null;
-    };
     backups.calibre = lib.mkOption {
       type = lib.types.bool;
       description = "Whether to backup Calibre library";
@@ -32,7 +27,7 @@ in {
     };
 
     caddy.routes = [{
-      match = [{ host = [ config.bookServer ]; }];
+      match = [{ host = [ config.hostnames.books ]; }];
       handle = [{
         handler = "reverse_proxy";
         upstreams = [{ dial = "localhost:8083"; }];
