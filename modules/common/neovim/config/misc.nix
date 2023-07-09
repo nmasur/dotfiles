@@ -11,6 +11,7 @@
 
   setup.Comment = { };
   setup.colorizer = { };
+  setup.glow = { };
 
   vim.o = {
     termguicolors = true; # Set to truecolor
