@@ -6,12 +6,15 @@
         tree-sitter-bash
         tree-sitter-fish
         tree-sitter-hcl
+        tree-sitter-ini
         tree-sitter-json
         tree-sitter-lua
         tree-sitter-markdown
         tree-sitter-markdown-inline
         tree-sitter-nix
+        tree-sitter-puppet
         tree-sitter-python
+        tree-sitter-rasi
         tree-sitter-toml
         tree-sitter-yaml
       ]))
@@ -19,7 +22,6 @@
     pkgs.vimPlugins.playground # Tree-sitter experimenting
     pkgs.vimPlugins.nginx-vim
     pkgs.vimPlugins.vim-helm
-    pkgs.vimPlugins.vim-puppet
     (pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "nmasur";
       version = "0.1";
@@ -30,6 +32,7 @@
   setup."nvim-treesitter.configs" = {
     highlight = { enable = true; };
     indent = { enable = true; };
+    matchup = { enable = true; }; # Uses vim-matchup
 
     textobjects = {
       select = {

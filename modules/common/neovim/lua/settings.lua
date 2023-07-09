@@ -6,7 +6,7 @@ vim.filetype.add({
     pattern = {
         [".*%.tfvars"] = "terraform",
         [".*%.tf"] = "terraform",
-        [".*%.rasi"] = "css",
+        [".*%.rasi"] = "rasi",
     },
 })
 

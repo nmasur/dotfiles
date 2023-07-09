@@ -144,7 +144,7 @@
         (import ./overlays/neovim-plugins.nix inputs)
         (import ./overlays/calibre-web.nix)
         (import ./overlays/disko.nix inputs)
-        (import ./overlays/tree-sitter-bash.nix)
+        (import ./overlays/tree-sitter.nix inputs)
       ];
 
       # System types to support.
