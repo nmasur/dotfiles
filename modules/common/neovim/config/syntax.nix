@@ -3,19 +3,28 @@
   plugins = [
     (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins:
       with pkgs.tree-sitter-grammars; [
-        tree-sitter-hcl
-        tree-sitter-python
-        tree-sitter-lua
-        tree-sitter-nix
+        tree-sitter-bash
         tree-sitter-fish
+        tree-sitter-hcl
+        tree-sitter-json
+        tree-sitter-lua
+        tree-sitter-markdown
+        tree-sitter-markdown-inline
+        tree-sitter-nix
+        tree-sitter-python
         tree-sitter-toml
         tree-sitter-yaml
-        tree-sitter-json
       ]))
     pkgs.vimPlugins.vim-matchup # Better % jumping in languages
+    pkgs.vimPlugins.playground # Tree-sitter experimenting
     pkgs.vimPlugins.nginx-vim
     pkgs.vimPlugins.vim-helm
     pkgs.vimPlugins.vim-puppet
+    (pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "nmasur";
+      version = "0.1";
+      src = ../plugin;
+    })
   ];
 
   setup."nvim-treesitter.configs" = {
