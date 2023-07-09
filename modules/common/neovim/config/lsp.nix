@@ -29,6 +29,9 @@
   lua = ''
     ${builtins.readFile ./lsp.lua}
 
+    -- Prevent infinite log size (change this when debugging)
+    vim.lsp.set_log_level("off")
+
     require("null-ls").setup({
         sources = {
             require("null-ls").builtins.formatting.stylua.with({ command = "${pkgs.stylua}/bin/stylua" }),
