@@ -62,6 +62,8 @@ inputs.nixpkgs.lib.nixosSystem {
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/6oyVqjFGX3Uvrc3VS8J9sphxzAnRzKC85xgkHfYgR3TK6qBGXzHrknEj21xeZrr3G2y1UsGzphWJd9ZfIcdA= open-ssh-ca@cloudflareaccess.org";
       };
 
+      giteaRunner.enable = true;
+
       # Nextcloud backup config
       backup.s3 = {
         endpoint = "s3.us-west-002.backblazeb2.com";

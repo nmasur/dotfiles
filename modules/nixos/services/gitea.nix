@@ -8,6 +8,7 @@ in {
     services.gitea = {
       database.type = "sqlite3";
       settings = {
+        actions.ENABLED = true;
         repository = {
           DEFAULT_PUSH_CREATE_PRIVATE = true;
           DISABLE_HTTP_GIT = false;

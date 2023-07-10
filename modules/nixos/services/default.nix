@@ -7,6 +7,7 @@
     ./calibre.nix
     ./cloudflare-tunnel.nix
     ./cloudflare.nix
+    ./gitea-runner.nix
     ./gitea.nix
     ./gnupg.nix
     ./grafana.nix
