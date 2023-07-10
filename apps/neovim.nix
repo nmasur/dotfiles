@@ -5,7 +5,7 @@
   program = "${
       (import ../modules/common/neovim/package {
         inherit pkgs;
-        colors = (import ../colorscheme/gruvbox).dark;
+        colors = (import ../colorscheme/nord).dark;
       })
     }/bin/nvim";
 

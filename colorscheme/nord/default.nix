@@ -1,7 +1,7 @@
 {
+  name = "nord";
+  author = "arcticicestudio";
   dark = {
-    name = "nord";
-    author = "arcticicestudio";
     base00 = "#2E3440";
     base01 = "#3B4252";
     base02 = "#434C5E";

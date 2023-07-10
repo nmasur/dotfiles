@@ -21,7 +21,7 @@ inputs.darwin.lib.darwinSystem {
       identityFile = "/Users/Noah.Masur/.ssh/id_ed25519";
       gui.enable = true;
       theme = {
-        colors = (import ../../colorscheme/gruvbox).dark;
+        colors = (import ../../colorscheme/gruvbox-dark).dark;
         dark = true;
       };
       mail.user = globals.user;

@@ -3,8 +3,6 @@
 *.db
 **/.direnv/**
 result
-.luarc.json
 private/**
 templates/**/flake.lock
 !private/**.age
-!private/**.sha512

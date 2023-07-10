@@ -2,7 +2,7 @@
   plugins = [ pkgs.vimPlugins.lualine-nvim ];
   setup.lualine = {
     options = {
-      theme = "gruvbox";
+      theme = "base16";
       icons_enabled = true;
     };
   };
