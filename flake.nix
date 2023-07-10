@@ -110,9 +110,19 @@
 
   };
 
-  outputs = { nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
 
     let
+
+      # Common overlays to always use
+      overlays = [
+        inputs.nur.overlay
+        inputs.nix2vim.overlay
+        (import ./overlays/neovim-plugins.nix inputs)
+        (import ./overlays/calibre-web.nix)
+        (import ./overlays/disko.nix inputs)
+        (import ./overlays/tree-sitter.nix inputs)
+      ];
 
       # Global configuration for my systems
       globals = let baseName = "masu.rs";
@@ -125,6 +135,7 @@
         mail.imapHost = "imap.purelymail.com";
         mail.smtpHost = "smtp.purelymail.com";
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
+        nixpkgs.overlays = overlays;
         hostnames = {
           git = "git.${baseName}";
           metrics = "metrics.${baseName}";
@@ -137,16 +148,6 @@
         };
       };
 
-      # Common overlays to always use
-      overlays = [
-        inputs.nur.overlay
-        inputs.nix2vim.overlay
-        (import ./overlays/neovim-plugins.nix inputs)
-        (import ./overlays/calibre-web.nix)
-        (import ./overlays/disko.nix inputs)
-        (import ./overlays/tree-sitter.nix inputs)
-      ];
-
       # System types to support.
       supportedSystems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
@@ -156,20 +157,26 @@
 
     in rec {
 
+      nixosModules = {
+        globals = { config }: { config = globals; };
+        common = import ./modules/common;
+        nixos = import ./modules/nixos;
+        darwin = import ./modules/darwin;
+      };
+
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
       nixosConfigurations = {
-        tempest = import ./hosts/tempest { inherit inputs globals overlays; };
-        hydra = import ./hosts/hydra { inherit inputs globals overlays; };
-        flame = import ./hosts/flame { inherit inputs globals overlays; };
-        swan = import ./hosts/swan { inherit inputs globals overlays; };
+        tempest = import ./hosts/tempest { inherit self; };
+        hydra = import ./hosts/hydra { inherit self; };
+        flame = import ./hosts/flame { inherit self; };
+        swan = import ./hosts/swan { inherit self; };
       };
 
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass
       darwinConfigurations = {
-        lookingglass =
-          import ./hosts/lookingglass { inherit inputs globals overlays; };
+        lookingglass = import ./hosts/lookingglass { inherit self; };
       };
 
       # For quickly applying home-manager settings with:
@@ -185,10 +192,8 @@
       diskoConfigurations = { root = import ./disks/root.nix; };
 
       packages = let
-        aws = system:
-          import ./hosts/aws { inherit inputs globals overlays system; };
-        staff = system:
-          import ./hosts/staff { inherit inputs globals overlays system; };
+        aws = system: import ./hosts/aws { inherit self system; };
+        staff = system: import ./hosts/staff { inherit self system; };
         neovim = system:
           let pkgs = import nixpkgs { inherit system overlays; };
           in import ./modules/common/neovim/package {

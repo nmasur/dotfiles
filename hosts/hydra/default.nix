@@ -1,21 +1,20 @@
 # The Hydra
 # System configuration for WSL
 
-{ inputs, globals, overlays, ... }:
+{ self, ... }:
 
-inputs.nixpkgs.lib.nixosSystem {
+self.inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
-    ../../modules/common
-    ../../modules/nixos
-    ../../modules/wsl
-    globals
-    inputs.wsl.nixosModules.wsl
-    inputs.home-manager.nixosModules.home-manager
+    self.inputs.wsl.nixosModules.wsl
+    self.inputs.home-manager.nixosModules.home-manager
+    self.nixosModules.globals
+    self.nixosModules.common
+    self.nixosModules.nixos
+    self.nixosModules.wsl
     {
       networking.hostName = "hydra";
-      nixpkgs.overlays = overlays;
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       gui.enable = false;
       theme = {

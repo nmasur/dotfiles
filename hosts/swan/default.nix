@@ -1,17 +1,17 @@
 # The Swan
 # System configuration for my home NAS server
 
-{ inputs, globals, overlays, ... }:
+{ self, ... }:
 
-inputs.nixpkgs.lib.nixosSystem {
+self.inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   specialArgs = { };
   modules = [
-    globals
-    inputs.home-manager.nixosModules.home-manager
-    inputs.disko.nixosModules.disko
-    ../../modules/common
-    ../../modules/nixos
+    self.inputs.home-manager.nixosModules.home-manager
+    self.inputs.disko.nixosModules.disko
+    self.nixosModules.globals
+    self.nixosModules.common
+    self.nixosModules.nixos
     {
       # Hardware
       server = true;
@@ -46,7 +46,6 @@ inputs.nixpkgs.lib.nixosSystem {
 
       gui.enable = false;
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
-      nixpkgs.overlays = overlays;
       neovim.enable = true;
       cloudflare.enable = true;
       dotfiles.enable = true;

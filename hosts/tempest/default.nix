@@ -1,18 +1,16 @@
 # The Tempest
 # System configuration for my desktop
 
-{ inputs, globals, overlays, ... }:
+{ self, ... }:
 
-inputs.nixpkgs.lib.nixosSystem {
+self.inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    globals
-    inputs.home-manager.nixosModules.home-manager
-    ../../modules/common
-    ../../modules/nixos
+    self.inputs.home-manager.nixosModules.home-manager
+    self.nixosModules.globals
+    self.nixosModules.common
+    self.nixosModules.nixos
     {
-      nixpkgs.overlays = overlays;
-
       # Hardware
       physical = true;
       networking.hostName = "tempest";
@@ -53,7 +51,7 @@ inputs.nixpkgs.lib.nixosSystem {
 
       # Must be prepared ahead
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
-      passwordHash = inputs.nixpkgs.lib.fileContents ../../password.sha512;
+      passwordHash = self.inputs.nixpkgs.lib.fileContents ../../password.sha512;
 
       # Theming
       gui.enable = true;
@@ -61,8 +59,8 @@ inputs.nixpkgs.lib.nixosSystem {
         colors = (import ../../colorscheme/gruvbox-dark).dark;
         dark = true;
       };
-      wallpaper = "${inputs.wallpapers}/gruvbox/road.jpg";
-      gtk.theme.name = inputs.nixpkgs.lib.mkDefault "Adwaita-dark";
+      wallpaper = "${self.inputs.wallpapers}/gruvbox/road.jpg";
+      gtk.theme.name = self.inputs.nixpkgs.lib.mkDefault "Adwaita-dark";
 
       # Programs and services
       charm.enable = true;

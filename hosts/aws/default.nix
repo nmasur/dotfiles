@@ -1,17 +1,14 @@
-{ inputs, system, globals, overlays, ... }:
+{ self, system, ... }:
 
-inputs.nixos-generators.nixosGenerate {
+self.inputs.nixos-generators.nixosGenerate {
   inherit system;
   format = "amazon";
   modules = [
-    inputs.home-manager.nixosModules.home-manager
+    self.inputs.home-manager.nixosModules.home-manager
+    self.nixosModules.globals
+    self.nixosModules.common
+    self.nixosModules.nixos
     {
-      nixpkgs.overlays = overlays;
-      user = globals.user;
-      fullName = globals.fullName;
-      dotfilesRepo = globals.dotfilesRepo;
-      gitName = globals.gitName;
-      gitEmail = globals.gitEmail;
       networking.hostName = "sheep";
       gui.enable = false;
       theme.colors = (import ../../colorscheme/gruvbox).dark;
@@ -21,9 +18,6 @@ inputs.nixos-generators.nixosGenerate {
       # AWS settings require this
       permitRootLogin = "prohibit-password";
     }
-    ../../modules/common
-    ../../modules/nixos
-    ../../modules/nixos/services/sshd.nix
   ] ++ [
     # Required to fix diskSize errors during build
     ({ ... }: { amazonImage.sizeMB = 16 * 1024; })

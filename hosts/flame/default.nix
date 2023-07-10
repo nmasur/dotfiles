@@ -4,24 +4,23 @@
 # How to install:
 # https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
 
-{ inputs, globals, overlays, ... }:
+{ self, ... }:
 
-inputs.nixpkgs.lib.nixosSystem {
+self.inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
   specialArgs = { };
   modules = [
-    globals
-    inputs.home-manager.nixosModules.home-manager
-    ../../modules/common
-    ../../modules/nixos
+    self.inputs.home-manager.nixosModules.home-manager
+    self.nixosModules.globals
+    self.nixosModules.common
+    self.nixosModules.nixos
     {
-      nixpkgs.overlays = overlays;
-
       # Hardware
       server = true;
       networking.hostName = "flame";
 
-      imports = [ (inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
+      imports =
+        [ (self.inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
       boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" ];
 
       fileSystems."/" = {
@@ -70,9 +69,6 @@ inputs.nixpkgs.lib.nixosSystem {
         bucket = "noahmasur-backup";
         accessKeyId = "0026b0e73b2e2c80000000005";
       };
-
-      # # Grant access to Jellyfin directories from Nextcloud
-      # users.users.nextcloud.extraGroups = [ "jellyfin" ];
 
       # # Wireguard config for Transmission
       # wireguard.enable = true;
