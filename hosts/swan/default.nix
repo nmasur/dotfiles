@@ -56,6 +56,7 @@ inputs.nixpkgs.lib.nixosSystem {
       services.jellyfin.enable = true;
       services.nextcloud.enable = true;
       services.calibre-web.enable = true;
+      services.openssh.enable = true;
       services.prometheus.enable = true;
       services.samba.enable = true;
 

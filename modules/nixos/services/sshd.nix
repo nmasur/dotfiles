@@ -13,9 +13,8 @@
     };
   };
 
-  config = lib.mkIf (config.publicKey != null) {
+  config = lib.mkIf config.services.openssh.enable {
     services.openssh = {
-      enable = true;
       ports = [ 22 ];
       allowSFTP = true;
       settings = {
@@ -27,7 +26,7 @@
     };
 
     users.users.${config.user}.openssh.authorizedKeys.keys =
-      [ config.publicKey ];
+      lib.mkIf (config.publicKey != null) [ config.publicKey ];
 
     # Implement a simple fail2ban service for sshd
     services.sshguard.enable = true;

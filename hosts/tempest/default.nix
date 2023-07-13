@@ -92,6 +92,7 @@ inputs.nixpkgs.lib.nixosSystem {
         ryujinx.enable = true;
       };
 
+      services.openssh.enable = true; # Required for Cloudflare tunnel
       cloudflareTunnel = {
         enable = true;
         id = "ac133a82-31fb-480c-942a-cdbcd4c58173";
