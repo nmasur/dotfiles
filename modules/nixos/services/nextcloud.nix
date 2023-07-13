@@ -3,7 +3,7 @@
   config = lib.mkIf config.services.nextcloud.enable {
 
     services.nextcloud = {
-      package = pkgs.nextcloud26; # Required to specify
+      package = pkgs.nextcloud27; # Required to specify
       datadir = "/data/nextcloud";
       https = true;
       hostName = "localhost";
