@@ -10,8 +10,9 @@
 
     services.prometheus = {
       exporters.node.enable = true;
+      extraFlags = lib.mkIf isServer [ "--web.enable-remote-write-receiver" ];
       scrapeConfigs = [{
-        job_name = "local";
+        job_name = config.networking.hostName;
         static_configs = [{ targets = [ "127.0.0.1:9100" ]; }];
       }];
       webExternalUrl =
@@ -28,7 +29,7 @@
         });
       remoteWrite = lib.mkIf (!isServer) [{
         name = config.networking.hostName;
-        url = "https://${config.hostnames.prometheus}";
+        url = "https://${config.hostnames.prometheus}/api/v1/write";
         basic_auth = {
           # Uses password hashed with bcrypt above
           username = "prometheus";
