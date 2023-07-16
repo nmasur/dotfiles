@@ -1,5 +1,11 @@
 { config, pkgs, lib, ... }: {
 
+  options.scrapeTargets = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    description = "Prometheus scrape targets";
+    default = [ ];
+  };
+
   config = let
 
     # If hosting Grafana, host local Prometheus and listen for inbound jobs. If
@@ -8,12 +14,33 @@
 
   in lib.mkIf config.services.prometheus.enable {
 
+    scrapeTargets = [
+      "127.0.0.1:${
+        builtins.toString config.services.prometheus.exporters.node.port
+      }"
+      "127.0.0.1:${
+        builtins.toString config.services.prometheus.exporters.systemd.port
+      }"
+      "127.0.0.1:${
+        builtins.toString config.services.prometheus.exporters.process.port
+      }"
+    ];
+
     services.prometheus = {
       exporters.node.enable = true;
+      exporters.systemd.enable = true;
+      exporters.process.enable = true;
+      exporters.process.settings.process_names = [
+        # Remove nix store path from process name
+        {
+          name = "{{.Matches.Wrapped}} {{ .Matches.Args }}";
+          cmdline = [ "^/nix/store[^ ]*/(?P<Wrapped>[^ /]*) (?P<Args>.*)" ];
+        }
+      ];
       extraFlags = lib.mkIf isServer [ "--web.enable-remote-write-receiver" ];
       scrapeConfigs = [{
         job_name = config.networking.hostName;
-        static_configs = [{ targets = [ "127.0.0.1:9100" ]; }];
+        static_configs = [{ targets = config.scrapeTargets; }];
       }];
       webExternalUrl =
         lib.mkIf isServer "https://${config.hostnames.prometheus}";

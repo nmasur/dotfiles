@@ -10,6 +10,12 @@
         config.boot.zfs.package.latestCompatibleLinuxPackages;
       boot.kernelParams = [ "nohibernate" ];
       boot.supportedFilesystems = [ "zfs" ];
+      services.prometheus.exporters.zfs.enable = true;
+      scrapeTargets = [
+        "127.0.0.1:${
+          builtins.toString config.services.prometheus.exporters.zfs.port
+        }"
+      ];
 
     };
 

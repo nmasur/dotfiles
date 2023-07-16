@@ -11,6 +11,7 @@
       config = {
         adminpassFile = config.secrets.nextcloud.dest;
         extraTrustedDomains = [ config.hostnames.content ];
+        trustedProxies = [ "127.0.0.1" ];
       };
     };
 
@@ -73,6 +74,21 @@
       after = [ "phpfpm-nextcloud.service" ];
       requires = [ "phpfpm-nextcloud.service" ];
     };
+
+    # Log metrics to prometheus
+    services.prometheus.exporters.nextcloud = {
+      enable = true;
+      username = config.services.nextcloud.config.adminuser;
+      url = "http://localhost:8080";
+      passwordFile = config.services.nextcloud.config.adminpassFile;
+    };
+    scrapeTargets = [
+      "127.0.0.1:${
+        builtins.toString config.services.prometheus.exporters.nextcloud.port
+      }"
+    ];
+    # Allows nextcloud-exporter to read passwordFile
+    users.users.nextcloud-exporter.extraGroups = [ "nextcloud" ];
 
   };
 
