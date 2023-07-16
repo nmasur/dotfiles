@@ -50,7 +50,7 @@ inputs.nixpkgs.lib.nixosSystem {
       services.caddy.enable = true;
       services.grafana.enable = true;
       services.openssh.enable = true;
-      services.prometheus.enable = true;
+      services.victoriametrics.enable = true;
       services.gitea.enable = true;
       services.vaultwarden.enable = true;
       services.minecraft-server.enable = true; # Setup Minecraft server
