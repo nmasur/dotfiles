@@ -5,13 +5,25 @@
     services.jellyfin.group = "media";
     users.users.jellyfin = { isSystemUser = true; };
 
-    caddy.routes = [{
-      match = [{ host = [ config.hostnames.stream ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:8096"; }];
-      }];
-    }];
+    caddy.routes = [
+      {
+        match = [{
+          host = [ config.hostnames.stream ];
+          path = [ "/metrics*" ];
+        }];
+        handle = [{
+          handler = "static_response";
+          status_code = "403";
+        }];
+      }
+      {
+        match = [{ host = [ config.hostnames.stream ]; }];
+        handle = [{
+          handler = "reverse_proxy";
+          upstreams = [{ dial = "localhost:8096"; }];
+        }];
+      }
+    ];
 
     # Create videos directory, allow anyone in Jellyfin group to manage it
     systemd.tmpfiles.rules = [
@@ -34,6 +46,9 @@
     };
     users.users.jellyfin.extraGroups =
       [ "render" "video" ]; # Access to /dev/dri
+
+    # Requires MetricsEnable is true in /var/lib/jellyfin/config/system.xml
+    prometheus.scrapeTargets = [ "127.0.0.1:8096" ];
 
   };
 

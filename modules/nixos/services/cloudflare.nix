@@ -41,11 +41,11 @@ in {
   config = lib.mkIf config.cloudflare.enable {
 
     # Forces Caddy to error if coming from a non-Cloudflare IP
-    caddy.blocks = [{
+    caddy.routes = [{
       match = [{ not = [{ remote_ip.ranges = cloudflareIpRanges; }]; }];
       handle = [{
         handler = "static_response";
-        abort = true;
+        status_code = "403";
       }];
     }];
 
