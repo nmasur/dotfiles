@@ -82,7 +82,8 @@
       match = [{ host = [ config.hostnames.prometheus ]; }];
       handle = [{
         handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:9090"; }];
+        upstreams =
+          [{ dial = "localhost:${config.services.prometheus.port}"; }];
       }];
     }];
 
