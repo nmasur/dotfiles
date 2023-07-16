@@ -38,6 +38,8 @@
 
     services.prometheus = {
       exporters.node.enable = config.prometheus.exporters.enable;
+      exporters.node.enabledCollectors = [ ];
+      exporters.node.disabledCollectors = [ "cpufreq" ];
       exporters.systemd.enable = config.prometheus.exporters.enable;
       exporters.process.enable = config.prometheus.exporters.enable;
       exporters.process.settings.process_names = [

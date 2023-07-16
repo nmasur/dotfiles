@@ -30,6 +30,7 @@
             errors.routes = config.caddy.blocks;
             # logs = { }; # Uncomment to collect access logs
           };
+          apps.http.servers.metrics = { }; # Enables Prometheus metrics
           apps.tls.automation.policies = config.caddy.tlsPolicies;
           logging.logs.main = {
             encoder = { format = "console"; };
@@ -46,6 +47,8 @@
 
       networking.firewall.allowedTCPPorts = [ 80 443 ];
       networking.firewall.allowedUDPPorts = [ 443 ];
+
+      prometheus.scrapeTargets = [ "127.0.0.1:2019" ];
 
     };
 
