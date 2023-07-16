@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let
+
+  port = 8080;
+
+in {
 
   config = lib.mkIf config.services.nextcloud.enable {
 
@@ -18,7 +24,7 @@
     # Don't let Nginx use main ports (using Caddy instead)
     services.nginx.virtualHosts."localhost".listen = [{
       addr = "127.0.0.1";
-      port = 8080;
+      port = port;
     }];
 
     # Point Caddy to Nginx
@@ -26,7 +32,7 @@
       match = [{ host = [ config.hostnames.content ]; }];
       handle = [{
         handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:8080"; }];
+        upstreams = [{ dial = "localhost:${builtins.toString port}"; }];
       }];
     }];
 
@@ -77,18 +83,20 @@
 
     # Log metrics to prometheus
     services.prometheus.exporters.nextcloud = {
-      enable = true;
+      enable = config.prometheus.exporters.enable;
       username = config.services.nextcloud.config.adminuser;
-      url = "http://localhost:8080";
+      url = "http://localhost:${builtins.toString port}";
       passwordFile = config.services.nextcloud.config.adminpassFile;
     };
-    scrapeTargets = [
+    prometheus.scrapeTargets = [
       "127.0.0.1:${
         builtins.toString config.services.prometheus.exporters.nextcloud.port
       }"
     ];
     # Allows nextcloud-exporter to read passwordFile
-    users.users.nextcloud-exporter.extraGroups = [ "nextcloud" ];
+    users.users.nextcloud-exporter.extraGroups =
+      lib.mkIf config.services.prometheus.exporters.nextcloud.enable
+      [ "nextcloud" ];
 
   };
 

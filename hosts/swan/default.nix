@@ -57,7 +57,8 @@ inputs.nixpkgs.lib.nixosSystem {
       services.nextcloud.enable = true;
       services.calibre-web.enable = true;
       services.openssh.enable = true;
-      services.prometheus.enable = true;
+      services.prometheus.enable = false;
+      services.vmagent.enable = true;
       services.samba.enable = true;
 
       cloudflareTunnel = {

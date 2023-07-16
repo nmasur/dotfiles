@@ -39,6 +39,11 @@
             type = lib.types.str;
             description = "Permissions expressed as octal.";
           };
+          prefix = lib.mkOption {
+            default = "";
+            type = lib.types.str;
+            description = "Prefix for secret value (for environment files).";
+          };
         };
       });
       description = "Set of secrets to decrypt to disk.";
@@ -65,10 +70,10 @@
         wantedBy = [ "multi-user.target" ];
         serviceConfig.Type = "oneshot";
         script = ''
-          ${pkgs.age}/bin/age --decrypt \
-            --identity ${config.identityFile} \
-            --output ${attrs.dest} \
-            ${attrs.source}
+          echo "${attrs.prefix}$(
+            ${pkgs.age}/bin/age --decrypt \
+                --identity ${config.identityFile} ${attrs.source}
+          )" > ${attrs.dest}
 
           chown '${attrs.owner}':'${attrs.group}' '${attrs.dest}'
           chmod '${attrs.permissions}' '${attrs.dest}'

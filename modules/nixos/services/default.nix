@@ -24,6 +24,7 @@
     ./sshd.nix
     ./transmission.nix
     ./vaultwarden.nix
+    ./victoriametrics.nix
     ./wireguard.nix
   ];
 

@@ -13,7 +13,12 @@
       match = [{ host = [ config.hostnames.metrics ]; }];
       handle = [{
         handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:3000"; }];
+        upstreams = [{
+          dial = "localhost:${
+              builtins.toString
+              config.services.grafana.settings.server.http_port
+            }";
+        }];
       }];
     }];
 

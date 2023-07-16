@@ -1,9 +1,12 @@
 { config, pkgs, lib, ... }: {
 
-  options.scrapeTargets = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    description = "Prometheus scrape targets";
-    default = [ ];
+  options.prometheus = {
+    exporters.enable = lib.mkEnableOption "Enable Prometheus exporters";
+    scrapeTargets = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Prometheus scrape targets";
+      default = [ ];
+    };
   };
 
   config = let
@@ -12,9 +15,16 @@
     # not hosting Grafana, send remote Prometheus writes to primary host.
     isServer = config.services.grafana.enable;
 
-  in lib.mkIf config.services.prometheus.enable {
+  in {
 
-    scrapeTargets = [
+    # Turn on exporters if any Prometheus scraper is running
+    prometheus.exporters.enable = builtins.any (x: x) [
+      config.services.prometheus.enable
+      config.services.victoriametrics.enable
+      config.services.vmagent.enable
+    ];
+
+    prometheus.scrapeTargets = [
       "127.0.0.1:${
         builtins.toString config.services.prometheus.exporters.node.port
       }"
@@ -27,9 +37,9 @@
     ];
 
     services.prometheus = {
-      exporters.node.enable = true;
-      exporters.systemd.enable = true;
-      exporters.process.enable = true;
+      exporters.node.enable = config.prometheus.exporters.enable;
+      exporters.systemd.enable = config.prometheus.exporters.enable;
+      exporters.process.enable = config.prometheus.exporters.enable;
       exporters.process.settings.process_names = [
         # Remove nix store path from process name
         {
@@ -66,19 +76,21 @@
     };
 
     # Create credentials file for remote Prometheus push
-    secrets.prometheus = lib.mkIf (!isServer) {
-      source = ../../../private/prometheus.age;
-      dest = "${config.secretsDirectory}/prometheus";
-      owner = "prometheus";
-      group = "prometheus";
-      permissions = "0440";
-    };
-    systemd.services.prometheus-secret = lib.mkIf (!isServer) {
-      requiredBy = [ "prometheus.service" ];
-      before = [ "prometheus.service" ];
-    };
+    secrets.prometheus =
+      lib.mkIf (config.services.prometheus.enable && !isServer) {
+        source = ../../../private/prometheus.age;
+        dest = "${config.secretsDirectory}/prometheus";
+        owner = "prometheus";
+        group = "prometheus";
+        permissions = "0440";
+      };
+    systemd.services.prometheus-secret =
+      lib.mkIf (config.services.prometheus.enable && !isServer) {
+        requiredBy = [ "prometheus.service" ];
+        before = [ "prometheus.service" ];
+      };
 
-    caddy.routes = lib.mkIf isServer [{
+    caddy.routes = lib.mkIf (config.services.prometheus.enable && isServer) [{
       match = [{ host = [ config.hostnames.prometheus ]; }];
       handle = [{
         handler = "reverse_proxy";
