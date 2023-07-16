@@ -91,6 +91,7 @@ inputs.nixpkgs.lib.nixosSystem {
         leagueoflegends.enable = true;
         ryujinx.enable = true;
       };
+      services.vmagent.enable = true;
 
       services.openssh.enable = true; # Required for Cloudflare tunnel
       cloudflareTunnel = {
