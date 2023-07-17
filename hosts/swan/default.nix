@@ -15,6 +15,7 @@ inputs.nixpkgs.lib.nixosSystem {
     {
       # Hardware
       server = true;
+      physical = true;
       networking.hostName = "swan";
 
       boot.initrd.availableKernelModules =
