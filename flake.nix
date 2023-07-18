@@ -126,6 +126,7 @@
         mail.smtpHost = "smtp.purelymail.com";
         dotfilesRepo = "git@github.com:nmasur/dotfiles";
         hostnames = {
+          zone = baseName;
           git = "git.${baseName}";
           metrics = "metrics.${baseName}";
           prometheus = "prom.${baseName}";
