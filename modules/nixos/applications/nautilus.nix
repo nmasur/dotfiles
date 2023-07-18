@@ -40,6 +40,7 @@
         defaultApplications."inode/directory" =
           lib.mkBefore [ "org.gnome.Nautilus.desktop" ];
       };
+
     };
 
     # # Set default for opening directories
@@ -49,6 +50,13 @@
     #   defaultApplications."inode/directory" =
     #     lib.mkForce [ "org.gnome.Nautilus.desktop" ];
     # };
+
+    # Delete Trash files older than 1 week
+    systemd.user.services.empty-trash = {
+      description = "Empty Trash on a regular basis";
+      wantedBy = [ "default.target" ];
+      script = "${pkgs.trash-cli}/bin/trash-empty 7";
+    };
 
   };
 
