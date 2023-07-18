@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  config = lib.mkIf config.physical {
+  config = lib.mkIf (config.physical && !config.server) {
 
     # Prevent wake from keyboard
     powerManagement.powerDownCommands = ''

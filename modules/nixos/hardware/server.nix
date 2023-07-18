@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, lib, ... }: {
 
-  config = lib.mkIf (pkgs.stdenv.isLinux && config.server) {
+  config = lib.mkIf config.server {
 
     # Servers need a bootloader or they won't start
     boot.loader.systemd-boot.enable = true;

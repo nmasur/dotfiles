@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  boot.loader = lib.mkIf config.physical {
+  boot.loader = lib.mkIf (config.physical && !config.server) {
     grub = {
       enable = true;
 
