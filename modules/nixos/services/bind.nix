@@ -1,12 +1,27 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, ... }:
 
-  config = {
+let
+
+  localIp = "192.168.1.218";
+  localServices = [
+    config.hostnames.stream
+    config.hostnames.content
+    config.hostnames.books
+    config.hostnames.download
+  ];
+  mkRecord = service: "${service}       A       ${localIp}";
+  localRecords = lib.concatLines (map mkRecord localServices);
+
+in {
+
+  config = lib.mkIf config.services.bind.enable {
+
+    caddy.cidrAllowlist = [ "192.168.0.0/16" ];
 
     services.bind = {
-
-      cacheNetworks = [ "192.168.0.0/16" ];
-
+      cacheNetworks = [ "127.0.0.0/24" "192.168.0.0/16" ];
       forwarders = [ "1.1.1.1" "1.0.0.1" ];
+      ipv4Only = true;
 
       # Use rpz zone as an override
       extraOptions = ''response-policy { zone "rpz"; };'';
@@ -25,12 +40,15 @@
                                     )
                     IN      NS      localhost.
             localhost       A       127.0.0.1
-            stream          A       192.168.0.218
+            ${localRecords}
           '';
         };
       };
 
     };
+
+    networking.firewall.allowedTCPPorts = [ 53 ];
+    networking.firewall.allowedUDPPorts = [ 53 ];
 
   };
 

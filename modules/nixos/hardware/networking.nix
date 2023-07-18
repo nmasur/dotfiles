@@ -10,6 +10,9 @@
     services.avahi = {
       enable = true;
       domainName = "local";
+      ipv6 = false; # Should work either way
+      # Resolve local hostnames using Avahi DNS
+      nssmdns = true;
       publish = {
         enable = true;
         addresses = true;
@@ -17,10 +20,6 @@
         workstation = true;
       };
     };
-
-    # Resolve local hostnames using Avahi DNS
-    services.avahi.nssmdns = true;
-
   };
 
 }

@@ -3,6 +3,7 @@
   imports = [
     ./arr.nix
     ./backups.nix
+    ./bind.nix
     ./caddy.nix
     ./calibre.nix
     ./cloudflare-tunnel.nix

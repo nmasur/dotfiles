@@ -53,6 +53,7 @@ inputs.nixpkgs.lib.nixosSystem {
       dotfiles.enable = true;
       arrs.enable = true;
 
+      services.bind.enable = true;
       services.caddy.enable = true;
       services.jellyfin.enable = true;
       services.nextcloud.enable = true;

@@ -41,13 +41,7 @@ in {
   config = lib.mkIf config.cloudflare.enable {
 
     # Forces Caddy to error if coming from a non-Cloudflare IP
-    caddy.routes = [{
-      match = [{ not = [{ remote_ip.ranges = cloudflareIpRanges; }]; }];
-      handle = [{
-        handler = "static_response";
-        status_code = "403";
-      }];
-    }];
+    caddy.cidrAllowlist = cloudflareIpRanges;
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
     services.caddy.package = (pkgs.callPackage ../../../overlays/caddy.nix {
