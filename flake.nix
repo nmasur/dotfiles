@@ -75,6 +75,10 @@
       url = "github:jose-elias-alvarez/null-ls.nvim";
       flake = false;
     };
+    baleia-nvim-src = {
+      url = "github:m00qek/baleia.nvim";
+      flake = false;
+    };
     Comment-nvim-src = {
       url = "github:numToStr/Comment.nvim/v0.8.0";
       flake = false;

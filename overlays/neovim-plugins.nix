@@ -7,12 +7,12 @@ let
   # Use nixpkgs vimPlugin but with source directly from plugin author
   withSrc = pkg: src: pkg.overrideAttrs (_: { inherit src; });
 
-  # Package plugin - disabling until in use
-  # plugin = pname: src:
-  #   prev.vimUtils.buildVimPluginFrom2Nix {
-  #     inherit pname src;
-  #     version = "master";
-  #   };
+  # Package plugin - for plugins not found in nixpkgs at all
+  plugin = pname: src:
+    prev.vimUtils.buildVimPluginFrom2Nix {
+      inherit pname src;
+      version = "master";
+    };
 
 in {
 
@@ -36,8 +36,7 @@ in {
     (withSrc prev.vimPlugins.bufferline-nvim inputs.bufferline-nvim);
   nvim-tree-lua = (withSrc prev.vimPlugins.nvim-tree-lua inputs.nvim-tree-lua);
 
-  # Packaging plugins with Nix
-  # comment-nvim = plugin "comment-nvim" comment-nvim-src;
-  # plenary-nvim = plugin "plenary-nvim" plenary-nvim-src;
+  # Packaging plugins entirely with Nix
+  baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
 
 }

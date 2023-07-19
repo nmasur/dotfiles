@@ -28,6 +28,12 @@
       programs.rofi.terminal =
         lib.mkIf pkgs.stdenv.isLinux "${pkgs.kitty}/bin/kitty";
 
+      # Display images in the terminal
+      programs.fish.shellAliases = {
+        icat = "kitty +kitten icat";
+        ssh = "kitty +kitten ssh";
+      };
+
       programs.kitty = {
         enable = true;
         environment = { };
@@ -85,7 +91,6 @@
           # Scrollback
           scrolling_lines = 10000;
           scrollback_pager_history_size = 10; # MB
-          scrollback_pager = "${pkgs.neovim}/bin/nvim -c 'normal G'";
 
           # Window
           window_padding_width = 6;

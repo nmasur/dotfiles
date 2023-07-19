@@ -17,6 +17,22 @@
         "type": "github"
       }
     },
+    "baleia-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681806450,
+        "narHash": "sha256-jxRlIzWbnSj89032msc5w+2TVt7zVyzlxdXxiH1dQqY=",
+        "owner": "m00qek",
+        "repo": "baleia.nvim",
+        "rev": "00bb4af31c8c3865b735d40ebefa6c3f07b2dd16",
+        "type": "github"
+      },
+      "original": {
+        "owner": "m00qek",
+        "repo": "baleia.nvim",
+        "type": "github"
+      }
+    },
     "bufferline-nvim-src": {
       "flake": false,
       "locked": {
@@ -395,6 +411,7 @@
     "root": {
       "inputs": {
         "Comment-nvim-src": "Comment-nvim-src",
+        "baleia-nvim-src": "baleia-nvim-src",
         "bufferline-nvim-src": "bufferline-nvim-src",
         "cmp-nvim-lsp-src": "cmp-nvim-lsp-src",
         "darwin": "darwin",

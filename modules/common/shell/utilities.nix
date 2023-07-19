@@ -52,10 +52,6 @@ in {
         };
       };
 
-      programs.fish.shellAbbrs = {
-        cat = "bat"; # Swap cat with bat
-      };
-
       programs.fish.functions = {
         ping = {
           description = "Improved ping";

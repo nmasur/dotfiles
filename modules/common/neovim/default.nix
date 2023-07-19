@@ -31,8 +31,8 @@ in {
             vll = "nvim -c 'Telescope oldfiles'";
           };
         };
-        programs.kitty.settings.scrollback_pager = lib.mkForce ''
-          ${neovim}/bin/nvim -c 'setlocal nonumber nolist showtabline=0 foldcolumn=0|Man!' -c "autocmd VimEnter * normal G" -'';
+        programs.kitty.settings.scrollback_pager = ''
+          $SHELL -c 'sed -r "s/[[:cntrl:]]\]133;[AC]..//g" | ${neovim}/bin/nvim -c "setlocal nonumber norelativenumber nolist laststatus=0" -c "lua baleia = require(\"baleia\").setup({}); baleia.once(0)" -c "map <silent> q :qa!<CR>" -c "autocmd VimEnter * normal G"' '';
 
         xdg.desktopEntries.nvim = lib.mkIf pkgs.stdenv.isLinux {
           name = "Neovim wrapper";

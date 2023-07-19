@@ -73,6 +73,7 @@
             "media.ffmpeg.vaapi.enabled" =
               true; # Enable hardware video acceleration
             "cookiebanners.ui.desktop.enabled" = true; # Reject cookie popups
+            "svg.context-properties.content.enabled" = true; # Sidebery styling
           };
           userChrome = ''
             :root {
