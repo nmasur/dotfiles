@@ -20,7 +20,7 @@
       cidrAllowlist = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         description = "CIDR blocks to allow for requests";
-        default = [ "127.0.0.1/32" ];
+        default = [ ];
       };
     };
   };
@@ -28,6 +28,7 @@
   config = lib.mkIf config.services.caddy.enable {
 
     # Force Caddy to 403 if not coming from allowlisted source
+    caddy.cidrAllowlist = [ "127.0.0.1/32" ];
     caddy.routes = [{
       match = [{ not = [{ remote_ip.ranges = config.caddy.cidrAllowlist; }]; }];
       handle = [{
