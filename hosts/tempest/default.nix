@@ -102,6 +102,9 @@ inputs.nixpkgs.lib.nixosSystem {
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPY6C0HmdFCaxYtJxFr3qV4/1X4Q8KrYQ1hlme3u1hJXK+xW+lc9Y9glWHrhiTKilB7carYTB80US0O47gI5yU4= open-ssh-ca@cloudflareaccess.org";
       };
 
+      # Allows requests to force machine to wake up
+      networking.interfaces.enp5s0.wakeOnLan.enable = true;
+
     }
   ];
 }
