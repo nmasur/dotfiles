@@ -149,6 +149,7 @@
         (import ./overlays/calibre-web.nix)
         (import ./overlays/disko.nix inputs)
         (import ./overlays/tree-sitter.nix inputs)
+        (import ./overlays/betterlockscreen.nix)
       ];
 
       # System types to support.
