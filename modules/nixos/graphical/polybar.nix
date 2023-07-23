@@ -36,7 +36,7 @@
             module-margin = 1;
             modules-left = "i3";
             modules-center = "xwindow";
-            modules-right = "mailcount pulseaudio date power";
+            modules-right = "mailcount network pulseaudio date power";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
@@ -106,8 +106,14 @@
             interval = 10;
             format = "<label>";
             exec = builtins.toString (pkgs.writeShellScript "mailcount.sh" ''
-              ${pkgs.notmuch}/bin/notmuch new > /dev/null
-              UNREAD=$(${pkgs.notmuch}/bin/notmuch count is:inbox and is:unread and folder:main/Inbox)
+              ${pkgs.notmuch}/bin/notmuch new --quiet 2>&1>/dev/null
+              UNREAD=$(
+                  ${pkgs.notmuch}/bin/notmuch count \
+                      is:inbox and \
+                      is:unread and \
+                      folder:main/Inbox \
+                      2>/dev/null
+              )
               if [ $UNREAD = "0" ]; then
                 echo ""
               else
@@ -118,6 +124,16 @@
               "i3-msg 'exec --no-startup-id kitty --class aerc aerc'; sleep 0.15; i3-msg '[class=aerc] focus'";
 
           };
+          "module/network" = {
+            type = "internal/network";
+            interface-type = "wired";
+            interval = 3;
+            accumulate-stats = true;
+            format-connected = "<label-connected>";
+            format-disconnected = "<label-disconnected>";
+            label-connected = "";
+            label-disconnected = "";
+          };
           "module/pulseaudio" = {
             type = "internal/pulseaudio";
             # format-volume-prefix = "VOL ";
@@ -127,10 +143,10 @@
             # label-volume-background = colors.background;
             format-volume-foreground = config.theme.colors.base0B;
             label-volume = "%percentage%%";
-            label-muted = "ﱝ ---";
+            label-muted = "󰝟 ---";
             label-muted-foreground = config.theme.colors.base03;
             ramp-volume-0 = "";
-            ramp-volume-1 = "墳";
+            ramp-volume-1 = "󰕾";
             ramp-volume-2 = "";
             click-right = config.audioSwitchCommand;
           };
