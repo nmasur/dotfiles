@@ -1,4 +1,31 @@
-{ config, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let
+
+  arrConfig = {
+    radarr = {
+      exportarrPort = "9707";
+      url = "localhost:7878";
+      apiKey = config.secrets.radarrApiKey.dest;
+    };
+    sonarr = {
+      exportarrPort = "9708";
+      url = "localhost:8989";
+      apiKey = config.secrets.sonarrApiKey.dest;
+    };
+    prowlarr = {
+      exportarrPort = "9709";
+      url = "localhost:9696";
+      apiKey = config.secrets.prowlarrApiKey.dest;
+    };
+    sabnzbd = {
+      exportarrPort = "9710";
+      url = "localhost:8085";
+      apiKey = config.secrets.sabnzbdApiKey.dest;
+    };
+  };
+
+in {
 
   options = { arrs.enable = lib.mkEnableOption "Arr services"; };
 
@@ -43,7 +70,7 @@
         }];
         handle = [{
           handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:8989"; }];
+          upstreams = [{ dial = arrConfig.sonarr.url; }];
         }];
       }
       {
@@ -54,7 +81,7 @@
         }];
         handle = [{
           handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:7878"; }];
+          upstreams = [{ dial = arrConfig.radarr.url; }];
         }];
       }
       {
@@ -76,7 +103,11 @@
         }];
         handle = [{
           handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:6767"; }];
+          upstreams = [{
+            dial = "localhost:${
+                builtins.toString config.services.bazarr.listenPort
+              }";
+          }];
         }];
       }
       {
@@ -87,7 +118,7 @@
         }];
         handle = [{
           handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:8085"; }];
+          upstreams = [{ dial = arrConfig.sabnzbd.url; }];
         }];
       }
       {
@@ -95,10 +126,82 @@
         match = [{ host = [ config.hostnames.download ]; }];
         handle = [{
           handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:5055"; }];
+          upstreams = [{
+            dial =
+              "localhost:${builtins.toString config.services.jellyseerr.port}";
+          }];
         }];
       }
     ];
+
+    # Enable Prometheus exporters
+    systemd.services = lib.mapAttrs' (name: attrs: {
+      name = "prometheus-${name}-exporter";
+      value = {
+        description = "Export Prometheus metrics for ${name}";
+        after = [ "network.target" ];
+        wantedBy = [ "${name}.service" ];
+        serviceConfig = {
+          Type = "simple";
+          DynamicUser = true;
+          ExecStart = let
+            url = if name != "sabnzbd" then
+              "http://${attrs.url}/${name}"
+            else
+              "http://${attrs.url}";
+          in ''
+            ${pkgs.exportarr}/bin/exportarr ${name} \
+                        --url ${url} \
+                        --port ${attrs.exportarrPort}'';
+          EnvironmentFile =
+            lib.mkIf (builtins.hasAttr "apiKey" attrs) attrs.apiKey;
+          Restart = "on-failure";
+          ProtectHome = true;
+          ProtectSystem = "strict";
+          PrivateTmp = true;
+          PrivateDevices = true;
+          ProtectHostname = true;
+          ProtectClock = true;
+          ProtectKernelTunables = true;
+          ProtectKernelModules = true;
+          ProtectKernelLogs = true;
+          ProtectControlGroups = true;
+          NoNewPrivileges = true;
+          RestrictRealtime = true;
+          RestrictSUIDSGID = true;
+          RemoveIPC = true;
+          PrivateMounts = true;
+        };
+      };
+    }) arrConfig;
+
+    # Secrets for Prometheus exporters
+    secrets.radarrApiKey = {
+      source = ../../../private/radarr-api-key.age;
+      dest = "/var/private/radarr-api";
+      prefix = "API_KEY=";
+    };
+    secrets.sonarrApiKey = {
+      source = ../../../private/sonarr-api-key.age;
+      dest = "/var/private/sonarr-api";
+      prefix = "API_KEY=";
+    };
+    secrets.prowlarrApiKey = {
+      source = ../../../private/prowlarr-api-key.age;
+      dest = "/var/private/prowlarr-api";
+      prefix = "API_KEY=";
+    };
+    secrets.sabnzbdApiKey = {
+      source = ../../../private/sabnzbd-api-key.age;
+      dest = "/var/private/sabnzbd-api";
+      prefix = "API_KEY=";
+    };
+
+    # Prometheus scrape targets
+    prometheus.scrapeTargets = map (key:
+      "127.0.0.1:${
+        lib.attrsets.getAttrFromPath [ key "exportarrPort" ] arrConfig
+      }") (builtins.attrNames arrConfig);
 
   };
 
