@@ -15,7 +15,12 @@
     # Use capslock as escape and/or control
     services.keyd = {
       enable = true;
-      settings = { main = { capslock = "overload(control, esc)"; }; };
+      keyboards = {
+        default = {
+          ids = [ "*" ];
+          settings = { main = { capslock = "overload(control, esc)"; }; };
+        };
+      };
     };
 
     # Enable num lock on login
