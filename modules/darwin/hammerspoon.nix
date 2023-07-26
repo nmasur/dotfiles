@@ -20,12 +20,22 @@
         };
       xdg.configFile."hammerspoon/Spoons/MoveWindow.spoon".source =
         ./hammerspoon/Spoons/MoveWindow.spoon;
+
+      home.activation.reloadHammerspoon =
+        config.home-manager.users.${config.user}.lib.dag.entryAfter
+        [ "writeBoundary" ] ''
+          $DRY_RUN_CMD /usr/local/bin/hs -c "hs.reload()"
+          $DRY_RUN_CMD sleep 1
+          $DRY_RUN_CMD /usr/local/bin/hs -c "hs.console.clearConsole()"
+        '';
+
     };
 
     homebrew.casks = [ "hammerspoon" ];
 
     system.activationScripts.postUserActivation.text = ''
       defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+      sudo killall Dock
     '';
 
   };
