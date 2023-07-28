@@ -59,7 +59,7 @@
     };
     dotfilesRepo = lib.mkOption {
       type = lib.types.str;
-      description = "Link to dotfiles repository.";
+      description = "Link to dotfiles repository HTTPS URL.";
     };
     unfreePackages = lib.mkOption {
       type = lib.types.listOf lib.types.str;

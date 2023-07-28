@@ -128,7 +128,7 @@
         mail.server = "noahmasur.com";
         mail.imapHost = "imap.purelymail.com";
         mail.smtpHost = "smtp.purelymail.com";
-        dotfilesRepo = "git@github.com:nmasur/dotfiles";
+        dotfilesRepo = "https://github.com/nmasur/dotfiles";
         hostnames = {
           git = "git.${baseName}";
           metrics = "metrics.${baseName}";
