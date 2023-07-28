@@ -23,6 +23,7 @@ in {
         dig # DNS lookup
         fd # find
         htop # Show system processes
+        killall # Force quit
         inetutils # Includes telnet, whois
         jq # JSON manipulation
         lf # File viewer
