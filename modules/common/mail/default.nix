@@ -33,7 +33,11 @@
         postExec = "${pkgs.notmuch}/bin/notmuch new";
       };
       services.imapnotify.enable = pkgs.stdenv.isLinux;
-      programs.notmuch.enable = true;
+      programs.msmtp.enable = true;
+      programs.notmuch = {
+        enable = true;
+        new.ignore = [ ".mbsyncstate.lock" ".mbsyncstate.journal" ];
+      };
       accounts.email = {
         maildirBasePath = "${config.homePath}/mail";
         accounts = {
@@ -74,6 +78,7 @@
                 CopyArrivalDate = "yes"; # Sync time of original message
               };
             };
+            msmtp.enable = true;
             notmuch.enable = true;
             passwordCommand =
               "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
