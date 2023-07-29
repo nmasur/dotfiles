@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  imports = [ ./himalaya.nix ./aerc.nix ];
+  imports = [ ./himalaya.nix ./aerc.nix ./system.nix ];
 
   options = {
     mail.enable = lib.mkEnableOption "Mail service.";
@@ -78,7 +78,6 @@
                 CopyArrivalDate = "yes"; # Sync time of original message
               };
             };
-            msmtp.enable = true;
             notmuch.enable = true;
             passwordCommand =
               "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
