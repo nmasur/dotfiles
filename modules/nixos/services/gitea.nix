@@ -9,6 +9,7 @@ in {
       database.type = "sqlite3";
       settings = {
         actions.ENABLED = true;
+        metrics.ENABLED = true;
         repository = {
           DEFAULT_PUSH_CREATE_PRIVATE = true;
           DISABLE_HTTP_GIT = false;
@@ -37,13 +38,36 @@ in {
     networking.firewall.allowedTCPPorts = [ 122 ];
     users.users.${config.user}.extraGroups = [ "gitea" ];
 
-    caddy.routes = [{
-      match = [{ host = [ config.hostnames.git ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:3001"; }];
-      }];
-    }];
+    caddy.routes = [
+      {
+        match = [{
+          host = [ config.hostnames.git ];
+          path = [ "/metrics*" ];
+        }];
+        handle = [{
+          handler = "static_response";
+          status_code = "403";
+        }];
+      }
+      {
+        match = [{ host = [ config.hostnames.git ]; }];
+        handle = [{
+          handler = "reverse_proxy";
+          upstreams = [{
+            dial = "localhost:${
+                builtins.toString
+                config.services.gitea.settings.server.HTTP_PORT
+              }";
+          }];
+        }];
+      }
+    ];
+
+    prometheus.scrapeTargets = [
+      "127.0.0.1:${
+        builtins.toString config.services.gitea.settings.server.HTTP_PORT
+      }"
+    ];
 
     ## Backup config
 
