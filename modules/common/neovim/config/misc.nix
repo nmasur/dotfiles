@@ -7,11 +7,13 @@
     pkgs.vimPlugins.comment-nvim # Smart comment commands
     pkgs.vimPlugins.glow-nvim # Markdown preview popup
     pkgs.vimPlugins.nvim-colorizer-lua # Hex color previews
+    pkgs.vimPlugins.which-key-nvim # Keybind helper
   ];
 
   setup.Comment = { };
   setup.colorizer = { };
   setup.glow = { };
+  setup.which-key = { };
 
   vim.o = {
     termguicolors = true; # Set to truecolor
@@ -40,6 +42,10 @@
     number = true; # Show line numbers
     relativenumber = true; # Relative numbers instead of absolute
   };
+
+  # For which-key-nvim
+  vim.o.timeout = true;
+  vim.o.timeoutlen = 300;
 
   # Better backup, swap and undo storage
   vim.o.backup = true; # Easier to recover and more secure
