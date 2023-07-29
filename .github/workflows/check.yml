@@ -1,0 +1,21 @@
+name: Check Build
+
+on:
+  workflow_dispatch: # allows manual triggering
+  pull_request:
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v4
+      - name: Check Nixpkgs Inputs
+        uses: DeterminateSystems/flake-checker-action@v5
+      - name: Add Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+      - name: Check the Flake
+        run: nix flake check

@@ -1,0 +1,32 @@
+name: Update Flake
+
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: '33 3 * * 0' # runs weekly on Sunday at 03:33
+
+permissions:
+  contents: read
+  pull-request: write
+
+jobs:
+  lockfile:
+    name: Lockfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v4
+      - name: Check Nixpkgs Inputs
+        uses: DeterminateSystems/flake-checker-action@v5
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v3
+        id: update
+        with:
+          pr-title: "Update flake.lock" # Title of PR to be created
+          pr-labels: |                  # Labels to be set on the PR
+            dependencies
+            automated
+      - name: Enable Pull Request Automerge
+        run: gh pr merge --merge --auto ${{ steps.update.outputs.pull-request-number }}

@@ -4,14 +4,10 @@ inputs.nixos-generators.nixosGenerate {
   inherit system;
   format = "amazon";
   modules = [
+    globals
     inputs.home-manager.nixosModules.home-manager
     {
       nixpkgs.overlays = overlays;
-      user = globals.user;
-      fullName = globals.fullName;
-      dotfilesRepo = globals.dotfilesRepo;
-      gitName = globals.gitName;
-      gitEmail = globals.gitEmail;
       networking.hostName = "sheep";
       gui.enable = false;
       theme.colors = (import ../../colorscheme/gruvbox).dark;

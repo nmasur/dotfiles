@@ -5,12 +5,14 @@
     home-manager.users.${config.user} = {
 
       programs.msmtp.enable = true;
+
+      # The system user for sending automatic notifications
       accounts.email.accounts.system =
         let address = "system@${config.mail.server}";
         in {
           userName = address;
           realName = "NixOS System";
-          primary = false;
+          primary = !config.mail.enable; # Only primary if mail not enabled
           inherit address;
           passwordCommand =
             "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${

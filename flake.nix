@@ -228,6 +228,24 @@
 
         });
 
+      checks = forAllSystems (system:
+        let pkgs = import nixpkgs { inherit system overlays; };
+        in {
+          neovim = pkgs.runCommand "neovim-check-health" {
+            buildInputs = [ inputs.self.packages.${system}.neovim ];
+          } ''
+            mkdir -p $out
+            export HOME=$TMPDIR
+            nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
+
+            # Check for errors inside the health log
+            if $(grep "ERROR" $out/health.log); then
+              cat $out/health.log
+              exit 1
+            fi
+          '';
+        });
+
       # Templates for starting other projects quickly
       templates = rec {
         default = basic;
