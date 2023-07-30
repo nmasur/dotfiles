@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: read
-  pull-request: write
+  pull-requests: write
 
 jobs:
   lockfile:
