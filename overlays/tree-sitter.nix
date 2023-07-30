@@ -1,8 +1,8 @@
-# Fix: bash highlighting doesn't work as of this commit:
-# https://github.com/NixOS/nixpkgs/commit/49cce41b7c5f6b88570a482355d9655ca19c1029
-
 inputs: _final: prev: {
   tree-sitter-grammars = prev.tree-sitter-grammars // {
+
+    # Fix: bash highlighting doesn't work as of this commit:
+    # https://github.com/NixOS/nixpkgs/commit/49cce41b7c5f6b88570a482355d9655ca19c1029
     tree-sitter-bash = prev.tree-sitter-grammars.tree-sitter-bash.overrideAttrs
       (old: {
         src = prev.fetchFromGitHub {
@@ -12,6 +12,20 @@ inputs: _final: prev: {
           sha256 = "sha256-gl5F3IeZa2VqyH/qFj8ey2pRbGq4X8DL5wiyvRrH56U=";
         };
       });
+
+    # Fix: invalid node in position. Broken as of this commit (replaced with newer):
+    # https://github.com/NixOS/nixpkgs/commit/8ec3627796ecc899e6f47f5bf3c3220856ead9c5
+    tree-sitter-python =
+      prev.tree-sitter-grammars.tree-sitter-python.overrideAttrs (old: {
+        src = prev.fetchFromGitHub {
+          owner = "tree-sitter";
+          repo = "tree-sitter-python";
+          rev = "5af00f64af6bbf822f208243cce5cf75396fb6f5";
+          sha256 = "sha256-2btd/NRE6NuGNlx4cq535OrwtWXihiP3VMCJjPCiDOk=";
+        };
+      });
+
+    # Add grammars not in nixpks
     tree-sitter-ini = prev.tree-sitter.buildGrammar {
       language = "ini";
       version = "1.0.0";
