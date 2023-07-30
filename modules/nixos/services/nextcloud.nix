@@ -45,14 +45,7 @@
             ];
           }
           {
-            match = [{ path = [ "/nix-apps*" ]; }];
-            handle = [{
-              handler = "vars";
-              root = config.services.nextcloud.home;
-            }];
-          }
-          {
-            match = [{ path = [ "/store-apps*" ]; }];
+            match = [{ path = [ "/nix-apps*" "/store-apps*" ]; }];
             handle = [{
               handler = "vars";
               root = config.services.nextcloud.home;
