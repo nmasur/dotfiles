@@ -27,19 +27,31 @@
 
     home-manager.users.${config.user} = {
       programs.mbsync = { enable = true; };
+
+      # Automatically check for mail and keep files synced locally
       services.mbsync = lib.mkIf pkgs.stdenv.isLinux {
         enable = true;
         frequency = "*:0/5";
         postExec = "${pkgs.notmuch}/bin/notmuch new";
       };
+
+      # Used to watch for new mail and trigger sync
       services.imapnotify.enable = pkgs.stdenv.isLinux;
+
+      # Allows sending email from CLI/sendmail
       programs.msmtp.enable = true;
+
+      # Better local mail search
       programs.notmuch = {
         enable = true;
         new.ignore = [ ".mbsyncstate.lock" ".mbsyncstate.journal" ];
       };
+
       accounts.email = {
+
+        # Where email files are stored
         maildirBasePath = "${config.homePath}/mail";
+
         accounts = {
           home = let address = "${config.mail.user}@${config.mail.server}";
           in {
@@ -52,13 +64,17 @@
               "hey"
               "admin"
             ];
+
+            # Options for contact completion
             alot = { };
-            flavor = "plain";
+
             imap = {
               host = config.mail.imapHost;
               port = 993;
               tls.enable = true;
             };
+
+            # Watch for mail and run notifications or sync
             imapnotify = {
               enable = true;
               boxes = [ "Inbox" ];
@@ -67,7 +83,11 @@
                 config.home-manager.users.${config.user}.services.dunst.enable
                 "${pkgs.libnotify}/bin/notify-send 'New mail arrived'";
             };
+
+            # Name of the directory in maildir for this account
             maildir = { path = "main"; };
+
+            # Bi-directional syncing options for local files
             mbsync = {
               enable = true;
               create = "both";
@@ -78,12 +98,17 @@
                 CopyArrivalDate = "yes"; # Sync time of original message
               };
             };
+
+            # Enable indexing
             notmuch.enable = true;
+
+            # Used to login and send and receive emails
             passwordCommand =
               "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
                 pkgs.writeText "mailpass.age"
                 (builtins.readFile ../../../private/mailpass.age)
               }";
+
             smtp = {
               host = config.mail.smtpHost;
               port = 465;

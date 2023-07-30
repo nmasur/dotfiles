@@ -1,4 +1,7 @@
 { pkgs, ... }: {
+
+  # Plugin for aligning text programmatically
+
   plugins = [ pkgs.vimPlugins.tabular ];
   lua = ''
     -- Align

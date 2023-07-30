@@ -22,8 +22,8 @@
         enable = true;
         bindings = { };
         config = {
-          image-display-duration = 2;
-          hwdec = "auto-safe";
+          image-display-duration = 2; # For cycling through images
+          hwdec = "auto-safe"; # Attempt to use GPU decoding for video
         };
         scripts = [
 
@@ -49,7 +49,7 @@
         ];
       };
 
-      # Set default for opening PDFs
+      # Set default programs for opening PDFs and other media
       xdg.mimeApps = {
         associations.added = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];

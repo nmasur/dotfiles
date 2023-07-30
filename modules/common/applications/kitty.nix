@@ -40,7 +40,10 @@
         extraConfig = "";
         font.size = 14;
         keybindings = {
+          # Use shift+enter to complete text suggestions in fish
           "shift+enter" = "send_text all \\x1F";
+
+          # Easy fullscreen toggle (for macOS)
           "super+f" = "toggle_fullscreen";
         };
         settings = {
@@ -98,7 +101,7 @@
           tab_bar_edge = "top";
           tab_bar_style = "slant";
 
-          # Audio
+          # Disable audio
           enable_audio_bell = false;
         };
       };

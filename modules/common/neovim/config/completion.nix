@@ -24,12 +24,14 @@
       end
     '';
 
+    # Enable Luasnip snippet completion
     snippet.expand = dsl.rawLua ''
       function(args)
           require("luasnip").lsp_expand(args.body)
       end
     '';
 
+    # Basic completion keybinds
     mapping = {
       "['<C-n>']" = dsl.rawLua
         "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert })";
@@ -64,24 +66,26 @@
       '';
     };
 
+    # These are where the completion engine gets its suggestions
     sources = [
-      { name = "nvim_lua"; }
-      { name = "nvim_lsp"; }
-      { name = "luasnip"; }
-      { name = "path"; }
+      { name = "nvim_lua"; } # Fills in common Neovim lua functions
+      { name = "nvim_lsp"; } # LSP results
+      { name = "luasnip"; } # Snippets
+      { name = "path"; } # Shell completion from current PATH
       {
-        name = "buffer";
+        name = "buffer"; # Grep for text from the current text buffer
         keyword_length = 3;
         max_item_count = 10;
       }
       {
-        name = "rg";
+        name = "rg"; # Grep for text from the current directory
         keyword_length = 6;
         max_item_count = 10;
         option = { additional_arguments = "--ignore-case"; };
       }
     ];
 
+    # Styling of the completion menu
     formatting = {
       fields = [ "kind" "abbr" "menu" ];
       format = dsl.rawLua ''

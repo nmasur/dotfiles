@@ -1,5 +1,7 @@
 { pkgs, lib, config, ... }: {
 
+  # Sets Neovim colors based on Nix colorscheme
+
   options.colors = lib.mkOption {
     type = lib.types.attrsOf lib.types.str;
     description = "Attrset of base16 colorscheme key value pairs.";

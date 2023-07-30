@@ -1,4 +1,7 @@
 { pkgs, ... }: {
+
+  # Shows buffers in a VSCode-style tab layout
+
   plugins = [
     pkgs.vimPlugins.bufferline-nvim
     pkgs.vimPlugins.vim-bbye # Better closing of buffers
