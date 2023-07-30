@@ -20,6 +20,8 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v4
       - name: Check Nixpkgs Inputs
         uses: DeterminateSystems/flake-checker-action@v5
+      - name: Add Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@v19
         id: update
@@ -28,5 +30,9 @@ jobs:
           pr-labels: |                  # Labels to be set on the PR
             dependencies
             automated
+      - name: Check the Flake
+        run: nix flake check
       - name: Enable Pull Request Automerge
         run: gh pr merge --merge --auto ${{ steps.update.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
