@@ -1,3 +1,5 @@
+# Adds the Cloudflare DNS validation module
+
 { lib, buildGo118Module, fetchFromGitHub, plugins ? [ ] }:
 let
   goImports = lib.flip lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
