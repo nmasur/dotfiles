@@ -21,7 +21,7 @@ jobs:
       - name: Check Nixpkgs Inputs
         uses: DeterminateSystems/flake-checker-action@v5
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v3
+        uses: DeterminateSystems/update-flake-lock@v19
         id: update
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
