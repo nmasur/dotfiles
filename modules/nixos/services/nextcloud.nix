@@ -1,10 +1,4 @@
-{ config, pkgs, lib, ... }:
-
-let
-
-  port = 8080;
-
-in {
+{ config, pkgs, lib, ... }: {
 
   config = lib.mkIf config.services.nextcloud.enable {
 
@@ -22,18 +16,126 @@ in {
     };
 
     # Don't let Nginx use main ports (using Caddy instead)
-    services.nginx.virtualHosts."localhost".listen = [{
-      addr = "127.0.0.1";
-      port = port;
-    }];
+    services.nginx.enable = false;
+
+    services.phpfpm.pools.nextcloud.settings = {
+      "listen.owner" = config.services.caddy.user;
+      "listen.group" = config.services.caddy.group;
+    };
+    users.users.caddy.extraGroups = [ "nextcloud" ];
 
     # Point Caddy to Nginx
     caddy.routes = [{
       match = [{ host = [ config.hostnames.content ]; }];
       handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:${builtins.toString port}"; }];
+        handler = "subroute";
+        routes = [
+          # Sets variables and headers
+          {
+            handle = [
+              {
+                handler = "vars";
+                root = config.services.nextcloud.package;
+              }
+              {
+                handler = "headers";
+                response.set.Strict-Transport-Security =
+                  [ "max-age=31536000;" ];
+              }
+            ];
+          }
+          {
+            match = [{ path = [ "/nix-apps*" ]; }];
+            handle = [{
+              handler = "vars";
+              root = config.services.nextcloud.home;
+            }];
+          }
+          {
+            match = [{ path = [ "/store-apps*" ]; }];
+            handle = [{
+              handler = "vars";
+              root = config.services.nextcloud.home;
+            }];
+          }
+          # Reroute carddav and caldav traffic
+          {
+            match =
+              [{ path = [ "/.well-known/carddav" "/.well-known/caldav" ]; }];
+            handle = [{
+              handler = "static_response";
+              headers = { Location = [ "/remote.php/dav" ]; };
+              status_code = 301;
+            }];
+          }
+          # Block traffic to sensitive files
+          {
+            match = [{
+              path = [
+                "/.htaccess"
+                "/data/*"
+                "/config/*"
+                "/db_structure"
+                "/.xml"
+                "/README"
+                "/3rdparty/*"
+                "/lib/*"
+                "/templates/*"
+                "/occ"
+                "/console.php"
+              ];
+            }];
+            handle = [{
+              handler = "static_response";
+              status_code = 404;
+            }];
+          }
+          # Redirect index.php to the homepage
+          {
+            match = [{
+              file = { try_files = [ "{http.request.uri.path}/index.php" ]; };
+              not = [{ path = [ "*/" ]; }];
+            }];
+            handle = [{
+              handler = "static_response";
+              headers = { Location = [ "{http.request.orig_uri.path}/" ]; };
+              status_code = 308;
+            }];
+          }
+          # Rewrite paths to be relative
+          {
+            match = [{
+              file = {
+                split_path = [ ".php" ];
+                try_files = [
+                  "{http.request.uri.path}"
+                  "{http.request.uri.path}/index.php"
+                  "index.php"
+                ];
+              };
+            }];
+            handle = [{
+              handler = "rewrite";
+              uri = "{http.matchers.file.relative}";
+            }];
+          }
+          # Send all PHP traffic to Nextcloud PHP service
+          {
+            match = [{ path = [ "*.php" ]; }];
+            handle = [{
+              handler = "reverse_proxy";
+              transport = {
+                protocol = "fastcgi";
+                split_path = [ ".php" ];
+              };
+              upstreams = [{ dial = "unix//run/phpfpm/nextcloud.sock"; }];
+            }];
+          }
+          # Finally, send the rest to the file server
+          { handle = [{ handler = "file_server"; }]; }
+        ];
       }];
+      terminal = true;
     }];
 
     # Create credentials file for nextcloud
@@ -82,10 +184,11 @@ in {
     };
 
     # Log metrics to prometheus
+    networking.hosts."127.0.0.1" = [ config.hostnames.content ];
     services.prometheus.exporters.nextcloud = {
       enable = config.prometheus.exporters.enable;
       username = config.services.nextcloud.config.adminuser;
-      url = "http://localhost:${builtins.toString port}";
+      url = "https://${config.hostnames.content}";
       passwordFile = config.services.nextcloud.config.adminpassFile;
     };
     prometheus.scrapeTargets = [
