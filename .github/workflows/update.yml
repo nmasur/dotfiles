@@ -6,7 +6,7 @@ on:
     - cron: '33 3 * * 0' # runs weekly on Sunday at 03:33
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 jobs:
