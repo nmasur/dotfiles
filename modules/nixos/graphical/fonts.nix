@@ -6,7 +6,7 @@ in {
 
   config = lib.mkIf (config.gui.enable && pkgs.stdenv.isLinux) {
 
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       victor-mono # Used for Vim and Terminal
       (nerdfonts.override { fonts = [ "Hack" ]; }) # For Polybar, Rofi
     ];
