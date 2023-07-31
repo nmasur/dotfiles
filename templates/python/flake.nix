@@ -1,7 +1,15 @@
 {
   description = "Python pip flake";
 
-  inputs.mach-nix.url = "github:DavHau/mach-nix/3.5.0";
+  inputs.pypi-deps-db = {
+    url = "github:DavHau/pypi-deps-db/b8c61fb930c9a9f95057b717bc7c701196f2ee4e";
+    flake = false;
+  };
+  inputs.mach-nix = {
+    # url = "github:DavHau/mach-nix/3.5.0";
+    url = "github:DavHau/mach-nix/8d903072c7b5426d90bc42a008242c76590af916";
+    inputs.pypi-deps-db.follows = "pypi-deps-db";
+  };
 
   outputs = { nixpkgs, mach-nix }:
     let
