@@ -1,5 +1,7 @@
 { pkgs, dsl, ... }: {
 
+  # Toggleterm provides a floating terminal inside the editor for quick access
+
   plugins = [ pkgs.vimPlugins.toggleterm-nvim ];
 
   use.toggleterm.setup = dsl.callWith {

@@ -1,5 +1,7 @@
 { pkgs, dsl, ... }: {
 
+  # Telescope is a fuzzy finder that can work with different sub-plugins
+
   plugins = [
     pkgs.vimPlugins.telescope-nvim
     pkgs.vimPlugins.project-nvim

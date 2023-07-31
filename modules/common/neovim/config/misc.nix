@@ -10,6 +10,7 @@
     pkgs.vimPlugins.which-key-nvim # Keybind helper
   ];
 
+  # Initialize some plugins
   setup.Comment = { };
   setup.colorizer = { };
   setup.glow = { };

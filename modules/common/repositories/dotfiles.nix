@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }: {
 
+  # Allows me to make sure I can work on my dotfiles locally
+
   options.dotfiles.enable = lib.mkEnableOption "Clone dotfiles.";
 
   config = lib.mkIf config.dotfiles.enable {

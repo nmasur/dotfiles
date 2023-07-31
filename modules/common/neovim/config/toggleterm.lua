@@ -12,6 +12,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
 })
 
+-- These are all the different types of terminals we can trigger
+
 local terminal = require("toggleterm.terminal").Terminal
 
 local basicterminal = terminal:new()

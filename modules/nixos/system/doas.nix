@@ -13,11 +13,11 @@
       doas = {
         enable = true;
 
-        # No password required
+        # No password required for trusted users
         wheelNeedsPassword = false;
 
         # Pass environment variables from user to root
-        # Also requires removing password here
+        # Also requires specifying that we are removing password here
         extraRules = [{
           groups = [ "wheel" ];
           noPass = true;
@@ -26,6 +26,7 @@
       };
     };
 
+    # Alias sudo to doas for convenience
     home-manager.users.${config.user}.programs.fish.shellAliases = {
       sudo = "doas";
     };

@@ -18,12 +18,14 @@
 
     home-manager.users.${config.user} = {
 
+      # Quick button for launching nautilus
       xsession.windowManager.i3.config.keybindings = {
         "${
           config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
         }+n" = "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus";
       };
 
+      # Generates a QR code and previews it with sushi
       programs.fish.functions = {
         qr = {
           body =
@@ -31,7 +33,7 @@
         };
       };
 
-      # Set default for opening directories
+      # Set Nautilus as default for opening directories
       xdg.mimeApps = {
         associations.added."inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         # associations.removed = {
