@@ -52,7 +52,9 @@
   vim.o.backup = true; # Easier to recover and more secure
   vim.bo.swapfile = false; # Instead of swaps, create backups
   vim.bo.undofile = true; # Keeps undos after quit
-  vim.o.backupdir = dsl.rawLua ''vim.fn.stdpath("cache") .. "/backup"'';
+  vim.o.backupdir =
+    dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/backup//")'';
+  vim.o.undodir = dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/undo//")'';
 
   # Required for nvim-cmp completion
   vim.opt.completeopt = [ "menu" "menuone" "noselect" ];
