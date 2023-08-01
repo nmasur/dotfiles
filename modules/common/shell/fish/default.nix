@@ -12,8 +12,14 @@
     programs.fish = {
       enable = true;
       shellAliases = {
+
+        # Version of bash which works much better on the terminal
         bash = "${pkgs.bashInteractive}/bin/bash";
-        ls = "exa";
+
+        # Use exa instead of ls for fancier output
+        ls = "exa --group";
+
+        # Move files to XDG trash on the commandline
         trash = lib.mkIf pkgs.stdenv.isLinux "${pkgs.trash-cli}/bin/trash-put";
       };
       functions = {
