@@ -4,14 +4,13 @@
  */
 @import "common.rasi"
 * {
-  font: @text-font;
+  font: @prompt-text-font;
 }
 #window {
   height: @prompt-window-height;
   width: @prompt-window-width;
   children: [ inputbar, horibox ];
   border: @prompt-window-border;
-  border-color: @accent;
 }
 #inputbar {
   enabled: false;
@@ -19,8 +18,6 @@
 #prompt {
   padding: @prompt-prompt-padding;
   margin: @prompt-prompt-margin;
-  background-color: @accent;
-  text-color: @background-light;
 }
 #listview {
   padding: @prompt-listview-padding;
@@ -31,19 +28,3 @@
   font: @prompt-text-font;
   padding: @prompt-element-padding;
 }
-element.alternate.active,
-element.normal.active,
-element.alternate.urgent,
-element.normal.urgent {
-  background-color: @background-light;
-  text-color: @foreground;
-}
-element.selected.urgent {
-  background-color: @off;
-  text-color: @background;
-}
-element.selected.active {
-  background-color: @on;
-  text-color: @background;
-}
-
