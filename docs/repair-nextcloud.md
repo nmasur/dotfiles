@@ -8,7 +8,7 @@ sudo -u nextcloud nextcloud-occ maintenance:repair
 sudo -u nextcloud nextcloud-occ maintenance:mode --off
 ```
 
-Converting from SQLite to MySQL (mariadb)
+## Converting from SQLite to MySQL (mariadb)
 
 First: keep Nextcloud set to SQLite as its dbtype, and separately launch MySQL
 as a service by copying the configuration found
@@ -44,3 +44,16 @@ be. Now update your NixOS configuration:
 - Set `database.createLocally` to `true`.
 
 Rebuild your configuration.
+
+Now, make sure to enable [4-byte
+support](https://docs.nextcloud.com/server/latest/admin_manual/configuration_database/mysql_4byte_support.html)
+in the database.
+
+## Backing Up MySQL Database
+
+Use this mysqldump command:
+
+```
+sudo -u nextcloud mysqldump -S /run/mysqld/mysqld.sock --default-character-set=utf8mb4 nextcloud > backup.sql
+```
+

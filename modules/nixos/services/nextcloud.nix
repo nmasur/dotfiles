@@ -17,6 +17,25 @@
         trustedProxies = [ "127.0.0.1" ];
       };
       extraOptions = { default_phone_region = "US"; };
+      extraAppsEnable = true;
+      extraApps = with config.services.nextcloud.package.packages.apps; {
+        inherit calendar contacts;
+        news = pkgs.fetchNextcloudApp {
+          url =
+            "https://github.com/nextcloud/news/releases/download/22.0.0/news.tar.gz";
+          sha256 = "sha256-hhXPEITSbCiFs0o+TOsQnSasXBpjU9mA/OFsbzuaCPw=";
+        };
+        external = pkgs.fetchNextcloudApp {
+          url =
+            "https://github.com/nextcloud-releases/external/releases/download/v5.2.0/external-v5.2.0.tar.gz";
+          sha256 = "sha256-gY1nxqK/pHfoxW/9mE7DFtNawgdEV7a4OXpscWY14yk=";
+        };
+        cookbook = pkgs.fetchNextcloudApp {
+          url =
+            "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
+          sha256 = "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=";
+        };
+      };
     };
 
     # Don't let Nginx use main ports (using Caddy instead)
