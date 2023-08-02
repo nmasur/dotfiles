@@ -4,15 +4,19 @@
 
     services.nextcloud = {
       package = pkgs.nextcloud27; # Required to specify
+      configureRedis = true;
       datadir = "/data/nextcloud";
+      database.createLocally = true;
       https = true;
       hostName = "localhost";
       maxUploadSize = "50G";
       config = {
         adminpassFile = config.secrets.nextcloud.dest;
+        dbtype = "mysql";
         extraTrustedDomains = [ config.hostnames.content ];
         trustedProxies = [ "127.0.0.1" ];
       };
+      extraOptions = { default_phone_region = "US"; };
     };
 
     # Don't let Nginx use main ports (using Caddy instead)
@@ -147,34 +151,9 @@
     # Grant user access to Nextcloud directories
     users.users.${config.user}.extraGroups = [ "nextcloud" ];
 
-    ## Backup config
-
     # Open to groups, allowing for backups
     systemd.services.phpfpm-nextcloud.serviceConfig.StateDirectoryMode =
       lib.mkForce "0770";
-
-    # Allow litestream and nextcloud to share a sqlite database
-    users.users.litestream.extraGroups = [ "nextcloud" ];
-    users.users.nextcloud.extraGroups = [ "litestream" ];
-
-    # Backup sqlite database with litestream
-    services.litestream = {
-      settings = {
-        dbs = [{
-          path = "${config.services.nextcloud.datadir}/data/nextcloud.db";
-          replicas = [{
-            url =
-              "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/nextcloud";
-          }];
-        }];
-      };
-    };
-
-    # Don't start litestream unless nextcloud is up
-    systemd.services.litestream = {
-      after = [ "phpfpm-nextcloud.service" ];
-      requires = [ "phpfpm-nextcloud.service" ];
-    };
 
     # Log metrics to prometheus
     networking.hosts."127.0.0.1" = [ config.hostnames.content ];
