@@ -112,6 +112,40 @@
       flake = false;
     };
 
+    # Tree-Sitter Grammars
+    tree-sitter-bash = {
+      # Fix: bash highlighting doesn't work as of this commit:
+      # https://github.com/NixOS/nixpkgs/commit/49cce41b7c5f6b88570a482355d9655ca19c1029
+      url =
+        "github:tree-sitter/tree-sitter-bash/493646764e7ad61ce63ce3b8c59ebeb37f71b841";
+      flake = false;
+    };
+    tree-sitter-python = {
+      # Fix: invalid node in position. Broken as of this commit (replaced with newer):
+      # https://github.com/NixOS/nixpkgs/commit/8ec3627796ecc899e6f47f5bf3c3220856ead9c5
+      url =
+        "github:tree-sitter/tree-sitter-python/5af00f64af6bbf822f208243cce5cf75396fb6f5";
+      flake = false;
+    };
+    tree-sitter-ini = {
+      url = "github:justinmk/tree-sitter-ini";
+      flake = false;
+    };
+    tree-sitter-puppet = {
+      url = "github:amaanq/tree-sitter-puppet";
+      flake = false;
+    };
+    tree-sitter-rasi = {
+      url = "github:Fymyte/tree-sitter-rasi";
+      flake = false;
+    };
+
+    # MPV Scripts
+    zenyd-mpv-scripts = {
+      url = "github:zenyd/mpv-scripts";
+      flake = false;
+    };
+
   };
 
   outputs = { nixpkgs, ... }@inputs:
@@ -149,6 +183,8 @@
         (import ./overlays/calibre-web.nix)
         (import ./overlays/disko.nix inputs)
         (import ./overlays/tree-sitter.nix inputs)
+        (import ./overlays/caddy.nix inputs)
+        (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/betterlockscreen.nix)
       ];
 

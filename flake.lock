@@ -430,9 +430,15 @@
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
         "toggleterm-nvim-src": "toggleterm-nvim-src",
+        "tree-sitter-bash": "tree-sitter-bash",
+        "tree-sitter-ini": "tree-sitter-ini",
+        "tree-sitter-puppet": "tree-sitter-puppet",
+        "tree-sitter-python": "tree-sitter-python",
+        "tree-sitter-rasi": "tree-sitter-rasi",
         "vscode-terraform-snippets": "vscode-terraform-snippets",
         "wallpapers": "wallpapers",
-        "wsl": "wsl"
+        "wsl": "wsl",
+        "zenyd-mpv-scripts": "zenyd-mpv-scripts"
       }
     },
     "rust-overlay": {
@@ -540,6 +546,88 @@
         "type": "github"
       }
     },
+    "tree-sitter-bash": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688032601,
+        "narHash": "sha256-gl5F3IeZa2VqyH/qFj8ey2pRbGq4X8DL5wiyvRrH56U=",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-bash",
+        "rev": "493646764e7ad61ce63ce3b8c59ebeb37f71b841",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-bash",
+        "rev": "493646764e7ad61ce63ce3b8c59ebeb37f71b841",
+        "type": "github"
+      }
+    },
+    "tree-sitter-ini": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690815608,
+        "narHash": "sha256-IIpKzpA4q1jpYVZ75VZaxWHaqNt8TA427eMOui2s71M=",
+        "owner": "justinmk",
+        "repo": "tree-sitter-ini",
+        "rev": "7f11a02fb8891482068e0fe419965d7bade81a68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "justinmk",
+        "repo": "tree-sitter-ini",
+        "type": "github"
+      }
+    },
+    "tree-sitter-puppet": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690231696,
+        "narHash": "sha256-YEjjy9WLwITERYqoeSVrRYnwVBIAwdc4o0lvAK9wizw=",
+        "owner": "amaanq",
+        "repo": "tree-sitter-puppet",
+        "rev": "9ce9a5f7d64528572aaa8d59459ba869e634086b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "amaanq",
+        "repo": "tree-sitter-puppet",
+        "type": "github"
+      }
+    },
+    "tree-sitter-python": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690493803,
+        "narHash": "sha256-2btd/NRE6NuGNlx4cq535OrwtWXihiP3VMCJjPCiDOk=",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-python",
+        "rev": "5af00f64af6bbf822f208243cce5cf75396fb6f5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-python",
+        "rev": "5af00f64af6bbf822f208243cce5cf75396fb6f5",
+        "type": "github"
+      }
+    },
+    "tree-sitter-rasi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678701563,
+        "narHash": "sha256-2nYZoLcrxxxiOJEySwHUm93lzMg8mU+V7LIP63ntFdA=",
+        "owner": "Fymyte",
+        "repo": "tree-sitter-rasi",
+        "rev": "371dac6bcce0df5566c1cfebde69d90ecbeefd2d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Fymyte",
+        "repo": "tree-sitter-rasi",
+        "type": "github"
+      }
+    },
     "vscode-terraform-snippets": {
       "flake": false,
       "locked": {
@@ -589,6 +677,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "NixOS-WSL",
+        "type": "github"
+      }
+    },
+    "zenyd-mpv-scripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650625438,
+        "narHash": "sha256-OBCuzCtgfSwj0i/rBNranuu4LRc47jObwQIJgQQoerg=",
+        "owner": "zenyd",
+        "repo": "mpv-scripts",
+        "rev": "19ea069abcb794d1bf8fac2f59b50d71ab992130",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenyd",
+        "repo": "mpv-scripts",
         "type": "github"
       }
     }

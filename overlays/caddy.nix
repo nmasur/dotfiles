@@ -1,9 +1,14 @@
 # Adds the Cloudflare DNS validation module
 
-{ lib, buildGo118Module, fetchFromGitHub, plugins ? [ ] }:
+inputs: _final: prev:
+
 let
-  goImports = lib.flip lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
-  goGets = lib.flip lib.concatMapStrings plugins (pkg: "go get ${pkg}\n      ");
+
+  plugins = [ "github.com/caddy-dns/cloudflare" ];
+  goImports =
+    prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
+  goGets = prev.lib.flip prev.lib.concatMapStrings plugins
+    (pkg: "go get ${pkg}\n      ");
   main = ''
     package main
     import (
@@ -15,44 +20,43 @@ let
     	caddycmd.Main()
     }
   '';
-in buildGo118Module rec {
-  pname = "caddy";
-  version = "2.6.4";
-  runVend = true;
 
-  subPackages = [ "cmd/caddy" ];
+in {
+  caddy-cloudflare = prev.buildGo118Module {
+    pname = "caddy-cloudflare";
+    version = prev.caddy.version;
+    runVend = true;
 
-  src = fetchFromGitHub {
-    owner = "caddyserver";
-    repo = "caddy";
-    rev = "v${version}";
-    sha256 = "sha256:3a3+nFHmGONvL/TyQRqgJtrSDIn0zdGy9YwhZP17mU0=";
-  };
+    subPackages = [ "cmd/caddy" ];
 
-  vendorSha256 = "sha256:CrHqJcJ0knX+txQ5qvzW4JrU8vfi3FO3M/xtislIC1M=";
+    src = prev.caddy.src;
 
-  overrideModAttrs = (_: {
-    preBuild = ''
+    vendorSha256 = "sha256:CrHqJcJ0knX+txQ5qvzW4JrU8vfi3FO3M/xtislIC1M=";
+
+    overrideModAttrs = (_: {
+      preBuild = ''
+        echo '${main}' > cmd/caddy/main.go
+        ${goGets}
+      '';
+      postInstall = "cp go.sum go.mod $out/ && ls $out/";
+    });
+
+    postPatch = ''
       echo '${main}' > cmd/caddy/main.go
-      ${goGets}
+      cat cmd/caddy/main.go
     '';
-    postInstall = "cp go.sum go.mod $out/ && ls $out/";
-  });
 
-  postPatch = ''
-    echo '${main}' > cmd/caddy/main.go
-    cat cmd/caddy/main.go
-  '';
+    postConfigure = ''
+      cp vendor/go.sum ./
+      cp vendor/go.mod ./
+    '';
 
-  postConfigure = ''
-    cp vendor/go.sum ./
-    cp vendor/go.mod ./
-  '';
-
-  meta = with lib; {
-    homepage = "https://caddyserver.com";
-    description = "Fast, cross-platform HTTP/2 web server with automatic HTTPS";
-    license = licenses.asl20;
-    maintainers = with maintainers; [ Br1ght0ne techknowlogick ];
+    meta = with prev.lib; {
+      homepage = "https://caddyserver.com";
+      description =
+        "Fast, cross-platform HTTP/2 web server with automatic HTTPS";
+      license = licenses.asl20;
+      maintainers = with maintainers; [ Br1ght0ne techknowlogick ];
+    };
   };
 }
