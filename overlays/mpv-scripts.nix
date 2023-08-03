@@ -1,4 +1,4 @@
-_final: prev: inputs: {
+inputs: _final: prev: {
 
   mpvScripts = prev.mpvScripts // {
     # Delete current file after quitting
