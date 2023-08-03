@@ -215,6 +215,42 @@
         "type": "github"
       }
     },
+    "nextcloud-cookbook": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=",
+        "type": "tarball",
+        "url": "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz"
+      }
+    },
+    "nextcloud-external": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-gY1nxqK/pHfoxW/9mE7DFtNawgdEV7a4OXpscWY14yk=",
+        "type": "tarball",
+        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.2.0/external-v5.2.0.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.2.0/external-v5.2.0.tar.gz"
+      }
+    },
+    "nextcloud-news": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-hhXPEITSbCiFs0o+TOsQnSasXBpjU9mA/OFsbzuaCPw=",
+        "type": "tarball",
+        "url": "https://github.com/nextcloud/news/releases/download/22.0.0/news.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/nextcloud/news/releases/download/22.0.0/news.tar.gz"
+      }
+    },
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -418,6 +454,9 @@
         "disko": "disko",
         "firefox-darwin": "firefox-darwin",
         "home-manager": "home-manager",
+        "nextcloud-cookbook": "nextcloud-cookbook",
+        "nextcloud-external": "nextcloud-external",
+        "nextcloud-news": "nextcloud-news",
         "nil": "nil",
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",

@@ -146,6 +146,23 @@
       flake = false;
     };
 
+    # Nextcloud Apps
+    nextcloud-news = {
+      url =
+        "https://github.com/nextcloud/news/releases/download/22.0.0/news.tar.gz";
+      flake = false;
+    };
+    nextcloud-external = {
+      url =
+        "https://github.com/nextcloud-releases/external/releases/download/v5.2.0/external-v5.2.0.tar.gz";
+      flake = false;
+    };
+    nextcloud-cookbook = {
+      url =
+        "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
+      flake = false;
+    };
+
   };
 
   outputs = { nixpkgs, ... }@inputs:
@@ -185,6 +202,7 @@
         (import ./overlays/tree-sitter.nix inputs)
         (import ./overlays/caddy.nix inputs)
         (import ./overlays/mpv-scripts.nix inputs)
+        (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
       ];
 
