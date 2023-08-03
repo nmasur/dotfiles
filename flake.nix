@@ -111,6 +111,10 @@
       url = "github:run-at-scale/vscode-terraform-doc-snippets";
       flake = false;
     };
+    hmts-nvim-src = {
+      url = "github:calops/hmts.nvim";
+      flake = false;
+    };
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {

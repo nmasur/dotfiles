@@ -194,6 +194,22 @@
         "type": "github"
       }
     },
+    "hmts-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691078607,
+        "narHash": "sha256-43t8eQA+ybyGyJ24sYC+5891ct9oTORid2Rk1niC6lI=",
+        "owner": "calops",
+        "repo": "hmts.nvim",
+        "rev": "725300f46d702529a739d2e6ef84758b6003d135",
+        "type": "github"
+      },
+      "original": {
+        "owner": "calops",
+        "repo": "hmts.nvim",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -453,6 +469,7 @@
         "darwin": "darwin",
         "disko": "disko",
         "firefox-darwin": "firefox-darwin",
+        "hmts-nvim-src": "hmts-nvim-src",
         "home-manager": "home-manager",
         "nextcloud-cookbook": "nextcloud-cookbook",
         "nextcloud-external": "nextcloud-external",
