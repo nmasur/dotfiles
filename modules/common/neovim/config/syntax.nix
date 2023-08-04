@@ -23,7 +23,7 @@
     pkgs.vimPlugins.nginx-vim
     pkgs.vimPlugins.vim-helm
     pkgs.baleia-nvim # Clean ANSI from kitty scrollback
-    pkgs.hmts-nvim # Tree-sitter injections for home-manager
+    # pkgs.hmts-nvim # Tree-sitter injections for home-manager
     (pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "nmasur";
       version = "0.1";
