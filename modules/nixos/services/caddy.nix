@@ -44,7 +44,7 @@
           listen = [ ":443" ];
           routes = config.caddy.routes;
           errors.routes = config.caddy.blocks;
-          # logs = { }; # Uncomment to collect access logs
+          logs = { }; # Uncomment to collect access logs
         };
         apps.http.servers.metrics = { }; # Enables Prometheus metrics
         apps.tls.automation.policies = config.caddy.tlsPolicies;
@@ -54,6 +54,7 @@
             output = "file";
             filename = "${config.services.caddy.logDir}/caddy.log";
             roll = true;
+            roll_size_mb = 1;
           };
           level = "INFO";
         };
