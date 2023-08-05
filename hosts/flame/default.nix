@@ -3,6 +3,7 @@
 
 # How to install:
 # https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
+# These days, probably use nixos-anywhere instead.
 
 { inputs, globals, overlays, ... }:
 
@@ -21,32 +22,38 @@ inputs.nixpkgs.lib.nixosSystem {
       server = true;
       networking.hostName = "flame";
 
+      # Not sure what's necessary but too afraid to remove anything
       imports = [ (inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
       boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" ];
 
+      # File systems must be declared in order to boot
+
+      # This is the root filesystem containing NixOS
+      # I forgot to set a clean label for it
       fileSystems."/" = {
         device = "/dev/disk/by-uuid/e1b6bd50-306d-429a-9f45-78f57bc597c3";
         fsType = "ext4";
       };
 
+      # This is the boot filesystem for systemd-boot
       fileSystems."/boot" = {
         device = "/dev/disk/by-uuid/D5CA-237A";
         fsType = "vfat";
       };
 
       # Theming
-      gui.enable = false;
-      theme = { colors = (import ../../colorscheme/gruvbox).dark; };
 
-      # Disable passwords, only use SSH key
-      publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
+      # Server doesn't require GUI
+      gui.enable = false;
+
+      # Still require colors for programs like Neovim, K9S
+      theme = { colors = (import ../../colorscheme/gruvbox).dark; };
 
       # Programs and services
       cloudflare.enable = true; # Proxy traffic with Cloudflare
       dotfiles.enable = true; # Clone dotfiles
       neovim.enable = true;
-
+      giteaRunner.enable = true;
       services.caddy.enable = true;
       services.grafana.enable = true;
       services.openssh.enable = true;
@@ -55,6 +62,7 @@ inputs.nixpkgs.lib.nixosSystem {
       services.vaultwarden.enable = true;
       services.minecraft-server.enable = true; # Setup Minecraft server
 
+      # Allows private remote access over the internet
       cloudflareTunnel = {
         enable = true;
         id = "bd250ee1-ed2e-42d2-b627-039f1eb5a4d2";
@@ -63,8 +71,6 @@ inputs.nixpkgs.lib.nixosSystem {
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/6oyVqjFGX3Uvrc3VS8J9sphxzAnRzKC85xgkHfYgR3TK6qBGXzHrknEj21xeZrr3G2y1UsGzphWJd9ZfIcdA= open-ssh-ca@cloudflareaccess.org";
       };
 
-      giteaRunner.enable = true;
-
       # Nextcloud backup config
       backup.s3 = {
         endpoint = "s3.us-west-002.backblazeb2.com";
@@ -72,8 +78,9 @@ inputs.nixpkgs.lib.nixosSystem {
         accessKeyId = "0026b0e73b2e2c80000000005";
       };
 
-      # # Grant access to Jellyfin directories from Nextcloud
-      # users.users.nextcloud.extraGroups = [ "jellyfin" ];
+      # Disable passwords, only use SSH key
+      publicKey =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
 
       # # Wireguard config for Transmission
       # wireguard.enable = true;
@@ -103,9 +110,6 @@ inputs.nixpkgs.lib.nixosSystem {
 
       # # VPN port forwarding
       # services.transmission.settings.peer-port = 57599;
-
-      # # Grant access to Transmission directories from Jellyfin
-      # users.users.jellyfin.extraGroups = [ "transmission" ];
 
     }
   ];
