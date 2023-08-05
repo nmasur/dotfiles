@@ -30,7 +30,8 @@ in {
       match = [{ host = [ config.hostnames.books ]; }];
       handle = [{
         handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:8083"; }];
+        upstreams =
+          [{ dial = "localhost:${config.services.calibre-web.listen.port}"; }];
         headers.request.add."X-Script-Name" = [ "/calibre-web" ];
       }];
     }];

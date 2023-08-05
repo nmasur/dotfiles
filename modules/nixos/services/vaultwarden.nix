@@ -39,7 +39,11 @@ in {
       match = [{ host = [ config.hostnames.secrets ]; }];
       handle = [{
         handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:8222"; }];
+        upstreams = [{
+          dial = "localhost:${
+              builtins.toString config.services.vaultwarden.config.ROCKET_PORT
+            }";
+        }];
         headers.request.add."X-Real-IP" = [ "{http.request.remote.host}" ];
       }];
     }];
