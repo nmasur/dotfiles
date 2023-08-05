@@ -7,12 +7,34 @@ in {
 
   config = lib.mkIf config.services.grafana.enable {
 
+    secrets.mailpass-grafana = {
+      source = ../../../private/mailpass-grafana.age;
+      dest = "${config.secretsDirectory}/mailpass-grafana";
+      owner = "grafana";
+      group = "grafana";
+      permissions = "0440";
+    };
+    systemd.services.mailpass-grafana-secret = {
+      requiredBy = [ "grafana.service" ];
+      before = [ "grafana.service" ];
+    };
+
     services.grafana = {
-      settings.server = {
-        domain = config.hostnames.metrics;
-        http_addr = "127.0.0.1";
-        http_port = 3000;
-        protocol = "http";
+      settings = {
+        server = {
+          domain = config.hostnames.metrics;
+          http_addr = "127.0.0.1";
+          http_port = 3000;
+          protocol = "http";
+        };
+        smtp = rec {
+          enabled = true;
+          host = "${config.mail.smtpHost}:465";
+          user = "grafana@${config.mail.server}";
+          password = "$__file{${config.secrets.mailpass-grafana.dest}}";
+          from_name = "Grafana";
+          from_address = user;
+        };
       };
       provision = {
         enable = true;
@@ -2156,6 +2178,140 @@ in {
               }))
             }/dashboards";
         }];
+
+        alerting = {
+
+          contactPoints.settings.contactPoints = [{
+            name = "grafana-default-email";
+            receivers = [{
+              uid = "basic-email";
+              type = "email";
+              settings.addresses = "grafana@${config.mail.server}";
+            }];
+          }];
+
+          muteTimings = { };
+          policies.settings = { resetPolicies = [ 1 ]; };
+
+          rules.settings.groups = [{
+            name = "Default";
+            interval = "1m";
+            folder = "Alerts";
+            rules = [{
+              uid = "cloudflare-tunnel";
+              title = "Cloudflare Tunnel";
+              condition = "C";
+              data = [
+
+                # Query to retrieve the status data
+                {
+                  refId = "A";
+                  relativeTimeRange = {
+                    from = 600;
+                    to = 0;
+                  };
+                  datasourceUid = promUid;
+                  model = {
+                    editorMode = "code";
+                    expr = ''
+                      systemd_unit_state{name=~"cloudflared-tunnel-.*", state="active"}'';
+                    hide = false;
+                    instant = true;
+                    intervalMs = 1000;
+                    maxDataPoints = 43200;
+                    range = false;
+                    refId = "A";
+                  };
+                }
+
+                # Reduce to the max level, to ensure no false alarms
+                {
+                  refId = "B";
+                  relativeTimeRange = {
+                    from = 600;
+                    to = 0;
+                  };
+                  datasourceUid = "__expr__";
+                  model = {
+                    conditions = [{
+                      evaluator = {
+                        params = [ ];
+                        type = "gt";
+                      };
+                      operator = { type = "and"; };
+                      query = { params = [ "B" ]; };
+                      reducer = {
+                        params = [ ];
+                        type = "last";
+                      };
+                      type = "query";
+                    }];
+                    datasource = {
+                      type = "__expr__";
+                      uid = "__expr__";
+                    };
+                    expression = "A";
+                    hide = false;
+                    intervalMs = 1000;
+                    maxDataPoints = 43200;
+                    reducer = "max";
+                    refId = "B";
+                    type = "reduce";
+                  };
+                }
+
+                # Threshold to trigger alarm if below 100% uptime
+                {
+                  refId = "C";
+                  relativeTimeRange = {
+                    from = 600;
+                    to = 0;
+                  };
+                  datasourceUid = "__expr__";
+                  model = {
+                    conditions = [{
+                      evaluator = {
+                        params = [ 1 ];
+                        type = "lt";
+                      };
+                      operator = { type = "and"; };
+                      query = { params = [ "C" ]; };
+                      reducer = {
+                        params = [ ];
+                        type = "last";
+                      };
+                      type = "query";
+                    }];
+                    datasource = {
+                      type = "__expr__";
+                      uid = "__expr__";
+                    };
+                    expression = "B";
+                    hide = false;
+                    intervalMs = 1000;
+                    maxDataPoints = 43200;
+                    refId = "C";
+                    type = "threshold";
+                  };
+                }
+
+              ];
+              noDataState = "Alerting";
+              execErrState = "Error";
+              for = "5m";
+              annotations = {
+                description = "Cloudflare Tunnel for {{ $job }}.";
+                summary = "Cloudflare Tunnel is down.";
+              };
+              isPaused = false;
+            }];
+          }];
+
+          templates = { };
+        };
+
+        # notifiers = [];
+
       };
     };
 
