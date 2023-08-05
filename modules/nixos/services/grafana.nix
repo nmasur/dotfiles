@@ -774,8 +774,10 @@ in {
                       {
                         matcher = {
                           id = "byName";
-                          options =
-                            "localhost:${config.services.calibre-web.listen.port}";
+                          options = "localhost:${
+                              builtins.toString
+                              config.services.calibre-web.listen.port
+                            }";
                         };
                         properties = [
                           {
