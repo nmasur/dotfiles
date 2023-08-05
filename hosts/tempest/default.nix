@@ -53,7 +53,7 @@ inputs.nixpkgs.lib.nixosSystem {
 
       # Must be prepared ahead
       identityFile = "/home/${globals.user}/.ssh/id_ed25519";
-      passwordHash = inputs.nixpkgs.lib.fileContents ../../password.sha512;
+      passwordHash = inputs.nixpkgs.lib.fileContents ../../misc/password.sha512;
 
       # Theming
       gui.enable = true;

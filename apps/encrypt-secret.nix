@@ -11,7 +11,7 @@
     tmpfile=$(mktemp)
     echo "''${secret}" > ''${tmpfile}
     ${pkgs.age}/bin/age --encrypt --armor --recipients-file ${
-      builtins.toString ../public-keys
+      builtins.toString ../misc/public-keys
     } $tmpfile
     rm $tmpfile
   '');

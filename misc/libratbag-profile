@@ -1,0 +1,23 @@
+Profile 1: (active)
+Name: n/a
+Report Rate: 1000Hz
+Resolutions:
+  0: 400dpi (active) (default)
+  1: 800dpi
+  2: 1600dpi
+  3: 2400dpi
+  4: 0dpi
+Button: 0 is mapped to 'button 1'
+Button: 1 is mapped to 'button 2'
+Button: 2 is mapped to 'button 3'
+Button: 3 is mapped to 'button 4'
+Button: 4 is mapped to 'button 5'
+Button: 5 is mapped to macro '↕F11'
+Button: 6 is mapped to macro '↕VOLUMEDOWN'
+Button: 7 is mapped to macro '↕VOLUMEUP'
+Button: 8 is mapped to 'unknown'
+Button: 9 is mapped to 'wheel-right'
+Button: 10 is mapped to 'wheel-left'
+LED: 0, depth: monochrome, mode: on, color: 000000
+LED: 1, depth: monochrome, mode: on, color: 000000
+LED: 2, depth: monochrome, mode: on, color: 000000

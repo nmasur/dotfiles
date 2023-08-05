@@ -22,7 +22,7 @@ inputs.nixpkgs.lib.nixosSystem {
         colors = (import ../../colorscheme/gruvbox).dark;
         dark = true;
       };
-      passwordHash = inputs.nixpkgs.lib.fileContents ../../password.sha512;
+      passwordHash = inputs.nixpkgs.lib.fileContents ../../misc/password.sha512;
       wsl = {
         enable = true;
         wslConf.automount.root = "/mnt";
