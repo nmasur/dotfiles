@@ -8,6 +8,12 @@ sudo -u nextcloud nextcloud-occ maintenance:repair
 sudo -u nextcloud nextcloud-occ maintenance:mode --off
 ```
 
+## Rescan Files
+
+```
+sudo -u nextcloud nextcloud-occ files:scan --all
+```
+
 ## Converting from SQLite to MySQL (mariadb)
 
 First: keep Nextcloud set to SQLite as its dbtype, and separately launch MySQL
