@@ -44,7 +44,8 @@
       # Better local mail search
       programs.notmuch = {
         enable = true;
-        new.ignore = [ ".mbsyncstate.lock" ".mbsyncstate.journal" ];
+        new.ignore =
+          [ ".mbsyncstate.lock" ".mbsyncstate.journal" ".mbsyncstate.new" ];
       };
 
       accounts.email = {
