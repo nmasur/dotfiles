@@ -38,7 +38,7 @@
     };
 
     # Create private key file for wireguard
-    secrets.wireguard = {
+    secrets.wireguard = lib.mkIf config.wireguard.enable {
       source = ../../../private/wireguard.age;
       dest = "${config.secretsDirectory}/wireguard";
     };

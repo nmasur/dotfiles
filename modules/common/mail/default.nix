@@ -104,7 +104,7 @@
 
             # Used to login and send and receive emails
             passwordCommand =
-              "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${
+              "${pkgs.age}/bin/age --decrypt --identity ~/.ssh/id_ed25519 ${
                 pkgs.writeText "mailpass.age"
                 (builtins.readFile ../../../private/mailpass.age)
               }";

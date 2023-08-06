@@ -17,8 +17,8 @@
             --foreground "#fb4934" \
             "Missing required parameter." \
             "Usage: installer -- <disk> <host>" \
-            "Example: installer -- nvme0n1 desktop" \
-            "Flake example: nix run github:nmasur/dotfiles#installer -- nvme0n1 desktop"
+            "Example: installer -- nvme0n1 tempest" \
+            "Flake example: nix run github:nmasur/dotfiles#installer -- nvme0n1 tempest"
         echo "(exiting)"
         exit 1
     fi

@@ -67,8 +67,6 @@ inputs.nixpkgs.lib.nixosSystem {
       };
 
       # Secrets must be prepared ahead before deploying
-      # The SSH key will need to be added manually with: nix run .#loadkey
-      identityFile = "/home/${globals.user}/.ssh/id_ed25519";
       passwordHash = inputs.nixpkgs.lib.fileContents ../../misc/password.sha512;
 
       # Theming
@@ -111,10 +109,9 @@ inputs.nixpkgs.lib.nixosSystem {
         leagueoflegends.enable = true;
         ryujinx.enable = true;
       };
-
-      # Services will require the identityFile to work
       services.vmagent.enable = true; # Enables Prometheus metrics
-      services.openssh.enable = true; # Required for Cloudflare tunnel
+      services.openssh.enable =
+        true; # Required for Cloudflare tunnel and identity file
 
       # Allows private remote access over the internet
       cloudflareTunnel = {
