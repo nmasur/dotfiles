@@ -1,5 +1,7 @@
 # Hosts
 
+These are the individual machines managed by this flake.
+
 | Host                                       | Purpose             |
 | ---                                        | ---                 |
 | [aws](./aws/default.nix)                   | AWS AMI             |
