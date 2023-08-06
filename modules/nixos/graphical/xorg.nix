@@ -40,6 +40,7 @@
           greeters.gtk.theme = gtkTheme;
 
           # Show default user
+          # Also make sure /var/lib/AccountsService/users/<user> has SystemAccount=false
           extraSeatDefaults = ''
             greeter-hide-users = false
           '';
