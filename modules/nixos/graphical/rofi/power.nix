@@ -25,7 +25,7 @@ in {
         | ${rofi}/bin/rofi \
             -theme-str '@import "power.rasi"' \
             -hover-select \
-            -me-select-entry ''' \
+            -me-select-entry "" \
             -me-accept-entry MousePrimary \
             -dmenu \
             -sep ';' \

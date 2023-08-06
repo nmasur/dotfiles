@@ -32,7 +32,7 @@ done
 chosen=$(printf '%s;%s\n' "$yes" "$no" |
     rofi -theme-str '@import "prompt.rasi"' \
         -hover-select \
-        -me-select-entry '' \
+        -me-select-entry "" \
         -me-accept-entry MousePrimary \
         -p "$query" \
         -dmenu \
