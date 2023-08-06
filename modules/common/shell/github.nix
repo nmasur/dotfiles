@@ -5,7 +5,7 @@
     programs.gh =
       lib.mkIf config.home-manager.users.${config.user}.programs.git.enable {
         enable = true;
-        enableGitCredentialHelper = true;
+        gitCredentialHelper.enable = true;
         settings.git_protocol = "https";
       };
 
