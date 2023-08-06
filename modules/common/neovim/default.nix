@@ -20,6 +20,7 @@ in {
 
         # Use Neovim as the editor for git commit messages
         programs.git.extraConfig.core.editor = "nvim";
+        programs.jujutsu.settings.ui.editor = "nvim";
 
         # Set Neovim as the default app for text editing and manual pages
         home.sessionVariables = {
