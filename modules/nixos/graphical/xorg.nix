@@ -36,9 +36,6 @@
           enable = config.services.xserver.enable;
           background = config.wallpaper;
 
-          # Make the login screen dark
-          greeters.gtk.theme = gtkTheme;
-
           # Show default user
           # Also make sure /var/lib/AccountsService/users/<user> has SystemAccount=false
           extraSeatDefaults = ''
@@ -59,24 +56,11 @@
     services.dbus.packages = [ pkgs.dconf ];
     programs.dconf.enable = true;
 
-    environment.sessionVariables = { GTK_THEME = config.gtk.theme.name; };
-
     home-manager.users.${config.user} = {
 
       programs.fish.shellAliases = {
         pbcopy = "xclip -selection clipboard -in";
         pbpaste = "xclip -selection clipboard -out";
-      };
-
-      gtk = let
-        gtkExtraConfig = {
-          gtk-application-prefer-dark-theme = config.theme.dark;
-        };
-      in {
-        enable = true;
-        theme = gtkTheme;
-        gtk3.extraConfig = gtkExtraConfig;
-        gtk4.extraConfig = gtkExtraConfig;
       };
 
     };

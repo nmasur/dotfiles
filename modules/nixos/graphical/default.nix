@@ -3,6 +3,7 @@
   imports = [
     ./dunst.nix
     ./fonts.nix
+    ./gtk.nix
     ./i3.nix
     ./picom.nix
     ./polybar.nix
