@@ -5,6 +5,19 @@ let
   lockUpdate =
     "${pkgs.betterlockscreen}/bin/betterlockscreen --update ${config.wallpaper} --display 1 --span";
 
+  workspaces = {
+    "1" = "1:I";
+    "2" = "2:II";
+    "3" = "3:III";
+    "4" = "4:IV";
+    "5" = "5:V";
+    "6" = "6:VI";
+    "7" = "7:VII";
+    "8" = "8:VIII";
+    "9" = "9:IX";
+    "0" = "10:X";
+  };
+
 in {
 
   config = lib.mkIf pkgs.stdenv.isLinux {
@@ -21,23 +34,18 @@ in {
     home-manager.users.${config.user} = {
       xsession.windowManager.i3 = {
         enable = config.services.xserver.enable;
-        config = let
-          modifier = "Mod4"; # Super key
-          ws1 = "1:I";
-          ws2 = "2:II";
-          ws3 = "3:III";
-          ws4 = "4:IV";
+        config = let modifier = "Mod4"; # Super key
         in {
           modifier = modifier;
           assigns = {
-            "${ws1}" = [{ class = "Firefox"; }];
-            "${ws2}" = [
+            "${workspaces."1"}" = [{ class = "Firefox"; }];
+            "${workspaces."2"}" = [
               { class = "kitty"; }
               { class = "aerc"; }
               { class = "obsidian"; }
             ];
-            "${ws3}" = [{ class = "discord"; }];
-            "${ws4}" = [{ class = "Steam"; }];
+            "${workspaces."3"}" = [{ class = "discord"; }];
+            "${workspaces."4"}" = [{ class = "Steam"; }];
           };
           bars = [{ command = "echo"; }]; # Disable i3bar
           colors = let
@@ -83,17 +91,7 @@ in {
             newWindow = "urgent";
             followMouse = false;
           };
-          keybindings = {
-            # Resizing
-            "${modifier}+r" = ''mode "resize"'';
-            "${modifier}+Control+Shift+h" =
-              "resize shrink width 10 px or 10 ppt";
-            "${modifier}+Control+Shift+j" =
-              "resize grow height 10 px or 10 ppt";
-            "${modifier}+Control+Shift+k" =
-              "resize shrink height 10 px or 10 ppt";
-            "${modifier}+Control+Shift+l" = "resize grow width 10 px or 10 ppt";
-          };
+          keybindings = { };
           modes = { };
           startup = [
             {
@@ -102,13 +100,15 @@ in {
               notification = false;
             }
             {
-              command =
-                "i3-msg workspace ${ws2}, move workspace to output right";
+              command = "i3-msg workspace ${
+                  workspaces."1"
+                }, move workspace to output right";
               notification = false;
             }
             {
-              command =
-                "i3-msg workspace ${ws1}, move workspace to output left";
+              command = "i3-msg workspace ${
+                  workspaces."2"
+                }, move workspace to output left";
               notification = false;
             }
           ];
@@ -123,6 +123,61 @@ in {
         };
         extraConfig = "";
       };
+
+      programs.sxhkd.keybindings = let
+
+        # Shortcuts
+        binds =
+          config.home-manager.users.${config.user}.programs.sxhkd.keybindings;
+        i3-msg = "${pkgs.i3}/bin/i3-msg";
+
+        # Create an attrset of keybinds to actions for every workspace by number
+        bindAll = let workspaceNums = builtins.attrNames workspaces;
+        in keybindFunction: actionFunction:
+        # 1 -> "keybind + 1" -> "some action on ws 1"
+        lib.genAttrs (map keybindFunction workspaceNums) actionFunction;
+
+        # Look up the name of the workspace based on its number
+        lookup = num: builtins.getAttr num workspaces;
+
+      in {
+
+        # Window navigation
+        "super + {h,j,k,l}" = ''${i3-msg} "focus {left,down,up,right}"'';
+        "super + {Left,Down,Up,Right}" = binds."super + {h,j,k,l}";
+        "super + shift + {h,j,k,l}" = ''${i3-msg} "move {left,down,up,right}"'';
+        "super + shift + {Left,Down,Up,Right}" =
+          binds."super + shift + {h,j,k,l}";
+        "super + q" = ''${i3-msg} "kill"'';
+        "super + f" = ''${i3-msg} "fullscreen toggle"'';
+
+        # Screen management
+        "super + control + l" = ''${i3-msg} "move workspace to output right"'';
+        "super + control + h" = ''${i3-msg} "move workspace to output left"'';
+
+        # Window layouts and tiling
+        "super + {i,v}" = ''${i3-msg} "split {h,v}"'';
+        "super + {s,t,e}" =
+          ''${i3-msg} "layout {stacking,tabbed,toggle split}"'';
+        "super + shift + space" = ''${i3-msg} "floating toggle"'';
+        "super + control + space" = ''${i3-msg} "focus mode_toggle"'';
+        "super + a" = ''${i3-msg} "focus parent"'';
+
+        # Restart and reload
+        "super + shift + {c,r}" = ''${i3-msg} "{reload,restart}"'';
+
+      }
+
+      # Bind super + workspace -> switch to workspace
+      // (bindAll (num: "super + ${num}")
+        (num: ''${i3-msg} "workspace ${lookup num}"''))
+
+      # Bind super + shift + workspace -> move to workspace
+      // (bindAll (num: "super + shift + ${num}") (num:
+        ''
+          ${i3-msg} "move container to workspace ${lookup num}; workspace ${
+            lookup num
+          }"''));
 
       lockScreenCommand =
         "${pkgs.betterlockscreen}/bin/betterlockscreen --lock --display 1 --blur 0.5 --span";
