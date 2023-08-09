@@ -3,18 +3,22 @@
 let
 
   # Based on: https://gitlab.com/rycee/nur-expressions/-/blob/7ae92e3497e1f1805fb849510120e2ee393018cd/pkgs/materia-theme/default.nix
-  gtkTheme = pkgs.stdenv.mkDerivation rec {
+  gtkTheme = pkgs.stdenv.mkDerivation {
     pname = "materia-custom";
-    version = "20210322";
+    version = "0.1";
     src = pkgs.fetchFromGitHub {
       owner = "nana-4";
       repo = "materia-theme";
-      rev = "v${version}";
-      sha256 = "1fsicmcni70jkl4jb3fvh7yv0v9jhb8nwjzdq8vfwn256qyk0xvl";
+      rev = "6e5850388a25f424b8193fe4523504d1dc364175";
+      sha256 = "sha256-I6hpH0VTmftU4+/pRbztuTQcBKcOFBFbNZXJL/2bcgU=";
     };
+    # patches = [ ../../../overlays/materia-theme.patch ];
     nativeBuildInputs = with pkgs; [
       bc
+      dart-sass
       optipng
+      meson
+      ninja
       sassc
 
       (runCommandLocal "rendersvg" { } ''
@@ -25,35 +29,51 @@ let
 
     dontConfigure = true;
 
-    # Fixes problem "Fontconfig error: Cannot load default config file"
-    FONTCONFIG_FILE =
-      pkgs.makeFontsConf { fontDirectories = [ pkgs.cantarell-fonts ]; };
+    # # Fixes problem "Fontconfig error: Cannot load default config file"
+    # FONTCONFIG_FILE =
+    #   pkgs.makeFontsConf { fontDirectories = [ pkgs.cantarell-fonts ]; };
 
     # Derivation adds an extra # so we need to remove it from our colorscheme
     theme = let stripHash = color: lib.strings.removePrefix "#" color;
     in lib.generators.toKeyValue { } {
       # Color selection copied from
       # https://github.com/pinpox/nixos-home/blob/1cefe28c72930a0aed41c20d254ad4d193a3fa37/gtk.nix#L11
+
+      # Secondary accent
       ACCENT_BG = stripHash config.theme.colors.base0B;
       ACCENT_FG = stripHash config.theme.colors.base00;
+
+      # Main colors
       BG = stripHash config.theme.colors.base00;
+      FG = stripHash config.theme.colors.base05;
+
+      # Buttons
       BTN_BG = stripHash config.theme.colors.base02;
       BTN_FG = stripHash config.theme.colors.base06;
-      FG = stripHash config.theme.colors.base05;
-      HDR_BG = stripHash config.theme.colors.base02;
-      HDR_BTN_BG = stripHash config.theme.colors.base01;
+
+      # Header bar
+      HDR_BG = stripHash config.theme.colors.base01;
+      HDR_BTN_BG = stripHash config.theme.colors.base02;
       HDR_BTN_FG = stripHash config.theme.colors.base05;
       HDR_FG = stripHash config.theme.colors.base05;
-      MATERIA_SURFACE = stripHash config.theme.colors.base01;
-      MATERIA_VIEW = stripHash config.theme.colors.base01;
-      MENU_BG = stripHash config.theme.colors.base02;
-      MENU_FG = stripHash config.theme.colors.base06;
+
+      # Not sure
+      MATERIA_SURFACE = stripHash config.theme.colors.base03;
+      MATERIA_VIEW = stripHash config.theme.colors.base08;
+
+      # Not sure
+      MENU_BG = stripHash config.theme.colors.base0A;
+      MENU_FG = stripHash config.theme.colors.base0E;
+
+      # Selection (primary accent)
       SEL_BG = stripHash config.theme.colors.base04;
-      SEL_FG = stripHash config.theme.colors.base05;
+      SEL_FG = stripHash config.theme.colors.base07;
+
       TXT_BG = stripHash config.theme.colors.base02;
       TXT_FG = stripHash config.theme.colors.base07;
-      WM_BORDER_FOCUS = stripHash config.theme.colors.base03;
-      WM_BORDER_UNFOCUS = stripHash config.theme.colors.base02;
+
+      WM_BORDER_FOCUS = stripHash config.theme.colors.base0D;
+      WM_BORDER_UNFOCUS = stripHash config.theme.colors.base0C;
 
       MATERIA_COLOR_VARIANT = if config.theme.dark then "dark" else "light";
       MATERIA_STYLE_COMPACT = "True";
@@ -71,12 +91,15 @@ let
 
     buildPhase = ''
       export HOME="$NIX_BUILD_ROOT"
+      mkdir -p $out/share/themes/materia-custom
       ./change_color.sh \
          -i False \
          -t $out/share/themes \
          -o "materia-custom" \
-         "$themePath"
+         "$themePath" # References the file "theme" from passAsFile
     '';
+
+    dontInstall = true;
   };
 
 in {
