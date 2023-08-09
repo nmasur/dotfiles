@@ -22,6 +22,10 @@
 
     ];
 
+    # Seems like NetworkManager can help speed up Steam launch
+    # https://www.reddit.com/r/archlinux/comments/qguhco/steam_startup_time_arch_1451_seconds_fedora_34/hi8opet/
+    networking.networkmanager.enable = true;
+
   };
 
 }

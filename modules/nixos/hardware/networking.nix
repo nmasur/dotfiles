@@ -2,7 +2,7 @@
 
   config = lib.mkIf config.physical {
 
-    networking.useDHCP = true;
+    networking.useDHCP = !config.networking.networkmanager.enable;
 
     networking.firewall.allowPing = lib.mkIf config.server true;
 
