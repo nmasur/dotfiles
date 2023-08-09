@@ -13,7 +13,7 @@
         "$cmd_duration"
         "$character"
       ];
-      right_format = "$nix_shell";
+      # right_format = "$nix_shell";
       character = {
         success_symbol = "[❯](bold green)";
         error_symbol = "[❯](bold red)";

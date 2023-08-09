@@ -15,7 +15,7 @@ let
     "7" = "7:VII";
     "8" = "8:VIII";
     "9" = "9:IX";
-    "0" = "10:X";
+    "10" = "10:X";
   };
 
 in {
@@ -124,30 +124,18 @@ in {
         extraConfig = "";
       };
 
-      programs.sxhkd.keybindings = let
+      services.sxhkd.keybindings = let
 
         # Shortcuts
-        binds =
-          config.home-manager.users.${config.user}.programs.sxhkd.keybindings;
         i3-msg = "${pkgs.i3}/bin/i3-msg";
-
-        # Create an attrset of keybinds to actions for every workspace by number
-        bindAll = let workspaceNums = builtins.attrNames workspaces;
-        in keybindFunction: actionFunction:
-        # 1 -> "keybind + 1" -> "some action on ws 1"
-        lib.genAttrs (map keybindFunction workspaceNums) actionFunction;
-
-        # Look up the name of the workspace based on its number
-        lookup = num: builtins.getAttr num workspaces;
 
       in {
 
         # Window navigation
-        "super + {h,j,k,l}" = ''${i3-msg} "focus {left,down,up,right}"'';
-        "super + {Left,Down,Up,Right}" = binds."super + {h,j,k,l}";
-        "super + shift + {h,j,k,l}" = ''${i3-msg} "move {left,down,up,right}"'';
-        "super + shift + {Left,Down,Up,Right}" =
-          binds."super + shift + {h,j,k,l}";
+        "super + {_,shift +}{h,j,k,l}" =
+          ''${i3-msg} "{focus,move} {left,down,up,right}"'';
+        "super + {_,shift +}{Left,Down,Up,Right}" =
+          ''${i3-msg} "{focus,move} {left,down,up,right}"'';
         "super + q" = ''${i3-msg} "kill"'';
         "super + f" = ''${i3-msg} "fullscreen toggle"'';
 
@@ -166,21 +154,17 @@ in {
         # Restart and reload
         "super + shift + {c,r}" = ''${i3-msg} "{reload,restart}"'';
 
-      }
+        "super + {1-9,0}" = ''${i3-msg} "workspace {1-9,10}"'';
+        "super + shift + {1-9,0}" = ''
+          WORKSPACE={1-9,10};
+          ${i3-msg} "move container to workspace $WORKSPACE; workspace $WORKSPACE"'';
 
-      # Bind super + workspace -> switch to workspace
-      // (bindAll (num: "super + ${num}")
-        (num: ''${i3-msg} "workspace ${lookup num}"''))
+        "super + r : {h,j,k,l}" =
+          ''${i3-msg} "resize {shrink,grow} width 10px or 10 ppt"'';
+        "super + r : {j,k}" =
+          ''${i3-msg} "resize {shrink,grow} height 10px or 10 ppt"'';
 
-      # Bind super + shift + workspace -> move to workspace
-      // (bindAll (num: "super + shift + ${num}") (num:
-        ''
-          ${i3-msg} "move container to workspace ${lookup num}; workspace ${
-            lookup num
-          }"''));
-
-      lockScreenCommand =
-        "${pkgs.betterlockscreen}/bin/betterlockscreen --lock --display 1 --blur 0.5 --span";
+      };
 
       programs.fish.functions = {
         update-lock-screen = lib.mkIf config.services.xserver.enable {
@@ -201,6 +185,9 @@ in {
           '');
 
     };
+
+    lockScreenCommand =
+      "${pkgs.betterlockscreen}/bin/betterlockscreen --lock --display 1 --blur 0.5 --span";
 
     # Ref: https://github.com/betterlockscreen/betterlockscreen/blob/next/system/betterlockscreen%40.service
     systemd.services.lock = {

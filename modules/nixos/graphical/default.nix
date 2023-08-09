@@ -5,6 +5,7 @@
     ./fonts.nix
     ./gtk.nix
     ./i3.nix
+    ./keybinds.nix
     ./picom.nix
     ./polybar.nix
     ./rofi.nix
