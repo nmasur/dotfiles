@@ -100,15 +100,11 @@ in {
               notification = false;
             }
             {
-              command = "i3-msg workspace ${
-                  workspaces."1"
-                }, move workspace to output right";
+              command = "i3-msg focus right, workspace ${workspaces."2"}";
               notification = false;
             }
             {
-              command = "i3-msg workspace ${
-                  workspaces."2"
-                }, move workspace to output left";
+              command = "i3-msg focus left, workspace ${workspaces."1"}";
               notification = false;
             }
           ];
@@ -151,20 +147,32 @@ in {
         "super + control + space" = ''${i3-msg} "focus mode_toggle"'';
         "super + a" = ''${i3-msg} "focus parent"'';
 
+        "super + Return" = ''
+          ${i3-msg} "exec --no-startup-id ${config.terminal}; workspace ${
+            workspaces."2"
+          }; layout tabbed"'';
+
         # Restart and reload
         "super + shift + {c,r}" = ''${i3-msg} "{reload,restart}"'';
-
-        "super + {1-9,0}" = ''${i3-msg} "workspace {1-9,10}"'';
-        "super + shift + {1-9,0}" = ''
-          WORKSPACE={1-9,10};
-          ${i3-msg} "move container to workspace $WORKSPACE; workspace $WORKSPACE"'';
+        "super + shift + q" = ''
+          ${pkgs.i3}/bin/i3-nagbar -t warning -m "Exit i3?" -B "Yes, exit i3" "${i3-msg} exit"'';
 
         "super + r : {h,j,k,l}" =
           ''${i3-msg} "resize {shrink,grow} width 10px or 10 ppt"'';
         "super + r : {j,k}" =
           ''${i3-msg} "resize {shrink,grow} height 10px or 10 ppt"'';
 
-      };
+      } // (let
+        # Bind navigation
+        bindWorkspace = num: workspace:
+          lib.attrsets.nameValuePair ("super + ${num}")
+          (''${i3-msg} "workspace ${workspace}"'');
+      in lib.mapAttrs' bindWorkspace workspaces) // (let
+        # Bind move container to workspace
+        bindWorkspace = num: workspace:
+          lib.attrsets.nameValuePair ("super + shift +${num}") (''
+            ${i3-msg} "move container to workspace ${workspace}; workspace ${workspace}"'');
+      in lib.mapAttrs' bindWorkspace workspaces);
 
       programs.fish.functions = {
         update-lock-screen = lib.mkIf config.services.xserver.enable {

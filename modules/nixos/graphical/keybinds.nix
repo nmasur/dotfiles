@@ -23,7 +23,6 @@
         "super + b" = config.toggleBarCommand;
 
         # Launchers
-        "super + Return" = config.terminal;
         "super + space" = config.launcherCommand;
         "super + shift + s" = config.systemdSearch;
         "super + shift + a" = config.audioSwitchCommand;
