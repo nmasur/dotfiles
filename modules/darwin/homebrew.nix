@@ -42,6 +42,7 @@
         "obsidian" # Obsidian packaging on Nix is not available for macOS
         "scroll-reverser" # Different scroll style for mouse vs. trackpad
         "steam" # Not packaged for Nix
+        "epic-games" # Not packaged for Nix
       ];
     };
 
