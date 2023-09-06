@@ -10,6 +10,7 @@
       glow # Markdown previews
       skate # Key-value store
       charm # Manage account and filesystem
+      pop # Send emails from a TUI
     ];
 
   };

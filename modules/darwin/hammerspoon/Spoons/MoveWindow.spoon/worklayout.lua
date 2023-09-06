@@ -55,6 +55,15 @@ local function worklayout()
         local layout = concat(left, right, laptop)
         hs.layout.apply(layout)
     end)
+
+    -- Reload Hammerspoon whenever layout changes
+    hs.screen.watcher.new(function()
+        -- Pause for 5 seconds to give time for layout to change
+        hs.timer.doAfter(5, function()
+            -- Perform the actual reload
+            hs.reload()
+        end)
+    end)
 end
 
 return worklayout

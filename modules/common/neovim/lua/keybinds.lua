@@ -65,6 +65,12 @@ key("n", "<C-Down>", ":resize -2<CR>", { silent = true })
 key("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
 key("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
+-- Quickfix
+key("n", "]q", ":cnext<CR>")
+key("n", "[q", ":cprevious<CR>")
+key("n", "co", ":copen<CR>")
+key("n", "cq", ":cclose<CR>")
+
 -- Other
 key("n", "<A-CR>", ":noh<CR>", { silent = true })           --- Clear search in VimWiki
 key("n", "Y", "y$")                                         --- Copy to end of line
