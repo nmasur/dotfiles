@@ -58,7 +58,7 @@
 
     # Nix language server
     nil = {
-      url = "github:oxalica/nil/2023-04-03";
+      url = "github:oxalica/nil/2023-08-09";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
