@@ -59,7 +59,7 @@ in {
             border = mkLiteral "0px";
             border-radius = mkLiteral "0px";
             border-color = mkLiteral config.theme.colors.base04;
-            children = map mkLiteral [ "inputbar" "listview" ];
+            children = map mkLiteral [ "inputbar" "message" "listview" ];
             spacing = mkLiteral "10px";
             padding = mkLiteral "10px";
           };
