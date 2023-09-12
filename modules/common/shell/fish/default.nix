@@ -6,7 +6,7 @@
   home-manager.users.${config.user} = {
 
     # Packages used in abbreviations and aliases
-    home.packages = with pkgs; [ curl exa ];
+    home.packages = with pkgs; [ curl ];
 
     programs.fish = {
       enable = true;
@@ -15,8 +15,8 @@
         # Version of bash which works much better on the terminal
         bash = "${pkgs.bashInteractive}/bin/bash";
 
-        # Use exa instead of ls for fancier output
-        ls = "exa --group";
+        # Use eza (exa) instead of ls for fancier output
+        ls = "${pkgs.eza}/bin/eza --group";
 
         # Move files to XDG trash on the commandline
         trash = lib.mkIf pkgs.stdenv.isLinux "${pkgs.trash-cli}/bin/trash-put";
