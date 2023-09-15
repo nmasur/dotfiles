@@ -17,6 +17,23 @@
         "type": "github"
       }
     },
+    "age": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672087018,
+        "narHash": "sha256-LRxxJQLQkzoCNYGS/XBixVmYXoZ1mPHKvFicPGXYLcw=",
+        "owner": "FiloSottile",
+        "repo": "age",
+        "rev": "c6dcfa1efcaa27879762a934d5bea0d1b83a894c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FiloSottile",
+        "ref": "v1.1.1",
+        "repo": "age",
+        "type": "github"
+      }
+    },
     "baleia-nvim-src": {
       "flake": false,
       "locked": {
@@ -114,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694479111,
-        "narHash": "sha256-os/KFcAORI8OBpPA4J5llib9sVLn9lEtDBgf0th5lhE=",
+        "lastModified": 1694651982,
+        "narHash": "sha256-oI8jrtIvLll+ADzm+qQqy58ybFeA1J1GlNgL3Q5hvGs=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "bd9d69cec7e3f62c22d1b3bbe68b4ddaa2b6e480",
+        "rev": "a376e3619b40947054e2c5e93fbcc00aa9e24477",
         "type": "github"
       },
       "original": {
@@ -466,6 +483,7 @@
     "root": {
       "inputs": {
         "Comment-nvim-src": "Comment-nvim-src",
+        "age": "age",
         "baleia-nvim-src": "baleia-nvim-src",
         "bufferline-nvim-src": "bufferline-nvim-src",
         "cmp-nvim-lsp-src": "cmp-nvim-lsp-src",

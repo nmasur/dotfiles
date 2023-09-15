@@ -150,6 +150,12 @@
       flake = false;
     };
 
+    # Age encryption (pin because of failed builds)
+    age = {
+      url = "github:FiloSottile/age/v1.1.1";
+      flake = false;
+    };
+
     # Nextcloud Apps
     nextcloud-news = {
       url =
@@ -208,6 +214,7 @@
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
+        (import ./overlays/age.nix inputs)
       ];
 
       # System types to support.
