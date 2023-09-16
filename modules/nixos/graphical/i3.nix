@@ -45,7 +45,7 @@ in {
               { class = "obsidian"; }
             ];
             "${ws3}" = [{ class = "discord"; }];
-            "${ws4}" = [{ class = "Steam"; }];
+            "${ws4}" = [ { class = "steam"; } { class = "Steam"; } ];
           };
           bars = [{ command = "echo"; }]; # Disable i3bar
           colors = let
