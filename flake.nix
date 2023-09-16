@@ -157,6 +157,14 @@
       flake = false;
     };
 
+    # GE version of Proton for game compatibility
+    # Alternatively, could consider using https://github.com/fufexan/nix-gaming
+    proton-ge = {
+      url =
+        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-14/GE-Proton8-14.tar.gz";
+      flake = false;
+    };
+
     # Nextcloud Apps
     nextcloud-news = {
       url =
@@ -216,6 +224,7 @@
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/age.nix inputs)
+        (import ./overlays/proton-ge.nix inputs)
       ];
 
       # System types to support.

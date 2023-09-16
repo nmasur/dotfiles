@@ -22,6 +22,11 @@
 
     ];
 
+    # Adapted in part from: https://github.com/Shawn8901/nix-configuration/blob/1c48be94238a9f463cf0bbd1e1842a4454286514/modules/nixos/steam-compat-tools/default.nix
+    # Based on: https://github.com/NixOS/nixpkgs/issues/73323
+    environment.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+      lib.makeBinPath [ pkgs.proton-ge-custom ];
+
     # Seems like NetworkManager can help speed up Steam launch
     # https://www.reddit.com/r/archlinux/comments/qguhco/steam_startup_time_arch_1451_seconds_fedora_34/hi8opet/
     networking.networkmanager.enable = true;

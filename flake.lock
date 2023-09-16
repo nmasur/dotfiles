@@ -480,6 +480,18 @@
         "type": "github"
       }
     },
+    "proton-ge": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-/68J3aVmHqrrcNk4DkYSBzfNyIQmbcUGg3yOlDq1ts8=",
+        "type": "tarball",
+        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-14/GE-Proton8-14.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-14/GE-Proton8-14.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "Comment-nvim-src": "Comment-nvim-src",
@@ -504,6 +516,7 @@
         "nvim-lspconfig-src": "nvim-lspconfig-src",
         "nvim-tree-lua-src": "nvim-tree-lua-src",
         "nvim-treesitter-src": "nvim-treesitter-src",
+        "proton-ge": "proton-ge",
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
         "toggleterm-nvim-src": "toggleterm-nvim-src",
