@@ -64,6 +64,7 @@
 
     # Neovim plugins
     nvim-lspconfig-src = {
+      # https://github.com/neovim/nvim-lspconfig/tags
       url = "github:neovim/nvim-lspconfig/v0.1.6";
       flake = false;
     };
@@ -84,7 +85,8 @@
       flake = false;
     };
     nvim-treesitter-src = {
-      url = "github:nvim-treesitter/nvim-treesitter/v0.9.0";
+      # https://github.com/nvim-treesitter/nvim-treesitter/tags
+      url = "github:nvim-treesitter/nvim-treesitter/v0.9.1";
       flake = false;
     };
     telescope-nvim-src = {
@@ -120,8 +122,7 @@
     tree-sitter-bash = {
       # Fix: bash highlighting doesn't work as of this commit:
       # https://github.com/NixOS/nixpkgs/commit/49cce41b7c5f6b88570a482355d9655ca19c1029
-      url =
-        "github:tree-sitter/tree-sitter-bash/493646764e7ad61ce63ce3b8c59ebeb37f71b841";
+      url = "github:tree-sitter/tree-sitter-bash/v0.20.3";
       flake = false;
     };
     tree-sitter-python = {
