@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694651982,
-        "narHash": "sha256-oI8jrtIvLll+ADzm+qQqy58ybFeA1J1GlNgL3Q5hvGs=",
+        "lastModified": 1694824736,
+        "narHash": "sha256-GQGN99hVdhwDMHsAWhnWahESWLXfzBu4RWMcqFyzHvA=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "a376e3619b40947054e2c5e93fbcc00aa9e24477",
+        "rev": "f3043cd4b4a01b4fbcf0a433ccba25bb52d3306d",
         "type": "github"
       },
       "original": {
@@ -417,11 +417,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1694814340,
-        "narHash": "sha256-eo9444JGI/G9jZF+X3xmS5TMRuIT4VYPKyZQ11iF65Q=",
+        "lastModified": 1694916038,
+        "narHash": "sha256-8e8B2UuHBEnixoMcFMEVOaoa/aOhqeMuNi1T/869UbY=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "9b70f21fd41d3b96580e7ca4a3d1c29e87bdab36",
+        "rev": "af834ba09f8a087f1f46868def06d281b4b9d71f",
         "type": "github"
       },
       "original": {
@@ -450,11 +450,11 @@
     "nvim-tree-lua-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1694306329,
-        "narHash": "sha256-Rv3DdlqRppEum09N4cKRlj0xdPbf5QLYHzYDuxb55w8=",
+        "lastModified": 1694912937,
+        "narHash": "sha256-z7KDkjhh9rTVP1XcxGYKdE7IdUyW8B2jUKy2j8jdWDs=",
         "owner": "kyazdani42",
         "repo": "nvim-tree.lua",
-        "rev": "94c7c810af205c0f00c8f105dcf490c8eb17658a",
+        "rev": "f742b86852948f11dcca5735d2af17b75dafee5f",
         "type": "github"
       },
       "original": {
