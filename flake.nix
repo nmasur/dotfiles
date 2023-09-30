@@ -86,7 +86,7 @@
     };
     nvim-treesitter-src = {
       # https://github.com/nvim-treesitter/nvim-treesitter/tags
-      url = "github:nvim-treesitter/nvim-treesitter/v0.9.1";
+      url = "github:nvim-treesitter/nvim-treesitter/master";
       flake = false;
     };
     telescope-nvim-src = {
@@ -120,16 +120,15 @@
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {
-      # Fix: bash highlighting doesn't work as of this commit:
-      # https://github.com/NixOS/nixpkgs/commit/49cce41b7c5f6b88570a482355d9655ca19c1029
-      url = "github:tree-sitter/tree-sitter-bash/v0.20.3";
+      url = "github:tree-sitter/tree-sitter-bash/master";
       flake = false;
     };
     tree-sitter-python = {
-      # Fix: invalid node in position. Broken as of this commit (replaced with newer):
-      # https://github.com/NixOS/nixpkgs/commit/8ec3627796ecc899e6f47f5bf3c3220856ead9c5
-      url =
-        "github:tree-sitter/tree-sitter-python/5af00f64af6bbf822f208243cce5cf75396fb6f5";
+      url = "github:tree-sitter/tree-sitter-python/master";
+      flake = false;
+    };
+    tree-sitter-lua = {
+      url = "github:MunifTanjim/tree-sitter-lua/main";
       flake = false;
     };
     tree-sitter-ini = {
@@ -160,23 +159,27 @@
     # GE version of Proton for game compatibility
     # Alternatively, could consider using https://github.com/fufexan/nix-gaming
     proton-ge = {
+      # https://github.com/GloriousEggroll/proton-ge-custom/releases
       url =
-        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-14/GE-Proton8-14.tar.gz";
+        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-16/GE-Proton8-16.tar.gz";
       flake = false;
     };
 
     # Nextcloud Apps
     nextcloud-news = {
+      # https://github.com/nextcloud/news/releases
       url =
-        "https://github.com/nextcloud/news/releases/download/22.0.0/news.tar.gz";
+        "https://github.com/nextcloud/news/releases/download/24.0.0/news.tar.gz";
       flake = false;
     };
     nextcloud-external = {
+      # https://github.com/nextcloud-releases/external/releases
       url =
-        "https://github.com/nextcloud-releases/external/releases/download/v5.2.0/external-v5.2.0.tar.gz";
+        "https://github.com/nextcloud-releases/external/releases/download/v5.2.1/external-v5.2.1.tar.gz";
       flake = false;
     };
     nextcloud-cookbook = {
+      # https://github.com/nextcloud/cookbook/releases
       url =
         "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
       flake = false;

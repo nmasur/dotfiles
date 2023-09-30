@@ -12,6 +12,10 @@ inputs: _final: prev: {
       prev.tree-sitter-grammars.tree-sitter-python.overrideAttrs
       (old: { src = inputs.tree-sitter-python; });
 
+    # Fix: invalid structure in position.
+    tree-sitter-lua = prev.tree-sitter-grammars.tree-sitter-lua.overrideAttrs
+      (old: { src = inputs.tree-sitter-lua; });
+
     # Add grammars not in nixpks
     tree-sitter-ini = prev.tree-sitter.buildGrammar {
       language = "ini";
