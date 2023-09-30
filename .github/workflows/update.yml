@@ -33,6 +33,20 @@ jobs:
       - name: Check the Flake
         run: nix flake check
       - name: Enable Pull Request Automerge
-        run: gh pr merge --rebase --auto ${{ steps.update.outputs.pull-request-number }}
+        if: success()
+        run: |
+          gh pr merge \
+            --rebase \
+            --auto \
+            ${{ steps.update.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Close Pull Request If Failed
+        if: failure()
+        run: |
+          gh pr close \
+            --comment "Auto-closing pull request" \
+            --delete-branch \
+            ${{ steps.update.outputs.pull-request-number }}
         env:
           GH_TOKEN: ${{ github.token }}
