@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
 
   config = {
 
@@ -22,6 +22,10 @@
         };
       };
     };
+
+    # For some reason, keyd doesn't restart properly when updating
+    system.activationScripts.keyd.text =
+      "${pkgs.systemd}/bin/systemctl restart keyd.service";
 
     # Enable num lock on login
     home-manager.users.${config.user}.xsession.numlock.enable = true;
