@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, pkgs, lib, ... }: {
 
   options = {
     publicKey = lib.mkOption {
@@ -32,7 +32,10 @@
     services.sshguard.enable = true;
 
     # Add terminfo for SSH from popular terminal emulators
-    environment.enableAllTerminfo = true;
+    # Fix: terminfo now installs contour, which is broken on ARM
+    # - https://github.com/NixOS/nixpkgs/pull/253334
+    # - Will disable until fixed
+    environment.enableAllTerminfo = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
   };
 
 }
