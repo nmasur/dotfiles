@@ -18,7 +18,14 @@
       keyboards = {
         default = {
           ids = [ "*" ];
-          settings = { main = { capslock = "overload(control, esc)"; }; };
+          settings = {
+            main = { capslock = "overload(control, esc)"; };
+
+            # Fix: ctrl-click sends escape afterwards
+            # Suppresses escape if held for more than 500ms
+            # https://github.com/rvaiya/keyd/issues/424
+            global = { overload_tap_timeout = 500; };
+          };
         };
       };
     };
