@@ -383,6 +383,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-keyd": {
+      "locked": {
+        "lastModified": 1690363189,
+        "narHash": "sha256-Zs0VkngOtQz7nIEO7Wi8AwGB4TBSex2KZAw784aOm2M=",
+        "owner": "JohnAZoidberg",
+        "repo": "nixpkgs",
+        "rev": "6591d332f93422e388ef6337f6b362b4ff8d0724",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JohnAZoidberg",
+        "ref": "keyd-2.4.3",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1695825837,
@@ -511,6 +527,7 @@
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-keyd": "nixpkgs-keyd",
         "null-ls-nvim-src": "null-ls-nvim-src",
         "nur": "nur",
         "nvim-lspconfig-src": "nvim-lspconfig-src",

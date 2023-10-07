@@ -7,6 +7,10 @@
     # Used for system packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Update to keyd 2.4.3 not yet in nixpkgs-unstable
+    # https://github.com/NixOS/nixpkgs/pull/245327
+    nixpkgs-keyd.url = "github:JohnAZoidberg/nixpkgs/keyd-2.4.3";
+
     # Used for MacOS system config
     darwin = {
       url = "github:/lnl7/nix-darwin/master";
@@ -228,6 +232,7 @@
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/age.nix inputs)
         (import ./overlays/proton-ge.nix inputs)
+        (import ./overlays/keyd.nix inputs)
       ];
 
       # System types to support.
