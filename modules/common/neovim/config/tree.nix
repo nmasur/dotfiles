@@ -63,7 +63,6 @@
     '';
     view = { # Set look and feel
       width = 30;
-      hide_root_folder = false;
       side = "left";
       number = false;
       relativenumber = false;

@@ -5,6 +5,7 @@ let
   neovim = import ./package {
     inherit pkgs;
     colors = config.theme.colors;
+    useTerraform = config.terraform.enable;
   };
 
 in {
