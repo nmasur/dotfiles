@@ -9,7 +9,7 @@ let
 
   # Package plugin - for plugins not found in nixpkgs at all
   plugin = pname: src:
-    prev.vimUtils.buildVimPluginFrom2Nix {
+    prev.vimUtils.buildVimPlugin {
       inherit pname src;
       version = "master";
     };
