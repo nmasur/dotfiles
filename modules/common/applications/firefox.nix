@@ -74,6 +74,8 @@
             "media.ffmpeg.vaapi.enabled" =
               true; # Enable hardware video acceleration
             "cookiebanners.ui.desktop.enabled" = true; # Reject cookie popups
+            "devtools.command-button-screenshot.enabled" =
+              true; # Scrolling screenshot of entire page
             "svg.context-properties.content.enabled" = true; # Sidebery styling
           };
           userChrome = ''
