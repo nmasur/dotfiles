@@ -26,9 +26,14 @@
       };
     };
 
-    # Alias sudo to doas for convenience
-    home-manager.users.${config.user}.programs.fish.shellAliases = {
-      sudo = "doas";
+    home-manager.users.${config.user}.programs = {
+
+      # Alias sudo to doas for convenience
+      fish.shellAliases = { sudo = "doas"; };
+
+      # Disable overriding our sudo alias with a TERMINFO alias
+      kitty.settings.shell_integration = "no-sudo";
+
     };
 
   };
