@@ -99,6 +99,7 @@ inputs.nixpkgs.lib.nixosSystem {
       keybase.enable = true;
       mullvad.enable = false;
       nixlang.enable = true;
+      rust.enable = true;
       yt-dlp.enable = true;
       gaming = {
         dwarf-fortress.enable = true;
