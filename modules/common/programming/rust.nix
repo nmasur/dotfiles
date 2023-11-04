@@ -6,7 +6,7 @@
 
     home-manager.users.${config.user} = {
 
-      home.packages = with pkgs; [ cargo rustc ];
+      home.packages = with pkgs; [ cargo rustc gcc ];
 
       programs.fish.shellAbbrs = { };
 
