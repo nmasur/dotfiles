@@ -31,7 +31,17 @@ jobs:
             dependencies
             automated
       - name: Check the Flake
+        id: check
         run: nix flake check
+      - name: Update Check Status
+        uses: LouisBrunner/checks-action@v1.6.1
+        if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Update Flake
+          conclusion: ${{ job.status }}
+          output: |
+            {"summary":"${{ steps.check.outputs.stdout }}"}
       - name: Enable Pull Request Automerge
         if: success()
         run: |
