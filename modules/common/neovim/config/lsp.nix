@@ -43,8 +43,12 @@
         cmd = [ "${pkgs.terraform-ls}/bin/terraform-ls" "serve" ];
       };
 
-      use.lspconfig.rust_analyzer.setup =
-        dsl.callWith { cmd = [ "${pkgs.rust-analyzer}/bin/rust-analyzer" ]; };
+      use.lspconfig.rust_analyzer.setup = dsl.callWith {
+        cmd = [ "${pkgs.rust-analyzer}/bin/rust-analyzer" ];
+        settings = {
+          "['rust-analyzer']" = { check = { command = "clippy"; }; };
+        };
+      };
 
       vim.api.nvim_create_augroup = dsl.callWith [ "LspFormatting" { } ];
 
