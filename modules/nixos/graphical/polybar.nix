@@ -36,7 +36,7 @@
             module-margin = 1;
             modules-left = "i3";
             modules-center = "xwindow";
-            modules-right = "mailcount network pulseaudio date power";
+            modules-right = "mailcount network pulseaudio date keyboard power";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
@@ -200,10 +200,17 @@
             label-foreground = config.theme.colors.base0A;
             # format-background = colors.background;
           };
+          "module/keyboard" = {
+            type = "custom/text";
+            content = "󰌌";
+            click-left = "doas systemctl restart keyd";
+            content-foreground = config.theme.colors.base04;
+          };
           "module/power" = {
             type = "custom/text";
             content = "  ";
             click-left = config.powerCommand;
+            click-right = "polybar-msg cmd restart";
             content-foreground = config.theme.colors.base04;
           };
           "settings" = {
