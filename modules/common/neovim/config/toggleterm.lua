@@ -26,17 +26,5 @@ function NIXPKGS_TOGGLE()
     nixpkgs:toggle()
 end
 
-local gitwatch = terminal:new({ cmd = "fish --interactive --init-command 'gh run watch'" })
-function GITWATCH_TOGGLE()
-    gitwatch:toggle()
-end
-
-local k9s = terminal:new({ cmd = "k9s" })
-function K9S_TOGGLE()
-    k9s:toggle()
-end
-
 vim.keymap.set("n", "<Leader>t", TERM_TOGGLE)
 vim.keymap.set("n", "<Leader>P", NIXPKGS_TOGGLE)
-vim.keymap.set("n", "<Leader>gw", GITWATCH_TOGGLE)
-vim.keymap.set("n", "<Leader>9", K9S_TOGGLE)

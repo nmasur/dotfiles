@@ -1,13 +1,16 @@
 { pkgs, lib, config, dsl, ... }: {
 
   # Terraform optional because non-free
-  options.useTerraform = lib.mkEnableOption "Whether to enable Terraform LSP";
+  options.terraform = lib.mkEnableOption "Whether to enable Terraform LSP";
+  options.github = lib.mkEnableOption "Whether to enable GitHub features";
+  options.kubernetes =
+    lib.mkEnableOption "Whether to enable Kubernetes features";
 
   config =
 
     let
 
-      terraformFormat = if config.useTerraform then ''
+      terraformFormat = if config.terraform then ''
         require("null-ls").builtins.formatting.terraform_fmt.with({
             command = "${pkgs.terraform}/bin/terraform",
             extra_filetypes = { "hcl" },
@@ -40,7 +43,11 @@
       };
 
       use.lspconfig.terraformls.setup = dsl.callWith {
-        cmd = [ "${pkgs.terraform-ls}/bin/terraform-ls" "serve" ];
+        cmd = if config.terraform then [
+          "${pkgs.terraform-ls}/bin/terraform-ls"
+          "serve"
+        ] else
+          [ "echo" ];
       };
 
       use.lspconfig.rust_analyzer.setup = dsl.callWith {

@@ -26,13 +26,13 @@
 #   ] ++ extraConfig;
 # }
 
-{ pkgs, colors, useTerraform ? false, ... }:
+{ pkgs, colors, terraform ? false, github ? false, kubernetes ? false, ... }:
 
 # Comes from nix2vim overlay:
 # https://github.com/gytis-ivaskevicius/nix2vim/blob/master/lib/neovim-builder.nix
 pkgs.neovimBuilder {
   package = pkgs.neovim-unwrapped;
-  inherit colors useTerraform;
+  inherit colors terraform github kubernetes;
   imports = [
     ../config/align.nix
     ../config/bufferline.nix

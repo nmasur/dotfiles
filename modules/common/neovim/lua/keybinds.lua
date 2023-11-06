@@ -39,7 +39,6 @@ key("n", "<Leader>fs", ":write<CR>")
 key("n", "<Leader>fd", ":lcd %:p:h<CR>", { silent = true })
 key("n", "<Leader>fu", ":lcd ..<CR>", { silent = true })
 key("n", "<Leader><Tab>", ":b#<CR>", { silent = true })
-key("n", "<Leader>gr", ":!gh browse %<CR><CR>", { silent = true })
 key("n", "<Leader>tt", [[<Cmd>exe 'edit $NOTES_PATH/journal/'.strftime("%Y-%m-%d_%a").'.md'<CR>]])
 key("n", "<Leader>jj", ":!journal<CR>:e<CR>")
 

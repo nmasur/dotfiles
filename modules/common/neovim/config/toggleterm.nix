@@ -1,4 +1,4 @@
-{ pkgs, dsl, ... }: {
+{ pkgs, dsl, config, ... }: {
 
   # Toggleterm provides a floating terminal inside the editor for quick access
 
@@ -10,6 +10,10 @@
     direction = "float";
   };
 
-  lua = builtins.readFile ./toggleterm.lua;
+  lua = ''
+    ${builtins.readFile ./toggleterm.lua}
+    ${if config.github then (builtins.readFile ./github.lua) else ""}
+    ${if config.kubernetes then (builtins.readFile ./kubernetes.lua) else ""}
+  '';
 
 }
