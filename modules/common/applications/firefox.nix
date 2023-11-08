@@ -117,7 +117,7 @@
               background-color: ${config.theme.colors.base00};
               color: ${config.theme.colors.base06} !important;
             }
-            .tab-content[selected=true] {
+            .tab-content[selected] {
               border-bottom: 2px solid color-mix(in srgb, var(--identity-tab-color) 25%, transparent);
               background-color: ${config.theme.colors.base01} !important;
               color: ${config.theme.colors.base07} !important;
