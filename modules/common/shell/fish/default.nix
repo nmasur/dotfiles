@@ -123,9 +123,6 @@
         dr = "docker run --rm -it";
         db = "docker build . -t";
 
-        # Rust
-        ca = "cargo";
-
       };
       shellInit = "";
     };

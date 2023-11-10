@@ -37,6 +37,7 @@ inputs.darwin.lib.darwinSystem {
       nixlang.enable = true;
       terraform.enable = true;
       python.enable = true;
+      rust.enable = true;
       lua.enable = true;
       kubernetes.enable = true;
       _1password.enable = true;
