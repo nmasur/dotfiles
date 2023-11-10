@@ -19,6 +19,7 @@
     ./n8n.nix
     ./netdata.nix
     ./nextcloud.nix
+    ./paperless.nix
     ./prometheus.nix
     ./samba.nix
     ./secrets.nix

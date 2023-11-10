@@ -79,6 +79,7 @@ inputs.nixpkgs.lib.nixosSystem {
       services.prometheus.enable = false;
       services.vmagent.enable = true;
       services.samba.enable = true;
+      services.paperless.enable = true;
 
       # Allows private remote access over the internet
       cloudflareTunnel = {

@@ -75,6 +75,10 @@
         type = lib.types.str;
         description = "Hostname for metrics server.";
       };
+      paperless = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for document server (paperless-ngx).";
+      };
       prometheus = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for Prometheus server.";

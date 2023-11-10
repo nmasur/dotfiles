@@ -206,6 +206,7 @@
           git = "git.${baseName}";
           metrics = "metrics.${baseName}";
           prometheus = "prom.${baseName}";
+          paperless = "paper.${baseName}";
           secrets = "vault.${baseName}";
           stream = "stream.${baseName}";
           content = "cloud.${baseName}";
