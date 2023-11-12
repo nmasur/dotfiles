@@ -12,7 +12,7 @@
 
   # Initialize some plugins
   setup.Comment = { };
-  setup.colorizer = { };
+  setup.colorizer = { user_default_options = { names = false; }; };
   setup.glow = { };
   setup.which-key = { };
 
