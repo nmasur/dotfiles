@@ -90,11 +90,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1698429334,
-        "narHash": "sha256-Gq3+QabboczSu7RMpcy79RSLMSqnySO3wsnHQk4DfbE=",
+        "lastModified": 1699704228,
+        "narHash": "sha256-NApWG385goidsXmsakWgFRjvbH+aw/n1CGGHn/UuXsc=",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "afe83cbc2e673b1f08d32dd0f70df599678ff1e7",
+        "rev": "0f1ad801387445fdda01d080db8ecf169be8e793",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699099781,
-        "narHash": "sha256-2WAs839yL6xmIPBLNVwbft46BDh0/RAjq1bAKNRqeR4=",
+        "lastModified": 1699734195,
+        "narHash": "sha256-T7Q2ke4LJx16wos828YMqKnCCK3kxey0PdqH+LxVMV8=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "548962c50b8afad7b8c820c1d6e21dc8394d6e65",
+        "rev": "89fd5b51f0725f9775ca9999d53a0a3e5d936490",
         "type": "github"
       },
       "original": {
@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699058439,
-        "narHash": "sha256-fvvrdBQ9vLb3TZRB3nMUaCLvBPVGnIgTqX6vPCFRv2o=",
+        "lastModified": 1699663243,
+        "narHash": "sha256-Plj2ypGV/5714enFtb4O5c3vXKvHUzoksgRx3zFmIJ4=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "9edd9209798cb115ebadfb5424d49b79b257ebea",
+        "rev": "63df8ec2d300da9912ae5b56b74e7aa574b6de0c",
         "type": "github"
       },
       "original": {
@@ -237,11 +237,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699025595,
-        "narHash": "sha256-e+o4PoSu2Z6Ww8y/AVUmMU200rNZoRK+p2opQ7Db8Rg=",
+        "lastModified": 1699748018,
+        "narHash": "sha256-28rwXnxgscLkeII6wj44cuP6RuiynhzZSa424ZwGt/s=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8765d4e38aa0be53cdeee26f7386173e6c65618d",
+        "rev": "50e582b9f91e409ffd2e134017445d376659b32e",
         "type": "github"
       },
       "original": {
@@ -254,6 +254,7 @@
     "nextcloud-cookbook": {
       "flake": false,
       "locked": {
+        "lastModified": 1679666795,
         "narHash": "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=",
         "type": "tarball",
         "url": "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz"
@@ -266,6 +267,7 @@
     "nextcloud-external": {
       "flake": false,
       "locked": {
+        "lastModified": 1693816929,
         "narHash": "sha256-X7eC8T8wSZGVwCQp6U/WxjMC7aIj39osgHotaUoRNSQ=",
         "type": "tarball",
         "url": "https://github.com/nextcloud-releases/external/releases/download/v5.2.1/external-v5.2.1.tar.gz"
@@ -278,6 +280,7 @@
     "nextcloud-news": {
       "flake": false,
       "locked": {
+        "lastModified": 1695883388,
         "narHash": "sha256-cfJkKRNSz15L4E3w1tnEb+t4MrVwVzb8lb6vCOA4cK4=",
         "type": "tarball",
         "url": "https://github.com/nextcloud/news/releases/download/24.0.0/news.tar.gz"
@@ -417,11 +420,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1699186655,
-        "narHash": "sha256-OFoCxYaQrA1VB/30Mj/ArzronpY42DWLBSIIH1mnX60=",
+        "lastModified": 1699751149,
+        "narHash": "sha256-hcWsurEJSVYWHoI5YvB5ZVaCY+Sg2Qd0ZumKn7dLjI0=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "8d9f20f147c17d62d16025e9769adbd76245591e",
+        "rev": "ff495b6b6763bcb879b97c105eedc1db23260bab",
         "type": "github"
       },
       "original": {
@@ -450,11 +453,11 @@
     "nvim-tree-lua-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1698632253,
-        "narHash": "sha256-jIbe+XXvc2H3GVYT+2vuwLE3MtE/fpArEopmuxW4I4s=",
+        "lastModified": 1699755272,
+        "narHash": "sha256-EZQ9HC6EArwQnfJbn4C8WnM2yQrO/FOXZu91ue43xTY=",
         "owner": "kyazdani42",
         "repo": "nvim-tree.lua",
-        "rev": "7e3c0bee7b246ca835d5f7453db6fa19de359bab",
+        "rev": "874ae6e9445a5eb5ba430e5fd10212450a261ad7",
         "type": "github"
       },
       "original": {
@@ -466,11 +469,11 @@
     "nvim-treesitter-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1699083795,
-        "narHash": "sha256-XaZ14s4F7Sc2MQNzHMUl7lvqbGK0xfhi0I0zIN/M63U=",
+        "lastModified": 1699694083,
+        "narHash": "sha256-MBSjwHmh4JCwa4mNuADcWaBgMhPnroDxz93eBE9ifOY=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "bef2c24e23d0da62a8542b1f08b1ac87ec43e93f",
+        "rev": "075a64addc33390028ea124a1046a43497f05cd1",
         "type": "github"
       },
       "original": {
@@ -483,6 +486,7 @@
     "proton-ge": {
       "flake": false,
       "locked": {
+        "lastModified": 1695533697,
         "narHash": "sha256-75A0VCVdYkiMQ1duE9r2+DLBJzV02vUozoVLeo/TIWQ=",
         "type": "tarball",
         "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-16/GE-Proton8-16.tar.gz"
@@ -622,11 +626,11 @@
     "telescope-project-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1682606566,
-        "narHash": "sha256-H6lrPjpOUVleKHB0ziI+6dthg9ymitHhEWtcgYJTrKo=",
+        "lastModified": 1699263681,
+        "narHash": "sha256-SxtjDnvObVLl1+rpsmUDbhsgpCnNGa40NbNFlMzTRVY=",
         "owner": "nvim-telescope",
         "repo": "telescope-project.nvim",
-        "rev": "7c64b181dd4e72deddcf6f319e3bf1e95b2a2f30",
+        "rev": "5460c6c60d48618c5c746e5b1cad4c3e8262fdae",
         "type": "github"
       },
       "original": {
@@ -790,11 +794,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1698222534,
-        "narHash": "sha256-iF9C7C7eT8LVVWx5IOZ/8KKJT8AIw9A5aBA6vqS18l8=",
+        "lastModified": 1699549513,
+        "narHash": "sha256-cfsghOs6Cr61wFsxkWonK8AwPwHaRGZ6QkbasUgygh4=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "a058cff4b09b3a398d8caa379b4dc96cfedd98c9",
+        "rev": "0e4c17efebff955471f169fffbb7e8cd62ada498",
         "type": "github"
       },
       "original": {
