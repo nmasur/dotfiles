@@ -19,7 +19,13 @@
         "";
 
     in {
-      plugins = [ pkgs.vimPlugins.nvim-lspconfig pkgs.vimPlugins.null-ls-nvim ];
+      plugins = [
+        pkgs.vimPlugins.nvim-lspconfig
+        pkgs.vimPlugins.null-ls-nvim
+        pkgs.vimPlugins.fidget-nvim
+      ];
+
+      setup.fidget = { };
 
       use.lspconfig.lua_ls.setup = dsl.callWith {
         settings = { Lua = { diagnostics = { globals = [ "vim" "hs" ]; }; }; };
