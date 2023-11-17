@@ -53,16 +53,16 @@
     "bufferline-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687763763,
-        "narHash": "sha256-wbOeylzjjScQXkrDbBU2HtrOZrp2YUK+wQ2aOkgxmRQ=",
+        "lastModified": 1695205521,
+        "narHash": "sha256-MQMpXMgUpZA0E9TunzjXeOQxDWSCTogXbvi9VJnv4Kw=",
         "owner": "akinsho",
         "repo": "bufferline.nvim",
-        "rev": "bf2f6b7edd0abf6b0732f5e5c0a8f30e51611c75",
+        "rev": "6ecd37e0fa8b156099daedd2191130e083fb1490",
         "type": "github"
       },
       "original": {
         "owner": "akinsho",
-        "ref": "v4.2.0",
+        "ref": "v4.4.0",
         "repo": "bufferline.nvim",
         "type": "github"
       }
@@ -121,6 +121,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "disko",
+        "type": "github"
+      }
+    },
+    "fidget-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699890088,
+        "narHash": "sha256-H0hK0Ym9dow/0PlEpM/o0AcZ74tAiTtDtEwpbbz7Jfo=",
+        "owner": "j-hui",
+        "repo": "fidget.nvim",
+        "rev": "36916518b16d80c48f4b3d88765734bf0842493c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "j-hui",
+        "repo": "fidget.nvim",
         "type": "github"
       }
     },
@@ -267,14 +283,14 @@
     "nextcloud-external": {
       "flake": false,
       "locked": {
-        "lastModified": 1693816929,
-        "narHash": "sha256-X7eC8T8wSZGVwCQp6U/WxjMC7aIj39osgHotaUoRNSQ=",
+        "lastModified": 1699624334,
+        "narHash": "sha256-RCL2RP5twRDLxI/KfAX6QLYQOzqZmSWsfrC5ZQIwTD4=",
         "type": "tarball",
-        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.2.1/external-v5.2.1.tar.gz"
+        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.2.1/external-v5.2.1.tar.gz"
+        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz"
       }
     },
     "nextcloud-news": {
@@ -486,14 +502,14 @@
     "proton-ge": {
       "flake": false,
       "locked": {
-        "lastModified": 1695533697,
-        "narHash": "sha256-75A0VCVdYkiMQ1duE9r2+DLBJzV02vUozoVLeo/TIWQ=",
+        "lastModified": 1699415676,
+        "narHash": "sha256-3XniKYf/KDRDYhTwffkktbmoISwOtGIABF28bsp8QHA=",
         "type": "tarball",
-        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-16/GE-Proton8-16.tar.gz"
+        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-23/GE-Proton8-23.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-16/GE-Proton8-16.tar.gz"
+        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-23/GE-Proton8-23.tar.gz"
       }
     },
     "root": {
@@ -505,6 +521,7 @@
         "cmp-nvim-lsp-src": "cmp-nvim-lsp-src",
         "darwin": "darwin",
         "disko": "disko",
+        "fidget-nvim-src": "fidget-nvim-src",
         "firefox-darwin": "firefox-darwin",
         "hmts-nvim-src": "hmts-nvim-src",
         "home-manager": "home-manager",
@@ -609,16 +626,16 @@
     "telescope-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1686302912,
-        "narHash": "sha256-fV3LLRwAPykVGc4ImOnUSP+WTrPp9Ad9OTfBJ6wqTMk=",
+        "lastModified": 1697004956,
+        "narHash": "sha256-7SqYFnfCjotOBhuX6Wx1IOhgMKoxaoI1a4SKz1d5RVM=",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "776b509f80dd49d8205b9b0d94485568236d1192",
+        "rev": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a",
         "type": "github"
       },
       "original": {
         "owner": "nvim-telescope",
-        "ref": "0.1.2",
+        "ref": "0.1.4",
         "repo": "telescope.nvim",
         "type": "github"
       }
@@ -642,16 +659,16 @@
     "toggleterm-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1685434104,
-        "narHash": "sha256-oiCnBrvft6XxiQtQH8E4F842xhh348SaTpHzaeb+iDY=",
+        "lastModified": 1695636777,
+        "narHash": "sha256-o8xzoo7OuYrPnKlfrupQ24Ja9hZy1qQVnvwO0FO+4zM=",
         "owner": "akinsho",
         "repo": "toggleterm.nvim",
-        "rev": "95204ece0f2a54c89c4395295432f9aeedca7b5f",
+        "rev": "faee9d60428afc7857e0927fdc18daa6c409fa64",
         "type": "github"
       },
       "original": {
         "owner": "akinsho",
-        "ref": "v2.7.0",
+        "ref": "v2.8.0",
         "repo": "toggleterm.nvim",
         "type": "github"
       }

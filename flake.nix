@@ -90,7 +90,7 @@
       flake = false;
     };
     telescope-nvim-src = {
-      url = "github:nvim-telescope/telescope.nvim/0.1.2";
+      url = "github:nvim-telescope/telescope.nvim/0.1.4";
       flake = false;
     };
     telescope-project-nvim-src = {
@@ -98,11 +98,11 @@
       flake = false;
     };
     toggleterm-nvim-src = {
-      url = "github:akinsho/toggleterm.nvim/v2.7.0";
+      url = "github:akinsho/toggleterm.nvim/v2.8.0";
       flake = false;
     };
     bufferline-nvim-src = {
-      url = "github:akinsho/bufferline.nvim/v4.2.0";
+      url = "github:akinsho/bufferline.nvim/v4.4.0";
       flake = false;
     };
     nvim-tree-lua-src = {
@@ -115,6 +115,10 @@
     };
     hmts-nvim-src = {
       url = "github:calops/hmts.nvim";
+      flake = false;
+    };
+    fidget-nvim-src = {
+      url = "github:j-hui/fidget.nvim";
       flake = false;
     };
 
@@ -161,7 +165,7 @@
     proton-ge = {
       # https://github.com/GloriousEggroll/proton-ge-custom/releases
       url =
-        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-16/GE-Proton8-16.tar.gz";
+        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-23/GE-Proton8-23.tar.gz";
       flake = false;
     };
 
@@ -175,7 +179,7 @@
     nextcloud-external = {
       # https://github.com/nextcloud-releases/external/releases
       url =
-        "https://github.com/nextcloud-releases/external/releases/download/v5.2.1/external-v5.2.1.tar.gz";
+        "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
       flake = false;
     };
     nextcloud-cookbook = {

@@ -13,8 +13,17 @@
       devShells = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
         in {
-          default =
-            pkgs.mkShell { buildInputs = with pkgs; [ gcc rustc cargo ]; };
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              gcc
+              rustc
+              cargo
+              cargo-watch
+              rustfmt
+              pkg-config
+              openssl
+            ];
+          };
         });
     };
 }

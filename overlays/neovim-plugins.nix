@@ -33,6 +33,7 @@ in {
   bufferline-nvim =
     withSrc prev.vimPlugins.bufferline-nvim inputs.bufferline-nvim;
   nvim-tree-lua = withSrc prev.vimPlugins.nvim-tree-lua inputs.nvim-tree-lua;
+  fidget-nvim = withSrc prev.vimPlugins.fidget-nvim inputs.fidget-nvim;
 
   # Packaging plugins entirely with Nix
   baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
