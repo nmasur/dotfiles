@@ -1,12 +1,12 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }: {
 
   plugins = [
     (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins:
-      with pkgs.tree-sitter-grammars; [
+      with pkgs.tree-sitter-grammars;
+      [
         tree-sitter-bash
         tree-sitter-c
         tree-sitter-fish
-        tree-sitter-hcl
         tree-sitter-ini
         tree-sitter-json
         tree-sitter-lua
@@ -14,16 +14,15 @@
         tree-sitter-markdown-inline
         tree-sitter-nix
         tree-sitter-puppet
-        tree-sitter-python
         tree-sitter-rasi
         tree-sitter-toml
         tree-sitter-vimdoc
         tree-sitter-yaml
-      ]))
+      ] ++ (if config.python.enable then [ tree-sitter-python ] else [ ])
+      ++ (if config.terraform.enable then [ tree-sitter-hcl ] else [ ])))
     pkgs.vimPlugins.vim-matchup # Better % jumping in languages
     pkgs.vimPlugins.playground # Tree-sitter experimenting
     pkgs.vimPlugins.nginx-vim
-    pkgs.vimPlugins.vim-helm
     pkgs.baleia-nvim # Clean ANSI from kitty scrollback
     # pkgs.hmts-nvim # Tree-sitter injections for home-manager
     (pkgs.vimUtils.buildVimPlugin {
@@ -31,7 +30,7 @@
       version = "0.1";
       src = ../plugin;
     })
-  ];
+  ] ++ (if config.kubernetes.enable then [ pkgs.vimPlugins.vim-helm ] else [ ]);
 
   setup."nvim-treesitter.configs" = {
     highlight = { enable = true; };

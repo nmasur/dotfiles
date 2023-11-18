@@ -1,10 +1,11 @@
 { pkgs, lib, config, dsl, ... }: {
 
   # Terraform optional because non-free
-  options.terraform = lib.mkEnableOption "Whether to enable Terraform LSP";
   options.github = lib.mkEnableOption "Whether to enable GitHub features";
   options.kubernetes =
     lib.mkEnableOption "Whether to enable Kubernetes features";
+  options.python = lib.mkEnableOption "Whether to enable Python LSP";
+  options.terraform = lib.mkEnableOption "Whether to enable Terraform LSP";
 
   config =
 
@@ -15,6 +16,12 @@
             command = "${pkgs.terraform}/bin/terraform",
             extra_filetypes = { "hcl" },
         }),
+      '' else
+        "";
+
+      pythonFormat = if config.python then ''
+        require("null-ls").builtins.formatting.black.with({ command = "${pkgs.black}/bin/black" }),
+        require("null-ls").builtins.diagnostics.ruff.with({ command = "${pkgs.ruff}/bin/ruff" }),
       '' else
         "";
 
@@ -41,7 +48,11 @@
       };
 
       use.lspconfig.pyright.setup = dsl.callWith {
-        cmd = [ "${pkgs.pyright}/bin/pyright-langserver" "--stdio" ];
+        cmd = if config.python then [
+          "${pkgs.pyright}/bin/pyright-langserver"
+          "--stdio"
+        ] else
+          [ "echo" ];
       };
 
       use.lspconfig.terraformls.setup = dsl.callWith {
@@ -70,8 +81,6 @@
         require("null-ls").setup({
             sources = {
                 require("null-ls").builtins.formatting.stylua.with({ command = "${pkgs.stylua}/bin/stylua" }),
-                require("null-ls").builtins.formatting.black.with({ command = "${pkgs.black}/bin/black" }),
-                require("null-ls").builtins.diagnostics.ruff.with({ command = "${pkgs.ruff}/bin/ruff" }),
                 require("null-ls").builtins.formatting.fish_indent.with({ command = "${pkgs.fish}/bin/fish_indent" }),
                 require("null-ls").builtins.formatting.nixfmt.with({ command = "${pkgs.nixfmt}/bin/nixfmt" }),
                 require("null-ls").builtins.formatting.rustfmt.with({ command = "${pkgs.rustfmt}/bin/rustfmt" }),
@@ -80,6 +89,7 @@
                     command = "${pkgs.shfmt}/bin/shfmt",
                     extra_args = { "-i", "4", "-ci" },
                 }),
+                ${pythonFormat}
                 ${terraformFormat}
             },
 
