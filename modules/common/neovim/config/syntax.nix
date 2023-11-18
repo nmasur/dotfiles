@@ -4,6 +4,7 @@
     (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins:
       with pkgs.tree-sitter-grammars; [
         tree-sitter-bash
+        # tree-sitter-c
         tree-sitter-fish
         tree-sitter-hcl
         tree-sitter-ini
