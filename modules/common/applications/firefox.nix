@@ -43,7 +43,6 @@
             darkreader
             snowflake
             don-t-fuck-with-paste
-            i-dont-care-about-cookies
             wappalyzer
           ];
           settings = {
