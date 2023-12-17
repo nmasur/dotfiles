@@ -13,6 +13,7 @@
     ./gnupg.nix
     ./grafana.nix
     ./honeypot.nix
+    ./influxdb2.nix
     ./jellyfin.nix
     ./keybase.nix
     ./mullvad.nix

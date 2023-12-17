@@ -83,6 +83,10 @@
         type = lib.types.str;
         description = "Hostname for Prometheus server.";
       };
+      influxdb = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for InfluxDB2 server.";
+      };
       secrets = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for passwords and secrets (Vaultwarden).";

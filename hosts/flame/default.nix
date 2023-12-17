@@ -58,6 +58,7 @@ inputs.nixpkgs.lib.nixosSystem {
       services.grafana.enable = true;
       services.openssh.enable = true;
       services.victoriametrics.enable = true;
+      services.influxdb2.enable = true;
       services.gitea.enable = true;
       services.vaultwarden.enable = true;
       services.minecraft-server.enable = true; # Setup Minecraft server

@@ -208,6 +208,7 @@
         dotfilesRepo = "https://github.com/nmasur/dotfiles";
         hostnames = {
           git = "git.${baseName}";
+          influxdb = "influxdb.${baseName}";
           metrics = "metrics.${baseName}";
           prometheus = "prom.${baseName}";
           paperless = "paper.${baseName}";
