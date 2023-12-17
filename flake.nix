@@ -233,6 +233,7 @@
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/age.nix inputs)
         (import ./overlays/proton-ge.nix inputs)
+        (import ./overlays/gh-collaborators.nix)
       ];
 
       # System types to support.
