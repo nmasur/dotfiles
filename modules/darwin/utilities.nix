@@ -15,7 +15,7 @@
       awslogs
       google-cloud-sdk
       ansible
-      vault
+      vault-bin
       consul
       noti # Create notifications programmatically
       ipcalc # Make IP network calculations
