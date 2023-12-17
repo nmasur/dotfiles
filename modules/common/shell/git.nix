@@ -58,6 +58,7 @@ in {
           git switch (git symbolic-ref refs/remotes/origin/HEAD | cut -d"/" -f4)'';
         gcob = "git switch -c";
         gb = "git branch";
+        gpd = "git push origin -d";
         gbd = "git branch -d";
         gbD = "git branch -D";
         gr = "git reset";
