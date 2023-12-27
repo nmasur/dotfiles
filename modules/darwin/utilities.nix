@@ -11,6 +11,7 @@
       youtube-dl # Convert web videos
       pandoc # Convert text documents
       mpd # TUI slideshows
+      mpv # Video player
       awscli2
       awslogs
       google-cloud-sdk
