@@ -12,7 +12,7 @@
       domainName = "local";
       ipv6 = false; # Should work either way
       # Resolve local hostnames using Avahi DNS
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {
         enable = true;
         addresses = true;
