@@ -30,19 +30,21 @@
           name = "default";
           isDefault = true;
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            ublock-origin
-            vimium
-            multi-account-containers
-            facebook-container
             (lib.mkIf config._1password.enable onepassword-password-manager)
+            pkgs.bypass-paywalls-clean
+            darkreader
+            don-t-fuck-with-paste
+            facebook-container
+            markdownload
+            multi-account-containers
             okta-browser-plugin
-            sponsorblock
             reddit-enhancement-suite
             return-youtube-dislikes
-            markdownload
-            darkreader
             snowflake
-            don-t-fuck-with-paste
+            sponsorblock
+            ublock-origin
+            ublacklist
+            vimium
             wappalyzer
           ];
           settings = {

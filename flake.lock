@@ -67,6 +67,22 @@
         "type": "github"
       }
     },
+    "bypass-paywalls-clean": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704020593,
+        "narHash": "sha256-k0RuPnQ1PGjzF5U05nkaunzDHCx0PrU8NNutAjvCDt0=",
+        "owner": "magnolia1234",
+        "repo": "bpc-uploads",
+        "rev": "d111b9c483294c9db9a1d2ecb8c08a4b3bb15ff6",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "magnolia1234",
+        "repo": "bpc-uploads",
+        "type": "gitlab"
+      }
+    },
     "cmp-nvim-lsp-src": {
       "flake": false,
       "locked": {
@@ -519,6 +535,7 @@
         "age": "age",
         "baleia-nvim-src": "baleia-nvim-src",
         "bufferline-nvim-src": "bufferline-nvim-src",
+        "bypass-paywalls-clean": "bypass-paywalls-clean",
         "cmp-nvim-lsp-src": "cmp-nvim-lsp-src",
         "darwin": "darwin",
         "disko": "disko",

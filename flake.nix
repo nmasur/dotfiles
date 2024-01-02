@@ -171,6 +171,13 @@
       flake = false;
     };
 
+    # Firefox addon from outside the extension store
+    bypass-paywalls-clean = {
+      # https://gitlab.com/magnolia1234/bpc-uploads/-/commits/master/?ref_type=HEADS
+      url = "gitlab:magnolia1234/bpc-uploads";
+      flake = false;
+    };
+
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
@@ -237,6 +244,7 @@
         (import ./overlays/age.nix inputs)
         (import ./overlays/proton-ge.nix inputs)
         (import ./overlays/gh-collaborators.nix)
+        (import ./overlays/bypass-paywalls-clean.nix inputs)
       ];
 
       # System types to support.
