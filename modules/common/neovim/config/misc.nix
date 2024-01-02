@@ -69,10 +69,6 @@
     " Remember last position when reopening file
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-    " LaTeX options
-    au FileType tex inoremap ;bf \textbf{}<Esc>i
-    au BufWritePost *.tex silent! execute "!pdflatex -output-directory=%:p:h % >/dev/null 2>&1" | redraw!
-
     " Flash highlight when yanking
     au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 250 }
   '';
