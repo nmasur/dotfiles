@@ -77,6 +77,7 @@
       flake = false;
     };
     baleia-nvim-src = {
+      # https://github.com/m00qek/baleia.nvim/tags
       url = "github:m00qek/baleia.nvim";
       flake = false;
     };
@@ -118,7 +119,8 @@
       flake = false;
     };
     fidget-nvim-src = {
-      url = "github:j-hui/fidget.nvim";
+      # https://github.com/j-hui/fidget.nvim/tags
+      url = "github:j-hui/fidget.nvim/v1.1.0";
       flake = false;
     };
 
