@@ -44,9 +44,10 @@ in {
 
       home.file = {
         ".rgignore".text = ignorePatterns;
-        ".fdignore".text = ignorePatterns;
         ".digrc".text = "+noall +answer"; # Cleaner dig commands
       };
+
+      xdg.configFile."fd/ignore".text = ignorePatterns;
 
       programs.bat = {
         enable = true; # cat replacement
