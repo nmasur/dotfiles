@@ -47,6 +47,9 @@
     users.users.jellyfin.extraGroups =
       [ "render" "video" ]; # Access to /dev/dri
 
+    # Fix issue where Jellyfin-created directories don't allow access for media group
+    systemd.services.jellyfin.serviceConfig.UMask = lib.mkForce "0007";
+
     # Requires MetricsEnable is true in /var/lib/jellyfin/config/system.xml
     prometheus.scrapeTargets = [ "127.0.0.1:8096" ];
 
