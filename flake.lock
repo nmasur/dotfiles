@@ -287,14 +287,14 @@
     "nextcloud-cookbook": {
       "flake": false,
       "locked": {
-        "lastModified": 1679666795,
-        "narHash": "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=",
+        "lastModified": 1702545935,
+        "narHash": "sha256-19LN1nYJJ0RMWj6DrYPvHzocTyhMfYdpdhBFch3fpHE=",
         "type": "tarball",
-        "url": "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz"
+        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz"
+        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz"
       }
     },
     "nextcloud-external": {
@@ -313,14 +313,14 @@
     "nextcloud-news": {
       "flake": false,
       "locked": {
-        "lastModified": 1695883388,
-        "narHash": "sha256-cfJkKRNSz15L4E3w1tnEb+t4MrVwVzb8lb6vCOA4cK4=",
+        "lastModified": 1703426420,
+        "narHash": "sha256-AENBJH/bEob5JQvw4WEi864mdLYJ5Mqe78HJH6ceCpI=",
         "type": "tarball",
-        "url": "https://github.com/nextcloud/news/releases/download/24.0.0/news.tar.gz"
+        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/nextcloud/news/releases/download/24.0.0/news.tar.gz"
+        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz"
       }
     },
     "nil": {

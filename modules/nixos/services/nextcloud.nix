@@ -3,7 +3,7 @@
   config = lib.mkIf config.services.nextcloud.enable {
 
     services.nextcloud = {
-      package = pkgs.nextcloud27; # Required to specify
+      package = pkgs.nextcloud28; # Required to specify
       configureRedis = true;
       datadir = "/data/nextcloud";
       database.createLocally = true;
@@ -13,10 +13,12 @@
       config = {
         adminpassFile = config.secrets.nextcloud.dest;
         dbtype = "mysql";
-        extraTrustedDomains = [ config.hostnames.content ];
-        trustedProxies = [ "127.0.0.1" ];
       };
-      extraOptions = { default_phone_region = "US"; };
+      extraOptions = {
+        default_phone_region = "US";
+        trusted_domains = [ config.hostnames.content ];
+        trusted_proxies = [ "127.0.0.1" ];
+      };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
         inherit calendar contacts;

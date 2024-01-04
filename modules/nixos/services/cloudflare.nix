@@ -73,7 +73,7 @@ in {
     };
 
     # Allows Nextcloud to trust Cloudflare IPs
-    services.nextcloud.config.trustedProxies = cloudflareIpRanges;
+    services.nextcloud.extraOptions.trusted_proxies = cloudflareIpRanges;
 
   };
 }

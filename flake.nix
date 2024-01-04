@@ -182,7 +182,7 @@
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
       url =
-        "https://github.com/nextcloud/news/releases/download/24.0.0/news.tar.gz";
+        "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz";
       flake = false;
     };
     nextcloud-external = {
@@ -192,9 +192,9 @@
       flake = false;
     };
     nextcloud-cookbook = {
-      # https://github.com/nextcloud/cookbook/releases
+      # https://github.com/christianlupus-nextcloud/cookbook-releases/releases/
       url =
-        "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
+        "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz";
       flake = false;
     };
 
