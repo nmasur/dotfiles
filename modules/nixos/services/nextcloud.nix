@@ -49,7 +49,10 @@
             handle = [
               {
                 handler = "vars";
-                root = config.services.nextcloud.package;
+                # Grab the webroot out of the written config
+                # The webroot is a symlinked combined Nextcloud directory
+                root =
+                  config.services.nginx.virtualHosts.${config.services.nextcloud.hostName}.root;
               }
               {
                 handler = "headers";
@@ -57,13 +60,6 @@
                   [ "max-age=31536000;" ];
               }
             ];
-          }
-          {
-            match = [{ path = [ "/nix-apps*" "/store-apps*" ]; }];
-            handle = [{
-              handler = "vars";
-              root = config.services.nextcloud.home;
-            }];
           }
           # Reroute carddav and caldav traffic
           {
