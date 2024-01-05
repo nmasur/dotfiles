@@ -25,6 +25,8 @@ in {
         htop # Show system processes
         killall # Force quit
         inetutils # Includes telnet, whois
+        jless # JSON viewer
+        jo # JSON output
         jq # JSON manipulation
         lf # File viewer
         qrencode # Generate qr codes
