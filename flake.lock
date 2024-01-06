@@ -519,14 +519,14 @@
     "proton-ge": {
       "flake": false,
       "locked": {
-        "lastModified": 1699415676,
-        "narHash": "sha256-3XniKYf/KDRDYhTwffkktbmoISwOtGIABF28bsp8QHA=",
+        "lastModified": 1700610476,
+        "narHash": "sha256-IoClZ6hl2lsz9OGfFgnz7vEAGlSY2+1K2lDEEsJQOfU=",
         "type": "tarball",
-        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-23/GE-Proton8-23.tar.gz"
+        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-25/GE-Proton8-25.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-23/GE-Proton8-23.tar.gz"
+        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-25/GE-Proton8-25.tar.gz"
       }
     },
     "root": {

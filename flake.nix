@@ -167,7 +167,7 @@
     proton-ge = {
       # https://github.com/GloriousEggroll/proton-ge-custom/releases
       url =
-        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-23/GE-Proton8-23.tar.gz";
+        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-25/GE-Proton8-25.tar.gz";
       flake = false;
     };
 
