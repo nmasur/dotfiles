@@ -31,15 +31,17 @@ in {
             -sep ';' \
             -selected-row 2)
 
+    confirm () {
+        ${builtins.readFile ./rofi-prompt.sh}
+    }
+
     case "$chosen" in
         "$power_off")
-            ${
-              builtins.toString ./rofi-prompt.sh
-            } 'Shutdown?' && doas shutdown now
+            confirm 'Shutdown?' && doas shutdown now
             ;;
 
         "$reboot")
-            ${builtins.toString ./rofi-prompt.sh} 'Reboot?' && doas reboot
+            confirm 'Reboot?' && doas reboot
             ;;
 
         "$lock")
@@ -51,7 +53,7 @@ in {
             ;;
 
         "$log_out")
-            ${builtins.toString ./rofi-prompt.sh} 'Logout?' && i3-msg exit
+            confirm 'Logout?' && i3-msg exit
             ;;
 
         *) exit 1 ;;
