@@ -105,7 +105,7 @@ inputs.nixpkgs.lib.nixosSystem {
         dwarf-fortress.enable = true;
         enable = true;
         steam.enable = true;
-        legendary.enable = false; # Electron marked as insecure
+        legendary.enable = true;
         lutris.enable = true;
         leagueoflegends.enable = true;
         ryujinx.enable = true;
