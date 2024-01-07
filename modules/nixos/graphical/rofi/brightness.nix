@@ -28,17 +28,18 @@ in {
               -sep ';' \
               -selected-row 1)
 
+
       case "$chosen" in
           "$dimmer")
-              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 25; ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 25
+              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 25; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 25
               ;;
 
           "$medium")
-              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 75; ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 75
+              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 75; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 75
               ;;
 
           "$brighter")
-              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 100; ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 100
+              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 100; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 100
               ;;
 
           *) exit 1 ;;

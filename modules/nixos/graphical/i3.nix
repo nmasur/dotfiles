@@ -95,13 +95,15 @@ in {
 
             # Adjust screen brightness
             "Shift+F12" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 + 30";
+              # Disable dynamic sleep
+              # https://github.com/rockowitz/ddcutil/issues/323
+              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 + 30";
             "Shift+F11" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 - 30";
+              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 - 30";
             "XF86MonBrightnessUp" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 + 30";
+              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 + 30";
             "XF86MonBrightnessDown" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --display 2 setvcp 10 - 30";
+              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 - 30";
 
             # Media player controls
             "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
