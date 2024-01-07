@@ -14,7 +14,10 @@
     };
 
     # Used for Windows Subsystem for Linux compatibility
-    wsl.url = "github:nix-community/NixOS-WSL";
+    wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Used for user packages and dotfiles
     home-manager = {
