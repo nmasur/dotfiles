@@ -42,6 +42,6 @@ chosen=$(printf '%s;%s\n' "$yes" "$no" |
         -selected-row 1)
 
 case "$chosen" in
-    "$yes") exit 0 ;;
-    *) exit 1 ;;
+    "$yes") return 0 ;;
+    *) return 1 ;;
 esac
