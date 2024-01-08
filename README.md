@@ -41,6 +41,10 @@ configuration may be difficult to translate to a non-Nix system.
 | ---      | ---                                         | ---                                  |
 | Keybinds | [Hammerspoon](https://www.hammerspoon.org/) | [Link](./modules/darwin/hammerspoon) |
 
+# Diagram
+
+![Diagram](https://github.com/nmasur/dotfiles/assets/7386960/ed3e7202-09c4-4a9c-9b14-0272c01647f6)
+
 ---
 
 # Unique Configurations
