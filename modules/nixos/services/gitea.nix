@@ -11,11 +11,21 @@ in {
         actions.ENABLED = true;
         metrics.ENABLED = true;
         repository = {
+          # Pushing to a repo that doesn't exist automatically creates one as
+          # private.
           DEFAULT_PUSH_CREATE_PRIVATE = true;
+
+          # Allow git over HTTP.
           DISABLE_HTTP_GIT = false;
+
+          # Allow requests hitting the specified hostname.
           ACCESS_CONTROL_ALLOW_ORIGIN = config.hostnames.git;
+
+          # Automatically create viable users/orgs on push.
           ENABLE_PUSH_CREATE_USER = true;
           ENABLE_PUSH_CREATE_ORG = true;
+
+          # Default when creating new repos.
           DEFAULT_BRANCH = "main";
         };
         server = {
@@ -25,11 +35,15 @@ in {
           SSH_PORT = 22;
           START_SSH_SERVER = false; # Use sshd instead
           DISABLE_SSH = false;
-          # SSH_LISTEN_HOST = "0.0.0.0";
-          # SSH_LISTEN_PORT = 122;
         };
+
+        # Don't allow public users to register accounts.
         service.DISABLE_REGISTRATION = true;
+
+        # Force using HTTPS for all session access.
         session.COOKIE_SECURE = true;
+
+        # Hide users' emails.
         ui.SHOW_USER_EMAIL = false;
       };
       extraConfig = null;
@@ -39,6 +53,7 @@ in {
     users.users.${config.user}.extraGroups = [ "gitea" ];
 
     caddy.routes = [
+      # Prevent public access to Prometheus metrics.
       {
         match = [{
           host = [ config.hostnames.git ];
@@ -49,6 +64,7 @@ in {
           status_code = "403";
         }];
       }
+      # Allow access to primary server.
       {
         match = [{ host = [ config.hostnames.git ]; }];
         handle = [{
@@ -63,6 +79,7 @@ in {
       }
     ];
 
+    # Scrape the metrics endpoint for Prometheus.
     prometheus.scrapeTargets = [
       "127.0.0.1:${
         builtins.toString config.services.gitea.settings.server.HTTP_PORT

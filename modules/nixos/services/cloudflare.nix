@@ -1,5 +1,13 @@
 # This module is necessary for hosts that are serving through Cloudflare.
 
+# Cloudflare is a CDN service that is used to serve the domain names and
+# caching for my websites and services. Since Cloudflare acts as our proxy, we
+# must allow access over the Internet from Cloudflare's IP ranges.
+
+# We also want to validate our HTTPS certificates from Caddy. We'll use Caddy's
+# DNS validation plugin to connect to Cloudflare and automatically create
+# validation DNS records for our generated certificates.
+
 { config, pkgs, lib, ... }:
 
 let
@@ -59,10 +67,9 @@ in {
         };
       }];
     }];
+    # Allow Caddy to read Cloudflare API key for DNS validation
     systemd.services.caddy.serviceConfig.EnvironmentFile =
       config.secrets.cloudflareApi.dest;
-    systemd.services.caddy.serviceConfig.AmbientCapabilities =
-      "CAP_NET_BIND_SERVICE";
 
     # API key must have access to modify Cloudflare DNS records
     secrets.cloudflareApi = {

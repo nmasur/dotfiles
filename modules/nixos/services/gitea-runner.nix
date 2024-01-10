@@ -1,3 +1,9 @@
+# Gitea Actions is a CI/CD service for the Gitea source code server, meaning it
+# allows us to run code operations (such as testing or deploys) when our git
+# repositories are updated. Any machine can act as a Gitea Action Runner, so
+# the Runners don't necessarily need to be running Gitea. All we need is an API
+# key for Gitea to connect to it and register ourselves as a Runner.
+
 { config, pkgs, lib, ... }:
 
 {

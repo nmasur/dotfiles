@@ -1,3 +1,5 @@
+# Samba is a Windows-compatible file-sharing service.
+
 { config, lib, ... }: {
 
   config = {

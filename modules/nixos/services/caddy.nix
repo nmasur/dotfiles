@@ -1,3 +1,14 @@
+# Caddy is a reverse proxy, like Nginx or Traefik. This creates an ingress
+# point from my local network or the public (via Cloudflare). Instead of a
+# Caddyfile, I'm using the more expressive JSON config file format. This means
+# I can source routes from other areas in my config and build the JSON file
+# using the result of the expression.
+
+# Caddy helpfully provides automatic ACME cert generation and management, but
+# it requires a form of validation. We are using a custom build of Caddy
+# (compiled with an overlay) to insert a plugin for managing DNS validation
+# with Cloudflare's DNS API.
+
 { config, pkgs, lib, ... }: {
 
   options = {
@@ -42,12 +53,17 @@
       configFile = pkgs.writeText "Caddyfile" (builtins.toJSON {
         apps.http.servers.main = {
           listen = [ ":443" ];
+
+          # These routes are pulled from the rest of this repo
           routes = config.caddy.routes;
           errors.routes = config.caddy.blocks;
-          logs = { }; # Uncomment to collect access logs
+
+          logs = { }; # Uncommenting collects access logs
         };
         apps.http.servers.metrics = { }; # Enables Prometheus metrics
         apps.tls.automation.policies = config.caddy.tlsPolicies;
+
+        # Setup logging to file
         logging.logs.main = {
           encoder = { format = "console"; };
           writer = {
@@ -58,13 +74,23 @@
           };
           level = "INFO";
         };
+
       });
 
     };
 
+    # Allows Caddy to serve lower ports (443, 80)
+    systemd.services.caddy.serviceConfig.AmbientCapabilities =
+      "CAP_NET_BIND_SERVICE";
+
+    # Required for web traffic to reach this machine
     networking.firewall.allowedTCPPorts = [ 80 443 ];
+
+    # HTTP/3 QUIC uses UDP (not sure if being used)
     networking.firewall.allowedUDPPorts = [ 443 ];
 
+    # Caddy exposes Prometheus metrics with the admin API
+    # https://caddyserver.com/docs/api
     prometheus.scrapeTargets = [ "127.0.0.1:2019" ];
 
   };

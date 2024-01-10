@@ -1,3 +1,8 @@
+# InfluxDB is a timeseries database similar to Prometheus. While
+# VictoriaMetrics can also act as an InfluxDB, this version of it allows for
+# infinite retention separate from our other metrics, which can be nice for
+# recording health information, for example.
+
 { config, lib, ... }: {
 
   config = {

@@ -1,3 +1,5 @@
+# Paperless-ngx is a document scanning and management solution.
+
 { config, lib, ... }: {
 
   config = lib.mkIf config.services.paperless.enable {

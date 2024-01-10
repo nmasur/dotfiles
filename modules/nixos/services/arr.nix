@@ -2,6 +2,7 @@
 
 let
 
+  # This config specifies ports for Prometheus to scrape information
   arrConfig = {
     radarr = {
       exportarrPort = "9707";
@@ -41,6 +42,8 @@ in {
       sabnzbd = {
         enable = true;
         group = "media";
+        # The config file must be editable within the application
+        # It contains server configs and credentials
         configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
       };
       sonarr = {
@@ -53,16 +56,23 @@ in {
       };
     };
 
+    # Create a media group to be shared between services
     users.groups.media = { };
+
+    # Give the human user access to the media group
     users.users.${config.user}.extraGroups = [ "media" ];
+
+    # Allows media group to read/write the sabnzbd directory
     users.users.sabnzbd.homeMode = "0770";
 
-    unfreePackages = [ "unrar" ]; # Required for sabnzbd
+    unfreePackages = [ "unrar" ]; # Required as a dependency for sabnzbd
 
     # Requires updating the base_url config value in each service
     # If you try to rewrite the URL, the service won't redirect properly
     caddy.routes = [
       {
+        # Group means that routes with the same name are mutually exclusive,
+        # so they are split between the appropriate services.
         group = "download";
         match = [{
           host = [ config.hostnames.download ];
@@ -70,6 +80,7 @@ in {
         }];
         handle = [{
           handler = "reverse_proxy";
+          # We're able to reference the url and port of the service dynamically 
           upstreams = [{ dial = arrConfig.sonarr.url; }];
         }];
       }
@@ -92,6 +103,7 @@ in {
         }];
         handle = [{
           handler = "reverse_proxy";
+          # Prowlarr doesn't offer a dynamic config, so we have to hardcode it
           upstreams = [{ dial = "localhost:9696"; }];
         }];
       }
@@ -104,6 +116,7 @@ in {
         handle = [{
           handler = "reverse_proxy";
           upstreams = [{
+            # Bazarr only dynamically sets the port, not the host
             dial = "localhost:${
                 builtins.toString config.services.bazarr.listenPort
               }";
@@ -145,10 +158,12 @@ in {
           Type = "simple";
           DynamicUser = true;
           ExecStart = let
+            # Sabnzbd doesn't accept the URI path, unlike the others
             url = if name != "sabnzbd" then
               "http://${attrs.url}/${name}"
             else
               "http://${attrs.url}";
+            # Exportarr is trained to pull from the arr services
           in ''
             ${pkgs.exportarr}/bin/exportarr ${name} \
                         --url ${url} \
@@ -197,7 +212,7 @@ in {
       prefix = "API_KEY=";
     };
 
-    # Prometheus scrape targets
+    # Prometheus scrape targets (expose Exportarr to Prometheus)
     prometheus.scrapeTargets = map (key:
       "127.0.0.1:${
         lib.attrsets.getAttrFromPath [ key "exportarrPort" ] arrConfig

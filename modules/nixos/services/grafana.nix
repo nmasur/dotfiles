@@ -7,6 +7,7 @@ in {
 
   config = lib.mkIf config.services.grafana.enable {
 
+    # Allow Grafana to connect to email service
     secrets.mailpass-grafana = {
       source = ../../../private/mailpass-grafana.age;
       dest = "${config.secretsDirectory}/mailpass-grafana";

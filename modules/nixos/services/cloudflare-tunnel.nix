@@ -1,3 +1,12 @@
+# Cloudflare Tunnel is a service for accessing the network even behind a
+# firewall, through outbound-only requests. It works by installing an agent on
+# our machines that exposes services through Cloudflare Access (Zero Trust),
+# similar to something like Tailscale.
+
+# In this case, we're using Cloudflare Tunnel to enable SSH access over a web
+# browser even when outside of my network. This is probably not the safest
+# choice but I feel comfortable enough with it anyway.
+
 { config, lib, ... }:
 
 # First time setup:
@@ -40,23 +49,28 @@
       tunnels = {
         "${config.cloudflareTunnel.id}" = {
           credentialsFile = config.secrets.cloudflared.dest;
+          # Catch-all if no match (should never happen anyway)
           default = "http_status:404";
+          # Match from ingress of any valid server name to SSH access
           ingress = { "*.masu.rs" = "ssh://localhost:22"; };
         };
       };
     };
 
+    # Grant Cloudflare access to SSH into this server
     environment.etc = {
       "ssh/ca.pub".text = ''
         ${config.cloudflareTunnel.ca}
       '';
 
-      # Must match the username of the email address in Cloudflare Access
+      # Must match the username portion of the email address in Cloudflare
+      # Access
       "ssh/authorized_principals".text = ''
         ${config.user}
       '';
     };
 
+    # Adjust SSH config to allow access from Cloudflare's certificate
     services.openssh.extraConfig = ''
       PubkeyAuthentication yes
       TrustedUserCAKeys /etc/ssh/ca.pub

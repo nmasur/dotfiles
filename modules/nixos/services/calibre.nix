@@ -1,3 +1,9 @@
+# Calibre-web is an E-Book library and management tool.
+
+# - Exposed to the public via Caddy.
+# - Hostname defined with config.hostnames.books
+# - File directory backed up to S3 on a cron schedule.
+
 { config, pkgs, lib, ... }:
 
 let
@@ -26,6 +32,7 @@ in {
       };
     };
 
+    # Allow web traffic to Caddy
     caddy.routes = [{
       match = [{ host = [ config.hostnames.books ]; }];
       handle = [{
@@ -35,6 +42,8 @@ in {
               builtins.toString config.services.calibre-web.listen.port
             }";
         }];
+        # This is required when calibre-web is behind a reverse proxy
+        # https://github.com/janeczku/calibre-web/issues/19
         headers.request.add."X-Script-Name" = [ "/calibre-web" ];
       }];
     }];

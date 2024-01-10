@@ -1,3 +1,6 @@
+# Keybase is an encrypted communications tool with a synchronized encrypted
+# filestore that can be mounted onto a machine's filesystem.
+
 { config, pkgs, lib, ... }: {
 
   options.keybase.enable = lib.mkEnableOption "Keybase.";

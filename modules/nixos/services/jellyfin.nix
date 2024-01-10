@@ -1,3 +1,6 @@
+# Jellyfin is a self-hosted video streaming service. This means I can play my
+# server's videos from a webpage, mobile app, or TV client.
+
 { config, pkgs, lib, ... }: {
 
   config = lib.mkIf config.services.jellyfin.enable {
@@ -6,6 +9,7 @@
     users.users.jellyfin = { isSystemUser = true; };
 
     caddy.routes = [
+      # Prevent public access to Prometheus metrics.
       {
         match = [{
           host = [ config.hostnames.stream ];
@@ -16,6 +20,7 @@
           status_code = "403";
         }];
       }
+      # Allow access to normal route.
       {
         match = [{ host = [ config.hostnames.stream ]; }];
         handle = [{

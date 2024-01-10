@@ -1,3 +1,7 @@
+# Vaultwarden is an implementation of the Bitwarden password manager backend
+# service, which allows for self-hosting the synchronization of a Bitwarden
+# password manager client.
+
 { config, pkgs, lib, ... }:
 
 let vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory

@@ -1,3 +1,6 @@
+# n8n is an automation integration tool for connecting data from services
+# together with triggers.
+
 { config, lib, ... }: {
 
   options = {

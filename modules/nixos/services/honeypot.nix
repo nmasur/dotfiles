@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
+# This is a tool for blocking IPs of anyone who attempts to scan all of my
+# ports.
 
 # Currently has some issues that don't make this viable.
+
+{ config, lib, pkgs, ... }:
 
 # Taken from:
 # https://dataswamp.org/~solene/2022-09-29-iblock-implemented-in-nixos.html

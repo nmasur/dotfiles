@@ -1,3 +1,6 @@
+# Transmission is a bittorrent client, which can run in the background for
+# automated downloads with a web GUI.
+
 { config, pkgs, lib, ... }: {
 
   options = {

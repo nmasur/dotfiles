@@ -1,3 +1,6 @@
+# VictoriaMetrics is a more efficient drop-in replacement for Prometheus and
+# InfluxDB (timeseries databases built for monitoring system metrics).
+
 { config, pkgs, lib, ... }:
 
 let

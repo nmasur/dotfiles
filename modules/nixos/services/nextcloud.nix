@@ -16,12 +16,14 @@
       };
       extraOptions = {
         default_phone_region = "US";
+        # Allow access when hitting either of these hosts or IPs
         trusted_domains = [ config.hostnames.content ];
         trusted_proxies = [ "127.0.0.1" ];
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
         inherit calendar contacts;
+        # These apps are defined and pinned by overlay in flake.
         news = pkgs.nextcloudApps.news;
         external = pkgs.nextcloudApps.external;
         cookbook = pkgs.nextcloudApps.cookbook;

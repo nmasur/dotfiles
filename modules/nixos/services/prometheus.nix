@@ -1,3 +1,9 @@
+# Prometheus is a timeseries database that exposes system and service metrics
+# for use in visualizing, monitoring, and alerting (with Grafana).
+
+# Instead of running traditional Prometheus, I generally run VictoriaMetrics as
+# a more efficient drop-in replacement.
+
 { config, pkgs, lib, ... }: {
 
   options.prometheus = {

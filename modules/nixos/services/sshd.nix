@@ -1,3 +1,5 @@
+# SSHD service for allowing SSH access to my machines.
+
 { config, pkgs, lib, ... }: {
 
   options = {

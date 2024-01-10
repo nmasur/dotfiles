@@ -1,3 +1,5 @@
+# GPG is an encryption tool. This isn't really in use for me at the moment.
+
 { config, pkgs, lib, ... }: {
 
   options.gpg.enable = lib.mkEnableOption "GnuPG encryption.";
