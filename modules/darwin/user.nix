@@ -10,11 +10,7 @@
     };
 
     # Used for aerc
-    home-manager.users.${config.user} = {
-      home.sessionVariables = {
-        XDG_CONFIG_HOME = "${config.homePath}/.config";
-      };
-    };
+    home-manager.users.${config.user}.xdg.enable = true;
 
   };
 
