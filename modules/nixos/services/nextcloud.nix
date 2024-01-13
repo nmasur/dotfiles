@@ -28,7 +28,10 @@
         external = pkgs.nextcloudApps.external;
         cookbook = pkgs.nextcloudApps.cookbook;
       };
-      phpOptions = { "opcache.interned_strings_buffer" = "16"; };
+      phpOptions = {
+        "opcache.interned_strings_buffer" = "16";
+        "output_buffering" = "0";
+      };
     };
 
     # Don't let Nginx use main ports (using Caddy instead)
