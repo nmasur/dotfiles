@@ -7,7 +7,7 @@
     services.paperless = {
       mediaDir = "/data/generic/paperless";
       passwordFile = config.secrets.paperless.dest;
-      extraConfig = {
+      settings = {
         PAPERLESS_OCR_USER_ARGS =
           builtins.toJSON { invalidate_digital_signatures = true; };
 
