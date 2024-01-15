@@ -9,7 +9,6 @@
     pkgs.vimPlugins.luasnip
     pkgs.vimPlugins.cmp_luasnip
     pkgs.vimPlugins.cmp-rg
-    pkgs.vimPlugins.friendly-snippets
   ];
 
   use.cmp.setup = dsl.callWith {
@@ -21,13 +20,6 @@
               return false
           end
           return true
-      end
-    '';
-
-    # Enable Luasnip snippet completion
-    snippet.expand = dsl.rawLua ''
-      function(args)
-          require("luasnip").lsp_expand(args.body)
       end
     '';
 
@@ -70,7 +62,6 @@
     sources = [
       { name = "nvim_lua"; } # Fills in common Neovim lua functions
       { name = "nvim_lsp"; } # LSP results
-      { name = "luasnip"; } # Snippets
       { name = "path"; } # Shell completion from current PATH
       {
         name = "buffer"; # Grep for text from the current text buffer
@@ -119,7 +110,6 @@
             }
             vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             vim_item.menu = ({
-                luasnip = "[Snippet]",
                 buffer = "[Buffer]",
                 path = "[Path]",
                 rg = "[Grep]",
@@ -139,13 +129,6 @@
   };
 
   lua = ''
-    -- Load snippets
-    -- Check status: :lua require("luasnip").log.open()
-    require("luasnip.loaders.from_vscode").lazy_load()
-    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "${
-      builtins.toString pkgs.vscode-terraform-snippets
-    }" } })
-
     -- Use buffer source for `/`
     require('cmp').setup.cmdline("/", {
         sources = {

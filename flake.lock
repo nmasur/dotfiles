@@ -549,7 +549,6 @@
         "tree-sitter-puppet": "tree-sitter-puppet",
         "tree-sitter-python": "tree-sitter-python",
         "tree-sitter-rasi": "tree-sitter-rasi",
-        "vscode-terraform-snippets": "vscode-terraform-snippets",
         "wallpapers": "wallpapers",
         "wsl": "wsl",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
@@ -771,22 +770,6 @@
       "original": {
         "owner": "Fymyte",
         "repo": "tree-sitter-rasi",
-        "type": "github"
-      }
-    },
-    "vscode-terraform-snippets": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1614849738,
-        "narHash": "sha256-v392tyzXV+zyBNt5OCB2NBCK7JcByrTa5Ne/nFtSCJI=",
-        "owner": "run-at-scale",
-        "repo": "vscode-terraform-doc-snippets",
-        "rev": "6ab3e44b566e660f38922cf908e6e547eaa5d4b4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "run-at-scale",
-        "repo": "vscode-terraform-doc-snippets",
         "type": "github"
       }
     },
