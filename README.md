@@ -53,17 +53,17 @@ configuration may be difficult to translate to a non-Nix system.
 
 # Unique Configurations
 
-This repo contains a few atypical choices for configuration.
+This repo contains a few more elaborate elements of configuration.
 
 - [Neovim config](./modules/common/neovim/default.nix) generated with Nix2Vim
-and source-controlled plugins, differing from host to host.
-- [Caddy JSON](./modules/nixos/services/caddy.nix) file (routes, etc.) based on
-dynamic service metadata.
-- [Grafana config](./modules/nixos/services/grafana.nix) based on dynamic
-service metadata.
+and source-controlled plugins, differing based on installed LSPs, for example.
+- [Caddy JSON](./modules/nixos/services/caddy.nix) file (routes, etc.) based
+dynamically on enabled services rendered with Nix.
+- [Grafana config](./modules/nixos/services/grafana.nix) rendered with Nix.
 - Custom [secrets deployment](./modules/nixos/services/secrets.nix) similar to
 agenix.
-- Base16 [colorschemes](./colorscheme/) applied to multiple applications.
+- Base16 [colorschemes](./colorscheme/) applied to multiple applications,
+including Firefox userChrome.
 
 ---
 
