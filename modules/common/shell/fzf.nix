@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
 
   # FZF is a fuzzy-finder for the terminal
 
@@ -16,10 +16,9 @@
                     --search-path $HOME/dev \
                     --type directory \
                     --exact-depth 2 \
+                | ${pkgs.proximity-sort}/bin/proximity-sort . \
                 | sed 's/\\/$//' \
-                | fzf \
-                    --delimiter '/' \
-                    --with-nth 6.. \
+                | fzf --tiebreak=index \
             )
             and cd $projdir
             and commandline -f execute
