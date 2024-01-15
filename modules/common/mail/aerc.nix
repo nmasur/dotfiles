@@ -68,7 +68,7 @@
             "!" = ":term<space>";
             "|" = ":pipe<space>";
 
-            "/" = ":search<space>";
+            "/" = ":search<space>-a<space>";
             "\\" = ":filter <space>";
             n = ":next-result<Enter>";
             N = ":prev-result<Enter>";
