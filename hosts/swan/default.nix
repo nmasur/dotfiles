@@ -1,6 +1,8 @@
 # The Swan
 # System configuration for my home NAS server
 
+# See [readme](../README.md) to explain how this file works.
+
 { inputs, globals, overlays, ... }:
 
 inputs.nixpkgs.lib.nixosSystem {

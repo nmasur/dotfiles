@@ -1,6 +1,8 @@
 # The Flame
 # System configuration for an Oracle free server
 
+# See [readme](../README.md) to explain how this file works.
+
 # How to install:
 # https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
 # These days, probably use nixos-anywhere instead.
