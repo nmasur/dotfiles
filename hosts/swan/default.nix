@@ -82,6 +82,7 @@ inputs.nixpkgs.lib.nixosSystem {
       services.vmagent.enable = true;
       services.samba.enable = true;
       services.paperless.enable = true;
+      services.postgresql.enable = true;
 
       # Allows private remote access over the internet
       cloudflareTunnel = {

@@ -24,6 +24,7 @@
     ./netdata.nix
     ./nextcloud.nix
     ./paperless.nix
+    ./postgresql.nix
     ./prometheus.nix
     ./samba.nix
     ./secrets.nix
