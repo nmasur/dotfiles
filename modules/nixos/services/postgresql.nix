@@ -1,6 +1,7 @@
-{ config, ... }: {
+{ config, pkgs, lib, ... }: {
 
   services.postgresql = {
+    package = pkgs.postgresql_15;
     settings = { };
     identMap = "";
     ensureUsers = [{
@@ -12,5 +13,10 @@
       };
     }];
   };
+
+  home-manager.users.${config.user}.home.packages =
+    lib.mkIf config.services.postgresql.enable [
+      pkgs.pgcli # Postgres client with autocomplete
+    ];
 
 }
