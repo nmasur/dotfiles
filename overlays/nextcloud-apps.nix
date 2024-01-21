@@ -16,6 +16,11 @@ inputs: _final: prev: {
       sha256 = inputs.nextcloud-cookbook.narHash;
       license = "agpl3Plus";
     };
+    snappymail = prev.fetchNextcloudApp {
+      url = inputs.nextcloud-snappymail.outPath;
+      sha256 = inputs.nextcloud-snappymail.narHash;
+      license = "agpl3Plus";
+    };
   };
 
 }

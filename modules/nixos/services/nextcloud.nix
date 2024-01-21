@@ -27,6 +27,7 @@
         news = pkgs.nextcloudApps.news;
         external = pkgs.nextcloudApps.external;
         cookbook = pkgs.nextcloudApps.cookbook;
+        snappymail = pkgs.nextcloudApps.snappymail;
       };
       phpOptions = {
         "opcache.interned_strings_buffer" = "16";

@@ -323,6 +323,19 @@
         "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz"
       }
     },
+    "nextcloud-snappymail": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705802070,
+        "narHash": "sha256-UeZXoZFEPJj7zEVNTXJ3IYNt/wI7VFq3Pjh1ubMHCBo=",
+        "type": "tarball",
+        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz"
+      }
+    },
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -530,6 +543,7 @@
         "nextcloud-cookbook": "nextcloud-cookbook",
         "nextcloud-external": "nextcloud-external",
         "nextcloud-news": "nextcloud-news",
+        "nextcloud-snappymail": "nextcloud-snappymail",
         "nil": "nil",
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",

@@ -196,6 +196,12 @@
         "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz";
       flake = false;
     };
+    nextcloud-snappymail = {
+      # https://github.com/the-djmaze/snappymail/releases
+      url =
+        "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz";
+      flake = false;
+    };
 
   };
 
