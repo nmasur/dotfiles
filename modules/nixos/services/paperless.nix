@@ -18,7 +18,8 @@
     };
 
     # Allow Nextcloud and user to see files
-    users.users.nextcloud.extraGroups = [ "paperless" ];
+    users.users.nextcloud.extraGroups =
+      lib.mkIf config.services.nextcloud.enable [ "paperless" ];
     users.users.${config.user}.extraGroups = [ "paperless" ];
 
     caddy.routes = [{
@@ -47,7 +48,23 @@
       before = [ "paperless.service" ];
     };
 
-    # TODO: Scheduled permissions fix with systemd timer
+    # Fix permissions on a regular schedule
+    systemd.timers.paperless-permissions = {
+      timerConfig = {
+        OnCalendar = "*-*-* *:0/5"; # Every 5 minutes
+        Unit = "paperless-permissions.service";
+      };
+      wantedBy = [ "timers.target" ];
+    };
+
+    # Fix paperless shared permissions
+    systemd.services.paperless-permissions = {
+      description = "Allow group access to paperless files";
+      serviceConfig = { Type = "oneshot"; };
+      script = ''
+        find ${config.services.paperless.mediaDir} -type f -exec chmod 640 -- {} +
+      '';
+    };
 
   };
 
