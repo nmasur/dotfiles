@@ -68,6 +68,7 @@ inputs.nixpkgs.lib.nixosSystem {
       theme = { colors = (import ../../colorscheme/gruvbox).dark; };
 
       # Programs and services
+      atuin.enable = true;
       neovim.enable = true;
       cloudflare.enable = true;
       dotfiles.enable = true;
