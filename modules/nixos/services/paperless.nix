@@ -17,7 +17,9 @@
       };
     };
 
-    users.users.paperless.extraGroups = [ "generic" ];
+    # Allow Nextcloud and user to see files
+    users.users.nextcloud.extraGroups = [ "paperless" ];
+    users.users.${config.user}.extraGroups = [ "paperless" ];
 
     caddy.routes = [{
       match = [{
@@ -44,6 +46,8 @@
       requiredBy = [ "paperless.service" ];
       before = [ "paperless.service" ];
     };
+
+    # TODO: Scheduled permissions fix with systemd timer
 
   };
 
