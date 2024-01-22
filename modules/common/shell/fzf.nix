@@ -16,7 +16,7 @@
                     --search-path $HOME/dev \
                     --type directory \
                     --exact-depth 2 \
-                | ${pkgs.proximity-sort}/bin/proximity-sort . \
+                | ${pkgs.proximity-sort}/bin/proximity-sort $PWD \
                 | sed 's/\\/$//' \
                 | fzf --tiebreak=index \
             )
