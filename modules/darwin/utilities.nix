@@ -14,6 +14,7 @@
       pandoc # Convert text documents
       mpd # TUI slideshows
       mpv # Video player
+      gnupg # Encryption
       awscli2
       awslogs
       google-cloud-sdk
