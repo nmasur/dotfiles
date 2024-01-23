@@ -29,6 +29,7 @@
           id = 0;
           name = "default";
           isDefault = true;
+          # https://nur.nix-community.org/repos/rycee/
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             (lib.mkIf config._1password.enable onepassword-password-manager)
             pkgs.bypass-paywalls-clean
