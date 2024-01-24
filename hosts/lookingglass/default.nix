@@ -4,7 +4,7 @@
 { inputs, globals, overlays, ... }:
 
 inputs.darwin.lib.darwinSystem {
-  system = "x86_64-darwin";
+  system = "aarch64-darwin";
   specialArgs = { };
   modules = [
     ../../modules/common
