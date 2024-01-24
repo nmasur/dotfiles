@@ -49,19 +49,24 @@ move the `windows/alacritty.yml` file to
 To get started on a bare macOS installation, first install Nix:
 
 ```bash
-sh -c "$(curl -L https://nixos.org/nix/install)"
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-Then use Nix to build nix-darwin:
+Launch a new shell. Then use Nix to switch to the macOS configuration:
 
 ```bash
-nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-./result/bin/darwin-installer
+sudo rm /etc/bashrc
+sudo rm /etc/nix/nix.conf
+nix \
+    --extra-experimental-features flakes \
+    --extra-experimental-features nix-command \
+    run nix-darwin -- switch \
+    --flake github:nmasur/dotfiles#lookingglass
 ```
 
-Then switch to the macOS configuration:
+Once installed, you can continue to update the macOS configuration:
 
 ```bash
-darwin-rebuild switch --flake github:nmasur/dotfiles#lookingglass
+darwin-rebuild switch --flake ~/dev/personal/dotfiles
 ```
 

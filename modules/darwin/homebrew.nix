@@ -24,10 +24,6 @@
         brewfile = true; # Run brew bundle from anywhere
         lockfiles = false; # Don't save lockfile (since running from anywhere)
       };
-      taps = [
-        "homebrew/cask" # Required for casks
-        "homebrew/cask-drivers" # Used for Logitech G-Hub
-      ];
       brews = [
         "trash" # Delete files and folders to trash instead of rm
         "openjdk" # Required by Apache Directory Studio
