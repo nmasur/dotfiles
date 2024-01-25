@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: {
 
   # Homebrew - Mac-specific packages that aren't in Nix
   config = lib.mkIf pkgs.stdenv.isDarwin {
@@ -12,6 +12,10 @@
         $DRY_RUN_CMD /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       fi
     '';
+
+    # Add homebrew paths to CLI path
+    home-manager.users.${config.user}.home.sessionPath =
+      [ "/opt/homebrew/bin/" ];
 
     homebrew = {
       enable = true;
