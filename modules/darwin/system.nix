@@ -187,6 +187,13 @@
             "$(__dock_item ${pkgs.obsidian}/Applications/Obsidian.app)" \
             "$(__dock_item ${pkgs.kitty}/Applications/kitty.app)" \
             "$(__dock_item /System/Applications/System\ Settings.app)"
+
+        echo "MeetingBar settings"
+        defaults write leits.MeetingBar eventTimeFormat -string "\"show\""
+        defaults write leits.MeetingBar eventTitleFormat -string "\"none\""
+        defaults write leits.MeetingBar eventTitleIconFormat -string "\"iconCalendar\""
+        defaults write leits.MeetingBar slackBrowser -string "{\"deletable\":true,\"arguments\":\"\",\"name\":\"Slack\",\"path\":\"\"}"
+        defaults write leits.MeetingBar zoomBrowser -string "{\"deletable\":true,\"arguments\":\"\",\"name\":\"Zoom\",\"path\":\"\"}"
       '';
 
     };
