@@ -18,3 +18,5 @@ bind -M insert \cn 'commandline -r "nix shell nixpkgs#"'
 bind -M default \cn 'commandline -r "nix shell nixpkgs#"'
 bind -M insert \x11F nix-fzf
 bind -M default \x11F nix-fzf
+bind -M insert \ch _atuin_search --filter-mode global
+bind -M default \ch _atuin_search --filter-mode global

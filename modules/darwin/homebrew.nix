@@ -31,7 +31,7 @@
       casks = [
         "1password" # 1Password will not launch from Nix on macOS
         "apache-directory-studio" # Packaging on Nix is not available for macOS
-        "gitify" # Git notifications in menu bar
+        # "gitify" # Git notifications in menu bar (downgrade manually from 4.6.1)
         "keybase" # GUI on Nix not available for macOS
         # "logitech-g-hub" # Mouse and keyboard management
         "logitune" # Logitech webcam firmware

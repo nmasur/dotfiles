@@ -154,11 +154,15 @@
         echo "Show the ~/Library folder"
         chflags nohidden ~/Library
 
-        echo "Enable dock magnification"
-        defaults write com.apple.dock magnification -bool true
+        if [ ! $(defaults read com.apple.dock magnification) = "1" ]; then
+            echo "Enable dock magnification"
+            defaults write com.apple.dock magnification -bool true
+        fi
 
-        echo "Set dock magnification size"
-        defaults write com.apple.dock largesize -int 48
+        if [ ! $(defaults read com.apple.dock largesize) = "48" ]; then
+            echo "Set dock magnification size"
+            defaults write com.apple.dock largesize -int 48
+        fi
 
         echo "Define dock icon function"
         __dock_item() {
