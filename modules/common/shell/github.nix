@@ -57,6 +57,7 @@
             | fzf \
                 --header-lines=1 \
                 --layout=reverse \
+                --height=100% \
                 --bind "ctrl-o:execute:gh repo view -w ''${organization}/{1}" \
                 --bind "shift-up:preview-half-page-up" \
                 --bind "shift-down:preview-half-page-down" \
