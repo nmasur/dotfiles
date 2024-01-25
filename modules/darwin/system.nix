@@ -34,8 +34,8 @@
           # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
           AppleKeyboardUIMode = 3;
 
-          # Automatically show and hide the menu bar
-          _HIHideMenuBar = true;
+          # Only hide menu bar in fullscreen
+          _HIHideMenuBar = false;
 
           # Expand save panel by default
           NSNavPanelExpandedStateForSaveMode = true;
@@ -180,7 +180,7 @@
             "$(__dock_item /System/Applications/Mail.app)" \
             "$(__dock_item /Applications/zoom.us.app)" \
             "$(__dock_item ${pkgs.discord}/Applications/Discord.app)" \
-            "$(__dock_item /Applications/Obsidian.app)" \
+            "$(__dock_item ${pkgs.obsidian}/Applications/Obsidian.app)" \
             "$(__dock_item ${pkgs.kitty}/Applications/kitty.app)" \
             "$(__dock_item /System/Applications/System\ Settings.app)"
       '';

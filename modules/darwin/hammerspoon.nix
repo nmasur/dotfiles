@@ -24,9 +24,9 @@
       home.activation.reloadHammerspoon =
         config.home-manager.users.${config.user}.lib.dag.entryAfter
         [ "writeBoundary" ] ''
-          $DRY_RUN_CMD /usr/local/bin/hs -c "hs.reload()"
+          $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.reload()"
           $DRY_RUN_CMD sleep 1
-          $DRY_RUN_CMD /usr/local/bin/hs -c "hs.console.clearConsole()"
+          $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.console.clearConsole()"
         '';
 
     };

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   home-manager.users.${config.user} = {
 
     programs.fish = {
@@ -60,12 +60,24 @@
       enableFishIntegration = true;
     };
 
+    # Create nix-index if doesn't exist
+    home.activation.createNixIndex =
+      let cacheDir = "${config.homePath}/.cache/nix-index";
+      in lib.mkIf
+      config.home-manager.users.${config.user}.programs.nix-index.enable
+      (config.home-manager.users.${config.user}.lib.dag.entryAfter
+        [ "writeBoundary" ] ''
+          if [ ! -d ${cacheDir} ]; then
+              $DRY_RUN_CMD ${pkgs.nix-index}/bin/nix-index -f ${pkgs.path}
+          fi
+        '');
+
   };
 
   nix = {
 
     # Set channel to flake packages, used for nix-shell commands
-    nixPath = [ "nixpkgs=${pkgs.path}" ];
+    nixPath = [{ nixpkgs = pkgs.path; }];
 
     # Set registry to this flake's packages, used for nix X commands
     registry.nixpkgs.to = {

@@ -35,7 +35,19 @@ in {
           init = { defaultBranch = "master"; };
         };
         ignores = [ ".direnv/**" "result" ];
+        includes = [{
+          path = "~/.config/git/personal";
+          condition = "gitdir:~/dev/personal/";
+        }];
       };
+
+      # Personal git config
+      # TODO: fix with variables
+      xdg.configFile."git/personal".text = ''
+        [user]
+            name = "Noah Masur"
+            email = "7386960+nmasur@users.noreply.github.com"
+      '';
 
       programs.fish.shellAbbrs = {
         g = "git";

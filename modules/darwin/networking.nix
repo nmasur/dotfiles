@@ -2,7 +2,7 @@
 
   config = lib.mkIf pkgs.stdenv.isDarwin {
     networking = {
-      computerName = "${config.fullName}'\\''s Mac";
+      computerName = config.networking.hostName;
       # Adjust if necessary
       # hostName = "";
     };
