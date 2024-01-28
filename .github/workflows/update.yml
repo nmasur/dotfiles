@@ -31,6 +31,12 @@ jobs:
           pr-labels: |                  # Labels to be set on the PR
             dependencies
             automated
+          pr-body: |
+            Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
+
+            ```
+            {{ env.GIT_COMMIT_MESSAGE }}
+            ```
       - name: Check the Flake
         id: check
         run: nix flake check
