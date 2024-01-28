@@ -59,16 +59,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix language server
-    nil = {
-      url = "github:oxalica/nil/2023-08-09";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Neovim plugins
     nvim-lspconfig-src = {
       # https://github.com/neovim/nvim-lspconfig/tags
-      url = "github:neovim/nvim-lspconfig/v0.1.6";
+      url = "github:neovim/nvim-lspconfig/v0.1.7";
       flake = false;
     };
     cmp-nvim-lsp-src = {
@@ -85,6 +79,7 @@
       flake = false;
     };
     Comment-nvim-src = {
+      # https://github.com/numToStr/Comment.nvim/releases
       url = "github:numToStr/Comment.nvim/v0.8.0";
       flake = false;
     };
@@ -94,7 +89,8 @@
       flake = false;
     };
     telescope-nvim-src = {
-      url = "github:nvim-telescope/telescope.nvim/0.1.4";
+      # https://github.com/nvim-telescope/telescope.nvim/releases
+      url = "github:nvim-telescope/telescope.nvim/0.1.5";
       flake = false;
     };
     telescope-project-nvim-src = {
@@ -102,11 +98,13 @@
       flake = false;
     };
     toggleterm-nvim-src = {
-      url = "github:akinsho/toggleterm.nvim/v2.8.0";
+      # https://github.com/akinsho/toggleterm.nvim/tags
+      url = "github:akinsho/toggleterm.nvim/v2.9.0";
       flake = false;
     };
     bufferline-nvim-src = {
-      url = "github:akinsho/bufferline.nvim/v4.4.0";
+      # https://github.com/akinsho/bufferline.nvim/releases
+      url = "github:akinsho/bufferline.nvim/v4.5.0";
       flake = false;
     };
     nvim-tree-lua-src = {
@@ -119,7 +117,7 @@
     };
     fidget-nvim-src = {
       # https://github.com/j-hui/fidget.nvim/tags
-      url = "github:j-hui/fidget.nvim/v1.1.0";
+      url = "github:j-hui/fidget.nvim/v1.2.0";
       flake = false;
     };
 
@@ -148,16 +146,14 @@
       url = "github:Fymyte/tree-sitter-rasi";
       flake = false;
     };
+    tree-sitter-vimdoc = {
+      url = "github:neovim/tree-sitter-vimdoc";
+      flake = false;
+    };
 
     # MPV Scripts
     zenyd-mpv-scripts = {
       url = "github:zenyd/mpv-scripts";
-      flake = false;
-    };
-
-    # Age encryption (pin because of failed builds)
-    age = {
-      url = "github:FiloSottile/age/v1.1.1";
       flake = false;
     };
 
@@ -246,7 +242,6 @@
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/age.nix inputs)
         (import ./overlays/proton-ge.nix inputs)
         (import ./overlays/gh-collaborators.nix)
         (import ./overlays/bypass-paywalls-clean.nix inputs)

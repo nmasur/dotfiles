@@ -32,6 +32,11 @@ inputs: _final: prev: {
       version = "0.1.1";
       src = inputs.tree-sitter-rasi;
     };
+    tree-sitter-vimdoc = prev.tree-sitter.buildGrammar {
+      language = "vimdoc";
+      version = "2.1.0";
+      src = inputs.tree-sitter-vimdoc;
+    };
   };
 
 }

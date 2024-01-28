@@ -17,23 +17,6 @@
         "type": "github"
       }
     },
-    "age": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1672087018,
-        "narHash": "sha256-LRxxJQLQkzoCNYGS/XBixVmYXoZ1mPHKvFicPGXYLcw=",
-        "owner": "FiloSottile",
-        "repo": "age",
-        "rev": "c6dcfa1efcaa27879762a934d5bea0d1b83a894c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "FiloSottile",
-        "ref": "v1.1.1",
-        "repo": "age",
-        "type": "github"
-      }
-    },
     "baleia-nvim-src": {
       "flake": false,
       "locked": {
@@ -53,16 +36,16 @@
     "bufferline-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1695205521,
-        "narHash": "sha256-MQMpXMgUpZA0E9TunzjXeOQxDWSCTogXbvi9VJnv4Kw=",
+        "lastModified": 1706180994,
+        "narHash": "sha256-/iGzUDJaodkUyWpwim8UtwaRuarfu/Nk6wxVApk+QxY=",
         "owner": "akinsho",
         "repo": "bufferline.nvim",
-        "rev": "6ecd37e0fa8b156099daedd2191130e083fb1490",
+        "rev": "d6cb9b7cac52887bcac65f8698e67479553c0748",
         "type": "github"
       },
       "original": {
         "owner": "akinsho",
-        "ref": "v4.4.0",
+        "ref": "v4.5.0",
         "repo": "bufferline.nvim",
         "type": "github"
       }
@@ -143,16 +126,16 @@
     "fidget-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1702031048,
-        "narHash": "sha256-wbjQuOFd/2339TIrUA97PYsV8N3PZsS+xbyMsyZmki8=",
+        "lastModified": 1704696337,
+        "narHash": "sha256-uAX/RGfOmsUIUaDepNwUpK8MBaTMBJ4rLZ69y0MwpNE=",
         "owner": "j-hui",
         "repo": "fidget.nvim",
-        "rev": "300018af4abd00610a345e382ca1f4b7ba420f77",
+        "rev": "3a93300c076109d86c7ce35ec67a8034ae6ba9db",
         "type": "github"
       },
       "original": {
         "owner": "j-hui",
-        "ref": "v1.1.0",
+        "ref": "v1.2.0",
         "repo": "fidget.nvim",
         "type": "github"
       }
@@ -198,24 +181,6 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1687709756,
-        "narHash": "sha256-Y5wKlQSkgEK2weWdOu4J3riRd+kV/VCgHsqLNTTWQ/0=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "dbabf0ca0c0c4bce6ea5eaf65af5cb694d2082c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
-      "inputs": {
-        "systems": "systems_2"
-      },
-      "locked": {
         "lastModified": 1705309234,
         "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
         "owner": "numtide",
@@ -229,9 +194,9 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
+    "flake-utils_2": {
       "inputs": {
-        "systems": "systems_3"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1705309234,
@@ -336,32 +301,9 @@
         "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz"
       }
     },
-    "nil": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1691372739,
-        "narHash": "sha256-fZ8KfBMcIFO/R7xaWtB85SFeuUjb9SCH8fxYBnY8068=",
-        "owner": "oxalica",
-        "repo": "nil",
-        "rev": "97abe7d3d48721d4e0fcc1876eea83bb4247825b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "ref": "2023-08-09",
-        "repo": "nil",
-        "type": "github"
-      }
-    },
     "nix2vim": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -466,16 +408,16 @@
     "nvim-lspconfig-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1675639052,
-        "narHash": "sha256-B8IgpypxzCACZ5VcqM6KiWyClaN+KrmemtkwMznmj5Y=",
+        "lastModified": 1701687137,
+        "narHash": "sha256-qFjFofA2LoD4yRfx4KGfSCpR3mDkpFaagcm+TVNPqco=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "255e07ce2a05627d482d2de77308bba51b90470c",
+        "rev": "cf3dd4a290084a868fac0e2e876039321d57111c",
         "type": "github"
       },
       "original": {
         "owner": "neovim",
-        "ref": "v0.1.6",
+        "ref": "v0.1.7",
         "repo": "nvim-lspconfig",
         "type": "github"
       }
@@ -529,7 +471,6 @@
     "root": {
       "inputs": {
         "Comment-nvim-src": "Comment-nvim-src",
-        "age": "age",
         "baleia-nvim-src": "baleia-nvim-src",
         "bufferline-nvim-src": "bufferline-nvim-src",
         "bypass-paywalls-clean": "bypass-paywalls-clean",
@@ -544,7 +485,6 @@
         "nextcloud-external": "nextcloud-external",
         "nextcloud-news": "nextcloud-news",
         "nextcloud-snappymail": "nextcloud-snappymail",
-        "nil": "nil",
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
@@ -563,34 +503,10 @@
         "tree-sitter-puppet": "tree-sitter-puppet",
         "tree-sitter-python": "tree-sitter-python",
         "tree-sitter-rasi": "tree-sitter-rasi",
+        "tree-sitter-vimdoc": "tree-sitter-vimdoc",
         "wallpapers": "wallpapers",
         "wsl": "wsl",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "flake-utils": [
-          "nil",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nil",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1688783586,
-        "narHash": "sha256-HHaM2hk2azslv1kH8zmQxXo2e7i5cKgzNIuK4yftzB0=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "7a29283cc242c2486fc67f60b431ef708046d176",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
       }
     },
     "systems": {
@@ -623,34 +539,19 @@
         "type": "github"
       }
     },
-    "systems_3": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "telescope-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1697004956,
-        "narHash": "sha256-7SqYFnfCjotOBhuX6Wx1IOhgMKoxaoI1a4SKz1d5RVM=",
+        "lastModified": 1701167040,
+        "narHash": "sha256-H5RpyWMluE+Yxg7xFX43AZTVW+Yg70DF3FmEGXBUSNg=",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a",
+        "rev": "d90956833d7c27e73c621a61f20b29fdb7122709",
         "type": "github"
       },
       "original": {
         "owner": "nvim-telescope",
-        "ref": "0.1.4",
+        "ref": "0.1.5",
         "repo": "telescope.nvim",
         "type": "github"
       }
@@ -674,16 +575,16 @@
     "toggleterm-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1695636777,
-        "narHash": "sha256-o8xzoo7OuYrPnKlfrupQ24Ja9hZy1qQVnvwO0FO+4zM=",
+        "lastModified": 1701858874,
+        "narHash": "sha256-vJApw7XY2wOX9InfWcah+hkNxBfS1+kQUWr4ITxRmgA=",
         "owner": "akinsho",
         "repo": "toggleterm.nvim",
-        "rev": "faee9d60428afc7857e0927fdc18daa6c409fa64",
+        "rev": "cbd041d91b90cd3c02df03fe6133208888f8e008",
         "type": "github"
       },
       "original": {
         "owner": "akinsho",
-        "ref": "v2.8.0",
+        "ref": "v2.9.0",
         "repo": "toggleterm.nvim",
         "type": "github"
       }
@@ -787,6 +688,22 @@
         "type": "github"
       }
     },
+    "tree-sitter-vimdoc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705491128,
+        "narHash": "sha256-q5Ln8WPFrtKBfZnaAAlMh3Q/eczEt6wCMZAtx+ISCKg=",
+        "owner": "neovim",
+        "repo": "tree-sitter-vimdoc",
+        "rev": "ed8695ad8de39c3f073da130156f00b1148e2891",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "repo": "tree-sitter-vimdoc",
+        "type": "github"
+      }
+    },
     "wallpapers": {
       "flake": false,
       "locked": {
@@ -806,7 +723,7 @@
     "wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ]

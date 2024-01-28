@@ -4,7 +4,7 @@
     (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins:
       with pkgs.tree-sitter-grammars; [
         tree-sitter-bash
-        # tree-sitter-c
+        tree-sitter-c
         tree-sitter-fish
         tree-sitter-hcl
         tree-sitter-ini
@@ -17,6 +17,7 @@
         tree-sitter-python
         tree-sitter-rasi
         tree-sitter-toml
+        tree-sitter-vimdoc
         tree-sitter-yaml
       ]))
     pkgs.vimPlugins.vim-matchup # Better % jumping in languages
