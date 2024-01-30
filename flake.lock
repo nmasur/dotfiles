@@ -249,6 +249,22 @@
         "type": "github"
       }
     },
+    "kitty-scrollback-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706493612,
+        "narHash": "sha256-hv3o5k85hBaGk8OBRLP7Rf0O9dxiKot6F7/EQelJHHg=",
+        "owner": "mikesmithgh",
+        "repo": "kitty-scrollback.nvim",
+        "rev": "bb5332b8ec0763b9e611f8cabf4165ed8c3893f5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mikesmithgh",
+        "repo": "kitty-scrollback.nvim",
+        "type": "github"
+      }
+    },
     "nextcloud-cookbook": {
       "flake": false,
       "locked": {
@@ -481,6 +497,7 @@
         "firefox-darwin": "firefox-darwin",
         "hmts-nvim-src": "hmts-nvim-src",
         "home-manager": "home-manager",
+        "kitty-scrollback-nvim-src": "kitty-scrollback-nvim-src",
         "nextcloud-cookbook": "nextcloud-cookbook",
         "nextcloud-external": "nextcloud-external",
         "nextcloud-news": "nextcloud-news",

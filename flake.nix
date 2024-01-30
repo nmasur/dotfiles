@@ -120,6 +120,10 @@
       url = "github:j-hui/fidget.nvim/v1.2.0";
       flake = false;
     };
+    kitty-scrollback-nvim-src = {
+      url = "github:mikesmithgh/kitty-scrollback.nvim";
+      flake = false;
+    };
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {

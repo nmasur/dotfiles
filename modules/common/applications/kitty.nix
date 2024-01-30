@@ -45,8 +45,19 @@
 
           # Easy fullscreen toggle (for macOS)
           "super+f" = "toggle_fullscreen";
+
+          # Kitty scrollback nvim
+          "kitty_mod+h" = "kitty_scrollback_nvim";
+          "kitty_mod+g" =
+            "kitty_scrollback_nvim --config ksb_builtin_last_cmd_output";
         };
         settings = {
+
+          # Required for kitty-scrollback.nvim
+          allow_remote_control = "socket-only";
+          listen_on = "unix:/tmp/kitty";
+          action_alias =
+            "kitty_scrollback_nvim kitten ${pkgs.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
 
           # Colors (adapted from: https://github.com/kdrag0n/base16-kitty/blob/master/templates/default-256.mustache)
           background = config.theme.colors.base00;

@@ -45,8 +45,8 @@ in {
         # Requires removing some of the ANSI escape codes that are sent to the
         # scrollback using sed and baleia, as well as removing several
         # unnecessary features.
-        programs.kitty.settings.scrollback_pager = ''
-          $SHELL -c 'sed -r "s/[[:cntrl:]]\]133;[AC]..//g" | ${neovim}/bin/nvim -c "setlocal nonumber norelativenumber nolist laststatus=0" -c "lua baleia = require(\"baleia\").setup({}); baleia.once(0)" -c "map <silent> q :qa!<CR>" -c "autocmd VimEnter * normal G"' '';
+        programs.kitty.settings.scrollback_pager =
+          "${neovim}/bin/nvim --headless +'KittyScrollbackGenerateKittens' +'set nonumber' +'set norelativenumber' +'%print' +'quit!' 2>&1";
 
         # Create a desktop option for launching Neovim from a file manager
         # (Requires launching the terminal and then executing Neovim)
