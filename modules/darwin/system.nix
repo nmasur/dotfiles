@@ -194,6 +194,7 @@
         defaults write leits.MeetingBar eventTitleIconFormat -string "\"iconCalendar\""
         defaults write leits.MeetingBar slackBrowser -string "{\"deletable\":true,\"arguments\":\"\",\"name\":\"Slack\",\"path\":\"\"}"
         defaults write leits.MeetingBar zoomBrowser -string "{\"deletable\":true,\"arguments\":\"\",\"name\":\"Zoom\",\"path\":\"\"}"
+        defaults write leits.MeetingBar KeyboardShortcuts_joinEventShortcut -string "{\"carbonModifiers\":6400,\"carbonKeyCode\":38}"
       '';
 
     };
