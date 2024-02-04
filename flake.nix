@@ -249,7 +249,6 @@
         (import ./overlays/proton-ge.nix inputs)
         (import ./overlays/gh-collaborators.nix)
         (import ./overlays/bypass-paywalls-clean.nix inputs)
-        (import ./overlays/terraform.nix)
       ];
 
       # System types to support.
