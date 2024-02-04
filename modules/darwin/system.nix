@@ -122,47 +122,54 @@
         # Where to save screenshots
         screencapture.location = "~/Downloads";
 
+        CustomUserPreferences = {
+          # Disable disk image verification
+          "com.apple.frameworks.diskimages" = {
+            skip-verify = true;
+            skip-verify-locked = true;
+            skip-verify-remote = true;
+          };
+          # Avoid creating .DS_Store files on network or USB volumes
+          "com.apple.desktopservices" = {
+            DSDontWriteNetworkStores = true;
+            DSDontWriteUSBStores = true;
+          };
+          "com.apple.dock" = {
+            magnification = true;
+            largesize = 48;
+          };
+          # Require password immediately after screen saver begins
+          "com.apple.screensaver" = {
+            askForPassword = 1;
+            askForPasswordDelay = 0;
+          };
+          "com.apple.finder" = {
+            # Disable the warning before emptying the Trash
+            WarnOnEmptyTrash = false;
+
+            # Finder search in current folder by default
+            FXDefaultSearchScope = "SCcf";
+
+            # Default Finder window set to column view
+            FXPreferredViewStyle = "clmv";
+          };
+        };
+
       };
 
       # Settings that don't have an option in nix-darwin
       activationScripts.postActivation.text = ''
-        echo "Disable disk image verification"
-        defaults write com.apple.frameworks.diskimages skip-verify -bool true
-        defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-        defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
-        echo "Avoid creating .DS_Store files on network volumes"
-        defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-        echo "Disable the warning before emptying the Trash"
-        defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-        echo "Require password immediately after sleep or screen saver begins"
-        defaults write com.apple.screensaver askForPassword -int 1
-        defaults write com.apple.screensaver askForPasswordDelay -int 0
-
         echo "Allow apps from anywhere"
         SPCTL=$(spctl --status)
         if ! [ "$SPCTL" = "assessments disabled" ]; then
             sudo spctl --master-disable
         fi
-
       '';
 
       # User-level settings
       activationScripts.postUserActivation.text = ''
         echo "Show the ~/Library folder"
         chflags nohidden ~/Library
-
-        if [ ! $(defaults read com.apple.dock magnification) = "1" ]; then
-            echo "Enable dock magnification"
-            defaults write com.apple.dock magnification -bool true
-        fi
-
-        if [ ! $(defaults read com.apple.dock largesize) = "48" ]; then
-            echo "Set dock magnification size"
-            defaults write com.apple.dock largesize -int 48
-        fi
 
         echo "Define dock icon function"
         __dock_item() {
