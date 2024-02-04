@@ -484,6 +484,38 @@
         "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-25/GE-Proton8-25.tar.gz"
       }
     },
+    "ren": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704996573,
+        "narHash": "sha256-zVIt6Xp+Mvym6gySvHIZJt1QgzKVP/wbTGTubWk6kzI=",
+        "owner": "robenkleene",
+        "repo": "ren-find",
+        "rev": "50c40172e354caffee48932266edd7c7a76a20fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "robenkleene",
+        "repo": "ren-find",
+        "type": "github"
+      }
+    },
+    "rep": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705833236,
+        "narHash": "sha256-hm+v+b97z1HnY/7QHZxc0GygCq9W0mJauyjnz48ddaM=",
+        "owner": "robenkleene",
+        "repo": "rep-grep",
+        "rev": "365acc5d599934e94dc066eb85b7ddd684ba508b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "robenkleene",
+        "repo": "rep-grep",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "Comment-nvim-src": "Comment-nvim-src",
@@ -511,6 +543,8 @@
         "nvim-tree-lua-src": "nvim-tree-lua-src",
         "nvim-treesitter-src": "nvim-treesitter-src",
         "proton-ge": "proton-ge",
+        "ren": "ren",
+        "rep": "rep",
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
         "toggleterm-nvim-src": "toggleterm-nvim-src",

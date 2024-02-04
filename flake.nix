@@ -161,6 +161,16 @@
       flake = false;
     };
 
+    # Ren and rep - CLI find and replace
+    rep = {
+      url = "github:robenkleene/rep-grep";
+      flake = false;
+    };
+    ren = {
+      url = "github:robenkleene/ren-find";
+      flake = false;
+    };
+
     # GE version of Proton for game compatibility
     # Alternatively, could consider using https://github.com/fufexan/nix-gaming
     proton-ge = {
@@ -249,6 +259,7 @@
         (import ./overlays/proton-ge.nix inputs)
         (import ./overlays/gh-collaborators.nix)
         (import ./overlays/bypass-paywalls-clean.nix inputs)
+        (import ./overlays/ren-rep.nix inputs)
       ];
 
       # System types to support.
