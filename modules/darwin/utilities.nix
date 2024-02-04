@@ -18,7 +18,6 @@
       awscli2
       awslogs
       google-cloud-sdk
-      ansible
       vault-bin
       consul
       noti # Create notifications programmatically
