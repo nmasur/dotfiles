@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: {
 
   config = lib.mkIf pkgs.stdenv.isDarwin {
 
@@ -137,6 +137,22 @@
           "com.apple.dock" = {
             magnification = true;
             largesize = 48;
+            persistent-apps = let
+              dockText = app:
+                "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>${app}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>";
+            in map dockText [
+              "/Applications/1Password.app"
+              "${pkgs.slack}/Applications/Slack.app"
+              "/System/Applications/Calendar.app"
+              "${pkgs.firefox-bin}/Applications/Firefox.app"
+              "/System/Applications/Messages.app"
+              "/System/Applications/Mail.app"
+              "/Applications/zoom.us.app"
+              "${pkgs.discord}/Applications/Discord.app"
+              "${pkgs.obsidian}/Applications/Obsidian.app"
+              "${pkgs.kitty}/Applications/kitty.app"
+              "/System/Applications/System Settings.app"
+            ];
           };
           # Require password immediately after screen saver begins
           "com.apple.screensaver" = {
@@ -153,6 +169,17 @@
             # Default Finder window set to column view
             FXPreferredViewStyle = "clmv";
           };
+          "leits.MeetingBar" = {
+            eventTimeFormat = ''"show"'';
+            eventTitleFormat = ''"none"'';
+            eventTitleIconFormat = ''"iconCalendar"'';
+            slackBrowser =
+              ''{"deletable":true,"arguments":"","name":"Slack","path":""}'';
+            zoomBrowser =
+              ''{"deletable":true,"arguments":"","name":"Zoom","path":""}'';
+            KeyboardShortcuts_joinEventShortcut =
+              ''{"carbonModifiers":6400,"carbonKeyCode":38}'';
+          };
         };
 
       };
@@ -167,41 +194,15 @@
       '';
 
       # User-level settings
-      activationScripts.postUserActivation.text = ''
+      activationScripts.postUserActivation.text = let
+        persistentApps = lib.concatMapStrings (x: ''"'' + x + ''" '')
+          config.system.defaults.CustomUserPreferences."com.apple.dock".persistent-apps;
+      in ''
         echo "Show the ~/Library folder"
         chflags nohidden ~/Library
 
-        echo "Define dock icon function"
-        __dock_item() {
-            printf "%s%s%s%s%s" \
-                   "<dict><key>tile-data</key><dict><key>file-data</key><dict>" \
-                   "<key>_CFURLString</key><string>" \
-                   "$1" \
-                   "</string><key>_CFURLStringType</key><integer>0</integer>" \
-                   "</dict></dict></dict>"
-        }
-
         echo "Choose and order dock icons"
-        defaults write com.apple.dock persistent-apps -array \
-            "$(__dock_item /Applications/1Password.app)" \
-            "$(__dock_item ${pkgs.slack}/Applications/Slack.app)" \
-            "$(__dock_item /System/Applications/Calendar.app)" \
-            "$(__dock_item ${pkgs.firefox-bin}/Applications/Firefox.app)" \
-            "$(__dock_item /System/Applications/Messages.app)" \
-            "$(__dock_item /System/Applications/Mail.app)" \
-            "$(__dock_item /Applications/zoom.us.app)" \
-            "$(__dock_item ${pkgs.discord}/Applications/Discord.app)" \
-            "$(__dock_item ${pkgs.obsidian}/Applications/Obsidian.app)" \
-            "$(__dock_item ${pkgs.kitty}/Applications/kitty.app)" \
-            "$(__dock_item /System/Applications/System\ Settings.app)"
-
-        echo "MeetingBar settings"
-        defaults write leits.MeetingBar eventTimeFormat -string "\"show\""
-        defaults write leits.MeetingBar eventTitleFormat -string "\"none\""
-        defaults write leits.MeetingBar eventTitleIconFormat -string "\"iconCalendar\""
-        defaults write leits.MeetingBar slackBrowser -string "{\"deletable\":true,\"arguments\":\"\",\"name\":\"Slack\",\"path\":\"\"}"
-        defaults write leits.MeetingBar zoomBrowser -string "{\"deletable\":true,\"arguments\":\"\",\"name\":\"Zoom\",\"path\":\"\"}"
-        defaults write leits.MeetingBar KeyboardShortcuts_joinEventShortcut -string "{\"carbonModifiers\":6400,\"carbonKeyCode\":38}"
+        defaults write com.apple.dock persistent-apps -array ${persistentApps}
       '';
 
     };
