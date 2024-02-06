@@ -9,7 +9,7 @@ obj.version = "0.1"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 function obj:init()
-    hs.window.animationDuration = 0
+    hs.window.animationDuration = 0.1
     dofile(hs.spoons.resourcePath("worklayout.lua"))()
     -- bind hotkey
     hs.hotkey.bind({ "alt", "ctrl", "cmd" }, "n", function()
