@@ -40,6 +40,7 @@
         associations.added = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
           "image/jpeg" = [ "nsxiv.desktop" ];
+          "image/png" = [ "nsxiv.desktop" ];
           "image/*" = [ "nsxiv.desktop" ];
         };
         associations.removed = {
@@ -48,6 +49,7 @@
         defaultApplications = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
           "image/jpeg" = [ "nsxiv.desktop" ];
+          "image/png" = [ "nsxiv.desktop" ];
           "image/*" = [ "nsxiv.desktop" ];
         };
       };
