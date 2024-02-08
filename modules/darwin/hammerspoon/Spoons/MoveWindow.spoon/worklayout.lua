@@ -51,6 +51,7 @@ local function worklayout()
         local laptop = {
             { "Firefox",  nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
             { "Obsidian", nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
+            { "Calendar", nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
         }
         local layout = concat(left, right, laptop)
         hs.layout.apply(layout)

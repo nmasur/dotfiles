@@ -8,10 +8,10 @@ obj.name = "Launcher"
 obj.version = "0.1"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
-local width = hs.screen.mainScreen():fullFrame().w
+local screen = hs.screen.primaryScreen()
 local switcherWidth = 500
 obj.canvas = hs.canvas.new({
-    x = width / 2 - switcherWidth / 2,
+    x = (screen:fullFrame().x + screen:fullFrame().w) / 2 - switcherWidth / 2,
     y = 1,
     h = 3,
     w = switcherWidth,

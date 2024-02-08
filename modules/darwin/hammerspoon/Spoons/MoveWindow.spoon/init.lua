@@ -56,7 +56,7 @@ function obj:init()
         local frame = win:frame()
         -- maximize if possible
         local max = win:screen():fullFrame()
-        frame.x = max.w / 2
+        frame.x = (max.x * 2 + max.w) / 2
         frame.y = max.y
         frame.w = max.w / 2
         frame.h = max.h
