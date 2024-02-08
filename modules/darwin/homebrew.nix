@@ -30,17 +30,14 @@
       };
       brews = [
         "trash" # Delete files and folders to trash instead of rm
-        "openjdk" # Required by Apache Directory Studio
       ];
       casks = [
         "1password" # 1Password will not launch from Nix on macOS
-        "apache-directory-studio" # Packaging on Nix is not available for macOS
         # "gitify" # Git notifications in menu bar (downgrade manually from 4.6.1)
         "keybase" # GUI on Nix not available for macOS
         # "logitech-g-hub" # Mouse and keyboard management
         "logitune" # Logitech webcam firmware
         "meetingbar" # Show meetings in menu bar
-        # "obsidian" # Obsidian packaging on Nix is not available for macOS
         "scroll-reverser" # Different scroll style for mouse vs. trackpad
         # "steam" # Not packaged for Nix
         # "epic-games" # Not packaged for Nix
