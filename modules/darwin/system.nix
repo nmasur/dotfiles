@@ -112,13 +112,6 @@
         # Disable trackpad tap to click
         trackpad.Clicking = false;
 
-        # universalaccess = {
-
-        #   # Zoom in with Control + Scroll Wheel
-        #   closeViewScrollWheelToggle = true;
-        #   closeViewZoomFollowsFocus = true;
-        # };
-
         # Where to save screenshots
         screencapture.location = "~/Downloads";
 
@@ -179,7 +172,12 @@
               ''{"deletable":true,"arguments":"","name":"Zoom","path":""}'';
             KeyboardShortcuts_joinEventShortcut =
               ''{"carbonModifiers":6400,"carbonKeyCode":38}'';
+            timeFormat = ''"12-hour"'';
           };
+        };
+
+        CustomSystemPreferences = {
+
         };
 
       };
