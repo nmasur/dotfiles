@@ -48,23 +48,12 @@
       before = [ "paperless.service" ];
     };
 
-    # Fix permissions on a regular schedule
-    systemd.timers.paperless-permissions = {
-      timerConfig = {
-        OnCalendar = "*-*-* *:0/5"; # Every 5 minutes
-        Unit = "paperless-permissions.service";
-      };
-      wantedBy = [ "timers.target" ];
-    };
-
     # Fix paperless shared permissions
-    systemd.services.paperless-permissions = {
-      description = "Allow group access to paperless files";
-      serviceConfig = { Type = "oneshot"; };
-      script = ''
-        find ${config.services.paperless.mediaDir} -type f -exec chmod 640 -- {} +
-      '';
-    };
+    systemd.services.paperless-web.serviceConfig.UMask = lib.mkForce "0026";
+    systemd.services.paperless-scheduler.serviceConfig.UMask =
+      lib.mkForce "0026";
+    systemd.services.paperless-task-queue.serviceConfig.UMask =
+      lib.mkForce "0026";
 
   };
 
