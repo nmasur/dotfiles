@@ -14,7 +14,7 @@
         adminpassFile = config.secrets.nextcloud.dest;
         dbtype = "mysql";
       };
-      extraOptions = {
+      settings = {
         default_phone_region = "US";
         # Allow access when hitting either of these hosts or IPs
         trusted_domains = [ config.hostnames.content ];
