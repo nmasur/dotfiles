@@ -44,7 +44,10 @@
     use.lspconfig.rust_analyzer.setup = dsl.callWith {
       cmd = [ "${pkgs.rust-analyzer}/bin/rust-analyzer" ];
       settings = {
-        "['rust-analyzer']" = { check = { command = "clippy"; }; };
+        "['rust-analyzer']" = {
+          check = { command = "clippy"; };
+          files = { excludeDirs = [ ".direnv" ]; };
+        };
       };
     };
 
