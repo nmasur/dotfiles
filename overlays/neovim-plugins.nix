@@ -40,8 +40,12 @@ in {
     # Packaging plugins entirely with Nix
     baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
     hmts-nvim = plugin "hmts-nvim" inputs.hmts-nvim-src;
-    kitty-scrollback-nvim =
-      plugin "kitty-scrollback-nvim" inputs.kitty-scrollback-nvim-src;
+    kitty-scrollback-nvim = prev.vimUtils.buildVimPlugin {
+      pname = "kitty-scrollback-nvim";
+      src = inputs.kitty-scrollback-nvim-src;
+      version = "master";
+      patches = [ ./kitty-scrollback-nvim.patch ];
+    };
 
   };
 
