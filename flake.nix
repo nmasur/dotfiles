@@ -69,16 +69,12 @@
       url = "github:hrsh7th/cmp-nvim-lsp";
       flake = false;
     };
-    null-ls-nvim-src = {
-      url = "github:jose-elias-alvarez/null-ls.nvim";
-      flake = false;
-    };
     baleia-nvim-src = {
       # https://github.com/m00qek/baleia.nvim/tags
       url = "github:m00qek/baleia.nvim";
       flake = false;
     };
-    Comment-nvim-src = {
+    comment-nvim-src = {
       # https://github.com/numToStr/Comment.nvim/releases
       url = "github:numToStr/Comment.nvim/v0.8.0";
       flake = false;
@@ -122,6 +118,10 @@
     };
     kitty-scrollback-nvim-src = {
       url = "github:mikesmithgh/kitty-scrollback.nvim";
+      flake = false;
+    };
+    nvim-lint-src = {
+      url = "github:mfussenegger/nvim-lint";
       flake = false;
     };
 
@@ -374,6 +374,10 @@
         haskell = {
           path = ./templates/haskell;
           description = "Haskell template";
+        };
+        rust = {
+          path = ./templates/rust;
+          description = "Rust template";
         };
       };
 

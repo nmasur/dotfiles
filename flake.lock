@@ -1,22 +1,5 @@
 {
   "nodes": {
-    "Comment-nvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1681214440,
-        "narHash": "sha256-48hy+hiaDJLlgWqC7IeZI3dT+VwWkRo4atQbyPxu/ys=",
-        "owner": "numToStr",
-        "repo": "Comment.nvim",
-        "rev": "e51f2b142d88bb666dcaa77d93a07f4b419aca70",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numToStr",
-        "ref": "v0.8.0",
-        "repo": "Comment.nvim",
-        "type": "github"
-      }
-    },
     "baleia-nvim-src": {
       "flake": false,
       "locked": {
@@ -79,6 +62,23 @@
       "original": {
         "owner": "hrsh7th",
         "repo": "cmp-nvim-lsp",
+        "type": "github"
+      }
+    },
+    "comment-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681214440,
+        "narHash": "sha256-48hy+hiaDJLlgWqC7IeZI3dT+VwWkRo4atQbyPxu/ys=",
+        "owner": "numToStr",
+        "repo": "Comment.nvim",
+        "rev": "e51f2b142d88bb666dcaa77d93a07f4b419aca70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numToStr",
+        "ref": "v0.8.0",
+        "repo": "Comment.nvim",
         "type": "github"
       }
     },
@@ -390,22 +390,6 @@
         "type": "github"
       }
     },
-    "null-ls-nvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1691810493,
-        "narHash": "sha256-cWA0rzkOp/ekVKaFee7iea1lhnqKtWUIU+fW5M950wI=",
-        "owner": "jose-elias-alvarez",
-        "repo": "null-ls.nvim",
-        "rev": "0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jose-elias-alvarez",
-        "repo": "null-ls.nvim",
-        "type": "github"
-      }
-    },
     "nur": {
       "locked": {
         "lastModified": 1707013032,
@@ -418,6 +402,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "nur",
+        "type": "github"
+      }
+    },
+    "nvim-lint-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707389610,
+        "narHash": "sha256-o2XCMJOySY7A40yS8/aFqhOSpPWTleD4DnOMssSKmXc=",
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
+        "rev": "966ab3dc37eee3e413692264b44a3011b05a6060",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-lint",
         "type": "github"
       }
     },
@@ -518,11 +518,11 @@
     },
     "root": {
       "inputs": {
-        "Comment-nvim-src": "Comment-nvim-src",
         "baleia-nvim-src": "baleia-nvim-src",
         "bufferline-nvim-src": "bufferline-nvim-src",
         "bypass-paywalls-clean": "bypass-paywalls-clean",
         "cmp-nvim-lsp-src": "cmp-nvim-lsp-src",
+        "comment-nvim-src": "comment-nvim-src",
         "darwin": "darwin",
         "disko": "disko",
         "fidget-nvim-src": "fidget-nvim-src",
@@ -537,8 +537,8 @@
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
-        "null-ls-nvim-src": "null-ls-nvim-src",
         "nur": "nur",
+        "nvim-lint-src": "nvim-lint-src",
         "nvim-lspconfig-src": "nvim-lspconfig-src",
         "nvim-tree-lua-src": "nvim-tree-lua-src",
         "nvim-treesitter-src": "nvim-treesitter-src",

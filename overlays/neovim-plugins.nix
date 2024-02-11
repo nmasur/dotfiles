@@ -16,26 +16,33 @@ let
 
 in {
 
-  nvim-lspconfig = withSrc prev.vimPlugins.nvim-lspconfig inputs.nvim-lspconfig;
-  cmp-nvim-lsp = withSrc prev.vimPlugins.cmp-nvim-lsp inputs.cmp-nvim-lsp;
-  null-ls-nvim = withSrc prev.vimPlugins.null-ls-nvim inputs.null-ls-nvim;
-  comment-nvim = withSrc prev.vimPlugins.comment-nvim inputs.comment-nvim;
-  nvim-treesitter =
-    withSrc prev.vimPlugins.nvim-treesitter inputs.nvim-treesitter;
-  telescope-nvim = withSrc prev.vimPlugins.telescope-nvim inputs.telescope-nvim;
-  telescope-project-nvim = withSrc prev.vimPlugins.telescope-project-nvim
-    inputs.telescope-project-nvim;
-  toggleterm-nvim =
-    withSrc prev.vimPlugins.toggleterm-nvim inputs.toggleterm-nvim;
-  bufferline-nvim =
-    withSrc prev.vimPlugins.bufferline-nvim inputs.bufferline-nvim;
-  nvim-tree-lua = withSrc prev.vimPlugins.nvim-tree-lua inputs.nvim-tree-lua;
-  fidget-nvim = withSrc prev.vimPlugins.fidget-nvim inputs.fidget-nvim;
+  vimPlugins = prev.vimPlugins // {
 
-  # Packaging plugins entirely with Nix
-  baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
-  hmts-nvim = plugin "hmts-nvim" inputs.hmts-nvim-src;
-  kitty-scrollback-nvim =
-    plugin "kitty-scrollback-nvim" inputs.kitty-scrollback-nvim-src;
+    nvim-lspconfig =
+      withSrc prev.vimPlugins.nvim-lspconfig inputs.nvim-lspconfig-src;
+    cmp-nvim-lsp = withSrc prev.vimPlugins.cmp-nvim-lsp inputs.cmp-nvim-lsp-src;
+    comment-nvim = withSrc prev.vimPlugins.comment-nvim inputs.comment-nvim-src;
+    nvim-treesitter =
+      withSrc prev.vimPlugins.nvim-treesitter inputs.nvim-treesitter-src;
+    telescope-nvim =
+      withSrc prev.vimPlugins.telescope-nvim inputs.telescope-nvim-src;
+    telescope-project-nvim = withSrc prev.vimPlugins.telescope-project-nvim
+      inputs.telescope-project-nvim-src;
+    toggleterm-nvim =
+      withSrc prev.vimPlugins.toggleterm-nvim inputs.toggleterm-nvim-src;
+    bufferline-nvim =
+      withSrc prev.vimPlugins.bufferline-nvim inputs.bufferline-nvim-src;
+    nvim-tree-lua =
+      withSrc prev.vimPlugins.nvim-tree-lua inputs.nvim-tree-lua-src;
+    fidget-nvim = withSrc prev.vimPlugins.fidget-nvim inputs.fidget-nvim-src;
+    nvim-lint = withSrc prev.vimPlugins.nvim-lint inputs.nvim-lint-src;
+
+    # Packaging plugins entirely with Nix
+    baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
+    hmts-nvim = plugin "hmts-nvim" inputs.hmts-nvim-src;
+    kitty-scrollback-nvim =
+      plugin "kitty-scrollback-nvim" inputs.kitty-scrollback-nvim-src;
+
+  };
 
 }
