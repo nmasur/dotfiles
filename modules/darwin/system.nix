@@ -201,6 +201,10 @@
 
         echo "Choose and order dock icons"
         defaults write com.apple.dock persistent-apps -array ${persistentApps}
+
+        echo "Reduce Menu Bar padding"
+        defaults write -globalDomain NSStatusItemSelectionPadding -int 6
+        defaults write -globalDomain NSStatusItemSpacing -int 6
       '';
 
     };
