@@ -45,7 +45,7 @@ in {
       # TODO: fix with variables
       xdg.configFile."git/personal".text = ''
         [user]
-            name = "Noah Masur"
+            name = "${config.fullName}"
             email = "7386960+nmasur@users.noreply.github.com"
       '';
 
