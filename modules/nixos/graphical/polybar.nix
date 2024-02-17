@@ -141,7 +141,7 @@
             format-volume = "<ramp-volume> <label-volume>";
             # format-volume-background = colors.background;
             # label-volume-background = colors.background;
-            format-volume-foreground = config.theme.colors.base0B;
+            format-volume-foreground = config.theme.colors.base04;
             label-volume = "%percentage%%";
             label-muted = "󰝟 ---";
             label-muted-foreground = config.theme.colors.base03;
@@ -197,7 +197,7 @@
             date = "%d %b %l:%M %p";
             date-alt = "%Y-%m-%d %H:%M:%S";
             label = "%date%";
-            label-foreground = config.theme.colors.base0A;
+            label-foreground = config.theme.colors.base06;
             # format-background = colors.background;
           };
           "module/keyboard" = {
