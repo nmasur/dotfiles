@@ -166,6 +166,11 @@
 
       };
 
+      xdg.mimeApps = {
+        associations.added = { "text.html" = [ "firefox.desktop" ]; };
+        defaultApplications = { "text.html" = [ "firefox.desktop" ]; };
+      };
+
       xsession.windowManager.i3.config.keybindings =
         lib.mkIf pkgs.stdenv.isLinux {
           "${
