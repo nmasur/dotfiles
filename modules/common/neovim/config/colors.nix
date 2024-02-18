@@ -8,7 +8,7 @@
   };
 
   config = {
-    plugins = [ pkgs.vimPlugins.nvim-base16 ];
+    plugins = [ pkgs.vimPlugins.base16-nvim ];
     setup.base16-colorscheme = config.colors;
 
     # Telescope isn't working, shut off for now

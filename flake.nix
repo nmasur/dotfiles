@@ -60,6 +60,10 @@
     };
 
     # Neovim plugins
+    base16-nvim-src = {
+      url = "github:RRethy/base16-nvim";
+      flake = false;
+    };
     nvim-lspconfig-src = {
       # https://github.com/neovim/nvim-lspconfig/tags
       url = "github:neovim/nvim-lspconfig/v0.1.7";

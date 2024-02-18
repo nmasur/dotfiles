@@ -38,6 +38,7 @@ in {
     nvim-lint = withSrc prev.vimPlugins.nvim-lint inputs.nvim-lint-src;
 
     # Packaging plugins entirely with Nix
+    base16-nvim = plugin "base16-nvim" inputs.base16-nvim-src;
     baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
     hmts-nvim = plugin "hmts-nvim" inputs.hmts-nvim-src;
     kitty-scrollback-nvim = prev.vimUtils.buildVimPlugin {
