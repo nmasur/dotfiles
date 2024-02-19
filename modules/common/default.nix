@@ -123,7 +123,7 @@
 
       gc = {
         automatic = true;
-        options = "--delete-older-than 7d";
+        options = "--delete-older-than 10d";
       };
 
       settings = {
