@@ -113,38 +113,6 @@
   config = let stateVersion = "23.05";
   in {
 
-    nix = {
-
-      # Enable features in Nix commands
-      extraOptions = ''
-        experimental-features = nix-command flakes
-        warn-dirty = false
-      '';
-
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 10d";
-      };
-
-      settings = {
-
-        # Add community Cachix to binary cache
-        # Don't use with macOS because blocked by corporate firewall
-        builders-use-substitutes = true;
-        substituters = lib.mkIf (!pkgs.stdenv.isDarwin)
-          [ "https://nix-community.cachix.org" ];
-        trusted-public-keys = lib.mkIf (!pkgs.stdenv.isDarwin) [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-
-        # Scans and hard links identical files in the store
-        # Not working with macOS: https://github.com/NixOS/nix/issues/7273
-        auto-optimise-store = lib.mkIf (!pkgs.stdenv.isDarwin) true;
-
-      };
-
-    };
-
     # Basic common system packages for all devices
     environment.systemPackages = with pkgs; [ git vim wget curl ];
 
