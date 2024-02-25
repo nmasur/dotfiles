@@ -11,6 +11,10 @@
       };
     };
 
+    # Adding new users:
+    # nix shell nixpkgs#thelounge
+    # sudo su - thelounge -s /bin/sh -c "thelounge add myuser"
+
     # Allow web traffic to Caddy
     caddy.routes = [{
       match = [{ host = [ config.hostnames.irc ]; }];
