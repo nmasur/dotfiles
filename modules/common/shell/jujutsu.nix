@@ -4,7 +4,6 @@
 
     home-manager.users.${config.user}.programs.jujutsu = {
       enable = true;
-      enableFishIntegration = false; # Temp: not working
 
       # https://github.com/martinvonz/jj/blob/main/docs/config.md
       settings = {
