@@ -107,6 +107,10 @@
         type = lib.types.str;
         description = "Hostname for download services.";
       };
+      irc = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for IRC services.";
+      };
     };
   };
 

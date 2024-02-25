@@ -237,6 +237,7 @@
         hostnames = {
           git = "git.${baseName}";
           influxdb = "influxdb.${baseName}";
+          irc = "irc.${baseName}";
           metrics = "metrics.${baseName}";
           prometheus = "prom.${baseName}";
           paperless = "paper.${baseName}";

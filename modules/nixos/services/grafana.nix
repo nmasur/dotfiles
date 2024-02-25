@@ -50,6 +50,7 @@ in {
         dashboards.settings.providers = [{
           name = "test";
           type = "file";
+          allowUiUpdates = true;
           options.path = "${
               (pkgs.writeTextDir "dashboards/dashboard.json" (builtins.toJSON {
                 annotations = {

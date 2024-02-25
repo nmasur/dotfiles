@@ -59,6 +59,7 @@ inputs.nixpkgs.lib.nixosSystem {
       giteaRunner.enable = true;
       services.caddy.enable = true;
       services.grafana.enable = true;
+      services.thelounge.enable = true;
       services.openssh.enable = true;
       services.victoriametrics.enable = true;
       services.influxdb2.enable = true;

@@ -11,6 +11,7 @@
     ./calibre.nix
     ./cloudflare-tunnel.nix
     ./cloudflare.nix
+    ./irc.nix
     ./gitea-runner.nix
     ./gitea.nix
     ./gnupg.nix
