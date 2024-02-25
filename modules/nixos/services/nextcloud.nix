@@ -12,13 +12,14 @@
       maxUploadSize = "50G";
       config = {
         adminpassFile = config.secrets.nextcloud.dest;
-        dbtype = "mysql";
+        dbtype = "pgsql";
       };
       settings = {
         default_phone_region = "US";
         # Allow access when hitting either of these hosts or IPs
         trusted_domains = [ config.hostnames.content ];
         trusted_proxies = [ "127.0.0.1" ];
+        maintenance_window_start = 4; # Run jobs at 4am UTC
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {

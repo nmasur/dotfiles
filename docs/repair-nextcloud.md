@@ -63,3 +63,20 @@ Use this mysqldump command:
 sudo -u nextcloud mysqldump -S /run/mysqld/mysqld.sock --default-character-set=utf8mb4 nextcloud > backup.sql
 ```
 
+## Converting to Postgres
+
+Same as MySQL, but run this command instead:
+
+```
+sudo -u nextcloud nextcloud-occ db:convert-type pgsql nextcloud /run/postgresql/ nextcloud
+```
+
+Then set the `dbtype` to `pgsql`.
+
+## Backing Up Postgres Database
+
+Use this pg_dump command:
+
+```
+sudo -u nextcloud pg_dump nextcloud > backup.sql
+```
