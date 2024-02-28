@@ -103,8 +103,8 @@
           color21 = config.theme.colors.base06;
 
           # Scrollback
-          scrolling_lines = 10000;
-          scrollback_pager_history_size = 10; # MB
+          scrollback_lines = 10000;
+          scrollback_pager_history_size = 300; # MB
 
           # Window
           window_padding_width = 6;
