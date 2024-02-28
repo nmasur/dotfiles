@@ -33,6 +33,7 @@ in {
           pull = { ff = "only"; };
           push = { autoSetupRemote = "true"; };
           init = { defaultBranch = "master"; };
+          rebase = { autosquash = "true"; };
         };
         ignores = [ ".direnv/**" "result" ];
         includes = [{
