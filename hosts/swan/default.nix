@@ -56,8 +56,15 @@ inputs.nixpkgs.lib.nixosSystem {
         devices = (import ../../disks/root.nix { disk = "/dev/nvme0n1"; });
       };
 
-      # Automatically load the ZFS pool on boot
-      boot.zfs.extraPools = [ "tank" ];
+      boot.zfs = {
+        # Automatically load the ZFS pool on boot
+        extraPools = [ "tank" ];
+        # Only try to decrypt datasets with keyfiles
+        requestEncryptionCredentials =
+          [ "tank/archive" "tank/generic" "tank/nextcloud" ];
+        # If password is requested and fails, continue to boot eventually
+        passwordTimeout = 300;
+      };
 
       # Theming
 
