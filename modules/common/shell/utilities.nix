@@ -20,6 +20,7 @@ in {
       home.packages = with pkgs; [
         age # Encryption
         bc # Calculator
+        delta # Fancy diffs
         dig # DNS lookup
         fd # find
         htop # Show system processes
