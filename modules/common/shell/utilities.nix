@@ -21,6 +21,7 @@ in {
         age # Encryption
         bc # Calculator
         delta # Fancy diffs
+        difftastic # Other fancy diffs
         dig # DNS lookup
         fd # find
         htop # Show system processes
