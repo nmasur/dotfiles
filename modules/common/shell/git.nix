@@ -28,6 +28,10 @@ in {
         userName = config.gitName;
         userEmail = config.gitEmail;
         extraConfig = {
+          core.pager =
+            "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less -F";
+          interactive.difffilter =
+            "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight";
           pager = { branch = "false"; };
           safe = { directory = config.dotfilesPath; };
           pull = { ff = "only"; };
