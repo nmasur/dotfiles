@@ -41,12 +41,10 @@
             okta-browser-plugin
             reddit-enhancement-suite
             return-youtube-dislikes
-            snowflake
             sponsorblock
             ublock-origin
             ublacklist
             vimium
-            wappalyzer
           ];
           settings = {
             "app.update.auto" = false;
