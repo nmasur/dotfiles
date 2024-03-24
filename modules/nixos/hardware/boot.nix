@@ -27,7 +27,7 @@
         if keystatus --shift ; then
             set timeout=-1
         else
-            set timeout=0
+            set timeout=3
         fi
       '';
     };
