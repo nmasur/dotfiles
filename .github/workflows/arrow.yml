@@ -89,6 +89,7 @@ jobs:
             -backend-config="key=state.tfstate" \
             -backend-config="skip_credentials_validation=true" \
             -backend-config="skip_region_validation=true" \
+            -backend-config="skip_requesting_account_id=true" \
             -backend-config="region=anything" \
             -backend-config="bucket=noahmasur-terraform"
 
