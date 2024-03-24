@@ -7,6 +7,7 @@ env:
   CLOUDFLARE_R2_ENDPOINT: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
   AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
+  AWS_DEFAULT_REGION: auto
   AWS_ENDPOINT_URL_S3: "https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
   TF_VAR_vultr_api_key: ${{ secrets.VULTR_API_KEY }}
 
