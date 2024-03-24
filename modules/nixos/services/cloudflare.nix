@@ -79,7 +79,7 @@ in {
       group = "caddy";
     };
     systemd.services.cloudflare-api-secret.serviceConfig.ExecStartPost = ''
-      /run/current-system/sw/bin/systemctl restart caddy.service
+      /run/current-system/sw/bin/systemctl restart caddy.service && \
       /run/current-system/sw/bin/systemctl restart cloudflare-dyndns.service
     '';
 
