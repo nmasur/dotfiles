@@ -6,13 +6,12 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = { Type = "oneshot"; };
     script = ''
-      while true; do
+      for i in $(seq 1 10); do
           if [ -f ${config.identityFile} ]; then
               echo "Identity file found."
               exit 0
           fi
-          sleep 5
-          exit 0
+          sleep 6
       done
     '';
   };
