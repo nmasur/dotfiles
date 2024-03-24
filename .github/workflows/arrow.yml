@@ -122,4 +122,6 @@ jobs:
 
       - name: Copy Identity File to Host
         if: inputs.action == 'create'
-        run: scp -i deploy_ed25519 arrow_ed25519 noah@${{ steps.host.outputs.stdout }}:~/.ssh/id_ed25519
+        run: |
+          ssh noah@${{ steps.host.outputs.stdout }} 'mkdir -pv .ssh'
+          scp -i deploy_ed25519 arrow_ed25519 noah@${{ steps.host.outputs.stdout }}:~/.ssh/id_ed25519

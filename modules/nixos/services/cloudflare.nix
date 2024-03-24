@@ -60,7 +60,7 @@ in {
           dns = {
             provider = {
               name = "cloudflare";
-              api_token = "{env.CF_API_TOKEN}";
+              api_token = "{env.CLOUDFLARE_API_TOKEN}";
             };
             resolvers = [ "1.1.1.1" ];
           };
