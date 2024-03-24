@@ -7,8 +7,8 @@ env:
   CLOUDFLARE_R2_ENDPOINT: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
   AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
+  AWS_ENDPOINT_URL_S3: "https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
   TF_VAR_vultr_api_key: ${{ secrets.VULTR_API_KEY }}
-  TF_VAR_cloudflare_r2_endpoint: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
 
 on:
   workflow_dispatch:
@@ -82,16 +82,7 @@ jobs:
       # Connects to remote state backend and download providers.
       - name: Terraform Init
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
-        run: |
-          terraform init \
-            -backend-config="endpoint=${{ env.CLOUDFLARE_R2_ENDPOINT }}" \
-            -backend-config="workspace_key_prefix=${{ github.repository }}/arrow" \
-            -backend-config="key=state.tfstate" \
-            -backend-config="skip_credentials_validation=true" \
-            -backend-config="skip_region_validation=true" \
-            -backend-config="skip_requesting_account_id=true" \
-            -backend-config="region=anything" \
-            -backend-config="bucket=noahmasur-terraform"
+        run: terraform init
 
       # Deploys infrastructure or changes to infrastructure.
       - name: Terraform Apply
