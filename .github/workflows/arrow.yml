@@ -123,7 +123,9 @@ jobs:
         if: inputs.action == 'create'
         run: |
           echo "${{ env.DEPLOY_IDENTITY_BASE64 }}" | base64 -d > deploy_ed25519
+          chmod 0600 deploy_ed25519
           echo "${{ env.ARROW_IDENTITY_BASE64 }}" | base64 -d > arrow_ed25519
+          chmod 0600 arrow_ed25519
 
       - name: Copy Identity File to Host
         if: inputs.action == 'create'
