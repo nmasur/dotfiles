@@ -34,10 +34,10 @@ terraform {
 #   image_file = one(fileset(path.root, "result/iso/nixos.iso"))
 # }
 
-variable "cloudflare_r2_endpoint" {
-  type        = string
-  description = "Domain for the Cloudflare R2 endpoint"
-}
+# variable "cloudflare_r2_endpoint" {
+#   type        = string
+#   description = "Domain for the Cloudflare R2 endpoint"
+# }
 
 variable "vultr_api_key" {
   type        = string
@@ -46,15 +46,11 @@ variable "vultr_api_key" {
 }
 
 provider "aws" {
-  region = "us-east-1"
-
+  region                      = "auto"
   skip_credentials_validation = true
+  skip_metadata_api_check     = true
   skip_region_validation      = true
   skip_requesting_account_id  = true
-
-  endpoints {
-    s3 = "https://${var.cloudflare_r2_endpoint}"
-  }
 }
 
 provider "vultr" {
