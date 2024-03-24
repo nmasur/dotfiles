@@ -57,6 +57,9 @@ jobs:
             result/iso/nixos.iso \
             s3://noahmasur-arrow-images/arrow.iso \
             --endpoint-url "https://${{ env.CLOUDFLARE_R2_ENDPOINT }}"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
 
       # # Copy the image to S3
       # - name: Upload Image to Cache
