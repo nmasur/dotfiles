@@ -12,8 +12,9 @@ inputs.nixos-generators.nixosGenerate {
       gui.enable = false;
       theme.colors = (import ../../colorscheme/gruvbox).dark;
       passwordHash = null;
-      publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
+      publicKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s personal"
+      ];
       # AWS settings require this
       permitRootLogin = "prohibit-password";
     }

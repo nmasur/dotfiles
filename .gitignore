@@ -1,6 +1,7 @@
 .DS_Store
 *.bak
 *.db
+*.qcow2
 **/.direnv/**
 result
 private/**

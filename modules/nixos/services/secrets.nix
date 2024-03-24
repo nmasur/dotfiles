@@ -68,6 +68,7 @@
 
         description = "Decrypt secret for ${name}";
         wantedBy = [ "multi-user.target" ];
+        requires = [ "wait-for-identity.service" ];
         serviceConfig.Type = "oneshot";
         script = ''
           echo "${attrs.prefix}$(

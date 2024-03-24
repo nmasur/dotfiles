@@ -84,8 +84,9 @@ inputs.nixpkgs.lib.nixosSystem {
       };
 
       # Disable passwords, only use SSH key
-      publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s";
+      publicKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s personal"
+      ];
 
       # # Wireguard config for Transmission
       # wireguard.enable = true;

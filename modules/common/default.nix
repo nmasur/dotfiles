@@ -111,6 +111,10 @@
         type = lib.types.str;
         description = "Hostname for IRC services.";
       };
+      transmission = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for peer2peer downloads (Transmission).";
+      };
     };
   };
 

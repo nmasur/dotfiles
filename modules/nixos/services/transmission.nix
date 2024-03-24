@@ -3,36 +3,32 @@
 
 { config, pkgs, lib, ... }: {
 
-  options = {
-    transmissionServer = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Hostname for Transmission";
-      default = null;
-    };
-  };
-
   config = let
     namespace = config.networking.wireguard.interfaces.wg0.interfaceNamespace;
     vpnIp = lib.strings.removeSuffix "/32"
       (builtins.head config.networking.wireguard.interfaces.wg0.ips);
-  in lib.mkIf (config.transmissionServer != null) {
+  in lib.mkIf config.services.transmission.enable {
 
     # Setup transmission
     services.transmission = {
-      enable = true;
       settings = {
         port-forwarding-enabled = false;
         rpc-authentication-required = true;
         rpc-port = 9091;
         rpc-bind-address = "0.0.0.0";
         rpc-username = config.user;
-        rpc-host-whitelist = config.transmissionServer;
+        # This is a salted hash of the real password
+        # https://github.com/tomwijnroks/transmission-pwgen
+        rpc-password = "{c4c5145f6e18bcd3c7429214a832440a45285ce26jDOBGVW";
+        rpc-host-whitelist = config.hostnames.transmission;
         rpc-host-whitelist-enabled = true;
-        rpc-whitelist = "127.0.0.1,${vpnIp}";
-        rpc-whitelist-enabled = config.wireguard.enable;
+        rpc-whitelist = lib.mkDefault "127.0.0.1"; # Overwritten by Cloudflare
+        rpc-whitelist-enabled = true;
       };
-      credentialsFile = config.secrets.transmission.dest;
     };
+
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.transmission ];
 
     # Bind transmission to wireguard namespace
     systemd.services.transmission = lib.mkIf config.wireguard.enable {
@@ -45,17 +41,22 @@
 
     # Create reverse proxy for web UI
     caddy.routes = lib.mkAfter [{
-      group = if (config.hostnames.download == config.transmissionServer) then
-        "download"
-      else
-        "transmission";
+      group =
+        if (config.hostnames.download == config.hostnames.transmission) then
+          "download"
+        else
+          "transmission";
       match = [{
-        host = [ config.transmissionServer ];
+        host = [ config.hostnames.transmission ];
         path = [ "/transmission*" ];
       }];
       handle = [{
         handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:9091"; }];
+        upstreams = [{
+          dial = "localhost:${
+              builtins.toString config.services.transmission.settings.rpc-port
+            }";
+        }];
       }];
     }];
 
@@ -77,14 +78,6 @@
         ${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.iproute2}/bin/ip link set dev lo up
         ${pkgs.socat}/bin/socat tcp-listen:9091,fork,reuseaddr exec:'${pkgs.iproute2}/bin/ip netns exec ${namespace} ${pkgs.socat}/bin/socat STDIO "tcp-connect:${vpnIp}:9091"',nofork
       '';
-    };
-
-    # Create credentials file for transmission
-    secrets.transmission = {
-      source = ../../../private/transmission.json.age;
-      dest = "${config.secretsDirectory}/transmission.json";
-      owner = "transmission";
-      group = "transmission";
     };
 
   };

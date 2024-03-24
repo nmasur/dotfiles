@@ -3,8 +3,8 @@
 { config, pkgs, lib, ... }: {
 
   options = {
-    publicKey = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
+    publicKeys = lib.mkOption {
+      type = lib.types.nullOr (lib.types.listOf lib.types.str);
       description = "Public SSH key authorized for this system.";
       default = null;
     };
@@ -28,7 +28,7 @@
     };
 
     users.users.${config.user}.openssh.authorizedKeys.keys =
-      lib.mkIf (config.publicKey != null) [ config.publicKey ];
+      lib.mkIf (config.publicKeys != null) config.publicKeys;
 
     # Implement a simple fail2ban service for sshd
     services.sshguard.enable = true;

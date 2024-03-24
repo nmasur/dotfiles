@@ -246,6 +246,7 @@
           content = "cloud.${baseName}";
           books = "books.${baseName}";
           download = "download.${baseName}";
+          transmission = "transmission.${baseName}";
         };
       };
 
@@ -279,6 +280,7 @@
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
       nixosConfigurations = {
+        arrow = import ./hosts/arrow { inherit inputs globals overlays; };
         tempest = import ./hosts/tempest { inherit inputs globals overlays; };
         hydra = import ./hosts/hydra { inherit inputs globals overlays; };
         flame = import ./hosts/flame { inherit inputs globals overlays; };
@@ -305,6 +307,8 @@
       diskoConfigurations = { root = import ./disks/root.nix; };
 
       packages = let
+        arrow = system:
+          import ./hosts/arrow { inherit inputs globals overlays system; };
         aws = system:
           import ./hosts/aws { inherit inputs globals overlays system; };
         staff = system:
@@ -316,8 +320,18 @@
             colors = (import ./colorscheme/gruvbox-dark).dark;
           };
       in {
+        x86_64-linux.arrow = arrow "x86_64-linux";
         x86_64-linux.aws = aws "x86_64-linux";
         x86_64-linux.staff = staff "x86_64-linux";
+        x86_64-linux.image = {
+          arrow = inputs.nixos-generators.nixosGenerate {
+            system = "x86_64-linux";
+            format = "iso";
+            modules = import ./hosts/arrow/modules.nix {
+              inherit inputs globals overlays;
+            };
+          };
+        };
 
         # Package Neovim config into standalone package
         x86_64-linux.neovim = neovim "x86_64-linux";

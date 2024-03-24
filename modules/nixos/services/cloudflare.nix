@@ -69,18 +69,40 @@ in {
     }];
     # Allow Caddy to read Cloudflare API key for DNS validation
     systemd.services.caddy.serviceConfig.EnvironmentFile =
-      config.secrets.cloudflareApi.dest;
+      config.secrets.cloudflare-api.dest;
 
     # API key must have access to modify Cloudflare DNS records
-    secrets.cloudflareApi = {
+    secrets.cloudflare-api = {
       source = ../../../private/cloudflare-api.age;
       dest = "${config.secretsDirectory}/cloudflare-api";
       owner = "caddy";
       group = "caddy";
     };
 
+    # Wait for secret to exist
+    systemd.services.caddy = {
+      after = [ "cloudflare-api-secret.service" ];
+      requires = [ "cloudflare-api-secret.service" ];
+    };
+
     # Allows Nextcloud to trust Cloudflare IPs
     services.nextcloud.settings.trusted_proxies = cloudflareIpRanges;
+
+    # Allows Transmission to trust Cloudflare IPs
+    services.transmission.settings.rpc-whitelist =
+      builtins.concatStringsSep "," ([ "127.0.0.1" ] ++ cloudflareIpRanges);
+
+    services.cloudflare-dyndns = {
+      enable = true;
+      proxied = true;
+      apiTokenFile = config.secrets.cloudflare-api.dest;
+    };
+
+    # Wait for secret to exist
+    systemd.services.cloudflare-dyndns = {
+      after = [ "cloudflare-api-secret.service" ];
+      requires = [ "cloudflare-api-secret.service" ];
+    };
 
   };
 }
