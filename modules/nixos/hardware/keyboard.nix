@@ -1,6 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
-  config = {
+  config = lib.mkIf config.physical {
 
     services.xserver = {
 

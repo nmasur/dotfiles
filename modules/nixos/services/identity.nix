@@ -12,6 +12,7 @@
               exit 0
           fi
           sleep 5
+          exit 0
       done
     '';
   };

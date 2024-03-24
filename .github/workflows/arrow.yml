@@ -106,7 +106,7 @@ jobs:
         if: inputs.action == 'create'
         id: host
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
-        run: terraform output host_ip
+        run: terraform output -raw host_ip
 
       - name: Wait on SSH
         uses: iFaxity/wait-on-action@v1.1.0
