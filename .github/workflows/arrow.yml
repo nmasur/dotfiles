@@ -5,10 +5,10 @@ env:
   DEPLOY_IDENTITY_BASE64: ${{ secrets.DEPLOY_IDENTITY_BASE64 }}
   ARROW_IDENTITY_BASE64: ${{ secrets.ARROW_IDENTITY_BASE64 }}
   CLOUDFLARE_R2_ENDPOINT: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
-  TF_VAR_cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-  TF_VAR_cloudflare_r2_access_key: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
-  TF_VAR_cloudflare_r2_secret_key: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
   TF_VAR_vultr_api_key: ${{ secrets.VULTR_API_KEY }}
+  TF_VAR_cloudflare_r2_endpoint: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
 
 on:
   workflow_dispatch:
@@ -57,9 +57,6 @@ jobs:
             result/iso/nixos.iso \
             s3://noahmasur-arrow-images/arrow.iso \
             --endpoint-url "https://${{ env.CLOUDFLARE_R2_ENDPOINT }}"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_KEY }}
 
       # # Copy the image to S3
       # - name: Upload Image to Cache
