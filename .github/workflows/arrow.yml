@@ -14,8 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       rebuild:
-        type: bool
-        required: true
+        type: boolean
         default: false
       action:
         type: choice
