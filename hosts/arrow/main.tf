@@ -1,13 +1,13 @@
 terraform {
-    backend "s3" {}
+  backend "s3" {}
   required_version = ">= 1.0.0"
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.42.0"
     }
     vultr = {
-      source = "vultr/vultr"
+      source  = "vultr/vultr"
       version = "2.19.0"
     }
   }
@@ -18,25 +18,25 @@ terraform {
 # }
 
 variable "cloudflare_account_id" {
-    type = string
-    description = "ID of the Cloudflare account"
+  type        = string
+  description = "ID of the Cloudflare account"
 }
 
 variable "cloudflare_r2_access_key" {
-    type = string
-    description = "Non-sensitive access key ID for Cloudflare R2"
+  type        = string
+  description = "Non-sensitive access key ID for Cloudflare R2"
 }
 
 variable "cloudflare_r2_secret_key" {
-    type = string
-    description = "Sensitive access key secret for Cloudflare R2"
-    sensitive = true
+  type        = string
+  description = "Sensitive access key secret for Cloudflare R2"
+  sensitive   = true
 }
 
 variable "vultr_api_key" {
-    type = string
-    description = "API key for Vultr management"
-    sensitive = true
+  type        = string
+  description = "API key for Vultr management"
+  sensitive   = true
 }
 
 provider "aws" {
@@ -71,23 +71,23 @@ provider "vultr" {
 # }
 
 resource "vultr_iso_private" "image" {
-    # url = "https://${var.cloudflare_account_id}.r2.cloudflarestorage.com/${data.aws_s3_bucket.images.id}/${aws_s3_object.image.key}"
-    url = "https://arrow.images.masu.rs/arrow.iso"
+  # url = "https://${var.cloudflare_account_id}.r2.cloudflarestorage.com/${data.aws_s3_bucket.images.id}/${aws_s3_object.image.key}"
+  url = "https://arrow.images.masu.rs/arrow.iso"
 }
 
 resource "vultr_instance" "arrow" {
-    plan = "vc2-1c-2gb"
-    region = "ewr"
-    iso_id = vultr_iso_private.image.id
-    label = "arrow"
-    tags = ["arrow"]
-    enable_ipv6 = false
-    disable_public_ipv4 = false
-    backups = "disabled"
-    ddos_protection = false
-    activation_email = false
+  plan                = "vc2-1c-2gb"
+  region              = "ewr"
+  iso_id              = vultr_iso_private.image.id
+  label               = "arrow"
+  tags                = ["arrow"]
+  enable_ipv6         = false
+  disable_public_ipv4 = false
+  backups             = "disabled"
+  ddos_protection     = false
+  activation_email    = false
 }
 
 output "host_ip" {
-    value = vultr_instance.arrow.main_ip
+  value = vultr_instance.arrow.main_ip
 }

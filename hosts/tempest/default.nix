@@ -103,6 +103,7 @@ inputs.nixpkgs.lib.nixosSystem {
       mullvad.enable = false;
       nixlang.enable = true;
       rust.enable = true;
+      terraform.enable = true;
       yt-dlp.enable = true;
       gaming = {
         dwarf-fortress.enable = true;
