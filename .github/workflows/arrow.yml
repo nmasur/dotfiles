@@ -110,10 +110,14 @@ jobs:
         run: terraform output -raw host_ip
 
       - name: Wait on SSH
-        uses: iFaxity/wait-on-action@v1.1.0
-        with:
-          resource: tcp ${{ steps.host.outputs.stdout }}:22
-          interval: 5000
+        if: inputs.action == 'create'
+        run: |
+          for i in $(seq 1 15); do
+            if $(nc -z -w 3 ${{ steps.host.outputs.stdout }} 22); then
+              exit 0
+            fi
+            sleep 10
+          done
 
       - name: Write Identity Keys to Files
         if: inputs.action == 'create'
