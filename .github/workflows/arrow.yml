@@ -78,6 +78,7 @@ jobs:
       # Checks whether Terraform is formatted properly. If this fails, you
       # should install the pre-commit hook.
       - name: Check Formatting
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
         run: |
           terraform fmt -no-color -check -diff -recursive
 
