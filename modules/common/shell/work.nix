@@ -16,6 +16,10 @@
       ldap_dc_2 = "t${magic_number}";
       ldap_dc_3 = magic_end_seq;
       ldap_script = pkgs.writeShellScriptBin "ldap" ''
+        # if ! [ "$LDAP_HOST" ]; then
+        #     echo "No LDAP_HOST specified!"
+        #     exit 1
+        # fi
         SEARCH_FILTER="$@"
         ldapsearch -LLL \
             -B -o ldif-wrap=no \
