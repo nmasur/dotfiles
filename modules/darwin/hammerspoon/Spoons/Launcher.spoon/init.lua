@@ -10,22 +10,6 @@ obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 local screen = hs.screen.primaryScreen()
 local switcherWidth = 500
-obj.canvas = hs.canvas.new({
-    x = (screen:fullFrame().x + screen:fullFrame().w) / 2 - switcherWidth / 2,
-    y = 1,
-    h = 3,
-    w = switcherWidth,
-})
--- Draw switcher
-obj.canvas[#obj.canvas + 1] = {
-    action = "build",
-    type = "rectangle",
-}
-obj.canvas[#obj.canvas + 1] = {
-    type = "rectangle",
-    fillColor = { alpha = 1, red = 0.8, green = 0.6, blue = 0.3 },
-    action = "fill",
-}
 
 function obj:init()
     -- Begin launcher mode
@@ -39,13 +23,29 @@ function obj:init()
     -- Behaviors on enter
     function self.launcher:entered()
         -- hs.alert("Entered mode")
+        obj.canvas = hs.canvas.new({
+            x = (screen:fullFrame().x + screen:fullFrame().w) / 2 - switcherWidth / 2,
+            y = 1,
+            h = 3,
+            w = switcherWidth,
+        })
+        -- Draw switcher
+        obj.canvas[#obj.canvas + 1] = {
+            action = "build",
+            type = "rectangle",
+        }
+        obj.canvas[#obj.canvas + 1] = {
+            type = "rectangle",
+            fillColor = { alpha = 1, red = 0.8, green = 0.6, blue = 0.3 },
+            action = "fill",
+        }
         obj.canvas:show()
     end
 
     -- Behaviors on exit
     function self.launcher:exited()
         -- hs.alert("Exited mode")
-        obj.canvas:hide()
+        obj.canvas:delete(0.2)
     end
 
     -- Use escape to exit launcher mode
