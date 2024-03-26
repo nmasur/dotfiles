@@ -88,6 +88,21 @@
           orientation = "bottom";
           show-recents = false;
           tilesize = 44;
+
+          persistent-apps = [
+            "/Applications/1Password.app"
+            "${pkgs.slack}/Applications/Slack.app"
+            "/System/Applications/Calendar.app"
+            "${pkgs.firefox-bin}/Applications/Firefox.app"
+            "/System/Applications/Messages.app"
+            "/System/Applications/Mail.app"
+            "/Applications/zoom.us.app"
+            "${pkgs.discord}/Applications/Discord.app"
+            "${pkgs.obsidian}/Applications/Obsidian.app"
+            "${pkgs.kitty}/Applications/kitty.app"
+            "/System/Applications/System Settings.app"
+          ];
+
         };
 
         finder = {
@@ -130,19 +145,6 @@
           "com.apple.dock" = {
             magnification = true;
             largesize = 48;
-            persistent-apps = [
-              "/Applications/1Password.app"
-              "${pkgs.slack}/Applications/Slack.app"
-              "/System/Applications/Calendar.app"
-              "${pkgs.firefox-bin}/Applications/Firefox.app"
-              "/System/Applications/Messages.app"
-              "/System/Applications/Mail.app"
-              "/Applications/zoom.us.app"
-              "${pkgs.discord}/Applications/Discord.app"
-              "${pkgs.obsidian}/Applications/Obsidian.app"
-              "${pkgs.kitty}/Applications/kitty.app"
-              "/System/Applications/System Settings.app"
-            ];
           };
           # Require password immediately after screen saver begins
           "com.apple.screensaver" = {
@@ -189,15 +191,9 @@
       '';
 
       # User-level settings
-      activationScripts.postUserActivation.text = let
-        persistentApps = lib.concatMapStrings (x: ''"'' + x + ''" '')
-          config.system.defaults.CustomUserPreferences."com.apple.dock".persistent-apps;
-      in ''
+      activationScripts.postUserActivation.text = ''
         echo "Show the ~/Library folder"
         chflags nohidden ~/Library
-
-        echo "Choose and order dock icons"
-        defaults write com.apple.dock persistent-apps -array ${persistentApps}
 
         echo "Reduce Menu Bar padding"
         defaults write -globalDomain NSStatusItemSelectionPadding -int 6
