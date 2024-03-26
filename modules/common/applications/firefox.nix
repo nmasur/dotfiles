@@ -16,7 +16,6 @@
     unfreePackages = [
       (lib.mkIf config._1password.enable "onepassword-password-manager")
       "okta-browser-plugin"
-      "wappalyzer"
     ];
 
     home-manager.users.${config.user} = {
