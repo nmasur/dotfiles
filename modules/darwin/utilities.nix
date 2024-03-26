@@ -16,6 +16,7 @@
       mpv # Video player
       gnupg # Encryption
       awscli2
+      ssm-session-manager-plugin
       awslogs
       google-cloud-sdk
       vault-bin
