@@ -31,6 +31,10 @@ STATUS=$?
 # because tesseract adds .txt to the given file path anyways. So if we were to
 # specify /tmp/ocr.txt as the file path, tesseract would out the text to
 # /tmp/ocr.txt.txt
+cd /tmp || {
+    echo "Failed to jump to directory."
+    exit 1
+}
 tesseract "$IMAGE_FILE" "${TEXT_FILE//\.txt/}"
 
 # Check if the text was detected by checking number
