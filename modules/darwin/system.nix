@@ -130,10 +130,7 @@
           "com.apple.dock" = {
             magnification = true;
             largesize = 48;
-            persistent-apps = let
-              dockText = app:
-                "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>${app}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>";
-            in map dockText [
+            persistent-apps = [
               "/Applications/1Password.app"
               "${pkgs.slack}/Applications/Slack.app"
               "/System/Applications/Calendar.app"
