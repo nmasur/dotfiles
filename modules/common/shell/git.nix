@@ -42,8 +42,8 @@ in {
             format = "ssh";
             ssh.allowedSignersFile = "~/.config/git/allowed-signers";
           };
-          commit.gpgsign = true;
-          tag.gpgsign = true;
+          # commit.gpgsign = true;
+          # tag.gpgsign = true;
         };
         ignores = [ ".direnv/**" "result" ];
         includes = [{
@@ -59,6 +59,10 @@ in {
             name = "${config.fullName}"
             email = "7386960+nmasur@users.noreply.github.com"
             signingkey = ~/.ssh/id_ed25519
+        [commit]
+            gpgsign = true
+        [tag]
+            gpgsign = true
       '';
 
       xdg.configFile."git/allowed-signers".text = ''
