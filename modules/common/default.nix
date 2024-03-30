@@ -75,6 +75,10 @@
         type = lib.types.str;
         description = "Hostname for metrics server.";
       };
+      minecraft = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for Minecraft server.";
+      };
       paperless = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for document server (paperless-ngx).";

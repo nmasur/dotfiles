@@ -44,6 +44,8 @@ in {
 
     networking.firewall.allowedTCPPorts = [ publicPort ];
 
+    cloudflare.noProxyDomains = [ config.hostnames.minecraft ];
+
     ## Automatically start and stop Minecraft server based on player connections
 
     # Adapted shamelessly from:
