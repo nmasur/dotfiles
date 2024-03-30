@@ -12,6 +12,9 @@ env:
   AWS_DEFAULT_REGION: auto
   AWS_ENDPOINT_URL_S3: "https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
   TF_VAR_vultr_api_key: ${{ secrets.VULTR_API_KEY }}
+  ZONE_NAME: masu.rs
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
 
 on:
   workflow_dispatch:
@@ -147,3 +150,15 @@ jobs:
         run: |
           ssh -i deploy_ed25519 -o StrictHostKeyChecking=accept-new noah@${{ steps.host.outputs.stdout }} 'mkdir -pv .ssh'
           scp -i deploy_ed25519 arrow_ed25519 noah@${{ steps.host.outputs.stdout }}:~/.ssh/id_ed25519
+
+      - name: Wipe Records
+        if: ${{ inputs.action == 'destroy' }}
+        run: |
+          RECORD_ID=$(curl --request GET \
+             --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records \
+             --header 'Content-Type: application/json' \
+             --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}" | jq -r '.result[] | select(.name == "transmission.${{ env.ZONE_NAME }}") | .id')
+          curl --request DELETE \
+             --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records/${RECORD_ID} \
+             --header 'Content-Type: application/json' \
+             --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}"
