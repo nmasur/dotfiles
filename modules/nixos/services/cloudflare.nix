@@ -49,6 +49,7 @@ in {
   options.cloudflare.noProxyDomains = lib.mkOption {
     type = lib.types.listOf lib.types.str;
     description = "Domains to use for dyndns without CDN proxying.";
+    default = [ ];
   };
 
   config = lib.mkIf config.cloudflare.enable {
