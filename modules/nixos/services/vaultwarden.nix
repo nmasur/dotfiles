@@ -52,6 +52,9 @@ in {
       }];
     }];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.secrets ];
+
     ## Backup config
 
     # Open to groups, allowing for backups

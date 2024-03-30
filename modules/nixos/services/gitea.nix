@@ -79,6 +79,9 @@ in {
       }
     ];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.git ];
+
     # Scrape the metrics endpoint for Prometheus.
     prometheus.scrapeTargets = [
       "127.0.0.1:${

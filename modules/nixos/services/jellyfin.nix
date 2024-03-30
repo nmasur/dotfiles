@@ -30,6 +30,9 @@
       }
     ];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.stream ];
+
     # Create videos directory, allow anyone in Jellyfin group to manage it
     systemd.tmpfiles.rules = [
       "d /var/lib/jellyfin 0775 jellyfin media"

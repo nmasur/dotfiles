@@ -48,6 +48,9 @@ in {
       }];
     }];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.books ];
+
     # Grant user access to Calibre directories
     users.users.${config.user}.extraGroups = [ "calibre-web" ];
 

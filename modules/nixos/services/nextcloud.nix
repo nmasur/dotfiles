@@ -148,6 +148,9 @@
       terminal = true;
     }];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.content ];
+
     # Create credentials file for nextcloud
     secrets.nextcloud = {
       source = ../../../private/nextcloud.age;

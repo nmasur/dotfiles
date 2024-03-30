@@ -147,6 +147,9 @@ in {
       }
     ];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.download ];
+
     # Enable Prometheus exporters
     systemd.services = lib.mapAttrs' (name: attrs: {
       name = "prometheus-${name}-exporter";

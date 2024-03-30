@@ -27,6 +27,9 @@
       }];
     }];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.irc ];
+
   };
 
 }
