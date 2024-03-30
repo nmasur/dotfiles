@@ -111,7 +111,6 @@ inputs.nixpkgs.lib.nixosSystem {
         steam.enable = true;
         legendary.enable = true;
         lutris.enable = true;
-        leagueoflegends.enable = true;
         ryujinx.enable = true;
       };
       services.vmagent.enable = true; # Enables Prometheus metrics
