@@ -69,6 +69,13 @@ in {
       }];
     }];
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains =
+      if config.services.victoriametrics.enable then
+        [ config.hostnames.prometheus ]
+      else
+        [ ];
+
     # VMAgent
 
     services.vmagent.prometheusConfig = prometheusConfig; # Overwritten below

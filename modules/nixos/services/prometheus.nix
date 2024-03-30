@@ -108,7 +108,11 @@
     }];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.prometheus ];
+    services.cloudflare-dyndns.domains =
+      if (config.services.prometheus.enable && isServer) then
+        [ config.hostnames.prometheus ]
+      else
+        [ ];
 
   };
 

@@ -5,7 +5,7 @@
 
 { config, lib, ... }: {
 
-  config = {
+  config = lib.mkIf config.services.influxdb2.enable {
 
     services.influxdb2 = {
       provision = {
