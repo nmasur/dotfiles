@@ -1,6 +1,6 @@
 name: Arrow
 
-run-name: Arrow - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || ( ${{ inputs.action == 'destroy' && 'Destroy' || 'No Action' ) }}
+run-name: Arrow - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || ( inputs.action == 'destroy' && 'Destroy' || 'No Action' ) }}
 
 env:
   TERRAFORM_DIRECTORY: hosts/arrow
