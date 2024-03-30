@@ -98,52 +98,56 @@ in {
     services.transmission.settings.rpc-whitelist =
       builtins.concatStringsSep "," ([ "127.0.0.1" ] ++ cloudflareIpRanges);
 
-    services.cloudflare-dyndns = {
-      enable = true;
-      proxied = true;
-      deleteMissing = true;
-      apiTokenFile = config.secrets.cloudflare-api.dest;
-    };
+    services.cloudflare-dyndns = lib.mkIf
+      ((builtins.length config.services.cloudflare-dyndns.domains) > 0) {
+        enable = true;
+        proxied = true;
+        deleteMissing = true;
+        apiTokenFile = config.secrets.cloudflare-api.dest;
+      };
 
-    # Wait for secret to exist
-    systemd.services.cloudflare-dyndns = {
-      after = [ "cloudflare-api-secret.service" ];
-      requires = [ "cloudflare-api-secret.service" ];
-    };
+    # Wait for secret to exist to start
+    systemd.services.cloudflare-dyndns =
+      lib.mkIf config.services.cloudflare-dyndns.enable {
+        after = [ "cloudflare-api-secret.service" ];
+        requires = [ "cloudflare-api-secret.service" ];
+      };
 
     # Run a second copy of dyn-dns for non-proxied domains
     # Adapted from: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/cloudflare-dyndns.nix
-    systemd.services.cloudflare-dyndns-noproxy = {
-      description = "CloudFlare Dynamic DNS Client (no proxy)";
-      after = [ "network.target" "cloudflare-api-secret.service" ];
-      requires = [ "cloudflare-api-secret.service" ];
-      wantedBy = [ "multi-user.target" ];
-      startAt = "*:0/5";
+    systemd.services.cloudflare-dyndns-noproxy =
+      lib.mkIf ((builtins.length config.cloudflare.noProxyDomains) > 0) {
+        description = "CloudFlare Dynamic DNS Client (no proxy)";
+        after = [ "network.target" "cloudflare-api-secret.service" ];
+        requires = [ "cloudflare-api-secret.service" ];
+        wantedBy = [ "multi-user.target" ];
+        startAt = "*:0/5";
 
-      environment = {
-        CLOUDFLARE_DOMAINS = toString config.cloudflare.noProxyDomains;
-      };
+        environment = {
+          CLOUDFLARE_DOMAINS = toString config.cloudflare.noProxyDomains;
+        };
 
-      serviceConfig = {
-        Type = "simple";
-        DynamicUser = true;
-        StateDirectory = "cloudflare-dyndns-noproxy";
-        EnvironmentFile = config.services.cloudflare-dyndns.apiTokenFile;
-        ExecStart = let
-          args = [ "--cache-file /var/lib/cloudflare-dyndns-noproxy/ip.cache" ]
-            ++ (if config.services.cloudflare-dyndns.ipv4 then
-              [ "-4" ]
-            else
-              [ "-no-4" ]) ++ (if config.services.cloudflare-dyndns.ipv6 then
-                [ "-6" ]
+        serviceConfig = {
+          Type = "simple";
+          DynamicUser = true;
+          StateDirectory = "cloudflare-dyndns-noproxy";
+          EnvironmentFile = config.services.cloudflare-dyndns.apiTokenFile;
+          ExecStart = let
+            args =
+              [ "--cache-file /var/lib/cloudflare-dyndns-noproxy/ip.cache" ]
+              ++ (if config.services.cloudflare-dyndns.ipv4 then
+                [ "-4" ]
               else
-                [ "-no-6" ])
-            ++ lib.optional config.services.cloudflare-dyndns.deleteMissing
-            "--delete-missing";
+                [ "-no-4" ]) ++ (if config.services.cloudflare-dyndns.ipv6 then
+                  [ "-6" ]
+                else
+                  [ "-no-6" ])
+              ++ lib.optional config.services.cloudflare-dyndns.deleteMissing
+              "--delete-missing";
 
-        in "${pkgs.cloudflare-dyndns}/bin/cloudflare-dyndns ${toString args}";
+          in "${pkgs.cloudflare-dyndns}/bin/cloudflare-dyndns ${toString args}";
+        };
       };
-    };
 
   };
 }
