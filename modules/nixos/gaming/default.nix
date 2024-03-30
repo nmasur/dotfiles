@@ -3,7 +3,6 @@
   imports = [
     ./chiaki.nix
     ./dwarf-fortress.nix
-    ./leagueoflegends.nix
     ./legendary.nix
     ./lutris.nix
     ./minecraft-server.nix
