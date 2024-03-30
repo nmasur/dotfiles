@@ -1,6 +1,6 @@
-{ config, ... }: {
+{ config, lib, ... }: {
 
-  config = {
+  config = lib.mkIf config.services.thelounge.enable {
 
     services.thelounge = {
       public = false;
