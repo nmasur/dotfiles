@@ -40,15 +40,15 @@
     };
 
     # Create reverse proxy for web UI
-    caddy.routes = lib.mkAfter [{
-      group =
-        if (config.hostnames.download == config.hostnames.transmission) then
-          "download"
-        else
-          "transmission";
+    caddy.routes = let
+      # Set if the download domain is the same as the Transmission domain
+      useDownloadDomain = config.hostnames.download
+        == config.hostnames.transmission;
+    in lib.mkAfter [{
+      group = if useDownloadDomain then "download" else "transmission";
       match = [{
         host = [ config.hostnames.transmission ];
-        path = [ "/transmission*" ];
+        path = if useDownloadDomain then [ "/transmission*" ] else null;
       }];
       handle = [{
         handler = "reverse_proxy";
