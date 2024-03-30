@@ -78,10 +78,6 @@ in {
       owner = "caddy";
       group = "caddy";
     };
-    systemd.services.cloudflare-api-secret.postStop = ''
-      /run/current-system/sw/bin/systemctl restart caddy.service
-      /run/current-system/sw/bin/systemctl restart cloudflare-dyndns.service
-    '';
 
     # Wait for secret to exist
     systemd.services.caddy = {
