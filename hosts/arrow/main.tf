@@ -71,7 +71,7 @@ provider "vultr" {
 
 resource "vultr_iso_private" "image" {
   # url = "https://${var.cloudflare_account_id}.r2.cloudflarestorage.com/${data.aws_s3_bucket.images.id}/${aws_s3_object.image.key}"
-  url = "https://arrow.images.masu.rs/arrow.iso"
+  url = "https://arrow-images.masu.rs/arrow.iso"
 }
 
 resource "vultr_instance" "arrow" {
