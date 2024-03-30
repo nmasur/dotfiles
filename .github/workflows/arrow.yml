@@ -1,5 +1,7 @@
 name: Arrow
 
+run-name: Arrow - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || 'Destroy' }}
+
 env:
   TERRAFORM_DIRECTORY: hosts/arrow
   DEPLOY_IDENTITY_BASE64: ${{ secrets.DEPLOY_IDENTITY_BASE64 }}
@@ -24,6 +26,7 @@ on:
         options:
           - create
           - destroy
+          - nothing
 
 jobs:
   build-deploy:
