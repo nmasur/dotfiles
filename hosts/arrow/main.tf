@@ -45,6 +45,13 @@ variable "vultr_api_key" {
   sensitive   = true
 }
 
+# https://api.vultr.com/v2/plans
+variable "vultr_plan" {
+  type        = string
+  description = "Size of instance to launch"
+  default     = "vc2-1c-2gb" # 55 GB SSD ($10/mo)
+}
+
 provider "aws" {
   region                      = "auto"
   skip_credentials_validation = true
@@ -75,7 +82,7 @@ resource "vultr_iso_private" "image" {
 }
 
 resource "vultr_instance" "arrow" {
-  plan                = "vc2-1c-2gb"
+  plan                = var.vultr_plan
   region              = "ewr"
   iso_id              = vultr_iso_private.image.id
   label               = "arrow"

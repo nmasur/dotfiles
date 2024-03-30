@@ -27,6 +27,16 @@ on:
           - create
           - destroy
           - nothing
+      plan:
+        type: choice
+        required: false
+        options:
+          - vc2-1c-1gb # 25 GB / $5
+          - vc2-1c-2gb # 55 GB / $10 (default)
+          - vc2-2c-2gb # 65 GB / $15
+          - vc2-2c-4gb # 80 GB / $20
+          - vc2-4c-8gb # 160 GB / $40
+          - vc2-6c-16gb # 320 GB / $80
 
 jobs:
   build-deploy:
@@ -92,6 +102,8 @@ jobs:
       - name: Terraform Apply
         if: inputs.action == 'create'
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        env:
+          TF_VAR_vultr_plan: ${{ inputs.plan }}
         run: |
           terraform apply \
             -auto-approve \
