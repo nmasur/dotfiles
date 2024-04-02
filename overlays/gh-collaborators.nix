@@ -1,6 +1,6 @@
 _final: prev: {
 
-  gh-collaborators = prev.buildGo120Module rec {
+  gh-collaborators = prev.buildGo122Module rec {
     pname = "gh-collaborators";
     version = "2.0.2";
 
