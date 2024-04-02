@@ -57,6 +57,7 @@ Launch a new shell. Then use Nix to switch to the macOS configuration:
 ```bash
 sudo rm /etc/bashrc
 sudo rm /etc/nix/nix.conf
+export NIX_SSL_CERT_FILE="$HOME/Documents/t2-ca-bundle.pem"
 nix \
     --extra-experimental-features flakes \
     --extra-experimental-features nix-command \
