@@ -71,7 +71,7 @@
         lua.command = "${pkgs.stylua}/bin/stylua";
         black.command = "${pkgs.black}/bin/black";
         fish_indent.command = "${pkgs.fish}/bin/fish_indent";
-        nixfmt.command = "${pkgs.nixfmt}/bin/nixfmt";
+        nixfmt.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
         rustfmt = {
           command = "${pkgs.rustfmt}/bin/rustfmt";
           prepend_args = [ "--edition" "2021" ];

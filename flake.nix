@@ -353,28 +353,46 @@
 
           # Used to run commands and edit files in this repo
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ git stylua nixfmt shfmt shellcheck ];
+            buildInputs = with pkgs; [
+              git
+              stylua
+              nixfmt-rfc-style
+              shfmt
+              shellcheck
+            ];
           };
+        }
+      );
 
-        });
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        {
+          neovim =
+            pkgs.runCommand "neovim-check-health" { buildInputs = [ inputs.self.packages.${system}.neovim ]; }
+              ''
+                mkdir -p $out
+                export HOME=$TMPDIR
+                nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
 
-      checks = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system overlays; };
-        in {
-          neovim = pkgs.runCommand "neovim-check-health" {
-            buildInputs = [ inputs.self.packages.${system}.neovim ];
-          } ''
-            mkdir -p $out
-            export HOME=$TMPDIR
-            nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
+                # Check for errors inside the health log
+                if $(grep "ERROR" $out/health.log); then
+                  cat $out/health.log
+                  exit 1
+                fi
+              '';
+        }
+      );
 
-            # Check for errors inside the health log
-            if $(grep "ERROR" $out/health.log); then
-              cat $out/health.log
-              exit 1
-            fi
-          '';
-        });
+      formatter = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        pkgs.nixfmt-rfc-style
+      );
 
       # Templates for starting other projects quickly
       templates = rec {
