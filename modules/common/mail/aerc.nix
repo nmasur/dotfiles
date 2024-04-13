@@ -176,6 +176,7 @@
         extraAccounts = {
           check-mail = "5m";
           check-mail-cmd = "${pkgs.isync}/bin/mbsync -a";
+          check-mail-timeout = "15s";
         };
       };
 
