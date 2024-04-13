@@ -5,10 +5,8 @@ inputs: _final: prev:
 let
 
   plugins = [ "github.com/caddy-dns/cloudflare" ];
-  goImports =
-    prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
-  goGets = prev.lib.flip prev.lib.concatMapStrings plugins
-    (pkg: "go get ${pkg}\n      ");
+  goImports = prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
+  goGets = prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "go get ${pkg}\n      ");
   main = ''
     package main
     import (
@@ -20,8 +18,8 @@ let
     	caddycmd.Main()
     }
   '';
-
-in {
+in
+{
   caddy-cloudflare = prev.buildGo122Module {
     pname = "caddy-cloudflare";
     version = prev.caddy.version;
@@ -33,13 +31,15 @@ in {
 
     vendorHash = "sha256-zeuvCk7kZa/W/roC12faCQDav4RB8RT1dR2Suh2yjD8=";
 
-    overrideModAttrs = (_: {
-      preBuild = ''
-        echo '${main}' > cmd/caddy/main.go
-        ${goGets}
-      '';
-      postInstall = "cp go.sum go.mod $out/ && ls $out/";
-    });
+    overrideModAttrs = (
+      _: {
+        preBuild = ''
+          echo '${main}' > cmd/caddy/main.go
+          ${goGets}
+        '';
+        postInstall = "cp go.sum go.mod $out/ && ls $out/";
+      }
+    );
 
     postPatch = ''
       echo '${main}' > cmd/caddy/main.go
@@ -53,10 +53,12 @@ in {
 
     meta = with prev.lib; {
       homepage = "https://caddyserver.com";
-      description =
-        "Fast, cross-platform HTTP/2 web server with automatic HTTPS";
+      description = "Fast, cross-platform HTTP/2 web server with automatic HTTPS";
       license = licenses.asl20;
-      maintainers = with maintainers; [ Br1ght0ne techknowlogick ];
+      maintainers = with maintainers; [
+        Br1ght0ne
+        techknowlogick
+      ];
     };
   };
 }

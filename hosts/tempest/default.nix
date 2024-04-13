@@ -3,7 +3,12 @@
 
 # See [readme](../README.md) to explain how this file works.
 
-{ inputs, globals, overlays, ... }:
+{
+  inputs,
+  globals,
+  overlays,
+  ...
+}:
 
 inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -20,8 +25,14 @@ inputs.nixpkgs.lib.nixosSystem {
       networking.hostName = "tempest";
 
       # Not sure what's necessary but too afraid to remove anything
-      boot.initrd.availableKernelModules =
-        [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+      boot.initrd.availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "ahci"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+      ];
 
       # Graphics and VMs
       boot.initrd.kernelModules = [ "amdgpu" ];
@@ -114,23 +125,20 @@ inputs.nixpkgs.lib.nixosSystem {
         ryujinx.enable = true;
       };
       services.vmagent.enable = true; # Enables Prometheus metrics
-      services.openssh.enable =
-        true; # Required for Cloudflare tunnel and identity file
+      services.openssh.enable = true; # Required for Cloudflare tunnel and identity file
 
       # Allows private remote access over the internet
       cloudflareTunnel = {
         enable = true;
         id = "ac133a82-31fb-480c-942a-cdbcd4c58173";
         credentialsFile = ../../private/cloudflared-tempest.age;
-        ca =
-          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPY6C0HmdFCaxYtJxFr3qV4/1X4Q8KrYQ1hlme3u1hJXK+xW+lc9Y9glWHrhiTKilB7carYTB80US0O47gI5yU4= open-ssh-ca@cloudflareaccess.org";
+        ca = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPY6C0HmdFCaxYtJxFr3qV4/1X4Q8KrYQ1hlme3u1hJXK+xW+lc9Y9glWHrhiTKilB7carYTB80US0O47gI5yU4= open-ssh-ca@cloudflareaccess.org";
       };
 
       # Allows requests to force machine to wake up
       # This network interface might change, needs to be set specifically for each machine.
       # Or set usePredictableInterfaceNames = false
       networking.interfaces.enp5s0.wakeOnLan.enable = true;
-
     }
   ];
 }

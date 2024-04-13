@@ -7,7 +7,12 @@
 # https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
 # These days, probably use nixos-anywhere instead.
 
-{ inputs, globals, overlays, ... }:
+{
+  inputs,
+  globals,
+  overlays,
+  ...
+}:
 
 inputs.nixpkgs.lib.nixosSystem {
   system = "aarch64-linux";
@@ -26,7 +31,11 @@ inputs.nixpkgs.lib.nixosSystem {
 
       # Not sure what's necessary but too afraid to remove anything
       imports = [ (inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
-      boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" ];
+      boot.initrd.availableKernelModules = [
+        "xhci_pci"
+        "virtio_pci"
+        "usbhid"
+      ];
 
       # File systems must be declared in order to boot
 
@@ -49,7 +58,9 @@ inputs.nixpkgs.lib.nixosSystem {
       gui.enable = false;
 
       # Still require colors for programs like Neovim, K9S
-      theme = { colors = (import ../../colorscheme/gruvbox).dark; };
+      theme = {
+        colors = (import ../../colorscheme/gruvbox).dark;
+      };
 
       # Programs and services
       atuin.enable = true;
@@ -72,8 +83,7 @@ inputs.nixpkgs.lib.nixosSystem {
         enable = true;
         id = "bd250ee1-ed2e-42d2-b627-039f1eb5a4d2";
         credentialsFile = ../../private/cloudflared-flame.age;
-        ca =
-          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/6oyVqjFGX3Uvrc3VS8J9sphxzAnRzKC85xgkHfYgR3TK6qBGXzHrknEj21xeZrr3G2y1UsGzphWJd9ZfIcdA= open-ssh-ca@cloudflareaccess.org";
+        ca = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/6oyVqjFGX3Uvrc3VS8J9sphxzAnRzKC85xgkHfYgR3TK6qBGXzHrknEj21xeZrr3G2y1UsGzphWJd9ZfIcdA= open-ssh-ca@cloudflareaccess.org";
       };
 
       # Nextcloud backup config
@@ -116,7 +126,6 @@ inputs.nixpkgs.lib.nixosSystem {
 
       # # VPN port forwarding
       # services.transmission.settings.peer-port = 57599;
-
     }
   ];
 }

@@ -3,7 +3,12 @@
 
 # See [readme](../README.md) to explain how this file works.
 
-{ inputs, globals, overlays, ... }:
+{
+  inputs,
+  globals,
+  overlays,
+  ...
+}:
 
 inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -23,8 +28,13 @@ inputs.nixpkgs.lib.nixosSystem {
       networking.hostName = "swan";
 
       # Not sure what's necessary but too afraid to remove anything
-      boot.initrd.availableKernelModules =
-        [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+      boot.initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+      ];
 
       # Required for transcoding
       boot.initrd.kernelModules = [ "amdgpu" ];
@@ -60,8 +70,11 @@ inputs.nixpkgs.lib.nixosSystem {
         # Automatically load the ZFS pool on boot
         extraPools = [ "tank" ];
         # Only try to decrypt datasets with keyfiles
-        requestEncryptionCredentials =
-          [ "tank/archive" "tank/generic" "tank/nextcloud" ];
+        requestEncryptionCredentials = [
+          "tank/archive"
+          "tank/generic"
+          "tank/nextcloud"
+        ];
         # If password is requested and fails, continue to boot eventually
         passwordTimeout = 300;
       };
@@ -72,7 +85,9 @@ inputs.nixpkgs.lib.nixosSystem {
       gui.enable = false;
 
       # Still require colors for programs like Neovim, K9S
-      theme = { colors = (import ../../colorscheme/gruvbox).dark; };
+      theme = {
+        colors = (import ../../colorscheme/gruvbox).dark;
+      };
 
       # Programs and services
       atuin.enable = true;
@@ -97,8 +112,7 @@ inputs.nixpkgs.lib.nixosSystem {
         enable = true;
         id = "646754ac-2149-4a58-b51a-e1d0a1f3ade2";
         credentialsFile = ../../private/cloudflared-swan.age;
-        ca =
-          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCHF/UMtJqPFrf6f6GRY0ZFnkCW7b6sYgUTjTtNfRj1RdmNic1NoJZql7y6BrqQinZvy7nsr1UFDNWoHn6ah3tg= open-ssh-ca@cloudflareaccess.org";
+        ca = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCHF/UMtJqPFrf6f6GRY0ZFnkCW7b6sYgUTjTtNfRj1RdmNic1NoJZql7y6BrqQinZvy7nsr1UFDNWoHn6ah3tg= open-ssh-ca@cloudflareaccess.org";
       };
 
       # Send regular backups and litestream for DBs to an S3-like bucket

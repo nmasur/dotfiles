@@ -1,7 +1,12 @@
 # The Looking Glass
 # System configuration for my work Macbook
 
-{ inputs, globals, overlays, ... }:
+{
+  inputs,
+  globals,
+  overlays,
+  ...
+}:
 
 inputs.darwin.lib.darwinSystem {
   system = "aarch64-darwin";
@@ -9,11 +14,14 @@ inputs.darwin.lib.darwinSystem {
   modules = [
     ../../modules/common
     ../../modules/darwin
-    (globals // rec {
-      user = "Noah.Masur";
-      gitName = "Noah-Masur_1701";
-      gitEmail = "${user}@take2games.com";
-    })
+    (
+      globals
+      // rec {
+        user = "Noah.Masur";
+        gitName = "Noah-Masur_1701";
+        gitEmail = "${user}@take2games.com";
+      }
+    )
     inputs.home-manager.darwinModules.home-manager
     {
       nixpkgs.overlays = [ inputs.firefox-darwin.overlay ] ++ overlays;

@@ -8,10 +8,8 @@ inputs: _final: prev: {
       src = inputs.zenyd-mpv-scripts + "/delete_file.lua";
       dontBuild = true;
       dontUnpack = true;
-      installPhase =
-        "install -Dm644 ${src} $out/share/mpv/scripts/delete_file.lua";
+      installPhase = "install -Dm644 ${src} $out/share/mpv/scripts/delete_file.lua";
       passthru.scriptName = "delete_file.lua";
     };
   };
-
 }

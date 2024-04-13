@@ -22,5 +22,4 @@ inputs: _final: prev: {
       license = "agpl3Plus";
     };
   };
-
 }

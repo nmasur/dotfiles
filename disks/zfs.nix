@@ -1,4 +1,5 @@
-{ pool, disks, ... }: {
+{ pool, disks, ... }:
+{
   disk = lib.genAttrs disks (disk: {
     "${disk}" = {
       type = "disk";
@@ -6,16 +7,18 @@
       content = {
         type = "table";
         format = "gpt";
-        partitions = [{
-          type = "partition";
-          name = "zfs";
-          start = "128MiB";
-          end = "100%";
-          content = {
-            type = "zfs";
-            pool = pool;
-          };
-        }];
+        partitions = [
+          {
+            type = "partition";
+            name = "zfs";
+            start = "128MiB";
+            end = "100%";
+            content = {
+              type = "zfs";
+              pool = pool;
+            };
+          }
+        ];
       };
     };
   });

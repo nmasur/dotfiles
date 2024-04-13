@@ -3,7 +3,12 @@
 
 # See [readme](../README.md) to explain how this file works.
 
-{ inputs, globals, overlays, ... }:
+{
+  inputs,
+  globals,
+  overlays,
+  ...
+}:
 
 inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -32,8 +37,7 @@ inputs.nixpkgs.lib.nixosSystem {
         startMenuLaunchers = true;
         nativeSystemd = true;
         wslConf.network.generateResolvConf = true; # Turn off if it breaks VPN
-        interop.includePath =
-          false; # Including Windows PATH will slow down Neovim command mode
+        interop.includePath = false; # Including Windows PATH will slow down Neovim command mode
       };
 
       neovim.enable = true;

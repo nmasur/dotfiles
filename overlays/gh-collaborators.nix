@@ -19,7 +19,5 @@ _final: prev: {
       "-X github.com/katiem0/gh-collaborators/cmd.Version=${version}"
       # "-X main.Version=${version}"
     ];
-
   };
-
 }
