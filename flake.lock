@@ -52,17 +52,17 @@
     "bypass-paywalls-clean": {
       "flake": false,
       "locked": {
-        "lastModified": 1712562887,
-        "narHash": "sha256-aX/h8cepKd9E+9ZtKnqRWLIdxTwl6q1a0v8+8fNK+/0=",
-        "owner": "magnolia1234",
-        "repo": "bpc-uploads",
-        "rev": "e58e8597347a8e2a656e2c4f10e259e7fcc8b52c",
-        "type": "gitlab"
+        "lastModified": 1713012522,
+        "narHash": "sha256-35KuPa3k6j8//gKXD3JY3Y318DRBxXNo/JuzatFXG5M=",
+        "ref": "refs/heads/master",
+        "rev": "724d4fcff64a433e988d9e54f7a08573523f2ca5",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://git.masu.rs/noah/bpc-uploads"
       },
       "original": {
-        "owner": "magnolia1234",
-        "repo": "bpc-uploads",
-        "type": "gitlab"
+        "type": "git",
+        "url": "https://git.masu.rs/noah/bpc-uploads"
       }
     },
     "cmp-nvim-lsp-src": {

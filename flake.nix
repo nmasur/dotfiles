@@ -187,7 +187,8 @@
     # Firefox addon from outside the extension store
     bypass-paywalls-clean = {
       # https://gitlab.com/magnolia1234/bpc-uploads/-/commits/master/?ref_type=HEADS
-      url = "gitlab:magnolia1234/bpc-uploads";
+      url =
+        "git+https://git.masu.rs/noah/bpc-uploads"; # temporary, shouldn't rely on myself
       flake = false;
     };
 
