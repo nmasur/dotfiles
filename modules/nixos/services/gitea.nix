@@ -49,7 +49,6 @@ in {
       extraConfig = null;
     };
 
-    networking.firewall.allowedTCPPorts = [ 122 ];
     users.users.${config.user}.extraGroups = [ "gitea" ];
 
     caddy.routes = [
