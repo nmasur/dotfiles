@@ -43,11 +43,7 @@ configuration may be difficult to translate to a non-Nix system.
 
 # Diagram
 
-![Diagram](https://github.com/nmasur/dotfiles/assets/7386960/ed3e7202-09c4-4a9c-9b14-0272c01647f6)
-
-- [flake.nix](./flake.nix)
-- [hosts](./hosts/)
-- [modules](./modules/)
+![Diagram](https://github.com/nmasur/dotfiles/assets/7386960/4cc22285-cea1-4831-b387-a82241184381)
 
 ---
 
