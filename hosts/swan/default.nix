@@ -74,6 +74,7 @@ inputs.nixpkgs.lib.nixosSystem {
           "tank/archive"
           "tank/generic"
           "tank/nextcloud"
+          "tank/generic/git"
         ];
         # If password is requested and fails, continue to boot eventually
         passwordTimeout = 300;
@@ -86,7 +87,7 @@ inputs.nixpkgs.lib.nixosSystem {
 
       # Still require colors for programs like Neovim, K9S
       theme = {
-        colors = (import ../../colorscheme/gruvbox).dark;
+        colors = (import ../../colorscheme/gruvbox-dark).dark;
       };
 
       # Programs and services
