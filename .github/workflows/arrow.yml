@@ -65,7 +65,7 @@ jobs:
       # Build the image
       - name: Build Image
         if: inputs.rebuild && inputs.action != 'destroy'
-        run: nix build .#image.arrow
+        run: nix build .#arrow
 
       - name: Upload Image to S3
         if: inputs.rebuild && inputs.action != 'destroy'

@@ -341,12 +341,10 @@
         in
         {
           x86_64-linux.staff = staff "x86_64-linux";
-          x86_64-linux.image = {
-            arrow = inputs.nixos-generators.nixosGenerate {
-              system = "x86_64-linux";
-              format = "iso";
-              modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
-            };
+          x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate {
+            system = "x86_64-linux";
+            format = "iso";
+            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
           };
 
           # Package Neovim config into standalone package
