@@ -3,7 +3,7 @@ name: Arrow
 run-name: Arrow - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || ( inputs.action == 'destroy' && 'Destroy' || 'No Action' ) }}
 
 env:
-  TERRAFORM_DIRECTORY: hosts/arrow
+  TERRAFORM_DIRECTORY: hosts/arrow/vultr
   DEPLOY_IDENTITY_BASE64: ${{ secrets.DEPLOY_IDENTITY_BASE64 }}
   ARROW_IDENTITY_BASE64: ${{ secrets.ARROW_IDENTITY_BASE64 }}
   CLOUDFLARE_R2_ENDPOINT: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"

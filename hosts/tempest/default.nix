@@ -1,8 +1,6 @@
 # The Tempest
 # System configuration for my desktop
 
-# See [readme](../README.md) to explain how this file works.
-
 {
   inputs,
   globals,

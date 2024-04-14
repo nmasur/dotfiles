@@ -1,3 +1,6 @@
+# The Arrow
+# System configuration for temporary VM
+
 {
   inputs,
   globals,

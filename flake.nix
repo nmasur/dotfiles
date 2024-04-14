@@ -22,8 +22,7 @@
     # Used for user packages and dotfiles
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows =
-        "nixpkgs"; # Use system packages list for their inputs
+      inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list for their inputs
     };
 
     # Community packages; used for Firefox extensions
@@ -179,78 +178,75 @@
     # Alternatively, could consider using https://github.com/fufexan/nix-gaming
     proton-ge = {
       # https://github.com/GloriousEggroll/proton-ge-custom/releases
-      url =
-        "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-2/GE-Proton9-2.tar.gz";
+      url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-2/GE-Proton9-2.tar.gz";
       flake = false;
     };
 
     # Firefox addon from outside the extension store
     bypass-paywalls-clean = {
       # https://gitlab.com/magnolia1234/bpc-uploads/-/commits/master/?ref_type=HEADS
-      url =
-        "git+https://git.masu.rs/noah/bpc-uploads"; # temporary, shouldn't rely on myself
+      url = "git+https://git.masu.rs/noah/bpc-uploads"; # temporary, shouldn't rely on myself
       flake = false;
     };
 
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
-      url =
-        "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz";
+      url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz";
       flake = false;
     };
     nextcloud-external = {
       # https://github.com/nextcloud-releases/external/releases
-      url =
-        "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
+      url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
       flake = false;
     };
     nextcloud-cookbook = {
       # https://github.com/christianlupus-nextcloud/cookbook-releases/releases/
-      url =
-        "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz";
+      url = "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz";
       flake = false;
     };
     nextcloud-snappymail = {
       # https://github.com/the-djmaze/snappymail/releases
-      url =
-        "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz";
+      url = "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz";
       flake = false;
     };
-
   };
 
-  outputs = { nixpkgs, ... }@inputs:
+  outputs =
+    { nixpkgs, ... }@inputs:
 
     let
 
       # Global configuration for my systems
-      globals = let baseName = "masu.rs";
-      in rec {
-        user = "noah";
-        fullName = "Noah Masur";
-        gitName = fullName;
-        gitEmail = "7386960+nmasur@users.noreply.github.com";
-        mail.server = "noahmasur.com";
-        mail.imapHost = "imap.purelymail.com";
-        mail.smtpHost = "smtp.purelymail.com";
-        dotfilesRepo = "https://github.com/nmasur/dotfiles";
-        hostnames = {
-          git = "git.${baseName}";
-          influxdb = "influxdb.${baseName}";
-          irc = "irc.${baseName}";
-          metrics = "metrics.${baseName}";
-          minecraft = "minecraft.${baseName}";
-          prometheus = "prom.${baseName}";
-          paperless = "paper.${baseName}";
-          secrets = "vault.${baseName}";
-          stream = "stream.${baseName}";
-          content = "cloud.${baseName}";
-          books = "books.${baseName}";
-          download = "download.${baseName}";
-          transmission = "transmission.${baseName}";
+      globals =
+        let
+          baseName = "masu.rs";
+        in
+        rec {
+          user = "noah";
+          fullName = "Noah Masur";
+          gitName = fullName;
+          gitEmail = "7386960+nmasur@users.noreply.github.com";
+          mail.server = "noahmasur.com";
+          mail.imapHost = "imap.purelymail.com";
+          mail.smtpHost = "smtp.purelymail.com";
+          dotfilesRepo = "https://github.com/nmasur/dotfiles";
+          hostnames = {
+            git = "git.${baseName}";
+            influxdb = "influxdb.${baseName}";
+            irc = "irc.${baseName}";
+            metrics = "metrics.${baseName}";
+            minecraft = "minecraft.${baseName}";
+            prometheus = "prom.${baseName}";
+            paperless = "paper.${baseName}";
+            secrets = "vault.${baseName}";
+            stream = "stream.${baseName}";
+            content = "cloud.${baseName}";
+            books = "books.${baseName}";
+            download = "download.${baseName}";
+            transmission = "transmission.${baseName}";
+          };
         };
-      };
 
       # Common overlays to always use
       overlays = [
@@ -271,13 +267,17 @@
       ];
 
       # System types to support.
-      supportedSystems =
-        [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+      supportedSystems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-
-    in rec {
+    in
+    rec {
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
@@ -292,65 +292,86 @@
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass
       darwinConfigurations = {
-        lookingglass =
-          import ./hosts/lookingglass { inherit inputs globals overlays; };
+        lookingglass = import ./hosts/lookingglass { inherit inputs globals overlays; };
       };
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#tempest
       homeConfigurations = {
-        tempest =
-          nixosConfigurations.tempest.config.home-manager.users.${globals.user}.home;
-        lookingglass =
-          darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
+        tempest = nixosConfigurations.tempest.config.home-manager.users.${globals.user}.home;
+        lookingglass = darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };
 
       # Disk formatting, only used once
-      diskoConfigurations = { root = import ./disks/root.nix; };
-
-      packages = let
-        arrow = system:
-          import ./hosts/arrow { inherit inputs globals overlays system; };
-        aws = system:
-          import ./hosts/aws { inherit inputs globals overlays system; };
-        staff = system:
-          import ./hosts/staff { inherit inputs globals overlays system; };
-        neovim = system:
-          let pkgs = import nixpkgs { inherit system overlays; };
-          in import ./modules/common/neovim/package {
-            inherit pkgs;
-            colors = (import ./colorscheme/gruvbox-dark).dark;
-          };
-      in {
-        x86_64-linux.arrow = arrow "x86_64-linux";
-        x86_64-linux.aws = aws "x86_64-linux";
-        x86_64-linux.staff = staff "x86_64-linux";
-        x86_64-linux.image = {
-          arrow = inputs.nixos-generators.nixosGenerate {
-            system = "x86_64-linux";
-            format = "iso";
-            modules = import ./hosts/arrow/modules.nix {
-              inherit inputs globals overlays;
-            };
-          };
-        };
-
-        # Package Neovim config into standalone package
-        x86_64-linux.neovim = neovim "x86_64-linux";
-        x86_64-darwin.neovim = neovim "x86_64-darwin";
-        aarch64-linux.neovim = neovim "aarch64-linux";
-        aarch64-darwin.neovim = neovim "aarch64-darwin";
+      diskoConfigurations = {
+        root = import ./disks/root.nix;
       };
 
+      packages =
+        let
+          arrow =
+            system:
+            import ./hosts/arrow {
+              inherit
+                inputs
+                globals
+                overlays
+                system
+                ;
+            };
+          staff =
+            system:
+            import ./hosts/staff {
+              inherit
+                inputs
+                globals
+                overlays
+                system
+                ;
+            };
+          neovim =
+            system:
+            let
+              pkgs = import nixpkgs { inherit system overlays; };
+            in
+            import ./modules/common/neovim/package {
+              inherit pkgs;
+              colors = (import ./colorscheme/gruvbox-dark).dark;
+            };
+        in
+        {
+          x86_64-linux.staff = staff "x86_64-linux";
+          x86_64-linux.image = {
+            arrow = inputs.nixos-generators.nixosGenerate {
+              system = "x86_64-linux";
+              format = "iso";
+              modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
+            };
+          };
+
+          # Package Neovim config into standalone package
+          x86_64-linux.neovim = neovim "x86_64-linux";
+          x86_64-darwin.neovim = neovim "x86_64-darwin";
+          aarch64-linux.neovim = neovim "aarch64-linux";
+          aarch64-darwin.neovim = neovim "aarch64-darwin";
+        };
+
       # Programs that can be run by calling this flake
-      apps = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system overlays; };
-        in import ./apps { inherit pkgs; });
+      apps = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        import ./apps { inherit pkgs; }
+      );
 
       # Development environments
-      devShells = forAllSystems (system:
-        let pkgs = import nixpkgs { inherit system overlays; };
-        in {
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        {
 
           # Used to run commands and edit files in this repo
           default = pkgs.mkShell {
@@ -419,6 +440,5 @@
           description = "Rust template";
         };
       };
-
     };
 }
