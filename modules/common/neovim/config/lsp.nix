@@ -1,10 +1,16 @@
-{ pkgs, lib, config, dsl, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  dsl,
+  ...
+}:
+{
 
   # Terraform optional because non-free
   options.terraform = lib.mkEnableOption "Whether to enable Terraform LSP";
   options.github = lib.mkEnableOption "Whether to enable GitHub features";
-  options.kubernetes =
-    lib.mkEnableOption "Whether to enable Kubernetes features";
+  options.kubernetes = lib.mkEnableOption "Whether to enable Kubernetes features";
 
   config = {
     plugins = [
@@ -17,36 +23,53 @@
     setup.fidget = { };
 
     use.lspconfig.lua_ls.setup = dsl.callWith {
-      settings = { Lua = { diagnostics = { globals = [ "vim" "hs" ]; }; }; };
-      capabilities =
-        dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = [
+              "vim"
+              "hs"
+            ];
+          };
+        };
+      };
+      capabilities = dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
       cmd = [ "${pkgs.lua-language-server}/bin/lua-language-server" ];
     };
 
     use.lspconfig.nil_ls.setup = dsl.callWith {
       cmd = [ "${pkgs.nil}/bin/nil" ];
-      capabilities =
-        dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
+      capabilities = dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
     };
 
     use.lspconfig.pyright.setup = dsl.callWith {
-      cmd = [ "${pkgs.pyright}/bin/pyright-langserver" "--stdio" ];
+      cmd = [
+        "${pkgs.pyright}/bin/pyright-langserver"
+        "--stdio"
+      ];
     };
 
     use.lspconfig.terraformls.setup = dsl.callWith {
-      cmd = if config.terraform then [
-        "${pkgs.terraform-ls}/bin/terraform-ls"
-        "serve"
-      ] else
-        [ "echo" ];
+      cmd =
+        if config.terraform then
+          [
+            "${pkgs.terraform-ls}/bin/terraform-ls"
+            "serve"
+          ]
+        else
+          [ "echo" ];
     };
 
     use.lspconfig.rust_analyzer.setup = dsl.callWith {
       cmd = [ "${pkgs.rust-analyzer}/bin/rust-analyzer" ];
       settings = {
         "['rust-analyzer']" = {
-          check = { command = "clippy"; };
-          files = { excludeDirs = [ ".direnv" ]; };
+          check = {
+            command = "clippy";
+          };
+          files = {
+            excludeDirs = [ ".direnv" ];
+          };
         };
       };
     };
@@ -72,16 +95,16 @@
         black.command = "${pkgs.black}/bin/black";
         fish_indent.command = "${pkgs.fish}/bin/fish_indent";
         nixfmt.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
-        rustfmt = {
-          command = "${pkgs.rustfmt}/bin/rustfmt";
-          prepend_args = [ "--edition" "2021" ];
-        };
+        rustfmt.command = "${pkgs.rustfmt}/bin/rustfmt";
         shfmt = {
           command = "${pkgs.shfmt}/bin/shfmt";
-          prepend_args = [ "-i" "4" "-ci" ];
+          prepend_args = [
+            "-i"
+            "4"
+            "-ci"
+          ];
         };
-        terraform_fmt.command =
-          if config.terraform then "${pkgs.terraform}/bin/terraform" else "";
+        terraform_fmt.command = if config.terraform then "${pkgs.terraform}/bin/terraform" else "";
       };
     };
 
@@ -93,7 +116,10 @@
     };
 
     vim.api.nvim_create_autocmd = dsl.callWith [
-      (dsl.toTable [ "BufEnter" "BufWritePost" ])
+      (dsl.toTable [
+        "BufEnter"
+        "BufWritePost"
+      ])
       (dsl.rawLua "{ callback = function() require('lint').try_lint() end }")
     ];
 
@@ -106,7 +132,5 @@
       -- Prevent infinite log size (change this when debugging)
       vim.lsp.set_log_level("off")
     '';
-
   };
-
 }
