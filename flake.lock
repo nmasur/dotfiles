@@ -52,17 +52,13 @@
     "bypass-paywalls-clean": {
       "flake": false,
       "locked": {
-        "lastModified": 1713012522,
-        "narHash": "sha256-35KuPa3k6j8//gKXD3JY3Y318DRBxXNo/JuzatFXG5M=",
-        "ref": "refs/heads/master",
-        "rev": "724d4fcff64a433e988d9e54f7a08573523f2ca5",
-        "revCount": 1,
-        "type": "git",
-        "url": "https://git.masu.rs/noah/bpc-uploads"
+        "narHash": "sha256-OlHiORYigNwOncKNaaq/EDgWutnWbdt0AFXGeUpOoC4=",
+        "type": "file",
+        "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-latest.xpi"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.masu.rs/noah/bpc-uploads"
+        "type": "file",
+        "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-latest.xpi"
       }
     },
     "cmp-nvim-lsp-src": {
