@@ -1,7 +1,8 @@
 # This is my setup for backing up SQlite databases and other systems to S3 or
 # S3-equivalent services (like Backblaze B2).
 
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   options = {
 
@@ -22,7 +23,6 @@
         default = null;
       };
     };
-
   };
 
   config = lib.mkIf (config.backup.s3.endpoint != null) {
@@ -65,7 +65,5 @@
     #   timerConfig = { OnCalendar = "00:05:00"; };
     #   environmentFile = backup.s3File;
     # };
-
   };
-
 }

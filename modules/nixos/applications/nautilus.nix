@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     nautilus = {
@@ -28,18 +34,15 @@
       # Generates a QR code and previews it with sushi
       programs.fish.functions = {
         qr = {
-          body =
-            "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | ${pkgs.gnome.sushi}/bin/sushi /tmp/qr.png";
+          body = "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | ${pkgs.gnome.sushi}/bin/sushi /tmp/qr.png";
         };
       };
 
       # Set Nautilus as default for opening directories
       xdg.mimeApps = {
         associations.added."inode/directory" = [ "org.gnome.Nautilus.desktop" ];
-        defaultApplications."inode/directory" =
-          lib.mkBefore [ "org.gnome.Nautilus.desktop" ];
+        defaultApplications."inode/directory" = lib.mkBefore [ "org.gnome.Nautilus.desktop" ];
       };
-
     };
 
     # Delete Trash files older than 1 week
@@ -48,7 +51,5 @@
       wantedBy = [ "default.target" ];
       script = "${pkgs.trash-cli}/bin/trash-empty 7";
     };
-
   };
-
 }

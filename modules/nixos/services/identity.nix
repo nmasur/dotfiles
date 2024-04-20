@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
 
   # Wait for secret to be placed on the machine
   systemd.services.wait-for-identity = {
@@ -18,5 +19,4 @@
       done
     '';
   };
-
 }

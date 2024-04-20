@@ -2,8 +2,7 @@
 
 {
   name = "gruvbox-dark"; # Dark, Medium
-  author =
-    "Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox), ElRastaOk (https://www.reddit.com/user/ElRastaOk)";
+  author = "Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox), ElRastaOk (https://www.reddit.com/user/ElRastaOk)";
   dark = {
     base00 = "#1D2122"; # ---- This is the change from normal gruvbox
     base01 = "#3c3836"; # ---

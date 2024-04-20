@@ -3,7 +3,12 @@
 
 # Currently has some issues that don't make this viable.
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 # Taken from:
 # https://dataswamp.org/~solene/2022-09-29-iblock-implemented-in-nixos.html
@@ -13,9 +18,12 @@
 
 let
 
-  portsToBlock = [ 25545 25565 25570 ];
-  portsString =
-    builtins.concatStringsSep "," (builtins.map builtins.toString portsToBlock);
+  portsToBlock = [
+    25545
+    25565
+    25570
+  ];
+  portsString = builtins.concatStringsSep "," (builtins.map builtins.toString portsToBlock);
 
   # Block IPs for 20 days
   expire = 60 * 60 * 24 * 20;
@@ -27,19 +35,17 @@ let
     "INPUT -i eth0 -p udp -m set --match-set ${table} src -j nixos-fw-refuse"
   ];
 
-  create-rules = lib.concatStringsSep "\n"
-    (builtins.map (rule: "iptables -C " + rule + " || iptables -A " + rule)
-      (rules "blocked") ++ builtins.map
-      (rule: "ip6tables -C " + rule + " || ip6tables -A " + rule)
-      (rules "blocked6"));
+  create-rules = lib.concatStringsSep "\n" (
+    builtins.map (rule: "iptables -C " + rule + " || iptables -A " + rule) (rules "blocked")
+    ++ builtins.map (rule: "ip6tables -C " + rule + " || ip6tables -A " + rule) (rules "blocked6")
+  );
 
-  delete-rules = lib.concatStringsSep "\n"
-    (builtins.map (rule: "iptables -C " + rule + " && iptables -D " + rule)
-      (rules "blocked") ++ builtins.map
-      (rule: "ip6tables -C " + rule + " && ip6tables -D " + rule)
-      (rules "blocked6"));
-
-in {
+  delete-rules = lib.concatStringsSep "\n" (
+    builtins.map (rule: "iptables -C " + rule + " && iptables -D " + rule) (rules "blocked")
+    ++ builtins.map (rule: "ip6tables -C " + rule + " && ip6tables -D " + rule) (rules "blocked6")
+  );
+in
+{
 
   options.honeypot.enable = lib.mkEnableOption "Honeypot fail2ban system.";
 
@@ -54,9 +60,7 @@ in {
       then
           ipset restore -! < /var/lib/ipset.conf
       else
-          ipset -exist create blocked hash:ip ${
-            if expire > 0 then "timeout ${toString expire}" else ""
-          }
+          ipset -exist create blocked hash:ip ${if expire > 0 then "timeout ${toString expire}" else ""}
           ipset -exist create blocked6 hash:ip family inet6 ${
             if expire > 0 then "timeout ${toString expire}" else ""
           }
@@ -66,9 +70,7 @@ in {
 
     # Save list when shutting down
     extraStopCommands = ''
-      ipset -exist create blocked hash:ip ${
-        if expire > 0 then "timeout ${toString expire}" else ""
-      }
+      ipset -exist create blocked hash:ip ${if expire > 0 then "timeout ${toString expire}" else ""}
       ipset -exist create blocked6 hash:ip family inet6 ${
         if expire > 0 then "timeout ${toString expire}" else ""
       }
@@ -76,5 +78,4 @@ in {
       ${delete-rules}
     '';
   };
-
 }

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
 
   config = {
 
@@ -9,12 +10,9 @@
       settings = {
         user = {
           name = config.home-manager.users.${config.user}.programs.git.userName;
-          email =
-            config.home-manager.users.${config.user}.programs.git.userEmail;
+          email = config.home-manager.users.${config.user}.programs.git.userEmail;
         };
       };
     };
-
   };
-
 }

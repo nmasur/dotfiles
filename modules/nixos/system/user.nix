@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
 
@@ -8,7 +14,6 @@
       default = null;
       # Test it by running: mkpasswd -m sha-512 --salt "PZYiMGmJIIHAepTM"
     };
-
   };
 
   config = {
@@ -28,7 +33,6 @@
       extraGroups = [
         "wheel" # Sudo privileges
       ];
-
     };
 
     # Allow writing custom scripts outside of Nix
@@ -59,10 +63,10 @@
         desktop = "$HOME/other/desktop";
         publicShare = "$HOME/other/public";
         templates = "$HOME/other/templates";
-        extraConfig = { XDG_DEV_DIR = "$HOME/dev"; };
+        extraConfig = {
+          XDG_DEV_DIR = "$HOME/dev";
+        };
       };
     };
-
   };
-
 }

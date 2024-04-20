@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     qbittorrent = {
@@ -14,8 +20,6 @@
     home-manager.users.${config.user} = {
 
       home.packages = with pkgs; [ qbittorrent ];
-
     };
   };
-
 }

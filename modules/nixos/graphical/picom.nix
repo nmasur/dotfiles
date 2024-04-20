@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
     home-manager.users.${config.user} = {
@@ -31,18 +37,21 @@
         ];
         shadow = false;
         shadowExclude = [ ];
-        shadowOffsets = [ (-10) (-10) ];
+        shadowOffsets = [
+          (-10)
+          (-10)
+        ];
         shadowOpacity = 0.5;
         vSync = true;
       };
 
-      xsession.windowManager.i3.config.startup = [{
-        command = "systemctl --user restart picom";
-        always = true;
-        notification = false;
-      }];
-
+      xsession.windowManager.i3.config.startup = [
+        {
+          command = "systemctl --user restart picom";
+          always = true;
+          notification = false;
+        }
+      ];
     };
   };
-
 }

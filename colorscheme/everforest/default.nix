@@ -16,9 +16,7 @@
     base0B = "#dbbc7f"; # Strings, Inherited Class, Markup Code, Diff Inserted
     base0C = "#e69875"; # Support, Regular Expressions, Escape Characters, ...
     base0D = "#a7c080"; # Functions, Methods, Attribute IDs, Headings
-    base0E =
-      "#e67e80"; # Keywords, Storage, Selector, Markup Italic, Diff Changed
-    base0F =
-      "#d699b6"; # Deprecated, Opening/Closing Embedded Language Tags, ...
+    base0E = "#e67e80"; # Keywords, Storage, Selector, Markup Italic, Diff Changed
+    base0F = "#d699b6"; # Deprecated, Opening/Closing Embedded Language Tags, ...
   };
 }

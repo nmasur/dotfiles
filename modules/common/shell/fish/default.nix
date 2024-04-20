@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   users.users.${config.user}.shell = pkgs.fish;
   programs.fish.enable = true; # Needed for LightDM to remember username
@@ -46,7 +52,9 @@
         fish_user_key_bindings = {
           body = builtins.readFile ./functions/fish_user_key_bindings.fish;
         };
-        ip = { body = builtins.readFile ./functions/ip.fish; };
+        ip = {
+          body = builtins.readFile ./functions/ip.fish;
+        };
         json = {
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
@@ -112,8 +120,7 @@
         moon = "curl wttr.in/Moon";
 
         # Cheat Sheets
-        ssl =
-          "openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr";
+        ssl = "openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr";
         fingerprint = "ssh-keyscan myhost.com | ssh-keygen -lf -";
         publickey = "ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub";
         forloop = "for i in (seq 1 100)";
@@ -122,7 +129,6 @@
         dc = "$DOTS/bin/docker_cleanup";
         dr = "docker run --rm -it";
         db = "docker build . -t";
-
       };
       shellInit = "";
     };
@@ -132,6 +138,5 @@
     programs.starship.enableFishIntegration = true;
     programs.zoxide.enableFishIntegration = true;
     programs.fzf.enableFishIntegration = true;
-
   };
 }

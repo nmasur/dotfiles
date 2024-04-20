@@ -1,8 +1,12 @@
-{ pkgs, dsl, ... }: {
+{ pkgs, dsl, ... }:
+{
 
   # This plugin creates a side drawer for navigating the current project
 
-  plugins = [ pkgs.vimPlugins.nvim-tree-lua pkgs.vimPlugins.nvim-web-devicons ];
+  plugins = [
+    pkgs.vimPlugins.nvim-tree-lua
+    pkgs.vimPlugins.nvim-web-devicons
+  ];
 
   # Disable netrw eagerly
   # https://github.com/kyazdani42/nvim-tree.lua/commit/fb8735e96cecf004fbefb086ce85371d003c5129
@@ -16,12 +20,14 @@
     hijack_netrw = true; # Works as the file manager
     sync_root_with_cwd = true; # Change project whenever currend dir changes
     respect_buf_cwd = true; # Change to exact location of focused buffer
-    update_focused_file = { # Change project based on the focused buffer
+    update_focused_file = {
+      # Change project based on the focused buffer
       enable = true;
       update_root = true;
       ignore_list = { };
     };
-    diagnostics = { # Enable LSP and linter integration
+    diagnostics = {
+      # Enable LSP and linter integration
       enable = true;
       icons = {
         hint = "";
@@ -30,7 +36,8 @@
         error = "";
       };
     };
-    renderer = { # Show files with changes vs. current commit
+    renderer = {
+      # Show files with changes vs. current commit
       icons = {
         glyphs = {
           git = {
@@ -61,7 +68,8 @@
         vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
       end
     '';
-    view = { # Set look and feel
+    view = {
+      # Set look and feel
       width = 30;
       side = "left";
       number = false;
@@ -73,5 +81,4 @@
   lua = ''
     vim.keymap.set("n", "<Leader>e", ":NvimTreeFindFileToggle<CR>", { silent = true })
   '';
-
 }

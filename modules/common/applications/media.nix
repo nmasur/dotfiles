@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     media = {
@@ -44,7 +50,10 @@
           "image/*" = [ "nsxiv.desktop" ];
         };
         associations.removed = {
-          "application/pdf" = [ "mupdf.desktop" "wine-extension-pdf.desktop" ];
+          "application/pdf" = [
+            "mupdf.desktop"
+            "wine-extension-pdf.desktop"
+          ];
         };
         defaultApplications = {
           "application/pdf" = [ "pwmt.zathura-cb.desktop" ];
@@ -53,9 +62,6 @@
           "image/*" = [ "nsxiv.desktop" ];
         };
       };
-
     };
-
   };
-
 }

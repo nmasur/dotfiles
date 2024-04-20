@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   # This setting only applies to NixOS, different on Darwin
   nix.gc.dates = "09:03"; # Run every morning (but before upgrade)
@@ -19,8 +25,10 @@
 
   # Create an email notification service for failed jobs
   systemd.services."notify-email@" =
-    let address = "system@${config.mail.server}";
-    in {
+    let
+      address = "system@${config.mail.server}";
+    in
+    {
       enable = config.mail.enable;
       environment.SERVICE_ID = "%i";
       script = ''
@@ -40,8 +48,7 @@
     };
 
   # Send an email whenever auto upgrade fails
-  systemd.services.nixos-upgrade.onFailure =
-    lib.mkIf config.systemd.services."notify-email@".enable
-    [ "notify-email@%i.service" ];
-
+  systemd.services.nixos-upgrade.onFailure = lib.mkIf config.systemd.services."notify-email@".enable [
+    "notify-email@%i.service"
+  ];
 }

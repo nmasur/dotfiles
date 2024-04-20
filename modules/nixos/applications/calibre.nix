@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     calibre = {
@@ -16,6 +22,8 @@
     };
 
     # Forces Calibre to use dark mode
-    environment.sessionVariables = { CALIBRE_USE_DARK_PALETTE = "1"; };
+    environment.sessionVariables = {
+      CALIBRE_USE_DARK_PALETTE = "1";
+    };
   };
 }

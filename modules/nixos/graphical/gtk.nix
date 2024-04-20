@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     gtk.theme = {
@@ -18,20 +24,21 @@
 
     home-manager.users.${config.user} = {
 
-      gtk = let
-        gtkExtraConfig = {
-          gtk-application-prefer-dark-theme = config.theme.dark;
+      gtk =
+        let
+          gtkExtraConfig = {
+            gtk-application-prefer-dark-theme = config.theme.dark;
+          };
+        in
+        {
+          enable = true;
+          theme = {
+            name = config.gtk.theme.name;
+            package = config.gtk.theme.package;
+          };
+          gtk3.extraConfig = gtkExtraConfig;
+          gtk4.extraConfig = gtkExtraConfig;
         };
-      in {
-        enable = true;
-        theme = {
-          name = config.gtk.theme.name;
-          package = config.gtk.theme.package;
-        };
-        gtk3.extraConfig = gtkExtraConfig;
-        gtk4.extraConfig = gtkExtraConfig;
-      };
-
     };
 
     # Required for setting GTK theme (for preferred-color-scheme in browser)
@@ -44,8 +51,8 @@
       package = config.gtk.theme.package;
     };
 
-    environment.sessionVariables = { GTK_THEME = config.gtk.theme.name; };
-
+    environment.sessionVariables = {
+      GTK_THEME = config.gtk.theme.name;
+    };
   };
-
 }

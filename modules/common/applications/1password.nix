@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     _1password = {
@@ -10,9 +16,16 @@
   };
 
   config = lib.mkIf (config.gui.enable && config._1password.enable) {
-    unfreePackages = [ "1password" "_1password-gui" "1password-cli" ];
+    unfreePackages = [
+      "1password"
+      "_1password-gui"
+      "1password-cli"
+    ];
     home-manager.users.${config.user} = {
-      home.packages = with pkgs; [ _1password-gui _1password ];
+      home.packages = with pkgs; [
+        _1password-gui
+        _1password
+      ];
     };
 
     # https://1password.community/discussion/135462/firefox-extension-does-not-connect-to-linux-app
@@ -26,5 +39,4 @@
       firefox
     '';
   };
-
 }

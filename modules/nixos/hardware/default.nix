@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
 
   imports = [
     ./audio.nix
@@ -18,5 +19,4 @@
     physical = lib.mkEnableOption "Whether this machine is a physical device.";
     server = lib.mkEnableOption "Whether this machine is a server.";
   };
-
 }

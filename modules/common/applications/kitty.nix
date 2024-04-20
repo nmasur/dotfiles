@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     kitty = {
@@ -13,20 +19,19 @@
 
     # Set the Rofi-Systemd terminal for viewing logs
     # Using optionalAttrs because only available in NixOS
-    environment = { } // lib.attrsets.optionalAttrs
-      (builtins.hasAttr "sessionVariables" config.environment) {
+    environment =
+      { }
+      // lib.attrsets.optionalAttrs (builtins.hasAttr "sessionVariables" config.environment) {
         sessionVariables.ROFI_SYSTEMD_TERM = "${pkgs.kitty}/bin/kitty";
       };
 
     home-manager.users.${config.user} = {
 
       # Set the i3 terminal
-      xsession.windowManager.i3.config.terminal =
-        lib.mkIf pkgs.stdenv.isLinux "kitty";
+      xsession.windowManager.i3.config.terminal = lib.mkIf pkgs.stdenv.isLinux "kitty";
 
       # Set the Rofi terminal for running programs
-      programs.rofi.terminal =
-        lib.mkIf pkgs.stdenv.isLinux "${pkgs.kitty}/bin/kitty";
+      programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux "${pkgs.kitty}/bin/kitty";
 
       # Display images in the terminal
       programs.fish.shellAliases = {
@@ -48,16 +53,14 @@
 
           # Kitty scrollback nvim
           "kitty_mod+h" = "kitty_scrollback_nvim";
-          "kitty_mod+g" =
-            "kitty_scrollback_nvim --config ksb_builtin_last_cmd_output";
+          "kitty_mod+g" = "kitty_scrollback_nvim --config ksb_builtin_last_cmd_output";
         };
         settings = {
 
           # Required for kitty-scrollback.nvim
           allow_remote_control = "socket-only";
           listen_on = "unix:/tmp/kitty";
-          action_alias =
-            "kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
+          action_alias = "kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
 
           # Colors (adapted from: https://github.com/kdrag0n/base16-kitty/blob/master/templates/default-256.mustache)
           background = config.theme.colors.base00;

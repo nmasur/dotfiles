@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf config.gui.enable {
 
@@ -15,7 +21,5 @@
       accelProfile = "flat";
       accelSpeed = "1.15";
     };
-
   };
-
 }

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.mail.aerc.enable = lib.mkEnableOption "Aerc email.";
 
@@ -75,7 +81,9 @@
             "<Esc>" = ":clear<Enter>";
           };
 
-          "messages:folder=Drafts" = { "<Enter>" = ":recall<Enter>"; };
+          "messages:folder=Drafts" = {
+            "<Enter>" = ":recall<Enter>";
+          };
 
           view = {
             "/" = ":toggle-key-passthrough <Enter> /";
@@ -148,21 +156,19 @@
             "<C-p>" = ":prev-tab<Enter>";
             "<C-n>" = ":next-tab<Enter>";
           };
-
         };
         extraConfig = {
           general.unsafe-accounts-conf = true;
-          viewer = { pager = "${pkgs.less}/bin/less -R"; };
+          viewer = {
+            pager = "${pkgs.less}/bin/less -R";
+          };
           filters = {
             "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
-            "text/calendar" =
-              "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/libexec/aerc/filters/calendar";
-            "text/html" =
-              "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
+            "text/calendar" = "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/libexec/aerc/filters/calendar";
+            "text/html" = "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
             # "text/*" =
             #   ''${pkgs.bat}/bin/bat -fP --file-name="$AERC_FILENAME "'';
-            "message/delivery-status" =
-              "${pkgs.aerc}/libexec/aerc/filters/colorize";
+            "message/delivery-status" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
             "message/rfc822" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
             "application/x-sh" = "${pkgs.bat}/bin/bat -fP -l sh";
             "application/pdf" = "${pkgs.zathura}/bin/zathura -";
@@ -184,26 +190,27 @@
         name = "aerc";
         exec = "kitty aerc %u";
       };
-      xsession.windowManager.i3.config.keybindings =
-        lib.mkIf pkgs.stdenv.isLinux {
-          "${
-            config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
-          }+Shift+e" = "exec ${
-            # Don't name the script `aerc` or it will affect grep
-              builtins.toString (pkgs.writeShellScript "focus-mail.sh" ''
-                count=$(ps aux | grep -c aerc)
-                if [ "$count" -eq 1 ]; then
-                    i3-msg "exec --no-startup-id kitty --class aerc aerc"
-                    sleep 0.25
-                fi
-                i3-msg "[class=aerc] focus"
-              '')
-            }";
-        };
+      xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
+        "${
+          config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
+        }+Shift+e" = "exec ${
+          # Don't name the script `aerc` or it will affect grep
+          builtins.toString (
+            pkgs.writeShellScript "focus-mail.sh" ''
+              count=$(ps aux | grep -c aerc)
+              if [ "$count" -eq 1 ]; then
+                  i3-msg "exec --no-startup-id kitty --class aerc aerc"
+                  sleep 0.25
+              fi
+              i3-msg "[class=aerc] focus"
+            ''
+          )
+        }";
+      };
 
-      programs.fish.shellAbbrs = { ae = "aerc"; };
-
+      programs.fish.shellAbbrs = {
+        ae = "aerc";
+      };
     };
-
   };
 }

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   # Shows buffers in a VSCode-style tab layout
 
@@ -11,7 +12,7 @@
       diagnostics = "nvim_lsp";
       always_show_bufferline = false;
       separator_style = "slant";
-      offsets = [{ filetype = "NvimTree"; }];
+      offsets = [ { filetype = "NvimTree"; } ];
     };
   };
   lua = ''

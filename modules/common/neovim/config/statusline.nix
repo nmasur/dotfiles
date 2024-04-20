@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   plugins = [ pkgs.vimPlugins.lualine-nvim ];
   setup.lualine = {
     options = {

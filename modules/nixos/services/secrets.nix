@@ -3,7 +3,13 @@
 
 # In my case, I pre-encrypt my secrets and commit them to git.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
 
@@ -14,42 +20,43 @@
     };
 
     secrets = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.submodule {
-        options = {
-          source = lib.mkOption {
-            type = lib.types.path;
-            description = "Path to encrypted secret.";
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            source = lib.mkOption {
+              type = lib.types.path;
+              description = "Path to encrypted secret.";
+            };
+            dest = lib.mkOption {
+              type = lib.types.str;
+              description = "Resulting path for decrypted secret.";
+            };
+            owner = lib.mkOption {
+              default = "root";
+              type = lib.types.str;
+              description = "User to own the secret.";
+            };
+            group = lib.mkOption {
+              default = "root";
+              type = lib.types.str;
+              description = "Group to own the secret.";
+            };
+            permissions = lib.mkOption {
+              default = "0400";
+              type = lib.types.str;
+              description = "Permissions expressed as octal.";
+            };
+            prefix = lib.mkOption {
+              default = "";
+              type = lib.types.str;
+              description = "Prefix for secret value (for environment files).";
+            };
           };
-          dest = lib.mkOption {
-            type = lib.types.str;
-            description = "Resulting path for decrypted secret.";
-          };
-          owner = lib.mkOption {
-            default = "root";
-            type = lib.types.str;
-            description = "User to own the secret.";
-          };
-          group = lib.mkOption {
-            default = "root";
-            type = lib.types.str;
-            description = "Group to own the secret.";
-          };
-          permissions = lib.mkOption {
-            default = "0400";
-            type = lib.types.str;
-            description = "Permissions expressed as octal.";
-          };
-          prefix = lib.mkOption {
-            default = "";
-            type = lib.types.str;
-            description = "Prefix for secret value (for environment files).";
-          };
-        };
-      });
+        }
+      );
       description = "Set of secrets to decrypt to disk.";
       default = { };
     };
-
   };
 
   config = lib.mkIf pkgs.stdenv.isLinux {
@@ -80,7 +87,6 @@
           chown '${attrs.owner}':'${attrs.group}' '${attrs.dest}'
           chmod '${attrs.permissions}' '${attrs.dest}'
         '';
-
       };
     }) config.secrets;
 
@@ -92,7 +98,5 @@
     #   group = "my-app";
     #   permissions = "0440";
     # };
-
   };
-
 }

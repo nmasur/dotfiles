@@ -1,7 +1,8 @@
 # n8n is an automation integration tool for connecting data from services
 # together with triggers.
 
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   options = {
     n8nServer = lib.mkOption {
@@ -23,14 +24,16 @@
       };
     };
 
-    caddy.routes = [{
-      match = [{ host = [ config.n8nServer ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:5678"; }];
-      }];
-    }];
-
+    caddy.routes = [
+      {
+        match = [ { host = [ config.n8nServer ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = "localhost:5678"; } ];
+          }
+        ];
+      }
+    ];
   };
-
 }

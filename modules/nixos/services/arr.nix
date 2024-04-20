@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
@@ -25,10 +30,12 @@ let
       apiKey = config.secrets.sabnzbdApiKey.dest;
     };
   };
+in
+{
 
-in {
-
-  options = { arrs.enable = lib.mkEnableOption "Arr services"; };
+  options = {
+    arrs.enable = lib.mkEnableOption "Arr services";
+  };
 
   config = lib.mkIf config.arrs.enable {
 
@@ -74,76 +81,95 @@ in {
         # Group means that routes with the same name are mutually exclusive,
         # so they are split between the appropriate services.
         group = "download";
-        match = [{
-          host = [ config.hostnames.download ];
-          path = [ "/sonarr*" ];
-        }];
-        handle = [{
-          handler = "reverse_proxy";
-          # We're able to reference the url and port of the service dynamically 
-          upstreams = [{ dial = arrConfig.sonarr.url; }];
-        }];
+        match = [
+          {
+            host = [ config.hostnames.download ];
+            path = [ "/sonarr*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            # We're able to reference the url and port of the service dynamically 
+            upstreams = [ { dial = arrConfig.sonarr.url; } ];
+          }
+        ];
       }
       {
         group = "download";
-        match = [{
-          host = [ config.hostnames.download ];
-          path = [ "/radarr*" ];
-        }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{ dial = arrConfig.radarr.url; }];
-        }];
+        match = [
+          {
+            host = [ config.hostnames.download ];
+            path = [ "/radarr*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = arrConfig.radarr.url; } ];
+          }
+        ];
       }
       {
         group = "download";
-        match = [{
-          host = [ config.hostnames.download ];
-          path = [ "/prowlarr*" ];
-        }];
-        handle = [{
-          handler = "reverse_proxy";
-          # Prowlarr doesn't offer a dynamic config, so we have to hardcode it
-          upstreams = [{ dial = "localhost:9696"; }];
-        }];
+        match = [
+          {
+            host = [ config.hostnames.download ];
+            path = [ "/prowlarr*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            # Prowlarr doesn't offer a dynamic config, so we have to hardcode it
+            upstreams = [ { dial = "localhost:9696"; } ];
+          }
+        ];
       }
       {
         group = "download";
-        match = [{
-          host = [ config.hostnames.download ];
-          path = [ "/bazarr*" ];
-        }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{
-            # Bazarr only dynamically sets the port, not the host
-            dial = "localhost:${
-                builtins.toString config.services.bazarr.listenPort
-              }";
-          }];
-        }];
+        match = [
+          {
+            host = [ config.hostnames.download ];
+            path = [ "/bazarr*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              {
+                # Bazarr only dynamically sets the port, not the host
+                dial = "localhost:${builtins.toString config.services.bazarr.listenPort}";
+              }
+            ];
+          }
+        ];
       }
       {
         group = "download";
-        match = [{
-          host = [ config.hostnames.download ];
-          path = [ "/sabnzbd*" ];
-        }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{ dial = arrConfig.sabnzbd.url; }];
-        }];
+        match = [
+          {
+            host = [ config.hostnames.download ];
+            path = [ "/sabnzbd*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = arrConfig.sabnzbd.url; } ];
+          }
+        ];
       }
       {
         group = "download";
-        match = [{ host = [ config.hostnames.download ]; }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{
-            dial =
-              "localhost:${builtins.toString config.services.jellyseerr.port}";
-          }];
-        }];
+        match = [ { host = [ config.hostnames.download ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = "localhost:${builtins.toString config.services.jellyseerr.port}"; } ];
+          }
+        ];
       }
     ];
 
@@ -160,19 +186,17 @@ in {
         serviceConfig = {
           Type = "simple";
           DynamicUser = true;
-          ExecStart = let
-            # Sabnzbd doesn't accept the URI path, unlike the others
-            url = if name != "sabnzbd" then
-              "http://${attrs.url}/${name}"
-            else
-              "http://${attrs.url}";
+          ExecStart =
+            let
+              # Sabnzbd doesn't accept the URI path, unlike the others
+              url = if name != "sabnzbd" then "http://${attrs.url}/${name}" else "http://${attrs.url}";
+            in
             # Exportarr is trained to pull from the arr services
-          in ''
-            ${pkgs.exportarr}/bin/exportarr ${name} \
-                        --url ${url} \
-                        --port ${attrs.exportarrPort}'';
-          EnvironmentFile =
-            lib.mkIf (builtins.hasAttr "apiKey" attrs) attrs.apiKey;
+            ''
+              ${pkgs.exportarr}/bin/exportarr ${name} \
+                          --url ${url} \
+                          --port ${attrs.exportarrPort}'';
+          EnvironmentFile = lib.mkIf (builtins.hasAttr "apiKey" attrs) attrs.apiKey;
           Restart = "on-failure";
           ProtectHome = true;
           ProtectSystem = "strict";
@@ -216,11 +240,14 @@ in {
     };
 
     # Prometheus scrape targets (expose Exportarr to Prometheus)
-    prometheus.scrapeTargets = map (key:
+    prometheus.scrapeTargets = map (
+      key:
       "127.0.0.1:${
-        lib.attrsets.getAttrFromPath [ key "exportarrPort" ] arrConfig
-      }") (builtins.attrNames arrConfig);
-
+        lib.attrsets.getAttrFromPath [
+          key
+          "exportarrPort"
+        ] arrConfig
+      }"
+    ) (builtins.attrNames arrConfig);
   };
-
 }

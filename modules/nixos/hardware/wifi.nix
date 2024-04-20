@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf (config.physical && pkgs.stdenv.isLinux) {
 
@@ -7,7 +13,5 @@
 
     # Allows the user to control the WiFi settings.
     networking.wireless.userControlled.enable = true;
-
   };
-
 }

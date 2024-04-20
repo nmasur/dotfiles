@@ -1,8 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
-let home-packages = config.home-manager.users.${config.user}.home.packages;
-
-in {
+let
+  home-packages = config.home-manager.users.${config.user}.home.packages;
+in
+{
 
   options = {
     gitName = lib.mkOption {
@@ -28,16 +34,26 @@ in {
         userName = config.gitName;
         userEmail = config.gitEmail;
         extraConfig = {
-          core.pager =
-            "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less -F";
-          interactive.difffilter =
-            "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight";
-          pager = { branch = "false"; };
-          safe = { directory = config.dotfilesPath; };
-          pull = { ff = "only"; };
-          push = { autoSetupRemote = "true"; };
-          init = { defaultBranch = "master"; };
-          rebase = { autosquash = "true"; };
+          core.pager = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less -F";
+          interactive.difffilter = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight";
+          pager = {
+            branch = "false";
+          };
+          safe = {
+            directory = config.dotfilesPath;
+          };
+          pull = {
+            ff = "only";
+          };
+          push = {
+            autoSetupRemote = "true";
+          };
+          init = {
+            defaultBranch = "master";
+          };
+          rebase = {
+            autosquash = "true";
+          };
           gpg = {
             format = "ssh";
             ssh.allowedSignersFile = "~/.config/git/allowed-signers";
@@ -45,11 +61,16 @@ in {
           # commit.gpgsign = true;
           # tag.gpgsign = true;
         };
-        ignores = [ ".direnv/**" "result" ];
-        includes = [{
-          path = "~/.config/git/personal";
-          condition = "gitdir:~/dev/personal/";
-        }];
+        ignores = [
+          ".direnv/**"
+          "result"
+        ];
+        includes = [
+          {
+            path = "~/.config/git/personal";
+            condition = "gitdir:~/dev/personal/";
+          }
+        ];
       };
 
       # Personal git config
@@ -86,8 +107,7 @@ in {
         gl = "git log --graph --decorate --oneline -20";
         gll = "git log --graph --decorate --oneline";
         gco = "git checkout";
-        gcom = ''
-          git switch (git symbolic-ref refs/remotes/origin/HEAD | cut -d"/" -f4)'';
+        gcom = ''git switch (git symbolic-ref refs/remotes/origin/HEAD | cut -d"/" -f4)'';
         gcob = "git switch -c";
         gb = "git branch";
         gpd = "git push origin -d";
@@ -101,58 +121,63 @@ in {
       };
 
       # Required for fish commands
-      home.packages = with pkgs; [ fish fzf bat ];
+      home.packages = with pkgs; [
+        fish
+        fzf
+        bat
+      ];
 
-      programs.fish.functions = lib.mkIf (builtins.elem pkgs.fzf home-packages
-        && builtins.elem pkgs.bat home-packages) {
-          git = { body = builtins.readFile ./fish/functions/git.fish; };
-          git-add-fuzzy = {
-            body = builtins.readFile ./fish/functions/git-add-fuzzy.fish;
+      programs.fish.functions =
+        lib.mkIf (builtins.elem pkgs.fzf home-packages && builtins.elem pkgs.bat home-packages)
+          {
+            git = {
+              body = builtins.readFile ./fish/functions/git.fish;
+            };
+            git-add-fuzzy = {
+              body = builtins.readFile ./fish/functions/git-add-fuzzy.fish;
+            };
+            git-fuzzy-branch = {
+              argumentNames = "header";
+              body = builtins.readFile ./fish/functions/git-fuzzy-branch.fish;
+            };
+            git-checkout-fuzzy = {
+              body = ''
+                set branch (git-fuzzy-branch "checkout branch...")
+                and git checkout $branch
+              '';
+            };
+            git-delete-fuzzy = {
+              body = ''
+                set branch (git-fuzzy-branch "delete branch...")
+                and git branch -d $branch
+              '';
+            };
+            git-force-delete-fuzzy = {
+              body = ''
+                set branch (git-fuzzy-branch "force delete branch...")
+                and git branch -D $branch
+              '';
+            };
+            git-merge-fuzzy = {
+              body = ''
+                set branch (git-fuzzy-branch "merge from...")
+                and git merge $branch
+              '';
+            };
+            git-show-fuzzy = {
+              body = builtins.readFile ./fish/functions/git-show-fuzzy.fish;
+            };
+            git-commits = {
+              body = builtins.readFile ./fish/functions/git-commits.fish;
+            };
+            git-history = {
+              body = builtins.readFile ./fish/functions/git-history.fish;
+            };
+            uncommitted = {
+              description = "Find uncommitted git repos";
+              body = builtins.readFile ./fish/functions/uncommitted.fish;
+            };
           };
-          git-fuzzy-branch = {
-            argumentNames = "header";
-            body = builtins.readFile ./fish/functions/git-fuzzy-branch.fish;
-          };
-          git-checkout-fuzzy = {
-            body = ''
-              set branch (git-fuzzy-branch "checkout branch...")
-              and git checkout $branch
-            '';
-          };
-          git-delete-fuzzy = {
-            body = ''
-              set branch (git-fuzzy-branch "delete branch...")
-              and git branch -d $branch
-            '';
-          };
-          git-force-delete-fuzzy = {
-            body = ''
-              set branch (git-fuzzy-branch "force delete branch...")
-              and git branch -D $branch
-            '';
-          };
-          git-merge-fuzzy = {
-            body = ''
-              set branch (git-fuzzy-branch "merge from...")
-              and git merge $branch
-            '';
-          };
-          git-show-fuzzy = {
-            body = builtins.readFile ./fish/functions/git-show-fuzzy.fish;
-          };
-          git-commits = {
-            body = builtins.readFile ./fish/functions/git-commits.fish;
-          };
-          git-history = {
-            body = builtins.readFile ./fish/functions/git-history.fish;
-          };
-          uncommitted = {
-            description = "Find uncommitted git repos";
-            body = builtins.readFile ./fish/functions/uncommitted.fish;
-          };
-        };
     };
-
   };
-
 }

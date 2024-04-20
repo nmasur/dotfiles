@@ -2,11 +2,17 @@
 # service, which allows for self-hosting the synchronization of a Bitwarden
 # password manager client.
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
-let vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory
-
-in {
+let
+  vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory
+in
+{
 
   config = lib.mkIf config.services.vaultwarden.enable {
     services.vaultwarden = {
@@ -39,18 +45,20 @@ in {
 
     networking.firewall.allowedTCPPorts = [ 3012 ];
 
-    caddy.routes = [{
-      match = [{ host = [ config.hostnames.secrets ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{
-          dial = "localhost:${
-              builtins.toString config.services.vaultwarden.config.ROCKET_PORT
-            }";
-        }];
-        headers.request.add."X-Real-IP" = [ "{http.request.remote.host}" ];
-      }];
-    }];
+    caddy.routes = [
+      {
+        match = [ { host = [ config.hostnames.secrets ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              { dial = "localhost:${builtins.toString config.services.vaultwarden.config.ROCKET_PORT}"; }
+            ];
+            headers.request.add."X-Real-IP" = [ "{http.request.remote.host}" ];
+          }
+        ];
+      }
+    ];
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.secrets ];
@@ -58,8 +66,7 @@ in {
     ## Backup config
 
     # Open to groups, allowing for backups
-    systemd.services.vaultwarden.serviceConfig.StateDirectoryMode =
-      lib.mkForce "0770";
+    systemd.services.vaultwarden.serviceConfig.StateDirectoryMode = lib.mkForce "0770";
     systemd.tmpfiles.rules = [
       "f ${vaultwardenPath}/db.sqlite3 0660 vaultwarden vaultwarden"
       "f ${vaultwardenPath}/db.sqlite3-shm 0660 vaultwarden vaultwarden"
@@ -73,13 +80,14 @@ in {
     # Backup sqlite database with litestream
     services.litestream = {
       settings = {
-        dbs = [{
-          path = "${vaultwardenPath}/db.sqlite3";
-          replicas = [{
-            url =
-              "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/vaultwarden";
-          }];
-        }];
+        dbs = [
+          {
+            path = "${vaultwardenPath}/db.sqlite3";
+            replicas = [
+              { url = "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/vaultwarden"; }
+            ];
+          }
+        ];
       };
     };
 
@@ -117,7 +125,5 @@ in {
             --exclude ".db.sqlite3*"
       '';
     };
-
   };
-
 }

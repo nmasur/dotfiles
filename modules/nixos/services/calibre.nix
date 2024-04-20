@@ -4,13 +4,18 @@
 # - Hostname defined with config.hostnames.books
 # - File directory backed up to S3 on a cron schedule.
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
   libraryPath = "/data/books";
-
-in {
+in
+{
 
   options = {
     backups.calibre = lib.mkOption {
@@ -33,20 +38,22 @@ in {
     };
 
     # Allow web traffic to Caddy
-    caddy.routes = [{
-      match = [{ host = [ config.hostnames.books ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{
-          dial = "localhost:${
-              builtins.toString config.services.calibre-web.listen.port
-            }";
-        }];
-        # This is required when calibre-web is behind a reverse proxy
-        # https://github.com/janeczku/calibre-web/issues/19
-        headers.request.add."X-Script-Name" = [ "/calibre-web" ];
-      }];
-    }];
+    caddy.routes = [
+      {
+        match = [ { host = [ config.hostnames.books ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              { dial = "localhost:${builtins.toString config.services.calibre-web.listen.port}"; }
+            ];
+            # This is required when calibre-web is behind a reverse proxy
+            # https://github.com/janeczku/calibre-web/issues/19
+            headers.request.add."X-Script-Name" = [ "/calibre-web" ];
+          }
+        ];
+      }
+    ];
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.books ];
@@ -80,7 +87,5 @@ in {
             --endpoint-url=https://${config.backup.s3.endpoint}
       '';
     };
-
   };
-
 }

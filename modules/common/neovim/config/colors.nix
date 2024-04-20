@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
 
   # Sets Neovim colors based on Nix colorscheme
 
@@ -18,5 +24,4 @@
       }
     '';
   };
-
 }

@@ -52,7 +52,9 @@
           # Catch-all if no match (should never happen anyway)
           default = "http_status:404";
           # Match from ingress of any valid server name to SSH access
-          ingress = { "*.masu.rs" = "ssh://localhost:22"; };
+          ingress = {
+            "*.masu.rs" = "ssh://localhost:22";
+          };
         };
       };
     };
@@ -79,8 +81,7 @@
         # if there is no existing AuthenticationMethods
         AuthenticationMethods publickey
     '';
-    services.openssh.settings.Macs =
-      [ "hmac-sha2-512" ]; # Fix for failure to find matching mac
+    services.openssh.settings.Macs = [ "hmac-sha2-512" ]; # Fix for failure to find matching mac
 
     # Create credentials file for Cloudflare
     secrets.cloudflared = {
@@ -91,11 +92,8 @@
       permissions = "0440";
     };
     systemd.services.cloudflared-secret = {
-      requiredBy =
-        [ "cloudflared-tunnel-${config.cloudflareTunnel.id}.service" ];
+      requiredBy = [ "cloudflared-tunnel-${config.cloudflareTunnel.id}.service" ];
       before = [ "cloudflared-tunnel-${config.cloudflareTunnel.id}.service" ];
     };
-
   };
-
 }

@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
 
   imports = [
     ./dunst.nix
@@ -49,7 +50,5 @@
       type = lib.types.path;
       description = "Wallpaper background image file";
     };
-
   };
-
 }

@@ -3,7 +3,8 @@
 # infinite retention separate from our other metrics, which can be nice for
 # recording health information, for example.
 
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   config = lib.mkIf config.services.influxdb2.enable {
 
@@ -30,11 +31,10 @@
       group = "influxdb2";
       permissions = "0440";
     };
-    systemd.services.influxdb2Password-secret =
-      lib.mkIf config.services.influxdb2.enable {
-        requiredBy = [ "influxdb2.service" ];
-        before = [ "influxdb2.service" ];
-      };
+    systemd.services.influxdb2Password-secret = lib.mkIf config.services.influxdb2.enable {
+      requiredBy = [ "influxdb2.service" ];
+      before = [ "influxdb2.service" ];
+    };
     secrets.influxdb2Token = lib.mkIf config.services.influxdb2.enable {
       source = ../../../private/influxdb2-token.age;
       dest = "${config.secretsDirectory}/influxdb2-token";
@@ -42,23 +42,24 @@
       group = "influxdb2";
       permissions = "0440";
     };
-    systemd.services.influxdb2Token-secret =
-      lib.mkIf config.services.influxdb2.enable {
-        requiredBy = [ "influxdb2.service" ];
-        before = [ "influxdb2.service" ];
-      };
+    systemd.services.influxdb2Token-secret = lib.mkIf config.services.influxdb2.enable {
+      requiredBy = [ "influxdb2.service" ];
+      before = [ "influxdb2.service" ];
+    };
 
-    caddy.routes = lib.mkIf config.services.influxdb2.enable [{
-      match = [{ host = [ config.hostnames.influxdb ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:8086"; }];
-      }];
-    }];
+    caddy.routes = lib.mkIf config.services.influxdb2.enable [
+      {
+        match = [ { host = [ config.hostnames.influxdb ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = "localhost:8086"; } ];
+          }
+        ];
+      }
+    ];
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.influxdb ];
-
   };
-
 }

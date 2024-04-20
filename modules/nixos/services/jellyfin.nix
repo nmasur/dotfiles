@@ -1,32 +1,46 @@
 # Jellyfin is a self-hosted video streaming service. This means I can play my
 # server's videos from a webpage, mobile app, or TV client.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf config.services.jellyfin.enable {
 
     services.jellyfin.group = "media";
-    users.users.jellyfin = { isSystemUser = true; };
+    users.users.jellyfin = {
+      isSystemUser = true;
+    };
 
     caddy.routes = [
       # Prevent public access to Prometheus metrics.
       {
-        match = [{
-          host = [ config.hostnames.stream ];
-          path = [ "/metrics*" ];
-        }];
-        handle = [{
-          handler = "static_response";
-          status_code = "403";
-        }];
+        match = [
+          {
+            host = [ config.hostnames.stream ];
+            path = [ "/metrics*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "static_response";
+            status_code = "403";
+          }
+        ];
       }
       # Allow access to normal route.
       {
-        match = [{ host = [ config.hostnames.stream ]; }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{ dial = "localhost:8096"; }];
-        }];
+        match = [ { host = [ config.hostnames.stream ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = "localhost:8096"; } ];
+          }
+        ];
       }
     ];
 
@@ -52,15 +66,15 @@
       "VDPAU_DRIVER" = "radeonsi";
       "LIBVA_DRIVER_NAME" = "radeonsi";
     };
-    users.users.jellyfin.extraGroups =
-      [ "render" "video" ]; # Access to /dev/dri
+    users.users.jellyfin.extraGroups = [
+      "render"
+      "video"
+    ]; # Access to /dev/dri
 
     # Fix issue where Jellyfin-created directories don't allow access for media group
     systemd.services.jellyfin.serviceConfig.UMask = lib.mkForce "0007";
 
     # Requires MetricsEnable is true in /var/lib/jellyfin/config/system.xml
     prometheus.scrapeTargets = [ "127.0.0.1:8096" ];
-
   };
-
 }

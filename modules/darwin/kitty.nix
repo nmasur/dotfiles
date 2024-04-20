@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   # MacOS-specific settings for Kitty
   home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
@@ -13,5 +19,4 @@
       };
     };
   };
-
 }

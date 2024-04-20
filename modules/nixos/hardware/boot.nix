@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   boot.loader = lib.mkIf (config.physical && !config.server) {
     grub = {
@@ -44,5 +50,4 @@
 
   # Use latest released Linux kernel by default
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-
 }

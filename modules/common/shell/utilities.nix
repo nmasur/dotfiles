@@ -10,8 +10,8 @@ let
     .terraform/
     .target/
     /Library/'';
-
-in {
+in
+{
 
   config = {
 
@@ -70,9 +70,6 @@ in {
           body = "${pkgs.prettyping}/bin/prettyping --nolegend $target";
         };
       };
-
     };
-
   };
-
 }

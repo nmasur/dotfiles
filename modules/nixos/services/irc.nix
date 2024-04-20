@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   config = lib.mkIf config.services.thelounge.enable {
 
@@ -16,20 +17,19 @@
     # sudo su - thelounge -s /bin/sh -c "thelounge add myuser"
 
     # Allow web traffic to Caddy
-    caddy.routes = [{
-      match = [{ host = [ config.hostnames.irc ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{
-          dial =
-            "localhost:${builtins.toString config.services.thelounge.port}";
-        }];
-      }];
-    }];
+    caddy.routes = [
+      {
+        match = [ { host = [ config.hostnames.irc ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = "localhost:${builtins.toString config.services.thelounge.port}"; } ];
+          }
+        ];
+      }
+    ];
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.irc ];
-
   };
-
 }

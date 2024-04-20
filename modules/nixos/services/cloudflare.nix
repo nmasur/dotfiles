@@ -8,7 +8,12 @@
 # DNS validation plugin to connect to Cloudflare and automatically create
 # validation DNS records for our generated certificates.
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
@@ -39,10 +44,9 @@ let
     "2405:8100::/32"
     "2a06:98c0::/29"
     "2c0f:f248::/32"
-
   ];
-
-in {
+in
+{
 
   options.cloudflare.enable = lib.mkEnableOption "Use Cloudflare.";
 
@@ -59,23 +63,26 @@ in {
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
     services.caddy.package = pkgs.caddy-cloudflare; # Patched overlay
-    caddy.tlsPolicies = [{
-      issuers = [{
-        module = "acme";
-        challenges = {
-          dns = {
-            provider = {
-              name = "cloudflare";
-              api_token = "{env.CLOUDFLARE_API_TOKEN}";
+    caddy.tlsPolicies = [
+      {
+        issuers = [
+          {
+            module = "acme";
+            challenges = {
+              dns = {
+                provider = {
+                  name = "cloudflare";
+                  api_token = "{env.CLOUDFLARE_API_TOKEN}";
+                };
+                resolvers = [ "1.1.1.1" ];
+              };
             };
-            resolvers = [ "1.1.1.1" ];
-          };
-        };
-      }];
-    }];
+          }
+        ];
+      }
+    ];
     # Allow Caddy to read Cloudflare API key for DNS validation
-    systemd.services.caddy.serviceConfig.EnvironmentFile =
-      config.secrets.cloudflare-api.dest;
+    systemd.services.caddy.serviceConfig.EnvironmentFile = config.secrets.cloudflare-api.dest;
 
     # API key must have access to modify Cloudflare DNS records
     secrets.cloudflare-api = {
@@ -95,59 +102,58 @@ in {
     services.nextcloud.settings.trusted_proxies = cloudflareIpRanges;
 
     # Allows Transmission to trust Cloudflare IPs
-    services.transmission.settings.rpc-whitelist =
-      builtins.concatStringsSep "," ([ "127.0.0.1" ] ++ cloudflareIpRanges);
+    services.transmission.settings.rpc-whitelist = builtins.concatStringsSep "," (
+      [ "127.0.0.1" ] ++ cloudflareIpRanges
+    );
 
-    services.cloudflare-dyndns = lib.mkIf
-      ((builtins.length config.services.cloudflare-dyndns.domains) > 0) {
-        enable = true;
-        proxied = true;
-        deleteMissing = true;
-        apiTokenFile = config.secrets.cloudflare-api.dest;
-      };
+    services.cloudflare-dyndns =
+      lib.mkIf ((builtins.length config.services.cloudflare-dyndns.domains) > 0)
+        {
+          enable = true;
+          proxied = true;
+          deleteMissing = true;
+          apiTokenFile = config.secrets.cloudflare-api.dest;
+        };
 
     # Wait for secret to exist to start
-    systemd.services.cloudflare-dyndns =
-      lib.mkIf config.services.cloudflare-dyndns.enable {
-        after = [ "cloudflare-api-secret.service" ];
-        requires = [ "cloudflare-api-secret.service" ];
-      };
+    systemd.services.cloudflare-dyndns = lib.mkIf config.services.cloudflare-dyndns.enable {
+      after = [ "cloudflare-api-secret.service" ];
+      requires = [ "cloudflare-api-secret.service" ];
+    };
 
     # Run a second copy of dyn-dns for non-proxied domains
     # Adapted from: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/cloudflare-dyndns.nix
     systemd.services.cloudflare-dyndns-noproxy =
-      lib.mkIf ((builtins.length config.cloudflare.noProxyDomains) > 0) {
-        description = "CloudFlare Dynamic DNS Client (no proxy)";
-        after = [ "network.target" "cloudflare-api-secret.service" ];
-        requires = [ "cloudflare-api-secret.service" ];
-        wantedBy = [ "multi-user.target" ];
-        startAt = "*:0/5";
+      lib.mkIf ((builtins.length config.cloudflare.noProxyDomains) > 0)
+        {
+          description = "CloudFlare Dynamic DNS Client (no proxy)";
+          after = [
+            "network.target"
+            "cloudflare-api-secret.service"
+          ];
+          requires = [ "cloudflare-api-secret.service" ];
+          wantedBy = [ "multi-user.target" ];
+          startAt = "*:0/5";
 
-        environment = {
-          CLOUDFLARE_DOMAINS = toString config.cloudflare.noProxyDomains;
+          environment = {
+            CLOUDFLARE_DOMAINS = toString config.cloudflare.noProxyDomains;
+          };
+
+          serviceConfig = {
+            Type = "simple";
+            DynamicUser = true;
+            StateDirectory = "cloudflare-dyndns-noproxy";
+            EnvironmentFile = config.services.cloudflare-dyndns.apiTokenFile;
+            ExecStart =
+              let
+                args =
+                  [ "--cache-file /var/lib/cloudflare-dyndns-noproxy/ip.cache" ]
+                  ++ (if config.services.cloudflare-dyndns.ipv4 then [ "-4" ] else [ "-no-4" ])
+                  ++ (if config.services.cloudflare-dyndns.ipv6 then [ "-6" ] else [ "-no-6" ])
+                  ++ lib.optional config.services.cloudflare-dyndns.deleteMissing "--delete-missing";
+              in
+              "${pkgs.cloudflare-dyndns}/bin/cloudflare-dyndns ${toString args}";
+          };
         };
-
-        serviceConfig = {
-          Type = "simple";
-          DynamicUser = true;
-          StateDirectory = "cloudflare-dyndns-noproxy";
-          EnvironmentFile = config.services.cloudflare-dyndns.apiTokenFile;
-          ExecStart = let
-            args =
-              [ "--cache-file /var/lib/cloudflare-dyndns-noproxy/ip.cache" ]
-              ++ (if config.services.cloudflare-dyndns.ipv4 then
-                [ "-4" ]
-              else
-                [ "-no-4" ]) ++ (if config.services.cloudflare-dyndns.ipv6 then
-                  [ "-6" ]
-                else
-                  [ "-no-6" ])
-              ++ lib.optional config.services.cloudflare-dyndns.deleteMissing
-              "--delete-missing";
-
-          in "${pkgs.cloudflare-dyndns}/bin/cloudflare-dyndns ${toString args}";
-        };
-      };
-
   };
 }

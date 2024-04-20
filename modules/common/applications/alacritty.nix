@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     alacritty = {
@@ -28,7 +34,9 @@
             opacity = 1.0;
           };
           scrolling.history = 10000;
-          font = { size = 14.0; };
+          font = {
+            size = 14.0;
+          };
           key_bindings = [
             # Used for word completion in fish_user_key_bindings
             {

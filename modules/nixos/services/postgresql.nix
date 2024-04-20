@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   services.postgresql = {
     package = pkgs.postgresql_15;
@@ -12,19 +18,19 @@
       root      root              postgres
       admin     ${config.user}    admin
     '';
-    ensureUsers = [{
-      name = "admin";
-      ensureClauses = {
-        createdb = true;
-        createrole = true;
-        login = true;
-      };
-    }];
+    ensureUsers = [
+      {
+        name = "admin";
+        ensureClauses = {
+          createdb = true;
+          createrole = true;
+          login = true;
+        };
+      }
+    ];
   };
 
-  home-manager.users.${config.user}.home.packages =
-    lib.mkIf config.services.postgresql.enable [
-      pkgs.pgcli # Postgres client with autocomplete
-    ];
-
+  home-manager.users.${config.user}.home.packages = lib.mkIf config.services.postgresql.enable [
+    pkgs.pgcli # Postgres client with autocomplete
+  ];
 }

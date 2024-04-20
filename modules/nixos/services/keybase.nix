@@ -1,7 +1,13 @@
 # Keybase is an encrypted communications tool with a synchronized encrypted
 # filestore that can be mounted onto a machine's filesystem.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.keybase.enable = lib.mkEnableOption "Keybase.";
 
@@ -19,16 +25,16 @@
       systemd.user.services.kbfs.Service.PrivateTmp = lib.mkForce false;
 
       home.packages = [ (lib.mkIf config.gui.enable pkgs.keybase-gui) ];
-      home.file = let
-        ignorePatterns = ''
-          keybase/
-          kbfs/'';
-      in {
-        ".rgignore".text = ignorePatterns;
-        ".fdignore".text = ignorePatterns;
-      };
+      home.file =
+        let
+          ignorePatterns = ''
+            keybase/
+            kbfs/'';
+        in
+        {
+          ".rgignore".text = ignorePatterns;
+          ".fdignore".text = ignorePatterns;
+        };
     };
-
   };
-
 }

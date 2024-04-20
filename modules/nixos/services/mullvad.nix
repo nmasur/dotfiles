@@ -1,6 +1,12 @@
 # Mullvad is a VPN service. This isn't currently in use for me at the moment.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.mullvad.enable = lib.mkEnableOption "Mullvad VPN.";
 
@@ -8,7 +14,5 @@
 
     services.mullvad-vpn.enable = true;
     environment.systemPackages = [ pkgs.mullvad-vpn ];
-
   };
-
 }

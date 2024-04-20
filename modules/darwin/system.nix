@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf pkgs.stdenv.isDarwin {
 
@@ -102,7 +108,6 @@
             "${pkgs.kitty}/Applications/kitty.app"
             "/System/Applications/System Settings.app"
           ];
-
         };
 
         finder = {
@@ -118,7 +123,6 @@
 
           # Allow quitting of Finder application
           QuitMenuItem = true;
-
         };
 
         # Disable "Are you sure you want to open" dialog
@@ -165,12 +169,9 @@
             eventTimeFormat = ''"show"'';
             eventTitleFormat = ''"none"'';
             eventTitleIconFormat = ''"iconCalendar"'';
-            slackBrowser =
-              ''{"deletable":true,"arguments":"","name":"Slack","path":""}'';
-            zoomBrowser =
-              ''{"deletable":true,"arguments":"","name":"Zoom","path":""}'';
-            KeyboardShortcuts_joinEventShortcut =
-              ''{"carbonModifiers":6400,"carbonKeyCode":38}'';
+            slackBrowser = ''{"deletable":true,"arguments":"","name":"Slack","path":""}'';
+            zoomBrowser = ''{"deletable":true,"arguments":"","name":"Zoom","path":""}'';
+            KeyboardShortcuts_joinEventShortcut = ''{"carbonModifiers":6400,"carbonKeyCode":38}'';
             timeFormat = ''"12-hour"'';
           };
         };
@@ -178,7 +179,6 @@
         CustomSystemPreferences = {
 
         };
-
       };
 
       # Settings that don't have an option in nix-darwin
@@ -199,9 +199,6 @@
         defaults write -globalDomain NSStatusItemSelectionPadding -int 6
         defaults write -globalDomain NSStatusItemSpacing -int 6
       '';
-
     };
-
   };
-
 }

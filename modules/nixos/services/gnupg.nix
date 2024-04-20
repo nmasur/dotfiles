@@ -1,6 +1,12 @@
 # GPG is an encryption tool. This isn't really in use for me at the moment.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.gpg.enable = lib.mkEnableOption "GnuPG encryption.";
 
@@ -16,5 +22,4 @@
     };
     home = lib.mkIf config.gui.enable { packages = with pkgs; [ pinentry ]; };
   };
-
 }

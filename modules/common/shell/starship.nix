@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   home-manager.users.${config.user}.programs.starship = {
     enable = true;
@@ -29,7 +35,9 @@
         truncate_to_repo = true;
         truncation_length = 100;
       };
-      git_branch = { format = "[$symbol$branch]($style)"; };
+      git_branch = {
+        format = "[$symbol$branch]($style)";
+      };
       git_commit = {
         format = "( @ [$hash]($style) )";
         only_detached = false;
@@ -56,8 +64,9 @@
         format = "[$symbol $name]($style)";
         symbol = "❄️";
       };
-      python = { format = "[\${version}\\(\${virtualenv}\\)]($style)"; };
+      python = {
+        format = "[\${version}\\(\${virtualenv}\\)]($style)";
+      };
     };
   };
-
 }

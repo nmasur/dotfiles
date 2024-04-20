@@ -1,4 +1,9 @@
-{ config, lib, modulesPath, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 {
 
   # options.iso.enable = lib.mkEnableOption "Enable creating as an ISO.";
@@ -14,6 +19,4 @@
   #   isoImage.makeUsbBootable = true;
   #
   # };
-
 }
-

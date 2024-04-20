@@ -1,4 +1,10 @@
-{ pkgs, dsl, lib, ... }: {
+{
+  pkgs,
+  dsl,
+  lib,
+  ...
+}:
+{
   plugins = [
     pkgs.vimPlugins.vim-surround # Keybinds for surround characters
     pkgs.vimPlugins.vim-eunuch # File manipulation commands
@@ -13,7 +19,11 @@
 
   # Initialize some plugins
   setup.Comment = { };
-  setup.colorizer = { user_default_options = { names = false; }; };
+  setup.colorizer = {
+    user_default_options = {
+      names = false;
+    };
+  };
   setup.glow = { };
   setup.which-key = { };
   setup.kitty-scrollback = { };
@@ -54,12 +64,15 @@
   vim.o.backup = true; # Easier to recover and more secure
   vim.bo.swapfile = false; # Instead of swaps, create backups
   vim.bo.undofile = true; # Keeps undos after quit
-  vim.o.backupdir =
-    dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/backup//")'';
+  vim.o.backupdir = dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/backup//")'';
   vim.o.undodir = dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/undo//")'';
 
   # Required for nvim-cmp completion
-  vim.opt.completeopt = [ "menu" "menuone" "noselect" ];
+  vim.opt.completeopt = [
+    "menu"
+    "menuone"
+    "noselect"
+  ];
 
   lua = lib.mkBefore ''
     vim.loader.enable()

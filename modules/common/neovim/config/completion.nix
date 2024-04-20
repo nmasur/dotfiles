@@ -1,4 +1,5 @@
-{ pkgs, dsl, ... }: {
+{ pkgs, dsl, ... }:
+{
 
   plugins = [
     pkgs.vimPlugins.cmp-nvim-lsp
@@ -25,21 +26,15 @@
 
     # Basic completion keybinds
     mapping = {
-      "['<C-n>']" = dsl.rawLua
-        "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert })";
-      "['<C-p>']" = dsl.rawLua
-        "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert })";
-      "['<Down>']" = dsl.rawLua
-        "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Select })";
-      "['<Up>']" = dsl.rawLua
-        "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Select })";
+      "['<C-n>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert })";
+      "['<C-p>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert })";
+      "['<Down>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Select })";
+      "['<Up>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Select })";
       "['<C-d>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(-4)";
       "['<C-f>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(4)";
       "['<C-e>']" = dsl.rawLua "require('cmp').mapping.abort()";
-      "['<CR>']" = dsl.rawLua
-        "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, })";
-      "['<C-r>']" = dsl.rawLua
-        "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, })";
+      "['<CR>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, })";
+      "['<C-r>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, })";
       "['<Esc>']" = dsl.rawLua ''
         function(_)
             cmp.mapping({
@@ -72,13 +67,19 @@
         name = "rg"; # Grep for text from the current directory
         keyword_length = 6;
         max_item_count = 10;
-        option = { additional_arguments = "--ignore-case"; };
+        option = {
+          additional_arguments = "--ignore-case";
+        };
       }
     ];
 
     # Styling of the completion menu
     formatting = {
-      fields = [ "kind" "abbr" "menu" ];
+      fields = [
+        "kind"
+        "abbr"
+        "menu"
+      ];
       format = dsl.rawLua ''
         function(entry, vim_item)
             local kind_icons = {
@@ -125,7 +126,6 @@
       native_menu = false; # Use cmp menu instead of Vim menu
       ghost_text = true; # Show preview auto-completion
     };
-
   };
 
   lua = ''
@@ -145,5 +145,4 @@
         }),
     })
   '';
-
 }

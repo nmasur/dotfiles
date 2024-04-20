@@ -1,7 +1,8 @@
 # Netdata is an out-of-the-box monitoring tool that exposes many different
 # metrics. Not currently in use, in favor of VictoriaMetrics and Grafana.
 
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   options.netdata.enable = lib.mkEnableOption "Netdata metrics.";
 
@@ -11,9 +12,9 @@
       enable = true;
 
       # Disable local dashboard (unsecured)
-      config = { web.mode = "none"; };
+      config = {
+        web.mode = "none";
+      };
     };
-
   };
-
 }

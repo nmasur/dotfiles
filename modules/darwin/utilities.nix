@@ -1,8 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
-  unfreePackages = [ "consul" "vault-bin" ];
+  unfreePackages = [
+    "consul"
+    "vault-bin"
+  ];
 
   home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
 
@@ -38,7 +46,5 @@
       # Shortcut to edit hosts file
       hosts = "sudo nvim /etc/hosts";
     };
-
   };
-
 }

@@ -1,4 +1,5 @@
-{ pkgs, dsl, ... }: {
+{ pkgs, dsl, ... }:
+{
 
   # Telescope is a fuzzy finder that can work with different sub-plugins
 
@@ -20,9 +21,15 @@
       };
     };
     pickers = {
-      find_files = { theme = "ivy"; };
-      oldfiles = { theme = "ivy"; };
-      buffers = { theme = "dropdown"; };
+      find_files = {
+        theme = "ivy";
+      };
+      oldfiles = {
+        theme = "ivy";
+      };
+      buffers = {
+        theme = "dropdown";
+      };
     };
     extensions = {
       fzy_native = { };
@@ -33,5 +40,4 @@
   setup.project_nvim = { };
 
   lua = builtins.readFile ./telescope.lua;
-
 }

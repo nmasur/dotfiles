@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   imports = [
     ./alacritty.nix
@@ -14,5 +15,4 @@
     ./user.nix
     ./utilities.nix
   ];
-
 }

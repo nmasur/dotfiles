@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.gaming.lutris.enable = lib.mkEnableOption "Lutris game installer.";
 
@@ -9,5 +15,4 @@
       wineWowPackages.stable # 32-bit and 64-bit wineWowPackages
     ];
   };
-
 }

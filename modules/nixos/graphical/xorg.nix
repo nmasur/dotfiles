@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf config.gui.enable {
 
@@ -20,16 +26,13 @@
           extraSeatDefaults = ''
             greeter-hide-users = false
           '';
-
         };
       };
-
     };
 
-    environment.systemPackages = with pkgs;
-      [
-        xclip # Clipboard
-      ];
+    environment.systemPackages = with pkgs; [
+      xclip # Clipboard
+    ];
 
     home-manager.users.${config.user} = {
 
@@ -37,9 +40,6 @@
         pbcopy = "xclip -selection clipboard -in";
         pbpaste = "xclip -selection clipboard -out";
       };
-
     };
-
   };
-
 }

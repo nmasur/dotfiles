@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   imports = [
     ./haskell.nix
@@ -9,5 +10,4 @@
     ./rust.nix
     ./terraform.nix
   ];
-
 }

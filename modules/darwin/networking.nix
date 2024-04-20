@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf pkgs.stdenv.isDarwin {
     networking = {
@@ -7,5 +13,4 @@
       # hostName = "";
     };
   };
-
 }

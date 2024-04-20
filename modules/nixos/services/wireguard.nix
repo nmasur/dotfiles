@@ -1,7 +1,13 @@
 # Wireguard is a VPN protocol that can be setup to create a mesh network
 # between machines on different LANs. This is currently not in use in my setup.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.wireguard.enable = lib.mkEnableOption "Wireguard VPN setup.";
 
@@ -21,7 +27,6 @@
 
           # Move to network namespace for isolating programs
           interfaceNamespace = "wg";
-
         };
       };
     };
@@ -45,7 +50,5 @@
       source = ../../../private/wireguard.age;
       dest = "${config.secretsDirectory}/wireguard";
     };
-
   };
-
 }

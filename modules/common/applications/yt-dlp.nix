@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     yt-dlp = {
@@ -27,9 +33,6 @@
       };
 
       programs.fish.shellAbbrs.yt = "yt-dlp";
-
     };
-
   };
-
 }

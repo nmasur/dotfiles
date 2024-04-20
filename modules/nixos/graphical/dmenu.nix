@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
@@ -8,7 +13,5 @@
 
     home-manager.users.${config.user}.home.packages = [ pkgs.dmenu ];
     gui.launcherCommand = "${pkgs.dmenu}/bin/dmenu_run";
-
   };
-
 }

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
 
@@ -46,33 +52,36 @@
             # wm-restack = "i3";
             # override-redirect = true;
           };
-          "module/i3" = let padding = 2;
-          in {
-            type = "internal/i3";
-            pin-workspaces = false;
-            show-urgent = true;
-            strip-wsnumbers = true;
-            index-sort = true;
-            enable-click = true;
-            wrapping-scroll = true;
-            fuzzy-match = true;
-            format = "<label-state> <label-mode>";
-            label-focused = "%name%";
-            label-focused-foreground = config.theme.colors.base01;
-            label-focused-background = config.theme.colors.base05;
-            label-focused-underline = config.theme.colors.base03;
-            label-focused-padding = padding;
-            label-unfocused = "%name%";
-            label-unfocused-padding = padding;
-            label-visible = "%name%";
-            label-visible-underline = config.theme.colors.base01;
-            label-visible-padding = padding;
-            label-urgent = "%name%";
-            label-urgent-foreground = config.theme.colors.base00;
-            label-urgent-background = config.theme.colors.base08;
-            label-urgent-underline = config.theme.colors.base0F;
-            label-urgent-padding = padding;
-          };
+          "module/i3" =
+            let
+              padding = 2;
+            in
+            {
+              type = "internal/i3";
+              pin-workspaces = false;
+              show-urgent = true;
+              strip-wsnumbers = true;
+              index-sort = true;
+              enable-click = true;
+              wrapping-scroll = true;
+              fuzzy-match = true;
+              format = "<label-state> <label-mode>";
+              label-focused = "%name%";
+              label-focused-foreground = config.theme.colors.base01;
+              label-focused-background = config.theme.colors.base05;
+              label-focused-underline = config.theme.colors.base03;
+              label-focused-padding = padding;
+              label-unfocused = "%name%";
+              label-unfocused-padding = padding;
+              label-visible = "%name%";
+              label-visible-underline = config.theme.colors.base01;
+              label-visible-padding = padding;
+              label-urgent = "%name%";
+              label-urgent-foreground = config.theme.colors.base00;
+              label-urgent-background = config.theme.colors.base08;
+              label-urgent-underline = config.theme.colors.base0F;
+              label-urgent-padding = padding;
+            };
           "module/xworkspaces" = {
             type = "internal/xworkspaces";
             label-active = "%name%";
@@ -105,24 +114,24 @@
             type = "custom/script";
             interval = 10;
             format = "<label>";
-            exec = builtins.toString (pkgs.writeShellScript "mailcount.sh" ''
-              ${pkgs.notmuch}/bin/notmuch new --quiet 2>&1>/dev/null
-              UNREAD=$(
-                  ${pkgs.notmuch}/bin/notmuch count \
-                      is:inbox and \
-                      is:unread and \
-                      folder:main/Inbox \
-                      2>/dev/null
-              )
-              if [ $UNREAD = "0" ]; then
-                echo ""
-              else
-                echo "%{T2}%{T-} $UNREAD "
-              fi
-            '');
-            click-left =
-              "i3-msg 'exec --no-startup-id kitty --class aerc aerc'; sleep 0.15; i3-msg '[class=aerc] focus'";
-
+            exec = builtins.toString (
+              pkgs.writeShellScript "mailcount.sh" ''
+                ${pkgs.notmuch}/bin/notmuch new --quiet 2>&1>/dev/null
+                UNREAD=$(
+                    ${pkgs.notmuch}/bin/notmuch count \
+                        is:inbox and \
+                        is:unread and \
+                        folder:main/Inbox \
+                        2>/dev/null
+                )
+                if [ $UNREAD = "0" ]; then
+                  echo ""
+                else
+                  echo "%{T2}%{T-} $UNREAD "
+                fi
+              ''
+            );
+            click-left = "i3-msg 'exec --no-startup-id kitty --class aerc aerc'; sleep 0.15; i3-msg '[class=aerc] focus'";
           };
           "module/network" = {
             type = "internal/network";
@@ -220,13 +229,13 @@
         };
       };
 
-      xsession.windowManager.i3.config.startup = [{
-        command = "pkill polybar; polybar -r main";
-        always = true;
-        notification = false;
-      }];
-
+      xsession.windowManager.i3.config.startup = [
+        {
+          command = "pkill polybar; polybar -r main";
+          always = true;
+          notification = false;
+        }
+      ];
     };
   };
-
 }

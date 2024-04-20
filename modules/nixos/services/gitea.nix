@@ -1,8 +1,14 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
-let giteaPath = "/var/lib/gitea"; # Default service directory
-
-in {
+let
+  giteaPath = "/var/lib/gitea"; # Default service directory
+in
+{
 
   config = lib.mkIf config.services.gitea.enable {
     services.gitea = {
@@ -54,27 +60,30 @@ in {
     caddy.routes = [
       # Prevent public access to Prometheus metrics.
       {
-        match = [{
-          host = [ config.hostnames.git ];
-          path = [ "/metrics*" ];
-        }];
-        handle = [{
-          handler = "static_response";
-          status_code = "403";
-        }];
+        match = [
+          {
+            host = [ config.hostnames.git ];
+            path = [ "/metrics*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "static_response";
+            status_code = "403";
+          }
+        ];
       }
       # Allow access to primary server.
       {
-        match = [{ host = [ config.hostnames.git ]; }];
-        handle = [{
-          handler = "reverse_proxy";
-          upstreams = [{
-            dial = "localhost:${
-                builtins.toString
-                config.services.gitea.settings.server.HTTP_PORT
-              }";
-          }];
-        }];
+        match = [ { host = [ config.hostnames.git ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              { dial = "localhost:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}"; }
+            ];
+          }
+        ];
       }
     ];
 
@@ -83,18 +92,14 @@ in {
 
     # Scrape the metrics endpoint for Prometheus.
     prometheus.scrapeTargets = [
-      "127.0.0.1:${
-        builtins.toString config.services.gitea.settings.server.HTTP_PORT
-      }"
+      "127.0.0.1:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}"
     ];
 
     ## Backup config
 
     # Open to groups, allowing for backups
-    systemd.services.gitea.serviceConfig.StateDirectoryMode =
-      lib.mkForce "0770";
-    systemd.tmpfiles.rules =
-      [ "f ${giteaPath}/data/gitea.db 0660 gitea gitea" ];
+    systemd.services.gitea.serviceConfig.StateDirectoryMode = lib.mkForce "0770";
+    systemd.tmpfiles.rules = [ "f ${giteaPath}/data/gitea.db 0660 gitea gitea" ];
 
     # Allow litestream and gitea to share a sqlite database
     users.users.litestream.extraGroups = [ "gitea" ];
@@ -103,13 +108,12 @@ in {
     # Backup sqlite database with litestream
     services.litestream = {
       settings = {
-        dbs = [{
-          path = "${giteaPath}/data/gitea.db";
-          replicas = [{
-            url =
-              "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/gitea";
-          }];
-        }];
+        dbs = [
+          {
+            path = "${giteaPath}/data/gitea.db";
+            replicas = [ { url = "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/gitea"; } ];
+          }
+        ];
       };
     };
 
@@ -129,24 +133,21 @@ in {
     };
 
     # Backup Gitea repos to object storage
-    systemd.services.gitea-backup =
-      lib.mkIf (config.backup.s3.endpoint != null) {
-        description = "Backup Gitea data";
-        environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
-        serviceConfig = {
-          Type = "oneshot";
-          User = "gitea";
-          Group = "backup";
-          EnvironmentFile = config.secrets.backup.dest;
-        };
-        script = ''
-          ${pkgs.awscli2}/bin/aws s3 sync --exclude */gitea.db* \
-              ${giteaPath}/ \
-              s3://${config.backup.s3.bucket}/gitea-data/ \
-              --endpoint-url=https://${config.backup.s3.endpoint}
-        '';
+    systemd.services.gitea-backup = lib.mkIf (config.backup.s3.endpoint != null) {
+      description = "Backup Gitea data";
+      environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
+      serviceConfig = {
+        Type = "oneshot";
+        User = "gitea";
+        Group = "backup";
+        EnvironmentFile = config.secrets.backup.dest;
       };
-
+      script = ''
+        ${pkgs.awscli2}/bin/aws s3 sync --exclude */gitea.db* \
+            ${giteaPath}/ \
+            s3://${config.backup.s3.bucket}/gitea-data/ \
+            --endpoint-url=https://${config.backup.s3.endpoint}
+      '';
+    };
   };
-
 }

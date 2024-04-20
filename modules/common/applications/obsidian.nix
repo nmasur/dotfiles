@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     obsidian = {
@@ -18,7 +24,5 @@
     # Broken on 2023-12-11
     # https://forum.obsidian.md/t/electron-25-is-now-eol-please-upgrade-to-a-newer-version/72878/8
     nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
-
   };
-
 }

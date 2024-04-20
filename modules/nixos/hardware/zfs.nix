@@ -1,6 +1,9 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
-  options = { zfs.enable = lib.mkEnableOption "ZFS file system."; };
+  options = {
+    zfs.enable = lib.mkEnableOption "ZFS file system.";
+  };
 
   config = lib.mkIf (config.server && config.zfs.enable) {
 
@@ -8,14 +11,9 @@
     boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     boot.kernelParams = [ "nohibernate" ];
     boot.supportedFilesystems = [ "zfs" ];
-    services.prometheus.exporters.zfs.enable =
-      config.prometheus.exporters.enable;
+    services.prometheus.exporters.zfs.enable = config.prometheus.exporters.enable;
     prometheus.scrapeTargets = [
-      "127.0.0.1:${
-        builtins.toString config.services.prometheus.exporters.zfs.port
-      }"
+      "127.0.0.1:${builtins.toString config.services.prometheus.exporters.zfs.port}"
     ];
-
   };
-
 }

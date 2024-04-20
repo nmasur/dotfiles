@@ -1,7 +1,19 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
 
-  imports =
-    [ ./applications ./mail ./neovim ./programming ./repositories ./shell ];
+  imports = [
+    ./applications
+    ./mail
+    ./neovim
+    ./programming
+    ./repositories
+    ./shell
+  ];
 
   options = {
     user = lib.mkOption {
@@ -17,8 +29,7 @@
       download = lib.mkOption {
         type = lib.types.str;
         description = "XDG directory for downloads";
-        default =
-          if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
+        default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
       };
     };
     identityFile = lib.mkOption {
@@ -47,10 +58,9 @@
     homePath = lib.mkOption {
       type = lib.types.path;
       description = "Path of user's home directory.";
-      default = builtins.toPath (if pkgs.stdenv.isDarwin then
-        "/Users/${config.user}"
-      else
-        "/home/${config.user}");
+      default = builtins.toPath (
+        if pkgs.stdenv.isDarwin then "/Users/${config.user}" else "/home/${config.user}"
+      );
     };
     dotfilesPath = lib.mkOption {
       type = lib.types.path;
@@ -122,28 +132,33 @@
     };
   };
 
-  config = let stateVersion = "23.05";
-  in {
+  config =
+    let
+      stateVersion = "23.05";
+    in
+    {
 
-    # Basic common system packages for all devices
-    environment.systemPackages = with pkgs; [ git vim wget curl ];
+      # Basic common system packages for all devices
+      environment.systemPackages = with pkgs; [
+        git
+        vim
+        wget
+        curl
+      ];
 
-    # Use the system-level nixpkgs instead of Home Manager's
-    home-manager.useGlobalPkgs = true;
+      # Use the system-level nixpkgs instead of Home Manager's
+      home-manager.useGlobalPkgs = true;
 
-    # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-    # using multiple profiles for one user
-    home-manager.useUserPackages = true;
+      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+      # using multiple profiles for one user
+      home-manager.useUserPackages = true;
 
-    # Allow specified unfree packages (identified elsewhere)
-    # Retrieves package object based on string name
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) config.unfreePackages;
+      # Allow specified unfree packages (identified elsewhere)
+      # Retrieves package object based on string name
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.unfreePackages;
 
-    # Pin a state version to prevent warnings
-    home-manager.users.${config.user}.home.stateVersion = stateVersion;
-    home-manager.users.root.home.stateVersion = stateVersion;
-
-  };
-
+      # Pin a state version to prevent warnings
+      home-manager.users.${config.user}.home.stateVersion = stateVersion;
+      home-manager.users.root.home.stateVersion = stateVersion;
+    };
 }

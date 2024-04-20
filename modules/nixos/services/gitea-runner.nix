@@ -4,11 +4,15 @@
 # the Runners don't necessarily need to be running Gitea. All we need is an API
 # key for Gitea to connect to it and register ourselves as a Runner.
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  options.giteaRunner.enable =
-    lib.mkEnableOption "Enable Gitea Actions runner.";
+  options.giteaRunner.enable = lib.mkEnableOption "Enable Gitea Actions runner.";
 
   config = lib.mkIf config.giteaRunner.enable {
 
@@ -38,8 +42,7 @@
     };
 
     # Make sure the runner doesn't start until after Gitea
-    systemd.services."gitea-runner-${config.networking.hostName}".after =
-      [ "gitea.service" ];
+    systemd.services."gitea-runner-${config.networking.hostName}".after = [ "gitea.service" ];
 
     # API key needed to connect to Gitea
     secrets.giteaRunnerToken = {
@@ -58,7 +61,5 @@
         }.service"
       ];
     };
-
   };
-
 }

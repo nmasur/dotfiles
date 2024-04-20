@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   # Convenience utilities from charm.sh
 
@@ -12,7 +18,5 @@
       charm # Manage account and filesystem
       pop # Send emails from a TUI
     ];
-
   };
-
 }

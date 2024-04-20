@@ -1,37 +1,44 @@
 # VictoriaMetrics is a more efficient drop-in replacement for Prometheus and
 # InfluxDB (timeseries databases built for monitoring system metrics).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
   username = "prometheus";
 
   prometheusConfig = (pkgs.formats.yaml { }).generate "prometheus.yml" {
-    scrape_configs = [{
-      job_name = config.networking.hostName;
-      stream_parse = true;
-      static_configs = [{ targets = config.prometheus.scrapeTargets; }];
-    }];
+    scrape_configs = [
+      {
+        job_name = config.networking.hostName;
+        stream_parse = true;
+        static_configs = [ { targets = config.prometheus.scrapeTargets; } ];
+      }
+    ];
   };
 
   authConfig = (pkgs.formats.yaml { }).generate "auth.yml" {
-    users = [{
-      username = username;
-      password = "%{PASSWORD}";
-      url_prefix =
-        "http://localhost${config.services.victoriametrics.listenAddress}";
-    }];
+    users = [
+      {
+        username = username;
+        password = "%{PASSWORD}";
+        url_prefix = "http://localhost${config.services.victoriametrics.listenAddress}";
+      }
+    ];
   };
 
   authPort = "8427";
-
-in {
+in
+{
 
   config = {
 
-    services.victoriametrics.extraOptions =
-      [ "-promscrape.config=${prometheusConfig}" ];
+    services.victoriametrics.extraOptions = [ "-promscrape.config=${prometheusConfig}" ];
 
     systemd.services.vmauth = lib.mkIf config.services.victoriametrics.enable {
       description = "VictoriaMetrics basic auth proxy";
@@ -55,39 +62,38 @@ in {
       dest = "${config.secretsDirectory}/vmauth";
       prefix = "PASSWORD=";
     };
-    systemd.services.vmauth-secret =
-      lib.mkIf config.services.victoriametrics.enable {
-        requiredBy = [ "vmauth.service" ];
-        before = [ "vmauth.service" ];
-      };
+    systemd.services.vmauth-secret = lib.mkIf config.services.victoriametrics.enable {
+      requiredBy = [ "vmauth.service" ];
+      before = [ "vmauth.service" ];
+    };
 
-    caddy.routes = lib.mkIf config.services.victoriametrics.enable [{
-      match = [{ host = [ config.hostnames.prometheus ]; }];
-      handle = [{
-        handler = "reverse_proxy";
-        upstreams = [{ dial = "localhost:${authPort}"; }];
-      }];
-    }];
+    caddy.routes = lib.mkIf config.services.victoriametrics.enable [
+      {
+        match = [ { host = [ config.hostnames.prometheus ]; } ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = "localhost:${authPort}"; } ];
+          }
+        ];
+      }
+    ];
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains =
-      if config.services.victoriametrics.enable then
-        [ config.hostnames.prometheus ]
-      else
-        [ ];
+      if config.services.victoriametrics.enable then [ config.hostnames.prometheus ] else [ ];
 
     # VMAgent
 
     services.vmagent.prometheusConfig = prometheusConfig; # Overwritten below
-    systemd.services.vmagent.serviceConfig =
-      lib.mkIf config.services.vmagent.enable {
-        ExecStart = lib.mkForce ''
-          ${pkgs.victoriametrics}/bin/vmagent \
-                  -promscrape.config=${prometheusConfig} \
-                  -remoteWrite.url="https://${config.hostnames.prometheus}/api/v1/write" \
-                  -remoteWrite.basicAuth.username=${username} \
-                  -remoteWrite.basicAuth.passwordFile=${config.secrets.vmagent.dest}'';
-      };
+    systemd.services.vmagent.serviceConfig = lib.mkIf config.services.vmagent.enable {
+      ExecStart = lib.mkForce ''
+        ${pkgs.victoriametrics}/bin/vmagent \
+                -promscrape.config=${prometheusConfig} \
+                -remoteWrite.url="https://${config.hostnames.prometheus}/api/v1/write" \
+                -remoteWrite.basicAuth.username=${username} \
+                -remoteWrite.basicAuth.passwordFile=${config.secrets.vmagent.dest}'';
+    };
 
     secrets.vmagent = lib.mkIf config.services.vmagent.enable {
       source = ../../../private/prometheus.age;
@@ -99,7 +105,5 @@ in {
       requiredBy = [ "vmagent.service" ];
       before = [ "vmagent.service" ];
     };
-
   };
-
 }

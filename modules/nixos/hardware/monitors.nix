@@ -1,11 +1,16 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf config.gui.enable {
 
-    environment.systemPackages = with pkgs;
-      [
-        ddcutil # Monitor brightness control
-      ];
+    environment.systemPackages = with pkgs; [
+      ddcutil # Monitor brightness control
+    ];
 
     # Reduce blue light at night
     services.redshift = {
@@ -44,7 +49,5 @@
                                         --output DVI-1 --off \
       '';
     };
-
   };
-
 }

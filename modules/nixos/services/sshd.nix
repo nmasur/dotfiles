@@ -1,6 +1,12 @@
 # SSHD service for allowing SSH access to my machines.
 
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     publicKeys = lib.mkOption {
@@ -27,8 +33,9 @@
       };
     };
 
-    users.users.${config.user}.openssh.authorizedKeys.keys =
-      lib.mkIf (config.publicKeys != null) config.publicKeys;
+    users.users.${config.user}.openssh.authorizedKeys.keys = lib.mkIf (
+      config.publicKeys != null
+    ) config.publicKeys;
 
     # Implement a simple fail2ban service for sshd
     services.sshguard.enable = true;
@@ -39,5 +46,4 @@
     # - Will disable until fixed
     environment.enableAllTerminfo = pkgs.stdenv.isLinux && pkgs.stdenv.isx86_64;
   };
-
 }

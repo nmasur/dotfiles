@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   options.mail.himalaya.enable = lib.mkEnableOption "Himalaya email.";
 
@@ -6,7 +7,9 @@
 
     home-manager.users.${config.user} = {
 
-      programs.himalaya = { enable = true; };
+      programs.himalaya = {
+        enable = true;
+      };
       accounts.email.accounts.home.himalaya = {
         enable = true;
         settings = {
@@ -15,9 +18,9 @@
         };
       };
 
-      programs.fish.shellAbbrs = { hi = "himalaya"; };
-
+      programs.fish.shellAbbrs = {
+        hi = "himalaya";
+      };
     };
-
   };
 }

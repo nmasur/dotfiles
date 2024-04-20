@@ -1,7 +1,8 @@
 {
   description = "Basic project";
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  outputs = { nixpkgs }:
+  outputs =
+    { nixpkgs }:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"

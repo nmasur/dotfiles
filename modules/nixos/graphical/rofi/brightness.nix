@@ -2,14 +2,14 @@
 let
 
   rofi = config.home-manager.users.${config.user}.programs.rofi.finalPackage;
-
-in {
+in
+{
 
   # Adapted from:
   # A rofi powered menu to execute brightness choices.
 
-  config.brightnessCommand = builtins.toString
-    (pkgs.writeShellScript "brightness" ''
+  config.brightnessCommand = builtins.toString (
+    pkgs.writeShellScript "brightness" ''
 
       dimmer="󰃝"
       medium="󰃟"
@@ -45,6 +45,6 @@ in {
           *) exit 1 ;;
       esac
 
-    '');
-
+    ''
+  );
 }

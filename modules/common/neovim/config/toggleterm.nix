@@ -1,4 +1,10 @@
-{ pkgs, dsl, config, ... }: {
+{
+  pkgs,
+  dsl,
+  config,
+  ...
+}:
+{
 
   # Toggleterm provides a floating terminal inside the editor for quick access
 
@@ -15,5 +21,4 @@
     ${if config.github then (builtins.readFile ./github.lua) else ""}
     ${if config.kubernetes then (builtins.readFile ./kubernetes.lua) else ""}
   '';
-
 }

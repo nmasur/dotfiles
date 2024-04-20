@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf config.physical {
 
@@ -22,10 +28,7 @@
     };
 
     environment.systemPackages = [
-      (pkgs.writeShellScriptBin "wake-tempest"
-        "${pkgs.wakeonlan}/bin/wakeonlan --ip=192.168.1.255 74:56:3C:40:37:5D")
+      (pkgs.writeShellScriptBin "wake-tempest" "${pkgs.wakeonlan}/bin/wakeonlan --ip=192.168.1.255 74:56:3C:40:37:5D")
     ];
-
   };
-
 }

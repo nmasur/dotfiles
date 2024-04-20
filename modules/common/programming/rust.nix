@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.rust.enable = lib.mkEnableOption "Rust programming language.";
 
@@ -6,12 +12,16 @@
 
     home-manager.users.${config.user} = {
 
-      programs.fish.shellAbbrs = { ca = "cargo"; };
+      programs.fish.shellAbbrs = {
+        ca = "cargo";
+      };
 
-      home.packages = with pkgs; [ cargo rustc clippy gcc ];
-
+      home.packages = with pkgs; [
+        cargo
+        rustc
+        clippy
+        gcc
+      ];
     };
-
   };
-
 }

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   # Homebrew - Mac-specific packages that aren't in Nix
   config = lib.mkIf pkgs.stdenv.isDarwin {
@@ -14,8 +20,7 @@
     '';
 
     # Add homebrew paths to CLI path
-    home-manager.users.${config.user}.home.sessionPath =
-      [ "/opt/homebrew/bin/" ];
+    home-manager.users.${config.user}.home.sessionPath = [ "/opt/homebrew/bin/" ];
 
     homebrew = {
       enable = true;
@@ -43,7 +48,5 @@
         # "epic-games" # Not packaged for Nix
       ];
     };
-
   };
-
 }

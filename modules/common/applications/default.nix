@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   imports = [
     ./1password.nix
@@ -12,5 +13,4 @@
     ./slack.nix
     ./yt-dlp.nix
   ];
-
 }

@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
 
   # Shell history sync
 
@@ -10,7 +11,10 @@
 
       programs.atuin = {
         enable = true;
-        flags = [ "--disable-up-arrow" "--disable-ctrl-r" ];
+        flags = [
+          "--disable-up-arrow"
+          "--disable-ctrl-r"
+        ];
         settings = {
           auto_sync = true;
           update_check = false;
@@ -27,13 +31,9 @@
           keymap_mode = "vim-normal";
         };
       };
-
     };
 
     # Give root user the same setup
-    home-manager.users.root.programs.atuin =
-      config.home-manager.users.${config.user}.programs.atuin;
-
+    home-manager.users.root.programs.atuin = config.home-manager.users.${config.user}.programs.atuin;
   };
-
 }

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.python.enable = lib.mkEnableOption "Python programming language.";
 
@@ -13,10 +19,9 @@
         python310Packages.flake8 # Python linter
       ];
 
-      programs.fish.shellAbbrs = { py = "python3"; };
-
+      programs.fish.shellAbbrs = {
+        py = "python3";
+      };
     };
-
   };
-
 }

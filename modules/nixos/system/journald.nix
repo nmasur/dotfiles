@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   # How long to keep journalctl entries
   # This helps to make sure log disk usage doesn't grow too unwieldy
@@ -7,5 +8,4 @@
     MaxFileSec=1month
     MaxRetentionSec=2month
   '';
-
 }

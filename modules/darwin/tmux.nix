@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.tmux.enable = lib.mkEnableOption "Tmux terminal multiplexer";
 
@@ -127,7 +133,5 @@
       tan = "tmux attach-session -t noah";
       tnn = "tmux new-session -s noah";
     };
-
   };
-
 }

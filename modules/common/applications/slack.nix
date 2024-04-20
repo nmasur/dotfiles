@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options = {
     slack = {
@@ -15,5 +21,4 @@
       home.packages = with pkgs; [ slack ];
     };
   };
-
 }

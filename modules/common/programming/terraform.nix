@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.terraform.enable = lib.mkEnableOption "Terraform tools.";
 
@@ -15,9 +21,6 @@
         terraform-ls # Language server
         tflint # Linter
       ];
-
     };
-
   };
-
 }

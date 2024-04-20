@@ -1,11 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
-let home-packages = config.home-manager.users.${config.user}.home.packages;
+let
+  home-packages = config.home-manager.users.${config.user}.home.packages;
+in
+{
 
-in {
-
-  options.gaming.legendary.enable =
-    lib.mkEnableOption "Legendary Epic Games launcher.";
+  options.gaming.legendary.enable = lib.mkEnableOption "Legendary Epic Games launcher.";
 
   config = lib.mkIf config.gaming.legendary.enable {
     environment.systemPackages = with pkgs; [
@@ -28,29 +33,28 @@ in {
         log_level = error
       '';
 
-      home.file = let
-        ignorePatterns = ''
-          .wine/
-          drive_c/'';
-      in {
-        ".rgignore".text = ignorePatterns;
-        ".fdignore".text = ignorePatterns;
-      };
-
-      programs.fish.functions =
-        lib.mkIf (builtins.elem pkgs.fzf home-packages) {
-          epic-games = {
-            body = ''
-              set game (legendary list 2>/dev/null \
-                  | awk '/^ \* / { print $0; }' \
-                  | sed -e 's/ (.*)$//' -e 's/ \* //' \
-                  | fzf)
-              and legendary launch "$game" &> /dev/null
-            '';
-          };
+      home.file =
+        let
+          ignorePatterns = ''
+            .wine/
+            drive_c/'';
+        in
+        {
+          ".rgignore".text = ignorePatterns;
+          ".fdignore".text = ignorePatterns;
         };
 
+      programs.fish.functions = lib.mkIf (builtins.elem pkgs.fzf home-packages) {
+        epic-games = {
+          body = ''
+            set game (legendary list 2>/dev/null \
+                | awk '/^ \* / { print $0; }' \
+                | sed -e 's/ (.*)$//' -e 's/ \* //' \
+                | fzf)
+            and legendary launch "$game" &> /dev/null
+          '';
+        };
+      };
     };
   };
-
 }

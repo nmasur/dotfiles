@@ -1,10 +1,18 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.wsl.enable) {
 
     # Systemd doesn't work in WSL so these must be disabled
     services.geoclue2.enable = lib.mkForce false;
-    location = { provider = lib.mkForce "manual"; };
+    location = {
+      provider = lib.mkForce "manual";
+    };
     services.localtimed.enable = lib.mkForce false;
 
     # Used by NeoVim for clipboard sharing with Windows
@@ -17,7 +25,5 @@
       rm -rf /etc/nixos
       ln --symbolic --no-dereference --force ${config.dotfilesPath} /etc/nixos
     '';
-
   };
-
 }

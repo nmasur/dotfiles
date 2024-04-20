@@ -1,5 +1,8 @@
-{ ... }: {
+{ ... }:
+{
 
-  imports = [ ./dotfiles.nix ./notes.nix ];
-
+  imports = [
+    ./dotfiles.nix
+    ./notes.nix
+  ];
 }

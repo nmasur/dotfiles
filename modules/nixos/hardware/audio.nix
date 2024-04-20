@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
@@ -27,8 +32,8 @@ let
         ${pkgs.volnoti}/bin/volnoti-show $volume
     fi
   '';
-
-in {
+in
+{
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
     sound.enable = true;
@@ -57,28 +62,23 @@ in {
 
         # Make sure that Volnoti actually starts (home-manager doesn't start
         # user daemon's automatically)
-        startup = [{
-          command =
-            "systemctl --user restart volnoti --alpha 0.15 --radius 40 --timeout 0.2";
-          always = true;
-          notification = false;
-        }];
+        startup = [
+          {
+            command = "systemctl --user restart volnoti --alpha 0.15 --radius 40 --timeout 0.2";
+            always = true;
+            notification = false;
+          }
+        ];
 
         # i3 keybinds for changing the volume
         keybindings = {
-          "XF86AudioRaiseVolume" =
-            "exec --no-startup-id ${increaseVolume}/bin/increaseVolume";
-          "XF86AudioLowerVolume" =
-            "exec --no-startup-id ${decreaseVolume}/bin/decreaseVolume";
+          "XF86AudioRaiseVolume" = "exec --no-startup-id ${increaseVolume}/bin/increaseVolume";
+          "XF86AudioLowerVolume" = "exec --no-startup-id ${decreaseVolume}/bin/decreaseVolume";
           "XF86AudioMute" = "exec --no-startup-id ${toggleMute}/bin/toggleMute";
           # We can mute the mic by adding "--default-source"
-          "XF86AudioMicMute" =
-            "exec --no-startup-id ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute";
+          "XF86AudioMicMute" = "exec --no-startup-id ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute";
         };
-
       };
-
     };
   };
-
 }

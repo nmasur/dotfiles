@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   options.kubernetes.enable = lib.mkEnableOption "Kubernetes tools.";
 
@@ -99,12 +105,16 @@
               views = {
                 charts = {
                   bgColor = "default";
-                  defaultDialColors =
-                    [ config.theme.colors.base0D config.theme.colors.base08 ];
+                  defaultDialColors = [
+                    config.theme.colors.base0D
+                    config.theme.colors.base08
+                  ];
                   # - *blue
                   # - *red
-                  defaultChartColors =
-                    [ config.theme.colors.base0D config.theme.colors.base08 ];
+                  defaultChartColors = [
+                    config.theme.colors.base0D
+                    config.theme.colors.base08
+                  ];
                   # - *blue
                   # - *red
                 };
@@ -149,9 +159,6 @@
           };
         };
       };
-
     };
-
   };
-
 }

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
 
@@ -6,8 +11,8 @@ let
   publicPort = 49732;
   rconPort = 25575;
   rconPassword = "thiscanbeanything";
-
-in {
+in
+{
 
   config = lib.mkIf config.services.minecraft-server.enable {
 
@@ -52,7 +57,9 @@ in {
     # https://dataswamp.org/~solene/2022-08-20-on-demand-minecraft-with-systemd.html
 
     # Prevent Minecraft from starting by default
-    systemd.services.minecraft-server = { wantedBy = pkgs.lib.mkForce [ ]; };
+    systemd.services.minecraft-server = {
+      wantedBy = pkgs.lib.mkForce [ ];
+    };
 
     # Listen for connections on the public port, to trigger the actual
     # listen-minecraft service.
@@ -65,18 +72,25 @@ in {
     # Proxy traffic to local port, and trigger hook-minecraft
     systemd.services.listen-minecraft = {
       path = [ pkgs.systemd ];
-      requires = [ "hook-minecraft.service" "listen-minecraft.socket" ];
-      after = [ "hook-minecraft.service" "listen-minecraft.socket" ];
-      serviceConfig.ExecStart =
-        "${pkgs.systemd.out}/lib/systemd/systemd-socket-proxyd 127.0.0.1:${
-          toString localPort
-        }";
+      requires = [
+        "hook-minecraft.service"
+        "listen-minecraft.socket"
+      ];
+      after = [
+        "hook-minecraft.service"
+        "listen-minecraft.socket"
+      ];
+      serviceConfig.ExecStart = "${pkgs.systemd.out}/lib/systemd/systemd-socket-proxyd 127.0.0.1:${toString localPort}";
     };
 
     # Start Minecraft if required and wait for it to be available
     # Then unlock the listen-minecraft.service
     systemd.services.hook-minecraft = {
-      path = with pkgs; [ systemd libressl busybox ];
+      path = with pkgs; [
+        systemd
+        libressl
+        busybox
+      ];
 
       # Start Minecraft and the auto-shutdown timer
       script = ''
@@ -87,9 +101,7 @@ in {
       # Keep checking until the service is available
       postStart = ''
         for i in $(seq 60); do
-          if ${pkgs.libressl.nc}/bin/nc -z 127.0.0.1 ${
-            toString localPort
-          } > /dev/null ; then
+          if ${pkgs.libressl.nc}/bin/nc -z 127.0.0.1 ${toString localPort} > /dev/null ; then
             exit 0
           fi
           ${pkgs.busybox.out}/bin/sleep 1
@@ -144,7 +156,5 @@ in {
         fi
       '';
     };
-
   };
-
 }
