@@ -52,7 +52,7 @@
     "bypass-paywalls-clean": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-OlHiORYigNwOncKNaaq/EDgWutnWbdt0AFXGeUpOoC4=",
+        "narHash": "sha256-VioYGvLdF8Nxdyu7Jcj3k0ufUUhTIo0v+R+u+goAXN4=",
         "type": "file",
         "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-latest.xpi"
       },
@@ -483,19 +483,6 @@
         "type": "github"
       }
     },
-    "proton-ge": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710987994,
-        "narHash": "sha256-NqBzKonCYH+hNpVZzDhrVf+r2i6EwLG/IFBXjE2mC7s=",
-        "type": "tarball",
-        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-2/GE-Proton9-2.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-2/GE-Proton9-2.tar.gz"
-      }
-    },
     "ren": {
       "flake": false,
       "locked": {
@@ -555,7 +542,6 @@
         "nvim-lspconfig-src": "nvim-lspconfig-src",
         "nvim-tree-lua-src": "nvim-tree-lua-src",
         "nvim-treesitter-src": "nvim-treesitter-src",
-        "proton-ge": "proton-ge",
         "ren": "ren",
         "rep": "rep",
         "telescope-nvim-src": "telescope-nvim-src",

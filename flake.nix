@@ -174,14 +174,6 @@
       flake = false;
     };
 
-    # GE version of Proton for game compatibility
-    # Alternatively, could consider using https://github.com/fufexan/nix-gaming
-    proton-ge = {
-      # https://github.com/GloriousEggroll/proton-ge-custom/releases
-      url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-2/GE-Proton9-2.tar.gz";
-      flake = false;
-    };
-
     # Firefox addon from outside the extension store
     bypass-paywalls-clean = {
       # https://gitlab.com/magnolia1234/bpc-uploads/-/commits/master/?ref_type=HEADS
@@ -260,7 +252,6 @@
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/proton-ge.nix inputs)
         (import ./overlays/gh-collaborators.nix)
         (import ./overlays/bypass-paywalls-clean.nix inputs)
         (import ./overlays/ren-rep.nix inputs)

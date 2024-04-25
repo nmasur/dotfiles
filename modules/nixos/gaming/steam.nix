@@ -20,13 +20,7 @@
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
-      package = pkgs.steam.override {
-        # Adapted in part from: https://github.com/Shawn8901/nix-configuration/blob/1c48be94238a9f463cf0bbd1e1842a4454286514/modules/nixos/steam-compat-tools/default.nix
-        # Based on: https://github.com/NixOS/nixpkgs/issues/73323
-        extraEnv = {
-          STEAM_EXTRA_COMPAT_TOOLS_PATHS = lib.makeBinPath [ pkgs.proton-ge-custom ];
-        };
-      };
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
 
     environment.systemPackages = with pkgs; [
