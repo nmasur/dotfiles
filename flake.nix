@@ -300,16 +300,6 @@
 
       packages =
         let
-          arrow =
-            system:
-            import ./hosts/arrow {
-              inherit
-                inputs
-                globals
-                overlays
-                system
-                ;
-            };
           staff =
             system:
             import ./hosts/staff {

@@ -43,7 +43,6 @@ inputs.darwin.lib.darwinSystem {
       discord.enable = true;
       firefox.enable = true;
       dotfiles.enable = true;
-      nixlang.enable = true;
       terraform.enable = true;
       python.enable = true;
       rust.enable = true;

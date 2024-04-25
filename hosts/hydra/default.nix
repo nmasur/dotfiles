@@ -45,7 +45,6 @@ inputs.nixpkgs.lib.nixosSystem {
       mail.aerc.enable = true;
       mail.himalaya.enable = true;
       dotfiles.enable = true;
-      nixlang.enable = true;
       lua.enable = true;
     }
   ];

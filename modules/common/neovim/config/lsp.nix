@@ -37,8 +37,8 @@
       cmd = [ "${pkgs.lua-language-server}/bin/lua-language-server" ];
     };
 
-    use.lspconfig.nil_ls.setup = dsl.callWith {
-      cmd = [ "${pkgs.nil}/bin/nil" ];
+    use.lspconfig.nixd.setup = dsl.callWith {
+      cmd = [ "${pkgs.nixd}/bin/nixd" ];
       capabilities = dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
     };
 

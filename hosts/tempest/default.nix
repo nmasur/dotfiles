@@ -110,7 +110,6 @@ inputs.nixpkgs.lib.nixosSystem {
       mail.himalaya.enable = true;
       keybase.enable = true;
       mullvad.enable = false;
-      nixlang.enable = true;
       rust.enable = true;
       terraform.enable = true;
       yt-dlp.enable = true;
