@@ -199,7 +199,7 @@
     };
     nextcloud-snappymail = {
       # https://github.com/the-djmaze/snappymail/releases
-      url = "https://snappymail.eu/repository/nextcloud/snappymail-2.32.0-nextcloud.tar.gz";
+      url = "https://snappymail.eu/repository/nextcloud/snappymail-2.36.1-nextcloud.tar.gz";
       flake = false;
     };
   };
