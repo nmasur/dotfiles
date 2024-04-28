@@ -122,11 +122,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714043827,
-        "narHash": "sha256-PJbmbf+5z924b/wq7jzEFCUtrOc7s1J+8qRZu3fVAQc=",
+        "lastModified": 1714103775,
+        "narHash": "sha256-kcBiIrmqzt3bNTr2GMBfAyA+on8BEKO1iKzzDFQZkjI=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "a816daa384dd754b7586f51157fc2e1a44e76073",
+        "rev": "285e26465a0bae510897ca04da26ce6307c652b4",
         "type": "github"
       },
       "original": {
@@ -247,11 +247,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714042918,
-        "narHash": "sha256-4AItZA3EQIiSNAxliuYEJumw/LaVfrMv84gYyrs0r3U=",
+        "lastModified": 1714203603,
+        "narHash": "sha256-eT7DENhYy7EPLOqHI9zkIMD9RvMCXcqh6gGqOK5BWYQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0c5704eceefcb7bb238a958f532a86e3b59d76db",
+        "rev": "c1609d584a6b5e9e6a02010f51bd368cb4782f8e",
         "type": "github"
       },
       "original": {
@@ -319,8 +319,8 @@
     "nextcloud-snappymail": {
       "flake": false,
       "locked": {
-        "lastModified": 1714063170,
-        "narHash": "sha256-CsAUnbA/9XiVuk96pOK+E++lp8BlJITtfExWcb9rqPk=",
+        "lastModified": 1713917355,
+        "narHash": "sha256-6mel49dSTujJnpdUt1aOJ87duXU/DBqpuqgZOKP1YII=",
         "type": "tarball",
         "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.36.1-nextcloud.tar.gz"
       },
@@ -388,11 +388,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1713895582,
-        "narHash": "sha256-cfh1hi+6muQMbi9acOlju3V1gl8BEaZBXBR9jQfQi4U=",
+        "lastModified": 1714076141,
+        "narHash": "sha256-Drmja/f5MRHZCskS6mvzFqxEaZMeciScCTFxWVLqWEY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "572af610f6151fd41c212f897c71f7056e3fb518",
+        "rev": "7bb2ccd8cdc44c91edba16c48d2c8f331fb3d856",
         "type": "github"
       },
       "original": {
@@ -404,11 +404,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1714059215,
-        "narHash": "sha256-I7oJlmcyCo0EuqGiIgJYY/OtqzyJz7pdq71sLD5mnyQ=",
+        "lastModified": 1714275345,
+        "narHash": "sha256-SZTU/TQFzihktp/SPzY3yzMnrYi7EuaCIA/g4jNA8KU=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "23ec6b3cf4882a7b39685837368af00744d8cb6e",
+        "rev": "1348a217ce75f5171b65873c5146b47e0d26bc83",
         "type": "github"
       },
       "original": {
@@ -469,11 +469,11 @@
     "nvim-treesitter-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1714052621,
-        "narHash": "sha256-1K+vg99QjM7UiMLMN7m4trZYFR33BwyHZlsPOe6UOqE=",
+        "lastModified": 1714206551,
+        "narHash": "sha256-4VmW8xfayxIo4k6WA4423yTyLvzBTwidU7d8OuGH1vY=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "19c6b0c4c9b35962e45b782e2b85a3214d2ac4d5",
+        "rev": "0883ff05655117a3fc79ab295a640c4984cfd415",
         "type": "github"
       },
       "original": {
@@ -779,11 +779,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1713947658,
-        "narHash": "sha256-q3zu2D5HVphfAMZ070o/K9IPxw5DLsLkvwr7H1b5fpE=",
+        "lastModified": 1714134704,
+        "narHash": "sha256-jgTn20s3qzar/IqhjQcEO+dIQbT4hBFIloVntiCURkA=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "f41f95c2c187a49a4ef98b5d00fdf1a68c5f88ba",
+        "rev": "4fb773cffed9bf1efdabcc01b25637eaeb4e8e9c",
         "type": "github"
       },
       "original": {
