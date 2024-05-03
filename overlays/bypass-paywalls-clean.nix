@@ -9,7 +9,7 @@ inputs: _final: prev: {
     in
     prev.stdenv.mkDerivation rec {
       pname = "bypass-paywalls-clean";
-      version = "3.4.9.0";
+      version = "3.6.6.0";
       src = inputs.bypass-paywalls-clean;
       preferLocalBuild = true;
       allowSubstitutes = true;

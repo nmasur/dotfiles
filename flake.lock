@@ -52,13 +52,13 @@
     "bypass-paywalls-clean": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-VioYGvLdF8Nxdyu7Jcj3k0ufUUhTIo0v+R+u+goAXN4=",
+        "narHash": "sha256-VZey1VgabUpsiN+mdSNzoMfxICSNKtZIuvISFcMUDw4=",
         "type": "file",
-        "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-latest.xpi"
+        "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-3.6.6.0.xpi"
       },
       "original": {
         "type": "file",
-        "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-latest.xpi"
+        "url": "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-3.6.6.0.xpi"
       }
     },
     "cmp-nvim-lsp-src": {
@@ -319,8 +319,8 @@
     "nextcloud-snappymail": {
       "flake": false,
       "locked": {
-        "lastModified": 1713917355,
-        "narHash": "sha256-6mel49dSTujJnpdUt1aOJ87duXU/DBqpuqgZOKP1YII=",
+        "lastModified": 1714092659,
+        "narHash": "sha256-CsAUnbA/9XiVuk96pOK+E++lp8BlJITtfExWcb9rqPk=",
         "type": "tarball",
         "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.36.1-nextcloud.tar.gz"
       },

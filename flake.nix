@@ -177,7 +177,7 @@
     # Firefox addon from outside the extension store
     bypass-paywalls-clean = {
       # https://gitlab.com/magnolia1234/bpc-uploads/-/commits/master/?ref_type=HEADS
-      url = "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-latest.xpi";
+      url = "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-3.6.6.0.xpi";
       flake = false;
     };
 
