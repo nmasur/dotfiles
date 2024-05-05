@@ -91,15 +91,16 @@ jobs:
       # Connects to remote state backend and download providers.
       - name: Terraform Init
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
-        run: terraform init
+        run: |
+          terraform init \
+            -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}" \
+            -backend-config="key=arrow.tfstate"
 
       # Deploys infrastructure or changes to infrastructure.
       - name: Terraform Apply
         if: inputs.action == 'create'
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
         env:
-          TF_VAR_terraform_state_bucket: ${{ secrets.TERRAFORM_STATE_BUCKET }}
-          TF_VAR_terraform_state_key: arrow.tfstate
           TF_VAR_ec2_size: ${{ inputs.size }}
         run: |
           terraform apply \
