@@ -21,6 +21,7 @@
       enable = true;
       remotePlay.openFirewall = true;
       extraCompatPackages = [ pkgs.proton-ge-bin ];
+      gamescopeSession.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -29,8 +30,8 @@
       steamPackages.steamcmd
       steam-tui
 
-      # Allow downloading of GE-Proton and other versions
-      protonup-qt
+      # Overlay with performance monitoring
+      mangohud
     ];
 
     # Seems like NetworkManager can help speed up Steam launch
