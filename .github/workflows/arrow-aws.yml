@@ -30,6 +30,10 @@ on:
         options:
           - t3a.small # 2 GB RAM / $10
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   build-deploy:
     name: Build and Deploy
