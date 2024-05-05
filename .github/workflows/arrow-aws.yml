@@ -1,0 +1,154 @@
+name: Arrow (AWS)
+
+run-name: Arrow (AWS) - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || ( inputs.action == 'destroy' && 'Destroy' || 'No Action' ) }}
+
+env:
+  TERRAFORM_DIRECTORY: hosts/arrow/aws
+  DEPLOY_IDENTITY_BASE64: ${{ secrets.DEPLOY_IDENTITY_BASE64 }}
+  ARROW_IDENTITY_BASE64: ${{ secrets.ARROW_IDENTITY_BASE64 }}
+  ZONE_NAME: masu.rs
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      rebuild:
+        type: boolean
+        default: false
+      action:
+        type: choice
+        required: true
+        default: create
+        options:
+          - create
+          - destroy
+          - nothing
+      size:
+        type: choice
+        required: false
+        options:
+          - t3a.small # 2 GB RAM / $10
+
+jobs:
+  build-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo Code
+        uses: actions/checkout@v4
+
+      # Enable access to KVM, required to build an image
+      - name: Enable KVM group perms
+        if: inputs.rebuild && inputs.action != 'destroy'
+        run: |
+            echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+            sudo udevadm control --reload-rules
+            sudo udevadm trigger --name-match=kvm
+
+      # Login to AWS
+      - name: AWS Assume Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: github_actions_admin
+          aws-region: us-east-1
+
+      # Install Nix
+      - name: Install Nix
+        if: inputs.rebuild && inputs.action != 'destroy'
+        uses: cachix/install-nix-action@v17
+
+      # Build the image
+      - name: Build Image
+        if: inputs.rebuild && inputs.action != 'destroy'
+        run: nix build .#arrow-aws
+
+      # # Copy the image to S3
+      # - name: Upload Image to Cache
+      #   env:
+      #     NIX_CACHE_PRIVATE_KEY: ${{ secrets.NIX_CACHE_PRIVATE_KEY }}
+      #   run: |
+      #     echo "$NIX_CACHE_PRIVATE_KEY" > cache.key
+      #     nix store sign --key-file cache.key $(readlink result)
+      #     nix copy --to s3://t2-aws-nixos-test $(readlink result)
+      #     rm cache.key
+
+      # Installs the Terraform binary and some other accessory functions.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      # Checks whether Terraform is formatted properly. If this fails, you
+      # should install the pre-commit hook.
+      - name: Check Formatting
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: |
+          terraform fmt -no-color -check -diff -recursive
+
+      # Connects to remote state backend and download providers.
+      - name: Terraform Init
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: terraform init
+
+      # Deploys infrastructure or changes to infrastructure.
+      - name: Terraform Apply
+        if: inputs.action == 'create'
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        env:
+          TF_VAR_terraform_state_bucket: ${{ secrets.TERRAFORM_STATE_BUCKET }}
+          TF_VAR_terraform_state_key: arrow.tfstate
+          TF_VAR_ec2_size: ${{ inputs.size }}
+        run: |
+          terraform apply \
+            -auto-approve \
+            -input=false
+
+      # Removes infrastructure.
+      - name: Terraform Destroy
+        if: inputs.action == 'destroy'
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: |
+          terraform destroy \
+            -auto-approve \
+            -input=false
+
+      - name: Get Host IP
+        if: inputs.action == 'create'
+        id: host
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: terraform output -raw host_ip
+
+      - name: Wait on SSH
+        if: inputs.action == 'create'
+        run: |
+          for i in $(seq 1 15); do
+            if $(nc -z -w 3 ${{ steps.host.outputs.stdout }} 22); then
+              exit 0
+            fi
+            sleep 10
+          done
+
+      - name: Write Identity Keys to Files
+        if: inputs.action == 'create'
+        run: |
+          echo "${{ env.DEPLOY_IDENTITY_BASE64 }}" | base64 -d > deploy_ed25519
+          chmod 0600 deploy_ed25519
+          echo "${{ env.ARROW_IDENTITY_BASE64 }}" | base64 -d > arrow_ed25519
+          chmod 0600 arrow_ed25519
+
+      - name: Copy Identity File to Host
+        if: inputs.action == 'create'
+        run: |
+          ssh -i deploy_ed25519 -o StrictHostKeyChecking=accept-new noah@${{ steps.host.outputs.stdout }} 'mkdir -pv .ssh'
+          scp -i deploy_ed25519 arrow_ed25519 noah@${{ steps.host.outputs.stdout }}:~/.ssh/id_ed25519
+
+      - name: Wipe Records
+        if: ${{ inputs.action == 'destroy' }}
+        run: |
+          RECORD_ID=$(curl --request GET \
+             --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records \
+             --header 'Content-Type: application/json' \
+             --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}" | jq -r '.result[] | select(.name == "transmission.${{ env.ZONE_NAME }}") | .id')
+          curl --request DELETE \
+             --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records/${RECORD_ID} \
+             --header 'Content-Type: application/json' \
+             --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}"

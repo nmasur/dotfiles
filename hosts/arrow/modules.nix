@@ -22,9 +22,8 @@
     cloudflare.enable = true;
     services.openssh.enable = true;
     services.caddy.enable = true;
-    services.transmission.enable = true;
 
-    # nix-index seems to each up too much memory for Vultr
+    # nix-index seems to eat up too much memory for Vultr
     home-manager.users.${globals.user}.programs.nix-index.enable = inputs.nixpkgs.lib.mkForce false;
 
     virtualisation.vmVariant = {

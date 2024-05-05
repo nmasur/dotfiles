@@ -29,7 +29,7 @@
         GatewayPorts = "no";
         X11Forwarding = false;
         PasswordAuthentication = false;
-        PermitRootLogin = config.permitRootLogin;
+        PermitRootLogin = lib.mkDefault config.permitRootLogin;
       };
     };
 

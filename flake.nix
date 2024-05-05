@@ -327,6 +327,25 @@
             format = "iso";
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
           };
+          x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate {
+            system = "x86_64-linux";
+            format = "amazon";
+            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
+              # import
+              # ./modules/aws
+              # { inherit inputs; }
+              (
+                { ... }:
+                {
+                  boot.kernelPackages = inputs.nixpkgs.legacyPackages.x86_64-linux.linuxKernel.packages.linux_6_6;
+                  amazonImage.sizeMB = 16 * 1024;
+                  permitRootLogin = "prohibit-password";
+                  boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
+                  boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
+                }
+              )
+            ];
+          };
 
           # Package Neovim config into standalone package
           x86_64-linux.neovim = neovim "x86_64-linux";
