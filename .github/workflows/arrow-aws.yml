@@ -54,7 +54,7 @@ jobs:
       - name: AWS Assume Role
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: github_actions_admin
+          role-to-assume: arn:aws:iam::286370965832:role/github_actions_admin
           aws-region: us-east-1
 
       # Install Nix
