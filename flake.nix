@@ -7,6 +7,9 @@
     # Used for system packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Used for caddy plugins
+    nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
+
     # Used for MacOS system config
     darwin = {
       url = "github:lnl7/nix-darwin/master";
@@ -249,7 +252,6 @@
         (import ./overlays/calibre-web.nix)
         (import ./overlays/disko.nix inputs)
         (import ./overlays/tree-sitter.nix inputs)
-        (import ./overlays/caddy.nix inputs)
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
@@ -328,9 +330,12 @@
             format = "iso";
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
           };
-          x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate {
+          x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
             system = "x86_64-linux";
             format = "amazon";
+            specialArgs = {
+              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
+            };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
               # import
               # ./modules/aws

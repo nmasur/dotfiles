@@ -8,9 +8,11 @@
   ...
 }:
 
-inputs.nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
-  specialArgs = { };
+  specialArgs = {
+    pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
+  };
   modules = import ./modules.nix { inherit inputs globals overlays; } ++ [
     {
       # This is the root filesystem containing NixOS

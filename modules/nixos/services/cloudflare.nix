@@ -11,6 +11,7 @@
 {
   config,
   pkgs,
+  pkgs-caddy,
   lib,
   ...
 }:
@@ -62,7 +63,16 @@ in
     caddy.cidrAllowlist = cloudflareIpRanges;
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
-    services.caddy.package = pkgs.caddy-cloudflare; # Patched overlay
+    services.caddy.package = pkgs-caddy.caddy.override {
+      externalPlugins = [
+        {
+          name = "cloudflare";
+          repo = "github.com/caddy-dns/cloudflare";
+          version = "master";
+        }
+      ];
+      vendorHash = "sha256-C7JOGd4sXsRZL561oP84V2/pTg7szEgF4OFOw35yS1s=";
+    };
     caddy.tlsPolicies = [
       {
         issuers = [
