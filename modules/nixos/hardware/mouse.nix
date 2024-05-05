@@ -16,7 +16,7 @@
       piper # Mouse adjustments GUI
     ];
 
-    services.xserver.libinput.mouse = {
+    services.libinput.mouse = {
       # Disable mouse acceleration
       accelProfile = "flat";
       accelSpeed = "1.15";
