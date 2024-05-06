@@ -72,6 +72,7 @@ resource "aws_ami" "image" {
   name                = replace(basename(local.image_file), "/\\.vhd$/", "")
   virtualization_type = "hvm"
   root_device_name    = "/dev/xvda"
+  ena_support         = true
 
   ebs_block_device {
     device_name = "/dev/xvda"
