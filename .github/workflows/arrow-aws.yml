@@ -42,6 +42,12 @@ jobs:
       - name: Checkout Repo Code
         uses: actions/checkout@v4
 
+      - name: Free Disk Space (Ubuntu)
+        if: inputs.rebuild && inputs.action != 'destroy'
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+
       # Enable access to KVM, required to build an image
       - name: Enable KVM group perms
         if: inputs.rebuild && inputs.action != 'destroy'
