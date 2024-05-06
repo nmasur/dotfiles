@@ -3,9 +3,9 @@ resource "aws_instance" "instance" {
   instance_type          = var.ec2_size
   vpc_security_group_ids = [aws_security_group.instance.id]
 
-  tags = merge(local.default_tags, {
+  tags = {
     Name = "aws-nixos"
-  })
+  }
 
   lifecycle {
     create_before_destroy = true
