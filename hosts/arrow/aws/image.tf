@@ -1,5 +1,5 @@
 locals {
-  image_file = one(fileset(path.root, "result/nixos-amazon-image-*.vhd"))
+  image_file = one(fileset(path.root, "../../../result/nixos-amazon-image-*.vhd"))
 }
 
 # Upload image to S3
