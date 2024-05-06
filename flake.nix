@@ -233,6 +233,7 @@
             irc = "irc.${baseName}";
             metrics = "metrics.${baseName}";
             minecraft = "minecraft.${baseName}";
+            n8n = "n8n.${baseName}";
             prometheus = "prom.${baseName}";
             paperless = "paper.${baseName}";
             secrets = "vault.${baseName}";

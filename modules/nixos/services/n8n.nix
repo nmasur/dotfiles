@@ -4,18 +4,9 @@
 { config, lib, ... }:
 {
 
-  options = {
-    n8nServer = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      description = "Hostname for n8n automation";
-      default = null;
-    };
-  };
-
-  config = lib.mkIf (config.n8nServer != null) {
+  config = lib.mkIf config.services.n8n.enable {
 
     services.n8n = {
-      enable = true;
       settings = {
         n8n = {
           listenAddress = "127.0.0.1";
@@ -24,13 +15,17 @@
       };
     };
 
+    # Configure Cloudflare DNS to point to this machine
+    services.cloudflare-dyndns.domains = [ config.hostnames.n8n ];
+
+    # Allow web traffic to Caddy
     caddy.routes = [
       {
-        match = [ { host = [ config.n8nServer ]; } ];
+        match = [ { host = [ config.hostnames.n8n ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
-            upstreams = [ { dial = "localhost:5678"; } ];
+            upstreams = [ { dial = "localhost:${builtins.toString config.services.n8n.settings.n8n.port}"; } ];
           }
         ];
       }
