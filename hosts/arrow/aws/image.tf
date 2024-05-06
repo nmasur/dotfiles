@@ -71,6 +71,7 @@ resource "aws_ami" "image" {
   description         = "Created with NixOS."
   name                = replace(basename(local.image_file), "/\\.vhd$/", "")
   virtualization_type = "hvm"
+  root_device_name    = "/dev/xvda"
 
   ebs_block_device {
     device_name = "/dev/xvda"
