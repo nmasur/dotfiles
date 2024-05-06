@@ -76,6 +76,6 @@ resource "aws_ami" "image" {
   ebs_block_device {
     device_name = "/dev/xvda"
     snapshot_id = aws_ebs_snapshot_import.image.id
-    volume_size = 8
+    volume_size = 17
   }
 }
