@@ -6,6 +6,8 @@
 
   config = lib.mkIf config.services.n8n.enable {
 
+    unfreePackages = [ "n8n" ];
+
     services.n8n = {
       settings = {
         n8n = {
