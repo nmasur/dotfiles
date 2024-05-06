@@ -60,22 +60,25 @@ jobs:
       # Install Nix
       - name: Install Nix
         if: inputs.rebuild && inputs.action != 'destroy'
-        uses: cachix/install-nix-action@v17
+        with:
+          extra_nix_config: |
+            substituters = s3://${{ secrets.NIX_CACHE_BUCKET }} https://cache.nixos.org/
+            trusted-public-keys = ${{ secrets.NIX_CACHE_BUCKET }}:KJLT83NgyLjjX+YOJxFNflmw3/IPwW+y21cpgVv+Kwc= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
 
       # Build the image
       - name: Build Image
         if: inputs.rebuild && inputs.action != 'destroy'
         run: nix build .#arrow-aws
 
-      # # Copy the image to S3
-      # - name: Upload Image to Cache
-      #   env:
-      #     NIX_CACHE_PRIVATE_KEY: ${{ secrets.NIX_CACHE_PRIVATE_KEY }}
-      #   run: |
-      #     echo "$NIX_CACHE_PRIVATE_KEY" > cache.key
-      #     nix store sign --key-file cache.key $(readlink result)
-      #     nix copy --to s3://t2-aws-nixos-test $(readlink result)
-      #     rm cache.key
+      # Copy the image to S3
+      - name: Upload Image to Cache
+        env:
+          NIX_CACHE_PRIVATE_KEY: ${{ secrets.NIX_CACHE_PRIVATE_KEY }}
+        run: |
+          echo "$NIX_CACHE_PRIVATE_KEY" > cache.key
+          nix store sign --key-file cache.key $(readlink result)
+          nix copy --to s3://${{ secrets.NIX_CACHE_BUCKET }} $(readlink result)
+          rm cache.key
 
       # Installs the Terraform binary and some other accessory functions.
       - name: Setup Terraform

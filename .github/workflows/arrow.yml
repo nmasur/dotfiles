@@ -75,16 +75,6 @@ jobs:
             s3://noahmasur-arrow-images/arrow.iso \
             --endpoint-url "https://${{ env.CLOUDFLARE_R2_ENDPOINT }}"
 
-      # # Copy the image to S3
-      # - name: Upload Image to Cache
-      #   env:
-      #     NIX_CACHE_PRIVATE_KEY: ${{ secrets.NIX_CACHE_PRIVATE_KEY }}
-      #   run: |
-      #     echo "$NIX_CACHE_PRIVATE_KEY" > cache.key
-      #     nix store sign --key-file cache.key $(readlink result)
-      #     nix copy --to s3://t2-aws-nixos-test $(readlink result)
-      #     rm cache.key
-
       # Installs the Terraform binary and some other accessory functions.
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
