@@ -60,6 +60,7 @@ jobs:
       # Install Nix
       - name: Install Nix
         if: inputs.rebuild && inputs.action != 'destroy'
+        uses: cachix/install-nix-action@v20
         with:
           extra_nix_config: |
             substituters = s3://${{ secrets.NIX_CACHE_BUCKET }} https://cache.nixos.org/
