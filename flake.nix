@@ -349,6 +349,7 @@
                   permitRootLogin = "prohibit-password";
                   boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
                   boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
+                  services.amazon-ssm-agent.enable = true;
                 }
               )
             ];
