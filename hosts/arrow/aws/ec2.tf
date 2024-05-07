@@ -56,7 +56,7 @@ resource "aws_security_group" "instance" {
 }
 
 # Setup IAM for the instance to use SSM
-data "aws_iam_policy_document" "instance_profile" {
+data "aws_iam_policy_document" "ec2_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
@@ -77,7 +77,7 @@ data "aws_iam_policy_document" "instance_profile" {
 
 resource "aws_iam_role" "instance_profile" {
   name               = "nixos"
-  assume_role_policy = data.aws_iam_policy_document.instance_profile.json
+  assume_role_policy = data.aws_iam_policy_document.ec2_assume_role.json
   inline_policy {
     name   = "instance-profile"
     policy = data.aws_iam_policy_document.instance_profile.json
