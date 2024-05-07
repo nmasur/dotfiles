@@ -75,7 +75,7 @@ resource "aws_ebs_snapshot_import" "image" {
 # Convert to AMI
 resource "aws_ami" "image" {
   description         = "Created with NixOS."
-  name                = replace(basename("arrow.vhd"), "/\\.vhd$/", "")
+  name                = replace(basename(data.aws_s3_object.image.key), "/\\.vhd$/", "")
   virtualization_type = "hvm"
   root_device_name    = "/dev/xvda"
   ena_support         = true
