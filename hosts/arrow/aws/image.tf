@@ -1,13 +1,19 @@
-locals {
-  image_file = one(fileset(path.root, "../../../result/nixos-amazon-image-*.vhd"))
-}
+# locals {
+#   image_file = one(fileset(path.root, "../../../result/nixos-amazon-image-*.vhd"))
+# }
+#
+# # Upload image to S3
+# resource "aws_s3_object" "image" {
+#   bucket = var.images_bucket
+#   key    = basename(local.image_file)
+#   source = local.image_file
+#   etag   = filemd5(local.image_file)
+# }
 
-# Upload image to S3
-resource "aws_s3_object" "image" {
+# Use existing image in S3
+data "aws_s3_object" "image" {
   bucket = var.images_bucket
-  key    = basename(local.image_file)
-  source = local.image_file
-  etag   = filemd5(local.image_file)
+  key    = "arrow.vhd"
 }
 
 # Setup IAM access for the VM Importer
@@ -29,8 +35,8 @@ data "aws_iam_policy_document" "vmimport" {
       "s3:ListBucket",
     ]
     resources = [
-      "arn:aws:s3:::${aws_s3_object.image.bucket}",
-      "arn:aws:s3:::${aws_s3_object.image.bucket}/*",
+      "arn:aws:s3:::${data.aws_s3_object.image.bucket}",
+      "arn:aws:s3:::${data.aws_s3_object.image.bucket}/*",
     ]
   }
   statement {
@@ -58,8 +64,8 @@ resource "aws_ebs_snapshot_import" "image" {
   disk_container {
     format = "VHD"
     user_bucket {
-      s3_bucket = aws_s3_object.image.bucket
-      s3_key    = aws_s3_object.image.key
+      s3_bucket = data.aws_s3_object.image.bucket
+      s3_key    = data.aws_s3_object.image.key
     }
   }
 

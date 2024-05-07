@@ -17,7 +17,7 @@ data "aws_vpc" "vpc" {
 }
 
 resource "aws_security_group" "instance" {
-  name        = "t2-aws-nixos-test"
+  name        = "aws-nixos"
   description = "Allow SSH and HTTPS"
   vpc_id      = data.aws_vpc.vpc.id
 
