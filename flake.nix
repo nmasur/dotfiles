@@ -326,9 +326,12 @@
         in
         {
           x86_64-linux.staff = staff "x86_64-linux";
-          x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate {
+          x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
             system = "x86_64-linux";
             format = "iso";
+            specialArgs = {
+              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
+            };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
           };
           x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
