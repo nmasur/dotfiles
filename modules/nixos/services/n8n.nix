@@ -10,10 +10,8 @@
 
     services.n8n = {
       settings = {
-        n8n = {
-          listenAddress = "127.0.0.1";
-          port = 5678;
-        };
+        listen_address = "127.0.0.1";
+        port = 5678;
       };
     };
 
@@ -27,7 +25,7 @@
         handle = [
           {
             handler = "reverse_proxy";
-            upstreams = [ { dial = "localhost:${builtins.toString config.services.n8n.settings.n8n.port}"; } ];
+            upstreams = [ { dial = "localhost:${builtins.toString config.services.n8n.settings.port}"; } ];
           }
         ];
       }
