@@ -31,6 +31,7 @@
       consul
       noti # Create notifications programmatically
       ipcalc # Make IP network calculations
+      teams
       (writeShellApplication {
         name = "ocr";
         runtimeInputs = [ tesseract ];
