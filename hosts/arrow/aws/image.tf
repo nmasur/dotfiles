@@ -12,8 +12,9 @@
 
 # Use existing image in S3
 data "aws_s3_object" "image" {
-  bucket = var.images_bucket
-  key    = "arrow.vhd"
+  bucket        = var.images_bucket
+  key           = "arrow.vhd"
+  checksum_mode = "ENABLED"
 }
 
 # Setup IAM access for the VM Importer
