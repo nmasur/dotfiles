@@ -13,6 +13,11 @@ resource "aws_instance" "instance" {
   }
 }
 
+resource "aws_ec2_instance_state" "instance" {
+  instance_id = aws_instance.instance.id
+  state       = "running"
+}
+
 data "aws_vpc" "vpc" {
   default = true
 }
