@@ -12,9 +12,12 @@
 
 # Use existing image in S3
 data "aws_s3_object" "image" {
-  bucket        = var.images_bucket
-  key           = "arrow.vhd"
-  checksum_mode = "ENABLED"
+  bucket = var.images_bucket
+  key    = "arrow.vhd"
+}
+
+resource "terraform_data" "image_replacement" {
+  input = data.aws_s3_object.image.checksum_sha256
 }
 
 # Setup IAM access for the VM Importer
@@ -72,7 +75,7 @@ resource "aws_ebs_snapshot_import" "image" {
 
   role_name = aws_iam_role.vmimport.name
   lifecycle {
-    replace_triggered_by = [data.aws_s3_object.image.checksum_sha256]
+    replace_triggered_by = [terraform_data.image_replacement]
   }
 }
 
