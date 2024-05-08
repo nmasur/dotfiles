@@ -70,6 +70,9 @@ resource "aws_ebs_snapshot_import" "image" {
   }
 
   role_name = aws_iam_role.vmimport.name
+  lifecycle {
+    replace_triggered_by = [data.aws_s3_object.image.checksum_sha256]
+  }
 }
 
 # Convert to AMI
