@@ -17,7 +17,7 @@ data "aws_s3_object" "image" {
 }
 
 resource "terraform_data" "image_replacement" {
-  input = data.aws_s3_object.image.checksum_sha256
+  input = data.aws_s3_object.image.etag
 }
 
 # Setup IAM access for the VM Importer
