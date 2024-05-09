@@ -30,15 +30,6 @@ terraform {
   }
 }
 
-# locals {
-#   image_file = one(fileset(path.root, "result/iso/nixos.iso"))
-# }
-
-# variable "cloudflare_r2_endpoint" {
-#   type        = string
-#   description = "Domain for the Cloudflare R2 endpoint"
-# }
-
 variable "vultr_api_key" {
   type        = string
   description = "API key for Vultr management"
@@ -63,18 +54,6 @@ provider "aws" {
 provider "vultr" {
   api_key = var.vultr_api_key
 }
-
-# data "aws_s3_bucket" "images" {
-#   bucket = "noahmasur-arrow-images"
-# }
-#
-# resource "aws_s3_object" "image" {
-#   bucket = data.aws_s3_bucket.images.id
-#   key    = "arrow.iso"
-#   source = local.image_file
-#   etag   = filemd5(local.image_file)
-#   acl    = "public-read"
-# }
 
 resource "vultr_iso_private" "image" {
   # url = "https://${var.cloudflare_account_id}.r2.cloudflarestorage.com/${data.aws_s3_bucket.images.id}/${aws_s3_object.image.key}"
