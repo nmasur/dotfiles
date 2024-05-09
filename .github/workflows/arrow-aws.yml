@@ -159,7 +159,7 @@ jobs:
           RECORD_ID=$(curl --request GET \
              --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records \
              --header 'Content-Type: application/json' \
-             --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}" | jq -r '.result[] | select(.name == "transmission.${{ env.ZONE_NAME }}") | .id')
+             --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}" | jq -r '.result[] | select(.name == "n8n2.${{ env.ZONE_NAME }}") | .id')
           curl --request DELETE \
              --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records/${RECORD_ID} \
              --header 'Content-Type: application/json' \
