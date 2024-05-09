@@ -115,6 +115,9 @@ jobs:
       - name: Terraform Destroy
         if: inputs.action == 'destroy'
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        env:
+          TF_VAR_ec2_size: ${{ inputs.size }}
+          TF_VAR_images_bucket: ${{ secrets.IMAGES_BUCKET }}
         run: |
           terraform destroy \
             -auto-approve \
