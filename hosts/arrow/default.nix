@@ -26,6 +26,16 @@ inputs.nixpkgs.lib.nixosSystem rec {
         device = "/dev/disk/by-label/boot";
         fsType = "vfat";
       };
+
+      virtualisation.vmVariant = {
+        virtualisation.forwardPorts = [
+          {
+            from = "host";
+            host.port = 2222;
+            guest.port = 22;
+          }
+        ];
+      };
     }
   ];
 }

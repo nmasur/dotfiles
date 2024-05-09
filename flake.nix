@@ -341,9 +341,6 @@
               pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
             };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
-              # import
-              # ./modules/aws
-              # { inherit inputs; }
               (
                 { ... }:
                 {
