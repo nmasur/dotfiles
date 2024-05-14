@@ -171,6 +171,7 @@
             eventTitleIconFormat = ''"iconCalendar"'';
             slackBrowser = ''{"deletable":true,"arguments":"","name":"Slack","path":""}'';
             zoomBrowser = ''{"deletable":true,"arguments":"","name":"Zoom","path":""}'';
+            teamsBrowser = ''{"deletable":true,"arguments":"","name":"Teams","path":""}'';
             KeyboardShortcuts_joinEventShortcut = ''{"carbonModifiers":6400,"carbonKeyCode":38}'';
             timeFormat = ''"12-hour"'';
           };
