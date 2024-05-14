@@ -14,9 +14,11 @@
   ...
 }:
 
-inputs.nixpkgs.lib.nixosSystem {
+inputs.nixpkgs.lib.nixosSystem rec {
   system = "aarch64-linux";
-  specialArgs = { };
+  specialArgs = {
+    pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
+  };
   modules = [
     globals
     inputs.home-manager.nixosModules.home-manager
