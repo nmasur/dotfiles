@@ -44,7 +44,8 @@
         "logitune" # Logitech webcam firmware
         "meetingbar" # Show meetings in menu bar
         "scroll-reverser" # Different scroll style for mouse vs. trackpad
-        # "steam" # Not packaged for Nix
+        "notunes" # Don't launch Apple Music with the play button
+        "steam" # Not packaged for Nixon macOS
         # "epic-games" # Not packaged for Nix
       ];
     };
