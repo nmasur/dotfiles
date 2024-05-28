@@ -68,7 +68,7 @@
     };
     nvim-lspconfig-src = {
       # https://github.com/neovim/nvim-lspconfig/tags
-      url = "github:neovim/nvim-lspconfig/v0.1.7";
+      url = "github:neovim/nvim-lspconfig/v0.1.8";
       flake = false;
     };
     cmp-nvim-lsp-src = {
@@ -80,11 +80,6 @@
       url = "github:m00qek/baleia.nvim";
       flake = false;
     };
-    comment-nvim-src = {
-      # https://github.com/numToStr/Comment.nvim/releases
-      url = "github:numToStr/Comment.nvim/v0.8.0";
-      flake = false;
-    };
     nvim-treesitter-src = {
       # https://github.com/nvim-treesitter/nvim-treesitter/tags
       url = "github:nvim-treesitter/nvim-treesitter/master";
@@ -92,7 +87,7 @@
     };
     telescope-nvim-src = {
       # https://github.com/nvim-telescope/telescope.nvim/releases
-      url = "github:nvim-telescope/telescope.nvim/0.1.5";
+      url = "github:nvim-telescope/telescope.nvim/0.1.8";
       flake = false;
     };
     telescope-project-nvim-src = {
@@ -101,12 +96,12 @@
     };
     toggleterm-nvim-src = {
       # https://github.com/akinsho/toggleterm.nvim/tags
-      url = "github:akinsho/toggleterm.nvim/v2.9.0";
+      url = "github:akinsho/toggleterm.nvim/v2.11.0";
       flake = false;
     };
     bufferline-nvim-src = {
       # https://github.com/akinsho/bufferline.nvim/releases
-      url = "github:akinsho/bufferline.nvim/v4.5.0";
+      url = "github:akinsho/bufferline.nvim/v4.6.1";
       flake = false;
     };
     nvim-tree-lua-src = {
@@ -119,7 +114,7 @@
     };
     fidget-nvim-src = {
       # https://github.com/j-hui/fidget.nvim/tags
-      url = "github:j-hui/fidget.nvim/v1.2.0";
+      url = "github:j-hui/fidget.nvim/v1.4.5";
       flake = false;
     };
     kitty-scrollback-nvim-src = {
@@ -174,13 +169,6 @@
     };
     ren = {
       url = "github:robenkleene/ren-find";
-      flake = false;
-    };
-
-    # Firefox addon from outside the extension store
-    bypass-paywalls-clean = {
-      # https://gitlab.com/magnolia1234/bpc-uploads/-/commits/master/?ref_type=HEADS
-      url = "https://github.com/bpc-clone/bpc_updates/releases/download/latest/bypass_paywalls_clean-3.6.6.0.xpi";
       flake = false;
     };
 
@@ -257,7 +245,6 @@
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/gh-collaborators.nix)
-        (import ./overlays/bypass-paywalls-clean.nix inputs)
         (import ./overlays/ren-rep.nix inputs)
       ];
 

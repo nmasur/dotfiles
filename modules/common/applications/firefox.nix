@@ -35,7 +35,6 @@
           # https://nur.nix-community.org/repos/rycee/
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             (lib.mkIf config._1password.enable onepassword-password-manager)
-            pkgs.bypass-paywalls-clean
             darkreader
             don-t-fuck-with-paste
             facebook-container

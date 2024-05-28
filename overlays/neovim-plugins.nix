@@ -25,7 +25,6 @@ in
 
     nvim-lspconfig = withSrc prev.vimPlugins.nvim-lspconfig inputs.nvim-lspconfig-src;
     cmp-nvim-lsp = withSrc prev.vimPlugins.cmp-nvim-lsp inputs.cmp-nvim-lsp-src;
-    comment-nvim = withSrc prev.vimPlugins.comment-nvim inputs.comment-nvim-src;
     nvim-treesitter = withSrc prev.vimPlugins.nvim-treesitter inputs.nvim-treesitter-src;
     telescope-nvim = withSrc prev.vimPlugins.telescope-nvim inputs.telescope-nvim-src;
     telescope-project-nvim = withSrc prev.vimPlugins.telescope-project-nvim inputs.telescope-project-nvim-src;

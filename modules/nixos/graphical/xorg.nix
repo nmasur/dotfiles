@@ -8,12 +8,12 @@
 
   config = lib.mkIf config.gui.enable {
 
+    # Enable touchpad support
+    services.libinput.enable = true;
+
     # Enable the X11 windowing system.
     services.xserver = {
       enable = config.gui.enable;
-
-      # Enable touchpad support
-      libinput.enable = true;
 
       # Login screen
       displayManager = {
