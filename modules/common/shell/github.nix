@@ -12,7 +12,10 @@
       enable = true;
       gitCredentialHelper.enable = true;
       settings.git_protocol = "https";
-      extensions = [ pkgs.gh-collaborators ];
+      extensions = [
+        pkgs.gh-collaborators
+        pkgs.gh-dash
+      ];
     };
 
     programs.fish = lib.mkIf config.home-manager.users.${config.user}.programs.gh.enable {
