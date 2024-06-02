@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+; Changes registry to map Caps Lock key to Ctrl key
+; More info here: https://www.autohotkey.com/boards/viewtopic.php?p=468638#p468638
+; And here: https://superuser.com/a/949533
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00
