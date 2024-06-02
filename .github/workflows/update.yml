@@ -18,13 +18,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v4
+        uses: DeterminateSystems/nix-installer-action@v11
       - name: Check Nixpkgs Inputs
-        uses: DeterminateSystems/flake-checker-action@v5
+        uses: DeterminateSystems/flake-checker-action@v7
       - name: Add Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v2
+        uses: DeterminateSystems/magic-nix-cache-action@v6
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v19
+        uses: DeterminateSystems/update-flake-lock@v21
         id: update
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
