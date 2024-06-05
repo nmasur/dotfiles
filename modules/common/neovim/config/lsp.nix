@@ -88,7 +88,7 @@
         rust = [ "rustfmt" ];
         sh = [ "shfmt" ];
         terraform = if config.terraform then [ "terraform_fmt" ] else [ ];
-        hcl = if config.terraform then [ "terraform_fmt" ] else [ ];
+        hcl = [ "hcl" ];
       };
       formatters = {
         lua.command = "${pkgs.stylua}/bin/stylua";
@@ -105,6 +105,7 @@
           ];
         };
         terraform_fmt.command = if config.terraform then "${pkgs.terraform}/bin/terraform" else "";
+        hcl.command = "${pkgs.hclfmt}/bin/hclfmt";
       };
     };
 
