@@ -5,14 +5,15 @@
 
 # Specify AWS_PROFILE and AWS_REGION before running this script
 
-aws ec2 describe-instances |
+aws ec2 describe-instances \
+    --filters "Name=instance-state-name,Values=running" |
     jq -r \
         '.Reservations[]
         | .Instances[]
         | .InstanceId + " - " +
         (.PrivateIpAddress // "n/a") + " - " +
         (.PublicIpAddress // "n/a") + " - " +
-        (.Tags | from_entries | .Name // "n/a")' |
+        (.Tags // [] | from_entries | .Name // "n/a")' |
     fzf \
         --height 100% \
         --layout reverse \
