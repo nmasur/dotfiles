@@ -33,8 +33,8 @@
       "['<C-d>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(-4)";
       "['<C-f>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(4)";
       "['<C-e>']" = dsl.rawLua "require('cmp').mapping.abort()";
-      "['<CR>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, })";
-      "['<C-r>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, })";
+      "['<C-y>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Insert, select = true, }, { 'i', 'c' })";
+      "['<C-r>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, }, { 'i', 'c' })";
       "['<Esc>']" = dsl.rawLua ''
         function(_)
             cmp.mapping({
@@ -44,7 +44,7 @@
             vim.cmd("stopinsert") --- Abort and leave insert mode
         end
       '';
-      "['<C-l>']" = dsl.rawLua ''
+      "['<C-k>']" = dsl.rawLua ''
         cmp.mapping(function(_)
             if require("luasnip").expand_or_jumpable() then
                 require("luasnip").expand_or_jump()
