@@ -15,28 +15,37 @@
 
   home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
 
-    home.packages = with pkgs; [
-      visidata # CSV inspector
-      dos2unix # Convert Windows text files
-      inetutils # Includes telnet
-      youtube-dl # Convert web videos
-      pandoc # Convert text documents
-      mpd # TUI slideshows
-      mpv # Video player
-      gnupg # Encryption
-      awscli2
-      ssm-session-manager-plugin
-      awslogs
-      google-cloud-sdk
-      vault-bin
-      consul
-      noti # Create notifications programmatically
-      ipcalc # Make IP network calculations
-      teams
-      (writeShellApplication {
+    home.packages = [
+      pkgs.visidata # CSV inspector
+      pkgs.dos2unix # Convert Windows text files
+      pkgs.inetutils # Includes telnet
+      pkgs.youtube-dl # Convert web videos
+      pkgs.pandoc # Convert text documents
+      pkgs.mpd # TUI slideshows
+      pkgs.mpv # Video player
+      pkgs.gnupg # Encryption
+      pkgs.awscli2
+      pkgs.ssm-session-manager-plugin
+      pkgs.awslogs
+      pkgs.google-cloud-sdk
+      pkgs.vault-bin
+      pkgs.consul
+      pkgs.noti # Create notifications programmatically
+      pkgs.ipcalc # Make IP network calculations
+      pkgs.teams
+      (pkgs.writeShellApplication {
         name = "ocr";
-        runtimeInputs = [ tesseract ];
+        runtimeInputs = [ pkgs.tesseract ];
         text = builtins.readFile ../../modules/common/shell/bash/scripts/ocr.sh;
+      })
+      (pkgs.writeShellApplication {
+        name = "ec2";
+        runtimeInputs = [
+          pkgs.awscli2
+          pkgs.jq
+          pkgs.fzf
+        ];
+        text = builtins.readFile ../../modules/common/shell/bash/scripts/aws-ec2.sh;
       })
     ];
 
