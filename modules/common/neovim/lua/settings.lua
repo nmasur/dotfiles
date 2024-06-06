@@ -19,9 +19,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
-    callback = function()
-        vim.o.formatoptions = vim.o.formatoptions .. "a"
-    end,
+    command = "TableModeEnable",
 })
 
 vim.api.nvim_create_autocmd("FileType", {

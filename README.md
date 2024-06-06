@@ -8,8 +8,9 @@ configuration may be difficult to translate to a non-Nix system.
 
 ## System Features
 
+|----------------|-----------------------------------------------------|-----------------------------------------------|
 | Feature        | Program                                             | Configuration                                 |
-| ---            | ---                                                 | ---                                           |
+|----------------|-----------------------------------------------------|-----------------------------------------------|
 | OS             | [NixOS](https://nixos.org)                          | [Link](./modules/nixos)                       |
 | Display Server | [X11](https://www.x.org/wiki/)                      | [Link](./modules/nixos/graphical/xorg.nix)    |
 | Compositor     | [Picom](https://github.com/yshui/picom)             | [Link](./modules/nixos/graphical/picom.nix)   |
@@ -17,15 +18,17 @@ configuration may be difficult to translate to a non-Nix system.
 | Panel          | [Polybar](https://polybar.github.io/)               | [Link](./modules/nixos/graphical/polybar.nix) |
 | Font           | [Victor Mono](https://rubjo.github.io/victor-mono/) | [Link](./modules/nixos/graphical/fonts.nix)   |
 | Launcher       | [Rofi](https://github.com/davatorium/rofi)          | [Link](./modules/nixos/graphical/rofi.nix)    |
+|----------------|-----------------------------------------------------|-----------------------------------------------|
 
 ## User Features
 
+|--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
 | Feature      | Program                                                                          | Configuration                                      |
-| ---          | ---                                                                              | ---                                                |
+|--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
 | Dotfiles     | [Home-Manager](https://github.com/nix-community/home-manager)                    | [Link](./modules/common)                           |
 | Terminal     | [Kitty](https://sw.kovidgoyal.net/kitty/)                                        | [Link](./modules/common/applications/kitty.nix)    |
 | Shell        | [Fish](https://fishshell.com/)                                                   | [Link](./modules/common/shell/fish)                |
-| Shell Prompt | [Starship](https://starship.rs/)                                                 | [Link](./modules/common/shell/starship.nix)         |
+| Shell Prompt | [Starship](https://starship.rs/)                                                 | [Link](./modules/common/shell/starship.nix)        |
 | Colorscheme  | [Gruvbox](https://github.com/morhetz/gruvbox)                                    | [Link](./colorscheme/gruvbox/default.nix)          |
 | Wallpaper    | [Road](https://gitlab.com/exorcist365/wallpapers/-/blob/master/gruvbox/road.jpg) | [Link](./hosts/tempest/default.nix)                |
 | Text Editor  | [Neovim](https://neovim.io/)                                                     | [Link](./modules/common/neovim/config)             |
@@ -34,12 +37,15 @@ configuration may be difficult to translate to a non-Nix system.
 | File Manager | [Nautilus](https://wiki.gnome.org/action/show/Apps/Files)                        | [Link](./modules/common/applications/nautilus.nix) |
 | PDF Reader   | [Zathura](https://pwmt.org/projects/zathura/)                                    | [Link](./modules/common/applications/media.nix)    |
 | Video Player | [mpv](https://mpv.io/)                                                           | [Link](./modules/common/applications/media.nix)    |
+|--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
 
 ## macOS Features
 
+|----------|---------------------------------------------|--------------------------------------|
 | Feature  | Program                                     | Configuration                        |
-| ---      | ---                                         | ---                                  |
+|----------|---------------------------------------------|--------------------------------------|
 | Keybinds | [Hammerspoon](https://www.hammerspoon.org/) | [Link](./modules/darwin/hammerspoon) |
+|----------|---------------------------------------------|--------------------------------------|
 
 # Diagram
 
