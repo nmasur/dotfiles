@@ -60,7 +60,7 @@
           # Required for kitty-scrollback.nvim
           allow_remote_control = "socket-only";
           listen_on = "unix:/tmp/kitty";
-          action_alias = "kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py";
+          action_alias = "kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py --no-nvim-args";
 
           # Colors (adapted from: https://github.com/kdrag0n/base16-kitty/blob/master/templates/default-256.mustache)
           background = config.theme.colors.base00;
