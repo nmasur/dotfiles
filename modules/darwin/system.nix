@@ -105,7 +105,7 @@
             "/Applications/zoom.us.app"
             "${pkgs.discord}/Applications/Discord.app"
             "${pkgs.obsidian}/Applications/Obsidian.app"
-            "${pkgs.kitty}/Applications/kitty.app"
+            "${pkgs.wezterm}/Applications/WezTerm.app"
             "/System/Applications/System Settings.app"
           ];
         };

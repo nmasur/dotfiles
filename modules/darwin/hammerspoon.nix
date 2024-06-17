@@ -18,7 +18,7 @@
         src = ./hammerspoon/Spoons/Launcher.spoon/init.lua;
         firefox = "${pkgs.firefox-bin}/Applications/Firefox.app";
         discord = "${pkgs.discord}/Applications/Discord.app";
-        kitty = "${pkgs.kitty}/Applications/kitty.app";
+        wezterm = "${pkgs.wezterm}/Applications/WezTerm.app";
         obsidian = "${pkgs.obsidian}/Applications/Obsidian.app";
         slack = "${pkgs.slack}/Applications/Slack.app";
       };
