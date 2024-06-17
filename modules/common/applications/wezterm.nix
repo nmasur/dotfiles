@@ -112,14 +112,29 @@
                 bottom = 0,
               },
 
+              font = wezterm.font 'VictorMono Nerd Font',
+              font_size = 18.0,
+
+              -- Tab Bar
+              window_frame = {
+                font = wezterm.font 'VictorMono Nerd Font',
+                font_size = 16.0,
+              },
+
+              colors = {
+                tab_bar = {
+                  active_tab = {
+                    bg_color = '${config.theme.colors.base00}',
+                    fg_color = '${config.theme.colors.base04}',
+                  },
+                },
+              },
+
               -- Disable audio
               audible_bell = "Disabled",
 
               initial_rows = 80,
               initial_cols = 200,
-
-              font = wezterm.font 'VictorMono Nerd Font',
-              font_size = 18.0,
           }
         '';
       };
