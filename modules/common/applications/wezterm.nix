@@ -61,7 +61,7 @@
               config.theme.colors.base06 # silver
             ];
             brights = [
-              config.theme.colors.base04 # grey
+              config.theme.colors.base03 # grey
               config.theme.colors.base08 # red
               config.theme.colors.base0B # lime
               config.theme.colors.base0A # yellow
@@ -135,6 +135,14 @@
 
               initial_rows = 80,
               initial_cols = 200,
+
+              keys = {
+                {
+                  key = 'Enter',
+                  mods = 'SHIFT',
+                  action = wezterm.action.SendString '\x1F'
+                },
+              },
           }
         '';
       };
