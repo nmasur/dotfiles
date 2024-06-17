@@ -47,6 +47,15 @@
         ];
         text = builtins.readFile ../../modules/common/shell/bash/scripts/aws-ec2.sh;
       })
+      (pkgs.writeShellApplication {
+        name = "tfinit";
+        runtimeInputs = [
+          pkgs.terraform
+          pkgs.gawk
+          pkgs.git
+        ];
+        text = builtins.readFile ../../modules/common/shell/bash/scripts/terraform-init.sh;
+      })
     ];
 
     programs.fish.shellAbbrs = {
