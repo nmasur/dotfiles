@@ -51,6 +51,7 @@ inputs.darwin.lib.darwinSystem {
       kubernetes.enable = true;
       _1password.enable = true;
       slack.enable = true;
+      wezterm.enable = true;
     }
   ];
 }
