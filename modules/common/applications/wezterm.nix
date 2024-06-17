@@ -149,6 +149,52 @@
                   mods = 'SHIFT|CTRL',
                   action = wezterm.action.DisableDefaultAssignment
                 },
+                -- project switcher
+                {
+                   key = 'P',
+                   mods = 'SUPER',
+                   action = wezterm.action_callback(function(window, pane)
+                     local choices = {}
+
+                     wezterm.log_info "working?"
+
+                     function scandir(directory)
+                         local i, t, popen = 0, {}, io.popen
+                         local pfile = popen('${pkgs.fd}/bin/fd --search-path "'..directory..'" --type directory --exact-depth 2 | ${pkgs.proximity-sort}/bin/proximity-sort "'..os.getenv("HOME").."/dev/work"..'"')
+                         for filename in pfile:lines() do
+                             i = i + 1
+                             t[i] = filename
+                         end
+                         pfile:close()
+                         return t
+                     end
+
+                     for _, v in pairs(scandir(os.getenv("HOME").."/dev")) do
+                       table.insert(choices, { label = v })
+                     end
+
+                     window:perform_action(
+                       wezterm.action.InputSelector {
+                         action = wezterm.action_callback(function(window, pane, id, label)
+                           if not id and not label then
+                             wezterm.log_info "cancelled"
+                           else
+                             window:perform_action(
+                               wezterm.action.SpawnCommandInNewTab {
+                                 cwd = label,
+                               },
+                               pane
+                             )
+                           end
+                         end),
+                         fuzzy = true,
+                         title = "Select Project",
+                         choices = choices,
+                       },
+                       pane
+                     )
+                   end),
+                },
               },
           }
         '';
