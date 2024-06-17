@@ -117,10 +117,6 @@
       url = "github:j-hui/fidget.nvim/v1.4.5";
       flake = false;
     };
-    kitty-scrollback-nvim-src = {
-      url = "github:mikesmithgh/kitty-scrollback.nvim";
-      flake = false;
-    };
     nvim-lint-src = {
       url = "github:mfussenegger/nvim-lint";
       flake = false;

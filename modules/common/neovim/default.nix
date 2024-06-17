@@ -48,12 +48,6 @@ in
           };
         };
 
-        # Set Neovim as the kitty terminal "scrollback" (vi mode) option.
-        # Requires removing some of the ANSI escape codes that are sent to the
-        # scrollback using sed and baleia, as well as removing several
-        # unnecessary features.
-        programs.kitty.settings.scrollback_pager = "${neovim}/bin/nvim --headless +'KittyScrollbackGenerateKittens' +'set nonumber' +'set norelativenumber' +'%print' +'quit!' 2>&1";
-
         # Create a desktop option for launching Neovim from a file manager
         # (Requires launching the terminal and then executing Neovim)
         xdg.desktopEntries.nvim = lib.mkIf pkgs.stdenv.isLinux {

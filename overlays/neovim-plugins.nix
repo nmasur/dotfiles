@@ -38,11 +38,5 @@ in
     base16-nvim = plugin "base16-nvim" inputs.base16-nvim-src;
     baleia-nvim = plugin "baleia-nvim" inputs.baleia-nvim-src;
     hmts-nvim = plugin "hmts-nvim" inputs.hmts-nvim-src;
-    kitty-scrollback-nvim = prev.vimUtils.buildVimPlugin {
-      pname = "kitty-scrollback-nvim";
-      src = inputs.kitty-scrollback-nvim-src;
-      version = "master";
-      patches = [ ./kitty-scrollback-nvim.patch ];
-    };
   };
 }

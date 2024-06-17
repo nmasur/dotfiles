@@ -13,7 +13,6 @@
     pkgs.vimPlugins.glow-nvim # Markdown preview popup
     pkgs.vimPlugins.nvim-colorizer-lua # Hex color previews
     pkgs.vimPlugins.which-key-nvim # Keybind helper
-    pkgs.vimPlugins.kitty-scrollback-nvim # Scrollback pager for kitty
   ];
 
   # Initialize some plugins
@@ -24,14 +23,6 @@
   };
   setup.glow = { };
   setup.which-key = { };
-  setup.kitty-scrollback = {
-    global = dsl.rawLua ''
-        {
-            keymaps_enabled = false,
-            vim.keymap.set({ 'v' }, 'y', '<Plug>(KsbVisualYank)<CR><Plug>(KsbQuitAll)', {})
-        }
-    '';
-  };
 
   vim.o = {
     termguicolors = true; # Set to truecolor
