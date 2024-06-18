@@ -149,6 +149,18 @@
                   mods = 'SHIFT|CTRL',
                   action = wezterm.action.DisableDefaultAssignment
                 },
+                -- alt-enter was "fullscreen"
+                {
+                  key = 'Enter',
+                  mods = 'ALT',
+                  action = wezterm.action.DisableDefaultAssignment
+                },
+                -- make super-f "fullscreen"
+                {
+                  key = 'f',
+                  mods = 'SUPER',
+                  action = wezterm.action.ToggleFullScreen
+                },
                 -- project switcher
                 {
                    key = 'P',
