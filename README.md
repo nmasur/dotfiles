@@ -8,7 +8,6 @@ configuration may be difficult to translate to a non-Nix system.
 
 ## System Features
 
-|----------------|-----------------------------------------------------|-----------------------------------------------|
 | Feature        | Program                                             | Configuration                                 |
 |----------------|-----------------------------------------------------|-----------------------------------------------|
 | OS             | [NixOS](https://nixos.org)                          | [Link](./modules/nixos)                       |
@@ -18,11 +17,9 @@ configuration may be difficult to translate to a non-Nix system.
 | Panel          | [Polybar](https://polybar.github.io/)               | [Link](./modules/nixos/graphical/polybar.nix) |
 | Font           | [Victor Mono](https://rubjo.github.io/victor-mono/) | [Link](./modules/nixos/graphical/fonts.nix)   |
 | Launcher       | [Rofi](https://github.com/davatorium/rofi)          | [Link](./modules/nixos/graphical/rofi.nix)    |
-|----------------|-----------------------------------------------------|-----------------------------------------------|
 
 ## User Features
 
-|--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
 | Feature      | Program                                                                          | Configuration                                      |
 |--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
 | Dotfiles     | [Home-Manager](https://github.com/nix-community/home-manager)                    | [Link](./modules/common)                           |
@@ -37,15 +34,12 @@ configuration may be difficult to translate to a non-Nix system.
 | File Manager | [Nautilus](https://wiki.gnome.org/action/show/Apps/Files)                        | [Link](./modules/common/applications/nautilus.nix) |
 | PDF Reader   | [Zathura](https://pwmt.org/projects/zathura/)                                    | [Link](./modules/common/applications/media.nix)    |
 | Video Player | [mpv](https://mpv.io/)                                                           | [Link](./modules/common/applications/media.nix)    |
-|--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
 
 ## macOS Features
 
-|----------|---------------------------------------------|--------------------------------------|
 | Feature  | Program                                     | Configuration                        |
 |----------|---------------------------------------------|--------------------------------------|
 | Keybinds | [Hammerspoon](https://www.hammerspoon.org/) | [Link](./modules/darwin/hammerspoon) |
-|----------|---------------------------------------------|--------------------------------------|
 
 # Diagram
 
