@@ -28,8 +28,9 @@
         maintenance_window_start = 4; # Run jobs at 4am UTC
       };
       extraAppsEnable = true;
-      extraApps = with config.services.nextcloud.package.packages.apps; {
-        inherit calendar contacts;
+      extraApps = {
+        calendar = config.services.nextcloud.package.packages.apps.calendar;
+        contacts = config.services.nextcloud.package.packages.apps.contacts;
         # These apps are defined and pinned by overlay in flake.
         news = pkgs.nextcloudApps.news;
         external = pkgs.nextcloudApps.external;
