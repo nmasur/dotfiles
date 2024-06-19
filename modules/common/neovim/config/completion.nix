@@ -26,10 +26,10 @@
 
     # Basic completion keybinds
     mapping = {
-      "['<C-n>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert })";
-      "['<C-p>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert })";
-      "['<Down>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Select })";
-      "['<Up>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Select })";
+      "['<C-n>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })";
+      "['<C-p>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })";
+      "['<Down>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Select }, { 'i', 'c' })";
+      "['<Up>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Select }, { 'i', 'c' })";
       "['<C-d>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(-4)";
       "['<C-f>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(4)";
       "['<C-e>']" = dsl.rawLua "require('cmp').mapping.abort()";
@@ -131,13 +131,41 @@
   lua = ''
     -- Use buffer source for `/`
     require('cmp').setup.cmdline("/", {
-        sources = {
-            { name = "buffer", keyword_length = 5 },
+        mapping = {
+            ['<C-n>'] = {
+                c = require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })
+            },
+            ['<C-p>'] = {
+                c = require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })
+            },
+            ['<C-y>'] = {
+                c = require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Insert, select = true, }, { 'i', 'c' })
+            },
+            ['<C-r>'] = {
+                c = require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, }, { 'i', 'c' })
+            },
         },
+        sources = require('cmp').config.sources({
+            { name = "buffer", keyword_length = 5 },
+        }),
     })
 
     -- Use cmdline & path source for ':'
     require('cmp').setup.cmdline(":", {
+        mapping = {
+            ['<C-n>'] = {
+                c = require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })
+            },
+            ['<C-p>'] = {
+                c = require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })
+            },
+            ['<C-y>'] = {
+                c = require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Insert, select = true, }, { 'i', 'c' })
+            },
+            ['<C-r>'] = {
+                c = require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, }, { 'i', 'c' })
+            },
+        },
         sources = require('cmp').config.sources({
             { name = "path" },
         }, {
