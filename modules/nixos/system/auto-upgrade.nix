@@ -11,7 +11,7 @@
 
   # Update the system daily by pointing it at the flake repository
   system.autoUpgrade = {
-    enable = config.server; # Only auto upgrade servers
+    enable = lib.mkDefault false; # Don't enable by default
     dates = "09:33";
     flake = "git+${config.dotfilesRepo}";
     randomizedDelaySec = "25min";

@@ -107,6 +107,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       services.samba.enable = true;
       services.paperless.enable = true;
       services.postgresql.enable = true;
+      system.autoUpgrade.enable = false;
 
       # Allows private remote access over the internet
       cloudflareTunnel = {

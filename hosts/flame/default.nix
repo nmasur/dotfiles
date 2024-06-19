@@ -79,6 +79,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       services.gitea.enable = true;
       services.vaultwarden.enable = true;
       services.minecraft-server.enable = true; # Setup Minecraft server
+      system.autoUpgrade.enable = true;
 
       # Allows private remote access over the internet
       cloudflareTunnel = {
