@@ -37,6 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Better App install management in macOS
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+    };
+
     # Manage disk format and partitioning
     disko = {
       url = "github:nix-community/disko";

@@ -23,6 +23,7 @@ inputs.darwin.lib.darwinSystem {
       }
     )
     inputs.home-manager.darwinModules.home-manager
+    inputs.mac-app-util.darwinModules.default
     {
       nixpkgs.overlays = [ inputs.firefox-darwin.overlay ] ++ overlays;
       networking.hostName = "lookingglass";
