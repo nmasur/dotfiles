@@ -14,7 +14,7 @@
 
       home.packages = with pkgs; [
         # python310 # Standard Python interpreter
-        nodePackages.pyright # Python language server
+        pyright # Python language server
         black # Python formatter
         python310Packages.flake8 # Python linter
       ];
