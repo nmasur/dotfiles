@@ -40,6 +40,7 @@
     # Better App install management in macOS
     mac-app-util = {
       url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list for their inputs
     };
 
     # Manage disk format and partitioning
