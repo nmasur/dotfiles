@@ -161,6 +161,20 @@
                   mods = 'SUPER',
                   action = wezterm.action.ToggleFullScreen
                 },
+                -- super-t open new tab in new dir
+                {
+                  key = 't',
+                  mods = 'SUPER',
+                  action = wezterm.action.SpawnCommandInNewTab {
+                    cwd = wezterm.home_dir,
+                  },
+                },
+                -- shift-super-t open new tab in same dir
+                {
+                  key = 't',
+                  mods = 'SUPER|SHIFT',
+                  action = wezterm.action.SpawnTab 'CurrentPaneDomain'
+                },
                 -- project switcher
                 {
                    key = 'P',
