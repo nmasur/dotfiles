@@ -19,10 +19,9 @@
   options.gaming.enable = lib.mkEnableOption "Enable gaming features.";
 
   config = lib.mkIf (config.gaming.enable && pkgs.stdenv.isLinux) {
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
     programs.gamemode.enable = true;
   };
