@@ -158,7 +158,11 @@
           };
         };
         extraConfig = {
-          general.unsafe-accounts-conf = true;
+          general = {
+            unsafe-accounts-conf = true;
+            # log-file = "~/.cache/aerc.log";
+            # log-level = "debug";
+          };
           viewer = {
             pager = "${pkgs.less}/bin/less -R";
           };
