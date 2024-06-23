@@ -116,12 +116,13 @@
                   bottom = 0,
                 },
 
-                font = wezterm.font '${font}',
+                font = wezterm.font('${font}', { weight = 'Bold'}),
                 font_size = ${if pkgs.stdenv.isLinux then "14.0" else "18.0"},
 
                 -- Tab Bar
+                hide_tab_bar_if_only_one_tab = true,
                 window_frame = {
-                  font = wezterm.font 'VictorMono Nerd Font',
+                  font = wezterm.font('${font}', { weight = 'Bold'}),
                   font_size = ${if pkgs.stdenv.isLinux then "12.0" else "16.0"},
                 },
 
