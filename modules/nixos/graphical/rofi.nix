@@ -18,9 +18,6 @@ in
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.services.xserver.enable) {
 
-    # Set the Rofi-Systemd terminal for viewing logs
-    environment.sessionVariables.ROFI_SYSTEMD_TERM = lib.mkIf config.kitty.enable "${pkgs.kitty}/bin/kitty";
-
     home-manager.users.${config.user} = {
 
       home.packages = with pkgs; [
