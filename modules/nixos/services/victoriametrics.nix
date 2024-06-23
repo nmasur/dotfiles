@@ -12,7 +12,7 @@ let
 
   username = "prometheus";
 
-  prometheusConfig = (pkgs.formats.yaml { }).generate "prometheus.yml" {
+  prometheusConfig = {
     scrape_configs = [
       {
         job_name = config.networking.hostName;
@@ -37,8 +37,6 @@ in
 {
 
   config = {
-
-    services.victoriametrics.extraOptions = [ "-promscrape.config=${prometheusConfig}" ];
 
     systemd.services.vmauth = lib.mkIf config.services.victoriametrics.enable {
       description = "VictoriaMetrics basic auth proxy";
@@ -85,21 +83,18 @@ in
 
     # VMAgent
 
-    services.vmagent.prometheusConfig = prometheusConfig; # Overwritten below
-    systemd.services.vmagent.serviceConfig = lib.mkIf config.services.vmagent.enable {
-      ExecStart = lib.mkForce ''
-        ${pkgs.victoriametrics}/bin/vmagent \
-                -promscrape.config=${prometheusConfig} \
-                -remoteWrite.url="https://${config.hostnames.prometheus}/api/v1/write" \
-                -remoteWrite.basicAuth.username=${username} \
-                -remoteWrite.basicAuth.passwordFile=${config.secrets.vmagent.dest}'';
+    services.vmagent = {
+      prometheusConfig = prometheusConfig;
+      remoteWrite = {
+        url = "https://${config.hostnames.prometheus}/api/v1/write";
+        basicAuthUsername = username;
+        basicAuthPasswordFile = config.secrets.vmagent.dest;
+      };
     };
 
     secrets.vmagent = lib.mkIf config.services.vmagent.enable {
       source = ../../../private/prometheus.age;
       dest = "${config.secretsDirectory}/vmagent";
-      owner = "vmagent";
-      group = "vmagent";
     };
     systemd.services.vmagent-secret = lib.mkIf config.services.vmagent.enable {
       requiredBy = [ "vmagent.service" ];
