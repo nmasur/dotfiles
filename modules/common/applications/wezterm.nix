@@ -110,10 +110,10 @@
 
                 -- Window
                 window_padding = {
-                  left = 6,
-                  right = 6,
-                  top = 0,
-                  bottom = 0,
+                  left = 10,
+                  right = 10,
+                  top = 10,
+                  bottom = 10,
                 },
 
                 font = wezterm.font('${font}', { weight = 'Bold'}),
