@@ -41,15 +41,15 @@ local function worklayout()
         local u = hs.geometry.unitrect
         -- set the layout
         local left = {
-            { "kitty", nil, WORK_ONLY_MONITOR, u(0, 0, 1 / 2, 1), nil, nil, visible = true },
+            { "WezTerm", nil, WORK_ONLY_MONITOR, u(0, 0, 1 / 2, 1), nil, nil, visible = true },
         }
         local right = {
-            { "Slack",   nil, WORK_ONLY_MONITOR, u(1 / 2, 0, 1 / 2, 1),         nil, nil, visible = true },
-            { "Mail",    nil, WORK_ONLY_MONITOR, u(1 / 2, 0, 1 / 2, 1),         nil, nil, visible = true },
+            { "Slack", nil, WORK_ONLY_MONITOR, u(1 / 2, 0, 1 / 2, 1), nil, nil, visible = true },
+            { "Mail", nil, WORK_ONLY_MONITOR, u(1 / 2, 0, 1 / 2, 1), nil, nil, visible = true },
             { "zoom.us", nil, WORK_ONLY_MONITOR, u(5 / 8, 1 / 4, 1 / 4, 1 / 2), nil, nil, visible = true },
         }
         local laptop = {
-            { "Firefox",  nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
+            { "Firefox", nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
             { "Obsidian", nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
             { "Calendar", nil, LAPTOP_MONITOR, u(0, 0, 1, 1), nil, nil, visible = true },
         }
