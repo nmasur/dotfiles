@@ -34,6 +34,7 @@ inputs.darwin.lib.darwinSystem {
         dark = true;
       };
       mail.user = globals.user;
+      mole.enable = true;
       atuin.enable = true;
       charm.enable = true;
       neovim.enable = true;

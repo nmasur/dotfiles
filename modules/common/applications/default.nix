@@ -8,6 +8,7 @@
     ./firefox.nix
     ./kitty.nix
     ./media.nix
+    ./mole.nix
     ./obsidian.nix
     ./qbittorrent.nix
     ./slack.nix
