@@ -2321,7 +2321,7 @@ in
                       datasourceUid = promUid;
                       model = {
                         editorMode = "code";
-                        expr = ''systemd_unit_state{name=~"cloudflared-tunnel-.*", state="active"}'';
+                        expr = ''systemd_unit_state{name=~"cloudflared-tunnel-.*", state="active", job!="tempest"}'';
                         hide = false;
                         instant = true;
                         intervalMs = 1000;
