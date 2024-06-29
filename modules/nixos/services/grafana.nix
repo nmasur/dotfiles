@@ -2418,7 +2418,7 @@ in
                   execErrState = "Error";
                   for = "5m";
                   annotations = {
-                    description = "Cloudflare Tunnel for {{ $job }}.";
+                    description = "Cloudflare Tunnel for {{ index $labels \"job\" }}.";
                     summary = "Cloudflare Tunnel is down.";
                   };
                   isPaused = false;
