@@ -127,6 +127,10 @@
       url = "github:mfussenegger/nvim-lint";
       flake = false;
     };
+    markview-nvim-src = {
+      url = "github:OXY2DEV/markview.nvim";
+      flake = false;
+    };
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {

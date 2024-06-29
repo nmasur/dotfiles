@@ -10,7 +10,7 @@
     pkgs.vimPlugins.vim-eunuch # File manipulation commands
     pkgs.vimPlugins.vim-fugitive # Git commands
     pkgs.vimPlugins.vim-repeat # Better repeat using .
-    pkgs.vimPlugins.glow-nvim # Markdown preview popup
+    pkgs.vimPlugins.markview-nvim # Markdown preview
     pkgs.vimPlugins.nvim-colorizer-lua # Hex color previews
     pkgs.vimPlugins.which-key-nvim # Keybind helper
   ];
@@ -21,7 +21,7 @@
       names = false;
     };
   };
-  setup.glow = { };
+  setup.markview = { };
   setup.which-key = { };
 
   vim.o = {

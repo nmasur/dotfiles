@@ -304,6 +304,22 @@
         "type": "github"
       }
     },
+    "markview-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719592662,
+        "narHash": "sha256-E1lHSjbnOOIeieaFJ+INvxJHCbfVS3mwbQ6wrlKeGSQ=",
+        "owner": "OXY2DEV",
+        "repo": "markview.nvim",
+        "rev": "f60219dce7283192d549f21847fcf8537bf6d260",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OXY2DEV",
+        "repo": "markview.nvim",
+        "type": "github"
+      }
+    },
     "nextcloud-cookbook": {
       "flake": false,
       "locked": {
@@ -570,6 +586,7 @@
         "hmts-nvim-src": "hmts-nvim-src",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
+        "markview-nvim-src": "markview-nvim-src",
         "nextcloud-cookbook": "nextcloud-cookbook",
         "nextcloud-external": "nextcloud-external",
         "nextcloud-news": "nextcloud-news",
