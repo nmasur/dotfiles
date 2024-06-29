@@ -14,11 +14,6 @@
     open_mapping = dsl.rawLua "[[<c-\\>]]";
     hide_numbers = true;
     direction = "float";
-    float_opts = {
-      width = dsl.rawLua "vim.o.columns - 4";
-      height = dsl.rawLua "vim.o.lines - 4";
-      row = 0;
-    };
   };
 
   lua = ''
