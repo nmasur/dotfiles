@@ -38,6 +38,10 @@ in
 
   config = {
 
+    services.victoriametrics.extraOptions = [
+      "-promscrape.config=${(pkgs.formats.yaml { }).generate "scrape.yml" prometheusConfig}"
+    ];
+
     systemd.services.vmauth = lib.mkIf config.services.victoriametrics.enable {
       description = "VictoriaMetrics basic auth proxy";
       after = [ "network.target" ];
