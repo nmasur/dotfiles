@@ -34,10 +34,13 @@
       programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux (lib.mkDefault "${pkgs.kitty}/bin/kitty");
 
       # Display images in the terminal
-      programs.fish.shellAliases = {
-        icat = "kitty +kitten icat";
-        ssh = "kitty +kitten ssh";
-      };
+      programs.fish.interactiveShellInit = # fish
+        ''
+          if test "$TERM" = "xterm-kitty"
+              alias icat="kitty +kitten icat"
+              alias ssh="kitty +kitten ssh"
+          end
+        '';
 
       programs.kitty = {
         enable = true;
