@@ -888,6 +888,28 @@ in
                           {
                             matcher = {
                               id = "byName";
+                              options = "localhost:8086";
+                            };
+                            properties = [
+                              {
+                                id = "displayName";
+                                value = "InfluxDB";
+                              }
+                              {
+                                id = "links";
+                                value = [
+                                  {
+                                    targetBlank = true;
+                                    title = "";
+                                    url = "https://${config.hostnames.influxdb}";
+                                  }
+                                ];
+                              }
+                            ];
+                          }
+                          {
+                            matcher = {
+                              id = "byName";
                               options = "localhost:8096";
                             };
                             properties = [
@@ -924,6 +946,28 @@ in
                                     targetBlank = true;
                                     title = "";
                                     url = "https://${config.hostnames.download}/sonarr";
+                                  }
+                                ];
+                              }
+                            ];
+                          }
+                          {
+                            matcher = {
+                              id = "byName";
+                              options = "localhost:9000";
+                            };
+                            properties = [
+                              {
+                                id = "displayName";
+                                value = "The Lounge";
+                              }
+                              {
+                                id = "links";
+                                value = [
+                                  {
+                                    targetBlank = true;
+                                    title = "";
+                                    url = "https://${config.hostnames.irc}";
                                   }
                                 ];
                               }
