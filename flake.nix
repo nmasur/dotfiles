@@ -199,7 +199,6 @@
       # https://snappymail.eu/repository/nextcloud
       url = "https://snappymail.eu/repository/nextcloud/snappymail-2.36.3-nextcloud.tar.gz";
       flake = false;
-      sha256 = "kalsjdfsdf";
     };
   };
 
