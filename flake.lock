@@ -323,52 +323,53 @@
     "nextcloud-cookbook": {
       "flake": false,
       "locked": {
-        "lastModified": 1702545935,
-        "narHash": "sha256-19LN1nYJJ0RMWj6DrYPvHzocTyhMfYdpdhBFch3fpHE=",
+        "lastModified": 1719431638,
+        "narHash": "sha256-a8ekMnEzudHGiqHF53jPtgsVTOTc2QLuPg6YtTw5h68=",
         "type": "tarball",
-        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz"
+        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.1/cookbook-0.11.1.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz"
+        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.1/cookbook-0.11.1.tar.gz"
       }
     },
     "nextcloud-external": {
       "flake": false,
       "locked": {
-        "lastModified": 1699624334,
-        "narHash": "sha256-RCL2RP5twRDLxI/KfAX6QLYQOzqZmSWsfrC5ZQIwTD4=",
+        "lastModified": 1710338675,
+        "narHash": "sha256-bJJ/dVmE1o04QCyrxD0sko0okRsnxJmT6sOTOmBiifs=",
         "type": "tarball",
-        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz"
+        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.4.0/external-v5.4.0.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz"
+        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.4.0/external-v5.4.0.tar.gz"
       }
     },
     "nextcloud-news": {
       "flake": false,
       "locked": {
-        "lastModified": 1703426420,
-        "narHash": "sha256-AENBJH/bEob5JQvw4WEi864mdLYJ5Mqe78HJH6ceCpI=",
+        "lastModified": 1718102703,
+        "narHash": "sha256-XNGjf7SWgJYFdVNOh3ED0jxSG0GJwWImVQq4cJT1Lo4=",
         "type": "tarball",
-        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz"
+        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha7/news.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz"
+        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha7/news.tar.gz"
       }
     },
     "nextcloud-snappymail": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-7oJEJ6t6iS/pcnSHashf1AkOEf+gKizpQHBy9XwY4Yo=",
-        "type": "file",
-        "url": "https://github.com/nmasur/snappymail-nextcloud/releases/download/v2.36.1/snappymail-2.36.1-nextcloud.tar.gz"
+        "lastModified": 1719667523,
+        "narHash": "sha256-1bPStkTKgVCc/puq0G7EiEZy/xrNlNXaO/tiOaZ/Ovw=",
+        "type": "tarball",
+        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.36.3-nextcloud.tar.gz"
       },
       "original": {
-        "type": "file",
-        "url": "https://github.com/nmasur/snappymail-nextcloud/releases/download/v2.36.1/snappymail-2.36.1-nextcloud.tar.gz"
+        "type": "tarball",
+        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.36.3-nextcloud.tar.gz"
       }
     },
     "nix2vim": {

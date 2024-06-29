@@ -181,24 +181,25 @@
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
-      url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha3/news.tar.gz";
+      url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha7/news.tar.gz";
       flake = false;
     };
     nextcloud-external = {
       # https://github.com/nextcloud-releases/external/releases
-      url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
+      url = "https://github.com/nextcloud-releases/external/releases/download/v5.4.0/external-v5.4.0.tar.gz";
       flake = false;
     };
     nextcloud-cookbook = {
       # https://github.com/christianlupus-nextcloud/cookbook-releases/releases/
-      url = "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.0/cookbook-0.11.0.tar.gz";
+      url = "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.1/cookbook-0.11.1.tar.gz";
       flake = false;
     };
     nextcloud-snappymail = {
       # https://github.com/the-djmaze/snappymail/releases
       # https://snappymail.eu/repository/nextcloud
-      url = "file+https://github.com/nmasur/snappymail-nextcloud/releases/download/v2.36.1/snappymail-2.36.1-nextcloud.tar.gz";
+      url = "https://snappymail.eu/repository/nextcloud/snappymail-2.36.3-nextcloud.tar.gz";
       flake = false;
+      sha256 = "kalsjdfsdf";
     };
   };
 

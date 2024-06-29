@@ -26,6 +26,8 @@
         trusted_domains = [ config.hostnames.content ];
         trusted_proxies = [ "127.0.0.1" ];
         maintenance_window_start = 4; # Run jobs at 4am UTC
+        log_type = "file";
+        loglevel = 1; # Include all actions in the log
       };
       extraAppsEnable = true;
       extraApps = {
