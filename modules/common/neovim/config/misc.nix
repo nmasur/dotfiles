@@ -57,8 +57,8 @@
 
   # Better backup, swap and undo storage
   vim.o.backup = true; # Easier to recover and more secure
-  vim.bo.swapfile = false; # Instead of swaps, create backups
-  vim.bo.undofile = true; # Keeps undos after quit
+  vim.opt.undofile = true; # Keeps undos after quit
+  vim.opt.swapfile = false; # Instead of swaps, create backups
   vim.o.backupdir = dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/backup//")'';
   vim.o.undodir = dsl.rawLua ''vim.fn.expand("~/.local/state/nvim/undo//")'';
 
