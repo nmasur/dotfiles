@@ -91,8 +91,16 @@
       );
     };
 
-    # Allows Caddy to serve lower ports (443, 80)
-    systemd.services.caddy.serviceConfig.AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+    systemd.services.caddy.serviceConfig = {
+
+      # Allows Caddy to serve lower ports (443, 80)
+      AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+
+      # Prevent flooding of logs by rate-limiting
+      LogRateLimitIntervalSec = "5s"; # Limit period
+      LogRateLimitBurst = 100; # Limit threshold
+
+    };
 
     # Required for web traffic to reach this machine
     networking.firewall.allowedTCPPorts = [
