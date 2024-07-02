@@ -33,6 +33,7 @@
       pkgs.noti # Create notifications programmatically
       pkgs.ipcalc # Make IP network calculations
       pkgs.teams
+      pkgs.cloudflared # Allow connecting to Cloudflare tunnels
       (pkgs.writeShellApplication {
         name = "ocr";
         runtimeInputs = [ pkgs.tesseract ];
