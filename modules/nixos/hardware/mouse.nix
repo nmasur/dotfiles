@@ -21,5 +21,15 @@
       accelProfile = "flat";
       accelSpeed = "1.15";
     };
+
+    # Cursor
+    home-manager.users.${config.user}.home.pointerCursor = {
+      name = "Adwaita";
+      package = pkgs.gnome3.adwaita-icon-theme;
+      size = 24;
+      gtk.enable = true;
+      x11.enable = true;
+    };
+
   };
 }
