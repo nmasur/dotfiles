@@ -603,6 +603,7 @@
         "nvim-treesitter-src": "nvim-treesitter-src",
         "ren": "ren",
         "rep": "rep",
+        "stu": "stu",
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
         "toggleterm-nvim-src": "toggleterm-nvim-src",
@@ -616,6 +617,22 @@
         "wallpapers": "wallpapers",
         "wsl": "wsl",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
+      }
+    },
+    "stu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720424134,
+        "narHash": "sha256-c6nLQOhwztwnUfKLx69Le9pCHE0GtruqKMnvYpGyr+0=",
+        "owner": "lusingander",
+        "repo": "stu",
+        "rev": "279edc8d63c04b42773434bf8c6f2744a66d71a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lusingander",
+        "repo": "stu",
+        "type": "github"
       }
     },
     "systems": {

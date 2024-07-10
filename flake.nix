@@ -178,6 +178,12 @@
       flake = false;
     };
 
+    # Stu - TUI for S3
+    stu = {
+      url = "github:lusingander/stu";
+      flake = false;
+    };
+
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
@@ -253,6 +259,7 @@
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/gh-collaborators.nix)
         (import ./overlays/ren-rep.nix inputs)
+        (import ./overlays/stu.nix inputs)
       ];
 
       # System types to support.
