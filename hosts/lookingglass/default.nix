@@ -53,6 +53,7 @@ inputs.darwin.lib.darwinSystem {
       _1password.enable = true;
       slack.enable = true;
       wezterm.enable = true;
+      yt-dlp.enable = true;
     }
   ];
 }

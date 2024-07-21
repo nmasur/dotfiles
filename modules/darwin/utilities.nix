@@ -19,7 +19,6 @@
       pkgs.visidata # CSV inspector
       pkgs.dos2unix # Convert Windows text files
       pkgs.inetutils # Includes telnet
-      pkgs.youtube-dl # Convert web videos
       pkgs.pandoc # Convert text documents
       pkgs.mpd # TUI slideshows
       pkgs.mpv # Video player
