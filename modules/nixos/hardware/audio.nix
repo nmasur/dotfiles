@@ -36,8 +36,6 @@ in
 {
 
   config = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
-    sound.enable = true;
-
     # Enable PipeWire
     services.pipewire = {
       enable = true;
