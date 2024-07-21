@@ -24,7 +24,7 @@ jobs:
       - name: Add Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v6
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v21
+        uses: DeterminateSystems/update-flake-lock@v23
         id: update
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
