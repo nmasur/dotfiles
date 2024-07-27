@@ -6,14 +6,15 @@ BUCKET_NAME_PART_1="t2"
 BUCKET_NAME_PART_2="global"
 BUCKET_NAME_PART_3="terraformstate"
 
-WORKFLOW_FILE=".github/workflows/terraform.yml"
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+WORKFLOW_FILE="${PROJECT_ROOT}/.github/workflows/terraform.yml"
 
-if [ ! -f $WORKFLOW_FILE ]; then
-    WORKFLOW_FILE=".github/workflows/apply.yml"
+if [ ! -f "$WORKFLOW_FILE" ]; then
+    WORKFLOW_FILE="${PROJECT_ROOT}/.github/workflows/apply.yml"
 fi
 
 AWS_ACCOUNT_NUMBER=$(
-    awk '/aws_account_number: .*/ {print $2}' $WORKFLOW_FILE | # Grab account number
+    awk '/aws_account_number: .*/ {print $2}' "$WORKFLOW_FILE" | # Grab account number
         echo "$(
             read -r s
             s=${s//\'/}
@@ -23,7 +24,7 @@ AWS_ACCOUNT_NUMBER=$(
 
 if [ -z "${AWS_ACCOUNT_NUMBER}" ]; then
     AWS_ACCOUNT_NUMBER=$(
-        awk '/AWS_ACCOUNT_NUMBER: .*/ {print $2}' $WORKFLOW_FILE | # Grab account number
+        awk '/AWS_ACCOUNT_NUMBER: .*/ {print $2}' "$WORKFLOW_FILE" | # Grab account number
             echo "$(
                 read -r s
                 s=${s//\'/}
