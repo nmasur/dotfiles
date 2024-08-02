@@ -25,7 +25,7 @@
     # Cursor
     home-manager.users.${config.user}.home.pointerCursor = {
       name = "Adwaita";
-      package = pkgs.gnome3.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       size = 24;
       gtk.enable = true;
       x11.enable = true;
