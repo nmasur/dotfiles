@@ -71,6 +71,9 @@
           files = {
             excludeDirs = [ ".direnv" ];
           };
+          cargo = {
+            features = "all";
+          };
         };
       };
     };
