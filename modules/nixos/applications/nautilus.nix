@@ -20,7 +20,7 @@
 
     # Quick preview with spacebar
     services.gnome.sushi.enable = true;
-    environment.systemPackages = [ pkgs.gnome.nautilus ];
+    environment.systemPackages = [ pkgs.nautilus ];
 
     home-manager.users.${config.user} = {
 
@@ -28,13 +28,13 @@
       xsession.windowManager.i3.config.keybindings = {
         "${
           config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
-        }+n" = "exec --no-startup-id ${pkgs.gnome.nautilus}/bin/nautilus";
+        }+n" = "exec --no-startup-id ${pkgs.nautilus}/bin/nautilus";
       };
 
       # Generates a QR code and previews it with sushi
       programs.fish.functions = {
         qr = {
-          body = "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | ${pkgs.gnome.sushi}/bin/sushi /tmp/qr.png";
+          body = "${pkgs.qrencode}/bin/qrencode $argv[1] -o /tmp/qr.png | ${pkgs.sushi}/bin/sushi /tmp/qr.png";
         };
       };
 
