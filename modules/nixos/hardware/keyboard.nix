@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 {
 
   config = lib.mkIf config.physical {
@@ -17,23 +12,29 @@
       autoRepeatInterval = 40;
     };
 
-    # Use capslock as escape and/or control
-    services.keyd = {
+    # Swap Caps-Lock with Escape when pressed or LCtrl when held/combined with others
+    # Inspired by: https://www.youtube.com/watch?v=XuQVbZ0wENE
+    services.kanata = {
       enable = true;
-      keyboards = {
-        default = {
-          ids = [ "*" ];
-          settings = {
-            main = {
-              capslock = "overload(control, esc)";
-            };
-          };
-        };
+      keyboards.default = {
+        devices = [
+          "/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-event-kbd"
+          "/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-if01-event-kbd"
+        ];
+        extraDefCfg = "process-unmapped-keys yes";
+        config = ''
+          (defsrc
+              caps
+          )
+          (defalias
+              escctrl (tap-hold-press 1000 1000 esc lctrl)
+          )
+          (deflayer base
+              @escctrl
+          )
+        '';
       };
     };
-
-    # For some reason, keyd doesn't restart properly when updating
-    system.activationScripts.keyd.text = "${pkgs.systemd}/bin/systemctl restart keyd.service";
 
     # Enable num lock on login
     home-manager.users.${config.user}.xsession.numlock.enable = true;
