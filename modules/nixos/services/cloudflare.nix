@@ -116,6 +116,9 @@ in
       [ "127.0.0.1" ] ++ cloudflareIpRanges
     );
 
+    # Using dyn-dns instead of ddclient because I can't find a way to choose
+    # between proxied and non-proxied records for Cloudflare using just
+    # ddclient.
     services.cloudflare-dyndns =
       lib.mkIf ((builtins.length config.services.cloudflare-dyndns.domains) > 0)
         {
