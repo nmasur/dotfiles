@@ -118,6 +118,7 @@ inputs.nixpkgs.lib.nixosSystem {
         dwarf-fortress.enable = true;
         enable = true;
         steam.enable = true;
+        moonlight.enable = true;
         legendary.enable = true;
         lutris.enable = true;
         ryujinx.enable = true;
