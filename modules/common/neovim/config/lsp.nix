@@ -19,9 +19,11 @@
       pkgs.vimPlugins.fidget-nvim
       pkgs.vimPlugins.nvim-lint
       pkgs.vimPlugins.vim-table-mode
+      pkgs.vimPlugins.tiny-inline-diagnostic-nvim
     ];
 
     setup.fidget = { };
+    setup.tiny-inline-diagnostic = { };
 
     use.lspconfig.lua_ls.setup = dsl.callWith {
       settings = {
@@ -136,6 +138,9 @@
 
       -- Prevent infinite log size (change this when debugging)
       vim.lsp.set_log_level("off")
+
+      -- Hide buffer diagnostics (use tiny-inline-diagnostic.nvim instead)
+      vim.diagnostic.config({ virtual_text = false })
     '';
   };
 }

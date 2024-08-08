@@ -131,6 +131,10 @@
       url = "github:OXY2DEV/markview.nvim";
       flake = false;
     };
+    tiny-inline-diagnostic-nvim-src = {
+      url = "github:rachartier/tiny-inline-diagnostic.nvim";
+      flake = false;
+    };
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {

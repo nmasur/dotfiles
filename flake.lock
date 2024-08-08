@@ -606,6 +606,7 @@
         "stu": "stu",
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
+        "tiny-inline-diagnostic-nvim-src": "tiny-inline-diagnostic-nvim-src",
         "toggleterm-nvim-src": "toggleterm-nvim-src",
         "tree-sitter-bash": "tree-sitter-bash",
         "tree-sitter-ini": "tree-sitter-ini",
@@ -710,6 +711,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope-project.nvim",
+        "type": "github"
+      }
+    },
+    "tiny-inline-diagnostic-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722199694,
+        "narHash": "sha256-GyJANobsPKFAJJLxb3bANKjOSGGwX0xmm9HkwBzkPuE=",
+        "owner": "rachartier",
+        "repo": "tiny-inline-diagnostic.nvim",
+        "rev": "ca50af9dc3cd88647077330b4728f4d0a7e754c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rachartier",
+        "repo": "tiny-inline-diagnostic.nvim",
         "type": "github"
       }
     },
