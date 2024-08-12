@@ -135,6 +135,10 @@
       url = "github:rachartier/tiny-inline-diagnostic.nvim";
       flake = false;
     };
+    snipe-nvim-src = {
+      url = "github:leath-dub/snipe.nvim";
+      flake = false;
+    };
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {

@@ -603,6 +603,7 @@
         "nvim-treesitter-src": "nvim-treesitter-src",
         "ren": "ren",
         "rep": "rep",
+        "snipe-nvim-src": "snipe-nvim-src",
         "stu": "stu",
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
@@ -618,6 +619,22 @@
         "wallpapers": "wallpapers",
         "wsl": "wsl",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
+      }
+    },
+    "snipe-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722790509,
+        "narHash": "sha256-DhJ2ss0p64mpaVo9rri72pEoaWbOOL05klM9AydnqJk=",
+        "owner": "leath-dub",
+        "repo": "snipe.nvim",
+        "rev": "854a47c970413405361487c13e2b1e9aa9a3696e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leath-dub",
+        "repo": "snipe.nvim",
+        "type": "github"
       }
     },
     "stu": {

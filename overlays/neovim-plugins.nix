@@ -40,5 +40,6 @@ in
     hmts-nvim = plugin "hmts-nvim" inputs.hmts-nvim-src;
     markview-nvim = plugin "markview-nvim" inputs.markview-nvim-src;
     tiny-inline-diagnostic-nvim = plugin "tiny-inline-diagnostic-nvim" inputs.tiny-inline-diagnostic-nvim-src;
+    snipe-nvim = plugin "snipe-nvim" inputs.snipe-nvim-src;
   };
 }
