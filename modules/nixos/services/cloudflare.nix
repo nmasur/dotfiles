@@ -78,6 +78,7 @@ in
         issuers = [
           {
             module = "acme";
+            email = "acme@${config.mail.server}";
             challenges = {
               dns = {
                 provider = {
