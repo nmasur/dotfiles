@@ -79,6 +79,7 @@ in
           {
             module = "acme";
             email = "acme@${config.mail.server}";
+            account_key = "{env.ACME_ACCOUNT_KEY}";
             challenges = {
               dns = {
                 provider = {
@@ -93,7 +94,18 @@ in
       }
     ];
     # Allow Caddy to read Cloudflare API key for DNS validation
-    systemd.services.caddy.serviceConfig.EnvironmentFile = config.secrets.cloudflare-api.dest;
+    systemd.services.caddy.serviceConfig.EnvironmentFile = [
+      config.secrets.cloudflare-api.dest
+      config.secrets.letsencrypt-key.dest
+    ];
+
+    # Private key is used for LetsEncrypt
+    secrets.letsencrypt-key = {
+      source = ../../../private/letsencrypt-key.age;
+      dest = "${config.secretsDirectory}/letsencrypt-key";
+      owner = "caddy";
+      group = "caddy";
+    };
 
     # API key must have access to modify Cloudflare DNS records
     secrets.cloudflare-api = {
@@ -105,8 +117,14 @@ in
 
     # Wait for secret to exist
     systemd.services.caddy = {
-      after = [ "cloudflare-api-secret.service" ];
-      requires = [ "cloudflare-api-secret.service" ];
+      after = [
+        "cloudflare-api-secret.service"
+        "letsencrypt-key-secret.service"
+      ];
+      requires = [
+        "cloudflare-api-secret.service"
+        "letsencrypt-key-secret.service"
+      ];
     };
 
     # Allows Nextcloud to trust Cloudflare IPs
