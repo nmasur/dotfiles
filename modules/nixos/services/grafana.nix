@@ -1083,6 +1083,28 @@ in
                               }
                             ];
                           }
+                          {
+                            matcher = {
+                              id = "byName";
+                              options = "localhost:${builtins.toString config.services.paperless.port}";
+                            };
+                            properties = [
+                              {
+                                id = "displayName";
+                                value = "Paperless";
+                              }
+                              {
+                                id = "links";
+                                value = [
+                                  {
+                                    targetBlank = true;
+                                    title = "";
+                                    url = "https://${config.hostnames.paperless}";
+                                  }
+                                ];
+                              }
+                            ];
+                          }
                         ];
                       };
                       gridPos = {
