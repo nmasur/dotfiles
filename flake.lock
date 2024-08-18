@@ -362,14 +362,14 @@
     "nextcloud-snappymail": {
       "flake": false,
       "locked": {
-        "lastModified": 1723347706,
-        "narHash": "sha256-HlqO7xlMSRGgBtwi0t5oz5v7iw0zTSHysc9wGVRwGZI=",
+        "lastModified": 1724017617,
+        "narHash": "sha256-WwCRAZzxYWUpOy6iVTDpVIr/DrkJkQGjgIdVWNfCH3Q=",
         "type": "tarball",
-        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.36.4-nextcloud.tar.gz"
+        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.37.2-nextcloud.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.36.4-nextcloud.tar.gz"
+        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.37.2-nextcloud.tar.gz"
       }
     },
     "nix2vim": {
