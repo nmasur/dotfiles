@@ -58,38 +58,129 @@
       }
     ];
 
-    services.caddy = {
-      adapter = "''"; # Required to enable JSON
-      configFile = pkgs.writeText "Caddyfile" (
-        builtins.toJSON {
-          apps.http.servers.main = {
-            listen = [ ":443" ];
+    services.caddy =
+      let
+        default_logger_name = "other";
+        roll_size_mb = 10;
+        # Extract list of hostnames (fqdns) from current caddy routes
+        getHostnameFromMatch = match: if (lib.hasAttr "host" match) then match.host else [ ];
+        getHostnameFromRoute =
+          route:
+          if (lib.hasAttr "match" route) then (lib.concatMap getHostnameFromMatch route.match) else [ ];
+        hostnames_non_unique = lib.concatMap getHostnameFromRoute config.caddy.routes;
+        hostnames = lib.unique hostnames_non_unique;
+        # Create attrset of subdomains to their fqdns
+        hostname_map = builtins.listToAttrs (
+          map (hostname: {
+            name = builtins.head (lib.splitString "." hostname);
+            value = hostname;
+          }) hostnames
+        );
+      in
+      {
+        adapter = "''"; # Required to enable JSON
+        configFile = pkgs.writeText "Caddyfile" (
+          builtins.toJSON {
+            apps.http.servers.main = {
+              listen = [ ":443" ];
 
-            # These routes are pulled from the rest of this repo
-            routes = config.caddy.routes;
-            errors.routes = config.caddy.blocks;
+              # These routes are pulled from the rest of this repo
+              routes = config.caddy.routes;
+              errors.routes = config.caddy.blocks;
 
-            logs = { }; # Uncommenting collects access logs
-          };
-          apps.http.servers.metrics = { }; # Enables Prometheus metrics
-          apps.tls.automation.policies = config.caddy.tlsPolicies;
-
-          # Setup logging to file
-          logging.logs.main = {
-            encoder = {
-              format = "console";
+              # Uncommenting collects access logs
+              logs = {
+                inherit default_logger_name;
+                # Invert hostnames keys and values
+                logger_names = lib.mapAttrs' (name: value: {
+                  name = value;
+                  value = name;
+                }) hostname_map;
+              };
             };
-            writer = {
-              output = "file";
-              filename = "${config.services.caddy.logDir}/caddy.log";
-              roll = true;
-              roll_size_mb = 1;
-            };
-            level = "INFO";
-          };
-        }
-      );
-    };
+            apps.http.servers.metrics = { }; # Enables Prometheus metrics
+            apps.tls.automation.policies = config.caddy.tlsPolicies;
+
+            # Setup logging to journal and files
+            logging.logs =
+              {
+                # System logs and catch-all
+                # Must be called `default` to override Caddy's built-in default logger
+                default = {
+                  level = "INFO";
+                  encoder.format = "console";
+                  writer = {
+                    output = "stderr";
+                  };
+                  exclude = map (hostname: "http.log.access.${hostname}") (builtins.attrNames hostname_map);
+                };
+                # This is for the default access logs (anything not captured by hostname)
+                other = {
+                  level = "INFO";
+                  encoder.format = "json";
+                  writer = {
+                    output = "file";
+                    filename = "${config.services.caddy.logDir}/other.log";
+                    roll = true;
+                    inherit roll_size_mb;
+                  };
+                  include = [ "http.log.access.${default_logger_name}" ];
+                };
+                # This is for using the Caddy API, which will probably never happen
+                admin = {
+                  level = "INFO";
+                  encoder.format = "json";
+                  writer = {
+                    output = "file";
+                    filename = "${config.services.caddy.logDir}/admin.log";
+                    roll = true;
+                    inherit roll_size_mb;
+                  };
+                  include = [ "admin.api" ];
+                };
+                # This is for debugging
+                debug = {
+                  level = "DEBUG";
+                  encoder.format = "console";
+                  writer = {
+                    output = "file";
+                    filename = "${config.services.caddy.logDir}/debug.log";
+                    roll = true;
+                    roll_keep = 1;
+                    inherit roll_size_mb;
+                  };
+                };
+              }
+              # These are the access logs for individual hostnames
+              // (lib.mapAttrs (name: value: {
+                level = "INFO";
+                encoder.format = "json";
+                writer = {
+                  output = "file";
+                  filename = "${config.services.caddy.logDir}/${name}-access.log";
+                  roll = true;
+                  inherit roll_size_mb;
+                };
+                include = [ "http.log.access.${name}" ];
+              }) hostname_map)
+              # We also capture just the errors separately for easy debugging
+              // (lib.mapAttrs' (name: value: {
+                name = "${name}-error";
+                value = {
+                  level = "ERROR";
+                  encoder.format = "json";
+                  writer = {
+                    output = "file";
+                    filename = "${config.services.caddy.logDir}/${name}-error.log";
+                    roll = true;
+                    inherit roll_size_mb;
+                  };
+                  include = [ "http.log.access.${name}" ];
+                };
+              }) hostname_map);
+          }
+        );
+      };
 
     systemd.services.caddy.serviceConfig = {
 
