@@ -42,7 +42,7 @@
             module-margin = 1;
             modules-left = "i3";
             modules-center = "xwindow";
-            modules-right = "mailcount network pulseaudio date keyboard power";
+            modules-right = "mailcount network pulseaudio date power";
             cursor-click = "pointer";
             cursor-scroll = "ns-resize";
             enable-ipc = true;
