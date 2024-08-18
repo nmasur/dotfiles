@@ -7,6 +7,9 @@
     # Used for system packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Used for specific stable packages
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+
     # Used for caddy plugins
     nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
 
@@ -338,6 +341,7 @@
             system = "x86_64-linux";
             format = "iso";
             specialArgs = {
+              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
               pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
             };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
@@ -346,6 +350,7 @@
             system = "x86_64-linux";
             format = "amazon";
             specialArgs = {
+              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
               pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
             };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [

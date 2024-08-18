@@ -11,6 +11,7 @@
 inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
   specialArgs = {
+    pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
     pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
   };
   modules = [
