@@ -169,7 +169,7 @@
                   -- super-t open new tab in new dir
                   {
                     key = 't',
-                    mods = 'SUPER',
+                    mods = ${if pkgs.stdenv.isDarwin then "'SUPER'" else "'ALT'"},
                     action = wezterm.action.SpawnCommandInNewTab {
                       cwd = wezterm.home_dir,
                     },
