@@ -105,6 +105,7 @@
         s = "sudo";
         sc = "systemctl";
         scs = "systemctl status";
+        sca = "systemctl cat";
         m = "make";
         t = "trash";
 
