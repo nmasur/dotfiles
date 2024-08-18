@@ -259,7 +259,6 @@
         inputs.nur.overlay
         inputs.nix2vim.overlay
         (import ./overlays/neovim-plugins.nix inputs)
-        (import ./overlays/calibre-web.nix)
         (import ./overlays/disko.nix inputs)
         (import ./overlays/tree-sitter.nix inputs)
         (import ./overlays/mpv-scripts.nix inputs)
