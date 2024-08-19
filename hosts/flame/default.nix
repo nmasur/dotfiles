@@ -80,6 +80,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       services.gitea.enable = true;
       services.vaultwarden.enable = true;
       services.minecraft-server.enable = true; # Setup Minecraft server
+      services.n8n.enable = true;
       system.autoUpgrade.enable = true;
 
       # Allows private remote access over the internet
