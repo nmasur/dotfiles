@@ -669,7 +669,7 @@ in
                           };
                           editorMode = "code";
                           exemplar = false;
-                          "expr" = ''increase(zfs_dataset_used_bytes{name="tank"}[1d])'';
+                          "expr" = ''delta(zfs_dataset_used_bytes{name="tank"}[1d])'';
                           hide = false;
                           instant = false;
                           interval = "";
@@ -683,7 +683,7 @@ in
                             uid = promUid;
                           };
                           editorMode = "code";
-                          "expr" = ''increase(zfs_dataset_used_bytes{name="tank"}[7d])'';
+                          "expr" = ''delta(zfs_dataset_used_bytes{name="tank"}[7d])'';
                           hide = false;
                           legendFormat = "Past Week";
                           range = true;
@@ -695,7 +695,7 @@ in
                             uid = promUid;
                           };
                           editorMode = "code";
-                          "expr" = ''increase(zfs_dataset_used_bytes{name="tank"}[30d])'';
+                          "expr" = ''delta(zfs_dataset_used_bytes{name="tank"}[30d])'';
                           hide = false;
                           legendFormat = "Past Month";
                           range = true;
