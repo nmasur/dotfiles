@@ -46,7 +46,7 @@
 
     # Force Caddy to 403 if not coming from allowlisted source
     caddy.cidrAllowlist = [ "127.0.0.1/32" ];
-    caddy.routes = [
+    caddy.routes = lib.mkBefore [
       {
         match = [ { not = [ { remote_ip.ranges = config.caddy.cidrAllowlist; } ]; } ];
         handle = [
