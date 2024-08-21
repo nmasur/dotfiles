@@ -61,7 +61,7 @@
     services.caddy =
       let
         default_logger_name = "other";
-        roll_size_mb = 10;
+        roll_size_mb = 25;
         # Extract list of hostnames (fqdns) from current caddy routes
         getHostnameFromMatch = match: if (lib.hasAttr "host" match) then match.host else [ ];
         getHostnameFromRoute =
@@ -112,7 +112,9 @@
                   writer = {
                     output = "stderr";
                   };
-                  exclude = map (hostname: "http.log.access.${hostname}") (builtins.attrNames hostname_map);
+                  exclude = (map (hostname: "http.log.access.${hostname}") (builtins.attrNames hostname_map)) ++ [
+                    "http.log.access.${default_logger_name}"
+                  ];
                 };
                 # This is for the default access logs (anything not captured by hostname)
                 other = {
@@ -136,12 +138,24 @@
                     roll = true;
                     inherit roll_size_mb;
                   };
-                  include = [ "admin.api" ];
+                  include = [ "admin" ];
+                };
+                # This is for TLS cert management tracking
+                tls = {
+                  level = "INFO";
+                  encoder.format = "json";
+                  writer = {
+                    output = "file";
+                    filename = "${config.services.caddy.logDir}/tls.log";
+                    roll = true;
+                    inherit roll_size_mb;
+                  };
+                  include = [ "tls" ];
                 };
                 # This is for debugging
                 debug = {
                   level = "DEBUG";
-                  encoder.format = "console";
+                  encoder.format = "json";
                   writer = {
                     output = "file";
                     filename = "${config.services.caddy.logDir}/debug.log";
