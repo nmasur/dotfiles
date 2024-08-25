@@ -129,6 +129,10 @@
         type = lib.types.str;
         description = "Hostname for n8n automation.";
       };
+      notifications = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for push notification services (ntfy).";
+      };
       transmission = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for peer2peer downloads (Transmission).";

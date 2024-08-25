@@ -26,6 +26,7 @@
     ./n8n.nix
     ./netdata.nix
     ./nextcloud.nix
+    ./ntfy.nix
     ./paperless.nix
     ./postgresql.nix
     ./prometheus.nix
