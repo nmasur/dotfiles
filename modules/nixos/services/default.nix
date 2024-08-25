@@ -12,6 +12,7 @@
     ./calibre.nix
     ./cloudflare-tunnel.nix
     ./cloudflare.nix
+    ./filebrowser.nix
     ./identity.nix
     ./irc.nix
     ./gitea-runner.nix

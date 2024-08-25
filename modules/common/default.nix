@@ -77,6 +77,10 @@
       default = [ ];
     };
     hostnames = {
+      files = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for files server (Filebrowser).";
+      };
       git = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for git server (Gitea).";

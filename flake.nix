@@ -240,6 +240,7 @@
           mail.smtpHost = "smtp.purelymail.com";
           dotfilesRepo = "https://github.com/nmasur/dotfiles";
           hostnames = {
+            files = "files.${baseName}";
             git = "git.${baseName}";
             influxdb = "influxdb.${baseName}";
             irc = "irc.${baseName}";

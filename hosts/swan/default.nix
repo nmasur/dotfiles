@@ -97,6 +97,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       cloudflare.enable = true;
       dotfiles.enable = true;
       arrs.enable = true;
+      filebrowser.enable = true;
       services.bind.enable = true;
       services.caddy.enable = true;
       services.jellyfin.enable = true;
