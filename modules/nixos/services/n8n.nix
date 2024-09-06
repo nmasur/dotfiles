@@ -9,10 +9,16 @@
     unfreePackages = [ "n8n" ];
 
     services.n8n = {
+      webhookUrl = "https://${config.hostnames.n8n}";
       settings = {
         listen_address = "127.0.0.1";
         port = 5678;
+
       };
+    };
+
+    systemd.services.n8n.environment = {
+      N8N_EDITOR_BASE_URL = config.services.n8n.webhookUrl;
     };
 
     # Configure Cloudflare DNS to point to this machine
