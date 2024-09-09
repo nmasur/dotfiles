@@ -130,10 +130,6 @@
       url = "github:mfussenegger/nvim-lint";
       flake = false;
     };
-    markview-nvim-src = {
-      url = "github:OXY2DEV/markview.nvim";
-      flake = false;
-    };
     tiny-inline-diagnostic-nvim-src = {
       url = "github:rachartier/tiny-inline-diagnostic.nvim";
       flake = false;
@@ -186,12 +182,6 @@
     };
     ren = {
       url = "github:robenkleene/ren-find";
-      flake = false;
-    };
-
-    # Stu - TUI for S3
-    stu = {
-      url = "github:lusingander/stu";
       flake = false;
     };
 
@@ -271,7 +261,6 @@
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/gh-collaborators.nix)
         (import ./overlays/ren-rep.nix inputs)
-        (import ./overlays/stu.nix inputs)
       ];
 
       # System types to support.

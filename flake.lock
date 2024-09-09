@@ -145,11 +145,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725757047,
-        "narHash": "sha256-+0yo6mq+c83a/JgCoMC+VQo+08/mTrkGpy7iN0x5Zl0=",
+        "lastModified": 1725843309,
+        "narHash": "sha256-8TVcjmIfGM5Arxs9oBtdCTOojhjSQAofUSw7aCjjbnE=",
         "owner": "bandithedoge",
         "repo": "nixpkgs-firefox-darwin",
-        "rev": "863c7532c468f208ce8cb651e44f63408d548c3f",
+        "rev": "1770fbd40babfb807f258b70b7992eaf6d09a712",
         "type": "github"
       },
       "original": {
@@ -301,22 +301,6 @@
       "original": {
         "owner": "hraban",
         "repo": "mac-app-util",
-        "type": "github"
-      }
-    },
-    "markview-nvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1725563775,
-        "narHash": "sha256-nSboIBcB9nwfRiyK2y47/T3az0oIUHip1L4vB+iqUwg=",
-        "owner": "OXY2DEV",
-        "repo": "markview.nvim",
-        "rev": "e4b4b9d03b90350236ce88f5be723aa5a8610931",
-        "type": "github"
-      },
-      "original": {
-        "owner": "OXY2DEV",
-        "repo": "markview.nvim",
         "type": "github"
       }
     },
@@ -603,7 +587,6 @@
         "hmts-nvim-src": "hmts-nvim-src",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
-        "markview-nvim-src": "markview-nvim-src",
         "nextcloud-cookbook": "nextcloud-cookbook",
         "nextcloud-external": "nextcloud-external",
         "nextcloud-news": "nextcloud-news",
@@ -621,7 +604,6 @@
         "ren": "ren",
         "rep": "rep",
         "snipe-nvim-src": "snipe-nvim-src",
-        "stu": "stu",
         "telescope-nvim-src": "telescope-nvim-src",
         "telescope-project-nvim-src": "telescope-project-nvim-src",
         "tiny-inline-diagnostic-nvim-src": "tiny-inline-diagnostic-nvim-src",
@@ -651,22 +633,6 @@
       "original": {
         "owner": "leath-dub",
         "repo": "snipe.nvim",
-        "type": "github"
-      }
-    },
-    "stu": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1725751514,
-        "narHash": "sha256-J70RgnuNlChhdIl0j/pFnIfCV6d9JT+ifYPbRxkoIKU=",
-        "owner": "lusingander",
-        "repo": "stu",
-        "rev": "6899c43edc34aeea99b632ae18c793f040160a99",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lusingander",
-        "repo": "stu",
         "type": "github"
       }
     },
