@@ -10,6 +10,7 @@
     pkgs.vimPlugins.vim-eunuch # File manipulation commands
     pkgs.vimPlugins.vim-fugitive # Git commands
     pkgs.vimPlugins.vim-repeat # Better repeat using .
+    pkgs.vimPlugins.vim-abolish # Keep capitalization in substitute (Subvert)
     pkgs.vimPlugins.markview-nvim # Markdown preview
     pkgs.vimPlugins.nvim-colorizer-lua # Hex color previews
     pkgs.vimPlugins.which-key-nvim # Keybind helper
