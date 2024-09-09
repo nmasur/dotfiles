@@ -22,10 +22,9 @@
       "1password-cli"
     ];
     home-manager.users.${config.user} = {
-      home.packages = with pkgs; [
-        _1password-gui
-        _1password
-      ];
+      home.packages = [
+        pkgs._1password
+      ] ++ (if pkgs.stdenv.isLinux then [ pkgs._1password-gui ] else [ ]);
     };
 
     # https://1password.community/discussion/135462/firefox-extension-does-not-connect-to-linux-app
