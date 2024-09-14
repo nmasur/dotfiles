@@ -4,7 +4,7 @@
 
   config = lib.mkIf config.services.ntfy-sh.enable {
     services.ntfy-sh = {
-      settings = rec {
+      settings = {
         base-url = "https://${config.hostnames.notifications}";
         upstream-base-url = "https://ntfy.sh";
         listen-http = ":8333";

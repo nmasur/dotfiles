@@ -35,6 +35,7 @@
     ./secrets.nix
     ./sshd.nix
     ./transmission.nix
+    ./uptime-kuma.nix
     ./vaultwarden.nix
     ./victoriametrics.nix
     ./wireguard.nix

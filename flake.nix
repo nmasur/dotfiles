@@ -245,6 +245,7 @@
             content = "cloud.${baseName}";
             books = "books.${baseName}";
             download = "download.${baseName}";
+            status = "status.${baseName}";
             transmission = "transmission.${baseName}";
           };
         };
