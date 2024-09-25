@@ -91,7 +91,7 @@
     };
     nvim-treesitter-src = {
       # https://github.com/nvim-treesitter/nvim-treesitter/tags
-      url = "github:nvim-treesitter/nvim-treesitter/master";
+      url = "github:nvim-treesitter/nvim-treesitter/v0.9.2";
       flake = false;
     };
     telescope-nvim-src = {
@@ -105,7 +105,7 @@
     };
     toggleterm-nvim-src = {
       # https://github.com/akinsho/toggleterm.nvim/tags
-      url = "github:akinsho/toggleterm.nvim/v2.11.0";
+      url = "github:akinsho/toggleterm.nvim/v2.12.0";
       flake = false;
     };
     bufferline-nvim-src = {
