@@ -113,6 +113,7 @@ in
         gpd = "git push origin -d";
         gbd = "git branch -d";
         gbD = "git branch -D";
+        gdd = "git-delete-both";
         gr = "git reset";
         grh = "git reset --hard";
         gm = "git merge";
@@ -156,6 +157,13 @@ in
               body = ''
                 set branch (git-fuzzy-branch "force delete branch...")
                 and git branch -D $branch
+              '';
+            };
+            git-delete-both = {
+              argumentNames = "branch";
+              body = ''
+                git push origin -d $branch
+                git branch -d $branch
               '';
             };
             git-merge-fuzzy = {
