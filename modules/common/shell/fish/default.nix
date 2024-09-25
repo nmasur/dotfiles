@@ -76,6 +76,10 @@
           description = "Full git commit on notes";
           body = builtins.readFile ./functions/syncnotes.fish;
         };
+        _which = {
+          description = "Identify the path to a program in the shell";
+          body = "command --search (string sub --start=2 $argv)";
+        };
       };
       interactiveShellInit = ''
         fish_vi_key_bindings
@@ -100,6 +104,13 @@
         c = "cd";
         "-" = "cd -";
         mkd = "mkdir -pv";
+
+        # Convert a program into its full path
+        "=" = {
+          position = "anywhere";
+          regex = "=\\w+";
+          function = "_which";
+        };
 
         # System
         s = "sudo";
