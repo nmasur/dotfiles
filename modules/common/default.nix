@@ -137,6 +137,10 @@
         type = lib.types.str;
         description = "Hostname for push notification services (ntfy).";
       };
+      status = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for status page (Uptime-Kuma).";
+      };
       transmission = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for peer2peer downloads (Transmission).";

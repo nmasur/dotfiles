@@ -1,13 +1,6 @@
 { config, lib, ... }:
 {
 
-  options = {
-    hostnames.status = lib.mkOption {
-      type = lib.types.str;
-      description = "Hostname for status page (Uptime-Kuma).";
-    };
-  };
-
   config = lib.mkIf config.services.uptime-kuma.enable {
 
     services.uptime-kuma = {
