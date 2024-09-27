@@ -71,6 +71,8 @@
             "cookiebanners.ui.desktop.enabled" = true; # Reject cookie popups
             "devtools.command-button-screenshot.enabled" = true; # Scrolling screenshot of entire page
             "svg.context-properties.content.enabled" = true; # Sidebery styling
+            "browser.tabs.hoverPreview.enabled" = false; # Disable tab previews
+            "browser.tabs.hoverPreview.showThumbnails" = false; # Disable tab previews
           };
           userChrome = ''
             :root {
