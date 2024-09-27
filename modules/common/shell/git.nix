@@ -113,7 +113,11 @@ in
         gpd = "git push origin -d";
         gbd = "git branch -d";
         gbD = "git branch -D";
-        gdd = "git-delete-both";
+        gdd = {
+          position = "anywhere";
+          setCursor = true;
+          expansion = "BRANCH=% git push origin -d $BRANCH and git branch -d $BRANCH";
+        };
         gr = "git reset";
         grh = "git reset --hard";
         gm = "git merge";
