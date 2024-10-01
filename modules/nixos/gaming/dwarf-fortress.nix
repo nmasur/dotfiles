@@ -9,7 +9,10 @@
   options.gaming.dwarf-fortress.enable = lib.mkEnableOption "Dwarf Fortress free edition.";
 
   config = lib.mkIf config.gaming.dwarf-fortress.enable {
-    unfreePackages = [ "dwarf-fortress" ];
+    unfreePackages = [
+      "dwarf-fortress"
+      "phoebus-theme"
+    ];
     environment.systemPackages =
       let
         dfDesktopItem = pkgs.makeDesktopItem {
