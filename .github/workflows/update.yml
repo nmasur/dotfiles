@@ -3,7 +3,7 @@ name: Update Flake
 on:
   workflow_dispatch: # allows manual triggering
   schedule:
-    - cron: '33 3 * * 0' # runs weekly on Sunday at 03:33
+    - cron: '33 3 * * 6' # runs weekly on Saturday at 03:33
 
 permissions:
   contents: write
