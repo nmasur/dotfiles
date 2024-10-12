@@ -7,7 +7,7 @@
 
     services.samba = lib.mkIf config.services.samba.enable {
       openFirewall = true;
-      shares.data = {
+      settings.data = {
         path = "/data";
         browseable = "yes";
         "read only" = "no";
