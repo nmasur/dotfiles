@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
 
   options = {
@@ -8,7 +13,7 @@
   config = lib.mkIf (config.server && config.zfs.enable) {
 
     # Only use compatible Linux kernel, since ZFS can be behind
-    boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    boot.kernelPackages = pkgs.linuxPackages; # Defaults to latest LTS
     boot.kernelParams = [ "nohibernate" ];
     boot.supportedFilesystems = [ "zfs" ];
     services.prometheus.exporters.zfs.enable = config.prometheus.exporters.enable;
