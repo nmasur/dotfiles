@@ -14,6 +14,11 @@ let
       url = "localhost:7878";
       apiKey = config.secrets.radarrApiKey.dest;
     };
+    readarr = {
+      exportarrPort = "9711";
+      url = "localhost:8787";
+      apiKey = config.secrets.readarrApiKey.dest;
+    };
     sonarr = {
       exportarrPort = "9708";
       url = "localhost:8989";
@@ -58,6 +63,10 @@ in
         group = "media";
       };
       radarr = {
+        enable = true;
+        group = "media";
+      };
+      readarr = {
         enable = true;
         group = "media";
       };
@@ -107,6 +116,21 @@ in
           {
             handler = "reverse_proxy";
             upstreams = [ { dial = arrConfig.radarr.url; } ];
+          }
+        ];
+      }
+      {
+        group = "download";
+        match = [
+          {
+            host = [ config.hostnames.download ];
+            path = [ "/readarr*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = arrConfig.readarr.url; } ];
           }
         ];
       }
@@ -221,6 +245,11 @@ in
     secrets.radarrApiKey = {
       source = ../../../private/radarr-api-key.age;
       dest = "/var/private/radarr-api";
+      prefix = "API_KEY=";
+    };
+    secrets.readarrApiKey = {
+      source = ../../../private/radarr-api-key.age;
+      dest = "/var/private/readarr-api";
       prefix = "API_KEY=";
     };
     secrets.sonarrApiKey = {

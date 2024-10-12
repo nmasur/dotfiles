@@ -5,6 +5,7 @@
 {
 
   imports = [
+    ./audiobookshelf.nix
     ./arr.nix
     ./backups.nix
     ./bind.nix

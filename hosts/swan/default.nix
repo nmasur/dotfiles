@@ -67,6 +67,14 @@ inputs.nixpkgs.lib.nixosSystem rec {
         devices = (import ../../disks/root.nix { disk = "/dev/nvme0n1"; });
       };
 
+      zramSwap.enable = true;
+      swapDevices = [
+        {
+          device = "/swapfile";
+          size = 4 * 1024; # 4 GB
+        }
+      ];
+
       boot.zfs = {
         # Automatically load the ZFS pool on boot
         extraPools = [ "tank" ];
@@ -98,6 +106,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       dotfiles.enable = true;
       arrs.enable = true;
       filebrowser.enable = true;
+      services.audiobookshelf.enable = true;
       services.bind.enable = true;
       services.caddy.enable = true;
       services.jellyfin.enable = true;

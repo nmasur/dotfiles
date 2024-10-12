@@ -235,6 +235,7 @@
           mail.smtpHost = "smtp.purelymail.com";
           dotfilesRepo = "https://github.com/nmasur/dotfiles";
           hostnames = {
+            audiobooks = "read.${baseName}";
             files = "files.${baseName}";
             git = "git.${baseName}";
             influxdb = "influxdb.${baseName}";

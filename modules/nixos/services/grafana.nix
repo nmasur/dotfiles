@@ -53,6 +53,7 @@ in
             uid = promUid;
           }
         ];
+        # TODO: Add option to pull services from a list like Caddy does
         dashboards.settings.providers = [
           {
             name = "test";
@@ -367,6 +368,18 @@ in
                           legendFormat = "Radarr";
                           range = true;
                           refId = "C";
+                        }
+                        {
+                          datasource = {
+                            type = "prometheus";
+                            uid = promUid;
+                          };
+                          editorMode = "code";
+                          expr = "readarr_system_status";
+                          hide = false;
+                          legendFormat = "Readarr";
+                          range = true;
+                          refId = "F";
                         }
                         {
                           datasource = {
@@ -822,6 +835,28 @@ in
                           {
                             matcher = {
                               id = "byName";
+                              options = "localhost:8787";
+                            };
+                            properties = [
+                              {
+                                id = "displayName";
+                                value = "Readarr";
+                              }
+                              {
+                                id = "links";
+                                value = [
+                                  {
+                                    targetBlank = true;
+                                    title = "";
+                                    url = "https://${config.hostnames.download}/readarr";
+                                  }
+                                ];
+                              }
+                            ];
+                          }
+                          {
+                            matcher = {
+                              id = "byName";
                               options = "unix//run/phpfpm/nextcloud.sock";
                             };
                             properties = [
@@ -1100,6 +1135,28 @@ in
                                     targetBlank = true;
                                     title = "";
                                     url = "https://${config.hostnames.paperless}";
+                                  }
+                                ];
+                              }
+                            ];
+                          }
+                          {
+                            matcher = {
+                              id = "byName";
+                              options = "localhost:${builtins.toString config.services.audiobookshelf.port}";
+                            };
+                            properties = [
+                              {
+                                id = "displayName";
+                                value = "Audiobookshelf";
+                              }
+                              {
+                                id = "links";
+                                value = [
+                                  {
+                                    targetBlank = true;
+                                    title = "";
+                                    url = "https://${config.hostnames.audiobooks}";
                                   }
                                 ];
                               }
