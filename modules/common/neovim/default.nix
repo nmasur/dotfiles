@@ -52,7 +52,7 @@ in
         # (Requires launching the terminal and then executing Neovim)
         xdg.desktopEntries.nvim = lib.mkIf pkgs.stdenv.isLinux {
           name = "Neovim wrapper";
-          exec = "kitty nvim %F";
+          exec = "${config.home-manager.users.${config.user}.programs.rofi.terminal} nvim %F";
           mimeType = [
             "text/plain"
             "text/markdown"
