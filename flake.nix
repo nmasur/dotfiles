@@ -185,6 +185,11 @@
       flake = false;
     };
 
+    gh-collaborators = {
+      url = "github:katiem0/gh-collaborators";
+      flake = false;
+    };
+
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
@@ -260,7 +265,7 @@
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/gh-collaborators.nix)
+        (import ./overlays/gh-collaborators.nix inputs)
         (import ./overlays/ren-rep.nix inputs)
       ];
 

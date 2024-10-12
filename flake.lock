@@ -244,6 +244,22 @@
         "type": "github"
       }
     },
+    "gh-collaborators": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717117275,
+        "narHash": "sha256-x3p2bHL6U8gWanXnTTJGgA9x4Ixy9AOZiBbfcfn5VVw=",
+        "owner": "katiem0",
+        "repo": "gh-collaborators",
+        "rev": "4dfcd0b5c2e31f2d0fbfd4b83fdfae787a5e6ff8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "katiem0",
+        "repo": "gh-collaborators",
+        "type": "github"
+      }
+    },
     "hmts-nvim-src": {
       "flake": false,
       "locked": {
@@ -584,6 +600,7 @@
         "disko": "disko",
         "fidget-nvim-src": "fidget-nvim-src",
         "firefox-darwin": "firefox-darwin",
+        "gh-collaborators": "gh-collaborators",
         "hmts-nvim-src": "hmts-nvim-src",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
