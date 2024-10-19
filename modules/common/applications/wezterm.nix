@@ -119,8 +119,8 @@
                 font = wezterm.font('${font}', { weight = 'Bold'}),
                 font_size = ${if pkgs.stdenv.isLinux then "14.0" else "18.0"},
 
-		-- Fix color blocks instead of text
-		front_end = "WebGpu",
+                -- Fix color blocks instead of text
+                front_end = "WebGpu",
 
                 -- Tab Bar
                 hide_tab_bar_if_only_one_tab = true,
