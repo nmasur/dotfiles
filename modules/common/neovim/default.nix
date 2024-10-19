@@ -50,7 +50,7 @@ in
 
         # Create a desktop option for launching Neovim from a file manager
         # (Requires launching the terminal and then executing Neovim)
-        xdg.desktopEntries.nvim = lib.mkIf pkgs.stdenv.isLinux {
+        xdg.desktopEntries.nvim = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
           name = "Neovim wrapper";
           exec = "${config.home-manager.users.${config.user}.programs.rofi.terminal} nvim %F";
           mimeType = [
