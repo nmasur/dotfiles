@@ -11,6 +11,11 @@
   options.terraform = lib.mkEnableOption "Whether to enable Terraform LSP";
   options.github = lib.mkEnableOption "Whether to enable GitHub features";
   options.kubernetes = lib.mkEnableOption "Whether to enable Kubernetes features";
+  options.nixosConfiguration = lib.mkOption {
+    type = lib.types.str;
+    description = "Configuration to use for nixd options checking";
+    default = "default";
+  };
 
   config = {
     plugins = [
@@ -43,6 +48,21 @@
     use.lspconfig.nixd.setup = dsl.callWith {
       cmd = [ "${pkgs.nixd}/bin/nixd" ];
       capabilities = dsl.rawLua "require('cmp_nvim_lsp').default_capabilities()";
+      # settings = {
+      #   nixd = {
+      #     options = {
+      #       nixos = {
+      #         expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.${config.nixosConfiguration}.options";
+      #       };
+      #       home-manager = {
+      #         expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.${config.nixosConfiguration}.options";
+      #       };
+      #       darwin = {
+      #         expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).darwinConfigurations.${config.nixosConfiguration}.options";
+      #       };
+      #     };
+      #   };
+      # };
     };
 
     use.lspconfig.pyright.setup = dsl.callWith {

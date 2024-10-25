@@ -13,6 +13,7 @@ let
     terraform = config.terraform.enable;
     github = true;
     kubernetes = config.kubernetes.enable;
+    nixosConfiguration = config.networking.hostName; # Used for Nixd
   };
 in
 {

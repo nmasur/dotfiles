@@ -32,6 +32,7 @@
   terraform ? false,
   github ? false,
   kubernetes ? false,
+  nixosConfiguration ? "default",
   ...
 }:
 
@@ -44,6 +45,7 @@ pkgs.neovimBuilder {
     terraform
     github
     kubernetes
+    nixosConfiguration
     ;
   imports = [
     ../config/align.nix
