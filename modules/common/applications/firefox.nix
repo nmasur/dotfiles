@@ -159,6 +159,15 @@
         };
       };
 
+      # Mimic nixpkgs package environment for read-only profiles.ini management
+      # From: https://github.com/booxter/home-manager/commit/dd1602e306fec366280f5953c5e1b553e3d9672a
+      home.sessionVariables = {
+        MOZ_LEGACY_PROFILES = 1;
+        MOZ_ALLOW_DOWNGRADE = 1;
+      };
+
+      # launchd.user.envVariables = config.home-manager.users.${config.user}.home.sessionVariables;
+
       xdg.mimeApps = {
         associations.added = {
           "text/html" = [ "firefox.desktop" ];
