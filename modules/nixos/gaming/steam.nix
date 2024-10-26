@@ -15,6 +15,7 @@
       "steam-original"
       "steamcmd"
       "steam-run"
+      "steam-unwrapped"
     ];
 
     programs.steam = {
@@ -27,7 +28,7 @@
     environment.systemPackages = with pkgs; [
 
       # Enable terminal interaction
-      steamPackages.steamcmd
+      steamcmd
       steam-tui
 
       # Overlay with performance monitoring
