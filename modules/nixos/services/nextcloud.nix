@@ -9,7 +9,7 @@
   config = lib.mkIf config.services.nextcloud.enable {
 
     services.nextcloud = {
-      package = pkgs.nextcloud29; # Required to specify
+      package = pkgs.nextcloud30; # Required to specify
       configureRedis = true;
       datadir = "/data/nextcloud";
       database.createLocally = true;
