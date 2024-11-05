@@ -77,6 +77,10 @@
       default = [ ];
     };
     hostnames = {
+      audiobooks = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for audiobook server (Audiobookshelf).";
+      };
       files = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for files server (Filebrowser).";

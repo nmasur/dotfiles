@@ -1,13 +1,6 @@
 { config, lib, ... }:
 {
 
-  options = {
-    hostnames.audiobooks = lib.mkOption {
-      type = lib.types.str;
-      description = "Hostname for audiobook server (Audiobookshelf).";
-    };
-  };
-
   config = lib.mkIf config.services.audiobookshelf.enable {
 
     services.audiobookshelf = {
