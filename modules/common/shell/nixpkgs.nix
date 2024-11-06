@@ -13,7 +13,7 @@
         ns = "nix-shell -p";
         nsf = "nix-shell --run fish -p";
         nsr = "nix-shell-run";
-        nps = "nix repl '<nixpkgs>'";
+        nps = "nix repl --expr 'import <nixpkgs>{}'";
         nixo = "man configuration.nix";
         nixh = "man home-configuration.nix";
         nr = "rebuild-nixos";

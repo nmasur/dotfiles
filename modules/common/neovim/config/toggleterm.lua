@@ -21,7 +21,7 @@ function TERM_TOGGLE()
     basicterminal:toggle()
 end
 
-local nixpkgs = terminal:new({ cmd = "nix repl '<nixpkgs>'" })
+local nixpkgs = terminal:new({ cmd = "nix repl --expr 'import <nixpkgs>{}'" })
 function NIXPKGS_TOGGLE()
     nixpkgs:toggle()
 end
