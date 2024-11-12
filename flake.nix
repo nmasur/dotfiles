@@ -31,6 +31,9 @@
       inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list for their inputs
     };
 
+    # Used for AMD CPU microcode
+    ucodenix.url = "github:e-tho/ucodenix";
+
     # Community packages; used for Firefox extensions
     nur.url = "github:nix-community/nur";
 

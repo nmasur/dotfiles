@@ -477,6 +477,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1730531603,
+        "narHash": "sha256-Dqg6si5CqIzm87sp57j5nTaeBbWhHFaVyG7V6L8k3lY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7ffd9ae656aec493492b44d0ddfb28e79a1ea25d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
         "lastModified": 1731119600,
@@ -632,6 +648,7 @@
         "tree-sitter-python": "tree-sitter-python",
         "tree-sitter-rasi": "tree-sitter-rasi",
         "tree-sitter-vimdoc": "tree-sitter-vimdoc",
+        "ucodenix": "ucodenix",
         "wallpapers": "wallpapers",
         "wsl": "wsl",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
@@ -876,6 +893,24 @@
       "original": {
         "owner": "neovim",
         "repo": "tree-sitter-vimdoc",
+        "type": "github"
+      }
+    },
+    "ucodenix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1731337052,
+        "narHash": "sha256-/wKkjAHHmaov6VWW7POdL+dUWtAWA9Zs6Ys/r7ugy00=",
+        "owner": "e-tho",
+        "repo": "ucodenix",
+        "rev": "5d8df57d4258d225dc9f5c2c4bb96855842cbac2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "e-tho",
+        "repo": "ucodenix",
         "type": "github"
       }
     },

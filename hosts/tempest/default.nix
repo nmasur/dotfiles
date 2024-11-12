@@ -17,6 +17,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
   modules = [
     globals
     inputs.home-manager.nixosModules.home-manager
+    inputs.ucodenix.nixosModules.default
     ../../modules/common
     ../../modules/nixos
     {
@@ -49,6 +50,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       # Allow firmware updates
       hardware.cpu.amd.updateMicrocode = true;
+      services.ucodenix.enable = true;
 
       # Helps reduce GPU fan noise under idle loads
       hardware.fancontrol.enable = true;
