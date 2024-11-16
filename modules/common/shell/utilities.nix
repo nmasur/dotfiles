@@ -31,6 +31,7 @@ in
         jo # JSON output
         jq # JSON manipulation
         lf # File viewer
+        osc # Clipboard over SSH
         qrencode # Generate qr codes
         rsync # Copy folders
         ren # Rename files

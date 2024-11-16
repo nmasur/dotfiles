@@ -179,6 +179,7 @@
     # Fixes: https://github.com/martinvonz/jj/issues/4784
     jujutsu = {
       url = "github:martinvonz/jj";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Ren and rep - CLI find and replace
@@ -193,6 +194,12 @@
 
     gh-collaborators = {
       url = "github:katiem0/gh-collaborators";
+      flake = false;
+    };
+
+    # Clipboard over SSH
+    osc = {
+      url = "github:theimpostor/osc";
       flake = false;
     };
 
@@ -274,6 +281,7 @@
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
         (import ./overlays/gh-collaborators.nix inputs)
+        (import ./overlays/osc.nix inputs)
         (import ./overlays/ren-rep.nix inputs)
       ];
 
