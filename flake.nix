@@ -175,6 +175,12 @@
       flake = false;
     };
 
+    # Git alternative
+    # Fixes: https://github.com/martinvonz/jj/issues/4784
+    jujutsu = {
+      url = "github:martinvonz/jj";
+    };
+
     # Ren and rep - CLI find and replace
     rep = {
       url = "github:robenkleene/rep-grep";
@@ -260,6 +266,7 @@
       overlays = [
         inputs.nur.overlay
         inputs.nix2vim.overlay
+        inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
         (import ./overlays/neovim-plugins.nix inputs)
         (import ./overlays/disko.nix inputs)
         (import ./overlays/tree-sitter.nix inputs)
