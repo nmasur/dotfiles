@@ -82,6 +82,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       services.minecraft-server.enable = true; # Setup Minecraft server
       services.n8n.enable = true;
       services.ntfy-sh.enable = true;
+      services.postgresql.enable = true;
       services.uptime-kuma.enable = true;
       system.autoUpgrade.enable = true;
 
