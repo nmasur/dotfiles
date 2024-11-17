@@ -59,10 +59,6 @@
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
-        jqr = {
-          description = "jq repl for constructing jq syntax";
-          body = "echo '' | fzf --query '.' --print-query --preview \"jq {q} < $argv\"";
-        };
         note = {
           description = "Edit or create a note";
           argumentNames = "filename";

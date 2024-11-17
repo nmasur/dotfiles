@@ -41,5 +41,16 @@
         FZF_CTRL_T_COMMAND = fzfCommand;
         FZF_DEFAULT_OPTS = "-m --height 50% --border";
       };
+
+    home.packages = [
+      (pkgs.writeShellApplication {
+        name = "jqr";
+        runtimeInputs = [
+          pkgs.jq
+          pkgs.fzf
+        ];
+        text = builtins.readFile ./bash/scripts/jqr.sh;
+      })
+    ];
   };
 }
