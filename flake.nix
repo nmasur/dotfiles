@@ -199,7 +199,7 @@
 
     # Clipboard over SSH
     osc = {
-      url = "github:theimpostor/osc";
+      url = "github:theimpostor/osc/v0.4.6";
       flake = false;
     };
 

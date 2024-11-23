@@ -601,15 +601,16 @@
     "osc": {
       "flake": false,
       "locked": {
-        "lastModified": 1732198382,
-        "narHash": "sha256-JB65v6a4Tu3RUJ3KZoLNS5IS+CcOlv1b/mjjy3prIkc=",
+        "lastModified": 1732197203,
+        "narHash": "sha256-xL9mqwb+C6WbuJ/qk0lNbi9xd24PbKi5G0FlwaH5XPk=",
         "owner": "theimpostor",
         "repo": "osc",
-        "rev": "d8bb64e15c3041148e2a6fc92749a5346c47818c",
+        "rev": "87b316b3f96a22fd85654cd7bd091f2cac1c6691",
         "type": "github"
       },
       "original": {
         "owner": "theimpostor",
+        "ref": "v0.4.6",
         "repo": "osc",
         "type": "github"
       }
