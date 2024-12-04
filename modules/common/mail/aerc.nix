@@ -192,7 +192,7 @@
 
       xdg.desktopEntries.aerc = lib.mkIf pkgs.stdenv.isLinux {
         name = "aerc";
-        exec = "kitty aerc %u";
+        exec = "${config.home-manager.users.${config.user}.programs.rofi.terminal} aerc %u";
       };
       xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
         "${
@@ -203,7 +203,9 @@
             pkgs.writeShellScript "focus-mail.sh" ''
               count=$(ps aux | grep -c aerc)
               if [ "$count" -eq 1 ]; then
-                  i3-msg "exec --no-startup-id kitty --class aerc aerc"
+                  i3-msg "exec --no-startup-id ${
+                    config.home-manager.users.${config.user}.programs.rofi.terminal
+                  } --class aerc aerc"
                   sleep 0.25
               fi
               i3-msg "[class=aerc] focus"
