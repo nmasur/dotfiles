@@ -91,8 +91,6 @@ in
     services.vmagent = {
       package = pkgs-stable.vmagent;
       prometheusConfig = prometheusConfig;
-      # https://github.com/VictoriaMetrics/VictoriaMetrics/issues/5567
-      extraArgs = [ "-promscrape.maxScrapeSize 450000000" ];
       remoteWrite = {
         url = "https://${config.hostnames.prometheus}/api/v1/write";
         basicAuthUsername = username;
