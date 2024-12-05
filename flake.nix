@@ -259,6 +259,7 @@
             notifications = "ntfy.${baseName}";
             prometheus = "prom.${baseName}";
             paperless = "paper.${baseName}";
+            photos = "photos.${baseName}";
             secrets = "vault.${baseName}";
             stream = "stream.${baseName}";
             content = "cloud.${baseName}";

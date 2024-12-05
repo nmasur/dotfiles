@@ -109,6 +109,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       services.audiobookshelf.enable = true;
       services.bind.enable = true;
       services.caddy.enable = true;
+      services.immich.enable = true;
       services.jellyfin.enable = true;
       services.nextcloud.enable = true;
       services.calibre-web.enable = true;

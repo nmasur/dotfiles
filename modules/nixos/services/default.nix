@@ -15,6 +15,7 @@
     ./cloudflare.nix
     ./filebrowser.nix
     ./identity.nix
+    ./immich.nix
     ./irc.nix
     ./gitea-runner.nix
     ./gitea.nix
