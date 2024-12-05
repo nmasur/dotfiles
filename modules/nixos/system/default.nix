@@ -10,6 +10,7 @@
     ./auto-upgrade.nix
     ./doas.nix
     ./journald.nix
+    ./shared.nix
     ./user.nix
     ./timezone.nix
   ];
