@@ -16,7 +16,9 @@
         nps = "nix repl --expr 'import <nixpkgs>{}'";
         nixo = "man configuration.nix";
         nixh = "man home-configuration.nix";
-        nr = "rebuild-nixos";
+        nr = {
+          function = "rebuild-nixos";
+        };
         nro = "rebuild-nixos offline";
         hm = "rebuild-home";
       };
@@ -43,18 +45,16 @@
         rebuild-nixos = {
           body = ''
             if test "$argv[1]" = "offline"
-                set option "--option substitute false"
+                set option "--option substitute false "
             end
             git -C ${config.dotfilesPath} add --intent-to-add --all
-            commandline -r "doas nixos-rebuild switch $option --flake ${config.dotfilesPath}#${config.networking.hostName}"
-            commandline --function execute
+            echo "doas nixos-rebuild switch $option--flake ${config.dotfilesPath}#${config.networking.hostName}"
           '';
         };
         rebuild-home = {
           body = ''
             git -C ${config.dotfilesPath} add --intent-to-add --all
-            commandline -r "${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName}";
-            commandline --function execute
+            echo "${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName}";
           '';
         };
       };
