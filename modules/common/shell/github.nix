@@ -6,6 +6,8 @@
 }:
 {
 
+  unfreePackages = [ "gh-copilot" ];
+
   home-manager.users.${config.user} = {
 
     programs.gh = lib.mkIf config.home-manager.users.${config.user}.programs.git.enable {
@@ -15,6 +17,7 @@
       extensions = [
         pkgs.gh-collaborators
         pkgs.gh-dash
+        pkgs.gh-copilot
       ];
     };
 
