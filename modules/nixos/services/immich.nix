@@ -37,6 +37,9 @@
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.photos ];
 
+    # Point localhost to the local domain
+    networking.hosts."127.0.0.1" = [ config.hostnames.photos ];
+
   };
 
 }

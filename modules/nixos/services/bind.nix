@@ -20,6 +20,7 @@ let
     config.hostnames.content
     config.hostnames.books
     config.hostnames.download
+    config.hostnames.photos
   ];
   mkRecord = service: "${service}       A       ${localIp}";
   localRecords = lib.concatLines (map mkRecord localServices);
