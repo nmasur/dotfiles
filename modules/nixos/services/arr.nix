@@ -44,6 +44,15 @@ in
 
   config = lib.mkIf config.arrs.enable {
 
+    # Broken on 2024-12-07
+    # https://discourse.nixos.org/t/solved-sonarr-is-broken-in-24-11-unstable-aka-how-the-hell-do-i-use-nixpkgs-config-permittedinsecurepackages/
+    insecurePackages = [
+      "aspnetcore-runtime-wrapped-6.0.36"
+      "aspnetcore-runtime-6.0.36"
+      "dotnet-sdk-wrapped-6.0.428"
+      "dotnet-sdk-6.0.428"
+    ];
+
     services = {
       bazarr = {
         enable = true;

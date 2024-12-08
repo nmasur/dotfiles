@@ -272,7 +272,7 @@
 
       # Common overlays to always use
       overlays = [
-        inputs.nur.overlay
+        inputs.nur.overlays.default
         inputs.nix2vim.overlay
         inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
         (import ./overlays/neovim-plugins.nix inputs)
@@ -284,6 +284,7 @@
         (import ./overlays/gh-collaborators.nix inputs)
         (import ./overlays/osc.nix inputs)
         (import ./overlays/ren-rep.nix inputs)
+        (import ./overlays/volnoti.nix)
       ];
 
       # System types to support.

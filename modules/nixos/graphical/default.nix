@@ -46,6 +46,11 @@
       type = lib.types.str;
       description = "Command to use for power options menu";
     };
+    terminal = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Path to executable for terminal emulator program.";
+      default = null;
+    };
     wallpaper = lib.mkOption {
       type = lib.types.path;
       description = "Wallpaper background image file";

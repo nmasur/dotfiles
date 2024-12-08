@@ -56,10 +56,6 @@ in
       # Graphical volume notifications
       services.volnoti.enable = true;
 
-      # Fix: Volnoti binary not found
-      # Broken by https://github.com/nix-community/home-manager/pull/5725/commits/98bf8de65dc1ed12c6443b18f6f24d36e9c438d6
-      systemd.user.services.volnoti.Service.ExecStart = lib.mkForce "${pkgs.volnoti}/bin/volnoti -v -n";
-
       xsession.windowManager.i3.config = {
 
         # Make sure that Volnoti actually starts (home-manager doesn't start

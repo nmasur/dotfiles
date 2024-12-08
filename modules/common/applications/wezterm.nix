@@ -29,13 +29,12 @@
           sessionVariables.ROFI_SYSTEMD_TERM = "${pkgs.wezterm}/bin/wezterm";
         };
 
+      terminal = "${pkgs.wezterm}/bin/wezterm";
+
       home-manager.users.${config.user} = {
 
         # Set the i3 terminal
         xsession.windowManager.i3.config.terminal = lib.mkIf pkgs.stdenv.isLinux "wezterm";
-
-        # Set the Rofi terminal for running programs
-        programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux "${pkgs.wezterm}/bin/wezterm";
 
         # Display images in the terminal
         programs.fish.shellAliases = {

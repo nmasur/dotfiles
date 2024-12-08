@@ -190,9 +190,9 @@
         };
       };
 
-      xdg.desktopEntries.aerc = lib.mkIf pkgs.stdenv.isLinux {
+      xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
         name = "aerc";
-        exec = "${config.home-manager.users.${config.user}.programs.rofi.terminal} aerc %u";
+        exec = "${config.terminal} aerc %u";
       };
       xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
         "${

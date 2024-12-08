@@ -29,6 +29,7 @@ in
         cycle = true;
         location = "center";
         pass = { };
+        terminal = lib.mkIf pkgs.stdenv.isLinux config.terminal;
         plugins = [
           pkgs.rofi-calc
           pkgs.rofi-emoji

@@ -15,7 +15,7 @@
     };
 
     programs.kitty.font = {
-      package = (pkgs.nerdfonts.override { fonts = [ "VictorMono" ]; });
+      package = pkgs.nerd-fonts.victor-mono;
       name = "VictorMono Nerd Font Mono";
     };
   };

@@ -14,7 +14,7 @@ in
 
     fonts.packages = with pkgs; [
       victor-mono # Used for Vim and Terminal
-      (nerdfonts.override { fonts = [ "Hack" ]; }) # For Polybar, Rofi
+      nerd-fonts.hack # For Polybar, Rofi
     ];
     fonts.fontconfig.defaultFonts.monospace = [ fontName ];
 
