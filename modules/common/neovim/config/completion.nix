@@ -2,6 +2,7 @@
 {
 
   plugins = [
+    pkgs.vimPlugins.nvim-cmp
     pkgs.vimPlugins.cmp-nvim-lsp
     pkgs.vimPlugins.cmp-buffer
     pkgs.vimPlugins.cmp-path
@@ -26,15 +27,21 @@
 
     # Basic completion keybinds
     mapping = {
-      "['<C-n>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })";
-      "['<C-p>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })";
-      "['<Down>']" = dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Select }, { 'i', 'c' })";
-      "['<Up>']" = dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Select }, { 'i', 'c' })";
+      "['<C-n>']" =
+        dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })";
+      "['<C-p>']" =
+        dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Insert }, { 'i', 'c' })";
+      "['<Down>']" =
+        dsl.rawLua "require('cmp').mapping.select_next_item({ behavior = require('cmp').SelectBehavior.Select }, { 'i', 'c' })";
+      "['<Up>']" =
+        dsl.rawLua "require('cmp').mapping.select_prev_item({ behavior = require('cmp').SelectBehavior.Select }, { 'i', 'c' })";
       "['<C-d>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(-4)";
       "['<C-f>']" = dsl.rawLua "require('cmp').mapping.scroll_docs(4)";
       "['<C-e>']" = dsl.rawLua "require('cmp').mapping.abort()";
-      "['<C-y>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Insert, select = true, }, { 'i', 'c' })";
-      "['<C-r>']" = dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, }, { 'i', 'c' })";
+      "['<C-y>']" =
+        dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Insert, select = true, }, { 'i', 'c' })";
+      "['<C-r>']" =
+        dsl.rawLua "require('cmp').mapping.confirm({ behavior = require('cmp').ConfirmBehavior.Replace, select = true, }, { 'i', 'c' })";
       "['<Esc>']" = dsl.rawLua ''
         function(_)
             cmp.mapping({
@@ -128,7 +135,7 @@
     };
   };
 
-  lua = ''
+  lua' = ''
     -- Use buffer source for `/`
     require('cmp').setup.cmdline("/", {
         mapping = {
