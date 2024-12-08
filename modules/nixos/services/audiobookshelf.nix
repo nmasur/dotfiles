@@ -4,6 +4,7 @@
   config = lib.mkIf config.services.audiobookshelf.enable {
 
     services.audiobookshelf = {
+      group = "shared";
       dataDir = "audiobookshelf";
     };
 
@@ -22,15 +23,6 @@
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.audiobooks ];
-
-    # Grant user access to Audiobookshelf directories
-    users.users.${config.user}.extraGroups = [ config.services.audiobookshelf.group ];
-
-    # Grant audiobookshelf access to media and Calibre directories
-    users.users.${config.services.audiobookshelf.user}.extraGroups = [
-      "media"
-      "calibre-web"
-    ];
 
   };
 

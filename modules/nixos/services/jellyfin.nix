@@ -11,7 +11,7 @@
 
   config = lib.mkIf config.services.jellyfin.enable {
 
-    services.jellyfin.group = "media";
+    services.jellyfin.group = "shared";
     users.users.jellyfin = {
       isSystemUser = true;
     };
@@ -49,8 +49,8 @@
 
     # Create videos directory, allow anyone in Jellyfin group to manage it
     systemd.tmpfiles.rules = [
-      "d /var/lib/jellyfin 0775 jellyfin media"
-      "d /var/lib/jellyfin/library 0775 jellyfin media"
+      "d /var/lib/jellyfin 0775 jellyfin shared"
+      "d /var/lib/jellyfin/library 0775 jellyfin shared"
     ];
 
     # Enable VA-API for hardware transcoding

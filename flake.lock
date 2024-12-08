@@ -428,7 +428,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1728502660,
-        "narHash": "sha256-+0EivmFXn/o4CE/7Tgo0DFixZo4ELwKJpfEdQllEJMw=",
+        "narHash": "sha256-oCw6Brs85rINBHvz3UJXheyLVqvA3RgPXG03b30Fx7E=",
         "type": "tarball",
         "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.38.2-nextcloud.tar.gz"
       },

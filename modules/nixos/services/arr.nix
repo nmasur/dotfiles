@@ -56,38 +56,32 @@ in
     services = {
       bazarr = {
         enable = true;
-        group = "media";
+        group = "shared";
       };
       jellyseerr.enable = true;
       prowlarr.enable = true;
       sabnzbd = {
         enable = true;
-        group = "media";
+        group = "shared";
         # The config file must be editable within the application
         # It contains server configs and credentials
         configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
       };
       sonarr = {
         enable = true;
-        group = "media";
+        group = "shared";
       };
       radarr = {
         enable = true;
-        group = "media";
+        group = "shared";
       };
       readarr = {
         enable = true;
-        group = "media";
+        group = "shared";
       };
     };
 
-    # Create a media group to be shared between services
-    users.groups.media = { };
-
-    # Give the human user access to the media group
-    users.users.${config.user}.extraGroups = [ "media" ];
-
-    # Allows media group to read/write the sabnzbd directory
+    # Allows shared group to read/write the sabnzbd directory
     users.users.sabnzbd.homeMode = "0770";
 
     unfreePackages = [ "unrar" ]; # Required as a dependency for sabnzbd
@@ -108,7 +102,7 @@ in
         handle = [
           {
             handler = "reverse_proxy";
-            # We're able to reference the url and port of the service dynamically 
+            # We're able to reference the url and port of the service dynamically
             upstreams = [ { dial = arrConfig.sonarr.url; } ];
           }
         ];

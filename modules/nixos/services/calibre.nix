@@ -28,6 +28,7 @@ in
   config = lib.mkIf config.services.calibre-web.enable {
 
     services.calibre-web = {
+      group = "shared";
       openFirewall = true;
       options = {
         reverseProxyAuth.enable = false;
