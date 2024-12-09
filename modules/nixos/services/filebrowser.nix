@@ -5,12 +5,6 @@
   ...
 }:
 let
-  user =
-    if config.services.nextcloud.enable then
-      config.services.phpfpm.pools.nextcloud.user
-    else
-      "filebrowser";
-
   dataDir = "/var/lib/filebrowser";
 
   settings = {
@@ -43,15 +37,15 @@ in
       startLimitBurst = 10;
       serviceConfig = {
         ExecStart = "${pkgs.filebrowser}/bin/filebrowser";
-        DynamicUser = !config.services.nextcloud.enable; # Unique user if not using Nextcloud
-        User = user;
-        Group = user;
+        DynamicUser = true;
+        Group = "shared";
         ReadWritePaths = [ dataDir ];
         StateDirectory = [ "filebrowser" ];
         Restart = "on-failure";
         RestartPreventExitStatus = 1;
         RestartSec = "5s";
       };
+      path = [ pkgs.getent ]; # Fix: getent not found in $PATH
     };
 
     caddy.routes = [
