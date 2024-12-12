@@ -40,6 +40,9 @@
     # Point localhost to the local domain
     networking.hosts."127.0.0.1" = [ config.hostnames.photos ];
 
+    # Backups
+    services.restic.backups.default.paths = [ "/data/images" ];
+
   };
 
 }
