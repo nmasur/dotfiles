@@ -30,6 +30,7 @@
         };
 
       terminal = "${pkgs.wezterm}/bin/wezterm";
+      terminalLaunchCommand = "${config.terminal} start --";
 
       home-manager.users.${config.user} = {
 

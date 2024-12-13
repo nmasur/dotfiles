@@ -51,6 +51,11 @@
       description = "Path to executable for terminal emulator program.";
       default = null;
     };
+    terminalLaunchCommand = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Command for using the terminal to launch a new window with a program.";
+      default = null;
+    };
     wallpaper = lib.mkOption {
       type = lib.types.path;
       description = "Wallpaper background image file";

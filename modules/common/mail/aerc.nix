@@ -169,7 +169,8 @@
           filters = {
             "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
             "text/calendar" = "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/libexec/aerc/filters/calendar";
-            "text/html" = "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
+            "text/html" =
+              "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
             # "text/*" =
             #   ''${pkgs.bat}/bin/bat -fP --file-name="$AERC_FILENAME "'';
             "message/delivery-status" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
@@ -192,26 +193,23 @@
 
       xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
         name = "aerc";
-        exec = "${config.terminal} aerc %u";
+        exec = "${config.terminalLaunchCommand} aerc %u";
       };
       xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
-        "${
-          config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier
-        }+Shift+e" = "exec ${
-          # Don't name the script `aerc` or it will affect grep
-          builtins.toString (
-            pkgs.writeShellScript "focus-mail.sh" ''
-              count=$(ps aux | grep -c aerc)
-              if [ "$count" -eq 1 ]; then
-                  i3-msg "exec --no-startup-id ${
-                    config.home-manager.users.${config.user}.programs.rofi.terminal
-                  } --class aerc aerc"
-                  sleep 0.25
-              fi
-              i3-msg "[class=aerc] focus"
-            ''
-          )
-        }";
+        "${config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier}+Shift+e" =
+          "exec ${
+            # Don't name the script `aerc` or it will affect grep
+            builtins.toString (
+              pkgs.writeShellScript "focus-mail.sh" ''
+                count=$(ps aux | grep -c aerc)
+                if [ "$count" -eq 1 ]; then
+                    i3-msg "exec --no-startup-id ${config.terminal} start --class aerc -- aerc"
+                    sleep 0.25
+                fi
+                i3-msg "[class=aerc] focus"
+              ''
+            )
+          }";
       };
 
       programs.fish.shellAbbrs = {
