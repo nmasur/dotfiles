@@ -38,13 +38,14 @@
       setupCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-1 \
                                             --mode 1920x1200 \
-                                            --pos 1920x0 \
+                                            --pos 2560x0 \
                                             --rotate left \
-                                        --output HDMI-A-0 \
+                                        --output DisplayPort-0 \
                                             --primary \
-                                            --mode 1920x1080 \
+                                            --mode 2560x1440 \
                                             --pos 0x560 \
                                             --rotate normal \
+                                            --rate 120 \
                                         --output DVI-0 --off \
                                         --output DVI-1 --off \
       '';

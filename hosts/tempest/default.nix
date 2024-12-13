@@ -41,6 +41,12 @@ inputs.nixpkgs.lib.nixosSystem rec {
       boot.kernelModules = [ "kvm-amd" ];
       services.xserver.videoDrivers = [ "amdgpu" ];
 
+      # I don't think I need this?
+      # boot.kernelParams = [
+      #   "video=DP-0:2560x1440@165"
+      #   "video=DP-1:1920x1080@60"
+      # ];
+
       # Required binary blobs to boot on this machine
       hardware.enableRedistributableFirmware = true;
 
