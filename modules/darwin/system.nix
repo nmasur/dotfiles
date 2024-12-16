@@ -6,6 +6,19 @@
 }:
 {
 
+  options = {
+    terminal = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Path to executable for terminal emulator program.";
+      default = null;
+    };
+    terminalLaunchCommand = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Command for using the terminal to launch a new window with a program.";
+      default = null;
+    };
+  };
+
   config = lib.mkIf pkgs.stdenv.isDarwin {
 
     services.nix-daemon.enable = true;
