@@ -247,7 +247,6 @@
           mail.imapHost = "imap.purelymail.com";
           mail.smtpHost = "smtp.purelymail.com";
           dotfilesRepo = "https://github.com/nmasur/dotfiles";
-          backup.s3.glacierBucket = "noahmasur-archive";
           hostnames = {
             audiobooks = "read.${baseName}";
             files = "files.${baseName}";
