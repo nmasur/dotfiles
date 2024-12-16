@@ -19,8 +19,12 @@
         nr = {
           function = "rebuild-nixos";
         };
-        nro = "rebuild-nixos offline";
-        hm = "rebuild-home";
+        nro = {
+          function = "rebuild-nixos-offline";
+        };
+        hm = {
+          function = "rebuild-home";
+        };
       };
       functions = {
         nix-shell-run = {
@@ -44,11 +48,14 @@
         };
         rebuild-nixos = {
           body = ''
-            if test "$argv[1]" = "offline"
-                set option "--option substitute false "
-            end
             git -C ${config.dotfilesPath} add --intent-to-add --all
-            echo "doas nixos-rebuild switch $option--flake ${config.dotfilesPath}#${config.networking.hostName}"
+            echo "doas nixos-rebuild switch --flake ${config.dotfilesPath}#${config.networking.hostName}"
+          '';
+        };
+        rebuild-nixos-offline = {
+          body = ''
+            git -C ${config.dotfilesPath} add --intent-to-add --all
+            echo "doas nixos-rebuild switch --option substitute false --flake ${config.dotfilesPath}#${config.networking.hostName}"
           '';
         };
         rebuild-home = {

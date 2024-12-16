@@ -115,7 +115,7 @@
               left = 10,
               right = 10,
               top = 10,
-              bottom = 10,
+              bottom = 12,
             }
 
             config.font = wezterm.font('${font}', { weight = 'Bold'})
