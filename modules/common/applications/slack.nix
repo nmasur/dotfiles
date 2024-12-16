@@ -21,4 +21,6 @@
       home.packages = with pkgs; [ slack ];
     };
   };
+
+  # Theme string: #1D2122,#665C54,#8EC07C,#BDAE93
 }
