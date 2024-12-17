@@ -148,6 +148,9 @@
         # Where to save screenshots
         screencapture.location = "~/Downloads";
 
+        # Show seconds on the clock
+        menuExtraClock.ShowSeconds = true;
+
         CustomUserPreferences = {
           # Disable disk image verification
           "com.apple.frameworks.diskimages" = {

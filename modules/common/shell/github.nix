@@ -57,7 +57,7 @@
         esac
 
         selected=$(gh repo list "$organization" \
-            --limit 100 \
+            --limit 1000 \
             --no-archived \
             --json=name,description,isPrivate,updatedAt,primaryLanguage \
             | jq -r '.[] | .name + "," + if .description == "" then "-" else .description |= gsub(","; " ") | .description end + "," + .updatedAt + "," + .primaryLanguage.name' \

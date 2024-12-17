@@ -34,7 +34,7 @@ in
         osc # Clipboard over SSH
         qrencode # Generate qr codes
         rsync # Copy folders
-        ren # Rename files
+        # ren # Rename files
         # rep # Replace text in files
         ripgrep # grep
         sd # sed

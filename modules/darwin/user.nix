@@ -11,11 +11,12 @@
     users.users."${config.user}" = {
       # macOS user
       home = config.homePath;
+      uid = 502;
       # shell = pkgs.fish; # Default shell
     };
 
     # This might fix the shell issues
-    # users.knownUsers = [ config.user ];
+    users.knownUsers = [ config.user ];
 
     home-manager.users.${config.user} = {
 
