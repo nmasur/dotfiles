@@ -62,7 +62,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
 
       # Still require colors for programs like Neovim, K9S
       theme = {
-        colors = (import ../../colorscheme/gruvbox).dark;
+        colors = (import ../../colorscheme/gruvbox-dark).dark;
       };
 
       # Programs and services
