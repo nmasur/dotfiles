@@ -86,6 +86,10 @@
         type = lib.types.str;
         description = "Hostname for audiobook server (Audiobookshelf).";
       };
+      budget = lib.mkOption {
+        type = lib.types.str;
+        description = "Hostname for budgeting server (ActualBudget).";
+      };
       files = lib.mkOption {
         type = lib.types.str;
         description = "Hostname for files server (Filebrowser).";

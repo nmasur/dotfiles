@@ -249,6 +249,7 @@
           dotfilesRepo = "https://github.com/nmasur/dotfiles";
           hostnames = {
             audiobooks = "read.${baseName}";
+            budget = "money.${baseName}";
             files = "files.${baseName}";
             git = "git.${baseName}";
             influxdb = "influxdb.${baseName}";

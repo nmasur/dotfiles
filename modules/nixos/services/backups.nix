@@ -84,10 +84,10 @@
       dest = "${config.secretsDirectory}/restic";
     };
 
-    services.restic.backups = {
+    services.restic.backups = lib.mkIf (config.backup.s3.glacierBucket != null) {
       default = {
         repository = "s3:s3.us-east-1.amazonaws.com/${config.backup.s3.glacierBucket}/restic";
-        paths = [ "/data/images" ];
+        paths = [ ];
         environmentFile = config.secrets.s3-glacier.dest;
         passwordFile = config.secrets.restic.dest;
         pruneOpts = [

@@ -5,6 +5,7 @@
 {
 
   imports = [
+    ./actualbudget.nix
     ./audiobookshelf.nix
     ./arr.nix
     ./backups.nix
