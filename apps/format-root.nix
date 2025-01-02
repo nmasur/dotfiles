@@ -21,7 +21,7 @@
           exit 1
       fi
 
-      ${pkgs.disko-packaged}/bin/disko \
+      ${pkgs.disko}/bin/disko \
           --mode create \
           --dry-run \
           --flake "path:$(pwd)#root" \
@@ -31,7 +31,7 @@
           "This will ERASE ALL DATA on the disk /dev/''${DISK}. Are you sure you want to continue?" \
           --default=false
 
-      ${pkgs.disko-packaged}/bin/disko \
+      ${pkgs.disko}/bin/disko \
           --mode create \
           --flake "path:$(pwd)#root" \
           --arg disk "/dev/''${DISK}"
