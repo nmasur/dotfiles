@@ -46,7 +46,7 @@
         "scroll-reverser" # Different scroll style for mouse vs. trackpad
         "notunes" # Don't launch Apple Music with the play button
         "steam" # Not packaged for Nixon macOS
-        # "epic-games" # Not packaged for Nix
+        "epic-games" # Not packaged for Nix
       ];
     };
   };
