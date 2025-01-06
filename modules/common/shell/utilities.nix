@@ -38,6 +38,7 @@ in
         # rep # Replace text in files
         ripgrep # grep
         sd # sed
+        spacer # Output lines in terminal
         tealdeer # Cheatsheets
         tree # View directory hierarchy
         vimv-rs # Batch rename files
