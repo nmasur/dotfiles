@@ -10,7 +10,7 @@
   unfreePackages = [
     "consul"
     "vault-bin"
-    "teams"
+    # "teams"
   ];
 
   home-manager.users.${config.user} = lib.mkIf pkgs.stdenv.isDarwin {
@@ -32,7 +32,7 @@
       pkgs.consul
       pkgs.noti # Create notifications programmatically
       pkgs.ipcalc # Make IP network calculations
-      pkgs.teams
+      # pkgs.teams
       pkgs.cloudflared # Allow connecting to Cloudflare tunnels
       (pkgs.writeShellApplication {
         name = "ocr";
