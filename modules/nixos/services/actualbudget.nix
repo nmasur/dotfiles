@@ -39,10 +39,13 @@
       labels = {
         app = "actualbudget";
       };
-      image = "ghcr.io/actualbudget/actual-server:latest";
+      image = "ghcr.io/actualbudget/actual-server:25.1.0";
       hostname = null;
       environmentFiles = [ ];
-      environment = { };
+      environment = {
+        DEBUG = "actual:config"; # Enable debug logging
+        ACTUAL_TRUSTED_PROXIES = builtins.concatStringsSep "," [ "127.0.0.1" ];
+      };
       dependsOn = [ ];
       autoStart = true;
     };
