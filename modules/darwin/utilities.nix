@@ -34,6 +34,7 @@
       pkgs.ipcalc # Make IP network calculations
       # pkgs.teams
       pkgs.cloudflared # Allow connecting to Cloudflare tunnels
+      pkgs.monitorcontrol # Allows adjusting external displays
       (pkgs.writeShellApplication {
         name = "ocr";
         runtimeInputs = [ pkgs.tesseract ];
