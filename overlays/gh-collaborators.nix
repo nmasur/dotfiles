@@ -2,11 +2,10 @@ inputs: _final: prev: {
 
   gh-collaborators = prev.buildGoModule rec {
     pname = "gh-collaborators";
-    version = "v2.0.3";
+    version = "v3.0.0";
     src = inputs.gh-collaborators;
 
-    # vendorHash = "sha256-rsRDOgJBa8T6+bC/APcmuRmg6ykbIp9pwRnJ9rrfHEs=";
-    vendorHash = "sha256-fykxRb2U9DDsXorRTLiVWmhMY89N7RS07sal8ww6gz4=";
+    vendorHash = "sha256-9qmvG2q9t1Zj8yhKFyA99IaJ90R/gRVdQVjdliVKLRE";
 
     ldflags = [
       "-s"
