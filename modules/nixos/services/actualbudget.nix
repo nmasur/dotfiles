@@ -66,6 +66,9 @@
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ config.hostnames.budget ];
 
+    # Backups
+    services.restic.backups.default.paths = [ "/var/lib/actualbudget" ];
+
   };
 
 }
