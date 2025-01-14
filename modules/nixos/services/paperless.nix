@@ -57,5 +57,9 @@
     systemd.services.paperless-web.serviceConfig.UMask = lib.mkForce "0026";
     systemd.services.paperless-scheduler.serviceConfig.UMask = lib.mkForce "0026";
     systemd.services.paperless-task-queue.serviceConfig.UMask = lib.mkForce "0026";
+
+    # Backups
+    services.restic.backups.default.paths = [ "/data/generic/paperless/documents" ];
+
   };
 }

@@ -134,7 +134,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         endpoint = "s3.us-west-002.backblazeb2.com";
         bucket = "noahmasur-backup";
         accessKeyId = "0026b0e73b2e2c80000000005";
-        glacierBucket = "noahmasur-archive";
+        resticBucket = "noahmasur-restic";
       };
 
       # Disable passwords, only use SSH key

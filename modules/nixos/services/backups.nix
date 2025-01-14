@@ -22,9 +22,9 @@
         description = "S3 access key ID for backups";
         default = null;
       };
-      glacierBucket = lib.mkOption {
+      resticBucket = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
-        description = "S3 bucket for glacier backups";
+        description = "S3 bucket for restic backups";
         default = null;
       };
     };
@@ -84,9 +84,9 @@
       dest = "${config.secretsDirectory}/restic";
     };
 
-    services.restic.backups = lib.mkIf (config.backup.s3.glacierBucket != null) {
+    services.restic.backups = lib.mkIf (config.backup.s3.resticBucket != null) {
       default = {
-        repository = "s3:s3.us-east-1.amazonaws.com/${config.backup.s3.glacierBucket}/restic";
+        repository = "s3:s3.us-east-1.amazonaws.com/${config.backup.s3.resticBucket}/restic";
         paths = [ ];
         environmentFile = config.secrets.s3-glacier.dest;
         passwordFile = config.secrets.restic.dest;
