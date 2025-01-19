@@ -37,17 +37,16 @@
       # Set up screen position and rotation
       setupCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-1 \
-                                            --mode 1920x1200 \
-                                            --pos 2560x0 \
-                                            --rotate left \
-                                        --output DisplayPort-0 \
                                             --primary \
-                                            --mode 2560x1440 \
-                                            --pos 0x560 \
                                             --rotate normal \
-                                            --rate 120 \
+                                            --mode 2560x1440 \
+                                            --rate 165 \
+                                        --output DisplayPort-2 \
+                                            --right-of DisplayPort-1 \
+                                            --rotate left \
                                         --output DVI-0 --off \
                                         --output DVI-1 --off \
+                                        || echo "xrandr failed"
       '';
     };
   };
