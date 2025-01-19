@@ -8,6 +8,10 @@
 
   config = lib.mkIf (config.physical && !config.server) {
 
+    # Use power button to sleep instead of poweroff
+    services.logind.powerKey = "suspend";
+    services.logind.powerKeyLongPress = "poweroff";
+
     # Prevent wake from keyboard
     powerManagement.powerDownCommands = ''
       set +e
