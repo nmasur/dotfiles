@@ -194,7 +194,18 @@
       nixpkgs.config.permittedInsecurePackages = config.insecurePackages;
 
       # Pin a state version to prevent warnings
-      home-manager.users.${config.user}.home.stateVersion = stateVersion;
       home-manager.users.root.home.stateVersion = stateVersion;
+
+      # Fix for running home-manager against the repo directly
+      # See: https://github.com/nix-community/home-manager/issues/2033
+      home-manager.users.${config.user} = {
+        home.stateVersion = stateVersion;
+        news = {
+          display = "silent";
+          entries = lib.mkForce [ ];
+          json = lib.mkForce { "output" = { }; };
+        };
+      };
+
     };
 }
