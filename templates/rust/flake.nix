@@ -24,6 +24,7 @@
               rustc
               cargo
               cargo-watch
+              clippy
               rustfmt
               pkg-config
               openssl

@@ -17,10 +17,14 @@
       };
 
       home.packages = with pkgs; [
-        cargo
-        rustc
-        clippy
         gcc
+        rustc
+        cargo
+        cargo-watch
+        clippy
+        rustfmt
+        pkg-config
+        openssl
       ];
     };
   };
