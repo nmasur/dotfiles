@@ -48,11 +48,19 @@
           fi
           ${ldap_script}/bin/ldap "$@" | jq '[ .[].member] | add'
         '';
+        ldapl_script = pkgs.writeShellScriptBin "ldapl" ''
+          if ! [ "$LDAP_HOST" ]; then
+              echo "No LDAP_HOST specified!"
+              exit 1
+          fi
+          ${ldap_script}/bin/ldap "*$@*" | jq -r '.[].name'
+        '';
       in
       [
         ldap_script
         ldapm_script
         ldapg_script
+        ldapl_script
         jq_parse
       ];
   };
