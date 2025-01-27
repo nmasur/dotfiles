@@ -20,7 +20,10 @@
     '';
 
     # Add homebrew paths to CLI path
-    home-manager.users.${config.user}.home.sessionPath = [ "/opt/homebrew/bin/" ];
+    home-manager.users.${config.user}.home.sessionPath = [
+      "/opt/homebrew/bin/"
+      "/opt/homebrew/opt/trash/bin/"
+    ];
 
     homebrew = {
       enable = true;
