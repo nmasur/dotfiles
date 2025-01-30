@@ -18,6 +18,8 @@
 
 let
 
+  cfg = config.services.honeypot;
+
   portsToBlock = [
     25545
     25565
@@ -47,35 +49,37 @@ let
 in
 {
 
-  options.honeypot.enable = lib.mkEnableOption "Honeypot fail2ban system.";
+  options.services.honeypot.enable = lib.mkEnableOption "Honeypot fail2ban system.";
 
-  config.networking.firewall = lib.mkIf config.honeypot.enable {
+  config = lib.mkIf cfg.enable {
+    networking.firewall = {
 
-    extraPackages = [ pkgs.ipset ];
-    # allowedTCPPorts = portsToBlock;
+      extraPackages = [ pkgs.ipset ];
+      # allowedTCPPorts = portsToBlock;
 
-    # Restore ban list when starting up
-    extraCommands = ''
-      if test -f /var/lib/ipset.conf
-      then
-          ipset restore -! < /var/lib/ipset.conf
-      else
-          ipset -exist create blocked hash:ip ${if expire > 0 then "timeout ${toString expire}" else ""}
-          ipset -exist create blocked6 hash:ip family inet6 ${
-            if expire > 0 then "timeout ${toString expire}" else ""
-          }
-      fi
-      ${create-rules}
-    '';
+      # Restore ban list when starting up
+      extraCommands = ''
+        if test -f /var/lib/ipset.conf
+        then
+            ipset restore -! < /var/lib/ipset.conf
+        else
+            ipset -exist create blocked hash:ip ${if expire > 0 then "timeout ${toString expire}" else ""}
+            ipset -exist create blocked6 hash:ip family inet6 ${
+              if expire > 0 then "timeout ${toString expire}" else ""
+            }
+        fi
+        ${create-rules}
+      '';
 
-    # Save list when shutting down
-    extraStopCommands = ''
-      ipset -exist create blocked hash:ip ${if expire > 0 then "timeout ${toString expire}" else ""}
-      ipset -exist create blocked6 hash:ip family inet6 ${
-        if expire > 0 then "timeout ${toString expire}" else ""
-      }
-      ipset save > /var/lib/ipset.conf
-      ${delete-rules}
-    '';
+      # Save list when shutting down
+      extraStopCommands = ''
+        ipset -exist create blocked hash:ip ${if expire > 0 then "timeout ${toString expire}" else ""}
+        ipset -exist create blocked6 hash:ip family inet6 ${
+          if expire > 0 then "timeout ${toString expire}" else ""
+        }
+        ipset save > /var/lib/ipset.conf
+        ${delete-rules}
+      '';
+    };
   };
 }

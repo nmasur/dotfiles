@@ -1,9 +1,13 @@
 { config, lib, ... }:
+let
+  cfg = config.nmasur.presets.programs.haskell;
+in
 {
 
-  options.haskell.enable = lib.mkEnableOption "Haskell programming language.";
+  options.nmasur.presets.programs.haskell.enable =
+    lib.mkEnableOption "Haskell programming language config.";
 
-  config = lib.mkIf config.haskell.enable {
+  config = lib.mkIf cfg.enable {
 
     # Binary Cache for Haskell.nix
     nix.settings.trusted-public-keys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];

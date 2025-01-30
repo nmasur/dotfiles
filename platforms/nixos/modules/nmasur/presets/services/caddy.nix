@@ -50,10 +50,10 @@ in
   config = lib.mkIf cfg.enable {
 
     # Force Caddy to 403 if not coming from allowlisted source
-    caddy.cidrAllowlist = lib.mkDefault [ "127.0.0.1/32" ];
-    caddy.routes = lib.mkBefore [
+    cfg.cidrAllowlist = lib.mkDefault [ "127.0.0.1/32" ];
+    cfg.routes = lib.mkBefore [
       {
-        match = [ { not = [ { remote_ip.ranges = config.caddy.cidrAllowlist; } ]; } ];
+        match = [ { not = [ { remote_ip.ranges = cfg.cidrAllowlist; } ]; } ];
         handle = [
           {
             handler = "static_response";

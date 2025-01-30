@@ -492,22 +492,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-caddy": {
-      "locked": {
-        "lastModified": 1699107987,
-        "narHash": "sha256-nWXETr4Oqy/vOfzgWyMY04qzEN2iREFJc5ycQ3XNu0A=",
-        "owner": "jpds",
-        "repo": "nixpkgs",
-        "rev": "a33b02fa9d664f31dadc8a874eb1a5dbaa9f4ecf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jpds",
-        "ref": "caddy-external-plugins",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1735563628,
@@ -697,7 +681,6 @@
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-caddy": "nixpkgs-caddy",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "nvim-lint-src": "nvim-lint-src",

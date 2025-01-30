@@ -34,7 +34,7 @@ in
 
     # Normally I block all requests not coming from Cloudflare, so I have to also
     # allow my local network.
-    caddy.cidrAllowlist = [ "192.168.0.0/16" ];
+    config.nmasur.presets.services.caddy.cidrAllowlist = [ "192.168.0.0/16" ];
 
     services.bind = {
 

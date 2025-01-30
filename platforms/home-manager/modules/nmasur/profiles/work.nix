@@ -58,6 +58,12 @@ in
         text = builtins.readFile ../../modules/common/shell/bash/scripts/terraform-init.sh;
       })
     ];
+
+    programs.helix.enable = lib.mkDefault true;
+    programs.zed-editor.enable = lib.mkDefault true;
+
+    config.nmasur.presets.programs.terraform.enable = lib.mkDefault true;
+
   };
 
 }

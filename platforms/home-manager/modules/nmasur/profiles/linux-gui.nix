@@ -17,32 +17,34 @@ in
 
     # Cursor
     home.pointerCursor = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-      size = 24;
-      gtk.enable = true;
-      x11.enable = true;
+      name = lib.mkDefault "Adwaita";
+      package = lib.mkDefault pkgs.adwaita-icon-theme;
+      size = lib.mkDefault 24;
+      gtk.enable = lib.mkDefault true;
+      x11.enable = lib.mkDefault true;
     };
 
     # Enable num lock on login
-    xsession.numlock.enable = true;
+    xsession.numlock.enable = lib.mkDefault true;
 
     # Dark theme
     gtk =
       let
         gtkExtraConfig = {
-          gtk-application-prefer-dark-theme = config.theme.dark;
+          gtk-application-prefer-dark-theme = lib.mkDefault config.theme.dark;
         };
       in
       {
-        enable = true;
+        enable = lib.mkDefault true;
         theme = {
-          name = config.gtk.theme.name;
-          package = config.gtk.theme.package;
+          name = lib.mkDefault config.gtk.theme.name;
+          package = lib.mkDefault config.gtk.theme.package;
         };
-        gtk3.extraConfig = gtkExtraConfig;
-        gtk4.extraConfig = gtkExtraConfig;
+        gtk3.extraConfig = lib.mkDefault gtkExtraConfig;
+        gtk4.extraConfig = lib.mkDefault gtkExtraConfig;
       };
+
+    programs.zed-editor.enable = lib.mkDefault true;
 
   };
 }

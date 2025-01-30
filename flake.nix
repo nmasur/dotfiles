@@ -10,9 +10,6 @@
     # Used for specific stable packages
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    # Used for caddy plugins
-    nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
-
     # Used for MacOS system config
     darwin = {
       url = "github:lnl7/nix-darwin/master";

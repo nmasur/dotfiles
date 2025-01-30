@@ -11,12 +11,13 @@
 {
   config,
   pkgs,
-  pkgs-caddy,
   lib,
   ...
 }:
 
 let
+
+  cfg = config.nmasur.presets.services.cloudflare;
 
   cloudflareIpRanges = [
 
@@ -49,29 +50,25 @@ let
 in
 {
 
-  options.cloudflare.enable = lib.mkEnableOption "Use Cloudflare.";
+  options.nmasur.presets.services.cloudflare = {
+    enable = lib.mkEnableOption "Cloudflare proxy configuration";
 
-  options.cloudflare.noProxyDomains = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    description = "Domains to use for dyndns without CDN proxying.";
-    default = [ ];
+    noProxyDomains = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Domains to use for dyndns without CDN proxying.";
+      default = [ ];
+    };
   };
 
-  config = lib.mkIf config.cloudflare.enable {
+  config = lib.mkIf cfg.enable {
 
     # Forces Caddy to error if coming from a non-Cloudflare IP
-    caddy.cidrAllowlist = cloudflareIpRanges;
+    config.nmasur.presets.services.caddy.cidrAllowlist = cloudflareIpRanges;
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
-    services.caddy.package = pkgs-caddy.caddy.override {
-      externalPlugins = [
-        {
-          name = "cloudflare";
-          repo = "github.com/caddy-dns/cloudflare";
-          version = "master";
-        }
-      ];
-      vendorHash = "sha256-C7JOGd4sXsRZL561oP84V2/pTg7szEgF4OFOw35yS1s=";
+    services.caddy.package = pkgs.caddy.withPlugins {
+      plugins = [ "github.com/caddy-dns/cloudflare@master" ];
+      hash = "sha256-C7JOGd4sXsRZL561oP84V2/pTg7szEgF4OFOw35yS1s=";
     };
     caddy.tlsPolicies = [
       {

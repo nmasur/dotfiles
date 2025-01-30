@@ -7,12 +7,17 @@
 
 let
   cfg = config.nmasur.presets.programs.wezterm;
-  font = config.programs.kitty.font.name;
 in
 
 {
 
-  options.nmasur.presets.programs.wezterm.enable = lib.mkEnableOption "WezTerm terminal";
+  options.nmasur.presets.programs.wezterm = {
+    enable = lib.mkEnableOption "WezTerm terminal";
+    font = lib.mkOption {
+      type = lib.types.str;
+      description = "Name of the font for WezTerm";
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     # Set the i3 terminal
@@ -99,7 +104,7 @@ in
           bottom = 12,
         }
 
-        config.font = wezterm.font('${font}', { weight = 'Bold'})
+        config.font = wezterm.font('${cfg.font}', { weight = 'Bold'})
         config.font_size = ${if pkgs.stdenv.isLinux then "14.0" else "18.0"}
 
         -- Fix color blocks instead of text
@@ -108,7 +113,7 @@ in
         -- Tab Bar
         config.hide_tab_bar_if_only_one_tab = true
         config.window_frame = {
-          font = wezterm.font('${font}', { weight = 'Bold'}),
+          font = wezterm.font('${cfg.font}', { weight = 'Bold'}),
           font_size = ${if pkgs.stdenv.isLinux then "12.0" else "16.0"},
         }
 

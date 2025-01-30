@@ -22,5 +22,10 @@ in
       "notunes" # Don't launch Apple Music with the play button
     ];
 
+    # Add homebrew paths to CLI path
+    home.sessionPath = [
+      "/opt/homebrew/opt/trash/bin"
+    ];
+
   };
 }

@@ -25,5 +25,6 @@ in
     programs.gamemode.enable = true;
 
     environment.systemPackages = with pkgs; [ moonlight-qt ];
+
   };
 }

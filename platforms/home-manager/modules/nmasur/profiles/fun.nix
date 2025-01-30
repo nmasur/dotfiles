@@ -15,14 +15,14 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    home.packages = with pkgs; [
+    home.packages = lib.mkDefault [
 
       # Charm tools
 
-      glow # Markdown previews
-      skate # Key-value store
-      charm # Manage account and filesystem
-      pop # Send emails from a TUI
+      pkgs.glow # Markdown previews
+      pkgs.skate # Key-value store
+      pkgs.charm # Manage account and filesystem
+      pkgs.pop # Send emails from a TUI
 
     ];
 

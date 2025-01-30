@@ -16,28 +16,28 @@ in
   config = lib.mkIf cfg.enable {
 
     # Allow Nix to manage the default applications list
-    mimeApps.enable = true;
+    mimeApps.enable = lib.mkDefault true;
 
     # Set directories for application defaults
     userDirs = {
-      enable = true;
-      createDirectories = true;
-      documents = "$HOME/documents";
-      download = config.userDirs.download;
-      music = "$HOME/media/music";
-      pictures = "$HOME/media/images";
-      videos = "$HOME/media/videos";
-      desktop = "$HOME/other/desktop";
-      publicShare = "$HOME/other/public";
-      templates = "$HOME/other/templates";
+      enable = lib.mkDefault true;
+      createDirectories = lib.mkDefault true;
+      documents = lib.mkDefault "$HOME/documents";
+      download = lib.mkDefault config.userDirs.download;
+      music = lib.mkDefault "$HOME/media/music";
+      pictures = lib.mkDefault "$HOME/media/images";
+      videos = lib.mkDefault "$HOME/media/videos";
+      desktop = lib.mkDefault "$HOME/other/desktop";
+      publicShare = lib.mkDefault "$HOME/other/public";
+      templates = lib.mkDefault "$HOME/other/templates";
       extraConfig = {
-        XDG_DEV_DIR = "$HOME/dev";
+        XDG_DEV_DIR = lib.mkDefault "$HOME/dev";
       };
     };
 
     programs.fish.shellAliases = {
       # Move files to XDG trash on the commandline
-      trash = "${pkgs.trash-cli}/bin/trash-put";
+      trash = lib.mkDefault "${pkgs.trash-cli}/bin/trash-put";
     };
   };
 }

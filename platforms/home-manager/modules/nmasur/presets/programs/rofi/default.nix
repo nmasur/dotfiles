@@ -168,7 +168,7 @@ in
 
     home.file.".local/share/rofi/themes" = {
       recursive = true;
-      source = ./rofi/themes;
+      source = ./themes;
     };
 
   };

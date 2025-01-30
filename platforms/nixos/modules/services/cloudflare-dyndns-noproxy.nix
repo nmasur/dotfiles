@@ -18,7 +18,7 @@ in
     # Run a second copy of dyn-dns for non-proxied domains
     # Adapted from: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/cloudflare-dyndns.nix
     systemd.services.cloudflare-dyndns-noproxy =
-      lib.mkIf ((builtins.length config.cloudflare.noProxyDomains) > 0)
+      lib.mkIf ((builtins.length config.nmasur.presets.services.cloudflare.noProxyDomains) > 0)
         {
           description = "CloudFlare Dynamic DNS Client (no proxy)";
           after = [
@@ -30,7 +30,7 @@ in
           startAt = "*:0/5";
 
           environment = {
-            CLOUDFLARE_DOMAINS = toString config.cloudflare.noProxyDomains;
+            CLOUDFLARE_DOMAINS = toString config.nmasur.presets.services.cloudflare.noProxyDomains;
           };
 
           serviceConfig = {

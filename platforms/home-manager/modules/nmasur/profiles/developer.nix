@@ -15,9 +15,11 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    home.packages = with pkgs; [
-      pgcli # Postgres client with autocomplete
+    home.packages = lib.mkDefault [
+      pkgs.pgcli # Postgres client with autocomplete
     ];
+
+    programs.helix.enable = lib.mkDefault true;
 
   };
 
