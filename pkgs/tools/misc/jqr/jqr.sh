@@ -10,6 +10,8 @@ else
     input=$1
 fi
 
+# TODO: make available on non-macOS
+
 echo '' |
     fzf --phony \
         --height 100% \

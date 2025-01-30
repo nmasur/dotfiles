@@ -18,13 +18,16 @@ in
     home.activation = {
 
       # Always load the key if it doesn't exist
-      cloneDotfiles = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      loadkey = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        if [ ! -d ~/.ssh ]; then
+            run mkdir --parents $VERBOSE_ARG ~/.ssh/
+        fi
         if [ ! -f ~/.ssh/id_ed25519 ]; then
-            run mkdir -p ~/.ssh/
-
-            $DRY_RUN_CMD mkdir --parents $VERBOSE_ARG $(dirname "${config.dotfilesPath}")
-            $DRY_RUN_CMD ${pkgs.git}/bin/git \
-                clone ${config.dotfilesRepo} "${config.dotfilesPath}"
+            printf "\nEnter the seed phrase for your SSH key...\n"
+            printf "\nThen press ^D when complete.\n\n"
+            mkdir -p ~/.ssh/
+            ${pkgs.melt}/bin/melt restore ~/.ssh/id_ed25519
+            printf "\n\nContinuing activation.\n\n"
         fi
       '';
     };
