@@ -48,11 +48,6 @@ in
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
         };
-        note = {
-          description = "Edit or create a note";
-          argumentNames = "filename";
-          body = builtins.readFile ./functions/note.fish;
-        };
         recent = {
           description = "Open a recent file in Vim";
           body = builtins.readFile ./functions/recent.fish;
@@ -60,10 +55,6 @@ in
         search-and-edit = {
           description = "Search and open the relevant file in Vim";
           body = builtins.readFile ./functions/search-and-edit.fish;
-        };
-        syncnotes = {
-          description = "Full git commit on notes";
-          body = builtins.readFile ./functions/syncnotes.fish;
         };
         _which = {
           description = "Identify the path to a program in the shell";

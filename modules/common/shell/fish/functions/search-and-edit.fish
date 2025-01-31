@@ -17,5 +17,5 @@ set vimfile ( \
 )
 and set line_number (echo $vimfile | tr -d '\r' | cut -d':' -f2)
 and set vimfile (echo $vimfile | tr -d '\r' | cut -d':' -f1)
-and commandline -r "vim +$line_number $vimfile"
+and commandline -r "vim +$line_number \"$vimfile\""
 and commandline -f execute

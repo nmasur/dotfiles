@@ -6,13 +6,13 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.dotfiles;
+  cfg = config.nmasur.presets.programs.dotfiles;
 in
 {
 
   # Allows me to make sure I can work on my dotfiles locally
 
-  options.nmasur.preset.services.dotfiles = {
+  options.nmasur.preset.programs.dotfiles = {
     enable = lib.mkEnableOption "Clone dotfiles repository";
     repo = lib.mkOption {
       type = lib.types.str;
