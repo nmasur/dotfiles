@@ -7,13 +7,62 @@
 
 let
   cfg = config.nmasur.presets.services.i3;
-  lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen --lock --display 1 --blur 0.5 --span";
-  lockUpdate = "${pkgs.betterlockscreen}/bin/betterlockscreen --update ${config.wallpaper} --display 1 --span";
 in
 
 {
 
-  options.nmasur.presets.services.i3.enable = lib.mkEnableOption "i3 window manager";
+  options.nmasur.presets.services.i3 = {
+    enable = lib.mkEnableOption "i3 window manager";
+    commands = {
+      launcher = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Application launcher";
+        default = null;
+      };
+      lockScreen = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Screen lock";
+        default = "${lib.getExe pkgs.betterlockscreen} --lock --display 1 --blur 0.5 --span";
+      };
+      updateLockScreen = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Update lock screen cache";
+        default = "${lib.getExe pkgs.betterlockscreen} --update ${config.wallpaper} --display 1 --span";
+      };
+      toggleBar = lib.mkOption {
+      };
+      systemdSearch = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Search systemd";
+        default = null;
+      };
+      audioSwitch = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Switch audio output";
+        default = null;
+      };
+      applicationSwitch = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Application switcher";
+        default = null;
+      };
+      power = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Launch power options menu";
+        default = null;
+      };
+      brightness = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Launch brightness adjuster";
+        default = null;
+      };
+      calculator = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Launch calculator";
+        default = null;
+      };
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     xsession.windowManager.i3 = {
@@ -105,36 +154,36 @@ in
             "Shift+F12" =
               # Disable dynamic sleep
               # https://github.com/rockowitz/ddcutil/issues/323
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 + 30";
+              "exec ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 + 30";
             "Shift+F11" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 - 30";
+              "exec ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 - 30";
             "XF86MonBrightnessUp" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 + 30";
+              "exec ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 + 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 + 30";
             "XF86MonBrightnessDown" =
-              "exec ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 - 30";
+              "exec ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 - 30 && sleep 1; exec ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 - 30";
 
             # Media player controls
-            "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-            "XF86AudioStop" = "exec ${pkgs.playerctl}/bin/playerctl stop";
-            "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
-            "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+            "XF86AudioPlay" = "exec ${lib.getExe pkgs.playerctl} play-pause";
+            "XF86AudioStop" = "exec ${lib.getExe pkgs.playerctl} stop";
+            "XF86AudioNext" = "exec ${lib.getExe pkgs.playerctl} next";
+            "XF86AudioPrev" = "exec ${lib.getExe pkgs.playerctl} previous";
 
             # Launchers
             "${modifier}+Return" = "exec --no-startup-id ${
               config.home-manager.users.${config.user}.programs.rofi.terminal
             }; workspace ${ws2}; layout tabbed";
-            "${modifier}+space" = "exec --no-startup-id ${config.launcherCommand}";
-            "${modifier}+Shift+s" = "exec --no-startup-id ${config.systemdSearch}";
-            "${modifier}+Shift+a" = "exec --no-startup-id ${config.audioSwitchCommand}";
-            "Mod1+Tab" = "exec --no-startup-id ${config.altTabCommand}";
-            "${modifier}+Shift+period" = "exec --no-startup-id ${config.powerCommand}";
-            "${modifier}+Shift+m" = "exec --no-startup-id ${config.brightnessCommand}";
-            "${modifier}+c" = "exec --no-startup-id ${config.calculatorCommand}";
+            "${modifier}+space" = "exec --no-startup-id ${cfg.commands.launcher}";
+            "${modifier}+Shift+s" = "exec --no-startup-id ${cfg.commands.systemdSearch}";
+            "${modifier}+Shift+a" = "exec --no-startup-id ${cfg.commands.audioSwitch}";
+            "Mod1+Tab" = "exec --no-startup-id ${cfg.commands.altTab}";
+            "${modifier}+Shift+period" = "exec --no-startup-id ${cfg.commands.power}";
+            "${modifier}+Shift+m" = "exec --no-startup-id ${cfg.commands.brightness}";
+            "${modifier}+c" = "exec --no-startup-id ${cfg.commands.calculator}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+q" =
               ''exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
-            "${modifier}+Shift+x" = "exec ${lockCmd}";
+            "${modifier}+Shift+x" = "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
               "exec --no-startup-id ${
                 config.home-manager.users.${config.user}.programs.rofi.terminal
@@ -262,7 +311,7 @@ in
         cacheDir = "${config.homePath}/.cache/betterlockscreen/current";
       in
       lib.mkIf config.services.xserver.enable (
-        config.home-manager.users.${config.user}.lib.dag.entryAfter [ "writeBoundary" ] ''
+        config.lib.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -d ${cacheDir} ] || [ -z "$(ls ${cacheDir})" ]; then
               $DRY_RUN_CMD ${lockUpdate}
           fi

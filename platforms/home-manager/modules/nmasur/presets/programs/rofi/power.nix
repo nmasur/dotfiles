@@ -1,7 +1,12 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
 
-  rofi = config.home-manager.users.${config.user}.programs.rofi.finalPackage;
+  rofi = config.programs.rofi.finalPackage;
 in
 {
 
@@ -9,7 +14,7 @@ in
   # https://gitlab.com/vahnrr/rofi-menus/-/blob/b1f0e8a676eda5552e27ef631b0d43e660b23b8e/scripts/rofi-power
   # A rofi powered menu to execute power related action.
 
-  config.powerCommand = builtins.toString (
+  config.powerCommand = lib.mkIf config.nmasur.presets.programs.rofi.enable builtins.toString (
     pkgs.writeShellScript "powermenu" ''
       power_off=''
       reboot=''
@@ -23,7 +28,7 @@ in
           "$lock" \
           "$suspend" \
           "$log_out" \
-          | ${rofi}/bin/rofi \
+          | ${lib.getExe rofi} \
               -theme-str '@import "power.rasi"' \
               -hover-select \
               -me-select-entry "" \
@@ -46,7 +51,7 @@ in
               ;;
 
           "$lock")
-              ${pkgs.betterlockscreen}/bin/betterlockscreen --lock --display 1 --blur 0.5 --span
+              ${lib.getExe pkgs.betterlockscreen} --lock --display 1 --blur 0.5 --span
               ;;
 
           "$suspend")

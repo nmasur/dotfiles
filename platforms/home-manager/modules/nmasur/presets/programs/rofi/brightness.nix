@@ -1,14 +1,19 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
 
-  rofi = config.home-manager.users.${config.user}.programs.rofi.finalPackage;
+  rofi = config.programs.rofi.finalPackage;
 in
 {
 
   # Adapted from:
   # A rofi powered menu to execute brightness choices.
 
-  config.brightnessCommand = builtins.toString (
+  config.brightnessCommand = lib.mkIf config.nmasur.presets.programs.rofi.enable builtins.toString (
     pkgs.writeShellScript "brightness" ''
 
       dimmer="󰃝"
@@ -19,7 +24,7 @@ in
           "$dimmer" \
           "$medium" \
           "$brighter" \
-          | ${rofi}/bin/rofi \
+          | ${lib.getExe rofi} \
               -theme-str '@import "brightness.rasi"' \
               -hover-select \
               -me-select-entry ''' \
@@ -31,15 +36,15 @@ in
 
       case "$chosen" in
           "$dimmer")
-              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 25; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 25
+              ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 25; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 25
               ;;
 
           "$medium")
-              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 75; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 75
+              ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 75; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 75
               ;;
 
           "$brighter")
-              ${pkgs.ddcutil}/bin/ddcutil --display 1 setvcp 10 100; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 100
+              ${lib.getExe pkgs.ddcutil} --display 1 setvcp 10 100; ${pkgs.ddcutil}/bin/ddcutil --disable-dynamic-sleep --display 2 setvcp 10 100
               ;;
 
           *) exit 1 ;;

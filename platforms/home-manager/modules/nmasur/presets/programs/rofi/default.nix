@@ -11,6 +11,11 @@ in
 
 {
 
+  imports = [
+    ./power.nix
+    ./brightness.nix
+  ];
+
   options.nmasur.presets.programs.rofi.enable = lib.mkEnableOption "Rofi quick launcher";
 
   config = lib.mkIf cfg.enable {
