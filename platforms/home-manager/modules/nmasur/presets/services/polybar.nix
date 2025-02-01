@@ -15,6 +15,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    nmasur.presets.services.i3.commands.toggleBar = "polybar-msg cmd toggle";
+
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {

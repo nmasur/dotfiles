@@ -21,7 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Set the i3 terminal
-    xsession.windowManager.i3.config.terminal = lib.mkIf pkgs.stdenv.isLinux "wezterm";
+    config.nmasur.presets.services.i3.terminal = pkgs.wezterm;
 
     # Display images in the terminal
     programs.fish.shellAliases = {

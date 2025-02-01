@@ -13,6 +13,10 @@ in
 
   options.nmasur.presets.services.i3 = {
     enable = lib.mkEnableOption "i3 window manager";
+    terminal = lib.mkOption {
+      type = lib.types.package;
+      description = "Terminal application to launch";
+    };
     commands = {
       launcher = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
@@ -30,6 +34,9 @@ in
         default = "${lib.getExe pkgs.betterlockscreen} --update ${config.wallpaper} --display 1 --span";
       };
       toggleBar = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        description = "Toggle menu bar panel";
+        default = null;
       };
       systemdSearch = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
@@ -82,6 +89,7 @@ in
           ws10 = "10:X";
         in
         {
+          terminal = cfg.terminal.meta.mainProgram;
           modifier = modifier;
           assigns = {
             "${ws1}" = [ { class = "Firefox"; } ];
@@ -169,33 +177,34 @@ in
             "XF86AudioPrev" = "exec ${lib.getExe pkgs.playerctl} previous";
 
             # Launchers
-            "${modifier}+Return" = "exec --no-startup-id ${
-              config.home-manager.users.${config.user}.programs.rofi.terminal
-            }; workspace ${ws2}; layout tabbed";
-            "${modifier}+space" = "exec --no-startup-id ${cfg.commands.launcher}";
-            "${modifier}+Shift+s" = "exec --no-startup-id ${cfg.commands.systemdSearch}";
-            "${modifier}+Shift+a" = "exec --no-startup-id ${cfg.commands.audioSwitch}";
-            "Mod1+Tab" = "exec --no-startup-id ${cfg.commands.altTab}";
-            "${modifier}+Shift+period" = "exec --no-startup-id ${cfg.commands.power}";
-            "${modifier}+Shift+m" = "exec --no-startup-id ${cfg.commands.brightness}";
-            "${modifier}+c" = "exec --no-startup-id ${cfg.commands.calculator}";
+            "${modifier}+Return" =
+              "exec --no-startup-id ${lib.getExe cfg.terminal}; workspace ${ws2}; layout tabbed";
+            "${modifier}+space" =
+              lib.mkIf cfg.commands.launcher != null "exec --no-startup-id ${cfg.commands.launcher}";
+            "${modifier}+Shift+s" =
+              lib.mkIf cfg.commands.systemdSearch != null "exec --no-startup-id ${cfg.commands.systemdSearch}";
+            "${modifier}+Shift+a" =
+              lib.mkIf cfg.commands.audioSwitch != null "exec --no-startup-id ${cfg.commands.audioSwitch}";
+            "Mod1+Tab" = lib.mkIf cfg.commands.altTab != null "exec --no-startup-id ${cfg.commands.altTab}";
+            "${modifier}+Shift+period" =
+              lib.mkIf cfg.commands.power != null "exec --no-startup-id ${cfg.commands.power}";
+            "${modifier}+Shift+m" =
+              lib.mkIf cfg.commands.brightness != null "exec --no-startup-id ${cfg.commands.brightness}";
+            "${modifier}+c" =
+              lib.mkIf cfg.commands.calculator != null "exec --no-startup-id ${cfg.commands.calculator}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+q" =
               ''exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
-            "${modifier}+Shift+x" = "exec ${cfg.commands.lockScreen}";
+            "${modifier}+Shift+x" = lib.mkIf cfg.commands.lockScreen != null "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
-              "exec --no-startup-id ${
-                config.home-manager.users.${config.user}.programs.rofi.terminal
-              } -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName} || read'";
             "${modifier}+Mod1+r" =
-              "exec --no-startup-id ${
-                config.home-manager.users.${config.user}.programs.rofi.terminal
-              } -e sh -c 'doas nixos-rebuild switch --flake ${config.dotfilesPath}#${config.networking.hostName} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c 'doas nixos-rebuild switch --flake ${config.dotfilesPath}#${config.networking.hostName} || read'";
 
             # Window options
             "${modifier}+q" = "kill";
-            "${modifier}+b" = "exec ${config.toggleBarCommand}";
+            "${modifier}+b" = lib.mkIf cfg.commands.toggleBar "exec ${cfg.commands.toggleBar}";
             "${modifier}+f" = "fullscreen toggle";
             "${modifier}+h" = "focus left";
             "${modifier}+j" = "focus down";
@@ -299,10 +308,11 @@ in
     };
 
     programs.fish.functions = {
-      update-lock-screen = lib.mkIf config.services.xserver.enable {
-        description = "Update lockscreen with wallpaper";
-        body = lockUpdate;
-      };
+      update-lock-screen =
+        lib.mkIf cfg.commands.updateLockScreen != null {
+          description = "Update lockscreen with wallpaper";
+          body = cfg.commands.updateLockScreen;
+        };
     };
 
     # Update lock screen cache only if cache is empty
@@ -310,10 +320,10 @@ in
       let
         cacheDir = "${config.homePath}/.cache/betterlockscreen/current";
       in
-      lib.mkIf config.services.xserver.enable (
+      lib.mkIf cfg.commands.updateLockScreen != null (
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -d ${cacheDir} ] || [ -z "$(ls ${cacheDir})" ]; then
-              $DRY_RUN_CMD ${lockUpdate}
+              run ${cfg.commands.updateLockScreen}
           fi
         ''
       );
