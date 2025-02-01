@@ -28,6 +28,9 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    programs.git.extraConfig.safe.directory = cfg.path;
+    programs.direnv.config.whitelist.prefix = [ cfg.path ];
+
     home.activation = {
 
       # Always clone dotfiles repository if it doesn't exist

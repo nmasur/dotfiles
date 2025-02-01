@@ -17,6 +17,10 @@ in
       type = lib.types.package;
       description = "Terminal application to launch";
     };
+    wallpaper = {
+      type = lib.types.path;
+      description = "Wallpaper background image file";
+    };
     commands = {
       launcher = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
@@ -31,7 +35,7 @@ in
       updateLockScreen = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         description = "Update lock screen cache";
-        default = "${lib.getExe pkgs.betterlockscreen} --update ${config.wallpaper} --display 1 --span";
+        default = "${lib.getExe pkgs.betterlockscreen} --update ${cfg.wallpaper} --display 1 --span";
       };
       toggleBar = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
@@ -271,7 +275,7 @@ in
           modes = { };
           startup = [
             {
-              command = "feh --bg-fill ${config.wallpaper}";
+              command = "feh --bg-fill ${cfg.wallpaper}";
               always = true;
               notification = false;
             }

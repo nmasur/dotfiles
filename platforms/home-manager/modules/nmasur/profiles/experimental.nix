@@ -6,12 +6,12 @@
 }:
 
 let
-  cfg = config.nmasur.profiles.fun;
+  cfg = config.nmasur.profiles.experimental;
 in
 
 {
 
-  options.nmasur.profiles.fun.enable = lib.mkEnableOption "Fun tools";
+  options.nmasur.profiles.experimental.enable = lib.mkEnableOption "experimental tools";
 
   config = lib.mkIf cfg.enable {
 

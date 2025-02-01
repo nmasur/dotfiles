@@ -6,13 +6,12 @@
 }:
 
 let
-  cfg = config.nmasur.presets.programs."1password";
+  cfg = config.nmasur.presets.programs._1password;
 in
 
 {
 
-  options.nmasur.presets.programs."1password".enable =
-    lib.mkEnableOption "1Password password manager";
+  options.nmasur.presets.programs._1password.enable = lib.mkEnableOption "1Password password manager";
 
   config = lib.mkIf cfg.enable {
     unfreePackages = [

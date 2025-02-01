@@ -34,35 +34,40 @@ in
       pkgs.ipcalc # Make IP network calculations
       pkgs.cloudflared # Allow connecting to Cloudflare tunnels
       pkgs.monitorcontrol # Allows adjusting external displays
-      (pkgs.writeShellApplication {
-        name = "ocr";
-        runtimeInputs = [ pkgs.tesseract ];
-        text = builtins.readFile ../../modules/common/shell/bash/scripts/ocr.sh;
-      })
-      (pkgs.writeShellApplication {
-        name = "ec2";
-        runtimeInputs = [
-          pkgs.awscli2
-          pkgs.jq
-          pkgs.fzf
-        ];
-        text = builtins.readFile ../../modules/common/shell/bash/scripts/aws-ec2.sh;
-      })
-      (pkgs.writeShellApplication {
-        name = "tfinit";
-        runtimeInputs = [
-          pkgs.terraform
-          pkgs.gawk
-          pkgs.git
-        ];
-        text = builtins.readFile ../../modules/common/shell/bash/scripts/terraform-init.sh;
-      })
+      pkgs.ocr # Converts images to text
+      pkgs.aws-ec2 # Browse EC2 instances
+      pkgs.terraform-init # Quick shortcut for initializing Terraform backend
     ];
 
     programs.helix.enable = lib.mkDefault true;
     programs.zed-editor.enable = lib.mkDefault true;
 
-    config.nmasur.presets.programs.terraform.enable = lib.mkDefault true;
+    nmasur.presets = {
+      programs = {
+        _1password.enable = lib.mkDefault true;
+        atuin.enable = lib.mkDefault true;
+        bash.enable = lib.mkDefault true;
+        bat.enable = lib.mkDefault true;
+        direnv.enable = lib.mkDefault true;
+        dotfiles.enable = lib.mkDefault true;
+        fd.enable = lib.mkDefault true;
+        firefox.enable = lib.mkDefault true;
+        fish.enable = lib.mkDefault true;
+        fzf.enable = lib.mkDefault true;
+        git-work.enable = lib.mkDefault true;
+        git.enable = lib.mkDefault true;
+        github.enable = lib.mkDefault true;
+        jujutsu.enable = lib.mkDefault true;
+        k9s.enable = lib.mkDefault true;
+        kubectl.enable = lib.mkDefault true;
+        ldapsearch.enable = lib.mkDefault true;
+        ripgrep.enable = lib.mkDefault true;
+        starship.enable = lib.mkDefault true;
+        terraform.enable = lib.mkDefault true;
+        weather.enable = lib.mkDefault true;
+        wezterm.enable = lib.mkDefault true;
+      };
+    };
 
   };
 

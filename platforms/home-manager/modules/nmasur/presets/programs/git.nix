@@ -12,12 +12,12 @@ in
 {
 
   options.nmasur.presets.programs.git = {
-    enable = lib.mkEnableOption "";
-    gitName = lib.mkOption {
+    enable = lib.mkEnableOption "Git version control";
+    name = lib.mkOption {
       type = lib.types.str;
       description = "Name to use for git commits";
     };
-    gitEmail = lib.mkOption {
+    email = lib.mkOption {
       type = lib.types.str;
       description = "Email to use for git commits";
     };
@@ -27,16 +27,13 @@ in
 
     programs.git = {
       enable = true;
-      userName = config.gitName;
-      userEmail = config.gitEmail;
+      userName = cfg.name;
+      userEmail = cfg.email;
       extraConfig = {
         core.pager = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less -F";
         interactive.difffilter = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight";
         pager = {
           branch = "false";
-        };
-        safe = {
-          directory = config.dotfilesPath;
         };
         pull = {
           ff = "only";
@@ -61,26 +58,7 @@ in
         ".direnv/**"
         "result"
       ];
-      includes = [
-        {
-          path = "~/.config/git/personal";
-          condition = "gitdir:~/dev/personal/";
-        }
-      ];
     };
-
-    # Personal git config
-    # TODO: fix with variables
-    xdg.configFile."git/personal".text = ''
-      [user]
-          name = "${config.fullName}"
-          email = "7386960+nmasur@users.noreply.github.com"
-          signingkey = ~/.ssh/id_ed25519
-      [commit]
-          gpgsign = true
-      [tag]
-          gpgsign = true
-    '';
 
     xdg.configFile."git/allowed-signers".text = ''
       7386960+nmasur@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s

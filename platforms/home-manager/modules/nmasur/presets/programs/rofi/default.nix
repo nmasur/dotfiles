@@ -16,7 +16,14 @@ in
     ./brightness.nix
   ];
 
-  options.nmasur.presets.programs.rofi.enable = lib.mkEnableOption "Rofi quick launcher";
+  options.nmasur.presets.programs.rofi = {
+    enable = lib.mkEnableOption "Rofi quick launcher";
+    terminal = lib.mkOption {
+      type = lib.types.package;
+      description = "Terminal application for rofi";
+      default = config.nmasur.presets.services.i3.terminal;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
 
@@ -24,12 +31,33 @@ in
       jq # Required for rofi-systemd
     ];
 
+    nmasur.presets.services.i3.commands =
+      let
+        rofi = config.programs.rofi.finalPackage;
+      in
+      {
+        launcher = ''${lib.getExe rofi} -modes drun -show drun -theme-str '@import "launcher.rasi"' '';
+        systemdSearch = lib.getExe pkgs.rofi-systemd;
+        altTab = "${lib.getExe rofi} -show window -modi window";
+        calculator = "${lib.getExe rofi} -modes calc -show calc";
+        audioSwitch = lib.getExe (
+          pkgs.writeShellApplication {
+            name = "switch-audio";
+            runtimeInputs = [
+              pkgs.ponymix
+              rofi
+            ];
+            text = builtins.readFile ./rofi/pulse-sink.sh;
+          }
+        );
+      };
+
     programs.rofi = {
       enable = true;
       cycle = true;
       location = "center";
       pass = { };
-      terminal = lib.mkIf pkgs.stdenv.isLinux config.terminal;
+      terminal = lib.getExe cfg.terminal;
       plugins = [
         pkgs.rofi-calc
         pkgs.rofi-emoji

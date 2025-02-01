@@ -179,13 +179,6 @@
         curl
       ];
 
-      # Use the system-level nixpkgs instead of Home Manager's
-      home-manager.useGlobalPkgs = true;
-
-      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-      # using multiple profiles for one user
-      home-manager.useUserPackages = true;
-
       # Allow specified unfree packages (identified elsewhere)
       # Retrieves package object based on string name
       nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.unfreePackages;

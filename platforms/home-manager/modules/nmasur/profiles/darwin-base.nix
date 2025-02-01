@@ -20,7 +20,7 @@ in
     };
 
     # Used for aerc
-    xdg.enable = true;
+    xdg.enable = lib.mkDefault pkgs.stdenv.isDarwin;
 
     home.packages = [
       pkgs.noti # Create notifications programmatically

@@ -14,6 +14,11 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    nmasur.presets = {
+      fish = lib.mkDefault true;
+      homebrew = lib.mkDefault true;
+    };
+
     homebrew.brews = lib.mkDefault [
       "trash" # Delete files and folders to trash instead of rm
     ];

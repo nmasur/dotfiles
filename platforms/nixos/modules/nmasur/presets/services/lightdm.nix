@@ -10,7 +10,13 @@ in
 
 {
 
-  options.nmasur.presets.services.lightdm.enable = lib.mkEnableOption "Lightdm display manager";
+  options.nmasur.presets.services.lightdm = {
+    enable = lib.mkEnableOption "Lightdm display manager";
+    wallpaper = {
+      type = lib.types.path;
+      description = "Wallpaper background image file";
+    };
+  };
 
   config = lib.mkIf cfg.enable {
 
@@ -21,7 +27,7 @@ in
       displayManager = {
         lightdm = {
           enable = true;
-          background = config.wallpaper;
+          background = cfg.wallpaper;
 
           # Show default user
           # Also make sure /var/lib/AccountsService/users/<user> has SystemAccount=false

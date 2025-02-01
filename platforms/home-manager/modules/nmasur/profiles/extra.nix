@@ -35,23 +35,25 @@ in
 
     programs.zoxide.enable = lib.mkDefault true; # Shortcut jump command
     programs.fish.shellAliases = {
-      "cd" = lib.mkDefault "${pkgs.zoxide}/bin/zoxide";
-      "du" = lib.mkDefault "${pkgs.dua}/bin/dua";
-      "ncdu" = lib.mkDefault "${pkgs.du-dust}/bin/du-dust";
-      "df" = lib.mkDefault "${pkgs.duf}/bin/duf";
+      "cd" = lib.mkDefault lib.getExe pkgs.zoxide;
+      "du" = lib.mkDefault lib.getExe pkgs.dua;
+      "ncdu" = lib.mkDefault lib.getExe pkgs.du-dust;
+      "df" = lib.mkDefault lib.getExe pkgs.duf;
 
       # Use eza (exa) instead of ls for fancier output
-      ls = "${pkgs.eza}/bin/eza --group";
+      ls = lib.mkDefault "${lib.getExe pkgs.eza} --group";
 
       # Version of bash which works much better on the terminal
-      bash = "${pkgs.bashInteractive}/bin/bash";
+      bash = lib.mkDefault lib.getExe pkgs.bashInteractive;
     };
 
-    config.nmasur.presets.bat.enable = lib.mkDefault true;
-    config.nmasur.presets.fd.enable = lib.mkDefault true;
-    config.nmasur.presets.ripgrep.enable = lib.mkDefault true;
-    config.nmasur.presets.prettyping.enable = lib.mkDefault true;
-    config.nmasur.presets.weather.enable = lib.mkDefault true;
+    nmasur.presets = {
+      bat.enable = lib.mkDefault true;
+      fd.enable = lib.mkDefault true;
+      ripgrep.enable = lib.mkDefault true;
+      prettyping.enable = lib.mkDefault true;
+      weather.enable = lib.mkDefault true;
+    };
 
   };
 }

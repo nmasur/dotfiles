@@ -5,14 +5,16 @@
 }:
 
 let
-  cfg = config.nmasur.profiles.gaming;
+  cfg = config.nmasur.profiles.extra;
 in
 
 {
 
-  options.nmasur.profiles.gaming.enable = lib.mkEnableOption "extra config for macOS";
+  options.nmasur.profiles.extra.enable = lib.mkEnableOption "extra config for macOS";
 
   config = lib.mkIf cfg.enable {
+
+    nmasur.profiles.base.enable = lib.mkDefault true;
 
     homebrew.casks = lib.mkDefault [
       "keybase" # GUI on Nix not available for macOS
