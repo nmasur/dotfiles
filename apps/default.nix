@@ -25,9 +25,6 @@ rec {
   # Re-encrypt secrets for all machines
   reencrypt-secrets = import ./reencrypt-secrets.nix { inherit pkgs; };
 
-  # Connect machine metrics to Netdata Cloud
-  netdata = import ./netdata-cloud.nix { inherit pkgs; };
-
   # Run neovim as an app
   neovim = import ./neovim.nix { inherit pkgs; };
   nvim = neovim;

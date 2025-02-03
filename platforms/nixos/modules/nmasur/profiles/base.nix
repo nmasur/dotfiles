@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -30,6 +31,14 @@ in
         "wheel" # Sudo privileges
       ];
     };
+
+    # Basic common system packages for all devices
+    environment.systemPackages = [
+      pkgs.git
+      pkgs.vim
+      pkgs.wget
+      pkgs.curl
+    ];
 
     # Include home-manager config in NixOS
     home-manager = {

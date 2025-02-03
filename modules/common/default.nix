@@ -171,14 +171,6 @@
     in
     {
 
-      # Basic common system packages for all devices
-      environment.systemPackages = with pkgs; [
-        git
-        vim
-        wget
-        curl
-      ];
-
       # Allow specified unfree packages (identified elsewhere)
       # Retrieves package object based on string name
       nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.unfreePackages;

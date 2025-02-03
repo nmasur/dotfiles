@@ -1,5 +1,5 @@
 {
-  description = "My system";
+  description = "An opinionated flake containing the NixOS, nix-darwin, and home-manager configurations for multiple systems.";
 
   # Other flakes that we want to pull from
   inputs = {
@@ -29,7 +29,10 @@
     };
 
     # Community packages; used for Firefox extensions
-    nur.url = "github:nix-community/nur";
+    nur = {
+      url = "github:nix-community/nur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Use official Firefox binary for macOS
     firefox-darwin = {

@@ -6,12 +6,13 @@
 }:
 
 let
-  cfg = config.nmasur.profiles.on-premises;
+  cfg = config.nmasur.profiles.home;
 in
 
 {
 
-  options.nmasur.profiles.on-premises.enable = lib.mkEnableOption "on-premises machine settings";
+  options.nmasur.profiles.home.enable =
+    lib.mkEnableOption "home (on-premises, physical) machine settings";
 
   config = lib.mkIf cfg.enable {
 

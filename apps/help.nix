@@ -17,7 +17,6 @@
           '  • {{ Color "15" "57" " loadkey " }} {{ Italic "Load an ssh key for this machine using melt." }}' \
           '  • {{ Color "15" "57" " encrypt-secret " }} {{ Italic "Encrypt a secret for all machines." }}' \
           '  • {{ Color "15" "57" " reencrypt-secrets " }} {{ Italic "Reencrypt all secrets when new machine is added." }}' \
-          '  • {{ Color "15" "57" " netdata " }} {{ Italic "Connect a machine to Netdata cloud." }}'
       echo ""
       echo ""
     ''

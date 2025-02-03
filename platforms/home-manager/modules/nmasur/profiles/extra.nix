@@ -31,6 +31,8 @@ in
       pkgs.duf # Basic disk information (df)
       pkgs.pandoc # Convert text documents
       pkgs.mpd # TUI slideshows
+      pkgs.doggo # DNS client (dig)
+      pkgs.bottom # System monitor (top)
     ];
 
     programs.fish.shellAliases = {
