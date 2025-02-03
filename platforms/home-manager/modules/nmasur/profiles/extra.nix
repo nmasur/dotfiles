@@ -33,7 +33,6 @@ in
       pkgs.mpd # TUI slideshows
     ];
 
-    programs.zoxide.enable = lib.mkDefault true; # Shortcut jump command
     programs.fish.shellAliases = {
       "cd" = lib.mkDefault lib.getExe pkgs.zoxide;
       "du" = lib.mkDefault lib.getExe pkgs.dua;
@@ -53,6 +52,7 @@ in
       ripgrep.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;
       weather.enable = lib.mkDefault true;
+      zoxide.enable = lib.mkDefault true;
     };
 
   };

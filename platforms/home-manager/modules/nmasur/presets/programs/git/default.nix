@@ -108,14 +108,14 @@ in
 
     programs.fish.functions = {
       git = {
-        body = builtins.readFile ./fish/functions/git.fish;
+        body = builtins.readFile ./fish/git.fish;
       };
       git-add-fuzzy = {
-        body = builtins.readFile ./fish/functions/git-add-fuzzy.fish;
+        body = builtins.readFile ./fish/git-add-fuzzy.fish;
       };
       git-fuzzy-branch = {
         argumentNames = "header";
-        body = builtins.readFile ./fish/functions/git-fuzzy-branch.fish;
+        body = builtins.readFile ./fish/git-fuzzy-branch.fish;
       };
       git-checkout-fuzzy = {
         body = ''
@@ -149,18 +149,30 @@ in
         '';
       };
       git-show-fuzzy = {
-        body = builtins.readFile ./fish/functions/git-show-fuzzy.fish;
+        body = builtins.readFile ./fish/git-show-fuzzy.fish;
       };
       git-commits = {
-        body = builtins.readFile ./fish/functions/git-commits.fish;
+        body = builtins.readFile ./fish/git-commits.fish;
+      };
+      commandline-git-commits = {
+        description = "Insert commit into commandline";
+        body = builtins.readFile ./fish/commandline-git-commits.fish;
       };
       git-history = {
-        body = builtins.readFile ./fish/functions/git-history.fish;
+        body = builtins.readFile ./fish/git-history.fish;
       };
       uncommitted = {
         description = "Find uncommitted git repos";
-        body = builtins.readFile ./fish/functions/uncommitted.fish;
+        body = builtins.readFile ./fish/uncommitted.fish;
       };
     };
+
+    config.nmasur.presets.programs.fish.fish_user_key_bindings = # fish
+      ''
+        # Ctrl-g
+        bind -M default \cg commandline-git-commits
+        bind -M insert \cg 'commandline -i (git rev-parse --show-toplevel 2>/dev/null || echo ".")'
+      '';
+
   };
 }

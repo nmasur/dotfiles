@@ -36,5 +36,12 @@ in
       };
     };
 
+    config.nmasur.presets.programs.fish.fish_user_key_bindings = # fish
+      ''
+        # Ctrl-h
+        bind -M insert \ch '_atuin_search --filter-mode global'
+        bind -M default \ch '_atuin_search --filter-mode global'
+      '';
+
   };
 }

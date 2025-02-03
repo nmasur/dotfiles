@@ -10,33 +10,34 @@ in
 
 {
 
-  options.nmasur.presets.programs.fish.enable = lib.mkEnableOption "Fish shell";
+  options.nmasur.presets.programs.fish = {
+    enable = lib.mkEnableOption "Fish shell";
+    fish_user_key_bindings = lib.mkOption {
+      type = lib.types.lines;
+      description = "Text of fish_user_key_bindings function";
+      default = "";
+    };
+  };
 
   config = lib.mkIf cfg.enable {
+
+    cfg.fish_user_key_bindings = # fish
+      ''
+        # Shift-Enter (defined by terminal)
+        bind -M insert \x1F accept-autosuggestion
+        bind -M default \x1F accept-autosuggestion
+      '';
 
     programs.fish = {
       enable = true;
       functions = {
-        commandline-git-commits = {
-          description = "Insert commit into commandline";
-          body = builtins.readFile ./functions/commandline-git-commits.fish;
-        };
         copy = {
           description = "Copy file contents into clipboard";
           body = "cat $argv | pbcopy"; # Need to fix for non-macOS
         };
-        edit = {
-          description = "Open a file in Vim";
-          body = builtins.readFile ./functions/edit.fish;
-        };
         envs = {
           description = "Evaluate a bash-like environment variables file";
           body = ''set -gx (cat $argv | tr "=" " " | string split ' ')'';
-        };
-        fcd = {
-          description = "Jump to directory";
-          argumentNames = "directory";
-          body = builtins.readFile ./functions/fcd.fish;
         };
         fish_user_key_bindings = {
           body = builtins.readFile ./functions/fish_user_key_bindings.fish;
@@ -47,14 +48,6 @@ in
         json = {
           description = "Tidy up JSON using jq";
           body = "pbpaste | jq '.' | pbcopy"; # Need to fix for non-macOS
-        };
-        recent = {
-          description = "Open a recent file in Vim";
-          body = builtins.readFile ./functions/recent.fish;
-        };
-        search-and-edit = {
-          description = "Search and open the relevant file in Vim";
-          body = builtins.readFile ./functions/search-and-edit.fish;
         };
         _which = {
           description = "Identify the path to a program in the shell";
@@ -122,10 +115,6 @@ in
     };
 
     home.sessionVariables.fish_greeting = "";
-
-    programs.starship.enableFishIntegration = true;
-    programs.zoxide.enableFishIntegration = true;
-    programs.fzf.enableFishIntegration = true;
 
   };
 }
