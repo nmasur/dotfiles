@@ -11,7 +11,14 @@ in
 
 {
 
-  options.nmasur.presets.services.nix-autoupgrade.enable = lib.mkEnableOption "Nix auto upgrade";
+  options.nmasur.presets.services.nix-autoupgrade = {
+    enable = lib.mkEnableOption "Nix auto upgrade";
+    repo = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      description = "Git URL of the flake repository to use for upgrades";
+      default = "git@github.com:nmasur/dotfiles";
+    };
+  };
 
   config = lib.mkIf cfg.enable {
 
@@ -19,7 +26,7 @@ in
     system.autoUpgrade = {
       enable = true;
       dates = "09:33";
-      flake = "git+${config.dotfilesRepo}";
+      flake = "git+${cfg.repo}";
       randomizedDelaySec = "25min";
       operation = "switch";
       allowReboot = true;
@@ -46,8 +53,8 @@ in
           set +e
           systemctl status $SERVICE_ID >> $TEMPFILE
           set -e
-          ${pkgs.msmtp}/bin/msmtp \
-              --file=${config.homePath}/.config/msmtp/config \
+          ${lib.getExe pkgs.msmtp} \
+              --file=${config.home-manager.users.${config.user}.xdg.configDir}/msmtp/config \
               --account=system \
               ${address} < $TEMPFILE
         '';

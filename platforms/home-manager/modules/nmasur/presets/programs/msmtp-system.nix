@@ -6,12 +6,12 @@
 }:
 
 let
-  cfg = config.nmasur.presets.programs.msmtp;
+  cfg = config.nmasur.presets.programs.msmtp-system;
 in
 
 {
 
-  options.nmasur.presets.programs.msmtp.enable = lib.mkEnableOption "System outgoing mail";
+  options.nmasur.presets.programs.msmtp-system.enable = lib.mkEnableOption "System outgoing mail";
 
   config = lib.mkIf cfg.enable {
     programs.msmtp.enable = true;

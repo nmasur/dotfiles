@@ -202,9 +202,9 @@ in
               ''exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
             "${modifier}+Shift+x" = lib.mkIf cfg.commands.lockScreen != null "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#${config.networking.hostName} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName} || read'";
             "${modifier}+Mod1+r" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c 'doas nixos-rebuild switch --flake ${config.dotfilesPath}#${config.networking.hostName} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c 'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName} || read'";
 
             # Window options
             "${modifier}+q" = "kill";
@@ -322,7 +322,7 @@ in
     # Update lock screen cache only if cache is empty
     home.activation.updateLockScreenCache =
       let
-        cacheDir = "${config.homePath}/.cache/betterlockscreen/current";
+        cacheDir = "${config.xdg.cacheHome}/betterlockscreen/current";
       in
       lib.mkIf cfg.commands.updateLockScreen != null (
         config.lib.dag.entryAfter [ "writeBoundary" ] ''

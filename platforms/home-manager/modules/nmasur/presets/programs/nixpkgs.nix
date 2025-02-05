@@ -24,13 +24,13 @@ in
         nps = "nix repl --expr 'import <nixpkgs>{}'";
         nixo = "man configuration.nix";
         nixh = "man home-configuration.nix";
-        nr = {
+        nr = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           function = "rebuild-nixos";
         };
-        nro = {
+        nro = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           function = "rebuild-nixos-offline";
         };
-        hm = {
+        hm = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           function = "rebuild-home";
         };
       };
@@ -56,25 +56,25 @@ in
               commandline -f repaint
             '';
         };
-        rebuild-nixos = {
+        rebuild-nixos = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           body = # fish
             ''
-              git -C ${config.dotfilesPath} add --intent-to-add --all
-              echo "doas nixos-rebuild switch --flake ${config.dotfilesPath}#${config.networking.hostName}"
+              git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+              echo "doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName}"
             '';
         };
-        rebuild-nixos-offline = {
+        rebuild-nixos-offline = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           body = # fish
             ''
-              git -C ${config.dotfilesPath} add --intent-to-add --all
-              echo "doas nixos-rebuild switch --option substitute false --flake ${config.dotfilesPath}#${config.networking.hostName}"
+              git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+              echo "doas nixos-rebuild switch --option substitute false --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName}"
             '';
         };
-        rebuild-home = {
+        rebuild-home = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           body = # fish
             ''
-              git -C ${config.dotfilesPath} add --intent-to-add --all
-              echo "${lib.getExe pkgs.home-manager} switch --flake ${config.dotfilesPath}#${config.networking.hostName}";
+              git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+              echo "${lib.getExe pkgs.home-manager} switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName}";
             '';
         };
       };
@@ -99,7 +99,7 @@ in
     # Create nix-index if doesn't exist
     home.activation.createNixIndex =
       let
-        cacheDir = "${config.homePath}/.cache/nix-index";
+        cacheDir = "${config.xdg.cacheHome}/nix-index";
       in
       lib.mkIf config.programs.nix-index.enable (
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
@@ -141,10 +141,12 @@ in
     settings = {
 
       # Add community Cachix to binary cache
-      # Don't use with macOS because blocked by corporate firewall
+      # Don't use at work because blocked by corporate firewall
       builders-use-substitutes = true;
-      substituters = lib.mkIf (!pkgs.stdenv.isDarwin) [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = lib.mkIf (!pkgs.stdenv.isDarwin) [
+      substituters = lib.mkIf (!config.nmasur.profiles.work.enable) [
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = lib.mkIf (!config.nmasur.profiles.work.enable) [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
 

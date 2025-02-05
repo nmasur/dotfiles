@@ -7,7 +7,6 @@
 
 let
   cfg = config.services.betterlockscreen;
-  lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen --lock --display 1 --blur 0.5 --span";
 in
 
 {
@@ -29,7 +28,7 @@ in
         Type = "simple";
         Environment = "DISPLAY=:0";
         TimeoutSec = "infinity";
-        ExecStart = lockCmd;
+        ExecStart = "${lib.getExe pkgs.betterlockscreen} --lock --display 1 --blur 0.5 --span";
         ExecStartPost = "${pkgs.coreutils-full}/bin/sleep 1";
       };
       wantedBy = [

@@ -20,7 +20,7 @@ in
     path = lib.mkOption {
       type = lib.types.path;
       description = "Path to notes on disk";
-      default = config.homePath + "/dev/personal/notes";
+      default = config.home.homeDirectory + "/dev/personal/notes";
     };
   };
 

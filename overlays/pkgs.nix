@@ -1,18 +1,24 @@
 _final: prev:
 
 let
+  listToAttrsByField =
+    field: list:
+    builtins.listToAttrs (
+      map (v: {
+        name = v.${field};
+        value = v;
+      }) list
+    );
   lib = prev.lib;
-  packages = lib.pipe [
-    (lib.filesystem.listFilesRecursive ../pkgs)
+  packagesDirectory = lib.filesystem.listFilesRecursive ../pkgs;
+  packages = lib.pipe packagesDirectory [
+    # Get only files called package.nix
     (builtins.filter (name: (lib.hasSuffix "package.nix" name)))
-    (builtins.map (package: prev.callPackage package))
+    # Apply callPackage to create a derivation
+    (builtins.map prev.callPackage)
+    # Convert the list to an attrset
+    (listToAttrsByField "name")
   ];
 in
 
-{
-
-  loadkey = prev.callPackage ../pkgs/tools/misc/loadkey.nix { };
-  aws-ec2 = prev.callPackage ../pkgs/tools/misc/aws-ec2 { };
-  docker-cleanup = prev.callPackage ../pkgs/tools/misc/docker-cleanup { };
-  nmasur-neovim = prev.callPackage ../pkgs/applications/editors/neovim/nmasur/neovim { };
-}
+packages

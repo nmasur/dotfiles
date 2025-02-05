@@ -82,15 +82,10 @@ in
     services.dbus.packages = [ pkgs.dconf ];
     programs.dconf.enable = true;
 
-    # Make the login screen dark
-    services.xserver.displayManager.lightdm.greeters.gtk.theme = {
-      name = config.gtk.theme.name;
-      package = config.gtk.theme.package;
-    };
-
-    environment.sessionVariables = {
-      GTK_THEME = config.gtk.theme.name;
-    };
+    # TODO: can we get rid of this?
+    # environment.sessionVariables = {
+    #   GTK_THEME = config.gtk.theme.name;
+    # };
 
   };
 }

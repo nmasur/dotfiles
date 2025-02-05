@@ -13,13 +13,16 @@ in
 
   options.nmasur.presets.programs.nixpkgs-darwin.enable = lib.mkEnableOption {
     description = "Nixpkgs tools for macOS";
-    default = config.nmasur.presets.programs.nixpkgs && pkgs.stdenv.isDarwin;
+    default =
+      config.nmasur.presets.programs.nixpkgs.enable
+      && pkgs.stdenv.isDarwin
+      && config.nmasur.presets.programs.dotfiles.enable;
   };
 
   config = lib.mkIf (cfg.enable) {
 
     programs.fish = {
-      shellAbbrs = {
+      shellAbbrs = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
         nr = {
           function = lib.mkForce "rebuild-darwin";
         };
@@ -27,23 +30,23 @@ in
           function = lib.mkForce "rebuild-darwin-offline";
         };
       };
-      functions = {
+      functions = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
         rebuild-darwin = {
           body = ''
-            git -C ${config.dotfilesPath} add --intent-to-add --all
-            echo "darwin-rebuild switch --flake ${config.dotfilesPath}#lookingglass"
+            git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+            echo "darwin-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass"
           '';
         };
         rebuild-darwin-offline = {
           body = ''
-            git -C ${config.dotfilesPath} add --intent-to-add --all
-            echo "darwin-rebuild switch --option substitute false --flake ${config.dotfilesPath}#lookingglass"
+            git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+            echo "darwin-rebuild switch --option substitute false --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass"
           '';
         };
         rebuild-home = lib.mkForce {
           body = ''
-            git -C ${config.dotfilesPath} add --intent-to-add --all
-            echo "${pkgs.home-manager}/bin/home-manager switch --flake ${config.dotfilesPath}#lookingglass";
+            git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+            echo "${lib.getExe pkgs.home-manager} switch --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass";
           '';
         };
       };

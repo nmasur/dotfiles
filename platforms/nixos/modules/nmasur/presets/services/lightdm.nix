@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -15,6 +16,13 @@ in
     wallpaper = {
       type = lib.types.path;
       description = "Wallpaper background image file";
+    };
+    gtk.theme = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "Adwaita-dark";
+      };
+      package = lib.mkPackageOption pkgs "gnome-themes-extra" { };
     };
   };
 
@@ -34,6 +42,13 @@ in
           extraSeatDefaults = ''
             greeter-hide-users = false
           '';
+
+          # Make the login screen dark
+          greeters.gtk.theme = {
+            name = cfg.gtk.theme.name;
+            package = cfg.gtk.theme.package;
+          };
+
         };
       };
     };

@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.nmasur.profiles.common;
+  cfg = config.nmasur.profiles.power-user;
 in
 {
-  options.nmasur.profiles.common.enable = lib.mkEnableOption "Extra home-manager config";
+  options.nmasur.profiles.power-user.enable = lib.mkEnableOption "power user home-manager config";
 
   config = lib.mkIf cfg.enable {
     home.packages = lib.mkDefault [

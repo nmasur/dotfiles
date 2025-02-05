@@ -25,9 +25,9 @@ in
       Unit.Description = "Get latest notes.";
       Service = {
         Type = "oneshot";
-        ExecStartPre = "${pkgs.git}/bin/git -C /data/git/notes reset --hard master";
-        ExecStart = "${pkgs.git}/bin/git -C /data/git/notes pull";
-        WorkingDirectory = config.homePath;
+        ExecStartPre = "${lib.getExe pkgs.git} -C /data/git/notes reset --hard master";
+        ExecStart = "${lib.getExe pkgs.git} -C /data/git/notes pull";
+        WorkingDirectory = config.home-manager.users.${config.user}.home.homeDirectory;
         Environment = "PATH=${pkgs.openssh}/bin";
       };
     };

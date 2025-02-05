@@ -22,12 +22,13 @@ in
     path = lib.mkOption {
       type = lib.types.path;
       description = "Path to dotfiles on disk";
-      default = config.homePath + "/dev/personal/dotfiles";
+      default = config.home.homeDirectory + "/dev/personal/dotfiles";
     };
   };
 
   config = lib.mkIf cfg.enable {
 
+    # Always make the dotfiles directory considered safe for git and direnv
     programs.git.extraConfig.safe.directory = cfg.path;
     programs.direnv.config.whitelist.prefix = [ cfg.path ];
 
@@ -37,8 +38,7 @@ in
       cloneDotfiles = config.lib.dag.entryAfter [ "writeBoundary" "loadkey" ] ''
         if [ ! -d "${cfg.path}" ]; then
             run mkdir --parents $VERBOSE_ARG $(dirname "${cfg.path}")
-            run ${pkgs.git}/bin/git \
-                clone ${cfg.repo} "${cfg.path}"
+            run ${lib.getExe pkgs.git} clone ${cfg.repo} "${cfg.path}"
         fi
       '';
     };
