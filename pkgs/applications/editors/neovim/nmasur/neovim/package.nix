@@ -28,7 +28,7 @@
 
 {
   pkgs,
-  colors,
+  colors ? null,
   terraform ? false,
   github ? false,
   kubernetes ? false,
@@ -46,17 +46,17 @@ pkgs.neovimBuilder {
     kubernetes
     ;
   imports = [
-    ../config/align.nix
-    ../config/bufferline.nix
-    ../config/colors.nix
-    ../config/completion.nix
-    ../config/gitsigns.nix
-    ../config/lsp.nix
-    ../config/misc.nix
-    ../config/statusline.nix
-    ../config/syntax.nix
-    ../config/telescope.nix
-    ../config/toggleterm.nix
-    ../config/tree.nix
+    ./config/align.nix
+    ./config/bufferline.nix
+    ./config/colors.nix
+    ./config/completion.nix
+    ./config/gitsigns.nix
+    ./config/lsp.nix
+    ./config/misc.nix
+    ./config/statusline.nix
+    ./config/syntax.nix
+    ./config/telescope.nix
+    ./config/toggleterm.nix
+    ./config/tree.nix
   ];
 }

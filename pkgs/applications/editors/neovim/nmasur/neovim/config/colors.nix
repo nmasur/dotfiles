@@ -13,7 +13,7 @@
     description = "Attrset of base16 colorscheme key value pairs.";
   };
 
-  config = {
+  config = lib.mkIf config.colors {
     plugins = [ pkgs.vimPlugins.base16-nvim ];
     setup.base16-colorscheme = config.colors;
 

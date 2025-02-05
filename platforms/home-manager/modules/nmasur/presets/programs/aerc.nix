@@ -194,7 +194,7 @@ in
       };
     };
 
-    xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux && config.gui.enable) {
+    xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux) {
       name = "aerc";
       exec = "${config.terminalLaunchCommand} aerc %u";
     };
