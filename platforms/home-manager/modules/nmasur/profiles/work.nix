@@ -39,9 +39,6 @@ in
       pkgs.terraform-init # Quick shortcut for initializing Terraform backend
     ];
 
-    programs.helix.enable = lib.mkDefault true;
-    programs.zed-editor.enable = lib.mkDefault true;
-
     nmasur.presets = {
       programs = {
         _1password.enable = lib.mkDefault true;

@@ -15,7 +15,6 @@ in
   config = lib.mkIf cfg.enable {
 
     nmasur.gtk.enable = lib.mkDefault true;
-    programs.zed-editor.enable = lib.mkDefault true;
 
   };
 }

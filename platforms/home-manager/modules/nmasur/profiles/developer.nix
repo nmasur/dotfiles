@@ -19,8 +19,6 @@ in
       pkgs.pgcli # Postgres client with autocomplete
     ];
 
-    programs.helix.enable = lib.mkDefault true;
-
   };
 
 }

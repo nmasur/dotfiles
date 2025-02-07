@@ -26,6 +26,10 @@ in
 
     ];
 
+    programs.gh-dash.enable = true;
+    programs.helix.enable = lib.mkDefault true;
+    programs.zed-editor.enable = lib.mkDefault true;
+
   };
 
 }
