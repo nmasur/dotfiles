@@ -11,8 +11,8 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.prometheus-remote-write;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.prometheus-remote-write;
 in
 {
 

@@ -1,8 +1,8 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nmasur.presets.services.immich;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.immich;
 in
 
 {

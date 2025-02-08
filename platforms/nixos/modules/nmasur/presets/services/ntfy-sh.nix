@@ -1,8 +1,8 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nmasur.presets.services.ntfy-sh;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.ntfy-sh;
 in
 
 {

@@ -5,8 +5,8 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.actualbudget;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.actualbudget;
 in
 
 {

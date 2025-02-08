@@ -6,8 +6,8 @@
 }:
 let
 
-  cfg = config.nmasur.presets.services.grafana;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.grafana;
   promUid = "victoriametrics";
 in
 {

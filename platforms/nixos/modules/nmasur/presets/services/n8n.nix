@@ -4,8 +4,8 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nmasur.presets.services.n8n;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.n8n;
 in
 
 {

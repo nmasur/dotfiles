@@ -6,8 +6,8 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nmasur.presets.services.influxdb2;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.influxdb2;
 in
 {
 

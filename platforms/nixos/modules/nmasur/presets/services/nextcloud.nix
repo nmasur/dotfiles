@@ -6,8 +6,8 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.nextcloud;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.nextcloud;
 in
 {
 

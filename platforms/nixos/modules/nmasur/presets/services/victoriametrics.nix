@@ -10,8 +10,8 @@
 
 let
 
-  cfg = config.nmasur.presets.services.victoriametrics;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.victoriametrics;
 
   username = "prometheus";
 

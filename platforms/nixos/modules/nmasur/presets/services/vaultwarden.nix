@@ -10,8 +10,8 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.vaultwarden;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.vaultwarden;
   vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory
 in
 {

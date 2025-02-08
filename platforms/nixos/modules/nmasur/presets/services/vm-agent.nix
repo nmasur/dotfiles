@@ -10,8 +10,8 @@
 
 let
 
-  cfg = config.nmasur.presets.services.vm-agent;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.vm-agent;
 
   username = "prometheus";
 

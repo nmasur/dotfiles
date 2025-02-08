@@ -7,8 +7,8 @@
 
 let
 
-  cfg = config.nmasur.presets.services.actualbudget;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.actualbudget;
 
   # This config specifies ports for Prometheus to scrape information
   arrConfig = {

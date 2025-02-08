@@ -3,8 +3,8 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nmasur.presets.services.paperless;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.paperless;
 in
 {
 

@@ -13,8 +13,8 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.bind;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.bind;
 
   localIp = "192.168.1.218";
   localServices = [

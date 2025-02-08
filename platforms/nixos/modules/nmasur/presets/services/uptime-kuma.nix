@@ -1,8 +1,8 @@
 { config, lib, ... }:
 
 let
-  cfg = config.nmasur.presets.services.uptime-kuma;
   inherit (config.nmasur.settings) hostnames;
+  cfg = config.nmasur.presets.services.uptime-kuma;
 in
 
 {
