@@ -7,7 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.minecraft-server;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
   localPort = 25564;
   publicPort = 49732;
   rconPort = 25575;

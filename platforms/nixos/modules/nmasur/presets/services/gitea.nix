@@ -7,7 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.gitea;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
   giteaPath = "/var/lib/gitea"; # Default service directory
 in
 {

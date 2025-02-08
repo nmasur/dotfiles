@@ -2,7 +2,7 @@
 
 let
   cfg = config.nmasur.presets.services.ntfy-sh;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 
 {

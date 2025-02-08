@@ -11,7 +11,7 @@
 let
 
   cfg = config.nmasur.presets.services.victoriametrics;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 
   username = "prometheus";
 

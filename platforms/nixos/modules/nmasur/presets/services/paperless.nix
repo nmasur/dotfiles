@@ -4,7 +4,7 @@
 
 let
   cfg = config.nmasur.presets.services.paperless;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 {
 

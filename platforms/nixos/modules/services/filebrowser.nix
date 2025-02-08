@@ -6,7 +6,7 @@
 }:
 let
   cfg = config.services.filebrowser;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 
   dataDir = "/var/lib/filebrowser";
 

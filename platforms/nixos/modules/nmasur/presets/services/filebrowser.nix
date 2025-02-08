@@ -5,7 +5,7 @@
 }:
 let
   cfg = config.nmasur.presets.services.filebrowser;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 {
 

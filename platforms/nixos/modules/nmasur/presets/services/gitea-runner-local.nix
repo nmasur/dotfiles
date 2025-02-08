@@ -13,7 +13,7 @@
 
 let
   cfg = config.nmasur.presets.services.gitea-runner-local;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 
 {

@@ -7,7 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.influxdb2;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 {
 

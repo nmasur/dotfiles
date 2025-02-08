@@ -14,7 +14,7 @@
 let
 
   cfg = config.nmasur.presets.services.calibre-web;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
   libraryPath = "/data/books";
 in
 {

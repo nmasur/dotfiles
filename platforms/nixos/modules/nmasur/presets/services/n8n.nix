@@ -5,7 +5,7 @@
 
 let
   cfg = config.nmasur.presets.services.n8n;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 
 {

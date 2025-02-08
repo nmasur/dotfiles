@@ -10,7 +10,7 @@
 
 let
   cfg = config.nmasur.presets.services.transmission;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 {
 

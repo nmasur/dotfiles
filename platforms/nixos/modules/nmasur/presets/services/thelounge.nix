@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.nmasur.presets.services.thelounge;
-  hostnames = config.nmasur.settings.hostnames;
+  inherit (config.nmasur.settings) hostnames;
 in
 {
 
