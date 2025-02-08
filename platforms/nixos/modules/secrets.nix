@@ -24,7 +24,7 @@ in
       default = "/var/private";
     };
 
-    secretsIdentityFile = lib.mkOption {
+    identityFile = lib.mkOption {
       type = lib.types.path;
       description = "Path containing decryption identity.";
     };
