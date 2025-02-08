@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.nmasur.presets.services.thelounge;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -22,7 +23,7 @@ in
     # Allow web traffic to Caddy
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.irc ]; } ];
+        match = [ { host = [ hostnames.irc ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -33,6 +34,6 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.irc ];
+    services.cloudflare-dyndns.domains = [ hostnames.irc ];
   };
 }

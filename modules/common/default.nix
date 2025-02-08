@@ -16,27 +16,27 @@
   ];
 
   options = {
-    user = lib.mkOption {
-      type = lib.types.str;
-      description = "Primary user of the system";
-    };
-    fullName = lib.mkOption {
-      type = lib.types.str;
-      description = "Human readable name of the user";
-    };
-    userDirs = {
-      # Required to prevent infinite recursion when referenced by himalaya
-      download = lib.mkOption {
-        type = lib.types.str;
-        description = "XDG directory for downloads";
-        default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
-      };
-    };
-    identityFile = lib.mkOption {
-      type = lib.types.str;
-      description = "Path to existing private key file.";
-      default = "/etc/ssh/ssh_host_ed25519_key";
-    };
+    # user = lib.mkOption {
+    #   type = lib.types.str;
+    #   description = "Primary user of the system";
+    # };
+    # fullName = lib.mkOption {
+    #   type = lib.types.str;
+    #   description = "Human readable name of the user";
+    # };
+    # userDirs = {
+    #   # Required to prevent infinite recursion when referenced by himalaya
+    #   download = lib.mkOption {
+    #     type = lib.types.str;
+    #     description = "XDG directory for downloads";
+    #     default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
+    #   };
+    # };
+    # identityFile = lib.mkOption {
+    #   type = lib.types.str;
+    #   description = "Path to existing private key file.";
+    #   default = "/etc/ssh/ssh_host_ed25519_key";
+    # };
     # homePath = lib.mkOption {
     #   type = lib.types.path;
     #   description = "Path of user's home directory.";

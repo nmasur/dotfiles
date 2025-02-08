@@ -8,6 +8,7 @@
 let
 
   cfg = config.nmasur.presets.services.actualbudget;
+  hostnames = config.nmasur.settings.hostnames;
 
   # This config specifies ports for Prometheus to scrape information
   arrConfig = {
@@ -98,7 +99,7 @@ in
         group = "download";
         match = [
           {
-            host = [ config.hostnames.download ];
+            host = [ hostnames.download ];
             path = [ "/sonarr*" ];
           }
         ];
@@ -114,7 +115,7 @@ in
         group = "download";
         match = [
           {
-            host = [ config.hostnames.download ];
+            host = [ hostnames.download ];
             path = [ "/radarr*" ];
           }
         ];
@@ -129,7 +130,7 @@ in
         group = "download";
         match = [
           {
-            host = [ config.hostnames.download ];
+            host = [ hostnames.download ];
             path = [ "/readarr*" ];
           }
         ];
@@ -144,7 +145,7 @@ in
         group = "download";
         match = [
           {
-            host = [ config.hostnames.download ];
+            host = [ hostnames.download ];
             path = [ "/prowlarr*" ];
           }
         ];
@@ -160,7 +161,7 @@ in
         group = "download";
         match = [
           {
-            host = [ config.hostnames.download ];
+            host = [ hostnames.download ];
             path = [ "/bazarr*" ];
           }
         ];
@@ -180,7 +181,7 @@ in
         group = "download";
         match = [
           {
-            host = [ config.hostnames.download ];
+            host = [ hostnames.download ];
             path = [ "/sabnzbd*" ];
           }
         ];
@@ -193,7 +194,7 @@ in
       }
       {
         group = "download";
-        match = [ { host = [ config.hostnames.download ]; } ];
+        match = [ { host = [ hostnames.download ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -204,7 +205,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.download ];
+    services.cloudflare-dyndns.domains = [ hostnames.download ];
 
     # Enable Prometheus exporters
     systemd.services = lib.mapAttrs' (name: attrs: {

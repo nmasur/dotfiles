@@ -27,6 +27,7 @@ in
     identityFile = lib.mkOption {
       type = lib.types.path;
       description = "Path containing decryption identity.";
+      default = "/etc/ssh/ssh_host_ed25519_key";
     };
 
     secrets = lib.mkOption {
@@ -91,7 +92,7 @@ in
         script = ''
           echo "${attrs.prefix}$(
             ${pkgs.age}/bin/age --decrypt \
-                --identity ${config.secretsIdentityFile} ${attrs.source}
+                --identity ${config.identityFile} ${attrs.source}
           )" > ${attrs.dest}
 
           chown '${attrs.owner}':'${attrs.group}' '${attrs.dest}'

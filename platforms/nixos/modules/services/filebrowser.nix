@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.services.filebrowser;
+  hostnames = config.nmasur.settings.hostnames;
 
   dataDir = "/var/lib/filebrowser";
 
@@ -57,7 +58,7 @@ in
     };
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.files ];
+    services.cloudflare-dyndns.domains = [ hostnames.files ];
 
   };
 

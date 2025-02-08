@@ -2,6 +2,7 @@
 
 let
   cfg = config.nmasur.presets.services.ntfy-sh;
+  hostnames = config.nmasur.settings.hostnames;
 in
 
 {
@@ -11,7 +12,7 @@ in
     services.ntfy-sh = {
       enable = true;
       settings = {
-        base-url = "https://${config.hostnames.notifications}";
+        base-url = "https://${hostnames.notifications}";
         upstream-base-url = "https://ntfy.sh";
         listen-http = ":8333";
         behind-proxy = true;
@@ -22,7 +23,7 @@ in
 
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.notifications ]; } ];
+        match = [ { host = [ hostnames.notifications ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -33,7 +34,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.notifications ];
+    services.cloudflare-dyndns.domains = [ hostnames.notifications ];
 
   };
 }

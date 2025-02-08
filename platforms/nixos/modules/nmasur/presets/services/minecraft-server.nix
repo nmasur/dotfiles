@@ -7,6 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.minecraft-server;
+  hostnames = config.nmasur.settings.hostnames;
   localPort = 25564;
   publicPort = 49732;
   rconPort = 25575;
@@ -52,7 +53,7 @@ in
 
     networking.firewall.allowedTCPPorts = [ publicPort ];
 
-    cloudflare.noProxyDomains = [ config.hostnames.minecraft ];
+    cloudflare.noProxyDomains = [ hostnames.minecraft ];
 
     ## Automatically start and stop Minecraft server based on player connections
 

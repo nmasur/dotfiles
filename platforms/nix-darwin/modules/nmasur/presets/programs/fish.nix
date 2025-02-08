@@ -7,6 +7,7 @@
 
 let
   cfg = config.nmasur.presets.programs.fish;
+  inherit (config.nmasur.settings) username;
 in
 
 {
@@ -18,7 +19,7 @@ in
 
     environment.shells = [ pkgs.fish ];
 
-    users.users.${config.user}.shell = pkgs.fish;
+    users.users.${username}.shell = pkgs.fish;
 
     # Speeds up fish launch time on macOS
     programs.fish.useBabelfish = true;

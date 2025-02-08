@@ -6,6 +6,7 @@
 
 let
   cfg = config.nmasur.presets.services.actualbudget;
+  hostnames = config.nmasur.settings.hostnames;
 in
 
 {
@@ -60,7 +61,7 @@ in
     # Allow web traffic to Caddy
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.budget ]; } ];
+        match = [ { host = [ hostnames.budget ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -71,7 +72,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.budget ];
+    services.cloudflare-dyndns.domains = [ hostnames.budget ];
 
     # Backups
     services.restic.backups.default.paths = [ "/var/lib/actualbudget" ];

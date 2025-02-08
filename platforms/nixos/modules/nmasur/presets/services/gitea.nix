@@ -7,6 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.gitea;
+  hostnames = config.nmasur.settings.hostnames;
   giteaPath = "/var/lib/gitea"; # Default service directory
 in
 {
@@ -28,7 +29,7 @@ in
           DISABLE_HTTP_GIT = false;
 
           # Allow requests hitting the specified hostname.
-          ACCESS_CONTROL_ALLOW_ORIGIN = config.hostnames.git;
+          ACCESS_CONTROL_ALLOW_ORIGIN = hostnames.git;
 
           # Automatically create viable users/orgs on push.
           ENABLE_PUSH_CREATE_USER = true;
@@ -40,7 +41,7 @@ in
         server = {
           HTTP_PORT = 3001;
           HTTP_ADDRESS = "127.0.0.1";
-          ROOT_URL = "https://${config.hostnames.git}/";
+          ROOT_URL = "https://${hostnames.git}/";
           SSH_PORT = 22;
           START_SSH_SERVER = false; # Use sshd instead
           DISABLE_SSH = false;
@@ -65,7 +66,7 @@ in
       {
         match = [
           {
-            host = [ config.hostnames.git ];
+            host = [ hostnames.git ];
             path = [ "/metrics*" ];
           }
         ];
@@ -78,7 +79,7 @@ in
       }
       # Allow access to primary server.
       {
-        match = [ { host = [ config.hostnames.git ]; } ];
+        match = [ { host = [ hostnames.git ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -91,7 +92,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.git ];
+    services.cloudflare-dyndns.domains = [ hostnames.git ];
 
     # Scrape the metrics endpoint for Prometheus.
     prometheus.scrapeTargets = [

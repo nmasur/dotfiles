@@ -5,6 +5,7 @@
 }:
 let
   cfg = config.nmasur.presets.services.filebrowser;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -20,7 +21,7 @@ in
 
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.files ]; } ];
+        match = [ { host = [ hostnames.files ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -33,7 +34,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.files ];
+    services.cloudflare-dyndns.domains = [ hostnames.files ];
 
   };
 

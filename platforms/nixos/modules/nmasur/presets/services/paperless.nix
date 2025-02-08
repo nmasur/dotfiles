@@ -4,6 +4,7 @@
 
 let
   cfg = config.nmasur.presets.services.paperless;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -33,7 +34,7 @@ in
       {
         match = [
           {
-            host = [ config.hostnames.paperless ];
+            host = [ hostnames.paperless ];
             # path = [ "/paperless*" ]; # Change path name in Caddy
           }
         ];
@@ -47,7 +48,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.paperless ];
+    services.cloudflare-dyndns.domains = [ hostnames.paperless ];
 
     secrets.paperless = {
       source = ../../../private/prometheus.age;

@@ -2,6 +2,7 @@
 
 let
   cfg = config.nmasur.presets.services.immich;
+  hostnames = config.nmasur.settings.hostnames;
 in
 
 {
@@ -19,7 +20,7 @@ in
       machine-learning.environment = { };
       mediaLocation = "/data/images";
       secretsFile = null;
-      settings.server.externalDomain = "https://${config.hostnames.photos}";
+      settings.server.externalDomain = "https://${hostnames.photos}";
       environment = {
         IMMICH_ENV = "production";
         IMMICH_LOG_LEVEL = "log";
@@ -30,7 +31,7 @@ in
 
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.photos ]; } ];
+        match = [ { host = [ hostnames.photos ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -41,10 +42,10 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.photos ];
+    services.cloudflare-dyndns.domains = [ hostnames.photos ];
 
     # Point localhost to the local domain
-    networking.hosts."127.0.0.1" = [ config.hostnames.photos ];
+    networking.hosts."127.0.0.1" = [ hostnames.photos ];
 
     # Backups
     services.restic.backups.default.paths = [ "/data/images" ];

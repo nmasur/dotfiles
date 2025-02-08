@@ -7,6 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.nextcloud;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -30,7 +31,7 @@ in
       settings = {
         default_phone_region = "US";
         # Allow access when hitting either of these hosts or IPs
-        trusted_domains = [ config.hostnames.content ];
+        trusted_domains = [ hostnames.content ];
         trusted_proxies = [ "127.0.0.1" ];
         maintenance_window_start = 4; # Run jobs at 4am UTC
         log_type = "file";
@@ -64,7 +65,7 @@ in
     # Point Caddy to Nginx
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.content ]; } ];
+        match = [ { host = [ hostnames.content ]; } ];
         handle = [
           {
             handler = "subroute";
@@ -195,7 +196,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.content ];
+    services.cloudflare-dyndns.domains = [ hostnames.content ];
 
     # Create credentials file for nextcloud
     secrets.nextcloud = {
@@ -217,11 +218,11 @@ in
     systemd.services.phpfpm-nextcloud.serviceConfig.StateDirectoryMode = lib.mkForce "0770";
 
     # Log metrics to prometheus
-    networking.hosts."127.0.0.1" = [ config.hostnames.content ];
+    networking.hosts."127.0.0.1" = [ hostnames.content ];
     services.prometheus.exporters.nextcloud = {
       enable = config.prometheus.exporters.enable;
       username = config.services.nextcloud.config.adminuser;
-      url = "https://${config.hostnames.content}";
+      url = "https://${hostnames.content}";
       passwordFile = config.services.nextcloud.config.adminpassFile;
     };
     prometheus.scrapeTargets = [

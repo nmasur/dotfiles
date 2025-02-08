@@ -34,11 +34,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Use official Firefox binary for macOS
-    firefox-darwin = {
-      url = "github:bandithedoge/nixpkgs-firefox-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # # Use official Firefox binary for macOS
+    # firefox-darwin = {
+    #   url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Better App install management in macOS
     mac-app-util = {
@@ -175,12 +175,12 @@
       flake = false;
     };
 
-    # Git alternative
-    # Fixes: https://github.com/martinvonz/jj/issues/4784
-    jujutsu = {
-      url = "github:martinvonz/jj";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # # Git alternative
+    # # Fixes: https://github.com/martinvonz/jj/issues/4784
+    # jujutsu = {
+    #   url = "github:martinvonz/jj";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Ren and rep - CLI find and replace
     rep = {
@@ -275,7 +275,7 @@
       overlays = [
         inputs.nur.overlays.default
         inputs.nix2vim.overlay
-        inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
+        # inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
         (import ./overlays/neovim-plugins.nix inputs)
         (import ./overlays/tree-sitter.nix inputs)
         (import ./overlays/mpv-scripts.nix inputs)

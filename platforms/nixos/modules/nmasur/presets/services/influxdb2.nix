@@ -7,6 +7,7 @@
 
 let
   cfg = config.nmasur.presets.services.influxdb2;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -56,7 +57,7 @@ in
 
     caddy.routes = lib.mkIf config.services.influxdb2.enable [
       {
-        match = [ { host = [ config.hostnames.influxdb ]; } ];
+        match = [ { host = [ hostnames.influxdb ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -67,6 +68,6 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.influxdb ];
+    services.cloudflare-dyndns.domains = [ hostnames.influxdb ];
   };
 }

@@ -11,6 +11,7 @@
 let
 
   cfg = config.nmasur.presets.services.vm-agent;
+  hostnames = config.nmasur.settings.hostnames;
 
   username = "prometheus";
 
@@ -37,7 +38,7 @@ in
       package = pkgs-stable.vmagent;
       prometheusConfig = prometheusConfig;
       remoteWrite = {
-        url = "https://${config.hostnames.prometheus}/api/v1/write";
+        url = "https://${hostnames.prometheus}/api/v1/write";
         basicAuthUsername = username;
         basicAuthPasswordFile = config.secrets.vmagent.dest;
       };

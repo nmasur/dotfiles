@@ -26,9 +26,10 @@ in
 
     ];
 
-    programs.gh-dash.enable = true;
+    programs.gh-dash.enable = lib.mkDefault true;
     programs.helix.enable = lib.mkDefault true;
     programs.zed-editor.enable = lib.mkDefault true;
+    programs.himalaya.enable = lib.mkDefault true;
 
   };
 

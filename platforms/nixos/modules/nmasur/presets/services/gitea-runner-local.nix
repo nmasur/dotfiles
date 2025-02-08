@@ -13,6 +13,7 @@
 
 let
   cfg = config.nmasur.presets.services.gitea-runner-local;
+  hostnames = config.nmasur.settings.hostnames;
 in
 
 {
@@ -42,7 +43,7 @@ in
         wget
       ];
       name = config.networking.hostName;
-      url = "https://${config.hostnames.git}";
+      url = "https://${hostnames.git}";
       tokenFile = config.secrets.giteaRunnerToken.dest;
     };
 

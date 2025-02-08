@@ -10,6 +10,7 @@
 
 let
   cfg = config.nmasur.presets.services.transmission;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -37,7 +38,7 @@ in
           # This is a salted hash of the real password
           # https://github.com/tomwijnroks/transmission-pwgen
           rpc-password = "{c4c5145f6e18bcd3c7429214a832440a45285ce26jDOBGVW";
-          rpc-host-whitelist = config.hostnames.transmission;
+          rpc-host-whitelist = hostnames.transmission;
           rpc-host-whitelist-enabled = true;
           rpc-whitelist = lib.mkDefault "127.0.0.1"; # Overwritten by Cloudflare
           rpc-whitelist-enabled = true;
@@ -45,7 +46,7 @@ in
       };
 
       # Configure Cloudflare DNS to point to this machine
-      services.cloudflare-dyndns.domains = [ config.hostnames.transmission ];
+      services.cloudflare-dyndns.domains = [ hostnames.transmission ];
 
       # Bind transmission to wireguard namespace
       systemd.services.transmission = lib.mkIf config.wireguard.enable {
@@ -66,14 +67,14 @@ in
       caddy.routes =
         let
           # Set if the download domain is the same as the Transmission domain
-          useDownloadDomain = config.hostnames.download == config.hostnames.transmission;
+          useDownloadDomain = hostnames.download == hostnames.transmission;
         in
         lib.mkAfter [
           {
             group = if useDownloadDomain then "download" else "transmission";
             match = [
               {
-                host = [ config.hostnames.transmission ];
+                host = [ hostnames.transmission ];
                 path = if useDownloadDomain then [ "/transmission*" ] else null;
               }
             ];

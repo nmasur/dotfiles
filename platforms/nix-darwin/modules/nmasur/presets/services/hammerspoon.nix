@@ -6,6 +6,7 @@
 
 let
   cfg = config.nmasur.presets.services.hammerspoon;
+  inherit (config.nmasur.settings) username;
 in
 
 {
@@ -19,7 +20,7 @@ in
 
     system.activationScripts.postUserActivation.text = ''
       defaults write org.hammerspoon.Hammerspoon MJConfigFile "${
-        config.home-manager.users.${config.user}.xdg.configHome
+        config.home-manager.users.${username}.xdg.configHome
       }/hammerspoon/init.lua"
       sudo killall Dock
     '';

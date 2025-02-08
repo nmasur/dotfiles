@@ -1,7 +1,7 @@
 # Calibre-web is an E-Book library and management tool.
 
 # - Exposed to the public via Caddy.
-# - Hostname defined with config.hostnames.books
+# - Hostname defined with hostnames.books
 # - File directory backed up to S3 on a cron schedule.
 
 {
@@ -14,6 +14,7 @@
 let
 
   cfg = config.nmasur.presets.services.calibre-web;
+  hostnames = config.nmasur.settings.hostnames;
   libraryPath = "/data/books";
 in
 {
@@ -38,7 +39,7 @@ in
     # Allow web traffic to Caddy
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.books ]; } ];
+        match = [ { host = [ hostnames.books ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -54,7 +55,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.books ];
+    services.cloudflare-dyndns.domains = [ hostnames.books ];
 
     # Grant user access to Calibre directories
     users.users.${config.user}.extraGroups = [ "calibre-web" ];

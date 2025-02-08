@@ -14,14 +14,15 @@
 
 let
   cfg = config.nmasur.presets.services.bind;
+  hostnames = config.nmasur.settings.hostnames;
 
   localIp = "192.168.1.218";
   localServices = [
-    config.hostnames.stream
-    config.hostnames.content
-    config.hostnames.books
-    config.hostnames.download
-    config.hostnames.photos
+    hostnames.stream
+    hostnames.content
+    hostnames.books
+    hostnames.download
+    hostnames.photos
   ];
   mkRecord = service: "${service}       A       ${localIp}";
   localRecords = lib.concatLines (map mkRecord localServices);

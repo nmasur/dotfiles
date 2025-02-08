@@ -12,6 +12,7 @@
 
 let
   cfg = config.nmasur.presets.services.prometheus-remote-write;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -25,7 +26,7 @@ in
       remoteWrite = [
         {
           name = config.networking.hostName;
-          url = "https://${config.hostnames.prometheus}/api/v1/write";
+          url = "https://${hostnames.prometheus}/api/v1/write";
           basic_auth = {
             # Uses password hashed with bcrypt above
             username = "prometheus";

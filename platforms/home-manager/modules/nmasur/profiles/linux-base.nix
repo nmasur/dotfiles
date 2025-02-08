@@ -16,14 +16,14 @@ in
   config = lib.mkIf cfg.enable {
 
     # Allow Nix to manage the default applications list
-    mimeApps.enable = lib.mkDefault true;
+    xdg.mimeApps.enable = lib.mkDefault true;
 
     # Set directories for application defaults
-    userDirs = {
+    xdg.userDirs = {
       enable = lib.mkDefault true;
       createDirectories = lib.mkDefault true;
       documents = lib.mkDefault "$HOME/documents";
-      download = lib.mkDefault config.userDirs.download;
+      download = lib.mkDefault "$HOME/downloads";
       music = lib.mkDefault "$HOME/media/music";
       pictures = lib.mkDefault "$HOME/media/images";
       videos = lib.mkDefault "$HOME/media/videos";

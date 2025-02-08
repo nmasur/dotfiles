@@ -11,6 +11,7 @@
 let
 
   cfg = config.nmasur.presets.services.victoriametrics;
+  hostnames = config.nmasur.settings.hostnames;
 
   username = "prometheus";
 
@@ -79,7 +80,7 @@ in
 
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.prometheus ]; } ];
+        match = [ { host = [ hostnames.prometheus ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -90,7 +91,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.prometheus ];
+    services.cloudflare-dyndns.domains = [ hostnames.prometheus ];
 
   };
 }

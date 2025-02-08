@@ -20,7 +20,7 @@ in
     accounts.email.accounts.home.himalaya = {
       enable = true;
       settings = {
-        downloads-dir = config.userDirs.download;
+        downloads-dir = config.xdg.userDirs.download;
         smtp-insecure = true;
       };
     };

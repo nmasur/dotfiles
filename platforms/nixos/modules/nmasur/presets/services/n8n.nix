@@ -2,14 +2,22 @@
 # together with triggers.
 
 { config, lib, ... }:
+
+let
+  cfg = config.nmasur.presets.services.n8n;
+  hostnames = config.nmasur.settings.hostnames;
+in
+
 {
 
-  config = lib.mkIf config.services.n8n.enable {
+  options.nmasur.presets.services.n8n.enable = lib.mkEnableOption "n8n low-code automation tool";
+
+  config = lib.mkIf cfg.enable {
 
     unfreePackages = [ "n8n" ];
 
     services.n8n = {
-      webhookUrl = "https://${config.hostnames.n8n}";
+      webhookUrl = "https://${hostnames.n8n}";
       settings = {
         listen_address = "127.0.0.1";
         port = 5678;
@@ -22,12 +30,12 @@
     };
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.n8n ];
+    services.cloudflare-dyndns.domains = [ hostnames.n8n ];
 
     # Allow web traffic to Caddy
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.n8n ]; } ];
+        match = [ { host = [ hostnames.n8n ]; } ];
         handle = [
           {
             handler = "reverse_proxy";

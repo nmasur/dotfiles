@@ -11,6 +11,7 @@
 
 let
   cfg = config.nmasur.presets.services.vaultwarden;
+  hostnames = config.nmasur.settings.hostnames;
   vaultwardenPath = "/var/lib/bitwarden_rs"; # Default service directory
 in
 {
@@ -22,7 +23,7 @@ in
     services.vaultwarden = {
       enable = true;
       config = {
-        DOMAIN = "https://${config.hostnames.secrets}";
+        DOMAIN = "https://${hostnames.secrets}";
         SIGNUPS_ALLOWED = false;
         SIGNUPS_VERIFY = true;
         INVITATIONS_ALLOWED = true;
@@ -52,7 +53,7 @@ in
 
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.secrets ]; } ];
+        match = [ { host = [ hostnames.secrets ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -66,7 +67,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.secrets ];
+    services.cloudflare-dyndns.domains = [ hostnames.secrets ];
 
     ## Backup config
 

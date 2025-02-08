@@ -2,6 +2,7 @@
 
 let
   cfg = config.nmasur.presets.services.uptime-kuma;
+  hostnames = config.nmasur.settings.hostnames;
 in
 
 {
@@ -20,7 +21,7 @@ in
     # Allow web traffic to Caddy
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.status ]; } ];
+        match = [ { host = [ hostnames.status ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -33,7 +34,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.status ];
+    services.cloudflare-dyndns.domains = [ hostnames.status ];
 
   };
 

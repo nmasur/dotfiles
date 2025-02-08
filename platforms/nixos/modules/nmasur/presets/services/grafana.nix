@@ -7,6 +7,7 @@
 let
 
   cfg = config.nmasur.presets.services.grafana;
+  hostnames = config.nmasur.settings.hostnames;
   promUid = "victoriametrics";
 in
 {
@@ -31,7 +32,7 @@ in
       enable = true;
       settings = {
         server = {
-          domain = config.hostnames.metrics;
+          domain = hostnames.metrics;
           http_addr = "127.0.0.1";
           http_port = 3000;
           protocol = "http";
@@ -451,7 +452,7 @@ in
                         {
                           targetBlank = true;
                           title = "";
-                          url = "https://${config.hostnames.git}/admin/runners";
+                          url = "https://${hostnames.git}/admin/runners";
                         }
                       ];
                       options = {
@@ -525,7 +526,7 @@ in
                         {
                           targetBlank = true;
                           title = "";
-                          url = "https://${config.hostnames.stream}";
+                          url = "https://${hostnames.stream}";
                         }
                       ];
                       options = {
@@ -785,7 +786,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}";
+                                    url = "https://${hostnames.download}";
                                   }
                                 ];
                               }
@@ -807,7 +808,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}/bazarr";
+                                    url = "https://${hostnames.download}/bazarr";
                                   }
                                 ];
                               }
@@ -829,7 +830,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}/radarr";
+                                    url = "https://${hostnames.download}/radarr";
                                   }
                                 ];
                               }
@@ -851,7 +852,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}/readarr";
+                                    url = "https://${hostnames.download}/readarr";
                                   }
                                 ];
                               }
@@ -873,7 +874,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.content}";
+                                    url = "https://${hostnames.content}";
                                   }
                                 ];
                               }
@@ -895,7 +896,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.books}";
+                                    url = "https://${hostnames.books}";
                                   }
                                 ];
                               }
@@ -917,7 +918,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}/sabnzbd";
+                                    url = "https://${hostnames.download}/sabnzbd";
                                   }
                                 ];
                               }
@@ -939,7 +940,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.influxdb}";
+                                    url = "https://${hostnames.influxdb}";
                                   }
                                 ];
                               }
@@ -961,7 +962,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.stream}";
+                                    url = "https://${hostnames.stream}";
                                   }
                                 ];
                               }
@@ -983,7 +984,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}/sonarr";
+                                    url = "https://${hostnames.download}/sonarr";
                                   }
                                 ];
                               }
@@ -1005,7 +1006,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.irc}";
+                                    url = "https://${hostnames.irc}";
                                   }
                                 ];
                               }
@@ -1027,7 +1028,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.download}/prowlarr";
+                                    url = "https://${hostnames.download}/prowlarr";
                                   }
                                 ];
                               }
@@ -1049,7 +1050,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.metrics}";
+                                    url = "https://${hostnames.metrics}";
                                   }
                                 ];
                               }
@@ -1071,7 +1072,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.git}";
+                                    url = "https://${hostnames.git}";
                                   }
                                 ];
                               }
@@ -1093,7 +1094,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.secrets}";
+                                    url = "https://${hostnames.secrets}";
                                   }
                                 ];
                               }
@@ -1115,7 +1116,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.prometheus}/vmui";
+                                    url = "https://${hostnames.prometheus}/vmui";
                                   }
                                 ];
                               }
@@ -1137,7 +1138,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.paperless}";
+                                    url = "https://${hostnames.paperless}";
                                   }
                                 ];
                               }
@@ -1159,7 +1160,7 @@ in
                                   {
                                     targetBlank = true;
                                     title = "";
-                                    url = "https://${config.hostnames.audiobooks}";
+                                    url = "https://${hostnames.audiobooks}";
                                   }
                                 ];
                               }
@@ -2562,7 +2563,7 @@ in
 
     caddy.routes = [
       {
-        match = [ { host = [ config.hostnames.metrics ]; } ];
+        match = [ { host = [ hostnames.metrics ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -2575,6 +2576,6 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.metrics ];
+    services.cloudflare-dyndns.domains = [ hostnames.metrics ];
   };
 }

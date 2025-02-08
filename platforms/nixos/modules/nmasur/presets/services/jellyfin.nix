@@ -10,6 +10,7 @@
 
 let
   cfg = config.nmasur.presets.services.jellyfin;
+  hostnames = config.nmasur.settings.hostnames;
 in
 {
 
@@ -25,7 +26,7 @@ in
       {
         match = [
           {
-            host = [ config.hostnames.stream ];
+            host = [ hostnames.stream ];
             path = [ "/metrics*" ];
           }
         ];
@@ -38,7 +39,7 @@ in
       }
       # Allow access to normal route.
       {
-        match = [ { host = [ config.hostnames.stream ]; } ];
+        match = [ { host = [ hostnames.stream ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -49,7 +50,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ config.hostnames.stream ];
+    services.cloudflare-dyndns.domains = [ hostnames.stream ];
 
     # Create videos directory, allow anyone in Jellyfin group to manage it
     systemd.tmpfiles.rules = [
