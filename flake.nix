@@ -182,27 +182,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # Ren and rep - CLI find and replace
-    rep = {
-      url = "github:robenkleene/rep-grep";
-      flake = false;
-    };
-    ren = {
-      url = "github:robenkleene/ren-find";
-      flake = false;
-    };
-
-    gh-collaborators = {
-      url = "github:katiem0/gh-collaborators";
-      flake = false;
-    };
-
-    # Clipboard over SSH
-    osc = {
-      url = "github:theimpostor/osc/v0.4.6";
-      flake = false;
-    };
-
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases
@@ -281,10 +260,7 @@
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/gh-collaborators.nix inputs)
         (import ./overlays/osc.nix inputs)
-        (import ./overlays/ren-rep.nix inputs)
-        (import ./overlays/volnoti.nix)
       ];
 
       # System types to support.
@@ -297,24 +273,42 @@
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      hosts = import ./hosts;
+
+      buildHome = { };
+
+      buildNixos =
+        pkgs: modules:
+        nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          modules = modules ++ [
+            inputs.home-manager.nixosModules.home-manager
+            inputs.disko.nixosModules.disko
+            inputs.wsl.nixosModules.wsl
+          ];
+        };
+
+      buildDarwin =
+        pkgs: modules:
+        inputs.darwin.lib.darwinSystem {
+          inherit pkgs;
+          modules = modules ++ [
+            inputs.home-manager.darwinModules.home-manager
+            inputs.mac-app-util.darwinModules.default
+          ];
+        };
+
     in
     rec {
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
-      nixosConfigurations = {
-        arrow = import ./hosts/arrow { inherit inputs globals overlays; };
-        tempest = import ./hosts/tempest { inherit inputs globals overlays; };
-        hydra = import ./hosts/hydra { inherit inputs globals overlays; };
-        flame = import ./hosts/flame { inherit inputs globals overlays; };
-        swan = import ./hosts/swan { inherit inputs globals overlays; };
-      };
+      nixosConfigurations = builtins.mapAttrs buildNixos (import ./hosts/nixos inputs);
 
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass
-      darwinConfigurations = {
-        lookingglass = import ./hosts/lookingglass { inherit inputs globals overlays; };
-      };
+      darwinConfigurations = builtins.mapAttrs buildDarwin (import ./hosts/darwin inputs);
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#tempest
@@ -355,19 +349,11 @@
           x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
             system = "x86_64-linux";
             format = "iso";
-            specialArgs = {
-              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
-              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-            };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
           };
           x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
             system = "x86_64-linux";
             format = "amazon";
-            specialArgs = {
-              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
-              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-            };
             modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
               (
                 { ... }:

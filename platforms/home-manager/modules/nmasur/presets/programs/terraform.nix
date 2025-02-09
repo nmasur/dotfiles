@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    unfreePackages = [ "terraform" ];
+    allowUnfreePackages = [ "terraform" ];
 
     programs.fish.shellAbbrs = {
       te = "terraform";

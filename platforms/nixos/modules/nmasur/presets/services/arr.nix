@@ -88,7 +88,7 @@ in
     # Allows shared group to read/write the sabnzbd directory
     users.users.sabnzbd.homeMode = "0770";
 
-    unfreePackages = [ "unrar" ]; # Required as a dependency for sabnzbd
+    allowUnfreePackages = [ "unrar" ]; # Required as a dependency for sabnzbd
 
     # Requires updating the base_url config value in each service
     # If you try to rewrite the URL, the service won't redirect properly

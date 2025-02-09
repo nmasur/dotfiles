@@ -32,5 +32,18 @@ in
       "/opt/homebrew/opt/trash/bin"
     ];
 
+    # Include home-manager config in nix-darwin
+    home-manager = {
+      sharedModules = [ ../../../../home-manager ];
+
+      # Use the system-level nixpkgs instead of Home Manager's
+      useGlobalPkgs = lib.mkDefault true;
+
+      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+      # using multiple profiles for one user
+      useUserPackages = lib.mkDefault true;
+
+    };
+
   };
 }

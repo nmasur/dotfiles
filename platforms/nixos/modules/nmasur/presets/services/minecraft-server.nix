@@ -20,7 +20,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    unfreePackages = [ "minecraft-server" ];
+    allowUnfreePackages = [ "minecraft-server" ];
 
     services.minecraft-server = {
       eula = true;

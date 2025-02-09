@@ -14,7 +14,7 @@ in
   options.nmasur.presets.programs._1password.enable = lib.mkEnableOption "1Password password manager";
 
   config = lib.mkIf cfg.enable {
-    unfreePackages = [
+    allowUnfreePackages = [
       "1password"
       "_1password-gui"
       "1password-cli"

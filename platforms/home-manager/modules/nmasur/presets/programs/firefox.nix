@@ -17,7 +17,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    unfreePackages = [
+    allowUnfreePackages = [
       "okta-browser-plugin"
     ];
 

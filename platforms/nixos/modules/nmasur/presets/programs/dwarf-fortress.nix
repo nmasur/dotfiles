@@ -14,7 +14,7 @@ in
   options.nmasur.presets.programs.dwarf-fortress.enable = lib.mkEnableOption "Dwarf Fortress";
 
   config = lib.mkIf cfg.enable {
-    unfreePackages = [
+    allowUnfreePackages = [
       "dwarf-fortress"
       "phoebus-theme"
     ];

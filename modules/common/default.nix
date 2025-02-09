@@ -53,16 +53,16 @@
     #   type = lib.types.str;
     #   description = "Link to dotfiles repository HTTPS URL.";
     # };
-    unfreePackages = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "List of unfree packages to allow.";
-      default = [ ];
-    };
-    insecurePackages = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "List of insecure packages to allow.";
-      default = [ ];
-    };
+    # unfreePackages = lib.mkOption {
+    #   type = lib.types.listOf lib.types.str;
+    #   description = "List of unfree packages to allow.";
+    #   default = [ ];
+    # };
+    # insecurePackages = lib.mkOption {
+    #   type = lib.types.listOf lib.types.str;
+    #   description = "List of insecure packages to allow.";
+    #   default = [ ];
+    # };
     # hostnames = {
     #   audiobooks = lib.mkOption {
     #     type = lib.types.str;

@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    unfreePackages = [
+    allowUnfreePackages = [
       "vault-bin"
       # "teams"
     ];

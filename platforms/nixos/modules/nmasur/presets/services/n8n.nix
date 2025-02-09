@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    unfreePackages = [ "n8n" ];
+    allowUnfreePackages = [ "n8n" ];
 
     services.n8n = {
       webhookUrl = "https://${hostnames.n8n}";

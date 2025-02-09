@@ -14,7 +14,7 @@ in
   options.nmasur.presets.programs.discord.enable = lib.mkEnableOption "Discord chat";
 
   config = lib.mkIf cfg.enable {
-    unfreePackages = [ "discord" ];
+    allowUnfreePackages = [ "discord" ];
     home.packages = [ pkgs.discord ];
     xdg.configFile."discord/settings.json".text = pkgs.formats.json {
       BACKGROUND_COLOR = "#202225";

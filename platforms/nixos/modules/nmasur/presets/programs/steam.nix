@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
     hardware.steam-hardware.enable = true;
-    unfreePackages = [
+    allowUnfreePackages = [
       "steam"
       "steam-original"
       "steamcmd"
