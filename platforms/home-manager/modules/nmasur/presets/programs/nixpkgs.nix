@@ -80,7 +80,7 @@ in
       };
     };
 
-    config.nmasur.presets.programs.fish.fish_user_key_bindings = # fish
+    nmasur.presets.programs.fish.fish_user_key_bindings = # fish
       ''
         # Ctrl-n
         bind -M insert \cn 'commandline -r "nix shell nixpkgs#"'

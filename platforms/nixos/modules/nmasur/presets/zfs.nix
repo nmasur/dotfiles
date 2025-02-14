@@ -6,12 +6,12 @@
 }:
 
 let
-  cfg = config.nmasur.presets.services.zfs;
+  cfg = config.nmasur.presets.zfs;
 in
 
 {
 
-  options.nmasur.presets.services.zfs.enable = lib.mkEnableOption "ZFS file system";
+  options.nmasur.presets.zfs.enable = lib.mkEnableOption "ZFS file system";
 
   config = lib.mkIf cfg.enable {
 

@@ -48,8 +48,10 @@ in
       bash = lib.mkDefault lib.getExe pkgs.bashInteractive;
     };
 
-    nmasur.presets = {
+    nmasur.presets.programs = {
+      atuin.enable = lib.mkDefault true;
       bat.enable = lib.mkDefault true;
+      dotfiles.enable = lib.mkDefault true;
       fd.enable = lib.mkDefault true;
       ripgrep.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;

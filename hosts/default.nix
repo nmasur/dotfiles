@@ -1,6 +1,6 @@
 # Return a list of all hosts
 
 {
-  darwinConfigurations = import ./nix-darwin;
-  nixosConfigurations = import ./nixos;
+  darwin-hosts = import ./aarch64-darwin;
+  linux-hosts = import ./x86_64-linux // import ./aarch64-linux;
 }

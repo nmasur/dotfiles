@@ -26,7 +26,7 @@ in
       maxUploadSize = "50G";
       config = {
         adminpassFile = config.secrets.nextcloud.dest;
-        dbtype = "pgsql";
+        dbtype = "pgsql"; # Enables postgresql
       };
       settings = {
         default_phone_region = "US";

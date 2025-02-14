@@ -63,7 +63,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Forces Caddy to error if coming from a non-Cloudflare IP
-    config.nmasur.presets.services.caddy.cidrAllowlist = cloudflareIpRanges;
+    nmasur.presets.services.caddy.cidrAllowlist = cloudflareIpRanges;
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
     services.caddy.package = pkgs.caddy.withPlugins {

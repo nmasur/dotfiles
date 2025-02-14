@@ -260,7 +260,6 @@
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
         (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/osc.nix inputs)
       ];
 
       # System types to support.
@@ -274,28 +273,40 @@
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
+      # { system -> pkgs }
+      pkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
+
       hosts = import ./hosts;
 
-      buildHome = { };
+      buildHome =
+        { pkgs, modules }:
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = modules ++ [
+            ./platforms/home-manager
+          ];
+        };
 
       buildNixos =
-        pkgs: modules:
+        { pkgs, modules }:
         nixpkgs.lib.nixosSystem {
           inherit pkgs;
           modules = modules ++ [
             inputs.home-manager.nixosModules.home-manager
             inputs.disko.nixosModules.disko
             inputs.wsl.nixosModules.wsl
+            ./platforms/nixos
           ];
         };
 
       buildDarwin =
-        pkgs: modules:
+        { pkgs, modules }:
         inputs.darwin.lib.darwinSystem {
           inherit pkgs;
           modules = modules ++ [
             inputs.home-manager.darwinModules.home-manager
             inputs.mac-app-util.darwinModules.default
+            ./platforms/nix-darwin
           ];
         };
 
@@ -304,15 +315,33 @@
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
-      nixosConfigurations = builtins.mapAttrs buildNixos (import ./hosts/nixos inputs);
+      nixosConfigurations =
+        builtins.mapAttrs buildNixos {
+          pkgs = pkgsBySystem.x86_64-linux;
+          modules = import ./hosts/x86_64-linux;
+        }
+        // builtins.mapAttrs buildNixos {
+          pkgs = pkgsBySystem.aarch64-linux;
+          modules = import ./hosts/aarch64-linux;
+        };
 
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass
-      darwinConfigurations = builtins.mapAttrs buildDarwin (import ./hosts/darwin inputs);
+      darwinConfigurations = builtins.mapAttrs buildDarwin {
+        pkgs = pkgsBySystem.aarch64-darwin;
+        modules = import ./hosts/darwin;
+      };
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#tempest
-      homeConfigurations = {
+      homeConfigurations = rec {
+        default = personal;
+        work = buildHome {
+          pkgs = pkgsBySystem.aarch64-darwin;
+          modules = { };
+        };
+        personal = buildHome {
+        };
         tempest = nixosConfigurations.tempest.config.home-manager.users.${globals.user}.home;
         lookingglass = darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
       };

@@ -21,7 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Set the i3 terminal
-    config.nmasur.presets.services.i3.terminal = pkgs.wezterm;
+    nmasur.presets.services.i3.terminal = pkgs.wezterm;
 
     # Display images in the terminal
     programs.fish.shellAliases = {

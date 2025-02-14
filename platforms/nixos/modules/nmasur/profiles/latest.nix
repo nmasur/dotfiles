@@ -18,5 +18,7 @@ in
     # Use latest released Linux kernel by default
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
+    nmasur.presets.services.nix-autoupgrade.enable = lib.mkDefault true;
+
   };
 }

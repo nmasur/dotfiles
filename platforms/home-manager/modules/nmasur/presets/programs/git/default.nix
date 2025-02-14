@@ -167,7 +167,7 @@ in
       };
     };
 
-    config.nmasur.presets.programs.fish.fish_user_key_bindings = # fish
+    nmasur.presets.programs.fish.fish_user_key_bindings = # fish
       ''
         # Ctrl-g
         bind -M default \cg commandline-git-commits

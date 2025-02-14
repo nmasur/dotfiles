@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Set the i3 terminal
-    config.nmasur.presets.services.i3.terminal = pkgs.kitty;
+    nmasur.presets.services.i3.terminal = pkgs.kitty;
 
     # Set the Rofi terminal for running programs
     programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux (lib.mkDefault "${pkgs.kitty}/bin/kitty");

@@ -1,11 +1,11 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
   cfg = config.nmasur.profiles.aws;
 in
 {
 
-  options.nmasur.profiles.nmasur.aws.enable = lib.mkEnableOption "AWS EC2";
+  options.nmasur.profiles.aws.enable = lib.mkEnableOption "AWS EC2";
 
   config = lib.mkIf cfg.enable {
 
