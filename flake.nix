@@ -259,7 +259,6 @@
         (import ./overlays/tree-sitter.nix inputs)
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
-        (import ./overlays/betterlockscreen.nix)
       ];
 
       # System types to support.
@@ -275,8 +274,7 @@
 
       # { system -> pkgs }
       pkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
-
-      hosts = import ./hosts;
+      # stablePkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
 
       buildHome =
         { pkgs, modules }:

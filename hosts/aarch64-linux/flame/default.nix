@@ -1,8 +1,6 @@
 # The Flame
 # System configuration for an Oracle free server
 
-# See [readme](../README.md) to explain how this file works.
-
 # How to install:
 # https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/
 # These days, probably use nixos-anywhere instead.
@@ -21,24 +19,9 @@ inputs.nixpkgs.lib.nixosSystem rec {
     pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
   };
   modules = [
-    globals
-    inputs.home-manager.nixosModules.home-manager
-    ../../modules/common
-    ../../modules/nixos
     {
-      nixpkgs.overlays = overlays;
-
       # Hardware
-      server = true;
       networking.hostName = "flame";
-
-      # Not sure what's necessary but too afraid to remove anything
-      imports = [ (inputs.nixpkgs + "/nixos/modules/profiles/qemu-guest.nix") ];
-      boot.initrd.availableKernelModules = [
-        "xhci_pci"
-        "virtio_pci"
-        "usbhid"
-      ];
 
       # File systems must be declared in order to boot
 
@@ -56,9 +39,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       };
 
       # Theming
-
-      # Server doesn't require GUI
-      gui.enable = false;
 
       # Still require colors for programs like Neovim, K9S
       theme = {

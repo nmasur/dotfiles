@@ -7,11 +7,16 @@
 
 let
   cfg = config.services.betterlockscreen;
+  # Disable Dunst so that it's not attempting to reach a non-existent dunst service
+  betterlockscreen = pkgs.betterlockscreen.override { withDunst = cfg.dunst.enable; };
 in
 
 {
 
-  options.services.betterlockscreen.enable = lib.mkEnableOption "Betterlockscreen X server display lock";
+  options.services.betterlockscreen = {
+    enable = lib.mkEnableOption "Betterlockscreen X server display lock";
+    dunst.enable = lib.mkEnableOption "Dunst integration";
+  };
 
   config = lib.mkIf cfg.enable {
 
@@ -28,8 +33,8 @@ in
         Type = "simple";
         Environment = "DISPLAY=:0";
         TimeoutSec = "infinity";
-        ExecStart = "${lib.getExe pkgs.betterlockscreen} --lock --display 1 --blur 0.5 --span";
-        ExecStartPost = "${pkgs.coreutils-full}/bin/sleep 1";
+        ExecStart = "${lib.getExe betterlockscreen} --lock --display 1 --blur 0.5 --span";
+        ExecStartPost = "${lib.getExe' pkgs.coreutils-full "sleep"} 1";
       };
       wantedBy = [
         "sleep.target"
