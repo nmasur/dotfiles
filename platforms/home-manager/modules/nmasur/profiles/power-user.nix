@@ -56,6 +56,7 @@ in
       ripgrep.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;
       weather.enable = lib.mkDefault true;
+      yt-dlp.enable = lib.mkDefault true;
       zoxide.enable = lib.mkDefault true;
     };
 

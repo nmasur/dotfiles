@@ -16,6 +16,12 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    nmasur.presets.services = {
+      # Allow tunneling into the machine
+      cloudflared.enable = lib.mkDefault true;
+      openssh.enable = lib.mkDefault true;
+    };
+
     # Allows us to declaritively set password
     users.mutableUsers = lib.mkDefault false;
 
@@ -24,9 +30,6 @@ in
 
       # Create a home directory for human user
       isNormalUser = lib.mkDefault true;
-
-      # Automatically create a password to start
-      hashedPassword = lib.mkDefault config.passwordHash;
 
       extraGroups = lib.mkDefault [
         "wheel" # Sudo privileges

@@ -15,7 +15,9 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    nmasur.programs.wine.enable = lib.mkDefault true;
+    nmasur.presets.programs = {
+      wine.enable = lib.mkDefault true;
+    };
 
     home.packages = lib.mkDefault [
       pkgs.heroic

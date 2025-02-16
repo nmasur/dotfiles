@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  wallpapers ? null,
   ...
 }:
 
@@ -14,8 +15,9 @@ in
   options.nmasur.presets.services.lightdm = {
     enable = lib.mkEnableOption "Lightdm display manager";
     wallpaper = {
-      type = lib.types.path;
+      type = lib.types.nullOr lib.types.path;
       description = "Wallpaper background image file";
+      default = "${wallpapers}/gruvbox/road.jpg";
     };
     gtk.theme = {
       name = lib.mkOption {

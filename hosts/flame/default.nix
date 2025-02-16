@@ -6,12 +6,28 @@
 # These days, probably use nixos-anywhere instead.
 
 rec {
-  # Hardware
   networking.hostName = "flame";
 
   nmasur.settings = {
     username = "noah";
     fullName = "Noah Masur";
+    hostnames =
+      let
+        baseName = "masu.rs";
+      in
+      {
+        budget = "money.${baseName}";
+        git = "git.${baseName}";
+        influxdb = "influxdb.${baseName}";
+        irc = "irc.${baseName}";
+        metrics = "metrics.${baseName}";
+        minecraft = "minecraft.${baseName}";
+        n8n = "n8n.${baseName}";
+        notifications = "ntfy.${baseName}";
+        prometheus = "prom.${baseName}";
+        secrets = "vault.${baseName}";
+        status = "status.${baseName}";
+      };
   };
 
   nmasur.profiles = {
@@ -21,7 +37,10 @@ rec {
   };
 
   home-manager.users."noah" = {
-    nmasur.settings = nmasur.settings;
+    nmasur.settings = {
+      username = nmasur.settings.username;
+      fullName = nmasur.settings.fullName;
+    };
     nmasur.profiles = {
       common.enable = true;
       linux-base.enable = true;

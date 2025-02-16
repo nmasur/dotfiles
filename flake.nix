@@ -295,6 +295,9 @@
             inputs.wsl.nixosModules.wsl
             ./platforms/nixos
           ];
+          specialArgs = {
+            wallpapers = inputs.wallpapers;
+          };
         };
 
       buildDarwin =

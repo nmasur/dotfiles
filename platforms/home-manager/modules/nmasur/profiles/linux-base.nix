@@ -41,7 +41,7 @@ in
         trash = lib.mkDefault "${pkgs.trash-cli}/bin/trash-put";
       };
       shellAbbrs = {
-        t = "trash";
+        t = lib.mkDefault "trash";
       };
     };
   };

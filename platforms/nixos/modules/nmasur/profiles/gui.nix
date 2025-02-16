@@ -53,8 +53,13 @@ in
     # Detect monitors (brightness) for ddcutil
     hardware.i2c.enable = lib.mkDefault true;
 
-    # Grant main user access to external monitors
-    users.users.${username}.extraGroups = lib.mkDefault [ "i2c" ];
+    users.users.${username} = {
+      # Grant main user access to external monitors
+      extraGroups = lib.mkDefault [ "i2c" ];
+
+      # Automatically create a password to start
+      hashedPassword = lib.mkDefault (lib.fileContents ../../../../../misc/password.sha512);
+    };
 
     services.xserver.displayManager = {
 

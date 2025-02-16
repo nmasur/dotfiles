@@ -23,5 +23,28 @@ in
     prometheus.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.zfs.port}"
     ];
+
+    zramSwap.enable = true;
+    swapDevices = [
+      {
+        device = "/swapfile";
+        size = 4 * 1024; # 4 GB
+      }
+    ];
+
+    boot.zfs = {
+      # Automatically load the ZFS pool on boot
+      extraPools = [ "tank" ];
+      # Only try to decrypt datasets with keyfiles
+      requestEncryptionCredentials = [
+        "tank/archive"
+        "tank/generic"
+        "tank/nextcloud"
+        "tank/generic/git"
+      ];
+      # If password is requested and fails, continue to boot eventually
+      passwordTimeout = 300;
+    };
+
   };
 }

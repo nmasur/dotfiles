@@ -20,7 +20,7 @@ let
     "auth.method" = "json";
     username = username;
     # Generate password: htpasswd -nBC 10 "" | tr -d ':\n'
-    password = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
+    password = cfg.passwordHash;
   };
 
 in
@@ -31,6 +31,7 @@ in
     passwordHash = lib.mkOption {
       type = lib.types.str;
       description = ''Hashed password created from htpasswd -nBC 10 "" | tr -d ':\n' '';
+      default = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
     };
   };
 
