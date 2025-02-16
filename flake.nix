@@ -320,8 +320,8 @@
       # Create nixosConfigurations using the different pkgs for each system
       # What to do with home config?
 
-      nixosModules = import ./hosts/nixos nixpkgs;
-      darwinModules = import ./hosts/darwin nixpkgs;
+      nixosModules = (import ./hosts nixpkgs).nixos-hosts;
+      darwinModules = (import ./hosts nixpkgs).darwin-hosts;
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
