@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  wallpapers ? null,
   ...
 }:
 
@@ -17,7 +16,7 @@ in
     wallpaper = {
       type = lib.types.nullOr lib.types.path;
       description = "Wallpaper background image file";
-      default = "${wallpapers}/gruvbox/road.jpg";
+      default = "${pkgs.wallpapers}/gruvbox/road.jpg";
     };
     gtk.theme = {
       name = lib.mkOption {

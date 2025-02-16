@@ -20,6 +20,7 @@ in
     wallpaper = {
       type = lib.types.path;
       description = "Wallpaper background image file";
+      default = "${pkgs.wallpapers}/gruvbox/road.jpg";
     };
     commands = {
       launcher = lib.mkOption {

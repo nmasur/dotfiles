@@ -52,11 +52,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Wallpapers
-    wallpapers = {
-      url = "gitlab:exorcist365/wallpapers";
-      flake = false;
-    };
+    # # Wallpapers
+    # wallpapers = {
+    #   url = "gitlab:exorcist365/wallpapers";
+    #   flake = false;
+    # };
 
     # Used to generate NixOS images for other platforms
     nixos-generators = {
@@ -295,9 +295,9 @@
             inputs.wsl.nixosModules.wsl
             ./platforms/nixos
           ];
-          specialArgs = {
-            wallpapers = inputs.wallpapers;
-          };
+          # specialArgs = {
+          #   wallpapers = inputs.wallpapers;
+          # };
         };
 
       buildDarwin =
@@ -320,7 +320,8 @@
       # Create nixosConfigurations using the different pkgs for each system
       # What to do with home config?
 
-      nixosModules = import ./hosts/x86_64-linux nixpkgs // import ./hosts/aarch64-linux nixpkgs;
+      nixosModules = import ./hosts/nixos nixpkgs;
+      darwinModules = import ./hosts/darwin nixpkgs;
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
@@ -350,24 +351,27 @@
 
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass
-      darwinConfigurations = builtins.mapAttrs buildDarwin {
-        pkgs = pkgsBySystem.aarch64-darwin;
-        modules = import ./hosts/darwin;
-      };
+      darwinConfigurations = builtins.mapAttrs (
+        name: module:
+        buildDarwin {
+          pkgs = pkgsBySystem.aarch64-darwin;
+          modules = [ module ];
+        }
+      ) darwinModules;
+      # darwinConfigurations = builtins.mapAttrs buildDarwin {
+      #   pkgs = pkgsBySystem.aarch64-darwin;
+      #   modules = import ./hosts/darwin;
+      # };
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#tempest
-      homeConfigurations = rec {
-        default = personal;
-        work = buildHome {
-          pkgs = pkgsBySystem.aarch64-darwin;
-          modules = { };
-        };
-        personal = buildHome {
-        };
-        tempest = nixosConfigurations.tempest.config.home-manager.users.${globals.user}.home;
-        lookingglass = darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
-      };
+      homeConfigurations = builtins.mapAttrs (
+        name: module:
+        buildHome {
+          pkgs = pkgsBySystem.x86_64-linux;
+          module = [ module ];
+        }
+      ) nixosModules;
 
       # Disk formatting, only used once
       diskoConfigurations = {
