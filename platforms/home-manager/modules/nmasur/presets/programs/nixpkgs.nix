@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.programs.nixpkgs;
 in
 
@@ -124,7 +125,7 @@ in
     # For security, only allow specific users
     settings.allowed-users = [
       "@wheel" # Anyone in the wheel group
-      config.user # The current user
+      config.home.username # The current user
     ];
 
     # Enable features in Nix commands

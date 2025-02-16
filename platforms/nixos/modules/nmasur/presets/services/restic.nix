@@ -21,7 +21,7 @@ in
       bucket = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         description = "S3 bucket for Restic backups";
-        default = null;
+        default = "noahmasur-restic";
       };
       accessKeySecretPair = lib.mkOption {
         type = lib.types.nullOr lib.types.path;

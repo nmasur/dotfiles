@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (config.nmasur.settings) hostnames;
+  inherit (config.nmasur.settings) hostnames username;
   cfg = config.nmasur.presets.services.gitea;
   giteaPath = "/var/lib/gitea"; # Default service directory
 in
@@ -59,7 +59,7 @@ in
       extraConfig = null;
     };
 
-    users.users.${config.user}.extraGroups = [ "gitea" ];
+    users.users.${username}.extraGroups = [ "gitea" ];
 
     caddy.routes = [
       # Prevent public access to Prometheus metrics.

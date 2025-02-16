@@ -3,7 +3,7 @@
 { config, lib, ... }:
 
 let
-  inherit (config.nmasur.settings) hostnames;
+  inherit (config.nmasur.settings) hostnames username;
   cfg = config.nmasur.presets.services.paperless;
 in
 {
@@ -28,7 +28,7 @@ in
 
     # Allow Nextcloud and user to see files
     users.users.nextcloud.extraGroups = lib.mkIf config.services.nextcloud.enable [ "paperless" ];
-    users.users.${config.user}.extraGroups = [ "paperless" ];
+    users.users.${username}.extraGroups = [ "paperless" ];
 
     caddy.routes = [
       {

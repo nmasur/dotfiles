@@ -199,20 +199,19 @@ in
       exec = "${config.terminalLaunchCommand} aerc %u";
     };
     xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
-      "${config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier}+Shift+e" =
-        "exec ${
-          # Don't name the script `aerc` or it will affect grep
-          builtins.toString (
-            pkgs.writeShellScript "focus-mail.sh" ''
-              count=$(ps aux | grep -c aerc)
-              if [ "$count" -eq 1 ]; then
-                  i3-msg "exec --no-startup-id ${config.terminal} start --class aerc -- aerc"
-                  sleep 0.25
-              fi
-              i3-msg "[class=aerc] focus"
-            ''
-          )
-        }";
+      "${config.xsession.windowManager.i3.config.modifier}+Shift+e" = "exec ${
+        # Don't name the script `aerc` or it will affect grep
+        builtins.toString (
+          pkgs.writeShellScript "focus-mail.sh" ''
+            count=$(ps aux | grep -c aerc)
+            if [ "$count" -eq 1 ]; then
+                i3-msg "exec --no-startup-id ${config.terminal} start --class aerc -- aerc"
+                sleep 0.25
+            fi
+            i3-msg "[class=aerc] focus"
+          ''
+        )
+      }";
     };
 
     programs.fish.shellAbbrs = {

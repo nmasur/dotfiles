@@ -58,6 +58,7 @@ in
         k9s.enable = lib.mkDefault true;
         kubectl.enable = lib.mkDefault true;
         ldapsearch.enable = lib.mkDefault true;
+        obsidian.enable = lib.mkDefault true;
         ripgrep.enable = lib.mkDefault true;
         starship.enable = lib.mkDefault true;
         terraform.enable = lib.mkDefault true;

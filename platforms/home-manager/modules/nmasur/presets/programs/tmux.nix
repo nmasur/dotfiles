@@ -8,7 +8,7 @@
 
   options.tmux.enable = lib.mkEnableOption "Tmux terminal multiplexer";
 
-  config.home-manager.users.${config.user} = lib.mkIf config.tmux.enable {
+  config = lib.mkIf config.tmux.enable {
 
     programs.tmux = {
       enable = true;

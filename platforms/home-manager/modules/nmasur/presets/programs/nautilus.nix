@@ -18,7 +18,7 @@ in
 
     # Quick button for launching nautilus
     xsession.windowManager.i3.config.keybindings = {
-      "${config.home-manager.users.${config.user}.xsession.windowManager.i3.config.modifier}+n" =
+      "${config.xsession.windowManager.i3.config.modifier}+n" =
         "exec --no-startup-id ${pkgs.nautilus}/bin/nautilus";
     };
 

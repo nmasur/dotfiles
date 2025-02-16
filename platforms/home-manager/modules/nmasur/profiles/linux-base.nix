@@ -35,9 +35,14 @@ in
       };
     };
 
-    programs.fish.shellAliases = {
-      # Move files to XDG trash on the commandline
-      trash = lib.mkDefault "${pkgs.trash-cli}/bin/trash-put";
+    programs.fish = {
+      shellAliases = {
+        # Move files to XDG trash on the commandline
+        trash = lib.mkDefault "${pkgs.trash-cli}/bin/trash-put";
+      };
+      shellAbbrs = {
+        t = "trash";
+      };
     };
   };
 }

@@ -5,6 +5,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.profiles.shared-media;
 in
 
@@ -18,7 +19,7 @@ in
     users.groups.shared = { };
 
     # Give the human user access to the shared group
-    users.users.${config.user}.extraGroups = [ config.users.groups.shared.name ];
+    users.users.${username}.extraGroups = [ config.users.groups.shared.name ];
 
   };
 }

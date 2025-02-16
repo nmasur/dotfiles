@@ -7,6 +7,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.openssh;
 in
 {
@@ -16,7 +17,9 @@ in
     publicKeys = lib.mkOption {
       type = lib.types.nullOr (lib.types.listOf lib.types.str);
       description = "Public SSH keys authorized for this system.";
-      default = null;
+      default = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s personal"
+      ];
     };
     # permitRootLogin = lib.mkOption {
     #   type = lib.types.str;
@@ -38,7 +41,7 @@ in
       };
     };
 
-    users.users.${config.user}.openssh.authorizedKeys.keys = lib.mkIf (
+    users.users.${username}.openssh.authorizedKeys.keys = lib.mkIf (
       cfg.publicKeys != null
     ) cfg.publicKeys;
 

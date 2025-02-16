@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.postgresql;
 in
 {
@@ -23,7 +24,7 @@ in
     identMap = ''
       root      postgres          postgres
       root      root              postgres
-      admin     ${config.user}    admin
+      admin     ${username}    admin
     '';
     ensureUsers = [
       {

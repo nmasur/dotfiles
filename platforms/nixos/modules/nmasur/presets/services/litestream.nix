@@ -14,17 +14,17 @@ in
       endpoint = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         description = "S3 endpoint for Litestream backups";
-        # default = null;
+        default = "s3.us-west-002.backblazeb2.com";
       };
       bucket = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         description = "S3 bucket for Litestream backups";
-        # default = null;
+        default = "noahmasur-backup";
       };
       accessKeyId = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         description = "S3 access key ID for Litestream backups";
-        # default = null;
+        default = "0026b0e73b2e2c80000000005";
       };
       accessKeySecret = lib.mkOption {
         type = lib.types.nullOr lib.types.path;

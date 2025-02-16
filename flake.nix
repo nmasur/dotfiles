@@ -311,17 +311,39 @@
     in
     rec {
 
+      # The plan
+      # Import all the host configurations as modules
+      # Setup the modules as nixosModules, homeModules, darwinModules
+      # Create nixosConfigurations using the different pkgs for each system
+      # What to do with home config?
+
+      nixosModules = import ./hosts/x86_64-linux nixpkgs // import ./hosts/aarch64-linux nixpkgs;
+
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
       nixosConfigurations =
-        builtins.mapAttrs buildNixos {
-          pkgs = pkgsBySystem.x86_64-linux;
-          modules = import ./hosts/x86_64-linux;
-        }
-        // builtins.mapAttrs buildNixos {
-          pkgs = pkgsBySystem.aarch64-linux;
-          modules = import ./hosts/aarch64-linux;
-        };
+        (builtins.mapAttrs (
+          name: module:
+          buildNixos {
+            pkgs = pkgsBySystem.x86_64-linux;
+            modules = [ module ];
+          }
+        ) nixosModules)
+        // (builtins.mapAttrs (
+          name: module:
+          buildNixos {
+            pkgs = pkgsBySystem.aarch64-linux;
+            modules = [ module ];
+          }
+        ) nixosModules);
+      # builtins.mapAttrs buildNixos {
+      #   pkgs = pkgsBySystem.x86_64-linux;
+      #   modules = import ./hosts/x86_64-linux;
+      # }
+      # // builtins.mapAttrs buildNixos {
+      #   pkgs = pkgsBySystem.aarch64-linux;
+      #   modules = import ./hosts/aarch64-linux;
+      # };
 
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass

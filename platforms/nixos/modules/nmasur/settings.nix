@@ -10,7 +10,7 @@
       type = lib.types.str;
       description = "Human readable name of the user";
     };
-    options.hostnames = lib.mkOption {
+    hostnames = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       description = "Map of service names to FQDNs";
       default = { };

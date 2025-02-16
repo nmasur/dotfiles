@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.profiles.gui;
 in
 
@@ -53,7 +54,7 @@ in
     hardware.i2c.enable = lib.mkDefault true;
 
     # Grant main user access to external monitors
-    users.users.${config.user}.extraGroups = lib.mkDefault [ "i2c" ];
+    users.users.${username}.extraGroups = lib.mkDefault [ "i2c" ];
 
     services.xserver.displayManager = {
 

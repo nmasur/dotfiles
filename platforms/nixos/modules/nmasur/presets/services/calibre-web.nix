@@ -13,7 +13,7 @@
 
 let
 
-  inherit (config.nmasur.settings) hostnames;
+  inherit (config.nmasur.settings) hostnames username;
   cfg = config.nmasur.presets.services.calibre-web;
   libraryPath = "/data/books";
 in
@@ -58,7 +58,7 @@ in
     services.cloudflare-dyndns.domains = [ hostnames.books ];
 
     # Grant user access to Calibre directories
-    users.users.${config.user}.extraGroups = [ "calibre-web" ];
+    users.users.${username}.extraGroups = [ "calibre-web" ];
 
     # Run a backup on a schedule
     systemd.timers.calibre-backup = {

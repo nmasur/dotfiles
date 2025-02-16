@@ -9,7 +9,7 @@
 }:
 
 let
-  inherit (config.nmasur.settings) hostnames;
+  inherit (config.nmasur.settings) hostnames username;
   cfg = config.nmasur.presets.services.transmission;
 in
 {
@@ -34,7 +34,7 @@ in
           rpc-authentication-required = true;
           rpc-port = 9091;
           rpc-bind-address = "0.0.0.0";
-          rpc-username = config.user;
+          rpc-username = username;
           # This is a salted hash of the real password
           # https://github.com/tomwijnroks/transmission-pwgen
           rpc-password = "{c4c5145f6e18bcd3c7429214a832440a45285ce26jDOBGVW";

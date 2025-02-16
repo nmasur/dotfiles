@@ -6,7 +6,7 @@
     name = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "Color palette name (fallback when individual colors aren't specified)";
-      default = null;
+      default = "gruvbox";
     };
     colors = lib.mkOption {
       type = lib.types.attrs;

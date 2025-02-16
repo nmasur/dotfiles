@@ -9,6 +9,7 @@ in
     enable = lib.mkEnableOption "Wait for identity file oneshot";
     identityFile = lib.mkOption {
       type = lib.types.path;
+      default = config.identityFile;
     };
   };
 

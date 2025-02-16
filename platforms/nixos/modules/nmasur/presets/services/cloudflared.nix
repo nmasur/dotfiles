@@ -25,6 +25,7 @@
 # Set ca = "<public key>"
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.cloudflared;
 in
 
@@ -74,7 +75,7 @@ in
       # Must match the username portion of the email address in Cloudflare
       # Access
       "ssh/authorized_principals".text = ''
-        ${config.user}
+        ${username}
       '';
     };
 
@@ -82,7 +83,7 @@ in
     services.openssh.extraConfig = ''
       PubkeyAuthentication yes
       TrustedUserCAKeys /etc/ssh/ca.pub
-      Match User '${config.user}'
+      Match User '${username}'
         AuthorizedPrincipalsFile /etc/ssh/authorized_principals
         # if there is no existing AuthenticationMethods
         AuthenticationMethods publickey

@@ -21,8 +21,8 @@ in
       pkgs.jo # JSON output
       pkgs.osc # Clipboard over SSH
       pkgs.qrencode # Generate qr codes
-      # pkgs.ren # Rename files
-      # pkgs.rep # Replace text in files
+      pkgs.ren # Rename files
+      pkgs.rep # Replace text in files
       pkgs.spacer # Output lines in terminal
       pkgs.tealdeer # Cheatsheets
       pkgs.vimv-rs # Batch rename files

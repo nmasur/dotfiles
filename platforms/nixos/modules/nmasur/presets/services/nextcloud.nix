@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (config.nmasur.settings) hostnames;
+  inherit (config.nmasur.settings) hostnames username;
   cfg = config.nmasur.presets.services.nextcloud;
 in
 {
@@ -212,7 +212,7 @@ in
     };
 
     # Grant user access to Nextcloud directories
-    users.users.${config.user}.extraGroups = [ "nextcloud" ];
+    users.users.${username}.extraGroups = [ "nextcloud" ];
 
     # Open to groups, allowing for backups
     systemd.services.phpfpm-nextcloud.serviceConfig.StateDirectoryMode = lib.mkForce "0770";

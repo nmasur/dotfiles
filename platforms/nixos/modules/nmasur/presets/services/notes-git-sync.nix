@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.notes-git-sync;
 in
 
@@ -27,7 +28,7 @@ in
         Type = "oneshot";
         ExecStartPre = "${lib.getExe pkgs.git} -C /data/git/notes reset --hard master";
         ExecStart = "${lib.getExe pkgs.git} -C /data/git/notes pull";
-        WorkingDirectory = config.home-manager.users.${config.user}.home.homeDirectory;
+        WorkingDirectory = config.home-manager.users.${username}.home.homeDirectory;
         Environment = "PATH=${pkgs.openssh}/bin";
       };
     };

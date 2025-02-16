@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.nix-autoupgrade;
 in
 
@@ -54,7 +55,7 @@ in
           systemctl status $SERVICE_ID >> $TEMPFILE
           set -e
           ${lib.getExe pkgs.msmtp} \
-              --file=${config.home-manager.users.${config.user}.xdg.configDir}/msmtp/config \
+              --file=${config.home-manager.users.${username}.xdg.configDir}/msmtp/config \
               --account=system \
               ${address} < $TEMPFILE
         '';

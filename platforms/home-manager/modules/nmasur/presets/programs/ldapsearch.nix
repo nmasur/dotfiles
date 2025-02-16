@@ -25,7 +25,7 @@ let
         -B -o ldif-wrap=no \
         -E pr=5000/prompt \
         -H "${ldap_scheme}://''${LDAP_HOST}:${builtins.toString ldap_port}" \
-        -D "${pkgs.lib.toUpper magic_prefix}2\\${pkgs.lib.toLower config.user}" \
+        -D "${pkgs.lib.toUpper magic_prefix}2\\${pkgs.lib.toLower config.home.username}" \
         -w "$(${pkgs._1password-cli}/bin/op item get T2 --fields label=password --reveal)" \
         -b "dc=''${LDAP_HOST//./,dc=}" \
         -s "sub" -x "(cn=''${SEARCH_FILTER})" \

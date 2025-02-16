@@ -91,7 +91,6 @@ in
         scs = "systemctl status";
         sca = "systemctl cat";
         m = "make";
-        t = "trash";
 
         # Vim (overwritten by Neovim)
         v = "vim";

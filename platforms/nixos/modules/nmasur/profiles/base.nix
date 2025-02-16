@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.profiles.base;
 in
 
@@ -19,7 +20,7 @@ in
     users.mutableUsers = lib.mkDefault false;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.${config.user} = {
+    users.users.${username} = {
 
       # Create a home directory for human user
       isNormalUser = lib.mkDefault true;

@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (config.nmasur.settings) hostnames;
+  inherit (config.nmasur.settings) hostnames username;
   cfg = config.services.filebrowser;
 
   dataDir = "/var/lib/filebrowser";
@@ -18,7 +18,7 @@ let
     database = "${dataDir}/filebrowser.db";
     root = "";
     "auth.method" = "json";
-    username = config.user;
+    username = username;
     # Generate password: htpasswd -nBC 10 "" | tr -d ':\n'
     password = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
   };

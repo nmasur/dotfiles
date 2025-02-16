@@ -5,6 +5,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.user;
 in
 
@@ -13,14 +14,14 @@ in
   options.nmasur.presets.services.user.enable = lib.mkEnableOption "macoS user settings";
 
   config = lib.mkIf cfg.enable {
-    users.users."${config.user}" = {
+    users.users."${username}" = {
       # macOS user
-      home = config.home-manager.users.${config.user}.home.homeDirectory;
+      home = config.home-manager.users.${username}.home.homeDirectory;
       uid = 502;
       # shell = pkgs.fish; # Default shell
     };
     # This might fix the shell issues
-    users.knownUsers = [ config.user ];
+    users.knownUsers = [ username ];
 
   };
 }
