@@ -40,10 +40,10 @@ in
     # Create an email notification service for failed jobs
     systemd.services."notify-email@" =
       let
-        address = "system@${config.mail.server}";
+        address = "system@${config.nmasur.presets.programs.msmtp.domain}";
       in
       {
-        enable = config.mail.enable;
+        enable = config.nmasur.presets.programs.msmtp.enable;
         environment.SERVICE_ID = "%i";
         script = ''
           TEMPFILE=$(mktemp)

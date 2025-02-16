@@ -39,8 +39,8 @@ in
         };
         smtp = rec {
           enabled = true;
-          host = "${config.mail.smtpHost}:465";
-          user = "grafana@${config.mail.server}";
+          host = "${config.nmasur.presets.programs.msmtp.host}:465";
+          user = "grafana@${config.nmasur.presets.programs.msmtp.domain}";
           password = "$__file{${config.secrets.mailpass-grafana.dest}}";
           from_name = "Grafana";
           from_address = user;
@@ -2415,7 +2415,7 @@ in
                 {
                   uid = "basic-email";
                   type = "email";
-                  settings.addresses = "grafana@${config.mail.server}";
+                  settings.addresses = "grafana@${config.nmasur.presets.programs.msmtp.domain}";
                 }
               ];
             }

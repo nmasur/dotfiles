@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.services.betterlockscreen;
   # Disable Dunst so that it's not attempting to reach a non-existent dunst service
   betterlockscreen = pkgs.betterlockscreen.override { withDunst = cfg.dunst.enable; };
@@ -29,7 +30,7 @@ in
         "suspend.target"
       ];
       serviceConfig = {
-        User = config.user;
+        User = username;
         Type = "simple";
         Environment = "DISPLAY=:0";
         TimeoutSec = "infinity";

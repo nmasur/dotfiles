@@ -15,13 +15,21 @@ in
     enable = lib.mkEnableOption "System outgoing mail";
     host = lib.mkOption {
       type = lib.types.str;
-      description = "Hostname for SMTP";
-      default = config.mail.smtpHost;
+      description = "Hostname for SMTP server";
+    };
+    domain = lib.mkOption {
+      type = lib.types.str;
+      description = "Domain name for SMTP email";
     };
     user = lib.mkOption {
       type = lib.types.str;
-      description = "system@${config.mail.server}";
-      default = config.mail.smtpHost;
+      description = "Username (email address) for SMTP";
+      default = "system@${cfg.domain}";
+    };
+    passwordFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Password file for SMTP";
+      default = ../../../../../../private/mailpass-system.age;
     };
   };
 
@@ -34,7 +42,7 @@ in
         default = {
           auth = true;
           host = cfg.host;
-          passwordeval = "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${pkgs.writeText "mailpass-system.age" (builtins.readFile ../../../private/mailpass-system.age)}";
+          passwordeval = "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${pkgs.writeText "mailpass-system.age" (builtins.readFile cfg.passwordFile)}";
           user = cfg.user;
           from_full_name = "${config.networking.hostName} System";
           port = 465;

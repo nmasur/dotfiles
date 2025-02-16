@@ -75,7 +75,7 @@ in
         issuers = [
           {
             module = "acme";
-            email = "acme@${config.mail.server}";
+            email = "acme@${config.nmasur.presets.programs.msmtp.domain}";
             account_key = "{env.ACME_ACCOUNT_KEY}";
             challenges = {
               dns = {
