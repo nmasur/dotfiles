@@ -43,15 +43,15 @@ in
       type = lib.types.listOf lib.types.str;
       description = "CIDR blocks to allow for requests";
       default = [ ];
-      merge = lib.mkMerge; # Ensure that values are merged from default
+      # merge = lib.mkMerge; # Ensure that values are merged from default
     };
   };
 
   config = lib.mkIf cfg.enable {
 
     # Force Caddy to 403 if not coming from allowlisted source
-    cfg.cidrAllowlist = lib.mkDefault [ "127.0.0.1/32" ];
-    cfg.routes = lib.mkBefore [
+    nmasur.presets.services.caddy.cidrAllowlist = lib.mkDefault [ "127.0.0.1/32" ];
+    nmasur.presets.services.caddy.routes = lib.mkBefore [
       {
         match = [ { not = [ { remote_ip.ranges = cfg.cidrAllowlist; } ]; } ];
         handle = [
@@ -72,7 +72,7 @@ in
         getHostnameFromRoute =
           route:
           if (lib.hasAttr "match" route) then (lib.concatMap getHostnameFromMatch route.match) else [ ];
-        hostnames_non_unique = lib.concatMap getHostnameFromRoute config.caddy.routes;
+        hostnames_non_unique = lib.concatMap getHostnameFromRoute cfg.routes;
         hostnames = lib.unique hostnames_non_unique;
         # Create attrset of subdomains to their fqdns
         hostname_map = builtins.listToAttrs (
@@ -90,8 +90,8 @@ in
               listen = [ ":443" ];
 
               # These routes are pulled from the rest of this repo
-              routes = config.caddy.routes;
-              errors.routes = config.caddy.blocks;
+              routes = cfg.routes;
+              errors.routes = cfg.blocks;
 
               # Uncommenting collects access logs
               logs = {
@@ -104,7 +104,7 @@ in
               };
             };
             apps.http.servers.metrics = { }; # Enables Prometheus metrics
-            apps.tls.automation.policies = config.caddy.tlsPolicies;
+            apps.tls.automation.policies = cfg.tlsPolicies;
 
             # Setup logging to journal and files
             logging.logs =
@@ -223,6 +223,6 @@ in
 
     # Caddy exposes Prometheus metrics with the admin API
     # https://caddyserver.com/docs/api
-    prometheus.scrapeTargets = [ "127.0.0.1:2019" ];
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = [ "127.0.0.1:2019" ];
   };
 }

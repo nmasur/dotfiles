@@ -14,6 +14,8 @@ let
 in
 {
 
+  options.nmasur.presets.services.jellyfin.enable = lib.mkEnableOption "Jellyfin video streaming";
+
   config = lib.mkIf cfg.enable {
 
     services.jellyfin.group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
@@ -21,7 +23,7 @@ in
       isSystemUser = true;
     };
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       # Prevent public access to Prometheus metrics.
       {
         match = [
@@ -79,6 +81,6 @@ in
     systemd.services.jellyfin.serviceConfig.UMask = lib.mkForce "0007";
 
     # Requires MetricsEnable is true in /var/lib/jellyfin/config/system.xml
-    prometheus.scrapeTargets = [ "127.0.0.1:8096" ];
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = [ "127.0.0.1:8096" ];
   };
 }

@@ -33,7 +33,7 @@ in
     services.cloudflare-dyndns.domains = [ hostnames.n8n ];
 
     # Allow web traffic to Caddy
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.n8n ]; } ];
         handle = [

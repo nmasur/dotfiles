@@ -12,7 +12,7 @@ in
 
 {
 
-  options.nmasur.preset.services.mbsync = {
+  options.nmasur.presets.services.mbsync = {
     enable = lib.mkEnableOption "Mail service.";
     user = lib.mkOption {
       type = lib.types.str;

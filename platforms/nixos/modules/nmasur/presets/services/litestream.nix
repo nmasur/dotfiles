@@ -55,7 +55,7 @@ in
 
     # Broken on 2024-08-23
     # https://github.com/NixOS/nixpkgs/commit/0875d0ce1c778f344cd2377a5337a45385d6ffa0
-    insecurePackages = [ "litestream-0.3.13" ];
+    allowInsecurePackages = [ "litestream-0.3.13" ];
 
     # Wait for secret to exist
     systemd.services.litestream = {

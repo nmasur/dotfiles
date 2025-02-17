@@ -9,6 +9,8 @@ in
 lib.pipe (lib.filesystem.listFilesRecursive ./.) [
   # Get only files ending in default.nix
   (builtins.filter (name: lib.hasSuffix "default.nix" name))
+  # Remove this file
+  (builtins.filter (name: name != ./default.nix))
   # Import each host function
   map
   (file: {

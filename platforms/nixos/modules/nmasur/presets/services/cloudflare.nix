@@ -70,7 +70,7 @@ in
       plugins = [ "github.com/caddy-dns/cloudflare@master" ];
       hash = "sha256-C7JOGd4sXsRZL561oP84V2/pTg7szEgF4OFOw35yS1s=";
     };
-    caddy.tlsPolicies = [
+    nmasur.presets.services.caddy.tlsPolicies = [
       {
         issuers = [
           {

@@ -6,12 +6,12 @@
 }:
 
 let
-  cfg = config.nmasur.presets.programs.alacritty;
+  cfg = config.nmasur.presets.programs.mpv;
 in
 
 {
 
-  options.nmasur.presets.programs.alacritty.enable = lib.mkEnableOption "Alacritty terminal";
+  options.nmasur.presets.programs.mpv.enable = lib.mkEnableOption "mpv video player";
 
   config = lib.mkIf cfg.enable {
     # Video player

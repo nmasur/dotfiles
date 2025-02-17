@@ -38,7 +38,7 @@ in
       {
         launcher = ''${lib.getExe rofi} -modes drun -show drun -theme-str '@import "launcher.rasi"' '';
         systemdSearch = lib.getExe pkgs.rofi-systemd;
-        altTab = "${lib.getExe rofi} -show window -modi window";
+        applicationSwitch = "${lib.getExe rofi} -show window -modi window";
         calculator = "${lib.getExe rofi} -modes calc -show calc";
         audioSwitch = lib.getExe (
           pkgs.writeShellApplication {

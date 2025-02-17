@@ -5,6 +5,8 @@ let
 in
 {
 
+  options.nmasur.presets.services.thelounge.enable = lib.mkEnableOption "TheLounge IRC chat service";
+
   config = lib.mkIf cfg.enable {
 
     services.thelounge = {
@@ -21,7 +23,7 @@ in
     # sudo su - thelounge -s /bin/sh -c "thelounge add myuser"
 
     # Allow web traffic to Caddy
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.irc ]; } ];
         handle = [

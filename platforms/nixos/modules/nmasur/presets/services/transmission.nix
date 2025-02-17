@@ -64,7 +64,7 @@ in
       };
 
       # Create reverse proxy for web UI
-      caddy.routes =
+      nmasur.presets.services.caddy.routes =
         let
           # Set if the download domain is the same as the Transmission domain
           useDownloadDomain = hostnames.download == hostnames.transmission;

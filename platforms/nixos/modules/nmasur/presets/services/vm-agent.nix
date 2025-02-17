@@ -20,7 +20,9 @@ let
       {
         job_name = config.networking.hostName;
         stream_parse = true;
-        static_configs = [ { targets = config.prometheus.scrapeTargets; } ];
+        static_configs = [
+          { targets = config.nmasur.presets.services.prometheus-exporters.scrapeTargets; }
+        ];
       }
     ];
   };

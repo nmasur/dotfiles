@@ -59,7 +59,7 @@ in
     };
 
     # Allow web traffic to Caddy
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.budget ]; } ];
         handle = [

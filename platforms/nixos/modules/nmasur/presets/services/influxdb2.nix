@@ -55,7 +55,7 @@ in
       before = [ "influxdb2.service" ];
     };
 
-    caddy.routes = lib.mkIf config.services.influxdb2.enable [
+    nmasur.presets.services.caddy.routes = lib.mkIf config.services.influxdb2.enable [
       {
         match = [ { host = [ hostnames.influxdb ]; } ];
         handle = [

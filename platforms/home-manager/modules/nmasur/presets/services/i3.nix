@@ -190,7 +190,9 @@ in
               lib.mkIf cfg.commands.systemdSearch != null "exec --no-startup-id ${cfg.commands.systemdSearch}";
             "${modifier}+Shift+a" =
               lib.mkIf cfg.commands.audioSwitch != null "exec --no-startup-id ${cfg.commands.audioSwitch}";
-            "Mod1+Tab" = lib.mkIf cfg.commands.altTab != null "exec --no-startup-id ${cfg.commands.altTab}";
+            "Mod1+Tab" =
+              lib.mkIf cfg.commands.applicationSwitch
+              != null "exec --no-startup-id ${cfg.commands.applicationSwitch}";
             "${modifier}+Shift+period" =
               lib.mkIf cfg.commands.power != null "exec --no-startup-id ${cfg.commands.power}";
             "${modifier}+Shift+m" =

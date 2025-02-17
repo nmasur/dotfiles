@@ -20,7 +20,9 @@ let
       {
         job_name = config.networking.hostName;
         stream_parse = true;
-        static_configs = [ { targets = config.prometheus.scrapeTargets; } ];
+        static_configs = [
+          { targets = config.nmasur.presets.services.prometheus-exporters.scrapeTargets; }
+        ];
       }
     ];
   };
@@ -78,7 +80,7 @@ in
       before = [ "vmauth.service" ];
     };
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.prometheus ]; } ];
         handle = [

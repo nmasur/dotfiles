@@ -61,7 +61,7 @@ in
 
     users.users.${username}.extraGroups = [ "gitea" ];
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       # Prevent public access to Prometheus metrics.
       {
         match = [
@@ -95,7 +95,7 @@ in
     services.cloudflare-dyndns.domains = [ hostnames.git ];
 
     # Scrape the metrics endpoint for Prometheus.
-    prometheus.scrapeTargets = [
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}"
     ];
 

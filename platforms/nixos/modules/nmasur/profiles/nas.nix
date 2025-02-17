@@ -20,7 +20,7 @@ in
         msmtp.enable = lib.mkDefault true;
       };
       services = {
-        arr.enable = lib.mkDefault true;
+        arrs.enable = lib.mkDefault true;
         audiobookshelf.enable = lib.mkDefault true;
         bind.enable = lib.mkDefault true;
         caddy.enable = lib.mkDefault true;

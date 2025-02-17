@@ -28,7 +28,7 @@ in
 
     home.packages = [ cfg.package ];
 
-    cfg.package = lib.mkDefault pkgs.nmasur-neovim.override {
+    nmasur.presets.programs.neovim.package = lib.mkDefault pkgs.nmasur-neovim.override {
       colors = cfg.colors;
       github = cfg.github.enable;
       terraform = cfg.terraform.enable;

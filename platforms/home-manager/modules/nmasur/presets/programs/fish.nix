@@ -21,7 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    cfg.fish_user_key_bindings = # fish
+    nmasur.presets.programs.fish.fish_user_key_bindings = # fish
       ''
         # Shift-Enter (defined by terminal)
         bind -M insert \x1F accept-autosuggestion

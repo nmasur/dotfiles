@@ -63,7 +63,7 @@ in
     users.users.caddy.extraGroups = [ "nextcloud" ];
 
     # Point Caddy to Nginx
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.content ]; } ];
         handle = [
@@ -225,7 +225,7 @@ in
       url = "https://${hostnames.content}";
       passwordFile = config.services.nextcloud.config.adminpassFile;
     };
-    prometheus.scrapeTargets = [
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.nextcloud.port}"
     ];
     # Allows nextcloud-exporter to read passwordFile

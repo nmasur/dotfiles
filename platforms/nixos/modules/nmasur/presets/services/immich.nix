@@ -29,7 +29,7 @@ in
       };
     };
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.photos ]; } ];
         handle = [

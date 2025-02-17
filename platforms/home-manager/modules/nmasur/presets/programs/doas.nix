@@ -15,12 +15,12 @@ in
   config = lib.mkIf cfg.enable {
 
     # Alias sudo to doas for convenience
-    fish.shellAliases = {
+    programs.fish.shellAliases = {
       sudo = "doas";
     };
 
     # Disable overriding our sudo alias with a TERMINFO alias
-    kitty.settings.shell_integration = "no-sudo";
+    programs.kitty.settings.shell_integration = "no-sudo";
   };
 
 }

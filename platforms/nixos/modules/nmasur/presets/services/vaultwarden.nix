@@ -51,7 +51,7 @@ in
 
     networking.firewall.allowedTCPPorts = [ 3012 ];
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.secrets ]; } ];
         handle = [

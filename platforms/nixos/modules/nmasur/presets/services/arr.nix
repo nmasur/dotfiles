@@ -8,7 +8,7 @@
 let
 
   inherit (config.nmasur.settings) hostnames;
-  cfg = config.nmasur.presets.services.actualbudget;
+  cfg = config.nmasur.presets.services.arrs;
 
   # This config specifies ports for Prometheus to scrape information
   arrConfig = {
@@ -46,7 +46,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Required
-    config.nmasur.profiles.shared-media.enable = true; # Shared user for multiple services
+    nmasur.profiles.shared-media.enable = true; # Shared user for multiple services
 
     # # Broken on 2024-12-07
     # # https://discourse.nixos.org/t/solved-sonarr-is-broken-in-24-11-unstable-aka-how-the-hell-do-i-use-nixpkgs-config-permittedinsecurepackages/
@@ -92,7 +92,7 @@ in
 
     # Requires updating the base_url config value in each service
     # If you try to rewrite the URL, the service won't redirect properly
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         # Group means that routes with the same name are mutually exclusive,
         # so they are split between the appropriate services.
@@ -276,7 +276,7 @@ in
     };
 
     # Prometheus scrape targets (expose Exportarr to Prometheus)
-    prometheus.scrapeTargets = map (
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = map (
       key:
       "127.0.0.1:${
         lib.attrsets.getAttrFromPath [

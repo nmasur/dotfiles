@@ -16,10 +16,10 @@ in
     services.filebrowser = {
       enable = true;
       # Generate password: htpasswd -nBC 10 "" | tr -d ':\n'
-      password = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
+      passwordHash = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
     };
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.files ]; } ];
         handle = [

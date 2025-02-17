@@ -30,7 +30,7 @@ in
     users.users.nextcloud.extraGroups = lib.mkIf config.services.nextcloud.enable [ "paperless" ];
     users.users.${username}.extraGroups = [ "paperless" ];
 
-    caddy.routes = [
+    nmasur.presets.services.caddy.routes = [
       {
         match = [
           {

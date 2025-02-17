@@ -27,7 +27,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Default scrape the basic host information
-    cfg.scrapeTargets = [
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.node.port}"
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.systemd.port}"
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.process.port}"

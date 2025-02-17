@@ -14,8 +14,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    nmasur.gtk.enable = lib.mkDefault true;
     nmasur.presets = {
+      gtk.enable = lib.mkDefault true;
       programs = {
         _1password.enable = lib.mkDefault true;
         aerc.enable = lib.mkDefault true;

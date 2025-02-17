@@ -12,7 +12,7 @@ in
 
   # Allows me to make sure I can work on my dotfiles locally
 
-  options.nmasur.preset.programs.dotfiles = {
+  options.nmasur.presets.programs.dotfiles = {
     enable = lib.mkEnableOption "Clone dotfiles repository";
     repo = lib.mkOption {
       type = lib.types.str;
