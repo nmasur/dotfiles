@@ -47,6 +47,7 @@ rec {
     };
   };
 
+  system.stateVersion = "23.05";
   # File systems must be declared in order to boot
 
   # This is the root filesystem containing NixOS

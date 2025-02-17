@@ -17,7 +17,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    unfreePackages = [ "obsidian" ];
+    allowUnfreePackages = [ "obsidian" ];
     home.packages = with pkgs; [ obsidian ];
 
     # Broken on 2023-12-11

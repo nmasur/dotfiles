@@ -10,10 +10,6 @@
   ...
 }:
 
-let
-  cfg = config.secrets;
-in
-
 {
 
   options = {
@@ -70,7 +66,7 @@ in
     };
   };
 
-  config = lib.mkIf (builtins.length cfg.secrets > 0) {
+  config = lib.mkIf (builtins.length config.secrets > 0) {
 
     # Create a default directory to place secrets
 
