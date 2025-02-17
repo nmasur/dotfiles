@@ -16,6 +16,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    nmasur.presets.services.kanata.enable = lib.mkDefault true;
+
     # Mouse customization
     services.ratbagd.enable = lib.mkDefault true;
 

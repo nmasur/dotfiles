@@ -33,7 +33,6 @@ in
       services = {
         dunst.enable = lib.mkDefault false; # Off by default
         i3.enable = lib.mkDefault true;
-        kanata.enable = lib.mkDefault true;
         keybase.enable = lib.mkDefault true;
         mbsync.enable = lib.mkDefault true;
         picom.enable = lib.mkDefault true;
