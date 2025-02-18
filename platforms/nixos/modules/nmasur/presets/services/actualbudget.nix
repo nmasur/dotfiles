@@ -41,7 +41,7 @@ in
       user = "${toString (builtins.toString config.users.users.actualbudget.uid)}";
       pull = "missing";
       privileged = false;
-      ports = [ "127.0.0.1:${builtins.toString config.services.actualbudget.port}:5006" ];
+      ports = [ "127.0.0.1:${builtins.toString cfg.port}:5006" ];
       networks = [ ];
       log-driver = "journald";
       labels = {
@@ -65,7 +65,7 @@ in
         handle = [
           {
             handler = "reverse_proxy";
-            upstreams = [ { dial = "localhost:${builtins.toString config.services.actualbudget.port}"; } ];
+            upstreams = [ { dial = "localhost:${builtins.toString cfg.port}"; } ];
           }
         ];
       }

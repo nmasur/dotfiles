@@ -47,7 +47,7 @@ in
     };
 
     secrets.vmagent = {
-      source = ../../../private/prometheus.age;
+      source = ../../../../../../private/prometheus.age;
       dest = "${config.secretsDirectory}/vmagent";
     };
     systemd.services.vmagent-secret = lib.mkIf config.services.vmagent.enable {

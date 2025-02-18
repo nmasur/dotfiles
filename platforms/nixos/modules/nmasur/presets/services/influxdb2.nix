@@ -33,7 +33,7 @@ in
 
     # Create credentials file for InfluxDB admin
     secrets.influxdb2Password = lib.mkIf config.services.influxdb2.enable {
-      source = ../../../private/influxdb2-password.age;
+      source = ../../../../../../private/influxdb2-password.age;
       dest = "${config.secretsDirectory}/influxdb2-password";
       owner = "influxdb2";
       group = "influxdb2";
@@ -44,7 +44,7 @@ in
       before = [ "influxdb2.service" ];
     };
     secrets.influxdb2Token = lib.mkIf config.services.influxdb2.enable {
-      source = ../../../private/influxdb2-token.age;
+      source = ../../../../../../private/influxdb2-token.age;
       dest = "${config.secretsDirectory}/influxdb2-token";
       owner = "influxdb2";
       group = "influxdb2";

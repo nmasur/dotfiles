@@ -10,7 +10,7 @@ let
 in
 {
 
-  options.nmasur.preset.programs.notes = {
+  options.nmasur.presets.programs.notes = {
     enable = lib.mkEnableOption "Manage notes repository";
     repo = lib.mkOption {
       type = lib.types.nullOr lib.types.str;

@@ -55,7 +55,7 @@ in
           systemctl status $SERVICE_ID >> $TEMPFILE
           set -e
           ${lib.getExe pkgs.msmtp} \
-              --file=${config.home-manager.users.${username}.xdg.configDir}/msmtp/config \
+              --file=${config.home-manager.users.${username}.xdg.configHome}/msmtp/config \
               --account=system \
               ${address} < $TEMPFILE
         '';

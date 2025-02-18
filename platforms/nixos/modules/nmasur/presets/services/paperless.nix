@@ -51,7 +51,7 @@ in
     services.cloudflare-dyndns.domains = [ hostnames.paperless ];
 
     secrets.paperless = {
-      source = ../../../private/prometheus.age;
+      source = ../../../../../../private/prometheus.age;
       dest = "${config.secretsDirectory}/paperless";
       owner = "paperless";
       group = "paperless";

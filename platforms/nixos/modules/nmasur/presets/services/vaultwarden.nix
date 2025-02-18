@@ -43,7 +43,7 @@ in
     };
 
     secrets.vaultwarden = {
-      source = ../../../private/vaultwarden.age;
+      source = ../../../../../../private/vaultwarden.age;
       dest = "${config.secretsDirectory}/vaultwarden";
       owner = "vaultwarden";
       group = "vaultwarden";
@@ -94,7 +94,9 @@ in
           {
             path = "${vaultwardenPath}/db.sqlite3";
             replicas = [
-              { url = "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/vaultwarden"; }
+              {
+                url = "s3://${config.nmasur.presets.services.litestream.s3.bucket}.${config.nmasur.presets.services.litestream.s3.endpoint}/vaultwarden";
+              }
             ];
           }
         ];
@@ -119,7 +121,7 @@ in
     # Backup other Vaultwarden data to object storage
     systemd.services.vaultwarden-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
       description = "Backup Vaultwarden files";
-      environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
+      environment.AWS_ACCESS_KEY_ID = config.nmasur.presets.services.litestream.s3.accessKeyId;
       serviceConfig = {
         Type = "oneshot";
         User = "vaultwarden";
@@ -129,8 +131,8 @@ in
       script = ''
         ${pkgs.awscli2}/bin/aws s3 sync \
             ${vaultwardenPath}/ \
-            s3://${config.backup.s3.bucket}/vaultwarden/ \
-            --endpoint-url=https://${config.backup.s3.endpoint} \
+            s3://${config.nmasur.presets.services.litestream.s3.bucket}/vaultwarden/ \
+            --endpoint-url=https://${config.nmasur.presets.services.litestream.s3.endpoint} \
             --exclude "*db.sqlite3*" \
             --exclude ".db.sqlite3*"
       '';

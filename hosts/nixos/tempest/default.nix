@@ -8,13 +8,13 @@ rec {
   nmasur.settings = {
     username = "noah";
     fullName = "Noah Masur";
-    hostnames =
-      let
-        baseName = "masu.rs";
-      in
-      {
-        prometheus = "prom.${baseName}";
-      };
+    # hostnames =
+    #   let
+    #     baseName = "masu.rs";
+    #   in
+    #   {
+    #     prometheus = "prom.${baseName}";
+    #   };
   };
 
   nmasur.profiles = {

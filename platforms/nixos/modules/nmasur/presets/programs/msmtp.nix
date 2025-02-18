@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  hostnames,
   ...
 }:
 
@@ -16,10 +17,12 @@ in
     host = lib.mkOption {
       type = lib.types.str;
       description = "Hostname for SMTP server";
+      default = hostnames.smtp;
     };
     domain = lib.mkOption {
       type = lib.types.str;
       description = "Domain name for SMTP email";
+      default = hostnames.mail;
     };
     user = lib.mkOption {
       type = lib.types.str;

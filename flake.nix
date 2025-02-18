@@ -228,24 +228,27 @@
           dotfilesRepo = "https://github.com/nmasur/dotfiles";
           hostnames = {
             audiobooks = "read.${baseName}";
+            books = "books.${baseName}";
             budget = "money.${baseName}";
+            content = "cloud.${baseName}";
+            download = "download.${baseName}";
             files = "files.${baseName}";
             git = "git.${baseName}";
+            imap = "imap.purelymail.com";
             influxdb = "influxdb.${baseName}";
             irc = "irc.${baseName}";
+            mail = "noahmasur.com";
             metrics = "metrics.${baseName}";
             minecraft = "minecraft.${baseName}";
             n8n = "n8n.${baseName}";
             notifications = "ntfy.${baseName}";
-            prometheus = "prom.${baseName}";
             paperless = "paper.${baseName}";
             photos = "photos.${baseName}";
+            prometheus = "prom.${baseName}";
             secrets = "vault.${baseName}";
-            stream = "stream.${baseName}";
-            content = "cloud.${baseName}";
-            books = "books.${baseName}";
-            download = "download.${baseName}";
+            smtp = "smtp.purelymail.com";
             status = "status.${baseName}";
+            stream = "stream.${baseName}";
             transmission = "transmission.${baseName}";
           };
         };
@@ -273,7 +276,13 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
       # { system -> pkgs }
-      pkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
+      pkgsBySystem = forAllSystems (
+        system:
+        import nixpkgs {
+          inherit system overlays;
+          config.permittedInsecurePackages = [ "litestream-0.3.13" ];
+        }
+      );
       # stablePkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
 
       buildHome =
@@ -295,9 +304,9 @@
             inputs.wsl.nixosModules.wsl
             ./platforms/nixos
           ];
-          # specialArgs = {
-          #   wallpapers = inputs.wallpapers;
-          # };
+          specialArgs = {
+            hostnames = globals.hostnames;
+          };
         };
 
       buildDarwin =

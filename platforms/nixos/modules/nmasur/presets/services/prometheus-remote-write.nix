@@ -38,7 +38,7 @@ in
 
     # Create credentials file for remote Prometheus push
     secrets.prometheus = {
-      source = ../../../private/prometheus.age;
+      source = ../../../../../../private/prometheus.age;
       dest = "${config.secretsDirectory}/prometheus";
       owner = "prometheus";
       group = "prometheus";
