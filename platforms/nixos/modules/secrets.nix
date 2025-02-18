@@ -66,7 +66,7 @@
     };
   };
 
-  config = lib.mkIf (builtins.length config.secrets > 0) {
+  config = lib.mkIf (builtins.length (builtins.attrNames config.secrets) > 0) {
 
     # Create a default directory to place secrets
 

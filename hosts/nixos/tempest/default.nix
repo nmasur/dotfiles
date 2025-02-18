@@ -38,6 +38,7 @@ rec {
       developer.enable = true;
       experimental.enable = true;
     };
+    home.stateVersion = "23.05";
   };
 
   # Not sure what's necessary but too afraid to remove anything

@@ -80,11 +80,15 @@ in
     ];
 
     # Allow litestream and vaultwarden to share a sqlite database
-    users.users.litestream.extraGroups = [ "vaultwarden" ];
-    users.users.vaultwarden.extraGroups = [ "litestream" ];
+    users.users.litestream.extraGroups = lib.mkIf config.nmasur.presets.services.litestream.enable [
+      "vaultwarden"
+    ];
+    users.users.vaultwarden.extraGroups = lib.mkIf config.nmasur.presets.services.litestream.enable [
+      "litestream"
+    ];
 
     # Backup sqlite database with litestream
-    services.litestream = {
+    services.litestream = lib.mkIf config.nmasur.presets.services.litestream.enable {
       settings = {
         dbs = [
           {
@@ -98,13 +102,13 @@ in
     };
 
     # Don't start litestream unless vaultwarden is up
-    systemd.services.litestream = {
+    systemd.services.litestream = lib.mkIf config.nmasur.presets.services.litestream.enable {
       after = [ "vaultwarden.service" ];
       requires = [ "vaultwarden.service" ];
     };
 
     # Run a separate file backup on a schedule
-    systemd.timers.vaultwarden-backup = {
+    systemd.timers.vaultwarden-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
       timerConfig = {
         OnCalendar = "*-*-* 06:00:00"; # Once per day
         Unit = "vaultwarden-backup.service";
@@ -113,14 +117,14 @@ in
     };
 
     # Backup other Vaultwarden data to object storage
-    systemd.services.vaultwarden-backup = {
+    systemd.services.vaultwarden-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
       description = "Backup Vaultwarden files";
       environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
       serviceConfig = {
         Type = "oneshot";
         User = "vaultwarden";
         Group = "backup";
-        EnvironmentFile = config.secrets.backup.dest;
+        EnvironmentFile = config.secrets.litestream-backup.dest;
       };
       script = ''
         ${pkgs.awscli2}/bin/aws s3 sync \

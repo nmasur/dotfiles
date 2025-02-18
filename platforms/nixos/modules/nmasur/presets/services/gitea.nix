@@ -115,7 +115,11 @@ in
         dbs = [
           {
             path = "${giteaPath}/data/gitea.db";
-            replicas = [ { url = "s3://${config.backup.s3.bucket}.${config.backup.s3.endpoint}/gitea"; } ];
+            replicas = [
+              {
+                url = "s3://${config.nmasur.presets.services.litestream.s3.bucket}.${config.nmasur.presets.services.litestream.s3.endpoint}/gitea";
+              }
+            ];
           }
         ];
       };
@@ -128,29 +132,31 @@ in
     };
 
     # Run a repository file backup on a schedule
-    systemd.timers.gitea-backup = lib.mkIf (config.backup.s3.endpoint != null) {
-      timerConfig = {
-        OnCalendar = "*-*-* 00:00:00"; # Once per day
-        Unit = "gitea-backup.service";
-      };
-      wantedBy = [ "timers.target" ];
-    };
+    systemd.timers.gitea-backup =
+      lib.mkIf (config.nmasur.presets.services.litestream.s3.endpoint != null)
+        {
+          timerConfig = {
+            OnCalendar = "*-*-* 00:00:00"; # Once per day
+            Unit = "gitea-backup.service";
+          };
+          wantedBy = [ "timers.target" ];
+        };
 
     # Backup Gitea repos to object storage
-    systemd.services.gitea-backup = lib.mkIf (config.backup.s3.endpoint != null) {
+    systemd.services.gitea-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
       description = "Backup Gitea data";
-      environment.AWS_ACCESS_KEY_ID = config.backup.s3.accessKeyId;
+      environment.AWS_ACCESS_KEY_ID = config.nmasur.presets.services.litestream.s3.accessKeyId;
       serviceConfig = {
         Type = "oneshot";
         User = "gitea";
         Group = "backup";
-        EnvironmentFile = config.secrets.backup.dest;
+        EnvironmentFile = config.secrets.litestream-backup.dest;
       };
       script = ''
         ${pkgs.awscli2}/bin/aws s3 sync --exclude */gitea.db* \
             ${giteaPath}/ \
-            s3://${config.backup.s3.bucket}/gitea-data/ \
-            --endpoint-url=https://${config.backup.s3.endpoint}
+            s3://${config.nmasur.presets.services.litestream.s3.bucket}/gitea-data/ \
+            --endpoint-url=https://${config.nmasur.presets.services.litestream.s3.endpoint}
       '';
     };
   };

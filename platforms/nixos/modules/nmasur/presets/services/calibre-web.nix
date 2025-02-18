@@ -61,7 +61,7 @@ in
     users.users.${username}.extraGroups = [ "calibre-web" ];
 
     # Run a backup on a schedule
-    systemd.timers.calibre-backup = {
+    systemd.timers.calibre-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
       timerConfig = {
         OnCalendar = "*-*-* 00:00:00"; # Once per day
         Unit = "calibre-backup.service";
@@ -70,14 +70,14 @@ in
     };
 
     # Backup Calibre data to object storage
-    systemd.services.calibre-backup = {
+    systemd.services.calibre-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
       description = "Backup Calibre data";
       environment.AWS_ACCESS_KEY_ID = config.nmasur.presets.services.litestream.s3.accessKeyId;
       serviceConfig = {
         Type = "oneshot";
         User = "calibre-web";
         Group = "backup";
-        EnvironmentFile = config.secrets.backup.dest;
+        EnvironmentFile = config.secrets.litestream-backup.dest;
       };
       script = ''
         ${pkgs.awscli2}/bin/aws s3 sync \

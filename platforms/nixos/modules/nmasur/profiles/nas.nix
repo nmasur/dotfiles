@@ -30,6 +30,7 @@ in
         filebrowser.enable = lib.mkDefault true;
         immich.enable = lib.mkDefault true;
         jellyfin.enable = lib.mkDefault true;
+        litestream.enable = lib.mkDefault true;
         nextcloud.enable = lib.mkDefault true;
         nix-autoupgrade.enable = lib.mkDefault false; # Off by default for NAS
         paperless.enable = lib.mkDefault true;
