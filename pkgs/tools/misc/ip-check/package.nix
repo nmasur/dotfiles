@@ -7,4 +7,4 @@ pkgs.writers.writeFishBin "ip-check" {
     ":"
     "${lib.makeBinPath [ pkgs.curl ]}"
   ];
-} builtins.readFile ./ip.fish
+} (builtins.readFile ./ip.fish)

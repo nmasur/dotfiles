@@ -1,13 +1,13 @@
-{ pkgs, ... }:
+{ buildGoModule, fetchFromGitHub }:
 
-pkgs.buildGoModule rec {
+buildGoModule rec {
   pname = "gh-collaborators";
   version = "v3.0.0";
-  src = {
+  src = fetchFromGitHub {
     owner = "katiem0";
     repo = "gh-collaborators";
-    rev = "4af7c8e54ecc499097121909f02ecb42a8a60d24";
-    sha256 = pkgs.lib.fakeHash;
+    rev = "bf412dde50605e48af86f291c2ac8714f2c1b228";
+    sha256 = "sha256-SGmP/8Fvf2rcYkwscMOFG01Y0VJGb/TXrNZtLacurxA=";
   };
 
   vendorHash = "sha256-9qmvG2q9t1Zj8yhKFyA99IaJ90R/gRVdQVjdliVKLRE";

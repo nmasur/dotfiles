@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (config.nmasur.settings) fullName;
+  inherit (config.nmasur.settings) fullName hostnames;
   cfg = config.nmasur.presets.services.mbsync;
 in
 
@@ -25,10 +25,12 @@ in
     imapHost = lib.mkOption {
       type = lib.types.str;
       description = "Server host for IMAP (reading mail).";
+      default = config.hostnames.imap;
     };
     smtpHost = lib.mkOption {
       type = lib.types.str;
       description = "Server host for SMTP (sending mail).";
+      default = config.hostnames.smtp;
     };
   };
 
@@ -110,7 +112,7 @@ in
             notmuch.enable = true;
 
             # Used to login and send and receive emails
-            passwordCommand = "${lib.getExe pkgs.age} --decrypt --identity ~/.ssh/id_ed25519 ${pkgs.writeText "mailpass.age" (builtins.readFile ../../../private/mailpass.age)}";
+            passwordCommand = "${lib.getExe pkgs.age} --decrypt --identity ~/.ssh/id_ed25519 ${pkgs.writeText "mailpass.age" (builtins.readFile ../../../../../../private/mailpass.age)}";
 
             smtp = {
               host = cfg.smtpHost;

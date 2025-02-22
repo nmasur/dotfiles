@@ -28,10 +28,10 @@
 
 {
   pkgs,
-  colors ? null,
-  terraform ? false,
-  github ? false,
-  kubernetes ? false,
+  # colors ? null,
+  # terraform ? false,
+  # github ? false,
+  # kubernetes ? false,
   ...
 }:
 
@@ -40,15 +40,15 @@
 pkgs.neovimBuilder {
   package = pkgs.neovim-unwrapped;
   inherit
-    colors
-    terraform
-    github
-    kubernetes
+    # colors
+    # terraform
+    # github
+    # kubernetes
     ;
   imports = [
     ./config/align.nix
     ./config/bufferline.nix
-    ./config/colors.nix
+    # ./config/colors.nix
     ./config/completion.nix
     ./config/gitsigns.nix
     ./config/lsp.nix

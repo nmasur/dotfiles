@@ -9,15 +9,24 @@ let
         value = v;
       }) list
     );
+
+  listToAttrsByPnameOrName =
+    list:
+    builtins.listToAttrs (
+      map (v: {
+        name = v."pname" ? v."name";
+        value = v;
+      }) list
+    );
   lib = prev.lib;
-  packagesDirectory = lib.filesystem.listFilesRecursive ../pkgs;
-  packages = lib.pipe packagesDirectory [
+  # packagesDirectory = lib.filesystem.listFilesRecursive ../pkgs;
+  packages = lib.pipe (lib.filesystem.listFilesRecursive ../pkgs) [
     # Get only files called package.nix
-    (builtins.filter (name: lib.hasSuffix "package.nix"))
+    (builtins.filter (name: lib.hasSuffix "package.nix" name))
     # Apply callPackage to create a derivation
-    (builtins.map prev.callPackage)
+    (builtins.map (name: prev.callPackage name { }))
     # Convert the list to an attrset
-    (listToAttrsByField "name")
+    listToAttrsByPnameOrName
   ];
 in
 

@@ -262,6 +262,7 @@
         (import ./overlays/tree-sitter.nix inputs)
         (import ./overlays/mpv-scripts.nix inputs)
         (import ./overlays/nextcloud-apps.nix inputs)
+        (import ./overlays/pkgs.nix)
       ];
 
       # System types to support.

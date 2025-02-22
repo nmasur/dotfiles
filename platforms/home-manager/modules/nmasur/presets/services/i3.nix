@@ -17,7 +17,7 @@ in
       type = lib.types.package;
       description = "Terminal application to launch";
     };
-    wallpaper = {
+    wallpaper = lib.mkOption {
       type = lib.types.path;
       description = "Wallpaper background image file";
       default = "${pkgs.wallpapers}/gruvbox/road.jpg";
@@ -78,7 +78,7 @@ in
 
   config = lib.mkIf cfg.enable {
     xsession.windowManager.i3 = {
-      enable = config.services.xserver.enable;
+      enable = true;
       config =
         let
           modifier = "Mod4"; # Super key
@@ -315,11 +315,10 @@ in
     };
 
     programs.fish.functions = {
-      update-lock-screen =
-        lib.mkIf cfg.commands.updateLockScreen != null {
-          description = "Update lockscreen with wallpaper";
-          body = cfg.commands.updateLockScreen;
-        };
+      update-lock-screen = lib.mkIf (cfg.commands.updateLockScreen != null) {
+        description = "Update lockscreen with wallpaper";
+        body = cfg.commands.updateLockScreen;
+      };
     };
 
     # Update lock screen cache only if cache is empty
@@ -327,7 +326,7 @@ in
       let
         cacheDir = "${config.xdg.cacheHome}/betterlockscreen/current";
       in
-      lib.mkIf cfg.commands.updateLockScreen != null (
+      lib.mkIf (cfg.commands.updateLockScreen != null) (
         config.lib.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -d ${cacheDir} ] || [ -z "$(ls ${cacheDir})" ]; then
               run ${cfg.commands.updateLockScreen}
