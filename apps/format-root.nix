@@ -5,5 +5,5 @@
 
   type = "app";
 
-  program = pkgs.lib.getExe pkgs.format-root;
+  program = pkgs.lib.getExe pkgs.nmasur.format-root;
 }

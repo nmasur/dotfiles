@@ -34,9 +34,9 @@ in
       pkgs.ipcalc # Make IP network calculations
       pkgs.cloudflared # Allow connecting to Cloudflare tunnels
       pkgs.monitorcontrol # Allows adjusting external displays
-      pkgs.ocr # Converts images to text
-      pkgs.aws-ec2 # Browse EC2 instances
-      pkgs.terraform-init # Quick shortcut for initializing Terraform backend
+      pkgs.nmasur.ocr # Converts images to text
+      pkgs.nmasur.aws-ec2 # Browse EC2 instances
+      pkgs.nmasur.terraform-init # Quick shortcut for initializing Terraform backend
     ];
 
     nmasur.presets = {

@@ -26,6 +26,7 @@ in
         nautilus.enable = lib.mkDefault true;
         nsxiv.enable = lib.mkDefault true;
         obsidian.enable = lib.mkDefault true;
+        rofi.enable = lib.mkDefault true;
         xclip.enable = lib.mkDefault true;
         wezterm.enable = lib.mkDefault true;
         zathura.enable = lib.mkDefault true;

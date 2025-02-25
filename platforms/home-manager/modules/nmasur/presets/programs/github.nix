@@ -20,7 +20,7 @@ in
       gitCredentialHelper.enable = true;
       settings.git_protocol = "https";
       extensions = [
-        pkgs.gh-collaborators
+        pkgs.nmasur.gh-collaborators
         pkgs.gh-dash
         pkgs.gh-copilot
       ];

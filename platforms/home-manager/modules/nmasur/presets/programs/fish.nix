@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -43,7 +44,7 @@ in
           body = builtins.readFile ./functions/fish_user_key_bindings.fish;
         };
         ip = {
-          body = builtins.readFile ./functions/ip.fish;
+          body = lib.getExe pkgs.nmasur.ip-check;
         };
         json = {
           description = "Tidy up JSON using jq";

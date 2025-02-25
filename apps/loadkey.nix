@@ -5,5 +5,5 @@
 
   type = "app";
 
-  program = "${pkgs.loadkey}/bin/loadkey";
+  program = "${pkgs.nmasur.loadkey}/bin/loadkey";
 }

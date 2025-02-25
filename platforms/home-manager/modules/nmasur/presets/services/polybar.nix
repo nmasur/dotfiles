@@ -162,7 +162,7 @@ in
           ramp-volume-0 = "";
           ramp-volume-1 = "󰕾";
           ramp-volume-2 = "";
-          click-right = config.audioSwitchCommand;
+          click-right = config.nmasur.presets.services.i3.commands.audioSwitch;
         };
         # "module/xkeyboard" = {
         # type = "internal/xkeyboard";
@@ -217,7 +217,7 @@ in
         "module/power" = {
           type = "custom/text";
           content = "  ";
-          click-left = config.powerCommand;
+          click-left = config.nmasur.presets.services.i3.commands.toggleBar;
           click-right = "polybar-msg cmd restart";
           content-foreground = config.theme.colors.base04;
         };

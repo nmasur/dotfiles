@@ -2,7 +2,7 @@
 
 { pkgs, lib, ... }:
 pkgs.stdenv.mkDerivation {
-  pname = "volnoti-unstable";
+  pname = "volnoti";
   version = "2013-09-23";
   src = pkgs.fetchFromGitHub {
     owner = "davidbrazdil";

@@ -19,7 +19,7 @@ in
       pkgs.difftastic # Other fancy diffs
       pkgs.jless # JSON viewer
       pkgs.jo # JSON output
-      pkgs.osc # Clipboard over SSH
+      pkgs.nmasur.osc # Clipboard over SSH
       pkgs.qrencode # Generate qr codes
       pkgs.ren # Rename files
       pkgs.rep # Replace text in files
@@ -33,6 +33,7 @@ in
       pkgs.mpd # TUI slideshows
       pkgs.doggo # DNS client (dig)
       pkgs.bottom # System monitor (top)
+      pkgs.nmasur.jqr # FZF fq JSON tool
     ];
 
     programs.fish.shellAliases = {

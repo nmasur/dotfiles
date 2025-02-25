@@ -47,7 +47,7 @@ in
               pkgs.ponymix
               rofi
             ];
-            text = builtins.readFile ./rofi/pulse-sink.sh;
+            text = builtins.readFile ./pulse-sink.sh;
           }
         );
       };
