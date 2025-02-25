@@ -57,5 +57,7 @@ in
 
     };
 
+    allowUnfreePackages = config.home-manager.users.${username}.allowUnfreePackages;
+
   };
 }

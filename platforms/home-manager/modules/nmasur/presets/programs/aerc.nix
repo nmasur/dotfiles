@@ -196,7 +196,7 @@ in
 
     xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux) {
       name = "aerc";
-      exec = "${config.terminalLaunchCommand} aerc %u";
+      exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} aerc %u";
     };
     xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
       "${config.xsession.windowManager.i3.config.modifier}+Shift+e" = "exec ${
@@ -205,7 +205,7 @@ in
           pkgs.writeShellScript "focus-mail.sh" ''
             count=$(ps aux | grep -c aerc)
             if [ "$count" -eq 1 ]; then
-                i3-msg "exec --no-startup-id ${config.terminal} start --class aerc -- aerc"
+                i3-msg "exec --no-startup-id ${lib.getExe config.nmasur.presets.services.i3.terminal} start --class aerc -- aerc"
                 sleep 0.25
             fi
             i3-msg "[class=aerc] focus"

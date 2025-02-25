@@ -184,34 +184,42 @@ in
             # Launchers
             "${modifier}+Return" =
               "exec --no-startup-id ${lib.getExe cfg.terminal}; workspace ${ws2}; layout tabbed";
-            "${modifier}+space" =
-              lib.mkIf cfg.commands.launcher != null "exec --no-startup-id ${cfg.commands.launcher}";
-            "${modifier}+Shift+s" =
-              lib.mkIf cfg.commands.systemdSearch != null "exec --no-startup-id ${cfg.commands.systemdSearch}";
-            "${modifier}+Shift+a" =
-              lib.mkIf cfg.commands.audioSwitch != null "exec --no-startup-id ${cfg.commands.audioSwitch}";
+            "${modifier}+space" = lib.mkIf (
+              cfg.commands.launcher != null
+            ) "exec --no-startup-id ${cfg.commands.launcher}";
+            "${modifier}+Shift+s" = lib.mkIf (
+              cfg.commands.systemdSearch != null
+            ) "exec --no-startup-id ${cfg.commands.systemdSearch}";
+            "${modifier}+Shift+a" = lib.mkIf (
+              cfg.commands.audioSwitch != null
+            ) "exec --no-startup-id ${cfg.commands.audioSwitch}";
             "Mod1+Tab" = lib.mkIf (
               cfg.commands.applicationSwitch != null
             ) "exec --no-startup-id ${cfg.commands.applicationSwitch}";
-            "${modifier}+Shift+period" =
-              lib.mkIf cfg.commands.power != null "exec --no-startup-id ${cfg.commands.power}";
-            "${modifier}+Shift+m" =
-              lib.mkIf cfg.commands.brightness != null "exec --no-startup-id ${cfg.commands.brightness}";
-            "${modifier}+c" =
-              lib.mkIf cfg.commands.calculator != null "exec --no-startup-id ${cfg.commands.calculator}";
+            "${modifier}+Shift+period" = lib.mkIf (
+              cfg.commands.power != null
+            ) "exec --no-startup-id ${cfg.commands.power}";
+            "${modifier}+Shift+m" = lib.mkIf (
+              cfg.commands.brightness != null
+            ) "exec --no-startup-id ${cfg.commands.brightness}";
+            "${modifier}+c" = lib.mkIf (
+              cfg.commands.calculator != null
+            ) "exec --no-startup-id ${cfg.commands.calculator}";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+q" =
               ''exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"'';
-            "${modifier}+Shift+x" = lib.mkIf cfg.commands.lockScreen != null "exec ${cfg.commands.lockScreen}";
+            "${modifier}+Shift+x" = lib.mkIf (
+              cfg.commands.lockScreen != null
+            ) "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
             "${modifier}+Mod1+r" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c 'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c 'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
 
             # Window options
             "${modifier}+q" = "kill";
-            "${modifier}+b" = lib.mkIf cfg.commands.toggleBar "exec ${cfg.commands.toggleBar}";
+            "${modifier}+b" = lib.mkIf (cfg.commands.toggleBar != null) "exec ${cfg.commands.toggleBar}";
             "${modifier}+f" = "fullscreen toggle";
             "${modifier}+h" = "focus left";
             "${modifier}+j" = "focus down";

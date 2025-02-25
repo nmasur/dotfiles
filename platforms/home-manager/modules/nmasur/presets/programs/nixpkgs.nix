@@ -60,21 +60,21 @@ in
           body = # fish
             ''
               git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
-              echo "doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName}"
+              echo "doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}"
             '';
         };
         rebuild-nixos-offline = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           body = # fish
             ''
               git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
-              echo "doas nixos-rebuild switch --option substitute false --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName}"
+              echo "doas nixos-rebuild switch --option substitute false --flake ${config.nmasur.presets.programs.dotfiles.path}"
             '';
         };
         rebuild-home = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
           body = # fish
             ''
               git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
-              echo "${lib.getExe pkgs.home-manager} switch --flake ${config.nmasur.presets.programs.dotfiles.path}#${config.networking.hostName}";
+              echo "${lib.getExe pkgs.home-manager} switch --flake ${config.nmasur.presets.programs.dotfiles.path}";
             '';
         };
       };
