@@ -25,8 +25,9 @@ in
     ] ++ (if pkgs.stdenv.isLinux then [ pkgs._1password-gui ] else [ ]);
 
     # Firefox extension
-    programs.firefox.profiles.default.extensions =
-      pkgs.nur.repos.rycee.firefox-addons.onepassword-password-manager;
+    programs.firefox.profiles.default.extensions = [
+      pkgs.nur.repos.rycee.firefox-addons.onepassword-password-manager
+    ];
   };
 
   # # https://1password.community/discussion/135462/firefox-extension-does-not-connect-to-linux-app

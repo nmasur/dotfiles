@@ -321,6 +321,10 @@
           ];
         };
 
+      x86_64-linux-hosts = (import ./hosts-by-platform nixpkgs).x86_64-linux-hosts;
+      aarch64-linux-hosts = (import ./hosts-by-platform nixpkgs).aarch64-linux-hosts;
+      aarch64-darwin-hosts = (import ./hosts-by-platform nixpkgs).aarch64-darwin-hosts;
+
     in
     rec {
 
@@ -330,8 +334,8 @@
       # Create nixosConfigurations using the different pkgs for each system
       # What to do with home config?
 
-      nixosModules = (import ./hosts nixpkgs).nixos-hosts;
-      darwinModules = (import ./hosts nixpkgs).darwin-hosts;
+      nixosModules = x86_64-linux-hosts // aarch64-linux-hosts;
+      darwinModules = aarch64-darwin-hosts;
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
@@ -342,14 +346,14 @@
             pkgs = pkgsBySystem.x86_64-linux;
             modules = [ module ];
           }
-        ) nixosModules)
+        ) x86_64-linux-hosts)
         // (builtins.mapAttrs (
           name: module:
           buildNixos {
             pkgs = pkgsBySystem.aarch64-linux;
             modules = [ module ];
           }
-        ) nixosModules);
+        ) aarch64-linux-hosts);
       # builtins.mapAttrs buildNixos {
       #   pkgs = pkgsBySystem.x86_64-linux;
       #   modules = import ./hosts/x86_64-linux;
@@ -367,7 +371,7 @@
           pkgs = pkgsBySystem.aarch64-darwin;
           modules = [ module ];
         }
-      ) darwinModules;
+      ) aarch64-darwin-hosts;
       # darwinConfigurations = builtins.mapAttrs buildDarwin {
       #   pkgs = pkgsBySystem.aarch64-darwin;
       #   modules = import ./hosts/darwin;
