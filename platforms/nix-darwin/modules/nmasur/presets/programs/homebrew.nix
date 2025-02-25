@@ -24,9 +24,6 @@ in
       fi
     '';
 
-    # Add homebrew paths to CLI path
-    home.sessionPath = [ "/opt/homebrew/bin/" ];
-
     homebrew = {
       enable = true;
       onActivation = {

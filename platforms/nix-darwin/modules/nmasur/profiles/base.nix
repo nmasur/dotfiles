@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    nmasur.presets = {
+    nmasur.presets.programs = {
       fish = lib.mkDefault true;
       homebrew = lib.mkDefault true;
     };
@@ -25,11 +25,6 @@ in
     homebrew.casks = lib.mkDefault [
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "notunes" # Don't launch Apple Music with the play button
-    ];
-
-    # Add homebrew paths to CLI path
-    home.sessionPath = [
-      "/opt/homebrew/opt/trash/bin"
     ];
 
     # Include home-manager config in nix-darwin

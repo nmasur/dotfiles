@@ -34,6 +34,4 @@ rec {
       email = "${nmasur.settings.username}@take2games.com";
     };
   };
-
-  identityFile = "/Users/${nmasur.settings.username}/.ssh/id_ed25519";
 }

@@ -22,6 +22,12 @@ in
     # Used for aerc
     xdg.enable = lib.mkDefault pkgs.stdenv.isDarwin;
 
+    # Add homebrew paths to CLI path
+    home.sessionPath = [
+      "/opt/homebrew/bin/"
+      "/opt/homebrew/opt/trash/bin"
+    ];
+
     home.packages = [
       pkgs.noti # Create notifications programmatically
     ];

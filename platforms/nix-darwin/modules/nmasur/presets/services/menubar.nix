@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # User-level settings
-    activationScripts.postUserActivation.text = ''
+    system.activationScripts.postUserActivation.text = ''
       echo "Reduce Menu Bar padding"
       defaults write -globalDomain NSStatusItemSelectionPadding -int 6
       defaults write -globalDomain NSStatusItemSpacing -int 6

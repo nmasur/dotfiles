@@ -59,7 +59,7 @@ in
     };
 
     # User-level settings
-    activationScripts.postUserActivation.text = ''
+    system.activationScripts.postUserActivation.text = ''
       echo "Show the ~/Library folder"
       chflags nohidden ~/Library
     '';

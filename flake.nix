@@ -354,14 +354,6 @@
             modules = [ module ];
           }
         ) aarch64-linux-hosts);
-      # builtins.mapAttrs buildNixos {
-      #   pkgs = pkgsBySystem.x86_64-linux;
-      #   modules = import ./hosts/x86_64-linux;
-      # }
-      # // builtins.mapAttrs buildNixos {
-      #   pkgs = pkgsBySystem.aarch64-linux;
-      #   modules = import ./hosts/aarch64-linux;
-      # };
 
       # Contains my full Mac system builds, including home-manager
       # darwin-rebuild switch --flake .#lookingglass
@@ -372,10 +364,6 @@
           modules = [ module ];
         }
       ) aarch64-darwin-hosts;
-      # darwinConfigurations = builtins.mapAttrs buildDarwin {
-      #   pkgs = pkgsBySystem.aarch64-darwin;
-      #   modules = import ./hosts/darwin;
-      # };
 
       # For quickly applying home-manager settings with:
       # home-manager switch --flake .#tempest
