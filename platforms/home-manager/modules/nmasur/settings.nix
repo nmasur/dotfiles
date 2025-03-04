@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, hostnames, ... }:
 
 {
   options.nmasur.settings = {
@@ -13,7 +13,7 @@
     hostnames = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       description = "Map of service names to FQDNs";
-      default = { };
+      default = hostnames;
     };
   };
 }

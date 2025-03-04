@@ -43,6 +43,7 @@ in
 
     # Graphical volume notifications
     services.volnoti.enable = true;
+    services.volnoti.package = pkgs.nmasur.volnoti;
 
     xsession.windowManager.i3.config = {
 

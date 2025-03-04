@@ -282,6 +282,7 @@
         import nixpkgs {
           inherit system overlays;
           config.permittedInsecurePackages = [ "litestream-0.3.13" ];
+          config.allowUnfree = true;
         }
       );
       # stablePkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
@@ -304,6 +305,11 @@
             inputs.disko.nixosModules.disko
             inputs.wsl.nixosModules.wsl
             ./platforms/nixos
+            {
+              home-manager.extraSpecialArgs = {
+                hostnames = globals.hostnames;
+              };
+            }
           ];
           specialArgs = {
             hostnames = globals.hostnames;

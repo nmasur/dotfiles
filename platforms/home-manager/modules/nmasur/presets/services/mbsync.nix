@@ -25,12 +25,12 @@ in
     imapHost = lib.mkOption {
       type = lib.types.str;
       description = "Server host for IMAP (reading mail).";
-      default = config.hostnames.imap;
+      default = hostnames.imap;
     };
     smtpHost = lib.mkOption {
       type = lib.types.str;
       description = "Server host for SMTP (sending mail).";
-      default = config.hostnames.smtp;
+      default = hostnames.smtp;
     };
   };
 

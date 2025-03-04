@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     allowUnfreePackages = [ "discord" ];
     home.packages = [ pkgs.discord ];
-    xdg.configFile."discord/settings.json".text = pkgs.formats.json {
+    xdg.configFile."discord/settings.json".text = builtins.toJSON {
       BACKGROUND_COLOR = "#202225";
       IS_MAXIMIZED = false;
       IS_MINIMIZED = false;

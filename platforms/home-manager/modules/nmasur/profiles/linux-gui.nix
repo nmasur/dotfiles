@@ -16,6 +16,7 @@ in
 
     nmasur.presets = {
       gtk.enable = lib.mkDefault true;
+      fonts.enable = lib.mkDefault true;
       programs = {
         _1password.enable = lib.mkDefault true;
         aerc.enable = lib.mkDefault true;

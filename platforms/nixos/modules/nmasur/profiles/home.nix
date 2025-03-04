@@ -17,6 +17,7 @@ in
   config = lib.mkIf cfg.enable {
 
     nmasur.presets.services = {
+      grub.enable = lib.mkDefault true;
       # Configure physical power buttons
       logind.enable = lib.mkDefault true;
     };
