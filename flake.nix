@@ -343,6 +343,10 @@
       nixosModules = x86_64-linux-hosts // aarch64-linux-hosts;
       darwinModules = aarch64-darwin-hosts;
 
+      inherit buildDarwin pkgsBySystem;
+      # buildDarwin = buildDarwin;
+      # pkgsBySystem = pkgsBySystem;
+
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
       nixosConfigurations =

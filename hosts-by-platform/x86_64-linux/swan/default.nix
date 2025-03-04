@@ -78,7 +78,7 @@ rec {
   # Sets root ext4 filesystem instead of declaring it manually
   disko = {
     enableConfig = true;
-    devices = (import ../../disks/root.nix { disk = "/dev/nvme0n1"; });
+    devices = (import ../../../disks/root.nix { disk = "/dev/nvme0n1"; });
   };
 
   # Allows private remote access over the internet
