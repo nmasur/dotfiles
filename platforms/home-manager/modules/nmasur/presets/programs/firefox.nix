@@ -29,7 +29,7 @@ in
         name = "default";
         isDefault = true;
         # https://nur.nix-community.org/repos/rycee/
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           pkgs.nmasur.bypass-paywalls-clean
           darkreader
           don-t-fuck-with-paste

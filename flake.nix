@@ -258,12 +258,12 @@
         inputs.nur.overlays.default
         inputs.nix2vim.overlay
         # inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
-        (import ./overlays/neovim-plugins.nix inputs)
-        (import ./overlays/tree-sitter.nix inputs)
-        (import ./overlays/mpv-scripts.nix inputs)
-        (import ./overlays/nextcloud-apps.nix inputs)
-        (import ./overlays/pkgs.nix)
-      ];
+        # (import ./overlays/neovim-plugins.nix inputs)
+        # (import ./overlays/tree-sitter.nix inputs)
+        # (import ./overlays/mpv-scripts.nix inputs)
+        # (import ./overlays/nextcloud-apps.nix inputs)
+        # (import ./overlays/pkgs.nix)
+      ] ++ (import ./overlays inputs);
 
       # System types to support.
       supportedSystems = [

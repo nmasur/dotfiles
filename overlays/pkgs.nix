@@ -1,14 +1,15 @@
-_final: prev:
+_inputs: _final: prev:
 
 let
-  listToAttrsByField =
-    field: list:
-    builtins.listToAttrs (
-      map (v: {
-        name = v.${field};
-        value = v;
-      }) list
-    );
+  # TODO: Remove
+  # listToAttrsByField =
+  #   field: list:
+  #   builtins.listToAttrs (
+  #     map (v: {
+  #       name = v.${field};
+  #       value = v;
+  #     }) list
+  #   );
 
   listToAttrsByPnameOrName =
     list:

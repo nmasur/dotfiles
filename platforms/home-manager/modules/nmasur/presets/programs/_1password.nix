@@ -25,7 +25,7 @@ in
     ] ++ (if pkgs.stdenv.isLinux then [ pkgs._1password-gui ] else [ ]);
 
     # Firefox extension
-    programs.firefox.profiles.default.extensions = [
+    programs.firefox.profiles.default.extensions.packages = [
       pkgs.nur.repos.rycee.firefox-addons.onepassword-password-manager
     ];
   };

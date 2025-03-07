@@ -3,7 +3,7 @@
 { lib, ... }:
 
 lib.pipe (lib.filesystem.listFilesRecursive ./.) [
-  # Get only files ending in default.nix
+  # Get only files ending in flake.nix
   (builtins.filter (name: lib.hasSuffix "flake.nix" name))
   # Import each template function
   map
