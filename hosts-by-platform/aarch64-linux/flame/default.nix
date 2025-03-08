@@ -17,6 +17,7 @@ rec {
     base.enable = true;
     server.enable = true;
     communications.enable = true;
+    power-user.enable = true;
   };
 
   home-manager.users."noah" = {

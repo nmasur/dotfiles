@@ -22,6 +22,8 @@ in
       openssh.enable = lib.mkDefault true;
     };
 
+    nmasur.presets.programs.doas.enable = lib.mkDefault true;
+
     # Allows us to declaritively set password
     users.mutableUsers = lib.mkDefault false;
 
