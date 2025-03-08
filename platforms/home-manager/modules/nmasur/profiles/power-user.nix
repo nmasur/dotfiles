@@ -21,8 +21,8 @@ in
       pkgs.jo # JSON output
       pkgs.nmasur.osc # Clipboard over SSH
       pkgs.qrencode # Generate qr codes
-      pkgs.ren # Rename files
-      pkgs.rep # Replace text in files
+      pkgs.nmasur.ren-find # Rename files
+      pkgs.nmasur.rep-grep # Replace text in files
       pkgs.spacer # Output lines in terminal
       pkgs.tealdeer # Cheatsheets
       pkgs.vimv-rs # Batch rename files
@@ -37,16 +37,16 @@ in
     ];
 
     programs.fish.shellAliases = {
-      "cd" = lib.mkDefault lib.getExe pkgs.zoxide;
-      "du" = lib.mkDefault lib.getExe pkgs.dua;
-      "ncdu" = lib.mkDefault lib.getExe pkgs.du-dust;
-      "df" = lib.mkDefault lib.getExe pkgs.duf;
+      "cd" = lib.mkDefault (lib.getExe pkgs.zoxide);
+      "du" = lib.mkDefault (lib.getExe pkgs.dua);
+      "ncdu" = lib.mkDefault (lib.getExe pkgs.du-dust);
+      "df" = lib.mkDefault (lib.getExe pkgs.duf);
 
       # Use eza (exa) instead of ls for fancier output
       ls = lib.mkDefault "${lib.getExe pkgs.eza} --group";
 
       # Version of bash which works much better on the terminal
-      bash = lib.mkDefault lib.getExe pkgs.bashInteractive;
+      bash = lib.mkDefault (lib.getExe pkgs.bashInteractive);
     };
 
     nmasur.presets.programs = {
