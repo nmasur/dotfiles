@@ -34,5 +34,9 @@ in
       };
     };
 
+    nmasur.presets.programs = {
+      doas.enable = lib.mkDefault true;
+    };
+
   };
 }

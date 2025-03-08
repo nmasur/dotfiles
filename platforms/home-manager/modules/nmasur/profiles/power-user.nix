@@ -52,10 +52,14 @@ in
     nmasur.presets.programs = {
       atuin.enable = lib.mkDefault true;
       bat.enable = lib.mkDefault true;
+      direnv.enable = lib.mkDefault true;
       dotfiles.enable = lib.mkDefault true;
       fd.enable = lib.mkDefault true;
-      ripgrep.enable = lib.mkDefault true;
+      fish.enable = lib.mkDefault true;
+      fzf.enable = lib.mkDefault true;
+      nixpkgs.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;
+      ripgrep.enable = lib.mkDefault true;
       weather.enable = lib.mkDefault true;
       yt-dlp.enable = lib.mkDefault true;
       zoxide.enable = lib.mkDefault true;
