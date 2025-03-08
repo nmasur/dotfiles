@@ -50,7 +50,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Force Caddy to 403 if not coming from allowlisted source
-    nmasur.presets.services.caddy.cidrAllowlist = lib.mkDefault [ "127.0.0.1/32" ];
+    nmasur.presets.services.caddy.cidrAllowlist = [ "127.0.0.1/32" ];
     nmasur.presets.services.caddy.routes = lib.mkBefore [
       {
         match = [ { not = [ { remote_ip.ranges = cfg.cidrAllowlist; } ]; } ];

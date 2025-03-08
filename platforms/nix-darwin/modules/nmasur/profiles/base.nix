@@ -19,10 +19,10 @@ in
       homebrew = lib.mkDefault true;
     };
 
-    homebrew.brews = lib.mkDefault [
+    homebrew.brews = [
       "trash" # Delete files and folders to trash instead of rm
     ];
-    homebrew.casks = lib.mkDefault [
+    homebrew.casks = [
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "notunes" # Don't launch Apple Music with the play button
     ];

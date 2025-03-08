@@ -11,23 +11,6 @@ rec {
   nmasur.settings = {
     username = "noah";
     fullName = "Noah Masur";
-    # hostnames =
-    #   let
-    #     baseName = "masu.rs";
-    #   in
-    #   {
-    #     budget = "money.${baseName}";
-    #     git = "git.${baseName}";
-    #     influxdb = "influxdb.${baseName}";
-    #     irc = "irc.${baseName}";
-    #     metrics = "metrics.${baseName}";
-    #     minecraft = "minecraft.${baseName}";
-    #     n8n = "n8n.${baseName}";
-    #     notifications = "ntfy.${baseName}";
-    #     prometheus = "prom.${baseName}";
-    #     secrets = "vault.${baseName}";
-    #     status = "status.${baseName}";
-    #   };
   };
 
   nmasur.profiles = {

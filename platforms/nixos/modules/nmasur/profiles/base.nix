@@ -31,7 +31,7 @@ in
       # Create a home directory for human user
       isNormalUser = lib.mkDefault true;
 
-      extraGroups = lib.mkDefault [
+      extraGroups = [
         "wheel" # Sudo privileges
       ];
     };

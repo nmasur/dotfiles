@@ -19,7 +19,7 @@ in
       wine.enable = lib.mkDefault true;
     };
 
-    home.packages = lib.mkDefault [
+    home.packages = [
       pkgs.heroic
     ];
 

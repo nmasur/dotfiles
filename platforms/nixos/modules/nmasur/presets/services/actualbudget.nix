@@ -24,6 +24,9 @@ in
 
     virtualisation.podman.enable = true;
 
+    # Create a shared group for generic services
+    users.groups.shared = { };
+
     users.users.actualbudget = {
       isSystemUser = true;
       group = "shared";

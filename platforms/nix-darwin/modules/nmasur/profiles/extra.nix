@@ -16,7 +16,7 @@ in
 
     nmasur.profiles.base.enable = lib.mkDefault true;
 
-    homebrew.casks = lib.mkDefault [
+    homebrew.casks = [
       "keybase" # GUI on Nix not available for macOS
     ];
 

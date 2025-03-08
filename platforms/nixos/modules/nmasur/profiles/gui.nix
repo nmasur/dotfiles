@@ -21,7 +21,7 @@ in
     # Mouse customization
     services.ratbagd.enable = lib.mkDefault true;
 
-    environment.systemPackages = lib.mkDefault [
+    environment.systemPackages = [
       pkgs.libratbag # Mouse adjustments
       pkgs.piper # Mouse adjustments GUI
       pkgs.ddcutil # Monitor brightness control
@@ -57,7 +57,7 @@ in
 
     users.users.${username} = {
       # Grant main user access to external monitors
-      extraGroups = lib.mkDefault [ "i2c" ];
+      extraGroups = [ "i2c" ];
 
       # Automatically create a password to start
       hashedPassword = lib.mkDefault (lib.fileContents ../../../../../misc/password.sha512);

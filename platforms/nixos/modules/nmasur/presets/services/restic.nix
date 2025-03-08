@@ -44,7 +44,7 @@ in
 
     services.restic.backups = {
       default = {
-        repository = "s3:${cfg.endpoint}/${cfg.s3.bucket}/restic";
+        repository = "s3:${cfg.s3.endpoint}/${cfg.s3.bucket}/restic";
         paths = [ ];
         environmentFile = config.secrets.restic-s3-creds.dest;
         passwordFile = config.secrets.restic.dest;

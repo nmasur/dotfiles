@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    home.packages = lib.mkDefault [
+    home.packages = [
       pkgs.pgcli # Postgres client with autocomplete
     ];
 

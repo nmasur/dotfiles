@@ -12,7 +12,7 @@ in
   options.nmasur.profiles.power-user.enable = lib.mkEnableOption "power user home-manager config";
 
   config = lib.mkIf cfg.enable {
-    home.packages = lib.mkDefault [
+    home.packages = [
       pkgs.age # Encryption
       pkgs.bc # Calculator
       pkgs.delta # Fancy diffs

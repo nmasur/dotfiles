@@ -16,7 +16,7 @@ in
 
     nmasur.profiles.base.enable = lib.mkDefault true;
 
-    homebrew.casks = lib.mkDefault [
+    homebrew.casks = [
       "steam" # Not packaged for Nixon macOS
       "epic-games" # Not packaged for Nix
     ];
