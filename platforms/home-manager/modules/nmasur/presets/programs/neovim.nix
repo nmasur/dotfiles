@@ -28,12 +28,13 @@ in
 
     home.packages = [ cfg.package ];
 
-    nmasur.presets.programs.neovim.package = lib.mkDefault pkgs.nmasur-neovim.override {
-      colors = cfg.colors;
-      github = cfg.github.enable;
-      terraform = cfg.terraform.enable;
-      kubernetes = cfg.kubernetes.enable;
-    };
+    #nmasur.presets.programs.neovim.package = lib.mkDefault pkgs.nmasur-neovim.override {
+    #  colors = cfg.colors;
+    #  github = cfg.github.enable;
+    #  terraform = cfg.terraform.enable;
+    #  kubernetes = cfg.kubernetes.enable;
+    #};
+    nmasur.presets.programs.neovim.package = pkgs.nmasur.neovim;
 
     # Use Neovim as the editor for git commit messages
     programs.git.extraConfig.core.editor = "${lib.getExe cfg.package}";
@@ -60,7 +61,7 @@ in
 
     # Create a desktop option for launching Neovim from a file manager
     # (Requires launching the terminal and then executing Neovim)
-    xdg.desktopEntries.nvim = lib.mkIf (pkgs.stdenv.isLinux) {
+    xdg.desktopEntries.nvim = lib.mkIf (pkgs.stdenv.isLinux && config.nmasur.presets.services.i3.enable) {
       name = "Neovim wrapper";
       exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} nvim %F"; # TODO: change to generic
       mimeType = [

@@ -16,10 +16,12 @@ in
     name = lib.mkOption {
       type = lib.types.str;
       description = "Name to use for git commits";
+      default = config.nmasur.settings.fullName;
     };
     email = lib.mkOption {
       type = lib.types.str;
       description = "Email to use for git commits";
+      default = "7386960+nmasur@users.noreply.github.com";
     };
   };
 

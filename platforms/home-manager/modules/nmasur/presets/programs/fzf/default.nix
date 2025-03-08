@@ -51,11 +51,11 @@ in
         };
         recent = {
           description = "Open a recent file in Vim";
-          body = builtins.readFile ./edit/recent.fish;
+          body = builtins.readFile ./fish/recent.fish;
         };
         search-and-edit = {
           description = "Search and open the relevant file in Vim";
-          body = builtins.readFile ./edit/search-and-edit.fish;
+          body = builtins.readFile ./fish/search-and-edit.fish;
         };
       };
       shellAbbrs = {

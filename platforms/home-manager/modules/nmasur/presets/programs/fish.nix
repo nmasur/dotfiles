@@ -40,9 +40,6 @@ in
           description = "Evaluate a bash-like environment variables file";
           body = ''set -gx (cat $argv | tr "=" " " | string split ' ')'';
         };
-        fish_user_key_bindings = {
-          body = builtins.readFile ./functions/fish_user_key_bindings.fish;
-        };
         ip = {
           body = lib.getExe pkgs.nmasur.ip-check;
         };

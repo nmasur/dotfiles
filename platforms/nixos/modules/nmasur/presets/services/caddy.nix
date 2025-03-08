@@ -83,6 +83,7 @@ in
         );
       in
       {
+        enable = true;
         adapter = "''"; # Required to enable JSON
         configFile = pkgs.writeText "Caddyfile" (
           builtins.toJSON {
