@@ -28,15 +28,11 @@ in
 
     nmasur.presets = {
       programs = {
-        atuin.enable = true;
-        fzf.enable = true;
-        neovim.enable = true;
-        git.enable = true;
         bat.enable = lib.mkDefault true;
         fd.enable = lib.mkDefault true;
-        fish.enable = lib.mkDefault true;
         ripgrep.enable = lib.mkDefault true;
         starship.enable = lib.mkDefault true;
+        nixpkgs.enable = lib.mkDefault true;
       };
       services = {
         loadkey.enable = lib.mkDefault true;

@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -40,6 +41,16 @@ in
         picom.enable = lib.mkDefault true;
         polybar.enable = lib.mkDefault true;
         volnoti.enable = lib.mkDefault true;
+      };
+    };
+
+    programs.fish = {
+      shellAliases = {
+        # Move files to XDG trash on the commandline
+        trash = lib.mkDefault "${pkgs.trash-cli}/bin/trash-put";
+      };
+      shellAbbrs = {
+        t = lib.mkDefault "trash";
       };
     };
 
