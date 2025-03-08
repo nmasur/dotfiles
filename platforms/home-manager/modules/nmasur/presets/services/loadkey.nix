@@ -22,12 +22,15 @@ in
         if [ ! -d ~/.ssh ]; then
             run mkdir --parents $VERBOSE_ARG ~/.ssh/
         fi
-        if [ ! -f ~/.ssh/id_ed25519 ]; then
-            printf "\nEnter the seed phrase for your SSH key...\n"
-            printf "\nThen press ^D when complete.\n\n"
-            mkdir -p ~/.ssh/
-            ${pkgs.melt}/bin/melt restore ~/.ssh/id_ed25519
-            printf "\n\nContinuing activation.\n\n"
+        # But only load if using interactive mode
+        if [[ $- == *i* ]]; then
+            if [ ! -f ~/.ssh/id_ed25519 ]; then
+                printf "\nEnter the seed phrase for your SSH key...\n"
+                printf "\nThen press ^D when complete.\n\n"
+                mkdir -p ~/.ssh/
+                ${pkgs.melt}/bin/melt restore ~/.ssh/id_ed25519
+                printf "\n\nContinuing activation.\n\n"
+            fi
         fi
       '';
     };

@@ -213,6 +213,7 @@ in
           label = "%date%";
           label-foreground = config.theme.colors.base06;
           # format-background = colors.background;
+          click-right = lib.getExe config.nmasur.presets.services.i3.terminal;
         };
         "module/power" = {
           type = "custom/text";

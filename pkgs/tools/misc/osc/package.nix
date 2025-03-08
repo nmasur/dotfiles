@@ -1,7 +1,6 @@
 # Clipboard over SSH
 
 {
-  lib,
   buildGoModule,
   fetchFromGitHub,
   ...

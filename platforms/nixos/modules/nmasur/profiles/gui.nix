@@ -17,6 +17,7 @@ in
   config = lib.mkIf cfg.enable {
 
     nmasur.presets.services.kanata.enable = lib.mkDefault true;
+    nmasur.presets.services.lightdm.enable = lib.mkDefault true;
 
     # Mouse customization
     services.ratbagd.enable = lib.mkDefault true;
@@ -34,10 +35,11 @@ in
     };
 
     # Enable touchpad support
-    services.libinput.enable = true;
+    services.libinput.enable = lib.mkDefault true;
 
     services.xserver = {
 
+      enable = lib.mkDefault true;
       xkb.layout = lib.mkDefault "us";
 
       # Keyboard responsiveness

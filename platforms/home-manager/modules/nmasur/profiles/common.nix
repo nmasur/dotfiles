@@ -35,6 +35,7 @@ in
         nixpkgs.enable = lib.mkDefault true;
       };
       services = {
+        nix.enable = lib.mkDefault true;
         loadkey.enable = lib.mkDefault true;
       };
     };

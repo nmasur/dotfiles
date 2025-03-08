@@ -29,6 +29,8 @@ in
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${username} = {
+      # Use fish by default if enabled in home-manager
+      shell = lib.mkIf (config.home-manager.users.${username}.programs.fish.enable) pkgs.fish;
 
       # Create a home directory for human user
       isNormalUser = lib.mkDefault true;
@@ -57,6 +59,11 @@ in
       # using multiple profiles for one user
       useUserPackages = lib.mkDefault true;
 
+    };
+
+    # Extending time for home-manager build for things like nix-index cache
+    systemd.services."home-manager-${username}" = {
+      serviceConfig.TimeoutStartSec = lib.mkForce "45m";
     };
 
     allowUnfreePackages = config.home-manager.users.${username}.allowUnfreePackages;

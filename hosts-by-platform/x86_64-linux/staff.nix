@@ -16,6 +16,19 @@ rec {
     gui.enable = true;
   };
   nmasur.presets.services.cloudflared.enable = false;
+  nmasur.presets.services.kanata.enable = false;
+  nmasur.presets.services.openssh.enable = true;
+
+  virtualisation.vmVariant = {
+    home-manager.users."noah".nmasur.presets.programs.nix-index.enable = false;
+    virtualisation.forwardPorts = [
+      {
+        from = "host";
+        host.port = 2222;
+        guest.port = 22;
+      }
+    ];
+  };
 
   home-manager.users."noah" = {
     nmasur.settings = {

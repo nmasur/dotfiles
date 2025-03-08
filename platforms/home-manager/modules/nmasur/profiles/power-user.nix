@@ -57,6 +57,7 @@ in
       fd.enable = lib.mkDefault true;
       fish.enable = lib.mkDefault true;
       fzf.enable = lib.mkDefault true;
+      nix-index.enable = lib.mkDefault true;
       nixpkgs.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;
       ripgrep.enable = lib.mkDefault true;

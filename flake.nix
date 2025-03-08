@@ -344,8 +344,6 @@
       darwinModules = aarch64-darwin-hosts;
 
       inherit buildDarwin pkgsBySystem;
-      # buildDarwin = buildDarwin;
-      # pkgsBySystem = pkgsBySystem;
 
       # Contains my full system builds, including home-manager
       # nixos-rebuild switch --flake .#tempest
@@ -390,60 +388,64 @@
         root = import ./disks/root.nix;
       };
 
-      packages =
-        let
-          staff =
-            system:
-            import ./hosts/staff {
-              inherit
-                inputs
-                globals
-                overlays
-                system
-                ;
-            };
-          neovim =
-            system:
-            let
-              pkgs = import nixpkgs { inherit system overlays; };
-            in
-            import ./modules/common/neovim/package {
-              inherit pkgs;
-              colors = (import ./colorscheme/gruvbox-dark).dark;
-            };
-        in
-        {
-          x86_64-linux.staff = staff "x86_64-linux";
-          x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
-            system = "x86_64-linux";
-            format = "iso";
-            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
-          };
-          x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
-            system = "x86_64-linux";
-            format = "amazon";
-            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
-              (
-                { ... }:
-                {
-                  boot.kernelPackages = inputs.nixpkgs.legacyPackages.x86_64-linux.linuxKernel.packages.linux_6_6;
-                  amazonImage.sizeMB = 16 * 1024;
-                  permitRootLogin = "prohibit-password";
-                  boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
-                  boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
-                  services.amazon-ssm-agent.enable = true;
-                  users.users.ssm-user.extraGroups = [ "wheel" ];
-                }
-              )
-            ];
-          };
+      # packages =
+      #   let
+      #     staff =
+      #       system:
+      #       import ./hosts/staff {
+      #         inherit
+      #           inputs
+      #           globals
+      #           overlays
+      #           system
+      #           ;
+      #       };
+      #     neovim =
+      #       system:
+      #       let
+      #         pkgs = import nixpkgs { inherit system overlays; };
+      #       in
+      #       import ./modules/common/neovim/package {
+      #         inherit pkgs;
+      #         colors = (import ./colorscheme/gruvbox-dark).dark;
+      #       };
+      #   in
+      #   {
+      #     x86_64-linux.staff = staff "x86_64-linux";
+      #     x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
+      #       system = "x86_64-linux";
+      #       format = "iso";
+      #       modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
+      #     };
+      #     x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
+      #       system = "x86_64-linux";
+      #       format = "amazon";
+      #       modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
+      #         (
+      #           { ... }:
+      #           {
+      #             boot.kernelPackages = inputs.nixpkgs.legacyPackages.x86_64-linux.linuxKernel.packages.linux_6_6;
+      #             amazonImage.sizeMB = 16 * 1024;
+      #             permitRootLogin = "prohibit-password";
+      #             boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
+      #             boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
+      #             services.amazon-ssm-agent.enable = true;
+      #             users.users.ssm-user.extraGroups = [ "wheel" ];
+      #           }
+      #         )
+      #       ];
+      #     };
 
-          # Package Neovim config into standalone package
-          x86_64-linux.neovim = neovim "x86_64-linux";
-          x86_64-darwin.neovim = neovim "x86_64-darwin";
-          aarch64-linux.neovim = neovim "aarch64-linux";
-          aarch64-darwin.neovim = neovim "aarch64-darwin";
-        };
+      #   # Package Neovim config into standalone package
+      #   x86_64-linux.neovim = neovim "x86_64-linux";
+      #   x86_64-darwin.neovim = neovim "x86_64-darwin";
+      #   aarch64-linux.neovim = neovim "aarch64-linux";
+      #   aarch64-darwin.neovim = neovim "aarch64-darwin";
+      # };
+
+      mypackages = forAllSystems (system: pkgsBySystem.${system}.nmasur);
+
+      packages = mypackages;
 
       # Programs that can be run by calling this flake
       apps = forAllSystems (

@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.lightdm;
 in
 
@@ -13,10 +14,10 @@ in
 
   options.nmasur.presets.services.lightdm = {
     enable = lib.mkEnableOption "Lightdm display manager";
-    wallpaper = {
+    wallpaper = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       description = "Wallpaper background image file";
-      default = "${pkgs.wallpapers}/gruvbox/road.jpg";
+      default = "${pkgs.nmasur.wallpapers}/gruvbox/road.jpg";
     };
     gtk.theme = {
       name = lib.mkOption {
@@ -28,6 +29,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    programs.fish.enable = lib.mkIf (config.home-manager.users.${username}.programs.fish.enable) true; # Needed for LightDM to remember username
 
     services.xserver = {
       enable = true;

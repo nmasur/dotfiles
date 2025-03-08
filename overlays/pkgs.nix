@@ -1,16 +1,6 @@
 _inputs: _final: prev:
 
 let
-  # TODO: Remove
-  # listToAttrsByField =
-  #   field: list:
-  #   builtins.listToAttrs (
-  #     map (v: {
-  #       name = v.${field};
-  #       value = v;
-  #     }) list
-  #   );
-
   listToAttrsByPnameOrName =
     list:
     builtins.listToAttrs (
@@ -20,7 +10,6 @@ let
       }) list
     );
   lib = prev.lib;
-  # packagesDirectory = lib.filesystem.listFilesRecursive ../pkgs;
   # [ package1/package.nix package2/package.nix package2/hello.sh ]
   packages = lib.pipe (lib.filesystem.listFilesRecursive ../pkgs) [
     # Get only files called package.nix

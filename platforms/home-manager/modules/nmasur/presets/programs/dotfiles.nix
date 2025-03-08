@@ -36,9 +36,11 @@ in
 
       # Always clone dotfiles repository if it doesn't exist
       cloneDotfiles = config.lib.dag.entryAfter [ "writeBoundary" "loadkey" ] ''
-        if [ ! -d "${cfg.path}" ]; then
-            run mkdir --parents $VERBOSE_ARG $(dirname "${cfg.path}")
-            run ${lib.getExe pkgs.git} clone ${cfg.repo} "${cfg.path}"
+        if [ -f ~/.ssh/id_ed25519 ]; then
+            if [ ! -d "${cfg.path}" ]; then
+                run mkdir --parents $VERBOSE_ARG $(dirname "${cfg.path}")
+                run ${lib.getExe pkgs.git} clone ${cfg.repo} "${cfg.path}"
+            fi
         fi
       '';
     };
