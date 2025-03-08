@@ -70,74 +70,74 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Neovim plugins
-    base16-nvim-src = {
-      url = "github:RRethy/base16-nvim";
-      flake = false;
-    };
-    nvim-lspconfig-src = {
-      # https://github.com/neovim/nvim-lspconfig/tags
-      url = "github:neovim/nvim-lspconfig/v0.1.8";
-      flake = false;
-    };
-    cmp-nvim-lsp-src = {
-      url = "github:hrsh7th/cmp-nvim-lsp";
-      flake = false;
-    };
-    baleia-nvim-src = {
-      # https://github.com/m00qek/baleia.nvim/tags
-      url = "github:m00qek/baleia.nvim";
-      flake = false;
-    };
-    nvim-treesitter-src = {
-      # https://github.com/nvim-treesitter/nvim-treesitter/tags
-      url = "github:nvim-treesitter/nvim-treesitter/v0.9.2";
-      flake = false;
-    };
-    telescope-nvim-src = {
-      # https://github.com/nvim-telescope/telescope.nvim/releases
-      url = "github:nvim-telescope/telescope.nvim/0.1.8";
-      flake = false;
-    };
-    telescope-project-nvim-src = {
-      url = "github:nvim-telescope/telescope-project.nvim";
-      flake = false;
-    };
-    toggleterm-nvim-src = {
-      # https://github.com/akinsho/toggleterm.nvim/tags
-      url = "github:akinsho/toggleterm.nvim/v2.12.0";
-      flake = false;
-    };
-    bufferline-nvim-src = {
-      # https://github.com/akinsho/bufferline.nvim/releases
-      url = "github:akinsho/bufferline.nvim/v4.6.1";
-      flake = false;
-    };
-    nvim-tree-lua-src = {
-      url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
-    hmts-nvim-src = {
-      url = "github:calops/hmts.nvim";
-      flake = false;
-    };
-    fidget-nvim-src = {
-      # https://github.com/j-hui/fidget.nvim/tags
-      url = "github:j-hui/fidget.nvim/v1.4.5";
-      flake = false;
-    };
-    nvim-lint-src = {
-      url = "github:mfussenegger/nvim-lint";
-      flake = false;
-    };
-    tiny-inline-diagnostic-nvim-src = {
-      url = "github:rachartier/tiny-inline-diagnostic.nvim";
-      flake = false;
-    };
-    snipe-nvim-src = {
-      url = "github:leath-dub/snipe.nvim";
-      flake = false;
-    };
+    # # Neovim plugins
+    # base16-nvim-src = {
+    #   url = "github:RRethy/base16-nvim";
+    #   flake = false;
+    # };
+    # nvim-lspconfig-src = {
+    #   # https://github.com/neovim/nvim-lspconfig/tags
+    #   url = "github:neovim/nvim-lspconfig/v0.1.8";
+    #   flake = false;
+    # };
+    # cmp-nvim-lsp-src = {
+    #   url = "github:hrsh7th/cmp-nvim-lsp";
+    #   flake = false;
+    # };
+    # baleia-nvim-src = {
+    #   # https://github.com/m00qek/baleia.nvim/tags
+    #   url = "github:m00qek/baleia.nvim";
+    #   flake = false;
+    # };
+    # nvim-treesitter-src = {
+    #   # https://github.com/nvim-treesitter/nvim-treesitter/tags
+    #   url = "github:nvim-treesitter/nvim-treesitter/v0.9.2";
+    #   flake = false;
+    # };
+    # telescope-nvim-src = {
+    #   # https://github.com/nvim-telescope/telescope.nvim/releases
+    #   url = "github:nvim-telescope/telescope.nvim/0.1.8";
+    #   flake = false;
+    # };
+    # telescope-project-nvim-src = {
+    #   url = "github:nvim-telescope/telescope-project.nvim";
+    #   flake = false;
+    # };
+    # toggleterm-nvim-src = {
+    #   # https://github.com/akinsho/toggleterm.nvim/tags
+    #   url = "github:akinsho/toggleterm.nvim/v2.12.0";
+    #   flake = false;
+    # };
+    # bufferline-nvim-src = {
+    #   # https://github.com/akinsho/bufferline.nvim/releases
+    #   url = "github:akinsho/bufferline.nvim/v4.6.1";
+    #   flake = false;
+    # };
+    # nvim-tree-lua-src = {
+    #   url = "github:kyazdani42/nvim-tree.lua";
+    #   flake = false;
+    # };
+    # hmts-nvim-src = {
+    #   url = "github:calops/hmts.nvim";
+    #   flake = false;
+    # };
+    # fidget-nvim-src = {
+    #   # https://github.com/j-hui/fidget.nvim/tags
+    #   url = "github:j-hui/fidget.nvim/v1.4.5";
+    #   flake = false;
+    # };
+    # nvim-lint-src = {
+    #   url = "github:mfussenegger/nvim-lint";
+    #   flake = false;
+    # };
+    # tiny-inline-diagnostic-nvim-src = {
+    #   url = "github:rachartier/tiny-inline-diagnostic.nvim";
+    #   flake = false;
+    # };
+    # snipe-nvim-src = {
+    #   url = "github:leath-dub/snipe.nvim";
+    #   flake = false;
+    # };
 
     # Tree-Sitter Grammars
     tree-sitter-bash = {
@@ -506,28 +506,6 @@
       );
 
       # Templates for starting other projects quickly
-      templates = rec {
-        default = basic;
-        basic = {
-          path = ./templates/basic;
-          description = "Basic program template";
-        };
-        poetry = {
-          path = ./templates/poetry;
-          description = "Poetry template";
-        };
-        python = {
-          path = ./templates/python;
-          description = "Legacy Python template";
-        };
-        haskell = {
-          path = ./templates/haskell;
-          description = "Haskell template";
-        };
-        rust = {
-          path = ./templates/rust;
-          description = "Rust template";
-        };
-      };
+      templates = (import ./templates nixpkgs.lib);
     };
 }
