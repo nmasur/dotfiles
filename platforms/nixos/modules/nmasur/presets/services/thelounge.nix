@@ -10,6 +10,7 @@ in
   config = lib.mkIf cfg.enable {
 
     services.thelounge = {
+      enable = true;
       public = false;
       port = 9000;
       extraConfig = {

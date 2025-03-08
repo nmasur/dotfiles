@@ -23,6 +23,7 @@ in
     allowUnfreePackages = [ "minecraft-server" ];
 
     services.minecraft-server = {
+      enable = true;
       eula = true;
       declarative = true;
       whitelist = { };

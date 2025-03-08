@@ -17,6 +17,7 @@ in
     allowUnfreePackages = [ "n8n" ];
 
     services.n8n = {
+      enable = true;
       webhookUrl = "https://${hostnames.n8n}";
       settings = {
         listen_address = "127.0.0.1";
