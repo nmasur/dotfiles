@@ -18,18 +18,12 @@ in
 
     nmasur.presets = {
       vm.enable = lib.mkDefault true;
-      services = {
-        # Allow tunneling into the machine
-        cloudflared.enable = lib.mkDefault true;
-        openssh.enable = lib.mkDefault true;
-      };
       programs = {
         doas.enable = lib.mkDefault true;
       };
     };
 
-programs.fish.enable = lib.mkDefault config.home-manager.users.${username}.programs.fish.enable;
-
+    programs.fish.enable = lib.mkDefault config.home-manager.users.${username}.programs.fish.enable;
 
     # Allows us to declaritively set password
     users.mutableUsers = lib.mkDefault false;
@@ -74,6 +68,8 @@ programs.fish.enable = lib.mkDefault config.home-manager.users.${username}.progr
     };
 
     allowUnfreePackages = config.home-manager.users.${username}.allowUnfreePackages;
+
+    wsl.enable = lib.mkDefault false;
 
   };
 }

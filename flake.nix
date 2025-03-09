@@ -327,9 +327,9 @@
           ];
         };
 
-      x86_64-linux-hosts = (import ./hosts-by-platform nixpkgs).x86_64-linux-hosts;
-      aarch64-linux-hosts = (import ./hosts-by-platform nixpkgs).aarch64-linux-hosts;
-      aarch64-darwin-hosts = (import ./hosts-by-platform nixpkgs).aarch64-darwin-hosts;
+      x86_64-linux-hosts = (import ./hosts nixpkgs).x86_64-linux-hosts;
+      aarch64-linux-hosts = (import ./hosts nixpkgs).aarch64-linux-hosts;
+      aarch64-darwin-hosts = (import ./hosts nixpkgs).aarch64-darwin-hosts;
 
     in
     rec {
@@ -443,39 +443,12 @@
       #   aarch64-darwin.neovim = neovim "aarch64-darwin";
       # };
 
-      mypackages = forAllSystems (system: pkgsBySystem.${system}.nmasur);
-
-      packages = mypackages;
-
-      # # Programs that can be run by calling this flake
-      # apps = forAllSystems (
-      #   system:
-      #   let
-      #     pkgs = import nixpkgs { inherit system overlays; };
-      #   in
-      #   import ./apps { inherit pkgs; }
-      # );
+      packages = forAllSystems (system: pkgsBySystem.${system}.nmasur);
 
       # Development environments
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        {
-
-          # Used to run commands and edit files in this repo
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              stylua
-              nixfmt-rfc-style
-              shfmt
-              shellcheck
-            ];
-          };
-        }
-      );
+      devShells = forAllSystems (system: {
+        default = pkgsBySystem.${system}.nmasur.dotfiles-devshell;
+      });
 
       checks = forAllSystems (
         system:

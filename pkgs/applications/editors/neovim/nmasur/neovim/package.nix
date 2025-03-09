@@ -28,7 +28,7 @@
 
 {
   pkgs,
-  colors ? (import ../../../../../../colorscheme/gruvbox).dark,
+  colors ? (import ../../../../../../colorscheme/nord).dark,
   terraform ? false,
   github ? false,
   kubernetes ? false,

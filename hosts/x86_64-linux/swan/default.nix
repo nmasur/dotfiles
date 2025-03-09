@@ -7,21 +7,6 @@ rec {
   nmasur.settings = {
     username = "noah";
     fullName = "Noah Masur";
-    # hostnames =
-    #   let
-    #     baseName = "masu.rs";
-    #   in
-    #   {
-    #     audiobooks = "read.${baseName}";
-    #     books = "books.${baseName}";
-    #     content = "cloud.${baseName}";
-    #     download = "download.${baseName}";
-    #     files = "files.${baseName}";
-    #     paperless = "paper.${baseName}";
-    #     photos = "photos.${baseName}";
-    #     prometheus = "prom.${baseName}";
-    #     stream = "stream.${baseName}";
-    #   };
   };
 
   nmasur.profiles = {
