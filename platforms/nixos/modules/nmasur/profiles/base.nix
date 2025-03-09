@@ -16,13 +16,17 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    nmasur.presets.services = {
-      # Allow tunneling into the machine
-      cloudflared.enable = lib.mkDefault true;
-      openssh.enable = lib.mkDefault true;
+    nmasur.presets = {
+      vm.enable = lib.mkDefault true;
+      services = {
+        # Allow tunneling into the machine
+        cloudflared.enable = lib.mkDefault true;
+        openssh.enable = lib.mkDefault true;
+      };
+      programs = {
+        doas.enable = lib.mkDefault true;
+      };
     };
-
-    nmasur.presets.programs.doas.enable = lib.mkDefault true;
 
     # Allows us to declaritively set password
     users.mutableUsers = lib.mkDefault false;
