@@ -28,13 +28,16 @@ in
       };
     };
 
+programs.fish.enable = lib.mkDefault config.home-manager.users.${username}.programs.fish.enable;
+
+
     # Allows us to declaritively set password
     users.mutableUsers = lib.mkDefault false;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${username} = {
       # Use fish by default if enabled in home-manager
-      shell = lib.mkIf (config.home-manager.users.${username}.programs.fish.enable) pkgs.fish;
+      shell = lib.mkIf (config.programs.fish.enable) pkgs.fish;
 
       # Create a home directory for human user
       isNormalUser = lib.mkDefault true;

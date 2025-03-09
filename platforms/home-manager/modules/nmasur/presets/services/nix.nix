@@ -40,6 +40,12 @@ in
 
       settings = {
 
+        # Trust users for messing with Nix stuff
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
+
         # Add community Cachix to binary cache
         # Don't use at work because blocked by corporate firewall
         builders-use-substitutes = true;
