@@ -34,7 +34,7 @@ in
   ];
   x86_64-linux-hosts = lib.pipe (lib.filesystem.listFilesRecursive ./x86_64-linux) [
     # Get only files ending in default.nix
-    (builtins.filter (name: lib.hasSuffix ".nix" name))
+    (builtins.filter (name: lib.hasSuffix "default.nix" name))
     # Import each host function
     (map (file: {
       name = lib.removeSuffix ".nix" (builtins.baseNameOf file);

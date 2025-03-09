@@ -52,7 +52,7 @@ rec {
   nmasur.presets.services.cloudflared = {
     tunnel = {
       id = "bd250ee1-ed2e-42d2-b627-039f1eb5a4d2";
-      credentialsFile = ../../../private/cloudflared-flame.age;
+      credentialsFile = ./cloudflared-flame.age;
       ca = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK/6oyVqjFGX3Uvrc3VS8J9sphxzAnRzKC85xgkHfYgR3TK6qBGXzHrknEj21xeZrr3G2y1UsGzphWJd9ZfIcdA= open-ssh-ca@cloudflareaccess.org";
     };
   };

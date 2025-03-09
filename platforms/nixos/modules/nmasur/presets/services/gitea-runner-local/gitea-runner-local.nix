@@ -52,7 +52,7 @@ in
 
     # API key needed to connect to Gitea
     secrets.giteaRunnerToken = {
-      source = ../../../private/gitea-runner-token.age; # TOKEN=xyz
+      source = ./gitea-runner-token.age; # TOKEN=xyz
       dest = "${config.secretsDirectory}/gitea-runner-token";
     };
     systemd.services.giteaRunnerToken-secret = {

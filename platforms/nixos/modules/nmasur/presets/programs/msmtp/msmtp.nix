@@ -32,7 +32,7 @@ in
     passwordFile = lib.mkOption {
       type = lib.types.path;
       description = "Password file for SMTP";
-      default = ../../../../../../private/mailpass-system.age;
+      default = ./mailpass-system.age;
     };
   };
 

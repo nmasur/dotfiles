@@ -52,7 +52,7 @@ in
 
     # Create private key file for wireguard
     secrets.wireguard = {
-      source = ../../../private/wireguard.age;
+      source = ./wireguard.age;
       dest = "${config.secretsDirectory}/wireguard";
     };
   };

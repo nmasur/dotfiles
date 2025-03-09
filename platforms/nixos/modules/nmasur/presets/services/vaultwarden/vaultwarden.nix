@@ -43,7 +43,7 @@ in
     };
 
     secrets.vaultwarden = {
-      source = ../../../../../../private/vaultwarden.age;
+      source = ./vaultwarden.age;
       dest = "${config.secretsDirectory}/vaultwarden";
       owner = "vaultwarden";
       group = "vaultwarden";

@@ -200,7 +200,7 @@ in
 
     # Create credentials file for nextcloud
     secrets.nextcloud = {
-      source = ../../../private/nextcloud.age;
+      source = ./nextcloud.age;
       dest = "${config.secretsDirectory}/nextcloud";
       owner = "nextcloud";
       group = "nextcloud";

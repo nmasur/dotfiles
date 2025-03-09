@@ -98,7 +98,7 @@ in
 
     # Private key is used for LetsEncrypt
     secrets.letsencrypt-key = {
-      source = ../../../../../../private/letsencrypt-key.age;
+      source = ./letsencrypt-key.age;
       dest = "${config.secretsDirectory}/letsencrypt-key";
       owner = "caddy";
       group = "caddy";
@@ -106,7 +106,7 @@ in
 
     # API key must have access to modify Cloudflare DNS records
     secrets.cloudflare-api = {
-      source = ../../../../../../private/cloudflare-api.age;
+      source = ./cloudflare-api.age;
       dest = "${config.secretsDirectory}/cloudflare-api";
       owner = "caddy";
       group = "caddy";

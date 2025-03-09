@@ -250,27 +250,27 @@ in
 
     # Secrets for Prometheus exporters
     secrets.radarrApiKey = {
-      source = ../../../private/radarr-api-key.age;
+      source = ./radarr-api-key.age;
       dest = "/var/private/radarr-api";
       prefix = "API_KEY=";
     };
     secrets.readarrApiKey = {
-      source = ../../../private/radarr-api-key.age;
+      source = ./radarr-api-key.age;
       dest = "/var/private/readarr-api";
       prefix = "API_KEY=";
     };
     secrets.sonarrApiKey = {
-      source = ../../../private/sonarr-api-key.age;
+      source = ./sonarr-api-key.age;
       dest = "/var/private/sonarr-api";
       prefix = "API_KEY=";
     };
     secrets.prowlarrApiKey = {
-      source = ../../../private/prowlarr-api-key.age;
+      source = ./prowlarr-api-key.age;
       dest = "/var/private/prowlarr-api";
       prefix = "API_KEY=";
     };
     secrets.sabnzbdApiKey = {
-      source = ../../../private/sabnzbd-api-key.age;
+      source = ./sabnzbd-api-key.age;
       dest = "/var/private/sabnzbd-api";
       prefix = "API_KEY=";
     };

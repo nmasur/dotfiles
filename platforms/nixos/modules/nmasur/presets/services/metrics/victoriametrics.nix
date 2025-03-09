@@ -71,7 +71,7 @@ in
     };
 
     secrets.vmauth = lib.mkIf config.services.victoriametrics.enable {
-      source = ../../../../../../private/prometheus.age;
+      source = ./prometheus.age;
       dest = "${config.secretsDirectory}/vmauth";
       prefix = "PASSWORD=";
     };

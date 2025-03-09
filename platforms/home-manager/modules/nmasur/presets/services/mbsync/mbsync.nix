@@ -112,7 +112,7 @@ in
             notmuch.enable = true;
 
             # Used to login and send and receive emails
-            passwordCommand = "${lib.getExe pkgs.age} --decrypt --identity ~/.ssh/id_ed25519 ${pkgs.writeText "mailpass.age" (builtins.readFile ../../../../../../private/mailpass.age)}";
+            passwordCommand = "${lib.getExe pkgs.age} --decrypt --identity ~/.ssh/id_ed25519 ${pkgs.writeText "mailpass.age" (builtins.readFile ./mailpass.age)}";
 
             smtp = {
               host = cfg.smtpHost;

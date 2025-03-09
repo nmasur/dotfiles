@@ -29,7 +29,7 @@ in
       accessKeySecret = lib.mkOption {
         type = lib.types.nullOr lib.types.path;
         description = "S3 secret key path for Litestream backups";
-        default = ../../../../../../private/backup.age;
+        default = ./backup.age;
       };
     };
   };

@@ -17,7 +17,7 @@ in
 
     # Allow Grafana to connect to email service
     secrets.mailpass-grafana = {
-      source = ../../../../../../private/mailpass-grafana.age;
+      source = ./mailpass-grafana.age;
       dest = "${config.secretsDirectory}/mailpass-grafana";
       owner = "grafana";
       group = "grafana";

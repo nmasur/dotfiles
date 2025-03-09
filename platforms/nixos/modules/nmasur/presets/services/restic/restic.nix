@@ -10,7 +10,7 @@ in
     resticPassword = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       description = "Password file path for Restic backups";
-      default = ../../../../../../private/restic.age;
+      default = ./restic.age;
     };
     s3 = {
       endpoint = lib.mkOption {
@@ -26,7 +26,7 @@ in
       accessKeySecretPair = lib.mkOption {
         type = lib.types.nullOr lib.types.path;
         description = "Path to file containing S3 access and secret key for Restic backups";
-        default = ../../../../../../private/s3-glacier.age;
+        default = ./s3-glacier.age;
       };
     };
   };
