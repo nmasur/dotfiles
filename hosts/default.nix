@@ -37,7 +37,8 @@ in
     (builtins.filter (name: lib.hasSuffix "default.nix" name))
     # Import each host function
     (map (file: {
-      name = lib.removeSuffix ".nix" (builtins.baseNameOf file);
+      # name = lib.removeSuffix ".nix" (builtins.baseNameOf file);
+      name = builtins.baseNameOf (builtins.dirOf file);
       value = import file;
     }))
     # Convert to an attrset of hostname -> host function
