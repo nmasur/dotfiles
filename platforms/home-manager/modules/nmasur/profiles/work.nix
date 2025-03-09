@@ -40,6 +40,7 @@ in
     ];
 
     nmasur.presets = {
+      fonts.enable = lib.mkDefault true;
       programs = {
         _1password.enable = lib.mkDefault true;
         atuin.enable = lib.mkDefault true;

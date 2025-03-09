@@ -18,6 +18,12 @@ in
       enable = true;
       enableFishIntegration = true;
       enableBashIntegration = true;
+      options = [ "--no-cmd" ]; # Disables key mapping
+    };
+
+    programs.fish.shellAliases = {
+      cd = "__zoxide_z";
+      cdi = "__zoxide_zi";
     };
 
   };

@@ -37,7 +37,6 @@ in
     ];
 
     programs.fish.shellAliases = {
-      "cd" = lib.mkDefault (lib.getExe pkgs.zoxide);
       "du" = lib.mkDefault (lib.getExe pkgs.dua);
       "ncdu" = lib.mkDefault (lib.getExe pkgs.du-dust);
       "df" = lib.mkDefault (lib.getExe pkgs.duf);
@@ -57,6 +56,7 @@ in
       fd.enable = lib.mkDefault true;
       fish.enable = lib.mkDefault true;
       fzf.enable = lib.mkDefault true;
+      git.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;
       nixpkgs.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;
