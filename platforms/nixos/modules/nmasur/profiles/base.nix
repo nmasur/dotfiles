@@ -21,6 +21,9 @@ in
       programs = {
         doas.enable = lib.mkDefault true;
       };
+      services = {
+        nix.enable = lib.mkDefault true;
+      };
     };
 
     programs.fish.enable = lib.mkDefault config.home-manager.users.${username}.programs.fish.enable;

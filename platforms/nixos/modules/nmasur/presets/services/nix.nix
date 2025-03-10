@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.nix;
 in
 
@@ -23,7 +24,7 @@ in
       # For security, only allow specific users
       settings.allowed-users = [
         "@wheel" # Anyone in the wheel group
-        config.home.username # The current user
+        username # The current user
       ];
 
       # Enable features in Nix commands
@@ -49,10 +50,10 @@ in
         # Add community Cachix to binary cache
         # Don't use at work because blocked by corporate firewall
         builders-use-substitutes = true;
-        substituters = lib.mkIf (!config.nmasur.profiles.work.enable) [
+        substituters = [
           "https://nix-community.cachix.org"
         ];
-        trusted-public-keys = lib.mkIf (!config.nmasur.profiles.work.enable) [
+        trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];
 
