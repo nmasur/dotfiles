@@ -222,9 +222,6 @@
           fullName = "Noah Masur";
           gitName = fullName;
           gitEmail = "7386960+nmasur@users.noreply.github.com";
-          mail.server = "noahmasur.com";
-          mail.imapHost = "imap.purelymail.com";
-          mail.smtpHost = "smtp.purelymail.com";
           dotfilesRepo = "https://github.com/nmasur/dotfiles";
           hostnames = {
             audiobooks = "read.${baseName}";
@@ -253,16 +250,12 @@
           };
         };
 
+      colorscheme = import ./colorscheme;
+
       # Common overlays to always use
       overlays = [
         inputs.nur.overlays.default
         inputs.nix2vim.overlay
-        # inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
-        # (import ./overlays/neovim-plugins.nix inputs)
-        # (import ./overlays/tree-sitter.nix inputs)
-        # (import ./overlays/mpv-scripts.nix inputs)
-        # (import ./overlays/nextcloud-apps.nix inputs)
-        # (import ./overlays/pkgs.nix)
       ] ++ (import ./overlays inputs);
 
       # System types to support.
@@ -308,6 +301,7 @@
             {
               home-manager.extraSpecialArgs = {
                 hostnames = globals.hostnames;
+                inherit colorscheme;
               };
             }
           ];

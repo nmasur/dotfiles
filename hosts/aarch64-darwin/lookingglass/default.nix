@@ -29,7 +29,7 @@ rec {
       work.enable = true;
       experimental.enable = true;
     };
-    nmasur.presets.programs.git = {
+    nmasur.presets.programs.git-work.work = {
       name = "Noah-Masur_1701";
       email = "${nmasur.settings.username}@take2games.com";
     };

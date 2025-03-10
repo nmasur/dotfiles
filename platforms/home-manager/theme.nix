@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, colorscheme, ... }:
 
 {
 
@@ -11,7 +11,7 @@
     colors = lib.mkOption {
       type = lib.types.attrs;
       description = "Base16 color scheme.";
-      default = (import ../../colorscheme/gruvbox).dark;
+      default = colorscheme.gruvbox.dark;
     };
     mode = lib.mkOption {
       type = lib.types.enum [

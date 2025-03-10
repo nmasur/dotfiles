@@ -1,4 +1,8 @@
-{ lib, hostnames, ... }:
+{
+  lib,
+  hostnames,
+  ...
+}:
 
 {
   options.nmasur.settings = {

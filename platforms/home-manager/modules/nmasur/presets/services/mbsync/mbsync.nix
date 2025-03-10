@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (config.nmasur.settings) fullName hostnames;
+  inherit (config.nmasur.settings) username fullName hostnames;
   cfg = config.nmasur.presets.services.mbsync;
 in
 
@@ -17,10 +17,12 @@ in
     user = lib.mkOption {
       type = lib.types.str;
       description = "User name for the email address.";
+      default = username;
     };
     server = lib.mkOption {
       type = lib.types.str;
       description = "Server name for the email address.";
+      default = hostnames.mail;
     };
     imapHost = lib.mkOption {
       type = lib.types.str;

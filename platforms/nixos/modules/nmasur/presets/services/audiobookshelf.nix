@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  globals,
+  hostnames,
   ...
 }:
 
@@ -30,7 +30,7 @@ in
     # Allow web traffic to Caddy
     nmasur.presets.services.caddy.routes = [
       {
-        match = [ { host = [ globals.hostnames.audiobooks ]; } ];
+        match = [ { host = [ hostnames.audiobooks ]; } ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -41,7 +41,7 @@ in
     ];
 
     # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ globals.hostnames.audiobooks ];
+    services.cloudflare-dyndns.domains = [ hostnames.audiobooks ];
 
   };
 

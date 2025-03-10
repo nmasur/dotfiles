@@ -31,14 +31,11 @@ rec {
       developer.enable = true;
       experimental.enable = true;
     };
-    nmasur.presets.services.mbsync = {
-      user = nmasur.settings.username;
-      server = "noahmasur.com";
-    };
     home.stateVersion = "23.05";
   };
 
   system.stateVersion = "23.05";
+
   # Not sure what's necessary but too afraid to remove anything
   boot.initrd.availableKernelModules = [
     "nvme"

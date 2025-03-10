@@ -27,10 +27,12 @@ in
       name = lib.mkOption {
         type = lib.types.str;
         description = "Name to use for personal git commits";
+        default = config.nmasur.presets.programs.git.name;
       };
       email = lib.mkOption {
         type = lib.types.str;
         description = "Email to use for personal git commits";
+        default = config.nmasur.presets.programs.git.email;
       };
     };
   };
