@@ -61,4 +61,92 @@ lib
       ))
     ];
 
+  # Common overlays to always use
+  overlays = [
+    inputs.nur.overlays.default
+    inputs.nix2vim.overlay
+  ] ++ (importOverlays ../overlays);
+
+  # System types to support.
+  supportedSystems = [
+    "x86_64-linux"
+    "x86_64-darwin"
+    "aarch64-linux"
+    "aarch64-darwin"
+  ];
+
+  # Split system types by operating system
+  linuxSystems = builtins.filter (lib.hasSuffix "linux") supportedSystems;
+  darwinSystems = builtins.filter (lib.hasSuffix "darwin") supportedSystems;
+
+  # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+  forSystems = systems: lib.genAttrs systems;
+  forAllSystems = lib.genAttrs supportedSystems;
+
+  # { x86_64-linux = { tempest = { settings = ...; }; }; };
+  hosts = forAllSystems (system: defaultFilesToAttrset ../hosts/${system});
+
+  linuxHosts = lib.filterAttrs (name: value: builtins.elem name linuxSystems) hosts;
+  darwinHosts = lib.filterAttrs (name: value: builtins.elem name darwinSystems) hosts;
+
+  # { system -> pkgs }
+  pkgsBySystem = forAllSystems (
+    system:
+    import inputs.nixpkgs {
+      inherit system overlays;
+      config.permittedInsecurePackages = [ "litestream-0.3.13" ];
+      config.allowUnfree = true;
+    }
+  );
+
+  colorscheme = defaultFilesToAttrset ../colorscheme;
+
+  buildHome =
+    {
+      pkgs,
+      modules,
+    }:
+    inputs.home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = modules ++ [
+        ../platforms/home-manager
+      ];
+    };
+
+  buildNixos =
+    {
+      pkgs,
+      modules,
+      specialArgs,
+    }:
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit pkgs;
+      modules = modules ++ [
+        inputs.home-manager.nixosModules.home-manager
+        inputs.disko.nixosModules.disko
+        inputs.wsl.nixosModules.wsl
+        ../platforms/nixos
+        {
+          home-manager.extraSpecialArgs = {
+            hostnames = globals.hostnames;
+            inherit colorscheme;
+          };
+        }
+      ];
+      specialArgs = {
+        hostnames = globals.hostnames;
+      };
+    };
+
+  buildDarwin =
+    { pkgs, modules }:
+    inputs.darwin.lib.darwinSystem {
+      inherit pkgs;
+      modules = modules ++ [
+        inputs.home-manager.darwinModules.home-manager
+        inputs.mac-app-util.darwinModules.default
+        ./platforms/nix-darwin
+      ];
+    };
+
 }

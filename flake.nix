@@ -211,6 +211,7 @@
     { nixpkgs, ... }@inputs:
 
     let
+      lib = import ./lib inputs;
 
       # Global configuration for my systems
       globals =
@@ -250,136 +251,53 @@
           };
         };
 
-      colorscheme = import ./colorscheme;
-
-      # Common overlays to always use
-      overlays = [
-        inputs.nur.overlays.default
-        inputs.nix2vim.overlay
-      ] ++ (import ./overlays inputs);
-
-      # System types to support.
-      supportedSystems = [
-        "x86_64-linux"
-        "x86_64-darwin"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
-
-      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-
-      # { system -> pkgs }
-      pkgsBySystem = forAllSystems (
-        system:
-        import nixpkgs {
-          inherit system overlays;
-          config.permittedInsecurePackages = [ "litestream-0.3.13" ];
-          config.allowUnfree = true;
-        }
-      );
-      # stablePkgsBySystem = forAllSystems (system: import nixpkgs { inherit system overlays; });
-
-      buildHome =
-        { pkgs, modules }:
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = modules ++ [
-            ./platforms/home-manager
-          ];
-        };
-
-      buildNixos =
-        { pkgs, modules }:
-        nixpkgs.lib.nixosSystem {
-          inherit pkgs;
-          modules = modules ++ [
-            inputs.home-manager.nixosModules.home-manager
-            inputs.disko.nixosModules.disko
-            inputs.wsl.nixosModules.wsl
-            ./platforms/nixos
-            {
-              home-manager.extraSpecialArgs = {
-                hostnames = globals.hostnames;
-                inherit colorscheme;
-              };
-            }
-          ];
-          specialArgs = {
-            hostnames = globals.hostnames;
-          };
-        };
-
-      buildDarwin =
-        { pkgs, modules }:
-        inputs.darwin.lib.darwinSystem {
-          inherit pkgs;
-          modules = modules ++ [
-            inputs.home-manager.darwinModules.home-manager
-            inputs.mac-app-util.darwinModules.default
-            ./platforms/nix-darwin
-          ];
-        };
-
-      x86_64-linux-hosts = (import ./hosts nixpkgs).x86_64-linux-hosts;
-      aarch64-linux-hosts = (import ./hosts nixpkgs).aarch64-linux-hosts;
-      aarch64-darwin-hosts = (import ./hosts nixpkgs).aarch64-darwin-hosts;
-
     in
     rec {
 
-      # The plan
-      # Import all the host configurations as modules
-      # Setup the modules as nixosModules, homeModules, darwinModules
-      # Create nixosConfigurations using the different pkgs for each system
-      # What to do with home config?
-
-      nixosModules = x86_64-linux-hosts // aarch64-linux-hosts;
-      darwinModules = aarch64-darwin-hosts;
-
-      inherit buildDarwin pkgsBySystem;
-
-      # Contains my full system builds, including home-manager
-      # nixos-rebuild switch --flake .#tempest
-      nixosConfigurations =
-        (builtins.mapAttrs (
-          name: module:
-          buildNixos {
-            pkgs = pkgsBySystem.x86_64-linux;
-            modules = [ module ];
-          }
-        ) x86_64-linux-hosts)
-        // (builtins.mapAttrs (
-          name: module:
-          buildNixos {
-            pkgs = pkgsBySystem.aarch64-linux;
-            modules = [ module ];
-          }
-        ) aarch64-linux-hosts);
-
-      # Contains my full Mac system builds, including home-manager
-      # darwin-rebuild switch --flake .#lookingglass
-      darwinConfigurations = builtins.mapAttrs (
-        name: module:
-        buildDarwin {
-          pkgs = pkgsBySystem.aarch64-darwin;
-          modules = [ module ];
-        }
-      ) aarch64-darwin-hosts;
-
-      # For quickly applying home-manager settings with:
-      # home-manager switch --flake .#tempest
-      homeConfigurations = builtins.mapAttrs (
-        name: module:
-        buildHome {
-          pkgs = pkgsBySystem.x86_64-linux;
-          module = [ module ];
-        }
-      ) nixosModules;
+      inherit lib;
+      # inherit buildDarwin pkgsBySystem;
+      #
+      # # Contains my full system builds, including home-manager
+      # # nixos-rebuild switch --flake .#tempest
+      # nixosConfigurations =
+      #   (builtins.mapAttrs (
+      #     name: module:
+      #     buildNixos {
+      #       pkgs = pkgsBySystem.x86_64-linux;
+      #       modules = [ module ];
+      #     }
+      #   ) x86_64-linux-hosts)
+      #   // (builtins.mapAttrs (
+      #     name: module:
+      #     buildNixos {
+      #       pkgs = pkgsBySystem.aarch64-linux;
+      #       modules = [ module ];
+      #     }
+      #   ) aarch64-linux-hosts);
+      #
+      # # Contains my full Mac system builds, including home-manager
+      # # darwin-rebuild switch --flake .#lookingglass
+      # darwinConfigurations = builtins.mapAttrs (
+      #   name: module:
+      #   buildDarwin {
+      #     pkgs = pkgsBySystem.aarch64-darwin;
+      #     modules = [ module ];
+      #   }
+      # ) aarch64-darwin-hosts;
+      #
+      # # For quickly applying home-manager settings with:
+      # # home-manager switch --flake .#tempest
+      # homeConfigurations = builtins.mapAttrs (
+      #   name: module:
+      #   buildHome {
+      #     pkgs = pkgsBySystem.x86_64-linux;
+      #     module = [ module ];
+      #   }
+      # ) nixosModules;
 
       # Disk formatting, only used once
       diskoConfigurations = {
-        root = import ./disks/root.nix;
+        root = import ./hosts/x86_64-linux/swan/root.nix;
       };
 
       # packages =
@@ -437,17 +355,21 @@
       #   aarch64-darwin.neovim = neovim "aarch64-darwin";
       # };
 
-      packages = forAllSystems (system: pkgsBySystem.${system}.nmasur);
+      # Get the custom packages that I have placed under the nmasur namespace
+      packages = lib.forAllSystems (system: lib.pkgsBySystem.${system}.nmasur);
 
       # Development environments
-      devShells = forAllSystems (system: {
-        default = pkgsBySystem.${system}.nmasur.dotfiles-devshell;
+      devShells = lib.forAllSystems (system: {
+        default = lib.pkgsBySystem.${system}.nmasur.dotfiles-devshell;
       });
 
-      checks = forAllSystems (
+      checks = lib.forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system overlays; };
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = lib.overlays;
+          };
         in
         {
           neovim =
@@ -466,10 +388,13 @@
         }
       );
 
-      formatter = forAllSystems (
+      formatter = lib.forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system overlays; };
+          pkgs = import nixpkgs {
+            inherit system;
+            inherit (lib) overlays;
+          };
         in
         pkgs.nixfmt-rfc-style
       );
