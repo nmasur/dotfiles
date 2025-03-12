@@ -255,45 +255,45 @@
     rec {
 
       inherit lib;
-      # inherit buildDarwin pkgsBySystem;
-      #
-      # # Contains my full system builds, including home-manager
-      # # nixos-rebuild switch --flake .#tempest
-      # nixosConfigurations =
-      #   (builtins.mapAttrs (
-      #     name: module:
-      #     buildNixos {
-      #       pkgs = pkgsBySystem.x86_64-linux;
-      #       modules = [ module ];
-      #     }
-      #   ) x86_64-linux-hosts)
-      #   // (builtins.mapAttrs (
-      #     name: module:
-      #     buildNixos {
-      #       pkgs = pkgsBySystem.aarch64-linux;
-      #       modules = [ module ];
-      #     }
-      #   ) aarch64-linux-hosts);
-      #
-      # # Contains my full Mac system builds, including home-manager
-      # # darwin-rebuild switch --flake .#lookingglass
-      # darwinConfigurations = builtins.mapAttrs (
-      #   name: module:
-      #   buildDarwin {
-      #     pkgs = pkgsBySystem.aarch64-darwin;
-      #     modules = [ module ];
-      #   }
-      # ) aarch64-darwin-hosts;
-      #
-      # # For quickly applying home-manager settings with:
-      # # home-manager switch --flake .#tempest
-      # homeConfigurations = builtins.mapAttrs (
-      #   name: module:
-      #   buildHome {
-      #     pkgs = pkgsBySystem.x86_64-linux;
-      #     module = [ module ];
-      #   }
-      # ) nixosModules;
+
+      nixosConfigurations = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module:
+          lib.buildNixos {
+            inherit system module;
+            specialArgs = { inherit (globals) hostnames; };
+          }
+        ) hosts
+      ) lib.linuxHosts;
+
+      darwinConfigurations = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module:
+          lib.buildDarwin {
+            inherit system module;
+          }
+        ) hosts
+      ) lib.darwinHosts;
+
+      homeModules = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
+        ) hosts
+      ) lib.hosts;
+
+      homeConfigurations = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module:
+          lib.buildHome {
+            inherit system module;
+            specialArgs = { inherit (globals) hostnames; };
+          }
+        ) hosts
+      ) homeModules;
 
       # Disk formatting, only used once
       diskoConfigurations = {

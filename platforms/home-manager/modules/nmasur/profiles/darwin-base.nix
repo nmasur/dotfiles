@@ -14,6 +14,9 @@ in
   options.nmasur.profiles.darwin-base.enable = lib.mkEnableOption "Base macOS home-manager config";
 
   config = lib.mkIf cfg.enable {
+
+    home.homeDirectory = lib.mkForce "/Users/${config.home.username}";
+
     # Default shell setting doesn't work
     home.sessionVariables = {
       SHELL = "${pkgs.fish}/bin/fish";

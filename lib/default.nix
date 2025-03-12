@@ -7,6 +7,7 @@ in
 lib
 // rec {
 
+  # Returns all files in a directory matching a suffix
   filesInDirectoryWithSuffix =
     directory: suffix:
     lib.pipe (lib.filesystem.listFilesRecursive directory) [
@@ -103,49 +104,54 @@ lib
 
   buildHome =
     {
-      pkgs,
-      modules,
+      system,
+      module,
+      specialArgs,
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = modules ++ [
+      pkgs = pkgsBySystem.${system};
+      modules = [
         ../platforms/home-manager
+        module
       ];
+      extraSpecialArgs = {
+        inherit colorscheme;
+      } // specialArgs;
     };
 
   buildNixos =
     {
-      pkgs,
-      modules,
+      system,
+      module,
       specialArgs,
     }:
     inputs.nixpkgs.lib.nixosSystem {
-      inherit pkgs;
-      modules = modules ++ [
+      pkgs = pkgsBySystem.${system};
+      modules = [
         inputs.home-manager.nixosModules.home-manager
         inputs.disko.nixosModules.disko
         inputs.wsl.nixosModules.wsl
         ../platforms/nixos
+        module
         {
           home-manager.extraSpecialArgs = {
-            hostnames = globals.hostnames;
             inherit colorscheme;
-          };
+          } // specialArgs;
         }
       ];
       specialArgs = {
-        hostnames = globals.hostnames;
-      };
+      } // specialArgs;
     };
 
   buildDarwin =
-    { pkgs, modules }:
+    { system, module }:
     inputs.darwin.lib.darwinSystem {
-      inherit pkgs;
-      modules = modules ++ [
+      pkgs = pkgsBySystem.${system};
+      modules = [
         inputs.home-manager.darwinModules.home-manager
         inputs.mac-app-util.darwinModules.default
         ./platforms/nix-darwin
+        module
       ];
     };
 
