@@ -146,9 +146,11 @@ lib
         { imports = (nixFiles ../platforms/nixos); }
         module
         {
-          home-manager.extraSpecialArgs = {
-            inherit colorscheme;
-          } // specialArgs;
+          home-manager = {
+            extraSpecialArgs = {
+              inherit colorscheme;
+            } // specialArgs;
+          } // homeModule.home-manager;
         }
       ];
       specialArgs = {
