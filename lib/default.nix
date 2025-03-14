@@ -102,6 +102,18 @@ lib
 
   colorscheme = defaultFilesToAttrset ../colorscheme;
 
+  homeModule = {
+    home-manager = {
+      # Include home-manager config in NixOS
+      sharedModules = nixFiles ../platforms/home-manager;
+      # Use the system-level nixpkgs instead of Home Manager's
+      useGlobalPkgs = lib.mkDefault true;
+      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
+      # using multiple profiles for one user
+      useUserPackages = lib.mkDefault true;
+    };
+  };
+
   buildHome =
     {
       system,
@@ -111,7 +123,7 @@ lib
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = pkgsBySystem.${system};
       modules = [
-        ../platforms/home-manager
+        { imports = (nixFiles ../platforms/home-manager); }
         module
       ];
       extraSpecialArgs = {
@@ -131,7 +143,7 @@ lib
         inputs.home-manager.nixosModules.home-manager
         inputs.disko.nixosModules.disko
         inputs.wsl.nixosModules.wsl
-        ../platforms/nixos
+        { imports = (nixFiles ../platforms/nixos); }
         module
         {
           home-manager.extraSpecialArgs = {
@@ -150,9 +162,46 @@ lib
       modules = [
         inputs.home-manager.darwinModules.home-manager
         inputs.mac-app-util.darwinModules.default
-        ./platforms/nix-darwin
+        { imports = (nixFiles ../platforms/nix-darwin); }
         module
       ];
+    };
+
+  generatorOptions = {
+    amazon = {
+      aws.enable = true;
+    };
+    iso = { };
+  };
+
+  generateImage =
+    {
+      system,
+      module,
+      format,
+      specialArgs,
+    }:
+    inputs.nixos-generators.nixosGenerate {
+      inherit system format;
+      modules = [
+        inputs.home-manager.nixosModules.home-manager
+        inputs.disko.nixosModules.disko
+        inputs.wsl.nixosModules.wsl
+        {
+          imports = (nixFiles ../platforms/nixos) ++ (nixFiles ../platforms/generators);
+        }
+        generatorOptions.${format}
+        module
+        {
+          home-manager = {
+            extraSpecialArgs = {
+              inherit colorscheme;
+            } // specialArgs;
+          } // homeModule.home-manager;
+        }
+      ];
+      specialArgs = {
+      } // specialArgs;
     };
 
 }

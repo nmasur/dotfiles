@@ -28,7 +28,7 @@
 
 {
   pkgs,
-  colors ? (import ../../../../../../colorscheme/nord).dark,
+  colors ? null,
   terraform ? false,
   github ? false,
   kubernetes ? false,

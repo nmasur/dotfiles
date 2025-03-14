@@ -300,63 +300,48 @@
         root = import ./hosts/x86_64-linux/swan/root.nix;
       };
 
-      # packages =
-      #   let
-      #     staff =
-      #       system:
-      #       import ./hosts/staff {
-      #         inherit
-      #           inputs
-      #           globals
-      #           overlays
-      #           system
-      #           ;
-      #       };
-      #     neovim =
-      #       system:
-      #       let
-      #         pkgs = import nixpkgs { inherit system overlays; };
-      #       in
-      #       import ./modules/common/neovim/package {
-      #         inherit pkgs;
-      #         colors = (import ./colorscheme/gruvbox-dark).dark;
-      #       };
-      #   in
-      #   {
-      #     x86_64-linux.staff = staff "x86_64-linux";
-      #     x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
-      #       system = "x86_64-linux";
-      #       format = "iso";
-      #       modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
-      #     };
-      #     x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
-      #       system = "x86_64-linux";
-      #       format = "amazon";
-      #       modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
-      #         (
-      #           { ... }:
-      #           {
-      #             boot.kernelPackages = inputs.nixpkgs.legacyPackages.x86_64-linux.linuxKernel.packages.linux_6_6;
-      #             amazonImage.sizeMB = 16 * 1024;
-      #             permitRootLogin = "prohibit-password";
-      #             boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
-      #             boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
-      #             services.amazon-ssm-agent.enable = true;
-      #             users.users.ssm-user.extraGroups = [ "wheel" ];
-      #           }
-      #         )
-      #       ];
-      #     };
-
-      #   # Package Neovim config into standalone package
-      #   x86_64-linux.neovim = neovim "x86_64-linux";
-      #   x86_64-darwin.neovim = neovim "x86_64-darwin";
-      #   aarch64-linux.neovim = neovim "aarch64-linux";
-      #   aarch64-darwin.neovim = neovim "aarch64-darwin";
+      # generators = {
+      #   arrow.aws.x86_64-linux = lib.generateImage {
+      #     system = "x86_64-linux";
+      #     format = "amazon";
+      #     specialArgs = { inherit (globals) hostnames; };
+      #   };
+      #   arrow.iso.x86_64-linux = lib.generateImage {
+      #     system = "x86_64-linux";
+      #     format = "iso";
+      #     specialArgs = { inherit (globals) hostnames; };
+      #   };
       # };
 
-      # Get the custom packages that I have placed under the nmasur namespace
-      packages = lib.forAllSystems (system: lib.pkgsBySystem.${system}.nmasur);
+      generators = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (name: module: {
+          aws = lib.generateImage {
+            inherit system module;
+            format = "amazon";
+            specialArgs = { inherit (globals) hostnames; };
+          };
+          iso = lib.generateImage {
+            inherit system module;
+            format = "iso";
+            specialArgs = { inherit (globals) hostnames; };
+          };
+        }) hosts
+      ) lib.linuxHosts;
+
+      packages = lib.forAllSystems (
+        system:
+        # Get the configurations that we normally use
+        {
+          nixosConfigurations = nixosConfigurations.${system};
+          darwinConfigurations = darwinConfigurations.${system};
+          homeConfigurations = homeConfigurations.${system};
+          generators = generators.${system};
+        }
+        //
+          # Get the custom packages that I have placed under the nmasur namespace
+          lib.pkgsBySystem.${system}.nmasur
+      );
 
       # Development environments
       devShells = lib.forAllSystems (system: {
