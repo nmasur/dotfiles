@@ -50,6 +50,7 @@ in
       pkgs.vim
       pkgs.wget
       pkgs.curl
+      pkgs.home-manager
     ];
 
     # Extending time for home-manager build for things like nix-index cache
