@@ -20,7 +20,7 @@ in
     xdg.configFile."hammerspoon/Spoons/DismissAlerts.spoon".source = ./Spoons/DismissAlerts.spoon;
     xdg.configFile."hammerspoon/Spoons/Launcher.spoon/init.lua".source = pkgs.substituteAll {
       src = ./Spoons/Launcher.spoon/init.lua;
-      firefox = "${pkgs.firefox-bin}/Applications/Firefox.app";
+      firefox = "${pkgs.firefox-unwrapped}/Applications/Firefox.app";
       discord = "${pkgs.discord}/Applications/Discord.app";
       wezterm = "${pkgs.wezterm}/Applications/WezTerm.app";
       obsidian = "${pkgs.obsidian}/Applications/Obsidian.app";

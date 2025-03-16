@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     users.users."${username}" = {
       # macOS user
-      home = config.home-manager.users.${username}.home.homeDirectory;
+      home = "/Users/${username}";
       uid = 502;
       # shell = pkgs.fish; # Default shell
     };

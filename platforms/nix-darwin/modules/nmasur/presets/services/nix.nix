@@ -18,6 +18,8 @@ in
 
     nix = {
 
+      enable = true;
+
       # Set channel to flake packages, used for nix-shell commands
       nixPath = [ "nixpkgs=${pkgs.path}" ];
 
@@ -37,6 +39,11 @@ in
       gc = {
         automatic = true;
         options = "--delete-older-than 10d";
+        interval = {
+          Hour = 12;
+          Minute = 15;
+          Day = 1;
+        };
       };
 
       settings = {

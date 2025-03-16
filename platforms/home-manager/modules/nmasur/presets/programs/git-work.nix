@@ -44,7 +44,7 @@ in
       userEmail = lib.mkForce cfg.work.email;
       includes = [
         {
-          path = "${config.xdg.configHome}/${config.xdg.configFile."git/personal".target}";
+          path = "${config.home.homeDirectory}/${config.xdg.configFile."git/personal".target}";
           condition = "gitdir:~/dev/personal/";
         }
       ];

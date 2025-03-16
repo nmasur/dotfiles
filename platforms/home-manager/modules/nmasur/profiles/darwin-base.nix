@@ -15,6 +15,12 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    nmasur.presets = {
+      fonts.enable = lib.mkDefault true;
+      services.hammerspoon.enable = lib.mkDefault true;
+      programs.nixpkgs-darwin.enable = lib.mkDefault true;
+    };
+
     home.homeDirectory = lib.mkForce "/Users/${config.home.username}";
 
     # Default shell setting doesn't work

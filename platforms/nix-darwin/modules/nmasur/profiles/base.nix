@@ -14,9 +14,20 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    nmasur.presets.programs = {
-      fish.enable = lib.mkDefault true;
-      homebrew.enable = lib.mkDefault true;
+    nmasur.presets = {
+      programs = {
+        fish.enable = lib.mkDefault true;
+        homebrew.enable = lib.mkDefault true;
+      };
+      services = {
+        dock.enable = lib.mkDefault true;
+        finder.enable = lib.mkDefault true;
+        hammerspoon.enable = lib.mkDefault true;
+        menubar.enable = lib.mkDefault true;
+        nix.enable = lib.mkDefault true;
+        settings.enable = lib.mkDefault true;
+        user.enable = lib.mkDefault true;
+      };
     };
 
     homebrew.brews = [

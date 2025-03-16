@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
 
     home.packages = [
-      pkgs.victor-mono # Used for Vim and Terminal
+      pkgs.nerd-fonts.victor-mono # Used for Vim and Terminal
       pkgs.nerd-fonts.hack # For Polybar, Rofi
     ];
     fonts.fontconfig = {
