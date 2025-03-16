@@ -20,11 +20,12 @@ in
     xdg.configFile."hammerspoon/Spoons/DismissAlerts.spoon".source = ./Spoons/DismissAlerts.spoon;
     xdg.configFile."hammerspoon/Spoons/Launcher.spoon/init.lua".source = pkgs.substituteAll {
       src = ./Spoons/Launcher.spoon/init.lua;
-      firefox = "${pkgs.firefox-unwrapped}/Applications/Firefox.app";
       discord = "${pkgs.discord}/Applications/Discord.app";
-      wezterm = "${pkgs.wezterm}/Applications/WezTerm.app";
+      firefox = "${pkgs.firefox-unwrapped}/Applications/Firefox.app";
+      ghostty = "${config.programs.ghostty.package}/Applications/Ghostty.app";
       obsidian = "${pkgs.obsidian}/Applications/Obsidian.app";
       slack = "${pkgs.slack}/Applications/Slack.app";
+      wezterm = "${pkgs.wezterm}/Applications/WezTerm.app";
     };
     xdg.configFile."hammerspoon/Spoons/MoveWindow.spoon".source = ./Spoons/MoveWindow.spoon;
 

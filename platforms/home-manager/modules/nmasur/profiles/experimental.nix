@@ -15,6 +15,11 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    nmasur.presets.programs = {
+      zed-editor.enable = lib.mkDefault true;
+      ghostty.enable = lib.mkDefault true;
+    };
+
     home.packages = [
 
       # Charm tools
@@ -28,7 +33,6 @@ in
 
     programs.gh-dash.enable = lib.mkDefault true;
     programs.helix.enable = lib.mkDefault true;
-    programs.zed-editor.enable = lib.mkDefault true;
     programs.himalaya.enable = lib.mkDefault true;
 
   };
