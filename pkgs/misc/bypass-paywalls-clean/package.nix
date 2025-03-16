@@ -5,11 +5,11 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "bypass-paywalls-clean";
-  version = "4.0.6.0";
+  version = "4.0.6.1";
   src = builtins.fetchGit {
     url = "https://gitflic.ru/project/magnolia1234/bpc_uploads.git";
     ref = "main";
-    rev = "a3012f84bad9719760150832803f2ea07af8dae3";
+    rev = "85a367220f5ae2181354f65fb1093e2f1ac9e417";
   };
   preferLocalBuild = true;
   allowSubstitutes = true;

@@ -15,8 +15,8 @@ in
   config = lib.mkIf cfg.enable {
 
     nmasur.presets.programs = {
-      fish = lib.mkDefault true;
-      homebrew = lib.mkDefault true;
+      fish.enable = lib.mkDefault true;
+      homebrew.enable = lib.mkDefault true;
     };
 
     homebrew.brews = [
@@ -26,19 +26,6 @@ in
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "notunes" # Don't launch Apple Music with the play button
     ];
-
-    # Include home-manager config in nix-darwin
-    home-manager = {
-      sharedModules = [ ../../../../home-manager ];
-
-      # Use the system-level nixpkgs instead of Home Manager's
-      useGlobalPkgs = lib.mkDefault true;
-
-      # Install packages to /etc/profiles instead of ~/.nix-profile, useful when
-      # using multiple profiles for one user
-      useUserPackages = lib.mkDefault true;
-
-    };
 
   };
 }

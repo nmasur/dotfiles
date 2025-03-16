@@ -23,7 +23,7 @@ in
 
     programs.firefox = {
       enable = true;
-      package = if pkgs.stdenv.isDarwin then pkgs.firefox-bin else pkgs.firefox;
+      package = if pkgs.stdenv.isDarwin then pkgs.firefox-unwrapped else pkgs.firefox;
       profiles.default = {
         id = 0;
         name = "default";

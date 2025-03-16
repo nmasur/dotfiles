@@ -52,7 +52,7 @@ in
     };
 
     # Personal git config
-    xdg.configFile."git/personal".text = pkgs.formats.gitIni {
+    xdg.configFile."git/personal".text = lib.generators.toGitINI {
       user = {
         name = cfg.personal.name;
         email = cfg.personal.email;

@@ -33,5 +33,8 @@ rec {
       name = "Noah-Masur_1701";
       email = "${nmasur.settings.username}@take2games.com";
     };
+    home.stateVersion = "23.05";
   };
+
+  system.stateVersion = 5;
 }

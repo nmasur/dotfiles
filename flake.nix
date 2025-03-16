@@ -267,12 +267,23 @@
         ) hosts
       ) lib.linuxHosts;
 
+      # darwinConfigurations = {
+      #   aarch64-darwin = {
+      #     lookingglass = lib.buildDarwin {
+      #       system = "aarch64-darwin";
+      #       module = { };
+      #       specialArgs = { };
+      #     };
+      #   };
+      # };
+
       darwinConfigurations = builtins.mapAttrs (
         system: hosts:
         builtins.mapAttrs (
           name: module:
           lib.buildDarwin {
             inherit system module;
+            specialArgs = { inherit (globals) hostnames; };
           }
         ) hosts
       ) lib.darwinHosts;

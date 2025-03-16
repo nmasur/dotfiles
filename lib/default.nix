@@ -138,6 +138,7 @@ lib
       specialArgs,
     }:
     inputs.nixpkgs.lib.nixosSystem {
+      inherit specialArgs;
       pkgs = pkgsBySystem.${system};
       modules = [
         inputs.home-manager.nixosModules.home-manager
@@ -153,19 +154,31 @@ lib
           } // homeModule.home-manager;
         }
       ];
-      specialArgs = {
-      } // specialArgs;
     };
 
   buildDarwin =
-    { system, module }:
+    {
+      system,
+      module,
+      specialArgs,
+    }:
     inputs.darwin.lib.darwinSystem {
-      pkgs = pkgsBySystem.${system};
+      inherit system specialArgs;
       modules = [
         inputs.home-manager.darwinModules.home-manager
         inputs.mac-app-util.darwinModules.default
-        { imports = (nixFiles ../platforms/nix-darwin); }
+        {
+          imports = (nixFiles ../platforms/nix-darwin);
+          nixpkgs.pkgs = pkgsBySystem.${system};
+        }
         module
+        {
+          home-manager = {
+            extraSpecialArgs = {
+              inherit colorscheme;
+            } // specialArgs;
+          } // homeModule.home-manager;
+        }
       ];
     };
 
