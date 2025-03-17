@@ -22,7 +22,7 @@ in
       enableFishIntegration = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      installBatSyntax = true;
+      installBatSyntax = false; # The file doesn't seem to exist in the pkg
       settings = {
         theme = config.theme.name;
         font-size = 16;

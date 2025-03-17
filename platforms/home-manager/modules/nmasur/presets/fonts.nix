@@ -33,6 +33,7 @@ in
     programs.alacritty.settings.font.normal.family = "VictorMono";
     programs.kitty.font.name = "VictorMono Nerd Font Mono";
     nmasur.presets.programs.wezterm.font = "VictorMono Nerd Font Mono";
+    programs.ghostty.settings.font-family = "VictorMono Nerd Font Mono";
     services.dunst.settings.global.font = "Hack Nerd Font 14";
   };
 }

@@ -17,7 +17,10 @@ in
     programs.zed-editor = {
       enable = true;
 
-      extensions = [ "nix" ];
+      extensions = [
+        "nix"
+        "rust"
+      ];
 
       extraPackages = [ pkgs.nixd ];
 

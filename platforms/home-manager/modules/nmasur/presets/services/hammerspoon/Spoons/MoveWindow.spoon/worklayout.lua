@@ -42,6 +42,7 @@ local function worklayout()
         -- set the layout
         local left = {
             { "WezTerm", nil, WORK_ONLY_MONITOR, u(0, 0, 1 / 2, 1), nil, nil, visible = true },
+            { "Ghostty", nil, WORK_ONLY_MONITOR, u(0, 0, 1 / 2, 1), nil, nil, visible = true },
         }
         local right = {
             { "Slack", nil, WORK_ONLY_MONITOR, u(1 / 2, 0, 1 / 2, 1), nil, nil, visible = true },
