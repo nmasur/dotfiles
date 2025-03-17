@@ -58,48 +58,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # # Tree-Sitter Grammars
-    # tree-sitter-bash = {
-    #   url = "github:tree-sitter/tree-sitter-bash/master";
-    #   flake = false;
-    # };
-    # tree-sitter-python = {
-    #   url = "github:tree-sitter/tree-sitter-python/master";
-    #   flake = false;
-    # };
-    # tree-sitter-lua = {
-    #   url = "github:MunifTanjim/tree-sitter-lua/main";
-    #   flake = false;
-    # };
-    # tree-sitter-ini = {
-    #   url = "github:justinmk/tree-sitter-ini";
-    #   flake = false;
-    # };
-    # tree-sitter-puppet = {
-    #   url = "github:amaanq/tree-sitter-puppet";
-    #   flake = false;
-    # };
-    # tree-sitter-rasi = {
-    #   url = "github:Fymyte/tree-sitter-rasi";
-    #   flake = false;
-    # };
-    # tree-sitter-vimdoc = {
-    #   url = "github:neovim/tree-sitter-vimdoc";
-    #   flake = false;
-    # };
-
     # MPV Scripts
     zenyd-mpv-scripts = {
       url = "github:zenyd/mpv-scripts";
       flake = false;
     };
-
-    # # Git alternative
-    # # Fixes: https://github.com/martinvonz/jj/issues/4784
-    # jujutsu = {
-    #   url = "github:martinvonz/jj";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     # Nextcloud Apps
     nextcloud-news = {
@@ -130,50 +93,40 @@
     { nixpkgs, ... }@inputs:
 
     let
-      lib = import ./lib inputs;
-
-      # Global configuration for my systems
-      globals =
+      hostnames =
         let
           baseName = "masu.rs";
         in
-        rec {
-          user = "noah";
-          fullName = "Noah Masur";
-          gitName = fullName;
-          gitEmail = "7386960+nmasur@users.noreply.github.com";
-          dotfilesRepo = "https://github.com/nmasur/dotfiles";
-          hostnames = {
-            audiobooks = "read.${baseName}";
-            books = "books.${baseName}";
-            budget = "money.${baseName}";
-            content = "cloud.${baseName}";
-            download = "download.${baseName}";
-            files = "files.${baseName}";
-            git = "git.${baseName}";
-            imap = "imap.purelymail.com";
-            influxdb = "influxdb.${baseName}";
-            irc = "irc.${baseName}";
-            mail = "noahmasur.com";
-            metrics = "metrics.${baseName}";
-            minecraft = "minecraft.${baseName}";
-            n8n = "n8n.${baseName}";
-            notifications = "ntfy.${baseName}";
-            paperless = "paper.${baseName}";
-            photos = "photos.${baseName}";
-            prometheus = "prom.${baseName}";
-            secrets = "vault.${baseName}";
-            smtp = "smtp.purelymail.com";
-            status = "status.${baseName}";
-            stream = "stream.${baseName}";
-            transmission = "transmission.${baseName}";
-          };
+        {
+          audiobooks = "read.${baseName}";
+          books = "books.${baseName}";
+          budget = "money.${baseName}";
+          content = "cloud.${baseName}";
+          download = "download.${baseName}";
+          files = "files.${baseName}";
+          git = "git.${baseName}";
+          imap = "imap.purelymail.com";
+          influxdb = "influxdb.${baseName}";
+          irc = "irc.${baseName}";
+          mail = "noahmasur.com";
+          metrics = "metrics.${baseName}";
+          minecraft = "minecraft.${baseName}";
+          n8n = "n8n.${baseName}";
+          notifications = "ntfy.${baseName}";
+          paperless = "paper.${baseName}";
+          photos = "photos.${baseName}";
+          prometheus = "prom.${baseName}";
+          secrets = "vault.${baseName}";
+          smtp = "smtp.purelymail.com";
+          status = "status.${baseName}";
+          stream = "stream.${baseName}";
+          transmission = "transmission.${baseName}";
         };
 
     in
     rec {
 
-      inherit lib;
+      lib = import ./lib inputs;
 
       nixosConfigurations = builtins.mapAttrs (
         system: hosts:
@@ -181,20 +134,10 @@
           name: module:
           lib.buildNixos {
             inherit system module;
-            specialArgs = { inherit (globals) hostnames; };
+            specialArgs = { inherit hostnames; };
           }
         ) hosts
       ) lib.linuxHosts;
-
-      # darwinConfigurations = {
-      #   aarch64-darwin = {
-      #     lookingglass = lib.buildDarwin {
-      #       system = "aarch64-darwin";
-      #       module = { };
-      #       specialArgs = { };
-      #     };
-      #   };
-      # };
 
       darwinConfigurations = builtins.mapAttrs (
         system: hosts:
@@ -202,7 +145,7 @@
           name: module:
           lib.buildDarwin {
             inherit system module;
-            specialArgs = { inherit (globals) hostnames; };
+            specialArgs = { inherit hostnames; };
           }
         ) hosts
       ) lib.darwinHosts;
@@ -220,7 +163,7 @@
           name: module:
           lib.buildHome {
             inherit system module;
-            specialArgs = { inherit (globals) hostnames; };
+            specialArgs = { inherit hostnames; };
           }
         ) hosts
       ) homeModules;
@@ -230,31 +173,18 @@
         root = import ./hosts/x86_64-linux/swan/root.nix;
       };
 
-      # generators = {
-      #   arrow.aws.x86_64-linux = lib.generateImage {
-      #     system = "x86_64-linux";
-      #     format = "amazon";
-      #     specialArgs = { inherit (globals) hostnames; };
-      #   };
-      #   arrow.iso.x86_64-linux = lib.generateImage {
-      #     system = "x86_64-linux";
-      #     format = "iso";
-      #     specialArgs = { inherit (globals) hostnames; };
-      #   };
-      # };
-
       generators = builtins.mapAttrs (
         system: hosts:
         builtins.mapAttrs (name: module: {
           aws = lib.generateImage {
             inherit system module;
             format = "amazon";
-            specialArgs = { inherit (globals) hostnames; };
+            specialArgs = { inherit hostnames; };
           };
           iso = lib.generateImage {
             inherit system module;
             format = "iso";
-            specialArgs = { inherit (globals) hostnames; };
+            specialArgs = { inherit hostnames; };
           };
         }) hosts
       ) lib.linuxHosts;
