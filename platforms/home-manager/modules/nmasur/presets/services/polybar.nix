@@ -129,7 +129,7 @@ in
                       folder:main/Inbox \
                       2>/dev/null
               )
-              if [ $UNREAD = "0" ]; then
+              if [ "$UNREAD" = "0" ]; then
                 echo ""
               else
                 echo "%{T2}%{T-} $UNREAD "
