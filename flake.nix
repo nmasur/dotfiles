@@ -34,12 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # # Use official Firefox binary for macOS
-    # firefox-darwin = {
-    #   url = "github:bandithedoge/nixpkgs-firefox-darwin";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # Better App install management in macOS
     mac-app-util = {
       url = "github:hraban/mac-app-util";
@@ -51,12 +45,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # # Wallpapers
-    # wallpapers = {
-    #   url = "gitlab:exorcist365/wallpapers";
-    #   flake = false;
-    # };
 
     # Used to generate NixOS images for other platforms
     nixos-generators = {
@@ -70,104 +58,35 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # # Neovim plugins
-    # base16-nvim-src = {
-    #   url = "github:RRethy/base16-nvim";
+    # # Tree-Sitter Grammars
+    # tree-sitter-bash = {
+    #   url = "github:tree-sitter/tree-sitter-bash/master";
     #   flake = false;
     # };
-    # nvim-lspconfig-src = {
-    #   # https://github.com/neovim/nvim-lspconfig/tags
-    #   url = "github:neovim/nvim-lspconfig/v0.1.8";
+    # tree-sitter-python = {
+    #   url = "github:tree-sitter/tree-sitter-python/master";
     #   flake = false;
     # };
-    # cmp-nvim-lsp-src = {
-    #   url = "github:hrsh7th/cmp-nvim-lsp";
+    # tree-sitter-lua = {
+    #   url = "github:MunifTanjim/tree-sitter-lua/main";
     #   flake = false;
     # };
-    # baleia-nvim-src = {
-    #   # https://github.com/m00qek/baleia.nvim/tags
-    #   url = "github:m00qek/baleia.nvim";
+    # tree-sitter-ini = {
+    #   url = "github:justinmk/tree-sitter-ini";
     #   flake = false;
     # };
-    # nvim-treesitter-src = {
-    #   # https://github.com/nvim-treesitter/nvim-treesitter/tags
-    #   url = "github:nvim-treesitter/nvim-treesitter/v0.9.2";
+    # tree-sitter-puppet = {
+    #   url = "github:amaanq/tree-sitter-puppet";
     #   flake = false;
     # };
-    # telescope-nvim-src = {
-    #   # https://github.com/nvim-telescope/telescope.nvim/releases
-    #   url = "github:nvim-telescope/telescope.nvim/0.1.8";
+    # tree-sitter-rasi = {
+    #   url = "github:Fymyte/tree-sitter-rasi";
     #   flake = false;
     # };
-    # telescope-project-nvim-src = {
-    #   url = "github:nvim-telescope/telescope-project.nvim";
+    # tree-sitter-vimdoc = {
+    #   url = "github:neovim/tree-sitter-vimdoc";
     #   flake = false;
     # };
-    # toggleterm-nvim-src = {
-    #   # https://github.com/akinsho/toggleterm.nvim/tags
-    #   url = "github:akinsho/toggleterm.nvim/v2.12.0";
-    #   flake = false;
-    # };
-    # bufferline-nvim-src = {
-    #   # https://github.com/akinsho/bufferline.nvim/releases
-    #   url = "github:akinsho/bufferline.nvim/v4.6.1";
-    #   flake = false;
-    # };
-    # nvim-tree-lua-src = {
-    #   url = "github:kyazdani42/nvim-tree.lua";
-    #   flake = false;
-    # };
-    # hmts-nvim-src = {
-    #   url = "github:calops/hmts.nvim";
-    #   flake = false;
-    # };
-    # fidget-nvim-src = {
-    #   # https://github.com/j-hui/fidget.nvim/tags
-    #   url = "github:j-hui/fidget.nvim/v1.4.5";
-    #   flake = false;
-    # };
-    # nvim-lint-src = {
-    #   url = "github:mfussenegger/nvim-lint";
-    #   flake = false;
-    # };
-    # tiny-inline-diagnostic-nvim-src = {
-    #   url = "github:rachartier/tiny-inline-diagnostic.nvim";
-    #   flake = false;
-    # };
-    # snipe-nvim-src = {
-    #   url = "github:leath-dub/snipe.nvim";
-    #   flake = false;
-    # };
-
-    # Tree-Sitter Grammars
-    tree-sitter-bash = {
-      url = "github:tree-sitter/tree-sitter-bash/master";
-      flake = false;
-    };
-    tree-sitter-python = {
-      url = "github:tree-sitter/tree-sitter-python/master";
-      flake = false;
-    };
-    tree-sitter-lua = {
-      url = "github:MunifTanjim/tree-sitter-lua/main";
-      flake = false;
-    };
-    tree-sitter-ini = {
-      url = "github:justinmk/tree-sitter-ini";
-      flake = false;
-    };
-    tree-sitter-puppet = {
-      url = "github:amaanq/tree-sitter-puppet";
-      flake = false;
-    };
-    tree-sitter-rasi = {
-      url = "github:Fymyte/tree-sitter-rasi";
-      flake = false;
-    };
-    tree-sitter-vimdoc = {
-      url = "github:neovim/tree-sitter-vimdoc";
-      flake = false;
-    };
 
     # MPV Scripts
     zenyd-mpv-scripts = {

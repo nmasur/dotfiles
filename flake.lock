@@ -371,13 +371,6 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "tree-sitter-bash": "tree-sitter-bash",
-        "tree-sitter-ini": "tree-sitter-ini",
-        "tree-sitter-lua": "tree-sitter-lua",
-        "tree-sitter-puppet": "tree-sitter-puppet",
-        "tree-sitter-python": "tree-sitter-python",
-        "tree-sitter-rasi": "tree-sitter-rasi",
-        "tree-sitter-vimdoc": "tree-sitter-vimdoc",
         "wsl": "wsl",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
       }
@@ -409,121 +402,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "tree-sitter-bash": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1738310128,
-        "narHash": "sha256-ODWgFpCLLPgzNYXFhfAVvDXPr5bW8/49ezsaS9MOWMk=",
-        "owner": "tree-sitter",
-        "repo": "tree-sitter-bash",
-        "rev": "0c46d792d54c536be5ff7eb18eb95c70fccdb232",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter",
-        "ref": "master",
-        "repo": "tree-sitter-bash",
-        "type": "github"
-      }
-    },
-    "tree-sitter-ini": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741697356,
-        "narHash": "sha256-kWCaOIC81GP5EHCqzPZP9EUgYy39CZ6/8TVS6soB6Wo=",
-        "owner": "justinmk",
-        "repo": "tree-sitter-ini",
-        "rev": "32b31863f222bf22eb43b07d4e9be8017e36fb31",
-        "type": "github"
-      },
-      "original": {
-        "owner": "justinmk",
-        "repo": "tree-sitter-ini",
-        "type": "github"
-      }
-    },
-    "tree-sitter-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1738303275,
-        "narHash": "sha256-mE84uI5AKbLvX5CM7NvA59Z8Ux+QFdqVjZf4hi06NAM=",
-        "owner": "MunifTanjim",
-        "repo": "tree-sitter-lua",
-        "rev": "68d29aa745b68ae22cbbdb5dcb68c20232521ff6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MunifTanjim",
-        "ref": "main",
-        "repo": "tree-sitter-lua",
-        "type": "github"
-      }
-    },
-    "tree-sitter-puppet": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1734835631,
-        "narHash": "sha256-bO5g5AdhzpB13yHklpAndUHIX7Rvd7OMjH0Ds2ATA6Q=",
-        "owner": "amaanq",
-        "repo": "tree-sitter-puppet",
-        "rev": "15f192929b7d317f5914de2b4accd37b349182a6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "amaanq",
-        "repo": "tree-sitter-puppet",
-        "type": "github"
-      }
-    },
-    "tree-sitter-python": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1738275152,
-        "narHash": "sha256-t9etfZcrliF7f9hfiomh2U9P+3ufAm8iSK1y9rOhP7s=",
-        "owner": "tree-sitter",
-        "repo": "tree-sitter-python",
-        "rev": "710796b8b877a970297106e5bbc8e2afa47f86ec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter",
-        "ref": "master",
-        "repo": "tree-sitter-python",
-        "type": "github"
-      }
-    },
-    "tree-sitter-rasi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1716296585,
-        "narHash": "sha256-sPrIVgGGaBaXeqHNxjcdJ/S2FvxyV6rD9UPKU/tpspw=",
-        "owner": "Fymyte",
-        "repo": "tree-sitter-rasi",
-        "rev": "6c9bbcfdf5f0f553d9ebc01750a3aa247a37b8aa",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Fymyte",
-        "repo": "tree-sitter-rasi",
-        "type": "github"
-      }
-    },
-    "tree-sitter-vimdoc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729686839,
-        "narHash": "sha256-Vrl4/cZL+TWlUMEeWZoHCAWhvlefcl3ajGcwyTNKOhI=",
-        "owner": "neovim",
-        "repo": "tree-sitter-vimdoc",
-        "rev": "d2e4b5c172a109966c2ce0378f73df6cede39400",
-        "type": "github"
-      },
-      "original": {
-        "owner": "neovim",
-        "repo": "tree-sitter-vimdoc",
         "type": "github"
       }
     },

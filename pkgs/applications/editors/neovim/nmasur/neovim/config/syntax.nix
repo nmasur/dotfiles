@@ -2,26 +2,24 @@
 {
 
   plugins = [
-    (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-      _plugins: with pkgs.tree-sitter-grammars; [
-        tree-sitter-bash
-        tree-sitter-c
-        tree-sitter-fish
-        tree-sitter-hcl
-        tree-sitter-ini
-        tree-sitter-json
-        tree-sitter-lua
-        tree-sitter-markdown
-        tree-sitter-markdown-inline
-        tree-sitter-nix
-        tree-sitter-puppet
-        tree-sitter-python
-        tree-sitter-rasi
-        tree-sitter-toml
-        tree-sitter-vimdoc
-        tree-sitter-yaml
-      ]
-    ))
+    (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins: [
+      pkgs.nmasur.ini-grammar
+      pkgs.nmasur.puppet-grammar
+      pkgs.nmasur.rasi-grammar
+      pkgs.nmasur.vimdoc-grammar
+      pkgs.tree-sitter-grammars.tree-sitter-bash
+      pkgs.tree-sitter-grammars.tree-sitter-c
+      pkgs.tree-sitter-grammars.tree-sitter-fish
+      pkgs.tree-sitter-grammars.tree-sitter-hcl
+      pkgs.tree-sitter-grammars.tree-sitter-json
+      pkgs.tree-sitter-grammars.tree-sitter-lua
+      pkgs.tree-sitter-grammars.tree-sitter-markdown
+      pkgs.tree-sitter-grammars.tree-sitter-markdown-inline
+      pkgs.tree-sitter-grammars.tree-sitter-nix
+      pkgs.tree-sitter-grammars.tree-sitter-python
+      pkgs.tree-sitter-grammars.tree-sitter-toml
+      pkgs.tree-sitter-grammars.tree-sitter-yaml
+    ]))
     pkgs.vimPlugins.vim-matchup # Better % jumping in languages
     pkgs.vimPlugins.playground # Tree-sitter experimenting
     pkgs.vimPlugins.nginx-vim
