@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.dock;
 in
 
@@ -49,9 +50,9 @@ in
         "/System/Applications/Messages.app"
         "/System/Applications/Mail.app"
         "/Applications/zoom.us.app"
+        "${config.home-manager.users.${username}.programs.ghostty.package}/Applications/Ghostty.app"
         "${pkgs.discord}/Applications/Discord.app"
         "${pkgs.obsidian}/Applications/Obsidian.app"
-        "${pkgs.wezterm}/Applications/WezTerm.app"
       ];
     };
   };
