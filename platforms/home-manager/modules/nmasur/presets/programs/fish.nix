@@ -24,9 +24,12 @@ in
 
     nmasur.presets.programs.fish.fish_user_key_bindings = # fish
       ''
-        # Shift-Enter (defined by terminal)
-        bind -M insert \x1F accept-autosuggestion
-        bind -M default \x1F accept-autosuggestion
+        for mode in insert default visual
+            # Shift-Enter (defined by terminal)
+            bind -M $mode \x1F accept-autosuggestion
+            # Ctrl-f to accept auto-suggestions
+            bind -M $mode \cf forward-char
+        end
       '';
 
     programs.fish = {
