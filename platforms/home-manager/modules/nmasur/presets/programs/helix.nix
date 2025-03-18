@@ -156,7 +156,7 @@ in
           bg = config.theme.colors.base02;
         };
         "ui.selection.primary" = {
-          bg = config.theme.colors.base02;
+          bg = config.theme.colors.base03;
         };
         "ui.statusline" = {
           fg = config.theme.colors.base04;
