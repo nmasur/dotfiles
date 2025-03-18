@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   cfg = config.nmasur.presets.programs.helix;
@@ -14,8 +19,33 @@ in
 
       enable = true;
 
+      languages = {
+
+        language-server.nixd = {
+          command = "${pkgs.nixd}/bin/nixd";
+        };
+
+        language-server.fish-lsp = {
+          command = "${pkgs.fish-lsp}/bin/fish-lsp";
+        };
+
+        language = [
+          {
+            name = "nix";
+            auto-format = true;
+            language-servers = [ "nixd" ];
+          }
+        ];
+
+      };
+
       settings = {
         theme = "base16";
+        editor.cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
       };
 
       themes."${config.programs.helix.settings.theme}" = {

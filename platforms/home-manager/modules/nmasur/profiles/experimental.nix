@@ -19,6 +19,7 @@ in
       zed-editor.enable = lib.mkDefault true;
       ghostty.enable = lib.mkDefault true;
       helix.enable = lib.mkDefault true;
+      zellij.enable = lib.mkDefault true;
     };
 
     home.packages = [

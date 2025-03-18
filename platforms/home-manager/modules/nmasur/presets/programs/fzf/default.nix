@@ -77,9 +77,6 @@ in
         # Ctrl-e
         bind -M insert \ce recent
         bind -M default \ce recent
-        # Ctrl-f
-        bind -M insert \cf fcd
-        bind -M default \cf fcd
         # Ctrl-p
         bind -M insert \cp projects
         bind -M default \cp projects
