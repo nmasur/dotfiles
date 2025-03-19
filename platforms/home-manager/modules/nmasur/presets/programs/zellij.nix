@@ -22,6 +22,69 @@ in
       enableZshIntegration = true;
 
       settings = {
+        # Remove border
+        pane_frames = false;
+        keybinds = {
+          # _props = {
+          # clear-defaults = true;
+          # };
+          unbind = {
+            _args = [
+              "Ctrl p"
+              "Ctrl n"
+              "Ctrl o"
+              "Ctrl s"
+            ];
+          };
+          normal = {
+            "bind \"Alt l\"" = {
+              SwitchToMode = {
+                _args = [ "locked" ];
+              };
+            };
+            "bind \"Alt p\"" = {
+              SwitchToMode = {
+                _args = [ "pane" ];
+              };
+            };
+            "bind \"Alt t\"" = {
+              SwitchToMode = {
+                _args = [ "tab" ];
+              };
+            };
+            "bind \"Alt r\"" = {
+              SwitchToMode = {
+                _args = [ "resize" ];
+              };
+            };
+            "bind \"Alt m\"" = {
+              SwitchToMode = {
+                _args = [ "move" ];
+              };
+            };
+            "bind \"Alt k\"" = {
+              SwitchToMode = {
+                _args = [ "search" ];
+              };
+            };
+            "bind \"Alt o\"" = {
+              SwitchToMode = {
+                _args = [ "session" ];
+              };
+            };
+            "bind \"Alt q\"" = {
+              "Quit" = { };
+            };
+          };
+          locked = {
+            "bind \"Alt l\"" = {
+              SwitchToMode = {
+                _args = [ "Normal" ];
+              };
+            };
+          };
+
+        };
         theme = "custom";
         themes.custom = {
           fg = "${config.theme.colors.base05}";

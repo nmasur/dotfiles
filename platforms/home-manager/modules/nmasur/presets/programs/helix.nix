@@ -41,10 +41,29 @@ in
 
       settings = {
         theme = "base16";
-        editor.cursor-shape = {
-          insert = "bar";
-          normal = "block";
-          select = "underline";
+        editor = {
+          # Change cursors depending on the mode
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+
+          # View line numbers relative to the current cursors
+          line-number = "relative";
+
+          # Show whitespace visible to the user
+          # Waiting for trailing whitespace option ideally
+          whitespace = {
+            render = {
+              # space = "all";
+              tab = "all";
+            };
+            characters = {
+              # space = "·";
+              tab = "→";
+            };
+          };
         };
       };
 
