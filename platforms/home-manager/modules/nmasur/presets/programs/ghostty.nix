@@ -26,6 +26,10 @@ in
       settings = {
         theme = config.theme.name;
         font-size = 16;
+        macos-titlebar-style = "hidden";
+        window-decoration = false;
+        macos-non-native-fullscreen = true;
+        fullscreen = true;
       };
       themes."gruvbox" = {
         background = config.theme.colors.base00;

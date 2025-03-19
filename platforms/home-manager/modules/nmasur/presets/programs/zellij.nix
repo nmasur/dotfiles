@@ -30,9 +30,12 @@ in
           # };
           unbind = {
             _args = [
-              "Ctrl p"
+              "Ctrl g"
+              "Ctrl h"
               "Ctrl n"
               "Ctrl o"
+              "Ctrl p"
+              "Ctrl q"
               "Ctrl s"
             ];
           };
