@@ -25,7 +25,13 @@ in
       functions = {
         edit = {
           description = "Open a file in Vim";
-          body = builtins.readFile ./fish/edit.fish;
+          body = # fish
+            ''
+              set vimfile (fzf)
+              and set vimfile (echo $vimfile | tr -d '\r')
+              and commandline -r "${builtins.baseNameOf config.home.sessionVariables.EDITOR} \"$vimfile\""
+              and commandline -f execute
+            '';
         };
         fcd = {
           description = "Jump to directory";
@@ -51,11 +57,40 @@ in
         };
         recent = {
           description = "Open a recent file in Vim";
-          body = builtins.readFile ./fish/recent.fish;
+          body = # fish
+            ''
+              set vimfile (fd -t f --exec /usr/bin/stat -f "%m%t%N" | sort -nr | cut -f2 | fzf)
+              and set vimfile (echo $vimfile | tr -d '\r')
+              and commandline -r "${builtins.baseNameOf config.home.sessionVariables.EDITOR} $vimfile"
+              and commandline -f execute
+            '';
         };
         search-and-edit = {
           description = "Search and open the relevant file in Vim";
-          body = builtins.readFile ./fish/search-and-edit.fish;
+          body = # fish
+            ''
+              set vimfile ( \
+                  rg \
+                    --color=always \
+                    --line-number \
+                    --no-heading \
+                    --smart-case \
+                    --iglob "!/Library/**" \
+                    --iglob "!/System/**" \
+                    --iglob "!Users/$HOME/Library/*" \
+                    ".*" \
+                  | fzf --ansi \
+                      --height "80%" \
+                      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+                      --delimiter : \
+                      --preview 'bat --color=always {1} --highlight-line {2}' \
+                      --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
+              )
+              and set line_number (echo $vimfile | tr -d '\r' | cut -d':' -f2)
+              and set vimfile (echo $vimfile | tr -d '\r' | cut -d':' -f1)
+              and commandline -r "${builtins.baseNameOf config.home.sessionVariables.EDITOR} +$line_number \"$vimfile\""
+              and commandline -f execute
+            '';
         };
       };
       shellAbbrs = {
