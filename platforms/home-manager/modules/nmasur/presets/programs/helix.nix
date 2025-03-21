@@ -24,6 +24,13 @@ in
       EDITOR = lib.mkForce "${lib.getExe pkgs.helix}";
     };
 
+    # Create quick aliases for launching Helix
+    programs.fish = {
+      shellAbbrs = {
+        h = lib.mkForce "hx";
+      };
+    };
+
     programs.helix = {
 
       enable = true;
@@ -60,6 +67,14 @@ in
 
           # View line numbers relative to the current cursors
           line-number = "relative";
+
+          # Show hidden files
+          file-picker = {
+            hidden = false;
+            git-ignore = true;
+            git-global = true;
+            git-exclude = true;
+          };
 
           # Show whitespace visible to the user
           # Waiting for trailing whitespace option ideally
