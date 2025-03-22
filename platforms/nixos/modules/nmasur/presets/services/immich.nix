@@ -13,7 +13,6 @@ in
     services.immich = {
       enable = true;
       port = 2283;
-      group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
       database.enable = true;
       redis.enable = true;
       machine-learning.enable = true;

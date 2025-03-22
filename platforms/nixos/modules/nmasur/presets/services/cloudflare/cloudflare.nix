@@ -68,7 +68,11 @@ in
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
     services.caddy.package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de" ];
-      hash = "sha256-3nvVGW+ZHLxQxc1VCc/oTzCLZPBKgw4mhn+O3IoyiSs=";
+      hash =
+        if pkgs.stdenv.isx86_64 then
+          "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc="
+        else
+          "sha256-3nvVGW+ZHLxQxc1VCc/oTzCLZPBKgw4mhn+O3IoyiSs=";
     };
     nmasur.presets.services.caddy.tlsPolicies = [
       {

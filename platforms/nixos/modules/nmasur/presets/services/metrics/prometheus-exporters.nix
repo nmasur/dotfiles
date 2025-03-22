@@ -34,11 +34,11 @@ in
     ];
 
     services.prometheus = {
-      exporters.node.enable = config.prometheus.exporters.enable;
+      exporters.node.enable = true;
       exporters.node.enabledCollectors = [ ];
       exporters.node.disabledCollectors = [ "cpufreq" ];
-      exporters.systemd.enable = config.prometheus.exporters.enable;
-      exporters.process.enable = config.prometheus.exporters.enable;
+      exporters.systemd.enable = true;
+      exporters.process.enable = true;
       exporters.process.settings.process_names = [
         # Remove nix store path from process name
         {

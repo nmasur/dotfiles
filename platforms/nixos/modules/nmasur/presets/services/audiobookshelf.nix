@@ -19,10 +19,6 @@ in
     services.audiobookshelf = {
       enable = true;
 
-      # Setting a generic group to make it easier for the different programs
-      # that make use of the same files
-      group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
-
       # This is the default /var/lib/audiobookshelf
       dataDir = "audiobookshelf";
     };

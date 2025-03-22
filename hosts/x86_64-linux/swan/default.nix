@@ -14,6 +14,7 @@ rec {
     server.enable = true;
     home.enable = true;
     nas.enable = true;
+    shared-media.enable = true;
   };
 
   home-manager.users."noah" = {
@@ -27,6 +28,8 @@ rec {
     };
     home.stateVersion = "23.05";
   };
+
+  system.stateVersion = "23.05";
 
   # Not sure what's necessary but too afraid to remove anything
   boot.initrd.availableKernelModules = [
@@ -63,7 +66,7 @@ rec {
   # Sets root ext4 filesystem instead of declaring it manually
   disko = {
     enableConfig = true;
-    devices = (import ../../../disks/root.nix { disk = "/dev/nvme0n1"; });
+    devices = (import ./root.nix { disk = "/dev/nvme0n1"; });
   };
 
   # Allows private remote access over the internet

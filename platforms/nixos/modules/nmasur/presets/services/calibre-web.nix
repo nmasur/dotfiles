@@ -26,7 +26,6 @@ in
   config = lib.mkIf cfg.enable {
 
     services.calibre-web = {
-      group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
       openFirewall = true;
       options = {
         reverseProxyAuth.enable = false;

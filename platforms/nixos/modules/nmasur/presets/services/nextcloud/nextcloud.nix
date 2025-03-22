@@ -220,7 +220,7 @@ in
     # Log metrics to prometheus
     networking.hosts."127.0.0.1" = [ hostnames.content ];
     services.prometheus.exporters.nextcloud = {
-      enable = config.prometheus.exporters.enable;
+      enable = true;
       username = config.services.nextcloud.config.adminuser;
       url = "https://${hostnames.content}";
       passwordFile = config.services.nextcloud.config.adminpassFile;

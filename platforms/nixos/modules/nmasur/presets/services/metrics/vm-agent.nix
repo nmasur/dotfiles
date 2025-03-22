@@ -3,8 +3,8 @@
 
 {
   config,
+  pkgs,
   lib,
-  pkgs-stable,
   ...
 }:
 
@@ -37,7 +37,7 @@ in
 
     services.vmagent = {
       enable = true;
-      package = pkgs-stable.vmagent;
+      package = pkgs.stable.vmagent;
       prometheusConfig = prometheusConfig;
       remoteWrite = {
         url = "https://${hostnames.prometheus}/api/v1/write";

@@ -60,28 +60,23 @@ in
     services = {
       bazarr = {
         enable = true;
-        group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
       };
       jellyseerr.enable = true;
       prowlarr.enable = true;
       sabnzbd = {
         enable = true;
-        group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
         # The config file must be editable within the application
         # It contains server configs and credentials
         configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
       };
       sonarr = {
         enable = true;
-        group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
       };
       radarr = {
         enable = true;
-        group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
       };
       readarr = {
         enable = true;
-        group = lib.mkIf config.nmasur.profiles.shared-media.enable "shared";
       };
     };
 
@@ -96,7 +91,6 @@ in
       {
         # Group means that routes with the same name are mutually exclusive,
         # so they are split between the appropriate services.
-        group = "download";
         match = [
           {
             host = [ hostnames.download ];
@@ -112,7 +106,6 @@ in
         ];
       }
       {
-        group = "download";
         match = [
           {
             host = [ hostnames.download ];
@@ -127,7 +120,6 @@ in
         ];
       }
       {
-        group = "download";
         match = [
           {
             host = [ hostnames.download ];
@@ -142,7 +134,6 @@ in
         ];
       }
       {
-        group = "download";
         match = [
           {
             host = [ hostnames.download ];
@@ -158,7 +149,6 @@ in
         ];
       }
       {
-        group = "download";
         match = [
           {
             host = [ hostnames.download ];
@@ -178,7 +168,6 @@ in
         ];
       }
       {
-        group = "download";
         match = [
           {
             host = [ hostnames.download ];
@@ -193,7 +182,6 @@ in
         ];
       }
       {
-        group = "download";
         match = [ { host = [ hostnames.download ]; } ];
         handle = [
           {

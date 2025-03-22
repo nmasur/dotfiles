@@ -17,6 +17,8 @@ rec {
     gaming.enable = true;
   };
 
+  nmasur.presets.services.grub.enable = true;
+
   home-manager.users."noah" = {
     nmasur.settings = {
       username = nmasur.settings.username;

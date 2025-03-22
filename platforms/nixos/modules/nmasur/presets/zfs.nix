@@ -19,7 +19,7 @@ in
     boot.kernelPackages = pkgs.linuxPackages; # Defaults to latest LTS
     boot.kernelParams = [ "nohibernate" ]; # ZFS does not work with hibernation
     boot.supportedFilesystems = [ "zfs" ];
-    services.prometheus.exporters.zfs.enable = config.prometheus.exporters.enable;
+    services.prometheus.exporters.zfs.enable = true;
     nmasur.presets.services.prometheus-exporters.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.zfs.port}"
     ];

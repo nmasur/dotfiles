@@ -31,7 +31,6 @@ in
     passwordHash = lib.mkOption {
       type = lib.types.str;
       description = ''Hashed password created from htpasswd -nBC 10 "" | tr -d ':\n' '';
-      default = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
     };
   };
 
@@ -39,7 +38,7 @@ in
 
     environment.etc."filebrowser/.filebrowser.json".text = builtins.toJSON settings;
 
-    systemd.services.filebrowser = lib.mkIf config.filebrowser.enable {
+    systemd.services.filebrowser = {
       description = "Filebrowser cloud file services";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
@@ -57,9 +56,6 @@ in
       };
       path = [ pkgs.getent ]; # Fix: getent not found in $PATH
     };
-
-    # Configure Cloudflare DNS to point to this machine
-    services.cloudflare-dyndns.domains = [ hostnames.files ];
 
   };
 
