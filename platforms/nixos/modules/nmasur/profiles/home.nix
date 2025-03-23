@@ -20,7 +20,6 @@ in
       # Configure physical power buttons
       logind.enable = lib.mkDefault true;
       avahi.enable = lib.mkDefault true;
-      prometheus-remote-write.enable = lib.mkDefault true;
     };
 
     # Enable automatic timezone updates based on location

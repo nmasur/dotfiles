@@ -243,7 +243,7 @@ in
       prefix = "API_KEY=";
     };
     secrets.readarrApiKey = {
-      source = ./radarr-api-key.age;
+      source = ./readarr-api-key.age;
       dest = "/var/private/readarr-api";
       prefix = "API_KEY=";
     };
