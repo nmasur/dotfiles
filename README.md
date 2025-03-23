@@ -8,38 +8,38 @@ configuration may be difficult to translate to a non-Nix system.
 
 ## System Features
 
-| Feature        | Program                                             | Configuration                                 |
-|----------------|-----------------------------------------------------|-----------------------------------------------|
-| OS             | [NixOS](https://nixos.org)                          | [Link](./modules/nixos)                       |
-| Display Server | [X11](https://www.x.org/wiki/)                      | [Link](./modules/nixos/graphical/xorg.nix)    |
-| Compositor     | [Picom](https://github.com/yshui/picom)             | [Link](./modules/nixos/graphical/picom.nix)   |
-| Window Manager | [i3](https://i3wm.org/)                             | [Link](./modules/nixos/graphical/i3.nix)      |
-| Panel          | [Polybar](https://polybar.github.io/)               | [Link](./modules/nixos/graphical/polybar.nix) |
-| Font           | [Victor Mono](https://rubjo.github.io/victor-mono/) | [Link](./modules/nixos/graphical/fonts.nix)   |
-| Launcher       | [Rofi](https://github.com/davatorium/rofi)          | [Link](./modules/nixos/graphical/rofi.nix)    |
+| Feature        | Program                                             | Configuration                                                                     |
+|----------------|-----------------------------------------------------|-----------------------------------------------------------------------------------|
+| OS             | [NixOS](https://nixos.org)                          | [Link](./platforms/nixos)                                                         |
+| Display Server | [X11](https://www.x.org/wiki/)                      | [Link](./platforms/nixos/modules/nmasur/profiles/gui.nix)                         |
+| Compositor     | [Picom](https://github.com/yshui/picom)             | [Link](./platforms/home-manager/modules/nmasur/presets/services/picom.nix)        |
+| Window Manager | [i3](https://i3wm.org/)                             | [Link](./platforms/home-manager/modules/nmasur/presets/services/i3.nix)           |
+| Panel          | [Polybar](https://polybar.github.io/)               | [Link](./platforms/home-manager/modules/nmasur/presets/services/polybar.nix)      |
+| Font           | [Victor Mono](https://rubjo.github.io/victor-mono/) | [Link](./platforms/home-manager/modules/nmasur/presets/fonts.nix)                 |
+| Launcher       | [Rofi](https://github.com/davatorium/rofi)          | [Link](./platforms/home-manager/modules/nmasur/presets/programs/rofi/default.nix) |
 
 ## User Features
 
-| Feature      | Program                                                                          | Configuration                                      |
-|--------------|----------------------------------------------------------------------------------|----------------------------------------------------|
-| Dotfiles     | [Home-Manager](https://github.com/nix-community/home-manager)                    | [Link](./modules/common)                           |
-| Terminal     | [Kitty](https://sw.kovidgoyal.net/kitty/)                                        | [Link](./modules/common/applications/kitty.nix)    |
-| Shell        | [Fish](https://fishshell.com/)                                                   | [Link](./modules/common/shell/fish)                |
-| Shell Prompt | [Starship](https://starship.rs/)                                                 | [Link](./modules/common/shell/starship.nix)        |
-| Colorscheme  | [Gruvbox](https://github.com/morhetz/gruvbox)                                    | [Link](./colorscheme/gruvbox/default.nix)          |
-| Wallpaper    | [Road](https://gitlab.com/exorcist365/wallpapers/-/blob/master/gruvbox/road.jpg) | [Link](./hosts/tempest/default.nix)                |
-| Text Editor  | [Neovim](https://neovim.io/)                                                     | [Link](./modules/common/neovim/config)             |
-| Browser      | [Firefox](https://www.mozilla.org/en-US/firefox/new/)                            | [Link](./modules/common/applications/firefox.nix)  |
-| E-Mail       | [Aerc](https://aerc-mail.org/)                                                   | [Link](./modules/common/mail/aerc.nix)             |
-| File Manager | [Nautilus](https://wiki.gnome.org/action/show/Apps/Files)                        | [Link](./modules/common/applications/nautilus.nix) |
-| PDF Reader   | [Zathura](https://pwmt.org/projects/zathura/)                                    | [Link](./modules/common/applications/media.nix)    |
-| Video Player | [mpv](https://mpv.io/)                                                           | [Link](./modules/common/applications/media.nix)    |
+| Feature      | Program                                                                          | Configuration                                                                 |
+|--------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| Dotfiles     | [Home-Manager](https://github.com/nix-community/home-manager)                    | [Link](./platforms/home-manager)                                              |
+| Terminal     | [Ghostty](https://sw.kovidgoyal.net/kitty/)                                      | [Link](./platforms/home-manager/modules/nmasur/presets/programs/ghostty.nix)  |
+| Shell        | [Fish](https://fishshell.com/)                                                   | [Link](./platforms/home-manager/modules/nmasur/presets/programs/fish.nix)     |
+| Shell Prompt | [Starship](https://starship.rs/)                                                 | [Link](./platforms/home-manager/modules/nmasur/presets/programs/starship.nix) |
+| Colorscheme  | [Gruvbox](https://github.com/morhetz/gruvbox)                                    | [Link](./colorscheme/gruvbox/default.nix)                                     |
+| Wallpaper    | [Road](https://gitlab.com/exorcist365/wallpapers/-/blob/master/gruvbox/road.jpg) | [Link](./hosts/x86_64-linux/tempest/default.nix)                              |
+| Text Editor  | [Neovim](https://neovim.io/)                                                     | [Link](./pkgs/applications/editors/neovim/nmasur/neovim/package.nix)          |
+| Browser      | [Firefox](https://www.mozilla.org/en-US/firefox/new/)                            | [Link](./platforms/home-manager/modules/nmasur/presets/programs/firefox.nix)  |
+| E-Mail       | [Aerc](https://aerc-mail.org/)                                                   | [Link](./platforms/home-manager/modules/nmasur/presets/programs/aerc.nix)     |
+| File Manager | [Nautilus](https://wiki.gnome.org/action/show/Apps/Files)                        | [Link](./platforms/home-manager/modules/nmasur/presets/programs/nautilus.nix) |
+| PDF Reader   | [Zathura](https://pwmt.org/projects/zathura/)                                    | [Link](./platforms/home-manager/modules/nmasur/presets/programs/zathura.nix)  |
+| Video Player | [mpv](https://mpv.io/)                                                           | [Link](./platforms/home-manager/modules/nmasur/presets/programs/mpv.nix)      |
 
 ## macOS Features
 
 | Feature  | Program                                     | Configuration                        |
 |----------|---------------------------------------------|--------------------------------------|
-| Keybinds | [Hammerspoon](https://www.hammerspoon.org/) | [Link](./modules/darwin/hammerspoon) |
+| Keybinds | [Hammerspoon](https://www.hammerspoon.org/) | [Link](./platforms/home-manager/modules/nmasur/presets/services/hammerspoon/) |
 
 # Diagram
 
@@ -51,15 +51,16 @@ configuration may be difficult to translate to a non-Nix system.
 
 This repo contains a few more elaborate elements of configuration.
 
-- [Neovim config](./modules/common/neovim/default.nix) generated with Nix2Vim
-and source-controlled plugins, differing based on installed LSPs, for example.
-- [Caddy JSON](./modules/nixos/services/caddy.nix) file (routes, etc.) based
-dynamically on enabled services rendered with Nix.
-- [Grafana config](./modules/nixos/services/grafana.nix) rendered with Nix.
-- Custom [secrets deployment](./modules/nixos/services/secrets.nix) similar to
-agenix.
-- Base16 [colorschemes](./colorscheme/) applied to multiple applications,
-including Firefox userChrome.
+- [Neovim config](./pkgs/applications/editors/neovim/nmasur/neovim/package.nix)
+generated with Nix2Vim and source-controlled plugins,
+differing based on installed LSPs, for example. - [Caddy
+JSON](./platforms/nixos/modules/nmasur/presets/services/caddy.nix) file (routes,
+etc.) based dynamically on enabled services rendered with Nix. - [Grafana
+config](./platforms/nixos/modules/nmasur/presets/services/grafana/grafana.nix)
+rendered with Nix. - Custom [secrets
+deployment](./platforms/nixos/modules/secrets.nix) similar to agenix. - Base16
+[colorschemes](./colorscheme/) applied to multiple applications, including
+Firefox userChrome.
 
 ---
 

@@ -8,7 +8,7 @@ TEXT_FILE="/tmp/ocr.txt"
 IMAGE_FILE="/tmp/ocr.png"
 
 function notify-send() {
-    /usr/bin/osascript -e "display notification \"$2\" with title \"OCR\""
+  /usr/bin/osascript -e "display notification \"$2\" with title \"OCR\""
 }
 
 PATH="/usr/local/bin/:$PATH"
@@ -32,8 +32,8 @@ STATUS=$?
 # specify /tmp/ocr.txt as the file path, tesseract would out the text to
 # /tmp/ocr.txt.txt
 cd /tmp || {
-    echo "Failed to jump to directory."
-    exit 1
+  echo "Failed to jump to directory."
+  exit 1
 }
 tesseract "$IMAGE_FILE" "${TEXT_FILE//\.txt/}"
 
@@ -41,8 +41,8 @@ tesseract "$IMAGE_FILE" "${TEXT_FILE//\.txt/}"
 # of lines in the file
 LINES=$(wc -l <$TEXT_FILE)
 if [ "$LINES" -eq 0 ]; then
-    notify-send "ocr" "no text was detected"
-    exit 1
+  notify-send "ocr" "no text was detected"
+  exit 1
 fi
 
 # Copy text to clipboard

@@ -45,11 +45,35 @@ in
           command = "${pkgs.fish-lsp}/bin/fish-lsp";
         };
 
+        language-server.yaml-language-server = {
+          command = lib.getExe pkgs.yaml-language-server;
+        };
+
+        language-server.marksman = {
+          command = lib.getExe pkgs.marksman;
+        };
+
+        language-server.bash-language-server = {
+          command = lib.getExe (
+            pkgs.bash-language-server.overrideAttrs {
+              buildInputs = [
+                pkgs.shellcheck
+                pkgs.shfmt
+              ];
+            }
+          );
+        };
+
         language = [
           {
             name = "nix";
             auto-format = true;
             language-servers = [ "nixd" ];
+          }
+          {
+            name = "markdown";
+            auto-format = true;
+            language-servers = [ "marksman" ];
           }
         ];
 
@@ -63,6 +87,11 @@ in
             insert = "bar";
             normal = "block";
             select = "underline";
+          };
+
+          # Text width
+          soft-wrap = {
+            enable = true;
           };
 
           # View line numbers relative to the current cursors
@@ -226,10 +255,10 @@ in
           bg = config.theme.colors.base01;
         };
         "ui.selection" = {
-          bg = config.theme.colors.base02;
+          bg = config.theme.colors.base01;
         };
         "ui.selection.primary" = {
-          bg = config.theme.colors.base03;
+          bg = config.theme.colors.base02;
         };
         "ui.statusline" = {
           fg = config.theme.colors.base04;

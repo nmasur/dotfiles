@@ -32,7 +32,7 @@ in
       userName = cfg.name;
       userEmail = cfg.email;
       extraConfig = {
-        core.pager = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less -F";
+        core.pager = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less --no-init";
         interactive.difffilter = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight";
         pager = {
           branch = "false";

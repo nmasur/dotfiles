@@ -36,6 +36,7 @@ in
     homebrew.casks = [
       "scroll-reverser" # Different scroll style for mouse vs. trackpad
       "notunes" # Don't launch Apple Music with the play button
+      "topnotch" # Darkens the menu bar to complete black
     ];
 
   };
