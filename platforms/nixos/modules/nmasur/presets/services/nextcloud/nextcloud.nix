@@ -17,7 +17,7 @@ in
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud30; # Required to specify
+      package = pkgs.nextcloud31; # Required to specify
       configureRedis = true;
       datadir = "/data/nextcloud";
       database.createLocally = true;
@@ -42,10 +42,10 @@ in
         calendar = config.services.nextcloud.package.packages.apps.calendar;
         contacts = config.services.nextcloud.package.packages.apps.contacts;
         # These apps are defined and pinned by overlay in flake.
-        news = pkgs.nextcloudApps.news;
-        external = pkgs.nextcloudApps.external;
-        cookbook = pkgs.nextcloudApps.cookbook;
-        snappymail = pkgs.nextcloudApps.snappymail;
+        # news = pkgs.nextcloudApps.news;
+        # external = pkgs.nextcloudApps.external;
+        # cookbook = pkgs.nextcloudApps.cookbook;
+        # snappymail = pkgs.nextcloudApps.snappymail;
       };
       phpOptions = {
         "opcache.interned_strings_buffer" = "16";
