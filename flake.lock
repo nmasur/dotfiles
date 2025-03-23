@@ -334,6 +334,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1728538411,
+        "narHash": "sha256-f0SBJz1eZ2yOuKUr5CA9BHULGXVSn6miBuUWdTyhUhU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b69de56fac8c2b6f8fd27f2eca01dcda8e0a4221",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -372,7 +388,26 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "wsl": "wsl",
+        "zellij-switch": "zellij-switch",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1736476219,
+        "narHash": "sha256-+qyv3QqdZCdZ3cSO/cbpEY6tntyYjfe1bB12mdpNFaY=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "de30cc5963da22e9742bbbbb9a3344570ed237b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "systems": {
@@ -391,6 +426,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -444,6 +494,28 @@
       "original": {
         "owner": "nix-community",
         "repo": "NixOS-WSL",
+        "type": "github"
+      }
+    },
+    "zellij-switch": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay",
+        "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1737011317,
+        "narHash": "sha256-A8VGuw/jIw+NCo5aCYy8MFrWpKzZLf77RApGGMzHxCY=",
+        "owner": "mostafaqanbaryan",
+        "repo": "zellij-switch",
+        "rev": "15b02834c8be735fca0d9fb41f48709f97cc9afc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mostafaqanbaryan",
+        "repo": "zellij-switch",
         "type": "github"
       }
     },

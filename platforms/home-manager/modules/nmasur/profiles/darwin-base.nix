@@ -31,6 +31,8 @@ in
     # Used for aerc
     xdg.enable = lib.mkDefault pkgs.stdenv.isDarwin;
 
+    programs.fish.shellAbbrs.t = "trash";
+
     # Add homebrew paths to CLI path
     home.sessionPath = [
       "/opt/homebrew/bin/"

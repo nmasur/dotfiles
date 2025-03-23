@@ -30,6 +30,13 @@ in
         window-decoration = false;
         macos-non-native-fullscreen = true;
         fullscreen = true;
+        keybind = [
+          "super+t=unbind" # Pass super-t to underlying tool (e.g. zellij tabs)
+          "super+shift+]=unbind"
+          "super+shift+[=unbind"
+          "ctrl+tab=unbind"
+          "ctrl+shift+tab=unbind"
+        ];
       };
       themes."gruvbox" = {
         background = config.theme.colors.base00;

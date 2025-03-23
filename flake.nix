@@ -64,6 +64,12 @@
       flake = false;
     };
 
+    # Zellij Switcher
+    zellij-switch = {
+      url = "github:mostafaqanbaryan/zellij-switch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Nextcloud Apps
     nextcloud-news = {
       # https://github.com/nextcloud/news/releases

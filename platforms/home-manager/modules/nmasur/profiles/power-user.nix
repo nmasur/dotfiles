@@ -15,25 +15,26 @@ in
     home.packages = [
       pkgs.age # Encryption
       pkgs.bc # Calculator
+      pkgs.bottom # System monitor (top)
       pkgs.delta # Fancy diffs
       pkgs.difftastic # Other fancy diffs
+      pkgs.doggo # DNS client (dig)
+      pkgs.du-dust # Disk usage tree (ncdu)
+      pkgs.dua # File sizes (du)
+      pkgs.duf # Basic disk information (df)
       pkgs.jless # JSON viewer
       pkgs.jo # JSON output
+      pkgs.mpd # TUI slideshows
+      pkgs.nmasur.jqr # FZF fq JSON tool
       pkgs.nmasur.osc # Clipboard over SSH
-      pkgs.qrencode # Generate qr codes
       pkgs.nmasur.ren-find # Rename files
       pkgs.nmasur.rep-grep # Replace text in files
+      pkgs.pandoc # Convert text documents
+      pkgs.qrencode # Generate qr codes
       pkgs.spacer # Output lines in terminal
       pkgs.tealdeer # Cheatsheets
+      pkgs.tree # Print tree in terminal
       pkgs.vimv-rs # Batch rename files
-      pkgs.dua # File sizes (du)
-      pkgs.du-dust # Disk usage tree (ncdu)
-      pkgs.duf # Basic disk information (df)
-      pkgs.pandoc # Convert text documents
-      pkgs.mpd # TUI slideshows
-      pkgs.doggo # DNS client (dig)
-      pkgs.bottom # System monitor (top)
-      pkgs.nmasur.jqr # FZF fq JSON tool
     ];
 
     programs.fish.shellAliases = {

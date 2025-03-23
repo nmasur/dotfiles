@@ -31,6 +31,8 @@ in
       pkgs.charm # Manage account and filesystem
       pkgs.pop # Send emails from a TUI
 
+      pkgs.yazi # TUI file explorer
+
     ];
 
     programs.gh-dash.enable = lib.mkDefault true;
