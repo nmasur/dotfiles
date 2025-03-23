@@ -30,7 +30,7 @@ in
         litestream.enable = lib.mkDefault true;
         minecraft-server.enable = lib.mkDefault true;
         n8n.enable = lib.mkDefault true;
-        nix-autoupgrade.enable = lib.mkDefault true; # On by default for communications
+        nix-autoupgrade.enable = lib.mkDefault false; # On by default for communications
         ntfy-sh.enable = lib.mkDefault true;
         postgresql.enable = lib.mkDefault true;
         thelounge.enable = lib.mkDefault true;

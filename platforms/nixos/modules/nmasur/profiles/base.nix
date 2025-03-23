@@ -23,6 +23,7 @@ in
       };
       services = {
         nix.enable = lib.mkDefault true;
+        prometheus-exporters.enable = lib.mkDefault true;
       };
     };
 
