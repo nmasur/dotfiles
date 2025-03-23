@@ -94,9 +94,6 @@ in
     secrets.cloudflared = {
       source = cfg.tunnel.credentialsFile;
       dest = "${config.secretsDirectory}/cloudflared";
-      owner = "cloudflared";
-      group = "cloudflared";
-      permissions = "0440";
     };
     systemd.services.cloudflared-secret = {
       requiredBy = [ "cloudflared-tunnel-${cfg.tunnel.id}.service" ];
