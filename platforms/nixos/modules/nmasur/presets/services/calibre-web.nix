@@ -26,6 +26,7 @@ in
   config = lib.mkIf cfg.enable {
 
     services.calibre-web = {
+      enable = true;
       openFirewall = true;
       options = {
         reverseProxyAuth.enable = false;
