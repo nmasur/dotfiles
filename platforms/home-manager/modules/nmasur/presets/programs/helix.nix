@@ -53,6 +53,10 @@ in
           command = lib.getExe pkgs.marksman;
         };
 
+        language-server.terraform-ls = {
+          command = "${lib.getExe pkgs.terraform-ls} serve";
+        };
+
         language-server.bash-language-server = {
           command = lib.getExe (
             pkgs.bash-language-server.overrideAttrs {
@@ -74,6 +78,38 @@ in
             name = "markdown";
             auto-format = true;
             language-servers = [ "marksman" ];
+            formatter = {
+              command = lib.getExe pkgs.mdformat;
+              args = [ "-" ];
+            };
+          }
+          {
+            name = "tfvars";
+            auto-format = true;
+            language-servers = [ "terraform-ls" ];
+            formatter = {
+              command = lib.getExe pkgs.terraform;
+              args = [
+                "fmt"
+                "-"
+              ];
+            };
+          }
+          {
+            name = "hcl";
+            auto-format = true;
+            language-servers = [ "terraform-ls" ];
+            formatter = {
+              command = lib.getExe pkgs.terraform;
+              args = [
+                "fmt"
+                "-"
+              ];
+            };
+          }
+          {
+            name = "bash";
+            auto-format = true;
           }
         ];
 
@@ -149,7 +185,7 @@ in
         "string" = config.theme.colors.base0B;
         "type" = config.theme.colors.base0A;
         "variable" = config.theme.colors.base08;
-        "variable.other.member" = config.theme.colors.base0B;
+        "variable.other.member" = config.theme.colors.base05;
         "warning" = config.theme.colors.base09;
         "markup.bold" = {
           fg = config.theme.colors.base0A;
