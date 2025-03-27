@@ -1,5 +1,5 @@
 {
-  description = "My system";
+  description = "An opinionated flake containing the NixOS, nix-darwin, and home-manager configurations for multiple systems.";
 
   # Other flakes that we want to pull from
   inputs = {
@@ -9,9 +9,6 @@
 
     # Used for specific stable packages
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-
-    # Used for caddy plugins
-    nixpkgs-caddy.url = "github:jpds/nixpkgs/caddy-external-plugins";
 
     # Used for MacOS system config
     darwin = {
@@ -32,11 +29,8 @@
     };
 
     # Community packages; used for Firefox extensions
-    nur.url = "github:nix-community/nur";
-
-    # Use official Firefox binary for macOS
-    firefox-darwin = {
-      url = "github:bandithedoge/nixpkgs-firefox-darwin";
+    nur = {
+      url = "github:nix-community/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -52,12 +46,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Wallpapers
-    wallpapers = {
-      url = "gitlab:exorcist365/wallpapers";
-      flake = false;
-    };
-
     # Used to generate NixOS images for other platforms
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -70,137 +58,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Neovim plugins
-    base16-nvim-src = {
-      url = "github:RRethy/base16-nvim";
-      flake = false;
-    };
-    nvim-lspconfig-src = {
-      # https://github.com/neovim/nvim-lspconfig/tags
-      url = "github:neovim/nvim-lspconfig/v0.1.8";
-      flake = false;
-    };
-    cmp-nvim-lsp-src = {
-      url = "github:hrsh7th/cmp-nvim-lsp";
-      flake = false;
-    };
-    baleia-nvim-src = {
-      # https://github.com/m00qek/baleia.nvim/tags
-      url = "github:m00qek/baleia.nvim";
-      flake = false;
-    };
-    nvim-treesitter-src = {
-      # https://github.com/nvim-treesitter/nvim-treesitter/tags
-      url = "github:nvim-treesitter/nvim-treesitter/v0.9.2";
-      flake = false;
-    };
-    telescope-nvim-src = {
-      # https://github.com/nvim-telescope/telescope.nvim/releases
-      url = "github:nvim-telescope/telescope.nvim/0.1.8";
-      flake = false;
-    };
-    telescope-project-nvim-src = {
-      url = "github:nvim-telescope/telescope-project.nvim";
-      flake = false;
-    };
-    toggleterm-nvim-src = {
-      # https://github.com/akinsho/toggleterm.nvim/tags
-      url = "github:akinsho/toggleterm.nvim/v2.12.0";
-      flake = false;
-    };
-    bufferline-nvim-src = {
-      # https://github.com/akinsho/bufferline.nvim/releases
-      url = "github:akinsho/bufferline.nvim/v4.6.1";
-      flake = false;
-    };
-    nvim-tree-lua-src = {
-      url = "github:kyazdani42/nvim-tree.lua";
-      flake = false;
-    };
-    hmts-nvim-src = {
-      url = "github:calops/hmts.nvim";
-      flake = false;
-    };
-    fidget-nvim-src = {
-      # https://github.com/j-hui/fidget.nvim/tags
-      url = "github:j-hui/fidget.nvim/v1.4.5";
-      flake = false;
-    };
-    nvim-lint-src = {
-      url = "github:mfussenegger/nvim-lint";
-      flake = false;
-    };
-    tiny-inline-diagnostic-nvim-src = {
-      url = "github:rachartier/tiny-inline-diagnostic.nvim";
-      flake = false;
-    };
-    snipe-nvim-src = {
-      url = "github:leath-dub/snipe.nvim";
-      flake = false;
-    };
-
-    # Tree-Sitter Grammars
-    tree-sitter-bash = {
-      url = "github:tree-sitter/tree-sitter-bash/master";
-      flake = false;
-    };
-    tree-sitter-python = {
-      url = "github:tree-sitter/tree-sitter-python/master";
-      flake = false;
-    };
-    tree-sitter-lua = {
-      url = "github:MunifTanjim/tree-sitter-lua/main";
-      flake = false;
-    };
-    tree-sitter-ini = {
-      url = "github:justinmk/tree-sitter-ini";
-      flake = false;
-    };
-    tree-sitter-puppet = {
-      url = "github:amaanq/tree-sitter-puppet";
-      flake = false;
-    };
-    tree-sitter-rasi = {
-      url = "github:Fymyte/tree-sitter-rasi";
-      flake = false;
-    };
-    tree-sitter-vimdoc = {
-      url = "github:neovim/tree-sitter-vimdoc";
-      flake = false;
-    };
-
     # MPV Scripts
     zenyd-mpv-scripts = {
       url = "github:zenyd/mpv-scripts";
       flake = false;
     };
 
-    # Git alternative
-    # Fixes: https://github.com/martinvonz/jj/issues/4784
-    jujutsu = {
-      url = "github:martinvonz/jj";
+    # Zellij Switcher
+    zellij-switch = {
+      url = "github:mostafaqanbaryan/zellij-switch";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Ren and rep - CLI find and replace
-    rep = {
-      url = "github:robenkleene/rep-grep";
-      flake = false;
-    };
-    ren = {
-      url = "github:robenkleene/ren-find";
-      flake = false;
-    };
-
-    gh-collaborators = {
-      url = "github:katiem0/gh-collaborators";
-      flake = false;
-    };
-
-    # Clipboard over SSH
-    osc = {
-      url = "github:theimpostor/osc/v0.4.6";
-      flake = false;
     };
 
     # Nextcloud Apps
@@ -232,199 +99,128 @@
     { nixpkgs, ... }@inputs:
 
     let
-
-      # Global configuration for my systems
-      globals =
+      hostnames =
         let
           baseName = "masu.rs";
         in
-        rec {
-          user = "noah";
-          fullName = "Noah Masur";
-          gitName = fullName;
-          gitEmail = "7386960+nmasur@users.noreply.github.com";
-          mail.server = "noahmasur.com";
-          mail.imapHost = "imap.purelymail.com";
-          mail.smtpHost = "smtp.purelymail.com";
-          dotfilesRepo = "https://github.com/nmasur/dotfiles";
-          hostnames = {
-            audiobooks = "read.${baseName}";
-            budget = "money.${baseName}";
-            files = "files.${baseName}";
-            git = "git.${baseName}";
-            influxdb = "influxdb.${baseName}";
-            irc = "irc.${baseName}";
-            metrics = "metrics.${baseName}";
-            minecraft = "minecraft.${baseName}";
-            n8n = "n8n.${baseName}";
-            notifications = "ntfy.${baseName}";
-            prometheus = "prom.${baseName}";
-            paperless = "paper.${baseName}";
-            photos = "photos.${baseName}";
-            secrets = "vault.${baseName}";
-            stream = "stream.${baseName}";
-            content = "cloud.${baseName}";
-            books = "books.${baseName}";
-            download = "download.${baseName}";
-            status = "status.${baseName}";
-            transmission = "transmission.${baseName}";
-          };
+        {
+          audiobooks = "read.${baseName}";
+          books = "books.${baseName}";
+          budget = "money.${baseName}";
+          content = "cloud.${baseName}";
+          download = "download.${baseName}";
+          files = "files.${baseName}";
+          git = "git.${baseName}";
+          imap = "imap.purelymail.com";
+          influxdb = "influxdb.${baseName}";
+          irc = "irc.${baseName}";
+          mail = "noahmasur.com";
+          metrics = "metrics.${baseName}";
+          minecraft = "minecraft.${baseName}";
+          n8n = "n8n.${baseName}";
+          notifications = "ntfy.${baseName}";
+          paperless = "paper.${baseName}";
+          photos = "photos.${baseName}";
+          prometheus = "prom.${baseName}";
+          secrets = "vault.${baseName}";
+          smtp = "smtp.purelymail.com";
+          status = "status.${baseName}";
+          stream = "stream.${baseName}";
+          transmission = "transmission.${baseName}";
         };
 
-      # Common overlays to always use
-      overlays = [
-        inputs.nur.overlays.default
-        inputs.nix2vim.overlay
-        inputs.jujutsu.overlays.default # Fix: https://github.com/martinvonz/jj/issues/4784
-        (import ./overlays/neovim-plugins.nix inputs)
-        (import ./overlays/tree-sitter.nix inputs)
-        (import ./overlays/mpv-scripts.nix inputs)
-        (import ./overlays/nextcloud-apps.nix inputs)
-        (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/gh-collaborators.nix inputs)
-        (import ./overlays/osc.nix inputs)
-        (import ./overlays/ren-rep.nix inputs)
-        (import ./overlays/volnoti.nix)
-      ];
-
-      # System types to support.
-      supportedSystems = [
-        "x86_64-linux"
-        "x86_64-darwin"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
-
-      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     rec {
 
-      # Contains my full system builds, including home-manager
-      # nixos-rebuild switch --flake .#tempest
-      nixosConfigurations = {
-        arrow = import ./hosts/arrow { inherit inputs globals overlays; };
-        tempest = import ./hosts/tempest { inherit inputs globals overlays; };
-        hydra = import ./hosts/hydra { inherit inputs globals overlays; };
-        flame = import ./hosts/flame { inherit inputs globals overlays; };
-        swan = import ./hosts/swan { inherit inputs globals overlays; };
-      };
+      lib = import ./lib inputs;
 
-      # Contains my full Mac system builds, including home-manager
-      # darwin-rebuild switch --flake .#lookingglass
-      darwinConfigurations = {
-        lookingglass = import ./hosts/lookingglass { inherit inputs globals overlays; };
-      };
+      nixosConfigurations = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module:
+          lib.buildNixos {
+            inherit system module;
+            specialArgs = { inherit hostnames; };
+          }
+        ) hosts
+      ) lib.linuxHosts;
 
-      # For quickly applying home-manager settings with:
-      # home-manager switch --flake .#tempest
-      homeConfigurations = {
-        tempest = nixosConfigurations.tempest.config.home-manager.users.${globals.user}.home;
-        lookingglass = darwinConfigurations.lookingglass.config.home-manager.users."Noah.Masur".home;
-      };
+      darwinConfigurations = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module:
+          lib.buildDarwin {
+            inherit system module;
+            specialArgs = { inherit hostnames; };
+          }
+        ) hosts
+      ) lib.darwinHosts;
+
+      homeModules = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
+        ) hosts
+      ) lib.hosts;
+
+      homeConfigurations = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (
+          name: module:
+          lib.buildHome {
+            inherit system module;
+            specialArgs = { inherit hostnames; };
+          }
+        ) hosts
+      ) homeModules;
 
       # Disk formatting, only used once
       diskoConfigurations = {
-        root = import ./disks/root.nix;
+        root = import ./hosts/x86_64-linux/swan/root.nix;
       };
 
-      packages =
-        let
-          staff =
-            system:
-            import ./hosts/staff {
-              inherit
-                inputs
-                globals
-                overlays
-                system
-                ;
-            };
-          neovim =
-            system:
-            let
-              pkgs = import nixpkgs { inherit system overlays; };
-            in
-            import ./modules/common/neovim/package {
-              inherit pkgs;
-              colors = (import ./colorscheme/gruvbox-dark).dark;
-            };
-        in
-        {
-          x86_64-linux.staff = staff "x86_64-linux";
-          x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
-            system = "x86_64-linux";
-            format = "iso";
-            specialArgs = {
-              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
-              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-            };
-            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
-          };
-          x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
-            system = "x86_64-linux";
+      generators = builtins.mapAttrs (
+        system: hosts:
+        builtins.mapAttrs (name: module: {
+          aws = lib.generateImage {
+            inherit system module;
             format = "amazon";
-            specialArgs = {
-              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
-              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
-            };
-            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
-              (
-                { ... }:
-                {
-                  boot.kernelPackages = inputs.nixpkgs.legacyPackages.x86_64-linux.linuxKernel.packages.linux_6_6;
-                  amazonImage.sizeMB = 16 * 1024;
-                  permitRootLogin = "prohibit-password";
-                  boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
-                  boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
-                  services.amazon-ssm-agent.enable = true;
-                  users.users.ssm-user.extraGroups = [ "wheel" ];
-                }
-              )
-            ];
+            specialArgs = { inherit hostnames; };
           };
+          iso = lib.generateImage {
+            inherit system module;
+            format = "iso";
+            specialArgs = { inherit hostnames; };
+          };
+        }) hosts
+      ) lib.linuxHosts;
 
-          # Package Neovim config into standalone package
-          x86_64-linux.neovim = neovim "x86_64-linux";
-          x86_64-darwin.neovim = neovim "x86_64-darwin";
-          aarch64-linux.neovim = neovim "aarch64-linux";
-          aarch64-darwin.neovim = neovim "aarch64-darwin";
-        };
-
-      # Programs that can be run by calling this flake
-      apps = forAllSystems (
+      packages = lib.forAllSystems (
         system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        import ./apps { inherit pkgs; }
+        # Get the configurations that we normally use
+        {
+          nixosConfigurations = nixosConfigurations.${system};
+          darwinConfigurations = darwinConfigurations.${system};
+          homeConfigurations = homeConfigurations.${system};
+          generators = generators.${system};
+        }
+        //
+          # Get the custom packages that I have placed under the nmasur namespace
+          lib.pkgsBySystem.${system}.nmasur
       );
 
       # Development environments
-      devShells = forAllSystems (
+      devShells = lib.forAllSystems (system: {
+        default = lib.pkgsBySystem.${system}.nmasur.dotfiles-devshell;
+      });
+
+      checks = lib.forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        {
-
-          # Used to run commands and edit files in this repo
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              stylua
-              nixfmt-rfc-style
-              shfmt
-              shellcheck
-            ];
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = lib.overlays;
           };
-        }
-      );
-
-      checks = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
         in
         {
           neovim =
@@ -443,37 +239,18 @@
         }
       );
 
-      formatter = forAllSystems (
+      formatter = lib.forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system overlays; };
+          pkgs = import nixpkgs {
+            inherit system;
+            inherit (lib) overlays;
+          };
         in
         pkgs.nixfmt-rfc-style
       );
 
       # Templates for starting other projects quickly
-      templates = rec {
-        default = basic;
-        basic = {
-          path = ./templates/basic;
-          description = "Basic program template";
-        };
-        poetry = {
-          path = ./templates/poetry;
-          description = "Poetry template";
-        };
-        python = {
-          path = ./templates/python;
-          description = "Legacy Python template";
-        };
-        haskell = {
-          path = ./templates/haskell;
-          description = "Haskell template";
-        };
-        rust = {
-          path = ./templates/rust;
-          description = "Rust template";
-        };
-      };
+      templates = (import ./templates nixpkgs.lib);
     };
 }
