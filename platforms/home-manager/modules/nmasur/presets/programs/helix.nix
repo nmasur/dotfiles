@@ -35,6 +35,8 @@ in
 
       enable = true;
 
+      package = pkgs.helix; # pkgs.evil-helix
+
       languages = {
 
         language-server.nixd = {
@@ -117,7 +119,44 @@ in
 
       settings = {
         theme = "base16";
+
+        keys.normal = {
+          # Enable and disable inlay hints
+          space.H = ":toggle lsp.display-inlay-hints";
+
+          # Extend selection above
+          X = "select_line_above";
+
+          # Move lines up or down
+          A-j = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "paste_after"
+          ];
+          A-k = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "move_line_up"
+            "paste_before"
+          ];
+
+          # Copy lines up or down
+          A-J = [
+            "extend_to_line_bounds"
+            "yank"
+            "paste_after"
+          ];
+
+          A-K = [
+            "extend_to_line_bounds"
+            "yank"
+            "paste_before"
+          ];
+
+        };
+
         editor = {
+
           # Change cursors depending on the mode
           cursor-shape = {
             insert = "bar";

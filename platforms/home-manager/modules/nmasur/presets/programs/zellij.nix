@@ -18,6 +18,7 @@ in
     home.packages = [ pkgs.zellij-switch ];
 
     programs.fish = {
+      shellAbbrs.z = "zellij";
       functions = {
         zellij-session = {
           # description = "Open a session in Zellij";
@@ -59,67 +60,42 @@ in
       enableFishIntegration = true;
       enableZshIntegration = true;
 
+      # Not yet available in unstable
+      # attachExistingSession = true;
+      # exitShellOnExit = true;
+
       settings = {
         # default_layout = "compact-top";
         # Remove border
         pane_frames = false;
         # Scrollback
         scrollback_editor = config.home.sessionVariables.EDITOR;
+        # plugins = {
+        #   autolock = {
+        #     _props = {
+        #       location = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm";
+        #     };
+        #     is_enabled = {
+        #       _args = [ true ];
+        #     };
+        #     triggers = {
+        #       _args = [ "vim|nvim|hx|git|fzf|zoxide|atuin|gh" ];
+        #     };
+        #     reaction_seconds = {
+        #       _args = [ "0.3" ];
+        #     };
+        #     print_to_log = {
+        #       _args = [ true ];
+        #     };
+        #   };
+        # };
+        # load_plugins = {
+        #   autolock = { };
+        # };
         keybinds = {
-          # _props = {
-          # clear-defaults = true;
-          # };
-          unbind = {
-            _args = [
-              "Ctrl g"
-              "Ctrl h"
-              "Ctrl n"
-              "Ctrl o"
-              "Ctrl p"
-              "Ctrl q"
-              "Ctrl s"
-              "Alt i"
-            ];
-          };
           normal = {
-            "bind \"Alt l\"" = {
-              SwitchToMode = {
-                _args = [ "locked" ];
-              };
-            };
-            "bind \"Alt p\"" = {
-              SwitchToMode = {
-                _args = [ "pane" ];
-              };
-            };
-            "bind \"Alt t\"" = {
-              SwitchToMode = {
-                _args = [ "tab" ];
-              };
-            };
-            "bind \"Alt r\"" = {
-              SwitchToMode = {
-                _args = [ "resize" ];
-              };
-            };
-            "bind \"Alt m\"" = {
-              SwitchToMode = {
-                _args = [ "move" ];
-              };
-            };
-            "bind \"Alt k\"" = {
-              SwitchToMode = {
-                _args = [ "scroll" ];
-              };
-            };
-            "bind \"Alt o\"" = {
-              SwitchToMode = {
-                _args = [ "session" ];
-              };
-            };
-            "bind \"Alt q\"" = {
-              "Quit" = { };
-            };
+          };
+          shared = {
             "bind \"Alt Shift p\"" = {
               "Run" = {
                 _args = [
@@ -130,42 +106,14 @@ in
                 close_on_exit = true;
               };
             };
-            "bind \"Super t\"" = {
-              "NewTab" = { };
-            };
             "bind \"Super Shift ]\"" = {
-              "GoToPreviousTab" = { };
+              "GoToNextTab" = { };
             };
             "bind \"Super Shift [\"" = {
-              "GoToNextTab" = { };
-            };
-            "bind \"Ctrl Tab\"" = {
-              "GoToNextTab" = { };
-            };
-            "bind \"Ctrl Shift Tab\"" = {
               "GoToPreviousTab" = { };
             };
-            "bind \"Alt Shift i\"" = {
-              "MoveTab" = {
-                _args = [ "Left" ];
-              };
-            };
-            "bind \"Alt Shift o\"" = {
-              "MoveTab" = {
-                _args = [ "Right" ];
-              };
-            };
-          };
-          locked = {
-            "bind \"Alt l\"" = {
-              SwitchToMode = {
-                _args = [ "Normal" ];
-              };
-            };
-          };
-          session = {
-            unbind = {
-              _args = [ "Alt o" ];
+            "bind \"Super t\"" = {
+              "NewTab" = { };
             };
           };
 
