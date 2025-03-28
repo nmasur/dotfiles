@@ -50,7 +50,7 @@ in
       labels = {
         app = "actualbudget";
       };
-      image = "ghcr.io/actualbudget/actual-server:25.1.0";
+      image = "ghcr.io/actualbudget/actual:25.3.1";
       hostname = null;
       environmentFiles = [ ];
       environment = {

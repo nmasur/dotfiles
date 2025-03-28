@@ -29,6 +29,7 @@ rec {
       linux-base.enable = true;
       power-user.enable = true;
     };
+    nmasur.presets.programs.helix.enable = true;
     home.stateVersion = "23.05";
   };
 
