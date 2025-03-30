@@ -193,58 +193,6 @@
         "type": "github"
       }
     },
-    "nextcloud-cookbook": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1726214817,
-        "narHash": "sha256-Pfa+Xbopg20os+pnGgg+wpEX1MI5fz5JMb0K4a8rBhs=",
-        "type": "tarball",
-        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.2/cookbook-0.11.2.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.2/cookbook-0.11.2.tar.gz"
-      }
-    },
-    "nextcloud-external": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729501365,
-        "narHash": "sha256-OV6HhFBzmnQBO5btGEnqmKlaUMY7/t2Qm3XebclpBlM=",
-        "type": "tarball",
-        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.5.2/external-v5.5.2.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/nextcloud-releases/external/releases/download/v5.5.2/external-v5.5.2.tar.gz"
-      }
-    },
-    "nextcloud-news": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729667622,
-        "narHash": "sha256-pnvyMZQ+NYMgH0Unfh5S19HdZSjnghgoUDAoi2KIXNI=",
-        "type": "tarball",
-        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha12/news.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/nextcloud/news/releases/download/25.0.0-alpha12/news.tar.gz"
-      }
-    },
-    "nextcloud-snappymail": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1728502660,
-        "narHash": "sha256-oCw6Brs85rINBHvz3UJXheyLVqvA3RgPXG03b30Fx7E=",
-        "type": "tarball",
-        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.38.2-nextcloud.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://snappymail.eu/repository/nextcloud/snappymail-2.38.2-nextcloud.tar.gz"
-      }
-    },
     "nix2vim": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -378,10 +326,6 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
-        "nextcloud-cookbook": "nextcloud-cookbook",
-        "nextcloud-external": "nextcloud-external",
-        "nextcloud-news": "nextcloud-news",
-        "nextcloud-snappymail": "nextcloud-snappymail",
         "nix2vim": "nix2vim",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",

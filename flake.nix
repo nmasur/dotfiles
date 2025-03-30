@@ -70,29 +70,29 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nextcloud Apps
-    nextcloud-news = {
-      # https://github.com/nextcloud/news/releases
-      url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha12/news.tar.gz";
-      flake = false;
-    };
-    nextcloud-external = {
-      # https://github.com/nextcloud-releases/external/releases
-      url = "https://github.com/nextcloud-releases/external/releases/download/v5.5.2/external-v5.5.2.tar.gz";
-      flake = false;
-    };
-    nextcloud-cookbook = {
-      # https://github.com/christianlupus-nextcloud/cookbook-releases/releases/
-      url = "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.2/cookbook-0.11.2.tar.gz";
-      flake = false;
-    };
-    nextcloud-snappymail = {
-      # https://github.com/the-djmaze/snappymail/releases
-      # https://snappymail.eu/repository/nextcloud
-      url = "https://snappymail.eu/repository/nextcloud/snappymail-2.38.2-nextcloud.tar.gz";
-      # url = "https://github.com/nmasur/snappymail-nextcloud/releases/download/v2.36.3/snappymail-2.36.3-nextcloud.tar.gz";
-      flake = false;
-    };
+    # # Nextcloud Apps
+    # nextcloud-news = {
+    #   # https://github.com/nextcloud/news/releases
+    #   url = "https://github.com/nextcloud/news/releases/download/25.0.0-alpha12/news.tar.gz";
+    #   flake = false;
+    # };
+    # nextcloud-external = {
+    #   # https://github.com/nextcloud-releases/external/releases
+    #   url = "https://github.com/nextcloud-releases/external/releases/download/v5.5.2/external-v5.5.2.tar.gz";
+    #   flake = false;
+    # };
+    # nextcloud-cookbook = {
+    #   # https://github.com/christianlupus-nextcloud/cookbook-releases/releases/
+    #   url = "https://github.com/christianlupus-nextcloud/cookbook-releases/releases/download/v0.11.2/cookbook-0.11.2.tar.gz";
+    #   flake = false;
+    # };
+    # nextcloud-snappymail = {
+    #   # https://github.com/the-djmaze/snappymail/releases
+    #   # https://snappymail.eu/repository/nextcloud
+    #   url = "https://snappymail.eu/repository/nextcloud/snappymail-2.38.2-nextcloud.tar.gz";
+    #   # url = "https://github.com/nmasur/snappymail-nextcloud/releases/download/v2.36.3/snappymail-2.36.3-nextcloud.tar.gz";
+    #   flake = false;
+    # };
   };
 
   outputs =
@@ -133,35 +133,42 @@
     rec {
 
       lib = import ./lib inputs;
+      flattenAttrset = attrs: builtins.foldl' lib.mergeAttrs { } (builtins.attrValues attrs);
 
-      nixosConfigurations = builtins.mapAttrs (
-        system: hosts:
+      nixosConfigurations = flattenAttrset (
         builtins.mapAttrs (
-          name: module:
-          lib.buildNixos {
-            inherit system module;
-            specialArgs = { inherit hostnames; };
-          }
-        ) hosts
-      ) lib.linuxHosts;
+          system: hosts:
+          builtins.mapAttrs (
+            name: module:
+            lib.buildNixos {
+              inherit system module;
+              specialArgs = { inherit hostnames; };
+            }
+          ) hosts
+        ) lib.linuxHosts
+      );
 
-      darwinConfigurations = builtins.mapAttrs (
-        system: hosts:
+      darwinConfigurations = flattenAttrset (
         builtins.mapAttrs (
-          name: module:
-          lib.buildDarwin {
-            inherit system module;
-            specialArgs = { inherit hostnames; };
-          }
-        ) hosts
-      ) lib.darwinHosts;
+          system: hosts:
+          builtins.mapAttrs (
+            name: module:
+            lib.buildDarwin {
+              inherit system module;
+              specialArgs = { inherit hostnames; };
+            }
+          ) hosts
+        ) lib.darwinHosts
+      );
 
-      homeModules = builtins.mapAttrs (
-        system: hosts:
+      homeModules = flattenAttrset (
         builtins.mapAttrs (
-          name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
-        ) hosts
-      ) lib.hosts;
+          system: hosts:
+          builtins.mapAttrs (
+            name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
+          ) hosts
+        ) lib.hosts
+      );
 
       homeConfigurations = builtins.mapAttrs (
         system: hosts:
