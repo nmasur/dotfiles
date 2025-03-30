@@ -123,6 +123,25 @@ in
         keys.normal = {
           # Enable and disable inlay hints
           space.H = ":toggle lsp.display-inlay-hints";
+          space.l = [
+            ":write-all"
+            ":new"
+            ":insert-output ${lib.getExe pkgs.lazygit}"
+            ":buffer-close!"
+            # ":redraw"
+            # ":reload-all"
+          ];
+
+          # Open yazi
+          # https://github.com/sxyazi/yazi/pull/2461
+          # Won't work until next Helix release
+          # C-y = [
+          #   ":sh rm -f /tmp/unique-file"
+          #   ":insert-output ${lib.getExe pkgs.yazi} %{buffer_name} --chooser-file=/tmp/unique-file"
+          #   ":insert-output echo \\x1b[?1049h\\x1b[?2004h > /dev/tty"
+          #   ":open %sh{cat /tmp/unique-file}"
+          #   ":redraw"
+          # ];
 
           # Extend selection above
           X = "select_line_above";
@@ -137,19 +156,6 @@ in
             "extend_to_line_bounds"
             "delete_selection"
             "move_line_up"
-            "paste_before"
-          ];
-
-          # Copy lines up or down
-          A-J = [
-            "extend_to_line_bounds"
-            "yank"
-            "paste_after"
-          ];
-
-          A-K = [
-            "extend_to_line_bounds"
-            "yank"
             "paste_before"
           ];
 

@@ -74,28 +74,6 @@ in
 
         show_startup_tips = false;
 
-        # plugins = {
-        #   autolock = {
-        #     _props = {
-        #       location = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm";
-        #     };
-        #     is_enabled = {
-        #       _args = [ true ];
-        #     };
-        #     triggers = {
-        #       _args = [ "vim|nvim|hx|git|fzf|zoxide|atuin|gh" ];
-        #     };
-        #     reaction_seconds = {
-        #       _args = [ "0.3" ];
-        #     };
-        #     print_to_log = {
-        #       _args = [ true ];
-        #     };
-        #   };
-        # };
-        # load_plugins = {
-        #   autolock = { };
-        # };
         keybinds = {
           normal = {
           };
@@ -106,6 +84,14 @@ in
                 floating = true;
                 move_to_focused_tab = true;
               };
+              SwitchToMode = {
+                _args = [ "locked" ];
+              };
+            };
+          };
+          scroll = {
+            "bind \"e\"" = {
+              EditScrollback = { };
               SwitchToMode = {
                 _args = [ "locked" ];
               };
@@ -122,10 +108,22 @@ in
                 close_on_exit = true;
               };
             };
+            "bind \"Alt Shift k\"" = {
+              EditScrollback = { };
+              SwitchToMode = {
+                _args = [ "locked" ];
+              };
+            };
             "bind \"Super Shift ]\"" = {
               "GoToNextTab" = { };
             };
             "bind \"Super Shift [\"" = {
+              "GoToPreviousTab" = { };
+            };
+            "bind \"Ctrl Tab\"" = {
+              "GoToNextTab" = { };
+            };
+            "bind \"Ctrl Shift Tab\"" = {
               "GoToPreviousTab" = { };
             };
             "bind \"Super t\"" = {
@@ -136,16 +134,16 @@ in
         };
         theme = "custom";
         themes.custom = {
-          fg = "${config.theme.colors.base05}";
+          fg = "${config.theme.colors.base03}";
           bg = "${config.theme.colors.base02}";
           black = "${config.theme.colors.base00}";
           red = "${config.theme.colors.base08}";
-          green = "${config.theme.colors.base0B}";
+          green = "${config.theme.colors.base04}";
           yellow = "${config.theme.colors.base0A}";
           blue = "${config.theme.colors.base0D}";
           magenta = "${config.theme.colors.base0E}";
           cyan = "${config.theme.colors.base0C}";
-          white = "${config.theme.colors.base05}";
+          white = "${config.theme.colors.base04}";
           orange = "${config.theme.colors.base09}";
         };
       };
