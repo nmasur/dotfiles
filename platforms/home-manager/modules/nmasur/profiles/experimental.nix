@@ -37,7 +37,7 @@ in
 
     programs.gh-dash.enable = lib.mkDefault true;
     programs.himalaya.enable = lib.mkDefault true;
-
+    programs.lazygit.enable = lib.mkDefault true;
   };
 
 }
