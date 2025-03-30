@@ -70,6 +70,9 @@ in
         pane_frames = false;
         # Scrollback
         scrollback_editor = config.home.sessionVariables.EDITOR;
+
+        show_startup_tips = false;
+
         # plugins = {
         #   autolock = {
         #     _props = {

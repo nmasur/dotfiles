@@ -161,14 +161,12 @@
         ) lib.darwinHosts
       );
 
-      homeModules = flattenAttrset (
+      homeModules = builtins.mapAttrs (
+        system: hosts:
         builtins.mapAttrs (
-          system: hosts:
-          builtins.mapAttrs (
-            name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
-          ) hosts
-        ) lib.hosts
-      );
+          name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
+        ) hosts
+      ) lib.hosts;
 
       homeConfigurations = builtins.mapAttrs (
         system: hosts:
