@@ -65,6 +65,7 @@ in
       # exitShellOnExit = true;
 
       settings = {
+        default_mode = "locked";
         # default_layout = "compact-top";
         # Remove border
         pane_frames = false;
@@ -97,6 +98,18 @@ in
         # };
         keybinds = {
           normal = {
+          };
+          session = {
+            "bind \"w\"" = {
+              LaunchOrFocusPlugin = {
+                _args = [ "session-manager" ];
+                floating = true;
+                move_to_focused_tab = true;
+              };
+              SwitchToMode = {
+                _args = [ "locked" ];
+              };
+            };
           };
           shared = {
             "bind \"Alt Shift p\"" = {
