@@ -123,13 +123,16 @@ in
         keys.normal = {
           # Enable and disable inlay hints
           space.H = ":toggle lsp.display-inlay-hints";
+
+          # Open lazygit
+          # Unfortunately, this breaks mouse input and the terminal after quitting Helix
           space.l = [
             ":write-all"
             ":new"
             ":insert-output ${lib.getExe pkgs.lazygit}"
             ":buffer-close!"
-            # ":redraw"
-            # ":reload-all"
+            ":redraw"
+            ":reload-all"
           ];
 
           # Open yazi
