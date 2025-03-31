@@ -129,10 +129,7 @@ in
           space.t = ":sh zellij action toggle-floating-panes";
 
           # Today's note
-          space.n = [
-            ":sh fish -c 'generate-today'"
-            ":vsplit %sh{generate-today}"
-          ];
+          space.n = ":vsplit %sh{fish -c 'generate-today'}";
 
           # Open lazygit
           # Unfortunately, this breaks mouse input and the terminal after quitting Helix
