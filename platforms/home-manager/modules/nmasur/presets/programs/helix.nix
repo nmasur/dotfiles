@@ -150,13 +150,13 @@ in
           # Open yazi
           # https://github.com/sxyazi/yazi/pull/2461
           # Won't work until next Helix release
-          # C-y = [
-          #   ":sh rm -f /tmp/unique-file"
-          #   ":insert-output ${lib.getExe pkgs.yazi} %{buffer_name} --chooser-file=/tmp/unique-file"
-          #   ":insert-output echo \\x1b[?1049h\\x1b[?2004h > /dev/tty"
-          #   ":open %sh{cat /tmp/unique-file}"
-          #   ":redraw"
-          # ];
+          C-y = [
+            ":sh rm -f /tmp/unique-file"
+            ":insert-output ${lib.getExe pkgs.yazi} %{buffer_name} --chooser-file=/tmp/unique-file"
+            ":insert-output echo \\x1b[?1049h\\x1b[?2004h > /dev/tty"
+            ":open %sh{cat /tmp/unique-file}"
+            ":redraw"
+          ];
 
           # Extend selection above
           X = "select_line_above";

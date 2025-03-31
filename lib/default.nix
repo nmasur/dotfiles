@@ -67,6 +67,8 @@ lib
     inputs.nur.overlays.default
     inputs.nix2vim.overlay
     inputs.zellij-switch.overlays.default
+    inputs.helix.overlays.default
+    inputs.yazi.overlays.default
   ] ++ (importOverlays ../overlays);
 
   # System types to support.
