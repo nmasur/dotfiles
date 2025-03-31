@@ -61,6 +61,7 @@ in
       neovim.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;
       nixpkgs.enable = lib.mkDefault true;
+      notes.enable = lib.mkDefault true;
       prettyping.enable = lib.mkDefault true;
       ripgrep.enable = lib.mkDefault true;
       weather.enable = lib.mkDefault true;

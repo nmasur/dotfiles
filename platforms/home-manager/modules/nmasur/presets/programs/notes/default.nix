@@ -44,7 +44,7 @@ in
     programs.fish.functions = {
       syncnotes = {
         description = "Full git commit on notes";
-        body = builtins.readFile lib.getExe (
+        body = lib.getExe (
           pkgs.writers.writeFishBin "syncnotes" {
             makeWrapperArgs = [
               "--prefix"
@@ -52,13 +52,13 @@ in
               ":"
               "${lib.makeBinPath [ pkgs.git ]}"
             ];
-          } builtins.readFile ./syncnotes.fish
+          } (builtins.readFile ./syncnotes.fish)
         );
       };
       note = {
         description = "Edit or create a note";
         argumentNames = "filename";
-        body = builtins.readFile lib.getExe (
+        body = lib.getExe (
           pkgs.writers.writeFishBin "note" {
             makeWrapperArgs = [
               "--prefix"
@@ -69,7 +69,44 @@ in
                 pkgs.fzf
               ]}"
             ];
-          } builtins.readFile ./note.fish
+          } (builtins.readFile ./note.fish)
+        );
+      };
+      generate-today = {
+        description = "Create today's note";
+        body = # fish
+          ''
+            set filename $(date +%Y-%m-%d_%a)
+            set filepath "${cfg.path}/content/journal/$filename.md"
+            if ! test -e "$filepath"
+              echo -e  "---\ntitle: $(date +"%A, %B %e %Y") - $(curl "https://wttr.in/New+York+City?u&format=1")\ntags: [ journal ]\n---\n\n" > "$filepath"
+            end
+            echo "$filepath"
+          '';
+      };
+      today = {
+        description = "Edit or create today's note";
+        body = lib.getExe (
+          pkgs.writers.writeFishBin "today"
+            {
+              makeWrapperArgs = [
+                "--prefix"
+                "PATH"
+                ":"
+                "${lib.makeBinPath [
+                  pkgs.curl
+                  pkgs.helix
+                ]}"
+              ];
+            } # fish
+            ''
+              set filename $(date +%Y-%m-%d_%a)
+              set filepath "${cfg.path}/content/journal/$filename.md"
+              if ! test -e "$filepath"
+                echo -e  "---\ntitle: $(date +"%A, %B %e %Y") - $(curl "https://wttr.in/New+York+City?u&format=1")\ntags: [ journal ]\n---\n\n" > "$filepath"
+              end
+              hx "$filepath"
+            ''
         );
       };
     };

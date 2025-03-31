@@ -22,6 +22,7 @@ in
     # Set Neovim as the default app for text editing and manual pages
     home.sessionVariables = {
       EDITOR = lib.mkForce "${lib.getExe pkgs.helix}";
+      MANPAGER = lib.mkForce "${lib.getExe pkgs.helix}";
     };
 
     # Create quick aliases for launching Helix
@@ -78,7 +79,7 @@ in
           }
           {
             name = "markdown";
-            auto-format = true;
+            auto-format = false;
             language-servers = [ "marksman" ];
             formatter = {
               command = lib.getExe pkgs.mdformat;
@@ -124,6 +125,15 @@ in
           # Enable and disable inlay hints
           space.H = ":toggle lsp.display-inlay-hints";
 
+          # Toggle floating pane
+          space.t = ":sh zellij action toggle-floating-panes";
+
+          # Today's note
+          space.n = [
+            ":sh fish -c 'generate-today'"
+            ":vsplit %sh{generate-today}"
+          ];
+
           # Open lazygit
           # Unfortunately, this breaks mouse input and the terminal after quitting Helix
           space.l = [
@@ -133,6 +143,8 @@ in
             ":buffer-close!"
             ":redraw"
             ":reload-all"
+            ":set mouse false"
+            ":set mouse true"
           ];
 
           # Open yazi
