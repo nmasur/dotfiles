@@ -24,7 +24,14 @@ in
           # description = "Open a session in Zellij";
           body = # fish
             ''
-              zoxide query --interactive | xargs -I {} sh -c 'zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--cwd {} --layout default --session $(basename {})"' \\;
+              set TARGET_DIR $(zoxide query --interactive)
+              if test -z $TARGET_DIR
+                return 0
+              end
+              if test "$TARGET_DIR" = $(pwd)
+                return 1
+              end
+              zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--cwd $TARGET_DIR --layout default --session $(basename $TARGET_DIR)"
             '';
         };
       };
