@@ -35,5 +35,9 @@ in
         ".rgignore".text = ignorePatterns;
         ".fdignore".text = ignorePatterns;
       };
+    # Ignore in zoxide
+    home.sessionVariables = {
+      _ZO_EXCLUDE_DIRS = "$HOME/keybase/*";
+    };
   };
 }
