@@ -216,13 +216,12 @@
         system:
         # Get the configurations that we normally use
         {
-          nixosConfigurations = nixosConfigurations.${system};
-          darwinConfigurations = darwinConfigurations.${system};
+          inherit nixosConfigurations darwinConfigurations;
           homeConfigurations = homeConfigurations.${system};
           generators = generators.${system};
         }
         //
-          # Get the custom packages that I have placed under the nmasur namespace
+          # Share the custom packages that I have placed under the nmasur namespace
           lib.pkgsBySystem.${system}.nmasur
       );
 
