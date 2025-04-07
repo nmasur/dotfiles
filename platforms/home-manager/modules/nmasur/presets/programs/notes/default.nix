@@ -44,16 +44,17 @@ in
     programs.fish.functions = {
       syncnotes = {
         description = "Full git commit on notes";
-        body = lib.getExe (
-          pkgs.writers.writeFishBin "syncnotes" {
-            makeWrapperArgs = [
-              "--prefix"
-              "PATH"
-              ":"
-              "${lib.makeBinPath [ pkgs.git ]}"
-            ];
-          } (builtins.readFile ./syncnotes.fish)
-        );
+        body =
+          let
+            git = lib.getExe pkgs.git;
+          in
+          # fish
+          ''
+            ${git} -C ${cfg.path} pull
+            ${git} -C ${cfg.path} add -A
+            ${git} -C ${cfg.path} commit -m autosync
+            ${git} -C ${cfg.path} push
+          '';
       };
       note = {
         description = "Edit or create a note";
