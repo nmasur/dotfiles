@@ -22,7 +22,9 @@ in
     # Set Neovim as the default app for text editing and manual pages
     home.sessionVariables = {
       EDITOR = lib.mkForce "${lib.getExe pkgs.helix}";
-      MANPAGER = lib.mkForce "${lib.getExe pkgs.helix}";
+      MANPAGER = lib.mkForce "sh -c 'col -bx | ${lib.getExe pkgs.helix}'";
+      MANWIDTH = 87;
+      MANROFFOPT = "-c";
     };
 
     # Create quick aliases for launching Helix
