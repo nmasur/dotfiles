@@ -120,6 +120,10 @@ in
 
       };
 
+      ignores = [
+        "content/.obsidian/**"
+      ];
+
       settings = {
         theme = "base16";
 
