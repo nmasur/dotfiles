@@ -128,6 +128,13 @@ in
         theme = "base16";
 
         keys.normal = {
+
+          # Get out of multiple cursors and selection
+          esc = [
+            "collapse_selection"
+            "keep_primary_selection"
+          ];
+
           # Enable and disable inlay hints
           space.H = ":toggle lsp.display-inlay-hints";
 
@@ -217,6 +224,7 @@ in
             };
           };
         };
+
       };
 
       themes."${config.programs.helix.settings.theme}" = {
