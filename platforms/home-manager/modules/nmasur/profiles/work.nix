@@ -39,11 +39,14 @@ in
       pkgs.nmasur.terraform-init # Quick shortcut for initializing Terraform backend
     ];
 
+    programs.fish.shellAliases.ec2 = "aws-ec2";
+
     nmasur.presets = {
       fonts.enable = lib.mkDefault true;
       programs = {
         _1password.enable = lib.mkDefault true;
         atuin.enable = lib.mkDefault true;
+        aws-ssh.enable = lib.mkDefault true;
         bash.enable = lib.mkDefault true;
         bat.enable = lib.mkDefault true;
         direnv.enable = lib.mkDefault true;
