@@ -106,7 +106,7 @@ in
           };
           shared = {
             "bind \"Alt Shift p\"" = {
-              "Run" = {
+              Run = {
                 _args = [
                   "${pkgs.fish}/bin/fish"
                   "-c"
@@ -115,26 +115,31 @@ in
                 close_on_exit = true;
               };
             };
-            "bind \"Alt Shift k\"" = {
+            "bind \"Super Shift ]\"" = {
+              GoToNextTab = { };
+            };
+            "bind \"Super Shift [\"" = {
+              GoToPreviousTab = { };
+            };
+            "bind \"Ctrl Tab\"" = {
+              GoToNextTab = { };
+            };
+            "bind \"Ctrl Shift Tab\"" = {
+              GoToPreviousTab = { };
+            };
+            "bind \"Super t\"" = {
+              NewTab = { };
+            };
+            "bind \"Super k\"" = {
+              SwitchToMode = {
+                _args = [ "scroll" ];
+              };
+            };
+            "bind \"Super Shift e\"" = {
               EditScrollback = { };
               SwitchToMode = {
                 _args = [ "locked" ];
               };
-            };
-            "bind \"Super Shift ]\"" = {
-              "GoToNextTab" = { };
-            };
-            "bind \"Super Shift [\"" = {
-              "GoToPreviousTab" = { };
-            };
-            "bind \"Ctrl Tab\"" = {
-              "GoToNextTab" = { };
-            };
-            "bind \"Ctrl Shift Tab\"" = {
-              "GoToPreviousTab" = { };
-            };
-            "bind \"Super t\"" = {
-              "NewTab" = { };
             };
           };
 

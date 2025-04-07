@@ -36,6 +36,10 @@ in
           "super+shift+[=unbind"
           "ctrl+tab=unbind"
           "ctrl+shift+tab=unbind"
+          "ctrl+tab=text:\\x1b[9;5u"
+          "ctrl+shift+tab=text:\\x1b[9;6u"
+          "super+k=unbind"
+          "super+shift+e=unbind"
         ];
       };
       themes."gruvbox" = {
