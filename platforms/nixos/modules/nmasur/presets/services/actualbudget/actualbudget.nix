@@ -38,6 +38,7 @@ in
       "d /var/lib/actualbudget 0770 actualbudget shared"
     ];
 
+    # TODO: switch to NixOS service
     virtualisation.oci-containers.containers.actualbudget = {
       workdir = null;
       volumes = [ "/var/lib/actualbudget:/data" ];
@@ -59,6 +60,35 @@ in
       };
       dependsOn = [ ];
       autoStart = true;
+    };
+
+    virtualisation.oci-containers.containers.actualbudget-prometheus-exporter = {
+      workdir = null;
+      user = builtins.toString config.users.users.actualbudget.uid;
+      pull = "missing";
+      privileged = false;
+      ports = [ "127.0.0.1:${builtins.toString cfg.port}:5007" ];
+      networks = [ ];
+      log-driver = "journald";
+      labels = {
+        app = "actualbudget-prometheus-exporter";
+      };
+      image = "docker.io/sakowicz/actual-budget-prometheus-exporter:1.1.6";
+      hostname = null;
+      environmentFiles = [ config.secrets.actualbudget.dest ];
+      environment = {
+        ACTUAL_SERVER_URL = "http://127.0.0.1:5006";
+        ACTUAL_BUDGET_ID_1 = "My-Finances-1daef08";
+      };
+      dependsOn = [ "actualbudget" ];
+      autoStart = true;
+    };
+
+    secrets.actualbudget = {
+      source = ./actualbudget-password.age;
+      dest = "${config.secretsDirectory}/actualbudget-password";
+      owner = builtins.toString config.users.users.actualbudget.uid;
+      group = builtins.toString config.users.users.actualbudget.uid;
     };
 
     # Allow web traffic to Caddy
