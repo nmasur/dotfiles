@@ -41,6 +41,7 @@ in
 
     home.packages = [
       pkgs.noti # Create notifications programmatically
+      pkgs.ice-bar # Menu bar hiding
     ];
   };
 
