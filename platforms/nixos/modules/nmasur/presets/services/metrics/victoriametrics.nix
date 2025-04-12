@@ -53,6 +53,9 @@ in
       ];
     };
 
+    # Don't enable vmagent because we already have victoriametrics running anyway
+    services.vmagent.enable = lib.mkForce false;
+
     systemd.services.vmauth = lib.mkIf config.services.victoriametrics.enable {
       description = "VictoriaMetrics basic auth proxy";
       after = [ "network.target" ];

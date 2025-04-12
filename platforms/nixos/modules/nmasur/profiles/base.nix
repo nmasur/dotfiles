@@ -23,7 +23,9 @@ in
       };
       services = {
         nix.enable = lib.mkDefault true;
+        openssh.enable = lib.mkDefault true;
         prometheus-exporters.enable = lib.mkDefault true;
+        vm-agent.enable = lib.mkDefault true;
       };
     };
 

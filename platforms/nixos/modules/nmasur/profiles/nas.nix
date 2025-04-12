@@ -36,7 +36,6 @@ in
         paperless.enable = lib.mkDefault true;
         postgresql.enable = lib.mkDefault true;
         samba.enable = lib.mkDefault true;
-        vm-agent.enable = lib.mkDefault true;
       };
     };
 
