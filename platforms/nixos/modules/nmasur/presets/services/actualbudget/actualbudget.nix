@@ -67,26 +67,38 @@ in
       user = builtins.toString config.users.users.actualbudget.uid;
       pull = "missing";
       privileged = false;
-      ports = [ "127.0.0.1:${builtins.toString cfg.port}:5007" ];
+      ports = [ "127.0.0.1:5007:3001" ];
       networks = [ ];
       log-driver = "journald";
       labels = {
         app = "actualbudget-prometheus-exporter";
       };
-      image = "docker.io/sakowicz/actual-budget-prometheus-exporter:1.1.6";
+      image = "docker.io/sakowicz/actual-budget-prometheus-exporter:1.1.5";
       hostname = null;
-      environmentFiles = [ config.secrets.actualbudget.dest ];
+      environmentFiles = [
+        config.secrets.actualbudget-password.dest
+        config.secrets.actualbudget-budget-id.dest
+      ];
       environment = {
-        ACTUAL_SERVER_URL = "http://127.0.0.1:5006";
-        ACTUAL_BUDGET_ID_1 = "My-Finances-1daef08";
+        ACTUAL_SERVER_URL = "https://${hostnames.budget}:443";
       };
       dependsOn = [ "actualbudget" ];
       autoStart = true;
     };
 
-    secrets.actualbudget = {
+    nmasur.presets.services.prometheus-exporters.scrapeTargets = [
+      "127.0.0.1:5007"
+    ];
+
+    secrets.actualbudget-password = {
       source = ./actualbudget-password.age;
       dest = "${config.secretsDirectory}/actualbudget-password";
+      owner = builtins.toString config.users.users.actualbudget.uid;
+      group = builtins.toString config.users.users.actualbudget.uid;
+    };
+    secrets.actualbudget-budget-id = {
+      source = ./actualbudget-budget-id.age;
+      dest = "${config.secretsDirectory}/actualbudget-budget-id";
       owner = builtins.toString config.users.users.actualbudget.uid;
       group = builtins.toString config.users.users.actualbudget.uid;
     };
