@@ -11,7 +11,7 @@
 let
 
   inherit (config.nmasur.settings) hostnames;
-  cfg = config.nmasur.presets.services.vm-agent;
+  cfg = config.nmasur.presets.services.vmagent;
 
   username = "prometheus";
 
@@ -30,8 +30,8 @@ let
 in
 {
 
-  options.nmasur.presets.services.vm-agent.enable =
-    lib.mkEnableOption "vm-agent VictoriaMetrics collector";
+  options.nmasur.presets.services.vmagent.enable =
+    lib.mkEnableOption "vmagent VictoriaMetrics collector";
 
   config = lib.mkIf cfg.enable {
 
