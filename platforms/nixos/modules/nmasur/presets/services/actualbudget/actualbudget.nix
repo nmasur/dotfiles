@@ -22,6 +22,14 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    services.actual = {
+      enable = true;
+      settings = {
+        port = 5006;
+      };
+    };
+
+    # Used for prometheus exporter
     virtualisation.podman.enable = true;
 
     # Create a shared group for generic services
@@ -31,35 +39,6 @@ in
       isSystemUser = true;
       group = "shared";
       uid = 980;
-    };
-
-    # Create budget directory, allowing others to manage it
-    systemd.tmpfiles.rules = [
-      "d /var/lib/actualbudget 0770 actualbudget shared"
-    ];
-
-    # TODO: switch to NixOS service
-    virtualisation.oci-containers.containers.actualbudget = {
-      workdir = null;
-      volumes = [ "/var/lib/actualbudget:/data" ];
-      user = "${toString (builtins.toString config.users.users.actualbudget.uid)}";
-      pull = "missing";
-      privileged = false;
-      ports = [ "127.0.0.1:${builtins.toString cfg.port}:5006" ];
-      networks = [ ];
-      log-driver = "journald";
-      labels = {
-        app = "actualbudget";
-      };
-      image = "ghcr.io/actualbudget/actual:25.3.1";
-      hostname = null;
-      environmentFiles = [ ];
-      environment = {
-        DEBUG = "actual:config"; # Enable debug logging
-        ACTUAL_TRUSTED_PROXIES = builtins.concatStringsSep "," [ "127.0.0.1" ];
-      };
-      dependsOn = [ ];
-      autoStart = true;
     };
 
     virtualisation.oci-containers.containers.actualbudget-prometheus-exporter = {
@@ -82,7 +61,7 @@ in
       environment = {
         ACTUAL_SERVER_URL = "https://${hostnames.budget}:443";
       };
-      dependsOn = [ "actualbudget" ];
+      # dependsOn = [ "actualbudget" ];
       autoStart = true;
     };
 
