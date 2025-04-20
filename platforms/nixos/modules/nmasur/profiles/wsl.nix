@@ -15,7 +15,6 @@ in
       wslConf.automount.root = lib.mkDefault "/mnt";
       defaultUser = lib.mkDefault username;
       startMenuLaunchers = lib.mkDefault true;
-      nativeSystemd = lib.mkDefault true;
       wslConf.network.generateResolvConf = lib.mkDefault true; # Turn off if it breaks VPN
       interop.includePath = lib.mkDefault false; # Including Windows PATH will slow down Neovim command mode
     };
