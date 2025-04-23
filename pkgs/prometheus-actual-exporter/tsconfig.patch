@@ -1,0 +1,12 @@
+diff --git a/tsconfig.json b/tsconfig.json
+index 5106135..3a340f6 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -8,5 +8,6 @@
+     "skipLibCheck": true,
+     "lib": ["es2020"],
+     "outDir": "./dist"
+-  }
++  },
++  "include": ["src/**/*", "app.ts"]
+ }

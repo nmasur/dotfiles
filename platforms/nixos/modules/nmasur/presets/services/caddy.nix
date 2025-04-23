@@ -103,8 +103,9 @@ in
                   value = name;
                 }) hostname_map;
               };
+
+              metrics = { }; # Enables Prometheus metrics
             };
-            apps.http.servers.metrics = { }; # Enables Prometheus metrics
             apps.tls.automation.policies = cfg.tlsPolicies;
 
             # Setup logging to journal and files

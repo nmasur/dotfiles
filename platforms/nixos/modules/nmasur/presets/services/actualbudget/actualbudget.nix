@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -18,6 +19,11 @@ in
       description = "Port to use for the localhost";
       default = 5006;
     };
+    prometheusPort = lib.mkOption {
+      type = lib.types.port;
+      description = "Port to use for prometheus actual exporter";
+      default = 5007;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -25,9 +31,29 @@ in
     services.actual = {
       enable = true;
       settings = {
-        port = 5006;
+        port = cfg.port;
       };
     };
+
+    # systemd.services.prometheus-actual-exporter = {
+    #   enable = true;
+    #   description = "Prometheus exporter for Actual budget";
+    #   serviceConfig = {
+    #     DynamicUser = true;
+    #     Environment = [
+    #       "ACTUAL_SERVER_URL=https://${hostnames.budget}:443"
+    #       "PORT=${builtins.toString cfg.prometheusPort}"
+    #     ];
+    #     EnvironmentFile = [
+    #       config.secrets.actualbudget-password.dest
+    #       config.secrets.actualbudget-budget-id.dest
+    #     ];
+    #     ExecStart = lib.getExe pkgs.nmasur.prometheus-actual-exporter;
+    #   };
+    #   wantedBy = [
+    #     "multi-user.target"
+    #   ];
+    # };
 
     # Used for prometheus exporter
     virtualisation.podman.enable = true;
@@ -66,7 +92,7 @@ in
     };
 
     nmasur.presets.services.prometheus-exporters.scrapeTargets = [
-      "127.0.0.1:5007"
+      "127.0.0.1:${builtins.toString cfg.prometheusPort}"
     ];
 
     secrets.actualbudget-password = {
@@ -99,7 +125,7 @@ in
     services.cloudflare-dyndns.domains = [ hostnames.budget ];
 
     # Backups
-    services.restic.backups.default.paths = [ "/var/lib/actualbudget" ];
+    services.restic.backups.default.paths = [ "/var/lib/actual" ];
 
   };
 
