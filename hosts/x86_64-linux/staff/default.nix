@@ -41,6 +41,9 @@ rec {
   # Not sure what's necessary but too afraid to remove anything
   # File systems must be declared in order to boot
 
+  # Required to have a boot loader to work
+  boot.loader.systemd-boot.enable = true;
+
   # This is the root filesystem containing NixOS
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
