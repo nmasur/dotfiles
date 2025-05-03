@@ -94,6 +94,9 @@ in
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ hostnames.git ];
 
+    # Configure DNS to point to this machine without a proxy
+    nmasur.presets.services.cloudflare.noProxyDomains = [ "ssh.${hostnames.git}" ];
+
     # Scrape the metrics endpoint for Prometheus.
     nmasur.presets.services.prometheus-exporters.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}"
