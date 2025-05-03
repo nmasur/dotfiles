@@ -133,6 +133,7 @@
           notifications = "ntfy.${baseName}";
           paperless = "paper.${baseName}";
           photos = "photos.${baseName}";
+          postgresql = "pg.${baseName}";
           prometheus = "prom.${baseName}";
           secrets = "vault.${baseName}";
           smtp = "smtp.purelymail.com";

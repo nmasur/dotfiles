@@ -67,8 +67,8 @@ in
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
     services.caddy.package = pkgs.caddy.withPlugins {
-      plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20250228175314-1fb64108d4de" ];
-      hash = "sha256-YYpsf8HMONR1teMiSymo2y+HrKoxuJMKIea5/NEykGc=";
+      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
+      hash = "sha256-saKJatiBZ4775IV2C5JLOmZ4BwHKFtRZan94aS5pO90=";
     };
     nmasur.presets.services.caddy.tlsPolicies = [
       {
@@ -90,11 +90,14 @@ in
         ];
       }
     ];
-    # Allow Caddy to read Cloudflare API key for DNS validation
-    systemd.services.caddy.serviceConfig.EnvironmentFile = [
-      config.secrets.cloudflare-api.dest
-      config.secrets.letsencrypt-key.dest
-    ];
+    systemd.services.caddy.serviceConfig = {
+      # Allow Caddy to read Cloudflare API key for DNS validation
+      # Allow Caddy to use letsencrypt account key for TLS verification
+      EnvironmentFile = [
+        config.secrets.letsencrypt-key.dest
+        config.secrets.cloudflare-api-prefixed.dest
+      ];
+    };
 
     # Private key is used for LetsEncrypt
     secrets.letsencrypt-key = {
@@ -111,15 +114,21 @@ in
       owner = "caddy";
       group = "caddy";
     };
-
+    secrets.cloudflare-api-prefixed = {
+      source = ./cloudflare-api.age;
+      dest = "${config.secretsDirectory}/cloudflare-api-prefixed";
+      owner = "caddy";
+      group = "caddy";
+      prefix = "CLOUDFLARE_API_TOKEN=";
+    };
     # Wait for secret to exist
     systemd.services.caddy = {
       after = [
-        "cloudflare-api-secret.service"
+        "cloudflare-api-prefixed-secret.service"
         "letsencrypt-key-secret.service"
       ];
       requires = [
-        "cloudflare-api-secret.service"
+        "cloudflare-api-prefixed-secret.service"
         "letsencrypt-key-secret.service"
       ];
     };
@@ -149,6 +158,9 @@ in
       after = [ "cloudflare-api-secret.service" ];
       requires = [ "cloudflare-api-secret.service" ];
     };
+
+    # Enable the home-made service that we created for non-proxied records
+    services.cloudflare-dyndns-noproxy.enable = true;
 
   };
 }

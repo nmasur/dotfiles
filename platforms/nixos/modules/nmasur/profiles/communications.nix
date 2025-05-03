@@ -28,6 +28,7 @@ in
         grafana.enable = lib.mkDefault true;
         influxdb2.enable = lib.mkDefault true;
         litestream.enable = lib.mkDefault true;
+        pgweb.enable = lib.mkDefault true;
         minecraft-server.enable = lib.mkDefault true;
         n8n.enable = lib.mkDefault true;
         nix-autoupgrade.enable = lib.mkDefault false; # On by default for communications
