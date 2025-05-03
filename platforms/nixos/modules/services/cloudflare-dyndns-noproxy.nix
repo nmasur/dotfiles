@@ -52,20 +52,7 @@ in
                 ++ lib.optional config.services.cloudflare-dyndns.deleteMissing "--delete-missing";
             in
             ''
-              export CLOUDFLARE_API_TOKEN_FILE=''${CREDENTIALS_DIRECTORY}/apiToken
-              echo $CLOUDFLARE_API_TOKEN_FILE
-              cat $CLOUDFLARE_API_TOKEN_FILE
-
-              # Added 2025-03-10: `cfg.apiTokenFile` used to be passed as an
-              # `EnvironmentFile` to the service, which required it to be of
-              # the form "CLOUDFLARE_API_TOKEN=" rather than just the secret.
-              # If we detect this legacy usage, error out.
-              token=$(< "''${CLOUDFLARE_API_TOKEN_FILE}")
-              if [[ $token == CLOUDFLARE_API_TOKEN* ]]; then
-                echo "Error: your api token starts with 'CLOUDFLARE_API_TOKEN='. Remove that, and instead specify just the token." >&2
-                exit 1
-              fi
-
+              export CLOUDFLARE_API_TOKEN=$(cat ''${CREDENTIALS_DIRECTORY}/apiToken)
               exec ${lib.getExe pkgs.cloudflare-dyndns} ${toString args}
             '';
         };
