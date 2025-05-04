@@ -87,6 +87,14 @@ in
               command = lib.getExe pkgs.mdformat;
               args = [ "-" ];
             };
+            # Allows return key to continue the token on the next line
+            comment-tokens = [
+              "-"
+              "+"
+              "*"
+              "- [ ]"
+              ">"
+            ];
           }
           {
             name = "tfvars";
