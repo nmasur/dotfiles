@@ -199,19 +199,25 @@ in
       exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} aerc %u";
     };
     xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
-      "${config.xsession.windowManager.i3.config.modifier}+Shift+e" = "exec ${
-        # Don't name the script `aerc` or it will affect grep
-        builtins.toString (
-          pkgs.writeShellScript "focus-mail.sh" ''
-            count=$(ps aux | grep -c aerc)
-            if [ "$count" -eq 1 ]; then
-                i3-msg "exec --no-startup-id ${lib.getExe config.nmasur.presets.services.i3.terminal} start --class aerc -- aerc"
-                sleep 0.25
-            fi
-            i3-msg "[class=aerc] focus"
-          ''
-        )
-      }";
+      "${config.xsession.windowManager.i3.config.modifier}+Shift+e" =
+        let
+          terminal = config.nmasur.presets.services.i3.terminal;
+          startupCommand =
+            if terminal == pkgs.wezterm then "start --class aerc -- aerc" else "--class=aerc --command=aerc";
+        in
+        "exec ${
+          # Don't name the script `aerc` or it will affect grep
+          builtins.toString (
+            pkgs.writeShellScript "focus-mail.sh" ''
+              count=$(ps aux | grep -c aerc)
+              if [ "$count" -eq 1 ]; then
+                  i3-msg "exec --no-startup-id ${lib.getExe terminal} ${startupCommand}"
+                  sleep 0.25
+              fi
+              i3-msg "[class=aerc] focus"
+            ''
+          )
+        }";
     };
 
     programs.fish.shellAbbrs = {

@@ -14,6 +14,10 @@ in
   options.nmasur.presets.programs.ghostty.enable = lib.mkEnableOption "Ghostty terminal";
 
   config = lib.mkIf cfg.enable {
+
+    # Set the i3 terminal
+    nmasur.presets.services.i3.terminal = config.programs.ghostty.package;
+
     programs.ghostty = {
       enable = true;
 
@@ -29,7 +33,7 @@ in
         macos-titlebar-style = "hidden";
         window-decoration = false;
         macos-non-native-fullscreen = true;
-        fullscreen = true;
+        fullscreen = if pkgs.stdenv.isDarwin then true else false;
         keybind = [
           "super+t=unbind" # Pass super-t to underlying tool (e.g. zellij tabs)
           "super+shift+]=unbind"

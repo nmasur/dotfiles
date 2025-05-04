@@ -24,13 +24,13 @@ in
         discord.enable = lib.mkDefault true;
         dotfiles.enable = lib.mkDefault true;
         firefox.enable = lib.mkDefault true;
+        ghostty.enable = lib.mkDefault true;
         mpv.enable = lib.mkDefault true;
         nautilus.enable = lib.mkDefault true;
         notmuch.enable = lib.mkDefault true;
         nsxiv.enable = lib.mkDefault true;
         obsidian.enable = lib.mkDefault true;
         rofi.enable = lib.mkDefault true;
-        wezterm.enable = lib.mkDefault true;
         xclip.enable = lib.mkDefault true;
         zathura.enable = lib.mkDefault true;
       };

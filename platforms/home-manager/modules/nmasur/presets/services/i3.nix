@@ -94,7 +94,7 @@ in
           ws10 = "10:X";
         in
         {
-          terminal = cfg.terminal.meta.mainProgram;
+          # terminal = cfg.terminal.meta.mainProgram;
           modifier = modifier;
           assigns = {
             "${ws1}" = [ { class = "Firefox"; } ];
@@ -103,6 +103,7 @@ in
               { class = "kitty"; }
               { class = "obsidian"; }
               { class = "wezterm"; }
+              { class = "ghostty"; }
             ];
             "${ws3}" = [ { class = "discord"; } ];
             "${ws4}" = [
@@ -213,9 +214,9 @@ in
               cfg.commands.lockScreen != null
             ) "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} --command sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
             "${modifier}+Mod1+r" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e sh -c 'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} --command sh -c 'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
 
             # Window options
             "${modifier}+q" = "kill";

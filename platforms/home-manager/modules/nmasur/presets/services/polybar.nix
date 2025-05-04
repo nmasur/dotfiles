@@ -136,7 +136,15 @@ in
               fi
             ''
           );
-          click-left = "i3-msg 'exec --no-startup-id kitty --class aerc aerc'; sleep 0.15; i3-msg '[class=aerc] focus'";
+          click-left =
+            let
+              startupCommand =
+                if config.nmasur.presets.services.i3.terminal == pkgs.wezterm then
+                  "start --class aerc -- aerc"
+                else
+                  "--class=aerc --command=aerc";
+            in
+            "i3-msg 'exec --no-startup-id ${config.nmasur.presets.services.i3.terminal} ${startupCommand}'; sleep 0.15; i3-msg '[class=aerc] focus'";
         };
         "module/network" = {
           type = "internal/network";

@@ -55,6 +55,7 @@ in
         firefox.enable = lib.mkDefault true;
         fish.enable = lib.mkDefault true;
         fzf.enable = lib.mkDefault true;
+        ghostty.enable = lib.mkDefault true;
         git-work.enable = lib.mkDefault true;
         git.enable = lib.mkDefault true;
         github.enable = lib.mkDefault true;
@@ -67,7 +68,6 @@ in
         starship.enable = lib.mkDefault true;
         terraform.enable = lib.mkDefault true;
         weather.enable = lib.mkDefault true;
-        wezterm.enable = lib.mkDefault true;
       };
     };
 
