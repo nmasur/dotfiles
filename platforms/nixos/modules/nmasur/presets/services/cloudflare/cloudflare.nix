@@ -157,6 +157,19 @@ in
     systemd.services.cloudflare-dyndns = lib.mkIf config.services.cloudflare-dyndns.enable {
       after = [ "cloudflare-api-secret.service" ];
       requires = [ "cloudflare-api-secret.service" ];
+      script =
+        let
+          args =
+            [ "--cache-file /var/lib/cloudflare-dyndns/ip.cache" ]
+            ++ (if config.services.cloudflare-dyndns.ipv4 then [ "-4" ] else [ "-no-4" ])
+            ++ (if config.services.cloudflare-dyndns.ipv6 then [ "-6" ] else [ "-no-6" ])
+            ++ lib.optional config.services.cloudflare-dyndns.deleteMissing "--delete-missing"
+            ++ lib.optional config.services.cloudflare-dyndns.proxied "--proxied";
+        in
+        lib.mkForce ''
+          export CLOUDFLARE_API_TOKEN=$(cat ''${CREDENTIALS_DIRECTORY}/apiToken)
+          exec ${lib.getExe pkgs.cloudflare-dyndns} ${toString args}
+        '';
     };
 
     # Enable the home-made service that we created for non-proxied records
