@@ -127,6 +127,7 @@
           influxdb = "influxdb.${baseName}";
           irc = "irc.${baseName}";
           mail = "noahmasur.com";
+          mathesar = "mathesar.${baseName}";
           metrics = "metrics.${baseName}";
           minecraft = "minecraft.${baseName}";
           n8n = "n8n.${baseName}";
