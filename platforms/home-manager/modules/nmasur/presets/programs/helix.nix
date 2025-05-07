@@ -137,6 +137,9 @@ in
 
         keys.normal = {
 
+          # Use the enter key to save the file
+          ret = ":write";
+
           # Get out of multiple cursors and selection
           esc = [
             "collapse_selection"
