@@ -19,6 +19,7 @@ in
     nmasur.presets.services.kanata.enable = lib.mkDefault true;
     nmasur.presets.services.lightdm.enable = lib.mkDefault true;
     nmasur.presets.programs.nautilus.enable = lib.mkDefault true;
+    nmasur.presets.services.pipewire.enable = lib.mkDefault true;
 
     # Mouse customization
     services.ratbagd.enable = lib.mkDefault true;

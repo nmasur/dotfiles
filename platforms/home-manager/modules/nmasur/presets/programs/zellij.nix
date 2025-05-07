@@ -127,15 +127,29 @@ in
             "bind \"Ctrl Shift Tab\"" = {
               GoToPreviousTab = { };
             };
-            "bind \"Super t\"" = {
+            "bind \"Super t\"" = lib.mkIf pkgs.stdenv.isDarwin {
               NewTab = { };
             };
-            "bind \"Super k\"" = {
+            "bind \"Alt t\"" = lib.mkIf pkgs.stdenv.isLinux {
+              NewTab = { };
+            };
+            "bind \"Super k\"" = lib.mkIf pkgs.stdenv.isDarwin {
               SwitchToMode = {
                 _args = [ "scroll" ];
               };
             };
-            "bind \"Super Shift e\"" = {
+            "bind \"Alt k\"" = lib.mkIf pkgs.stdenv.isLinux {
+              SwitchToMode = {
+                _args = [ "scroll" ];
+              };
+            };
+            "bind \"Super Shift e\"" = lib.mkIf pkgs.stdenv.isDarwin {
+              EditScrollback = { };
+              SwitchToMode = {
+                _args = [ "locked" ];
+              };
+            };
+            "bind \"Alt Shift e\"" = lib.mkIf pkgs.stdenv.isLinux {
               EditScrollback = { };
               SwitchToMode = {
                 _args = [ "locked" ];

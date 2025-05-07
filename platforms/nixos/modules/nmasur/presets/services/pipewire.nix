@@ -27,7 +27,7 @@ in
     # These aren't necessary, but helpful for the user
     environment.systemPackages = with pkgs; [
       pamixer # Audio control
-      volnoti # Volume notifications
+      nmasur.volnoti # Volume notifications
     ];
   };
 }
