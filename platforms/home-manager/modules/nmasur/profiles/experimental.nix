@@ -20,6 +20,7 @@ in
       ghostty.enable = lib.mkDefault true;
       helix.enable = lib.mkDefault true;
       zellij.enable = lib.mkDefault true;
+      lazygit.enable = lib.mkDefault true;
     };
 
     home.packages = [
@@ -37,7 +38,6 @@ in
 
     programs.gh-dash.enable = lib.mkDefault true;
     programs.himalaya.enable = lib.mkDefault true;
-    programs.lazygit.enable = lib.mkDefault true;
   };
 
 }
