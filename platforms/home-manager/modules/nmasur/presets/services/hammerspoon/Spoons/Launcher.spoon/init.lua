@@ -105,6 +105,9 @@ function obj:init()
     self.launcher:bind("", "Z", function()
         self:switch("zoom.us.app")
     end)
+    self.launcher:bind("shift", "Z", function()
+        self:switch("@zed@")
+    end)
 end
 
 function obj:switch(app)
