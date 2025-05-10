@@ -5,7 +5,7 @@
 
 * {
   /* General */
-  font:                                 "Hack Nerd Font 60";
+  font:                                 "Hack Nerd Font Mono 60";
 
   /* option menus: i3-layout, music, power and screenshot
    *
@@ -13,7 +13,6 @@
    * around using this character: ■
    * We then add add 100 actual padding around the icons.
    *                                    -12px 0px   -19px -96px */
-  option-element-padding:               1% 1% 1% 1%;
   option-5-window-padding:              4% 4%;
   option-5-listview-spacing:            15px;
 
@@ -46,7 +45,7 @@
   layout: horizontal;
 }
 element {
-  padding: 40px 68px 43px 30px;
+  padding: 40px 62px 40px 36px;
 }
 #window {
   padding: 20px;

@@ -226,7 +226,7 @@ in
         "module/power" = {
           type = "custom/text";
           content = "  ";
-          click-left = config.nmasur.presets.services.i3.commands.toggleBar;
+          click-left = config.nmasur.presets.services.i3.commands.power;
           click-right = "polybar-msg cmd restart";
           content-foreground = config.theme.colors.base04;
         };
