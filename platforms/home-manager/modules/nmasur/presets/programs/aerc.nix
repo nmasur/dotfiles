@@ -203,7 +203,10 @@ in
         let
           terminal = config.nmasur.presets.services.i3.terminal;
           startupCommand =
-            if terminal == pkgs.wezterm then "start --class aerc -- aerc" else "--class=aerc --command=aerc";
+            if terminal == pkgs.wezterm then
+              "start --class com.noah.aerc -- aerc"
+            else
+              "--class=com.noah.aerc --command=aerc";
         in
         "exec ${
           # Don't name the script `aerc` or it will affect grep
@@ -214,7 +217,7 @@ in
                   i3-msg "exec --no-startup-id ${lib.getExe terminal} ${startupCommand}"
                   sleep 0.25
               fi
-              i3-msg "[class=aerc] focus"
+              i3-msg "[class=com.noah.aerc] focus"
             ''
           )
         }";
