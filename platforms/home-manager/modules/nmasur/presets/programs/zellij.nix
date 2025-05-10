@@ -155,6 +155,16 @@ in
                 _args = [ "locked" ];
               };
             };
+            "bind \"Alt l\"" = {
+              MoveFocusOrTab = {
+                _args = [ "Right" ];
+              };
+            };
+            "bind \"Alt h\"" = {
+              MoveFocusOrTab = {
+                _args = [ "Left" ];
+              };
+            };
           };
 
         };
