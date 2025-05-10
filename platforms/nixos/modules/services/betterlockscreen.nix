@@ -21,6 +21,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    programs.i3lock.enable = true; # Required for unlocking to work
+
     # Ref: https://github.com/betterlockscreen/betterlockscreen/blob/next/system/betterlockscreen%40.service
     systemd.services.lock = {
       enable = true;
