@@ -31,5 +31,9 @@ in
         pkgs.mpvScripts.mpv-delete-file
       ];
     };
+
+    programs.fish.shellAbbrs = {
+      mpvs = "mpv --shuffle=yes";
+    };
   };
 }
