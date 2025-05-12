@@ -117,6 +117,7 @@
         in
         {
           audiobooks = "read.${baseName}";
+          bookmarks = "keep.${baseName}";
           books = "books.${baseName}";
           budget = "money.${baseName}";
           content = "cloud.${baseName}";
