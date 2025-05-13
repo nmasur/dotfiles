@@ -34,6 +34,12 @@ in
               zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--cwd $TARGET_DIR --layout default --session $(basename $TARGET_DIR)"
             '';
         };
+        gh-run = {
+          body = # fish
+            ''
+              zellij action new-pane --start-suspended -- gh run watch
+            '';
+        };
       };
     };
 
@@ -111,6 +117,16 @@ in
                   "${pkgs.fish}/bin/fish"
                   "-c"
                   "zellij-session"
+                ];
+                close_on_exit = true;
+              };
+            };
+            "bind \"Alt Shift w\"" = {
+              Run = {
+                _args = [
+                  "${pkgs.fish}/bin/fish"
+                  "-c"
+                  "gh-run"
                 ];
                 close_on_exit = true;
               };
