@@ -11,9 +11,33 @@ in
 
 {
 
-  options.nmasur.presets.programs.nixpkgs.enable = lib.mkEnableOption "Nixpkgs presets";
+  options.nmasur.presets.programs.nixpkgs = {
+    enable = lib.mkEnableOption "Nixpkgs presets";
+    commands = {
+      # These are useful for triggering from zellij (rather than running directly in the shell)
+      rebuildHome = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.writeShellScriptBin "rebuild-home" ''
+          git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+          ${lib.getExe pkgs.home-manager} switch --flake "${config.nmasur.presets.programs.dotfiles.path}#${config.nmasur.settings.host}"
+        '';
+      };
+      rebuildNixos = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.writeShellScriptBin "rebuild-nixos" ''
+          git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+          doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}
+        '';
+      };
+    };
+  };
 
   config = lib.mkIf cfg.enable {
+
+    home.packages = [
+      cfg.commands.rebuildHome
+      cfg.commands.rebuildNixos
+    ];
 
     programs.fish = {
       shellAbbrs = {

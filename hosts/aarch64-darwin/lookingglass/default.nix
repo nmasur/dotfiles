@@ -21,6 +21,7 @@ rec {
     nmasur.settings = {
       username = nmasur.settings.username;
       fullName = nmasur.settings.fullName;
+      host = "lookingglass";
     };
     nmasur.profiles = {
       common.enable = true;

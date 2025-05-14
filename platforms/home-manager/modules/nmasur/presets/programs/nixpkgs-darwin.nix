@@ -21,6 +21,12 @@ in
 
   config = lib.mkIf (cfg.enable) {
 
+    # These are useful for triggering from zellij (rather than running directly in the shell)
+    nmasur.presets.programs.nixpkgs.commands.rebuildNixos = pkgs.writeShellScriptBin "rebuild-darwin" ''
+      git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
+      darwin-rebuild switch --flake "${config.nmasur.presets.programs.dotfiles.path}#${config.nmasur.settings.host}"
+    '';
+
     programs.fish = {
       shellAbbrs = lib.mkIf config.nmasur.presets.programs.dotfiles.enable {
         nr = {

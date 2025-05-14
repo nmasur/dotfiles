@@ -121,14 +121,32 @@ in
                 close_on_exit = true;
               };
             };
+            "bind \"Alt Shift h\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe config.nmasur.presets.programs.nixpkgs.commands.rebuildHome)
+                ];
+                # close_on_exit = false;
+              };
+            };
+            "bind \"Alt Shift r\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe config.nmasur.presets.programs.nixpkgs.commands.rebuildNixos)
+                ];
+                # close_on_exit = false;
+              };
+            };
             "bind \"Alt Shift w\"" = {
               Run = {
                 _args = [
-                  "${pkgs.fish}/bin/fish"
-                  "-c"
-                  "gh-run"
+                  (lib.getExe pkgs.gh)
+                  "run"
+                  "watch"
                 ];
-                close_on_exit = true;
+                # direction = "Right";
+                # close_on_exit = false;
+                # start_suspended = true;
               };
             };
             "bind \"Super Shift ]\"" = {

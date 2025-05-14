@@ -21,6 +21,7 @@ rec {
     nmasur.settings = {
       username = nmasur.settings.username;
       fullName = nmasur.settings.fullName;
+      host = networking.hostName;
     };
     nmasur.profiles = {
       common.enable = true;
