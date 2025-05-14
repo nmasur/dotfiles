@@ -15,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.atuin = {
       enable = true;
+      daemon.enable = true;
       flags = [
         "--disable-up-arrow"
         "--disable-ctrl-r"
@@ -33,6 +34,7 @@ in
         secrets_filter = true;
         enter_accept = false;
         keymap_mode = "vim-normal";
+        records = true; # Sync v2
       };
     };
 
