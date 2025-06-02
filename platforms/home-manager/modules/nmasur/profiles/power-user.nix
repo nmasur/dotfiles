@@ -58,6 +58,7 @@ in
       fish.enable = lib.mkDefault true;
       fzf.enable = lib.mkDefault true;
       git.enable = lib.mkDefault true;
+      helix.enable = lib.mkDefault true;
       neovim.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;
       nixpkgs.enable = lib.mkDefault true;
