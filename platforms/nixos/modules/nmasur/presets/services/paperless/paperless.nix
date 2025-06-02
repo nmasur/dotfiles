@@ -19,6 +19,7 @@ in
       passwordFile = config.secrets.paperless.dest;
       settings = {
         PAPERLESS_OCR_USER_ARGS = builtins.toJSON { invalidate_digital_signatures = true; };
+        PAPERLESS_URL = "https://${hostnames.paperless}";
 
         # Enable if changing the path name in Caddy
         # PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
