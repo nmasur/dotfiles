@@ -13,10 +13,17 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    services.filebrowser = {
+    nmasur.services.filebrowser = {
       enable = true;
       # Generate password: htpasswd -nBC 10 "" | tr -d ':\n'
       passwordHash = "$2y$10$ze1cMob0k6pnXRjLowYfZOVZWg4G.dsPtH3TohbUeEbI0sdkG9.za";
+      # settings = {
+      #   database = "/var/lib/filebrowser/filebrowser.db";
+      #   port = 8020;
+      #   address = "localhost";
+      #   log = "stdout";
+      #   "auth.method" = "json";
+      # };
     };
 
     nmasur.presets.services.caddy.routes = [

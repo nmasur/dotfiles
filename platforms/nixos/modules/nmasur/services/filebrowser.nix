@@ -5,8 +5,8 @@
   ...
 }:
 let
-  inherit (config.nmasur.settings) hostnames username;
-  cfg = config.services.filebrowser;
+  inherit (config.nmasur.settings) username;
+  cfg = config.nmasur.services.filebrowser;
 
   dataDir = "/var/lib/filebrowser";
 
@@ -26,7 +26,7 @@ let
 in
 {
 
-  options.services.filebrowser = {
+  options.nmasur.services.filebrowser = {
     enable = lib.mkEnableOption "Filebrowser private files";
     passwordHash = lib.mkOption {
       type = lib.types.str;
