@@ -41,6 +41,7 @@ in
         "tank/generic"
         "tank/nextcloud"
         "tank/generic/git"
+        "tank/images"
       ];
       # If password is requested and fails, continue to boot eventually
       passwordTimeout = 300;
