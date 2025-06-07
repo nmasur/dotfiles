@@ -19,6 +19,7 @@ in
       fonts.enable = lib.mkDefault true;
       services.hammerspoon.enable = lib.mkDefault true;
       programs.nixpkgs-darwin.enable = lib.mkDefault true;
+      programs.mpv.enable = lib.mkDefault true;
     };
 
     home.homeDirectory = lib.mkForce "/Users/${config.home.username}";
