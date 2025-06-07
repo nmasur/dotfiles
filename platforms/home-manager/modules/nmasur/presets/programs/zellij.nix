@@ -149,6 +149,26 @@ in
                 # start_suspended = true;
               };
             };
+            "bind \"Alt Shift l\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe pkgs.gh)
+                  "run"
+                  "view"
+                  "--log"
+                ];
+              };
+            };
+            "bind \"Alt Shift f\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe pkgs.gh)
+                  "run"
+                  "view"
+                  "--log-failed"
+                ];
+              };
+            };
             "bind \"Super Shift ]\"" = {
               GoToNextTab = { };
             };
