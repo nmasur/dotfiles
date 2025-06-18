@@ -183,6 +183,9 @@ in
           "audio/*" = "${pkgs.mpv}/bin/mpv -";
           "image/*" = "${pkgs.feh}/bin/feh -";
         };
+        compose = {
+          editor = config.home.sessionVariables.EDITOR;
+        };
       };
     };
     accounts.email.accounts.home.aerc = {
