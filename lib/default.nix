@@ -189,7 +189,10 @@ lib
     amazon = {
       aws.enable = true;
     };
-    iso = { };
+    iso = {
+      nmasur.profiles.wsl.enable = lib.mkForce false;
+      boot.loader.grub.enable = lib.mkForce false;
+    };
   };
 
   generateImage =
@@ -201,6 +204,7 @@ lib
     }:
     inputs.nixos-generators.nixosGenerate {
       inherit system format;
+      pkgs = pkgsBySystem.${system};
       modules = [
         inputs.home-manager.nixosModules.home-manager
         inputs.disko.nixosModules.disko

@@ -29,9 +29,9 @@
 {
   pkgs,
   colors ? null,
-  terraform ? false,
-  github ? false,
-  kubernetes ? false,
+  enableTerraform ? false,
+  enableGithub ? false,
+  enableKubernetes ? false,
   ...
 }:
 
@@ -41,9 +41,9 @@ pkgs.neovimBuilder {
   package = pkgs.neovim-unwrapped;
   inherit
     colors
-    terraform
-    github
-    kubernetes
+    enableTerraform
+    enableGithub
+    enableKubernetes
     ;
   imports = [
     ./config/align.nix

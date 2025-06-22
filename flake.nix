@@ -200,32 +200,36 @@
       };
 
       generators = builtins.mapAttrs (
+        # x86_64-linux = { arrow = ...; swan = ...; }
         system: hosts:
-        builtins.mapAttrs (name: module: {
-          aws = lib.generateImage {
+        (lib.concatMapAttrs (name: module: {
+          "${name}-aws" = lib.generateImage {
             inherit system module;
             format = "amazon";
             specialArgs = { inherit hostnames; };
           };
-          iso = lib.generateImage {
+          "${name}-iso" = lib.generateImage {
             inherit system module;
             format = "iso";
             specialArgs = { inherit hostnames; };
           };
-        }) hosts
-      ) lib.linuxHosts;
+        }) hosts)
+      ) lib.linuxHosts # x86_64-linux = { arrow = ...; swan = ...; }
+      ;
+
+      # packages =
+      #   lib.forSystems lib.linuxSystems (
+      #     system: generateImagesForHosts system // lib.pkgsBySystem.${system}.nmasur
+      #   )
+      #   // lib.forSystems lib.darwinSystems (system: lib.pkgsBySystem.${system}.nmasur);
 
       packages = lib.forAllSystems (
         system:
-        # Get the configurations that we normally use
-        {
-          inherit nixosConfigurations darwinConfigurations;
-          homeConfigurations = homeConfigurations.${system};
-          generators = generators.${system};
-        }
+        # Share the custom packages that I have placed under the nmasur namespace
+        lib.pkgsBySystem.${system}.nmasur
         //
-          # Share the custom packages that I have placed under the nmasur namespace
-          lib.pkgsBySystem.${system}.nmasur
+          # Share generated images for each relevant host
+          generators.${system}
       );
 
       # Development environments
@@ -270,6 +274,6 @@
       );
 
       # Templates for starting other projects quickly
-      templates = (import ./templates nixpkgs.lib);
+      templates = (import ./templates { inherit lib; });
     };
 }

@@ -31,4 +31,24 @@ rec {
 
   system.stateVersion = "23.05";
 
+  # This is the root filesystem containing NixOS
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
+
+  # This is the boot filesystem for Grub
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+  };
+
+  # Not sure what's necessary but too afraid to remove anything
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+  ];
 }

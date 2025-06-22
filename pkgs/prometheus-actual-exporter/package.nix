@@ -1,7 +1,7 @@
 {
   lib,
   fetchFromGitHub,
-  nodejs_18,
+  nodejs_20,
   buildNpmPackage,
   nodePackages,
   python3,
@@ -29,7 +29,7 @@ buildNpmPackage (finalAttrs: rec {
   npmDepsHash = "sha256-N8xqRYFelolNGTEhG22M7KJ7B5U/uW7o+/XfLF8rHMg=";
 
   nativeBuildInputs = [
-    nodejs_18
+    nodejs_20
     nodePackages.typescript
     python3
     nodePackages.node-gyp
@@ -64,7 +64,7 @@ buildNpmPackage (finalAttrs: rec {
   installPhase = ''
     mkdir -p $out/{bin,lib}
     cp -r . $out/lib/prometheus-actual-exporter
-    makeWrapper ${lib.getExe nodejs_18} $out/bin/prometheus-actual-exporter \
+    makeWrapper ${lib.getExe nodejs_20} $out/bin/prometheus-actual-exporter \
       --add-flags "$out/lib/prometheus-actual-exporter/dist/app.js"
   '';
 

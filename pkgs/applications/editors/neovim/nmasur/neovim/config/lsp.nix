@@ -8,9 +8,9 @@
 {
 
   # Terraform optional because non-free
-  options.terraform = lib.mkEnableOption "Whether to enable Terraform LSP";
-  options.github = lib.mkEnableOption "Whether to enable GitHub features";
-  options.kubernetes = lib.mkEnableOption "Whether to enable Kubernetes features";
+  options.enableTerraform = lib.mkEnableOption "Whether to enable Terraform LSP";
+  options.enableGithub = lib.mkEnableOption "Whether to enable GitHub features";
+  options.enableKubernetes = lib.mkEnableOption "Whether to enable Kubernetes features";
 
   config = {
     plugins = [
@@ -54,7 +54,7 @@
 
     use.lspconfig.terraformls.setup = dsl.callWith {
       cmd =
-        if config.terraform then
+        if config.enableTerraform then
           [
             "${pkgs.terraform-ls}/bin/terraform-ls"
             "serve"
@@ -93,7 +93,7 @@
         nix = [ "nixfmt" ];
         rust = [ "rustfmt" ];
         sh = [ "shfmt" ];
-        terraform = if config.terraform then [ "terraform_fmt" ] else [ ];
+        terraform = if config.enableTerraform then [ "terraform_fmt" ] else [ ];
         hcl = [ "hcl" ];
       };
       formatters = {
@@ -110,7 +110,7 @@
             "-ci"
           ];
         };
-        terraform_fmt.command = if config.terraform then "${pkgs.terraform}/bin/terraform" else "";
+        terraform_fmt.command = if config.enableTerraform then "${pkgs.terraform}/bin/terraform" else "";
         hcl.command = "${pkgs.hclfmt}/bin/hclfmt";
       };
     };

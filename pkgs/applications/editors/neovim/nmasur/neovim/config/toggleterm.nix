@@ -18,7 +18,7 @@
 
   lua = ''
     ${builtins.readFile ./toggleterm.lua}
-    ${if config.github then (builtins.readFile ./github.lua) else ""}
-    ${if config.kubernetes then (builtins.readFile ./kubernetes.lua) else ""}
+    ${if config.enableGithub then (builtins.readFile ./github.lua) else ""}
+    ${if config.enableKubernetes then (builtins.readFile ./kubernetes.lua) else ""}
   '';
 }

@@ -9,7 +9,7 @@
   # Sets Neovim colors based on Nix colorscheme
 
   options.colors = lib.mkOption {
-    type = lib.types.attrsOf lib.types.str;
+    type = lib.types.nullOr (lib.types.attrsOf lib.types.str);
     description = "Attrset of base16 colorscheme key value pairs.";
     default = {
       # Nord
@@ -32,7 +32,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf (config.colors != null) {
     plugins = [ pkgs.vimPlugins.base16-nvim ];
     setup.base16-colorscheme = config.colors;
 
