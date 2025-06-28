@@ -54,6 +54,11 @@ in
           "--keep-monthly 12"
           "--keep-yearly 100"
         ];
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+          RandomizedDelaySec = "3h";
+        };
       };
     };
 

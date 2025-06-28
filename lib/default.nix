@@ -193,6 +193,10 @@ lib
       nmasur.profiles.wsl.enable = lib.mkForce false;
       boot.loader.grub.enable = lib.mkForce false;
     };
+    qcow = {
+      nmasur.profiles.wsl.enable = lib.mkForce false;
+      boot.loader.grub.enable = lib.mkForce false;
+    };
   };
 
   generateImage =

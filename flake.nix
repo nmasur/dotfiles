@@ -213,6 +213,11 @@
             format = "iso";
             specialArgs = { inherit hostnames; };
           };
+          "${name}-qcow" = lib.generateImage {
+            inherit system module;
+            format = "qcow";
+            specialArgs = { inherit hostnames; };
+          };
         }) hosts)
       ) lib.linuxHosts # x86_64-linux = { arrow = ...; swan = ...; }
       ;
@@ -229,7 +234,7 @@
         lib.pkgsBySystem.${system}.nmasur
         //
           # Share generated images for each relevant host
-          generators.${system}
+          (if (lib.hasInfix "linux" system) then generators.${system} else { })
       );
 
       # Development environments

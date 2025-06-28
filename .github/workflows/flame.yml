@@ -1,0 +1,175 @@
+name: Flame
+
+run-name: Flame - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || ( inputs.action == 'destroy' && 'Destroy' || 'No Action' ) }}
+
+env:
+  TERRAFORM_DIRECTORY: deploy/oracle
+  DEPLOY_IDENTITY_BASE64: ${{ secrets.DEPLOY_IDENTITY_BASE64 }}
+  FLAME_IDENTITY_BASE64: ${{ secrets.FLAME_IDENTITY_BASE64 }}
+  ZONE_NAME: masu.rs
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+  OCI_CLI_USER: "ocid1.user.oc1..aaaaaaaa6lro2eoxdajjypjysepvzcavq5yn4qyozjyebxdiaoqziribuqba"
+  OCI_CLI_TENANCY: "ocid1.tenancy.oc1..aaaaaaaaudwr2ozedhjnrn76ofjgglgug6gexknjisd7gb7tkj3mjdp763da"
+  OCI_CLI_FINGERPRINT: "dd:d0:da:6d:83:46:8b:b3:d9:45:2b:c7:56:ae:30:94"
+  OCI_CLI_KEY_CONTENT: "${{ secrets.OCI_PRIVATE_KEY }}"
+  TF_VAR_oci_private_key: "${{ secrets.OCI_PRIVATE_KEY }}"
+  OCI_CLI_REGION: "us-ashburn-1"
+
+on:
+  workflow_dispatch:
+    inputs:
+      rebuild:
+        description: Whether or not to rebuild image
+        type: boolean
+        default: false
+      action:
+        description: Which action to take with Terraform
+        type: choice
+        required: true
+        default: create
+        options:
+          - create
+          - destroy
+          - nothing
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout Repo Code
+        uses: actions/checkout@v4
+
+      # - name: Write OCI Key to File
+      #   run: |
+      #     echo "${{ env.OCI_PRIVATE_KEY_BASE64 }}" | base64 -d > OCI_PRIVATE_KEY
+
+      # Enable access to KVM, required to build an image
+      - name: Enable KVM group perms
+        if: inputs.rebuild && inputs.action != 'destroy'
+        run: |
+            echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+            sudo udevadm control --reload-rules
+            sudo udevadm trigger --name-match=kvm
+
+      # Install Nix
+      - name: Install Nix
+        if: inputs.rebuild && inputs.action != 'destroy'
+        uses: cachix/install-nix-action@v17
+
+      # Build the image
+      - name: Build Image
+        if: inputs.rebuild && inputs.action != 'destroy'
+        run: nix build .#flame-qcow
+
+      - name: List Images
+        if: inputs.rebuild && inputs.action != 'destroy'
+        run: |
+          ls -lh result/
+          echo "IMAGE_NAME=$(ls result/nixos-qcow-image-*.qcow*) >> $GITHUB_ENV
+
+      - name: Upload Image to S3
+        if: inputs.rebuild && inputs.action != 'destroy'
+        # env:
+        #   AWS_ACCESS_KEY_ID: "<YOUR_OCI_ACCESS_KEY>"
+        #   AWS_SECRET_ACCESS_KEY: "<YOUR_OCI_SECRET_KEY>"
+        #   AWS_DEFAULT_REGION: "us-ashburn-1" # e.g., us-ashburn-1, us-phoenix-1
+        #   AWS_ENDPOINT_URL: "https://masur.compat.objectstorage.us-ashburn-1.oraclecloud.com"
+        uses: oracle-actions/run-oci-cli-command@v1.3.2
+        with:
+          command: |
+            oci os object put \
+              --namespace "masur" \
+              --bucket-name "noahmasur-images" \
+              --name "nixos.qcow2" \
+              --file "${IMAGE_NAME}" \
+              --part-size 128 # Optional: Specify part size in MiB for multipart uploads, default is 128 MiB
+              --parallel-upload-count 5 # Optional: Number of parallel uploads, default is 3
+
+      # Login to AWS
+      - name: AWS Assume Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::286370965832:role/github_actions_admin
+          aws-region: us-east-1
+
+      # Installs the Terraform binary and some other accessory functions.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      # Checks whether Terraform is formatted properly. If this fails, you
+      # should install the pre-commit hook.
+      - name: Check Formatting
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: |
+          terraform fmt -no-color -check -diff -recursive
+
+      # Connects to remote state backend and download providers.
+      - name: Terraform Init
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: terraform init
+
+      # Deploys infrastructure or changes to infrastructure.
+      - name: Terraform Apply
+        if: inputs.action == 'create'
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: |
+          terraform apply \
+            -auto-approve \
+            -input=false
+
+      # Removes infrastructure.
+      - name: Terraform Destroy
+        if: inputs.action == 'destroy'
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: |
+          terraform destroy \
+            -auto-approve \
+            -input=false
+
+      - name: Get Host IP
+        if: inputs.action == 'create'
+        id: host
+        working-directory: ${{ env.TERRAFORM_DIRECTORY }}
+        run: terraform output -raw host_ip
+
+      - name: Wait on SSH
+        if: inputs.action == 'create'
+        run: |
+          for i in $(seq 1 15); do
+            if $(nc -z -w 3 ${{ steps.host.outputs.stdout }} 22); then
+              exit 0
+            fi
+            sleep 10
+          done
+
+      - name: Write Identity Keys to Files
+        if: inputs.action == 'create'
+        run: |
+          echo "${{ env.DEPLOY_IDENTITY_BASE64 }}" | base64 -d > deploy_ed25519
+          chmod 0600 deploy_ed25519
+          echo "${{ env.FLAME_IDENTITY_BASE64 }}" | base64 -d > flame_ed25519
+          chmod 0600 flame_ed25519
+
+      - name: Copy Identity File to Host
+        if: inputs.action == 'create'
+        run: |
+          ssh -i deploy_ed25519 -o StrictHostKeyChecking=accept-new noah@${{ steps.host.outputs.stdout }} 'mkdir -pv .ssh'
+          scp -i deploy_ed25519 flame_ed25519 noah@${{ steps.host.outputs.stdout }}:~/.ssh/id_ed25519
+
+      # - name: Wipe Records
+      #   if: ${{ inputs.action == 'destroy' }}
+      #   run: |
+      #     RECORD_ID=$(curl --request GET \
+      #        --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records \
+      #        --header 'Content-Type: application/json' \
+      #        --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}" | jq -r '.result[] | select(.name == "n8n2.${{ env.ZONE_NAME }}") | .id')
+      #     curl --request DELETE \
+      #        --url https://api.cloudflare.com/client/v4/zones/${{ env.CLOUDFLARE_ZONE_ID }}/dns_records/${RECORD_ID} \
+      #        --header 'Content-Type: application/json' \
+      #        --header "Authorization: Bearer ${{ env.CLOUDFLARE_API_TOKEN }}"
