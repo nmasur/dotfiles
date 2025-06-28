@@ -46,7 +46,7 @@ in
       permissions = "0440";
     };
 
-    users.users.litestream.group = "lightstream";
+    users.users.litestream.group = "litestream";
     users.users.litestream.extraGroups = [ "backup" ];
 
     services.litestream = {
