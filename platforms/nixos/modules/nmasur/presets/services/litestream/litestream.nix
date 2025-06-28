@@ -45,7 +45,7 @@ in
       permissions = "0440";
     };
 
-    users.users.litestream.extraGroups = [ "backup" ];
+    users.users.litestream.group = "backup";
 
     services.litestream = {
       enable = true;
