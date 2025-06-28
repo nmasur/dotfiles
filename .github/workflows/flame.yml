@@ -20,11 +20,11 @@ on:
   workflow_dispatch:
     inputs:
       rebuild:
-        description: Whether or not to rebuild image
+        description: Rebuild Image
         type: boolean
         default: false
       action:
-        description: Which action to take with Terraform
+        description: Terraform Action
         type: choice
         required: true
         default: create
@@ -40,7 +40,7 @@ permissions:
 jobs:
   build-deploy:
     name: Build and Deploy
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo Code
         uses: actions/checkout@v4
@@ -56,16 +56,22 @@ jobs:
             echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
             sudo udevadm control --reload-rules
             sudo udevadm trigger --name-match=kvm
+            sudo apt-get install -y qemu-user-static
 
       # Install Nix
       - name: Install Nix
         if: inputs.rebuild && inputs.action != 'destroy'
-        uses: cachix/install-nix-action@v17
+        uses: cachix/install-nix-action@v31.4.1
+        with:
+          enable_kvm: true
+          extra_nix_config: |
+            system = aarch64-linux
+            system-features = aarch64-linux arm-linux kvm
 
       # Build the image
       - name: Build Image
         if: inputs.rebuild && inputs.action != 'destroy'
-        run: nix build .#flame-qcow
+        run: nix build .#flame-qcow --system aarch64-linux
 
       - name: List Images
         if: inputs.rebuild && inputs.action != 'destroy'
