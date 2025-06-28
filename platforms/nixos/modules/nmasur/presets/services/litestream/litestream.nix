@@ -37,6 +37,7 @@ in
   config = lib.mkIf (cfg.enable) {
 
     users.groups.backup = { };
+    users.groups.litestream = { };
 
     secrets.litestream-backup = {
       source = cfg.s3.accessKeySecret;
@@ -45,7 +46,8 @@ in
       permissions = "0440";
     };
 
-    users.users.litestream.group = "backup";
+    users.users.litestream.group = "lightstream";
+    users.users.litestream.extraGroups = [ "backup" ];
 
     services.litestream = {
       enable = true;
