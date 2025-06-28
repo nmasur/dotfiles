@@ -37,18 +37,18 @@ rec {
   system.stateVersion = "23.05";
   # File systems must be declared in order to boot
 
-  # This is the root filesystem containing NixOS
-  # I forgot to set a clean label for it
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/e1b6bd50-306d-429a-9f45-78f57bc597c3";
-    fsType = "ext4";
-  };
+  # # This is the root filesystem containing NixOS
+  # # I forgot to set a clean label for it
+  # fileSystems."/" = {
+  #   device = "/dev/disk/by-uuid/e1b6bd50-306d-429a-9f45-78f57bc597c3";
+  #   fsType = "ext4";
+  # };
 
-  # This is the boot filesystem for systemd-boot
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/D5CA-237A";
-    fsType = "vfat";
-  };
+  # # This is the boot filesystem for systemd-boot
+  # fileSystems."/boot" = {
+  #   device = "/dev/disk/by-uuid/D5CA-237A";
+  #   fsType = "vfat";
+  # };
 
   # Allows private remote access over the internet
   nmasur.presets.services.cloudflared = {
