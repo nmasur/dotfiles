@@ -21,6 +21,9 @@ in
     nmasur.presets.programs.nautilus.enable = lib.mkDefault true;
     nmasur.presets.services.pipewire.enable = lib.mkDefault true;
 
+    # Allow cross-compiling my aarch64 builds
+    boot.binfmt.emulatedSystems = lib.mkDefault [ "aarch64-linux" ];
+
     # Lock the system
     services.betterlockscreen.enable = lib.mkDefault true;
 
