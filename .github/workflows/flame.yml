@@ -118,7 +118,7 @@ jobs:
       # Connects to remote state backend and download providers.
       - name: Terraform Init
         working-directory: ${{ env.TERRAFORM_DIRECTORY }}
-        run: terraform init
+        run: terraform init -input=false
 
       # Deploys infrastructure or changes to infrastructure.
       - name: Terraform Apply
