@@ -70,6 +70,10 @@ resource "oci_core_image" "my_custom_image" {
   }
 }
 
+data "oci_identity_availability_domains" "ads" {
+  compartment_id = var.compartment_ocid
+}
+
 resource "oci_core_instance" "my_compute_instance" {
   compartment_id      = var.compartment_ocid
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
