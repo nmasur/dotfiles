@@ -193,7 +193,7 @@ lib
       nmasur.profiles.wsl.enable = lib.mkForce false;
       boot.loader.grub.enable = lib.mkForce false;
     };
-    qcow = {
+    qcow-efi = {
       nmasur.profiles.wsl.enable = lib.mkForce false;
       boot.loader.grub.enable = lib.mkForce false;
     };

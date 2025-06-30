@@ -215,8 +215,9 @@
           };
           "${name}-qcow" = lib.generateImage {
             inherit system module;
-            format = "qcow";
+            format = "qcow-efi";
             specialArgs = { inherit hostnames; };
+            # extraModules = [ "${nixpkgs}/nixos/modules/virtualisation/oci-image.nix" ];
           };
         }) hosts)
       ) lib.linuxHosts # x86_64-linux = { arrow = ...; swan = ...; }
@@ -235,6 +236,12 @@
         //
           # Share generated images for each relevant host
           (if (lib.hasInfix "linux" system) then generators.${system} else { })
+
+        # //
+        #   # Oracle
+        #   {
+        #     flame-oci = nixosConfigurations.flame.config.system.build.OCIImage;
+        #   }
       );
 
       # Development environments
