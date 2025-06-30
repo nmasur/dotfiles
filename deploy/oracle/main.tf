@@ -52,11 +52,11 @@ resource "oci_core_image" "my_custom_image" {
 
     # These properties help OCI understand how to launch instances from this image
     # Adjust based on your custom image's OS and boot mode
-    launch_mode              = "PARAVIRTUALIZED" # Or "NATIVE", "EMULATED", "CUSTOM"
-    operating_system         = "NixOS"           # e.g., "CentOS", "Debian", "Windows"
-    operating_system_version = "25.05"           # e.g., "7", "11", "2019"
+    operating_system         = "NixOS" # e.g., "CentOS", "Debian", "Windows"
+    operating_system_version = "25.05" # e.g., "7", "11", "2019"
   }
 
+  launch_mode = "PARAVIRTUALIZED" # Or "NATIVE", "EMULATED", "CUSTOM"
   # Optional: for specific launch options if your image requires them
   # launch_options {
   #   boot_volume_type = "PARAVIRTUALIZED"

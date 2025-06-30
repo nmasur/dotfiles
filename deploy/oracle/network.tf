@@ -10,7 +10,7 @@ resource "oci_core_internet_gateway" "my_igw" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.my_vpc.id
   display_name   = "main-igw"
-  is_enabled     = true
+  enabled        = true
 }
 
 resource "oci_core_route_table" "my_public_route_table" {
