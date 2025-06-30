@@ -77,7 +77,7 @@ jobs:
         if: inputs.rebuild && inputs.action != 'destroy'
         run: |
           ls -lh result/
-          echo "IMAGE_NAME=$(ls result/nixos-qcow-image-*.qcow*) >> $GITHUB_ENV
+          echo "IMAGE_NAME=$(ls result/nixos.qcow2) >> $GITHUB_ENV
 
       - name: Upload Image to S3
         if: inputs.rebuild && inputs.action != 'destroy'
@@ -89,12 +89,12 @@ jobs:
         uses: oracle-actions/run-oci-cli-command@v1.3.2
         with:
           command: |
-            oci os object put \
-              --namespace "masur" \
+            os object put \
+              --namespace "idptr5akf9pf" \
               --bucket-name "noahmasur-images" \
               --name "nixos.qcow2" \
               --file "${IMAGE_NAME}" \
-              --part-size 128 # Optional: Specify part size in MiB for multipart uploads, default is 128 MiB
+              --part-size 128 \ # Optional: Specify part size in MiB for multipart uploads, default is 128 MiB
               --parallel-upload-count 5 # Optional: Number of parallel uploads, default is 3
 
       # Login to AWS

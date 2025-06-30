@@ -34,7 +34,7 @@ variable "instance_shape" {
 variable "object_storage_namespace" {
   description = "Your OCI Object Storage namespace (usually your tenancy name)."
   type        = string
-  default     = "masur"
+  default     = "idptr5akf9pf"
 }
 
 variable "object_storage_bucket_name" {
