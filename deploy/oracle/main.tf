@@ -93,6 +93,7 @@ resource "oci_core_instance" "my_compute_instance" {
     subnet_id        = oci_core_subnet.my_public_subnet.id # Use the created subnet's ID
     display_name     = "primary_vnic"
     assign_public_ip = true
+    hostname_label   = "flame"
   }
 
   metadata = {
