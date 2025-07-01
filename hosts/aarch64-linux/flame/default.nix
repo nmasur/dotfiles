@@ -50,6 +50,18 @@ rec {
   #   fsType = "vfat";
   # };
 
+  # This is the root filesystem containing NixOS
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
+
+  # This is the boot filesystem for Grub
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+  };
+
   # Allows private remote access over the internet
   nmasur.presets.services.cloudflared = {
     tunnel = {

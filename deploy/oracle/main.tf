@@ -23,52 +23,52 @@ provider "oci" {
   region       = "us-ashburn-1"
 }
 
-# # Get the latest Ubuntu image OCID
-# # We'll filter for a recent Ubuntu LTS version (e.g., 22.04 or 24.04) and pick the latest.
-# # Note: Image OCIDs are region-specific. This data source helps find the correct one.
-# data "oci_core_images" "ubuntu_image" {
-#   compartment_id   = var.compartment_ocid
-#   operating_system = "Canonical Ubuntu"
-#   # Adjust this version if you prefer a different Ubuntu LTS (e.g., "24.04")
-#   operating_system_version = "24.04"
-#   shape_filter             = var.instance_shape # Filter by the shape to ensure compatibility
-#   sort_by                  = "TIMECREATED"
-#   sort_order               = "DESC"
-#   limit                    = 1 # Get only the latest
-# }
-
-resource "oci_core_image" "my_custom_image" {
-  compartment_id = var.compartment_ocid
-  display_name   = "noah-nixos"
-
-  image_source_details {
-    source_type = "objectStorageTuple" # Use this if specifying namespace, bucket, and object name
-    # source_type  = "objectStorageUri"  # Use this if you have a pre-authenticated request URL (PAR)
-    namespace_name = var.object_storage_namespace
-    bucket_name    = var.object_storage_bucket_name
-    object_name    = var.object_storage_object_name
-
-    source_image_type = "QCOW2" # e.g., "QCOW2", "VMDK"
-
-    # These properties help OCI understand how to launch instances from this image
-    # Adjust based on your custom image's OS and boot mode
-    operating_system         = "NixOS" # e.g., "CentOS", "Debian", "Windows"
-    operating_system_version = "25.05" # e.g., "7", "11", "2019"
-  }
-
-  launch_mode = "PARAVIRTUALIZED" # Or "NATIVE", "EMULATED", "CUSTOM"
-  # Optional: for specific launch options if your image requires them
-  # launch_options {
-  #   boot_volume_type = "PARAVIRTUALIZED"
-  #   firmware         = "UEFI_64" # Or "BIOS"
-  #   network_type     = "PARAVIRTUALIZED"
-  # }
-
-  # Time out for image import operation. Can take a while for large images.
-  timeouts {
-    create = "60m" # Default is 20m, often needs to be increased
-  }
+# Get the latest Ubuntu image OCID
+# We'll filter for a recent Ubuntu LTS version (e.g., 22.04 or 24.04) and pick the latest.
+# Note: Image OCIDs are region-specific. This data source helps find the correct one.
+data "oci_core_images" "ubuntu_image" {
+  compartment_id   = var.compartment_ocid
+  operating_system = "Canonical Ubuntu"
+  # Adjust this version if you prefer a different Ubuntu LTS (e.g., "24.04")
+  operating_system_version = "24.04"
+  shape_filter             = var.instance_shape # Filter by the shape to ensure compatibility
+  sort_by                  = "TIMECREATED"
+  sort_order               = "DESC"
+  limit                    = 1 # Get only the latest
 }
+
+# resource "oci_core_image" "my_custom_image" {
+#   compartment_id = var.compartment_ocid
+#   display_name   = "noah-nixos"
+
+#   image_source_details {
+#     source_type = "objectStorageTuple" # Use this if specifying namespace, bucket, and object name
+#     # source_type  = "objectStorageUri"  # Use this if you have a pre-authenticated request URL (PAR)
+#     namespace_name = var.object_storage_namespace
+#     bucket_name    = var.object_storage_bucket_name
+#     object_name    = var.object_storage_object_name
+
+#     source_image_type = "QCOW2" # e.g., "QCOW2", "VMDK"
+
+#     # These properties help OCI understand how to launch instances from this image
+#     # Adjust based on your custom image's OS and boot mode
+#     operating_system         = "NixOS" # e.g., "CentOS", "Debian", "Windows"
+#     operating_system_version = "25.05" # e.g., "7", "11", "2019"
+#   }
+
+#   launch_mode = "PARAVIRTUALIZED" # Or "NATIVE", "EMULATED", "CUSTOM"
+#   # Optional: for specific launch options if your image requires them
+#   # launch_options {
+#   #   boot_volume_type = "PARAVIRTUALIZED"
+#   #   firmware         = "UEFI_64" # Or "BIOS"
+#   #   network_type     = "PARAVIRTUALIZED"
+#   # }
+
+#   # Time out for image import operation. Can take a while for large images.
+#   timeouts {
+#     create = "60m" # Default is 20m, often needs to be increased
+#   }
+# }
 
 data "oci_identity_availability_domains" "ads" {
   compartment_id = var.compartment_ocid
@@ -82,10 +82,10 @@ resource "oci_core_instance" "my_compute_instance" {
 
   source_details {
     source_type = "image"
-    # # Use the OCID of the latest Ubuntu image found by the data source
-    # source_id = data.oci_core_images.ubuntu_image.images[0].id
-    # Use the OCID of the newly imported custom image
-    source_id = oci_core_image.my_custom_image.id
+    # Use the OCID of the latest Ubuntu image found by the data source
+    source_id = data.oci_core_images.ubuntu_image.images[0].id
+    # # Use the OCID of the newly imported custom image
+    # source_id = oci_core_image.my_custom_image.id
     # Specify the boot volume size
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
   }

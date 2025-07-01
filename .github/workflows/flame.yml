@@ -154,6 +154,11 @@ jobs:
             sleep 10
           done
 
+      - name: Run nixos-anywhere
+        if: inputs.action == 'create'
+        run: |
+          nix run github:nix-community/nixos-anywhere -- --flake github:nmasur/dotfiles#flame --target-host ubuntu@${{ steps.host.outputs.stdout }}
+
       - name: Write Identity Keys to Files
         if: inputs.action == 'create'
         run: |
