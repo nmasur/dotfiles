@@ -60,7 +60,7 @@ jobs:
 
       # Install Nix
       - name: Install Nix
-        if: inputs.rebuild && inputs.action != 'destroy'
+        # if: inputs.rebuild && inputs.action != 'destroy'
         uses: cachix/install-nix-action@v31.4.1
         with:
           enable_kvm: true
