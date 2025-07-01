@@ -31,10 +31,9 @@ data "oci_core_images" "ubuntu_image" {
   operating_system = "Canonical Ubuntu"
   # Adjust this version if you prefer a different Ubuntu LTS (e.g., "24.04")
   operating_system_version = "24.04"
-  shape_filter             = var.instance_shape # Filter by the shape to ensure compatibility
+  shape                    = var.instance_shape # Filter by the shape to ensure compatibility
   sort_by                  = "TIMECREATED"
   sort_order               = "DESC"
-  limit                    = 1 # Get only the latest
 }
 
 # resource "oci_core_image" "my_custom_image" {
