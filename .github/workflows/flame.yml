@@ -40,7 +40,8 @@ permissions:
 jobs:
   build-deploy:
     name: Build and Deploy
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout Repo Code
         uses: actions/checkout@v4
@@ -49,14 +50,14 @@ jobs:
       #   run: |
       #     echo "${{ env.OCI_PRIVATE_KEY_BASE64 }}" | base64 -d > OCI_PRIVATE_KEY
 
-      # Enable access to KVM, required to build an image
-      - name: Enable KVM group perms
-        if: inputs.rebuild && inputs.action != 'destroy'
-        run: |
-            echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-            sudo udevadm control --reload-rules
-            sudo udevadm trigger --name-match=kvm
-            sudo apt-get install -y qemu-user-static
+      # # Enable access to KVM, required to build an image
+      # - name: Enable KVM group perms
+      #   if: inputs.rebuild && inputs.action != 'destroy'
+      #   run: |
+      #       echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+      #       sudo udevadm control --reload-rules
+      #       sudo udevadm trigger --name-match=kvm
+      #       sudo apt-get install -y qemu-user-static
 
       # Install Nix
       - name: Install Nix
