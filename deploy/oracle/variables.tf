@@ -58,5 +58,6 @@ variable "oci_private_key" {
 variable "ssh_public_key" {
   description = "Your public SSH key content."
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s"
+  # default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s personal"
+  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpPU2G9rSF8Q6waH62IJexDCQ6lY+8ZyVufGE3xMDGw actions-deploy"
 }

@@ -154,11 +154,6 @@ jobs:
             sleep 10
           done
 
-      - name: Run nixos-anywhere
-        if: inputs.action == 'create'
-        run: |
-          nix run github:nix-community/nixos-anywhere -- --flake github:nmasur/dotfiles#flame --target-host ubuntu@${{ steps.host.outputs.stdout }}
-
       - name: Write Identity Keys to Files
         if: inputs.action == 'create'
         run: |
@@ -166,6 +161,13 @@ jobs:
           chmod 0600 deploy_ed25519
           echo "${{ env.FLAME_IDENTITY_BASE64 }}" | base64 -d > flame_ed25519
           chmod 0600 flame_ed25519
+          mkdir -pv "${HOME}/.ssh/"
+          cp deploy_ed25519 "${HOME}/.ssh/id_ed25519"
+
+      - name: Run nixos-anywhere
+        if: inputs.action == 'create'
+        run: |
+          nix run github:nix-community/nixos-anywhere -- --flake github:nmasur/dotfiles#flame --target-host ubuntu@${{ steps.host.outputs.stdout }}
 
       - name: Copy Identity File to Host
         if: inputs.action == 'create'
