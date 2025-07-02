@@ -33,6 +33,7 @@ in
         macos-titlebar-style = "hidden";
         window-decoration = false;
         macos-non-native-fullscreen = true;
+        quit-after-last-window-closed = lib.mkIf pkgs.stdenv.isDarwin true;
         fullscreen = if pkgs.stdenv.isDarwin then true else false;
         keybind = [
           "super+t=unbind" # Pass super-t to underlying tool (e.g. zellij tabs)

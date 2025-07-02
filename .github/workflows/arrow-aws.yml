@@ -3,7 +3,7 @@ name: Arrow (AWS)
 run-name: Arrow (AWS) - ${{ inputs.rebuild && 'Rebuild and ' || '' }}${{ inputs.action == 'create' && 'Create' || ( inputs.action == 'destroy' && 'Destroy' || 'No Action' ) }}
 
 env:
-  TERRAFORM_DIRECTORY: hosts/arrow/aws
+  TERRAFORM_DIRECTORY: deploy/aws
   DEPLOY_IDENTITY_BASE64: ${{ secrets.DEPLOY_IDENTITY_BASE64 }}
   ARROW_IDENTITY_BASE64: ${{ secrets.ARROW_IDENTITY_BASE64 }}
   ZONE_NAME: masu.rs
