@@ -61,16 +61,16 @@ rec {
 
   # Taken from https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/oci-common.nix
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-    autoResize = true;
-  };
+  # fileSystems."/" = {
+  #   device = "/dev/disk/by-label/nixos";
+  #   fsType = "ext4";
+  #   autoResize = true;
+  # };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/ESP";
-    fsType = "vfat";
-  };
+  # fileSystems."/boot" = {
+  #   device = "/dev/disk/by-label/ESP";
+  #   fsType = "vfat";
+  # };
 
   boot.loader.efi.canTouchEfiVariables = false;
   boot.loader.grub = {
@@ -89,6 +89,60 @@ rec {
   networking.timeServers = [ "169.254.169.254" ];
 
   services.openssh.enable = true;
+
+  # Example to create a bios compatible gpt partition
+  disko.devices = {
+    disk.disk1 = {
+      device = "/dev/sda";
+      type = "disk";
+      content = {
+        type = "gpt";
+        partitions = {
+          boot = {
+            name = "boot";
+            size = "1M";
+            type = "EF02";
+          };
+          esp = {
+            name = "ESP";
+            size = "500M";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+            };
+          };
+          root = {
+            name = "root";
+            size = "100%";
+            content = {
+              type = "lvm_pv";
+              vg = "pool";
+            };
+          };
+        };
+      };
+    };
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          root = {
+            size = "100%FREE";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
+            };
+          };
+        };
+      };
+    };
+  };
 
   # # Otherwise the instance may not have a working network-online.target,
   # # making the fetch-ssh-keys.service fail
