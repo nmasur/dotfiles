@@ -16,7 +16,7 @@ rec {
   nmasur.profiles = {
     base.enable = true;
     server.enable = true;
-    communications.enable = true;
+    # communications.enable = true;
   };
 
   home-manager.users."noah" = {
@@ -28,9 +28,9 @@ rec {
     nmasur.profiles = {
       common.enable = true;
       linux-base.enable = true;
-      power-user.enable = true;
+      # power-user.enable = true;
     };
-    nmasur.presets.programs.helix.enable = true;
+    # nmasur.presets.programs.helix.enable = true;
     home.stateVersion = "23.05";
   };
 
@@ -85,12 +85,8 @@ rec {
   #   efiSupport = true;
   # };
 
-  boot.loader.systemd-boot.enable = true;
-
   # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
   networking.timeServers = [ "169.254.169.254" ];
-
-  services.openssh.enable = true;
 
   disko.devices = {
     disk = {
