@@ -87,6 +87,7 @@ resource "oci_core_instance" "my_compute_instance" {
     # source_id = oci_core_image.my_custom_image.id
     # Specify the boot volume size
     boot_volume_size_in_gbs = var.boot_volume_size_in_gbs
+    boot_volume_vpus_per_gb = 20 # Highest free tier option
   }
 
   create_vnic_details {

@@ -72,21 +72,66 @@ rec {
   #   fsType = "vfat";
   # };
 
-  # boot.loader.efi.canTouchEfiVariables = false;
-  # boot.loader.grub = {
-  #   device = "nodev";
-  #   splashImage = null;
-  #   extraConfig = ''
-  #     serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
-  #     terminal_input --append serial
-  #     terminal_output --append serial
-  #   '';
-  #   efiInstallAsRemovable = true;
-  #   efiSupport = true;
-  # };
+  boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.grub = {
+    device = "nodev";
+    splashImage = null;
+    extraConfig = ''
+      serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+      terminal_input --append serial
+      terminal_output --append serial
+    '';
+    efiInstallAsRemovable = true;
+    efiSupport = true;
+  };
+  boot.loader.systemd-boot.enable = false;
 
   # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
   networking.timeServers = [ "169.254.169.254" ];
+
+  boot.growPartition = true;
+  boot.kernelParams = [
+    "net.ifnames=0"
+
+    "nvme.shutdown_timeout=10"
+    "nvme_core.shutdown_timeout=10"
+    "libiscsi.debug_libiscsi_eh=1"
+    "crash_kexec_post_notifiers"
+
+    # VNC console
+    "console=tty1"
+
+    # x86_64-linux
+    "console=ttyS0"
+
+    # aarch64-linux
+    "console=ttyAMA0,115200"
+  ];
+
+  boot.initrd.availableKernelModules = [
+    "virtio_net"
+    "virtio_pci"
+    "virtio_mmio"
+    "virtio_blk"
+    "virtio_scsi"
+    "9p"
+    "9pnet_virtio"
+  ];
+  boot.initrd.kernelModules = [
+    "virtio_balloon"
+    "virtio_console"
+    "virtio_rng"
+    "virtio_gpu"
+  ];
+
+  networking.useDHCP = true;
+  # networking = {
+  #   defaultGateway = "10.0.0.1";
+  #   interfaces.eth0 = {
+  #     ipAddress = throw "set your own";
+  #     prefixLength = 24;
+  #   };
+  # };
 
   disko.devices = {
     disk = {
