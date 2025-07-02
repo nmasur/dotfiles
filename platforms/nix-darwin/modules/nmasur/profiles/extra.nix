@@ -20,5 +20,13 @@ in
       "keybase" # GUI on Nix not available for macOS
     ];
 
+    nix.linux-builder = {
+      enable = true;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+    };
+
   };
 }
