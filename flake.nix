@@ -183,16 +183,18 @@
         ) hosts
       ) lib.hosts;
 
-      homeConfigurations = builtins.mapAttrs (
-        system: hosts:
+      homeConfigurations = flattenAttrset (
         builtins.mapAttrs (
-          name: module:
-          lib.buildHome {
-            inherit system module;
-            specialArgs = { inherit hostnames; };
-          }
-        ) hosts
-      ) homeModules;
+          system: hosts:
+          builtins.mapAttrs (
+            name: module:
+            lib.buildHome {
+              inherit system module;
+              specialArgs = { inherit hostnames; };
+            }
+          ) hosts
+        ) homeModules
+      );
 
       # Disk formatting, only used once
       diskoConfigurations = {
