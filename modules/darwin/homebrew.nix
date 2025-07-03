@@ -9,8 +9,8 @@
   # Homebrew - Mac-specific packages that aren't in Nix
   config = lib.mkIf pkgs.stdenv.isDarwin {
 
-    # Requires Homebrew to be installed
-    system.activationScripts.preUserActivation.text = ''
+    # # Requires Homebrew to be installed
+    system.activationScripts.preActivation.text = ''
       if ! xcode-select --version 2>/dev/null; then
         $DRY_RUN_CMD xcode-select --install
       fi

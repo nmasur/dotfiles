@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Requires Homebrew to be installed
-    system.activationScripts.preUserActivation.text = ''
+    system.activationScripts.preActivation.text = ''
       if ! xcode-select --version 2>/dev/null; then
         $DRY_RUN_CMD xcode-select --install
       fi

@@ -14,6 +14,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    system.primaryUser = config.nmasur.settings.username;
+
     nmasur.presets = {
       programs = {
         fish.enable = lib.mkDefault true;
