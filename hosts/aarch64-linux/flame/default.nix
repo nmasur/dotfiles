@@ -134,7 +134,8 @@ rec {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/oracleoci/oraclevda"; # Consistent volume naming
+        # device = "/dev/oracleoci/oraclevda"; # Consistent volume naming
+        device = "/dev/sda"; # Consistent volume naming
         content = {
           type = "gpt";
           partitions = {

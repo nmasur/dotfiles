@@ -90,10 +90,10 @@ resource "oci_core_instance" "my_compute_instance" {
     boot_volume_vpus_per_gb = 20 # Highest free tier option
   }
 
-  launch_options {
-    is_consistent_volume_naming_enabled = true              # Sets boot device path to /dev/oracleoci/oraclevda
-    network_type                        = "PARAVIRTUALIZED" # I think this is the default?
-  }
+  # launch_options {
+  #   is_consistent_volume_naming_enabled = true              # Sets boot device path to /dev/oracleoci/oraclevda
+  #   network_type                        = "PARAVIRTUALIZED" # I think this is the default?
+  # }
 
   create_vnic_details {
     subnet_id        = oci_core_subnet.my_public_subnet.id # Use the created subnet's ID
