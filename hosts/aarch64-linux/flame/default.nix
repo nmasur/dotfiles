@@ -121,14 +121,6 @@ rec {
     "virtio_gpu"
   ];
 
-  # # Explicitly enable a getty on ttyS0
-  # systemd.services."getty@ttyS0" = {
-  #   enable = true;
-  #   after = [ "sysinit.target" ];
-  #   # Adjust baud rate if needed, but 115200 is standard
-  #   # execConfig = [ "- BaudRate=115200" ];
-  # };
-
   networking.useDHCP = true;
   # networking = {
   #   defaultGateway = "10.0.0.1";
@@ -142,7 +134,7 @@ rec {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/oracleoci/oraclevda"; # Consistent volume naming
         content = {
           type = "gpt";
           partitions = {
