@@ -91,7 +91,8 @@ resource "oci_core_instance" "my_compute_instance" {
   }
 
   launch_options {
-    is_consistent_volume_naming_enabled = true # Sets boot device path to /dev/oracleoci/oraclevda
+    is_consistent_volume_naming_enabled = true              # Sets boot device path to /dev/oracleoci/oraclevda
+    network_type                        = "PARAVIRTUALIZED" # I think this is the default?
   }
 
   create_vnic_details {
