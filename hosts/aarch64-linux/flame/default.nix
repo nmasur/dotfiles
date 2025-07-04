@@ -16,7 +16,7 @@ rec {
   nmasur.profiles = {
     base.enable = true;
     server.enable = true;
-    # communications.enable = true;
+    communications.enable = true;
   };
 
   home-manager.users."noah" = {
@@ -28,9 +28,9 @@ rec {
     nmasur.profiles = {
       common.enable = true;
       linux-base.enable = true;
-      # power-user.enable = true;
+      power-user.enable = true;
     };
-    # nmasur.presets.programs.helix.enable = true;
+    nmasur.presets.programs.helix.enable = true;
     home.stateVersion = "23.05";
   };
 
