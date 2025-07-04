@@ -98,14 +98,11 @@ rec {
     "libiscsi.debug_libiscsi_eh=1"
     "crash_kexec_post_notifiers"
 
+    # aarch64-linux
+    "console=ttyAMA0,115200n8"
+
     # VNC console
     "console=tty1"
-
-    # x86_64-linux
-    "console=ttyS0"
-
-    # aarch64-linux
-    "console=ttyAMA0,115200"
   ];
 
   boot.initrd.availableKernelModules = [
@@ -123,6 +120,14 @@ rec {
     "virtio_rng"
     "virtio_gpu"
   ];
+
+  # # Explicitly enable a getty on ttyS0
+  # systemd.services."getty@ttyS0" = {
+  #   enable = true;
+  #   after = [ "sysinit.target" ];
+  #   # Adjust baud rate if needed, but 115200 is standard
+  #   # execConfig = [ "- BaudRate=115200" ];
+  # };
 
   networking.useDHCP = true;
   # networking = {
