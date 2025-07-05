@@ -20,6 +20,7 @@ in
       settings = {
         actions.ENABLED = true;
         metrics.ENABLED = true;
+        mailer.SENDMAIL_PATH = "/run/wrappers/bin/sendmail";
         repository = {
           # Pushing to a repo that doesn't exist automatically creates one as
           # private.
