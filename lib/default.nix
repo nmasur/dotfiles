@@ -196,6 +196,7 @@ lib
     qcow-efi = {
       nmasur.profiles.wsl.enable = lib.mkForce false;
       boot.loader.grub.enable = lib.mkForce false;
+      fileSystems."/boot".device = lib.mkForce "/dev/disk/by-label/ESP";
     };
   };
 
