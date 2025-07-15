@@ -27,6 +27,11 @@ let
       url = "localhost:8989";
       apiKey = config.secrets.sonarrApiKey.dest;
     };
+    lidarr = {
+      exportarrPort = "9712";
+      url = "localhost:8686";
+      apiKey = config.secrets.lidarrApiKey.dest;
+    };
     prowlarr = {
       exportarrPort = "9709";
       url = "localhost:9696";
@@ -76,6 +81,9 @@ in
         enable = true;
       };
       readarr = {
+        enable = true;
+      };
+      lidarr = {
         enable = true;
       };
     };
@@ -130,6 +138,20 @@ in
           {
             handler = "reverse_proxy";
             upstreams = [ { dial = arrConfig.readarr.url; } ];
+          }
+        ];
+      }
+      {
+        match = [
+          {
+            host = [ hostnames.download ];
+            path = [ "/lidarr*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [ { dial = arrConfig.lidarr.url; } ];
           }
         ];
       }
@@ -250,6 +272,11 @@ in
     secrets.sonarrApiKey = {
       source = ./sonarr-api-key.age;
       dest = "/var/private/sonarr-api";
+      prefix = "API_KEY=";
+    };
+    secrets.lidarrApiKey = {
+      source = ./lidarr-api-key.age;
+      dest = "/var/private/lidarr-api";
       prefix = "API_KEY=";
     };
     secrets.prowlarrApiKey = {
