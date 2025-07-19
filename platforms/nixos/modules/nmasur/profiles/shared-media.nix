@@ -25,6 +25,7 @@ in
       audiobookshelf.group = "shared";
       bazarr.group = "shared";
       jellyfin.group = "shared";
+      lidarr.group = "shared";
       radarr.group = "shared";
       readarr.group = "shared";
       sabnzbd.group = "shared";
