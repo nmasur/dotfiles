@@ -29,6 +29,7 @@ in
       radarr.group = "shared";
       readarr.group = "shared";
       sabnzbd.group = "shared";
+      slskd.group = "shared";
       sonarr.group = "shared";
       immich.group = "shared";
       calibre-web.group = "shared";

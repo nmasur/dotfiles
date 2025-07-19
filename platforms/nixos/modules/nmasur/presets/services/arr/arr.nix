@@ -62,6 +62,11 @@ in
     #   "dotnet-sdk-6.0.428"
     # ];
 
+    secrets.slskd = {
+      source = ./slskd.age;
+      dest = "/var/private/slskd";
+    };
+
     services = {
       bazarr = {
         enable = true;
@@ -73,6 +78,20 @@ in
         # The config file must be editable within the application
         # It contains server configs and credentials
         configFile = "/data/downloads/sabnzbd/sabnzbd.ini";
+      };
+      slskd = {
+        enable = true;
+        domain = null;
+        environmentFile = config.secrets.slskd.dest;
+        settings = {
+          shares.directories = [ "/data/audio/music" ];
+          web = {
+            url_base = "/slskd";
+            port = 5030;
+          };
+          soulseek.listen_port = 50300;
+        };
+        openFirewall = false;
       };
       sonarr = {
         enable = true;
@@ -200,6 +219,22 @@ in
           {
             handler = "reverse_proxy";
             upstreams = [ { dial = arrConfig.sabnzbd.url; } ];
+          }
+        ];
+      }
+      {
+        match = [
+          {
+            host = [ hostnames.download ];
+            path = [ "/slskd*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              { dial = "localhost:${builtins.toString config.services.slskd.settings.web.port}"; }
+            ];
           }
         ];
       }
