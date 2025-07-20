@@ -214,7 +214,7 @@ in
               cfg.commands.lockScreen != null
             ) "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} --command sh -c '${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
+              ''exec --no-startup-id ${lib.getExe cfg.terminal} --command sh -c "${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path}#''${hostname} || read" '';
             "${modifier}+Mod1+r" =
               "exec --no-startup-id ${lib.getExe cfg.terminal} --command sh -c 'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read'";
 

@@ -142,9 +142,9 @@ in
                 if config.nmasur.presets.services.i3.terminal == pkgs.wezterm then
                   "start --class aerc -- aerc"
                 else
-                  "--class=aerc --command=aerc";
+                  "--class=com.noah.aerc --command=aerc";
             in
-            "i3-msg 'exec --no-startup-id ${config.nmasur.presets.services.i3.terminal} ${startupCommand}'; sleep 0.15; i3-msg '[class=aerc] focus'";
+            "i3-msg 'exec --no-startup-id ${lib.getExe config.nmasur.presets.services.i3.terminal} ${startupCommand}'; sleep 0.15; i3-msg '[class=com.noah.aerc] focus'";
         };
         "module/network" = {
           type = "internal/network";
@@ -221,7 +221,7 @@ in
           label = "%date%";
           label-foreground = config.theme.colors.base06;
           # format-background = colors.background;
-          click-right = lib.getExe config.nmasur.presets.services.i3.terminal;
+          click-right = "i3-msg 'exec --no-startup-id ${lib.getExe config.nmasur.presets.services.i3.terminal}'";
         };
         "module/power" = {
           type = "custom/text";
