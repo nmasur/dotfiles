@@ -18,6 +18,7 @@ in
       zfs.enable = lib.mkDefault true;
       programs = {
         msmtp.enable = lib.mkDefault true;
+        slsk-batchdl.enable = lib.mkDefault true;
       };
       services = {
         arrs.enable = lib.mkDefault true;
