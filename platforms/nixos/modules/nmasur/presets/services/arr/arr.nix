@@ -84,7 +84,8 @@ in
         domain = null;
         environmentFile = config.secrets.slskd.dest;
         settings = {
-          shares.directories = [ "/data/audio/music" ];
+          shares.directories = [ ];
+          directories.downloads = "/data/audio/music";
           web = {
             url_base = "/slskd";
             port = 5030;
