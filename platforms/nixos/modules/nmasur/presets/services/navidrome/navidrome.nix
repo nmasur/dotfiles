@@ -14,12 +14,18 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    secrets.navidrome-integrations = {
+      source = ./navidrome-integrations.age;
+      dest = "/var/private/navidrome-integrations";
+    };
+
     services.navidrome = {
       enable = true;
       settings = {
         MusicFolder = "/data/audio/music";
         EnableInsightsCollector = false;
       };
+      environmentFile = config.secrets.navidrome-integrations.dest;
     };
 
     # Configure Cloudflare DNS to point to this machine
