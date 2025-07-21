@@ -18,6 +18,7 @@ in
     home.packages = with pkgs; [
       w3m # Render HTML
       dante # Socksify for rendering HTML
+      aba # Address book
     ];
 
     programs.aerc = {
@@ -110,6 +111,7 @@ in
           "<C-j>" = ":next-part<Enter>";
           J = ":next <Enter>";
           K = ":prev<Enter>";
+          aa = ":pipe -m aba parse --all<Enter>";
         };
 
         "view::passthrough" = {
@@ -185,6 +187,7 @@ in
         };
         compose = {
           editor = config.home.sessionVariables.EDITOR;
+          address-book-cmd = "aba ls \"%s\"";
         };
       };
     };
