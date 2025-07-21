@@ -23,6 +23,7 @@ in
         aerc.enable = lib.mkDefault true;
         discord.enable = lib.mkDefault true;
         dotfiles.enable = lib.mkDefault true;
+        feishin.enable = lib.mkDefault true;
         firefox.enable = lib.mkDefault true;
         ghostty.enable = lib.mkDefault true;
         mpv.enable = lib.mkDefault true;
