@@ -76,12 +76,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Terminal file manager
-    yazi = {
-      url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # # Nextcloud Apps
     # nextcloud-news = {
     #   # https://github.com/nextcloud/news/releases
