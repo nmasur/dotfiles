@@ -88,8 +88,6 @@ in
         show_startup_tips = false;
 
         keybinds = {
-          normal = {
-          };
           session = {
             "bind \"w\"" = {
               LaunchOrFocusPlugin = {
