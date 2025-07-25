@@ -25,6 +25,7 @@ in
       pkgs.jless # JSON viewer
       pkgs.jo # JSON output
       pkgs.mpd # TUI slideshows
+      pkgs.nixfmt-rfc-style # Format Nix code
       pkgs.nmasur.jqr # FZF fq JSON tool
       pkgs.nmasur.osc # Clipboard over SSH
       # pkgs.nmasur.ren-find # Rename files
