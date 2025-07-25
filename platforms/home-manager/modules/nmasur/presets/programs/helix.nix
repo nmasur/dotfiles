@@ -197,6 +197,14 @@ in
 
         };
 
+        keys.insert = {
+          # Allows not continuing the comment
+          "A-ret" = [
+            "insert_newline"
+            "delete_word_backward"
+          ];
+        };
+
         editor = {
 
           # Change cursors depending on the mode
