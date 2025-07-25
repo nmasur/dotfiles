@@ -216,10 +216,10 @@ in
 
           # Show hidden files
           file-picker = {
-            hidden = false;
-            git-ignore = true;
-            git-global = true;
-            git-exclude = true;
+            hidden = false; # Show hidden files
+            git-ignore = true; # Skip gitignore files
+            git-global = true; # Skip global gitignore files
+            git-exclude = true; # Skip excluded files
           };
 
           # Show whitespace visible to the user
