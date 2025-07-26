@@ -28,14 +28,16 @@ in
       pkgs.nixfmt-rfc-style # Format Nix code
       pkgs.nmasur.jqr # FZF fq JSON tool
       pkgs.nmasur.osc # Clipboard over SSH
-      # pkgs.nmasur.ren-find # Rename files
-      # pkgs.nmasur.rep-grep # Replace text in files
+      pkgs.nmasur.ren-find # Rename files
+      pkgs.nmasur.rep-grep # Replace text in files
       pkgs.pandoc # Convert text documents
       pkgs.qrencode # Generate qr codes
       pkgs.spacer # Output lines in terminal
       pkgs.tealdeer # Cheatsheets
       pkgs.tree # Print tree in terminal
       pkgs.vimv-rs # Batch rename files
+      pkgs.yazi # TUI file explorer
+
     ];
 
     programs.fish.shellAliases = {
@@ -58,8 +60,10 @@ in
       fd.enable = lib.mkDefault true;
       fish.enable = lib.mkDefault true;
       fzf.enable = lib.mkDefault true;
+      ghostty.enable = lib.mkDefault true;
       git.enable = lib.mkDefault true;
       helix.enable = lib.mkDefault true;
+      lazygit.enable = lib.mkDefault true;
       neovim.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;
       nixpkgs.enable = lib.mkDefault true;
@@ -68,6 +72,7 @@ in
       ripgrep.enable = lib.mkDefault true;
       weather.enable = lib.mkDefault true;
       yt-dlp.enable = lib.mkDefault true;
+      zellij.enable = lib.mkDefault true;
       zoxide.enable = lib.mkDefault true;
     };
 

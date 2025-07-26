@@ -17,10 +17,6 @@ in
 
     nmasur.presets.programs = {
       zed-editor.enable = lib.mkDefault true;
-      ghostty.enable = lib.mkDefault true;
-      helix.enable = lib.mkDefault true;
-      zellij.enable = lib.mkDefault true;
-      lazygit.enable = lib.mkDefault true;
     };
 
     home.packages = [
@@ -31,8 +27,6 @@ in
       pkgs.skate # Key-value store
       pkgs.charm # Manage account and filesystem
       pkgs.pop # Send emails from a TUI
-
-      pkgs.yazi # TUI file explorer
 
     ];
 
