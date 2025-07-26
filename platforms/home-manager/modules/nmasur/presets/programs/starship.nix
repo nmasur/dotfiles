@@ -19,6 +19,7 @@ in
       enable = true;
       enableFishIntegration = true;
       enableBashIntegration = true;
+      enableTransience = true; # Replace previous prompts with custom string
       settings = {
         add_newline = false; # Don't print new line at the start of the prompt
         format = lib.concatStrings [
@@ -77,6 +78,17 @@ in
         };
         python = {
           format = "[\${version}\\(\${virtualenv}\\)]($style)";
+        };
+      };
+    };
+    programs.fish = {
+      functions = {
+        # Adjust the prompt in previous commands
+        starship_transient_prompt_func = {
+          body = "echo '$ '";
+        };
+        starship_transient_rprompt_func = {
+          body = "echo ' '";
         };
       };
     };
