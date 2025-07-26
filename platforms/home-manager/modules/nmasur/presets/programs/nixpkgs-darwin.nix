@@ -24,7 +24,7 @@ in
     # These are useful for triggering from zellij (rather than running directly in the shell)
     nmasur.presets.programs.nixpkgs.commands.rebuildNixos = pkgs.writeShellScriptBin "rebuild-darwin" ''
       git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
-      darwin-rebuild switch --flake "${config.nmasur.presets.programs.dotfiles.path}#${config.nmasur.settings.host}"
+      sudo darwin-rebuild switch --flake "${config.nmasur.presets.programs.dotfiles.path}#${config.nmasur.settings.host}"
     '';
 
     programs.fish = {
@@ -40,13 +40,13 @@ in
         rebuild-darwin = {
           body = ''
             git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
-            echo "darwin-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass"
+            echo "sudo darwin-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass"
           '';
         };
         rebuild-darwin-offline = {
           body = ''
             git -C ${config.nmasur.presets.programs.dotfiles.path} add --intent-to-add --all
-            echo "darwin-rebuild switch --option substitute false --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass"
+            echo "sudo darwin-rebuild switch --option substitute false --flake ${config.nmasur.presets.programs.dotfiles.path}#lookingglass"
           '';
         };
         rebuild-home = lib.mkForce {
