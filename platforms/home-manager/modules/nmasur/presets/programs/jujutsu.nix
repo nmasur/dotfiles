@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -23,8 +24,17 @@ in
           email = config.programs.git.userEmail;
         };
         ui.paginate = "never";
+
+        # Automatically snapshot when files change
+        fsmonitor.backend = "watchman";
+        fsmonitor.watchman.register-snapshot-trigger = true;
       };
     };
+
+    home.packages = [
+      # Required for the fsmonitor to auto-snapshot
+      pkgs.watchman
+    ];
 
   };
 }
