@@ -35,6 +35,7 @@ in
   config = lib.mkIf cfg.enable {
 
     home.packages = [
+      pkgs.nh # Allows rebuilding with a cleaner TUI
       cfg.commands.rebuildHome
       cfg.commands.rebuildNixos
     ];
