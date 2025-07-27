@@ -199,13 +199,26 @@ in
             "paste_before"
           ];
 
+          A-S-ret = [
+            "open_above"
+            "normal_mode"
+          ];
+          A-ret = [
+            "open_below"
+            "normal_mode"
+          ];
+
         };
 
         keys.insert = {
           # Allows not continuing the comment
           "A-ret" = [
             "insert_newline"
-            "delete_word_backward"
+            "extend_to_line_bounds"
+            "delete_selection"
+            "insert_newline"
+            "move_line_up"
+            "insert_mode"
           ];
         };
 
