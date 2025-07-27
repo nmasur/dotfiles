@@ -169,6 +169,9 @@ in
             ":set mouse true"
           ];
 
+          # Open git blame in github
+          space.B = ":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}";
+
           # Open yazi
           # https://github.com/sxyazi/yazi/pull/2461
           # Won't work until next Helix release
