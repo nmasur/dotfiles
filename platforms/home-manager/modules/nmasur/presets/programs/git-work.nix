@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -66,6 +65,18 @@ in
       };
     };
 
+    # Personal jj config
+    programs.jujutsu.settings = {
+      "--scope" = [
+        {
+          "--when".repositories = [ "~/dev/personal" ];
+          user = {
+            name = cfg.personal.name;
+            email = cfg.personal.email;
+          };
+        }
+      ];
+    };
   };
 
 }
