@@ -22,6 +22,7 @@ in
           name = config.programs.git.userName;
           email = config.programs.git.userEmail;
         };
+        ui.paginate = "never";
       };
     };
 
