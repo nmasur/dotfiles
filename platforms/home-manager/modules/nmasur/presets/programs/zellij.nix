@@ -7,6 +7,15 @@
 
 let
   cfg = config.nmasur.presets.programs.zellij;
+
+  zellij-switch-to-last = pkgs.writeShellScriptBin "zellij-switch-to-last" ''
+    TARGET_SESSION=$(cat ~/.local/state/zellij-last-session)
+    if [ -z "$TARGET_SESSION" ]; then
+      return 1
+    fi
+    echo "$ZELLIJ_SESSION_NAME" > ~/.local/state/zellij-last-session
+    zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--session $TARGET_SESSION"
+  '';
 in
 
 {
@@ -31,6 +40,7 @@ in
               if test "$TARGET_DIR" = $(pwd)
                 return 1
               end
+              echo "$ZELLIJ_SESSION_NAME" > ~/.local/state/zellij-last-session
               zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--cwd $TARGET_DIR --layout default --session $(basename $TARGET_DIR)"
             '';
         };
@@ -69,13 +79,13 @@ in
     programs.zellij = {
 
       enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
 
-      # Not yet available in unstable
-      # attachExistingSession = true;
-      # exitShellOnExit = true;
+      # Auto start on shell init
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
+      attachExistingSession = false;
+      exitShellOnExit = false;
 
       settings = {
         default_mode = "locked";
@@ -109,6 +119,14 @@ in
             };
           };
           shared = {
+            "bind \"Alt Shift s\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe zellij-switch-to-last)
+                ];
+                close_on_exit = true;
+              };
+            };
             "bind \"Alt Shift p\"" = {
               Run = {
                 _args = [
