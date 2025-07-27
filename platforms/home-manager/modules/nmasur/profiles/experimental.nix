@@ -17,6 +17,7 @@ in
 
     nmasur.presets.programs = {
       zed-editor.enable = lib.mkDefault true;
+      jujutsu.enable = lib.mkDefault true;
     };
 
     home.packages = [
