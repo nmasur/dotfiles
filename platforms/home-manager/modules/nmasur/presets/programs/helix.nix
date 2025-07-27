@@ -147,6 +147,8 @@ in
             "keep_primary_selection"
           ];
 
+          space.q = ":quit";
+
           # Enable and disable inlay hints
           space.H = ":toggle lsp.display-inlay-hints";
 
