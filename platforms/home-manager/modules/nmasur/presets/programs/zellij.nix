@@ -185,6 +185,14 @@ in
                 ];
               };
             };
+            "bind \"Alt Shift j\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe pkgs.lazyjj)
+                ];
+                close_on_exit = true;
+              };
+            };
             "bind \"Super Shift ]\"" = {
               GoToNextTab = { };
             };
@@ -204,11 +212,6 @@ in
               NewTab = { };
             };
             "bind \"Super k\"" = lib.mkIf pkgs.stdenv.isDarwin {
-              SwitchToMode = {
-                _args = [ "scroll" ];
-              };
-            };
-            "bind \"Alt k\"" = lib.mkIf pkgs.stdenv.isLinux {
               SwitchToMode = {
                 _args = [ "scroll" ];
               };

@@ -163,7 +163,7 @@ in
           space.l = [
             ":write-all"
             ":new"
-            ":insert-output ${lib.getExe pkgs.lazygit}"
+            ":insert-output ${lib.getExe pkgs.lazygit} > /dev/tty"
             ":buffer-close!"
             ":redraw"
             ":reload-all"
