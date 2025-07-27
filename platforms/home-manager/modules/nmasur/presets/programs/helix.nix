@@ -130,6 +130,7 @@ in
 
       ignores = [
         "content/.obsidian/**"
+        ".direnv/**"
       ];
 
       settings = {
