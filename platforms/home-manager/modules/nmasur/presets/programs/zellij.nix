@@ -191,6 +191,11 @@ in
                   (lib.getExe pkgs.lazyjj)
                 ];
                 close_on_exit = true;
+                floating = true;
+                x = "5%";
+                y = "5%";
+                width = "90%";
+                height = "90%";
               };
             };
             "bind \"Super Shift ]\"" = {
