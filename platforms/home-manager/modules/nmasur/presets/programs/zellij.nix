@@ -192,10 +192,10 @@ in
                 ];
                 close_on_exit = true;
                 floating = true;
-                x = "5%";
-                y = "5%";
-                width = "90%";
-                height = "90%";
+                x = "1%";
+                y = "1%";
+                width = "99%";
+                height = "99%";
               };
             };
             "bind \"Super Shift ]\"" = {
