@@ -171,8 +171,8 @@ in
             ":set mouse true"
           ];
 
-          # Open git blame in github
-          space.B = ":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}";
+          # Commandline git blame
+          space.B = ":echo %sh{git log -n1 --date=short --pretty=format:'%%h %%ad %%s' $(git blame -L %{cursor_line},+1 %{buffer_name} | cut -d' ' -f1)}";
 
           # Open yazi
           # https://github.com/sxyazi/yazi/pull/2461
