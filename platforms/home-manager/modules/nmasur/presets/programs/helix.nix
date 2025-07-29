@@ -147,7 +147,9 @@ in
             "keep_primary_selection"
           ];
 
-          space.q = ":quit";
+          # Quit shortcuts
+          space.q = ":quit-all";
+          space.x = ":quit-all!";
 
           # Enable and disable inlay hints
           space.H = ":toggle lsp.display-inlay-hints";
