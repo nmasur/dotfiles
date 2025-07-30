@@ -174,7 +174,7 @@ in
           ];
 
           # Commandline git blame
-          space.B = ":echo %sh{git log -n1 --date=short --pretty=format:'%%h %%ad %%s' $(git blame -L %{cursor_line},+1 %{buffer_name} | cut -d' ' -f1)}";
+          space.B = ":echo %sh{git log -n1 --date=short --pretty=format:'%%h %%ad %%s' $(git blame -L %{cursor_line},+1 \"%{buffer_name}\" | cut -d' ' -f1)}";
 
           # Open yazi
           # https://github.com/sxyazi/yazi/pull/2461
