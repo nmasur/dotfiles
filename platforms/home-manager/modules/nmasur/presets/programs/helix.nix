@@ -351,7 +351,7 @@ in
           bg = config.theme.colors.base00;
         };
         "ui.cursor" = {
-          fg = config.theme.colors.base0A;
+          fg = config.theme.colors.base04;
           modifiers = [ "reversed" ];
         };
         "ui.cursor.insert" = {
@@ -363,11 +363,11 @@ in
           bg = config.theme.colors.base01;
         };
         "ui.cursor.match" = {
-          fg = config.theme.colors.base0A;
+          fg = config.theme.colors.base03;
           modifiers = [ "reversed" ];
         };
         "ui.cursor.select" = {
-          fg = config.theme.colors.base0A;
+          fg = config.theme.colors.base04;
           modifiers = [ "reversed" ];
         };
         "ui.gutter" = {
