@@ -74,6 +74,8 @@ in
           "svg.context-properties.content.enabled" = true; # Sidebery styling
           "browser.tabs.hoverPreview.enabled" = false; # Disable tab previews
           "browser.tabs.hoverPreview.showThumbnails" = false; # Disable tab previews
+          "browser.gesture.swipe.left" = "cmd_scrollLeft"; # Disable swipe to go back
+          "browser.gesture.swipe.right" = "cmd_scrollRight"; # Disable swipe to go forward
         };
         userChrome = ''
           :root {
