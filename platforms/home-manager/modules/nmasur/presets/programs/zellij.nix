@@ -81,10 +81,10 @@ in
       enable = true;
 
       # Auto start on shell init
-      enableBashIntegration = false;
-      enableFishIntegration = false;
-      enableZshIntegration = false;
-      attachExistingSession = false;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      attachExistingSession = true;
       exitShellOnExit = false;
 
       settings = {
