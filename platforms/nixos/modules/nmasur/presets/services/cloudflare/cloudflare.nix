@@ -67,7 +67,7 @@ in
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
     services.caddy.package = pkgs.caddy.withPlugins {
-      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
+      plugins = [ "github.com/caddy-dns/cloudflare@8cbec3f04d5b4a768c52941a5468c4b71436509e" ]; # v0.2.1
       hash = "sha256-2D7dnG50CwtCho+U+iHmSj2w14zllQXPjmTHr6lJZ/A=";
     };
     nmasur.presets.services.caddy.tlsPolicies = [
@@ -159,12 +159,13 @@ in
       requires = [ "cloudflare-api-secret.service" ];
       script =
         let
-          args =
-            [ "--cache-file /var/lib/cloudflare-dyndns/ip.cache" ]
-            ++ (if config.services.cloudflare-dyndns.ipv4 then [ "-4" ] else [ "-no-4" ])
-            ++ (if config.services.cloudflare-dyndns.ipv6 then [ "-6" ] else [ "-no-6" ])
-            ++ lib.optional config.services.cloudflare-dyndns.deleteMissing "--delete-missing"
-            ++ lib.optional config.services.cloudflare-dyndns.proxied "--proxied";
+          args = [
+            "--cache-file /var/lib/cloudflare-dyndns/ip.cache"
+          ]
+          ++ (if config.services.cloudflare-dyndns.ipv4 then [ "-4" ] else [ "-no-4" ])
+          ++ (if config.services.cloudflare-dyndns.ipv6 then [ "-6" ] else [ "-no-6" ])
+          ++ lib.optional config.services.cloudflare-dyndns.deleteMissing "--delete-missing"
+          ++ lib.optional config.services.cloudflare-dyndns.proxied "--proxied";
         in
         lib.mkForce ''
           export CLOUDFLARE_API_TOKEN=$(cat ''${CREDENTIALS_DIRECTORY}/apiToken)
