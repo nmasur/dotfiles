@@ -69,6 +69,8 @@ in
     services.caddy.package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/cloudflare@8cbec3f04d5b4a768c52941a5468c4b71436509e" ]; # v0.2.1
       hash = "sha256-2D7dnG50CwtCho+U+iHmSj2w14zllQXPjmTHr6lJZ/A=";
+      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
+      hash = "sha256-S1JN7brvH2KIu7DaDOH1zij3j8hWLLc0HdnUc+L89uU=";
     };
     nmasur.presets.services.caddy.tlsPolicies = [
       {
