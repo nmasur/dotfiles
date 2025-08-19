@@ -33,9 +33,6 @@ rec {
 
   system.stateVersion = "23.05";
 
-  # Overrides
-  services.automatic-timezoned.enable = false;
-
   # Not sure what's necessary but too afraid to remove anything
   boot.initrd.availableKernelModules = [
     "xhci_pci"

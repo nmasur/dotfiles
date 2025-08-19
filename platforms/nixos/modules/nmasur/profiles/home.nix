@@ -24,6 +24,11 @@ in
 
     # Enable automatic timezone updates based on location
     services.automatic-timezoned.enable = lib.mkDefault true;
+    services.geoclue2 = {
+      # see: https://github.com/NixOS/nixpkgs/issues/68489#issuecomment-1484030107
+      enableDemoAgent = lib.mkForce true;
+      geoProviderUrl = "https://beacondb.net/v1/geolocate";
+    };
 
     # Allow reading from Windows drives
     boot.supportedFilesystems = [ "ntfs" ];
