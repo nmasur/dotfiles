@@ -21,7 +21,7 @@ in
     programs.ghostty = {
       enable = true;
 
-      package = if pkgs.stdenv.isDarwin then pkgs.nur.repos.DimitarNestorov.ghostty else pkgs.ghostty;
+      package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
 
       enableFishIntegration = true;
       enableBashIntegration = true;
