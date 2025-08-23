@@ -46,6 +46,10 @@ in
           command = "${pkgs.nixd}/bin/nixd";
         };
 
+        language-server.ty = {
+          command = "${pkgs.ty}/bin/ty";
+        };
+
         language-server.fish-lsp = {
           command = "${pkgs.fish-lsp}/bin/fish-lsp";
         };
@@ -59,7 +63,8 @@ in
         };
 
         language-server.terraform-ls = {
-          command = "${lib.getExe pkgs.terraform-ls} serve";
+          command = "${lib.getExe pkgs.terraform-ls}";
+          args = [ "serve" ];
         };
 
         language-server.bash-language-server = {
