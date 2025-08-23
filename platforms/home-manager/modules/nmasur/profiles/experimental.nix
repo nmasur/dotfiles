@@ -29,6 +29,8 @@ in
       pkgs.charm # Manage account and filesystem
       pkgs.pop # Send emails from a TUI
 
+      pkgs.chawan # Browser TUI
+
     ];
 
     programs.gh-dash.enable = lib.mkDefault true;
