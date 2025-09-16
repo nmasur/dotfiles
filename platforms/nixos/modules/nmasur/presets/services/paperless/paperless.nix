@@ -17,9 +17,11 @@ in
       enable = true;
       mediaDir = "/data/generic/paperless";
       passwordFile = config.secrets.paperless.dest;
+      configureTika = true; # Enable processing of emails
       settings = {
         PAPERLESS_OCR_USER_ARGS = builtins.toJSON { invalidate_digital_signatures = true; };
         PAPERLESS_URL = "https://${hostnames.paperless}";
+        PAPERLESS_DATE_ORDER = "MDY"; # Check document for US-formatted dates
 
         # Enable if changing the path name in Caddy
         # PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
