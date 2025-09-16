@@ -158,7 +158,7 @@ in
       };
       script = ''
         ${pkgs.awscli2}/bin/aws s3 sync --exclude */gitea.db* \
-            ${giteaPath}/ \
+            ${giteaPath}/repositories/ \
             s3://${config.nmasur.presets.services.litestream.s3.bucket}/gitea-data/ \
             --endpoint-url=https://${config.nmasur.presets.services.litestream.s3.endpoint}
       '';
