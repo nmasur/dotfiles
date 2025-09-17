@@ -36,6 +36,7 @@ in
         ntfy-sh.enable = lib.mkDefault true;
         pgweb.enable = lib.mkDefault true;
         postgresql.enable = lib.mkDefault true;
+        stalwart-mail.enable = lib.mkDefault true;
         thelounge.enable = lib.mkDefault true;
         uptime-kuma.enable = lib.mkDefault true;
         vaultwarden.enable = lib.mkDefault true;

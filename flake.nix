@@ -114,6 +114,7 @@
           bookmarks = "keep.${baseName}";
           books = "books.${baseName}";
           budget = "money.${baseName}";
+          contacts = "contacts.${baseName}";
           content = "cloud.${baseName}";
           download = "download.${baseName}";
           files = "files.${baseName}";
