@@ -31,10 +31,10 @@ rec {
       power-user.enable = true;
     };
     nmasur.presets.programs.helix.enable = true;
-    home.stateVersion = "23.05";
+    home.stateVersion = "25.05";
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "25.05";
   # File systems must be declared in order to boot
 
   # # This is the root filesystem containing NixOS
