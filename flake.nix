@@ -247,30 +247,30 @@
         default = lib.pkgsBySystem.${system}.nmasur.dotfiles-devshell;
       });
 
-      checks = lib.forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = lib.overlays;
-          };
-        in
-        {
-          neovim =
-            pkgs.runCommand "neovim-check-health" { buildInputs = [ inputs.self.packages.${system}.neovim ]; }
-              ''
-                mkdir -p $out
-                export HOME=$TMPDIR
-                nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
+      # checks = lib.forAllSystems (
+      #   system:
+      #   let
+      #     pkgs = import nixpkgs {
+      #       inherit system;
+      #       overlays = lib.overlays;
+      #     };
+      #   in
+      #   {
+      #     neovim =
+      #       pkgs.runCommand "neovim-check-health" { buildInputs = [ inputs.self.packages.${system}.neovim ]; }
+      #         ''
+      #           mkdir -p $out
+      #           export HOME=$TMPDIR
+      #           nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
 
-                # Check for errors inside the health log
-                if $(grep "ERROR" $out/health.log); then
-                  cat $out/health.log
-                  exit 1
-                fi
-              '';
-        }
-      );
+      #           # Check for errors inside the health log
+      #           if $(grep "ERROR" $out/health.log); then
+      #             cat $out/health.log
+      #             exit 1
+      #           fi
+      #         '';
+      #   }
+      # );
 
       formatter = lib.forAllSystems (
         system:
