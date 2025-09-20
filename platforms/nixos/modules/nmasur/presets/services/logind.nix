@@ -10,8 +10,8 @@ in
   config = lib.mkIf cfg.enable {
 
     # Use power button to sleep instead of poweroff
-    services.logind.powerKey = "suspend";
-    services.logind.powerKeyLongPress = "poweroff";
+    services.logind.settings.Login.HandlePowerKey = "suspend";
+    services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
 
   };
 
