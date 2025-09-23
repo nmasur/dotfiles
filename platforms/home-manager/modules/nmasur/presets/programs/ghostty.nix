@@ -37,8 +37,8 @@ in
         fullscreen = if pkgs.stdenv.isDarwin then true else false;
         keybind = [
           "super+t=unbind" # Pass super-t to underlying tool (e.g. zellij tabs)
-          "super+shift+]=unbind"
-          "super+shift+[=unbind"
+          "super+shift+bracket_right=unbind"
+          "super+shift+bracket_left=unbind"
           "ctrl+tab=unbind"
           "ctrl+shift+tab=unbind"
           "ctrl+tab=text:\\x1b[9;5u"
