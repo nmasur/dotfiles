@@ -454,6 +454,27 @@ in
 
     };
 
+    # Create a desktop option for launching Helix from a file manager
+    # (Requires launching the terminal and then executing Helix)
+    xdg.desktopEntries.helix =
+      lib.mkIf (pkgs.stdenv.isLinux && config.nmasur.presets.services.i3.enable)
+        {
+          name = "Helix wrapper";
+          exec = ''sh -c "${lib.getExe config.nmasur.presets.services.i3.terminal} --command='hx \$1'" _ %F ''; # TODO: change to work for any terminal
+          mimeType = [
+            "text/plain"
+            "text/markdown"
+          ];
+        };
+    xdg.mimeApps.defaultApplications = {
+      "text/plain" = lib.mkBefore [ "Helix.desktop" ];
+      "text/markdown" = lib.mkBefore [ "Helix.desktop" ];
+    };
+
+    home.packages = [
+      (pkgs.writers.writeDashBin "xterm" ''${lib.getExe config.nmasur.presets.services.i3.terminal} +new-window --command"$@" '')
+    ];
+
   };
 
 }

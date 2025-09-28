@@ -66,7 +66,7 @@ in
       lib.mkIf (pkgs.stdenv.isLinux && config.nmasur.presets.services.i3.enable)
         {
           name = "Neovim wrapper";
-          exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} nvim %F"; # TODO: change to generic
+          exec = ''${lib.getExe config.nmasur.presets.services.i3.terminal} --command="nvim %F"''; # TODO: change to generic
           mimeType = [
             "text/plain"
             "text/markdown"
