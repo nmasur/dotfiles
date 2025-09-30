@@ -38,6 +38,7 @@
       };
       brews = [
         "trash" # Delete files and folders to trash instead of rm
+        "jiratui" # Terminal program to manage Jira
       ];
       casks = [
         "1password" # 1Password will not launch from Nix on macOS
