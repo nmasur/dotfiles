@@ -66,10 +66,7 @@ in
     nmasur.presets.services.caddy.cidrAllowlist = cloudflareIpRanges;
 
     # Tell Caddy to use Cloudflare DNS for ACME challenge validation
-    services.caddy.package = pkgs.caddy.withPlugins {
-      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
-      hash = "sha256-AcWko5513hO8I0lvbCLqVbM1eWegAhoM0J0qXoWL/vI=";
-    };
+    services.caddy.package = pkgs.nmasur.caddy;
     nmasur.presets.services.caddy.tlsPolicies = [
       {
         issuers = [

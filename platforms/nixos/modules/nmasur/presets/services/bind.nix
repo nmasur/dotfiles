@@ -24,6 +24,7 @@ let
     hostnames.download
     hostnames.photos
     hostnames.audiobooks
+    hostnames.paperless
   ];
   mkRecord = service: "${service}       A       ${localIp}";
   localRecords = lib.concatLines (map mkRecord localServices);
