@@ -27,6 +27,7 @@ in
       rustfmt
       pkg-config
       openssl
+      rust-analyzer
     ];
   };
 }

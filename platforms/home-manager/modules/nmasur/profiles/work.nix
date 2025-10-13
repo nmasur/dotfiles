@@ -49,6 +49,7 @@ in
         aws-ssh.enable = lib.mkDefault true;
         bash.enable = lib.mkDefault true;
         bat.enable = lib.mkDefault true;
+        cargo.enable = lib.mkDefault true;
         direnv.enable = lib.mkDefault true;
         dotfiles.enable = lib.mkDefault true;
         fd.enable = lib.mkDefault true;

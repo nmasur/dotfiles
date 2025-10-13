@@ -19,6 +19,10 @@ in
       pkgs.pgcli # Postgres client with autocomplete
     ];
 
+    nmasur.presets = {
+      programs.cargo.enable = lib.mkDefault true;
+    };
+
   };
 
 }
