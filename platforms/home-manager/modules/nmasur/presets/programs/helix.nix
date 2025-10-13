@@ -118,6 +118,11 @@ in
           command = lib.getExe pkgs.marksman;
         };
 
+        language-server.rumdl = {
+          command = lib.getExe pkgs.rumdl;
+          args = [ "server" ];
+        };
+
         language-server.terraform-ls = {
           command = "${lib.getExe pkgs.terraform-ls}";
           args = [ "serve" ];
@@ -143,10 +148,16 @@ in
           {
             name = "markdown";
             auto-format = false;
-            language-servers = [ "marksman" ];
+            language-servers = [
+              "marksman"
+              "rumdl"
+            ];
             formatter = {
-              command = lib.getExe pkgs.mdformat;
-              args = [ "-" ];
+              command = lib.getExe pkgs.rumdl;
+              args = [
+                "fmt"
+                "-"
+              ];
             };
             # Allows return key to continue the token on the next line
             comment-tokens = [
@@ -158,9 +169,13 @@ in
             ];
           }
           {
-            name = "tfvars";
+            name = "terraform";
             auto-format = true;
             language-servers = [ "terraform-ls" ];
+            file-types = [
+              "tf"
+              "tfvars"
+            ];
             formatter = {
               command = lib.getExe pkgs.terraform;
               args = [
@@ -172,9 +187,9 @@ in
           {
             name = "hcl";
             auto-format = true;
-            language-servers = [ "terraform-ls" ];
+            file-types = [ "hcl" ];
             formatter = {
-              command = lib.getExe pkgs.terraform;
+              command = lib.getExe pkgs.packer;
               args = [
                 "fmt"
                 "-"
