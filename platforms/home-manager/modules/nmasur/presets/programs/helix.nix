@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Use Neovim as the editor for git commit messages
-    programs.git.extraConfig.core.editor = lib.mkForce "${lib.getExe pkgs.helix}";
+    programs.git.settings.core.editor = lib.mkForce "${lib.getExe pkgs.helix}";
     programs.jujutsu.settings.ui.editor = lib.mkForce "${lib.getExe pkgs.helix}";
 
     # Set Neovim as the default app for text editing and manual pages

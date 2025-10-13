@@ -29,9 +29,11 @@ in
 
     programs.git = {
       enable = true;
-      userName = cfg.name;
-      userEmail = cfg.email;
-      extraConfig = {
+      settings = {
+        user = {
+          name = cfg.name;
+          email = cfg.email;
+        };
         core.pager = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight | less --no-init";
         interactive.difffilter = "${pkgs.git}/share/git/contrib/diff-highlight/diff-highlight";
         pager = {

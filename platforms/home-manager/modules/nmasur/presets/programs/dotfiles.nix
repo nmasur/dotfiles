@@ -29,7 +29,7 @@ in
   config = lib.mkIf cfg.enable {
 
     # Always make the dotfiles directory considered safe for git and direnv
-    programs.git.extraConfig.safe.directory = cfg.path;
+    programs.git.settings.safe.directory = cfg.path;
     programs.direnv.config.whitelist.prefix = [ cfg.path ];
 
     home.activation = {

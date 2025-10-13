@@ -20,8 +20,8 @@ in
       # https://github.com/martinvonz/jj/blob/main/docs/config.md
       settings = {
         user = {
-          name = config.programs.git.userName;
-          email = config.programs.git.userEmail;
+          name = config.programs.git.settings.user.name;
+          email = config.programs.git.settings.user.email;
         };
         ui.paginate = "never";
 

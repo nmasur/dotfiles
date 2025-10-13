@@ -39,8 +39,8 @@ in
   config = lib.mkIf cfg.enable {
 
     programs.git = {
-      userName = lib.mkForce cfg.work.name;
-      userEmail = lib.mkForce cfg.work.email;
+      settings.user.name = lib.mkForce cfg.work.name;
+      settings.user.email = lib.mkForce cfg.work.email;
       includes = [
         {
           path = "${config.home.homeDirectory}/${config.xdg.configFile."git/personal".target}";

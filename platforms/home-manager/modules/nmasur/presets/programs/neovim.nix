@@ -38,7 +38,7 @@ in
     );
 
     # Use Neovim as the editor for git commit messages
-    programs.git.extraConfig.core.editor = "${lib.getExe cfg.package}";
+    programs.git.settings.core.editor = "${lib.getExe cfg.package}";
     programs.jujutsu.settings.ui.editor = "${lib.getExe cfg.package}";
 
     # Set Neovim as the default app for text editing and manual pages
