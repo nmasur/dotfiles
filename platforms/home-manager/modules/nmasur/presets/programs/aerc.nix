@@ -174,8 +174,10 @@ in
         filters = {
           "text/plain" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
           "text/calendar" = "${pkgs.gawk}/bin/awk -f ${pkgs.aerc}/libexec/aerc/filters/calendar";
+          # "text/html" =
+          #   "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
           "text/html" =
-            "${pkgs.aerc}/libexec/aerc/filters/html | ${pkgs.aerc}/libexec/aerc/filters/colorize"; # Requires w3m, dante
+            "!${pkgs.chawan}/bin/cha --type text/html --opt display.image-mode=kitty --opt display.columns=100 --opt display.force-columns=true";
           # "text/*" =
           #   ''${pkgs.bat}/bin/bat -fP --file-name="$AERC_FILENAME "'';
           "message/delivery-status" = "${pkgs.aerc}/libexec/aerc/filters/colorize";
