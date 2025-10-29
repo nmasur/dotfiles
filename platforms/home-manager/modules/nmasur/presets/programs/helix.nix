@@ -189,7 +189,7 @@ in
             auto-format = true;
             file-types = [ "hcl" ];
             formatter = {
-              command = lib.getExe pkgs.packer;
+              command = "${pkgs.packer}/bin/packer";
               args = [
                 "fmt"
                 "-"

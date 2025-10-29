@@ -67,7 +67,7 @@ lib
     inputs.nur.overlays.default
     inputs.nix2vim.overlay
     inputs.zellij-switch.overlays.default
-    inputs.helix.overlays.default
+    # inputs.helix.overlays.default
   ]
   ++ (importOverlays ../overlays);
 

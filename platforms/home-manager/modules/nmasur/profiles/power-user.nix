@@ -66,7 +66,7 @@ in
       helix.enable = lib.mkDefault true;
       jujutsu.enable = lib.mkDefault true;
       lazygit.enable = lib.mkDefault true;
-      neovim.enable = lib.mkDefault true;
+      # neovim.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;
       nixpkgs.enable = lib.mkDefault true;
       notes.enable = lib.mkDefault true;

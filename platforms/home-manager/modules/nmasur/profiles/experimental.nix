@@ -29,6 +29,7 @@ in
       pkgs.pop # Send emails from a TUI
 
       pkgs.crush # AI LLM Agent
+      pkgs.gemini-cli # AI LLM Agent
 
     ];
 
