@@ -33,6 +33,7 @@ in
     nmasur.presets = {
       programs = {
         bat.enable = lib.mkDefault true;
+        chawan.enable = lib.mkDefault true;
         fd.enable = lib.mkDefault true;
         ripgrep.enable = lib.mkDefault true;
         starship.enable = lib.mkDefault true;

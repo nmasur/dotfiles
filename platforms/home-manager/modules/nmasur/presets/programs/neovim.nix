@@ -44,7 +44,7 @@ in
     # Set Neovim as the default app for text editing and manual pages
     home.sessionVariables = {
       EDITOR = "${lib.getExe cfg.package}";
-      MANPAGER = "${lib.getExe cfg.package} +Man!";
+      # MANPAGER = "${lib.getExe cfg.package} +Man!";
     };
 
     # Create quick aliases for launching Neovim

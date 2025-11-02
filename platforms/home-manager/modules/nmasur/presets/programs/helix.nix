@@ -22,7 +22,7 @@ in
     # Set Neovim as the default app for text editing and manual pages
     home.sessionVariables = {
       EDITOR = lib.mkForce "${lib.getExe pkgs.helix}";
-      MANPAGER = lib.mkForce "sh -c 'col -bx | ${lib.getExe pkgs.helix}'";
+      # MANPAGER = lib.mkForce "sh -c 'col -bx | ${lib.getExe pkgs.helix}'";
       MANWIDTH = 87;
       MANROFFOPT = "-c";
     };
@@ -181,17 +181,6 @@ in
           # Commandline git blame
           space.B = ":echo %sh{git log -n1 --date=short --pretty=format:'%%h %%ad %%s' $(git blame -L %{cursor_line},+1 \"%{buffer_name}\" | cut -d' ' -f1)}";
 
-          # Open yazi
-          # https://github.com/sxyazi/yazi/pull/2461
-          # Won't work until next Helix release
-          C-y = [
-            ":sh rm -f /tmp/unique-file"
-            ":insert-output ${lib.getExe pkgs.yazi} %{buffer_name} --chooser-file=/tmp/unique-file"
-            ":insert-output echo \\x1b[?1049h\\x1b[?2004h > /dev/tty"
-            ":open %sh{cat /tmp/unique-file}"
-            ":redraw"
-          ];
-
           # Extend selection above
           X = "select_line_above";
 
@@ -255,6 +244,10 @@ in
             git-global = true; # Skip global gitignore files
             git-exclude = true; # Skip excluded files
           };
+
+          completion-replace = true; # Replace whole word with completion
+          trim-trailing-whitespace = true;
+          rainbow-brackets = true; # Make it easier to match parentheses
 
           # Show whitespace visible to the user
           # Waiting for trailing whitespace option ideally

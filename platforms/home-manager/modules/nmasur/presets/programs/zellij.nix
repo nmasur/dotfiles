@@ -198,6 +198,19 @@ in
                 height = "99%";
               };
             };
+            "bind \"Alt Shift y\"" = {
+              Run = {
+                _args = [
+                  (lib.getExe pkgs.yazi)
+                ];
+                close_on_exit = true;
+                floating = true;
+                x = "1%";
+                y = "1%";
+                width = "99%";
+                height = "99%";
+              };
+            };
             "bind \"Super Shift ]\"" = {
               GoToNextTab = { };
             };
