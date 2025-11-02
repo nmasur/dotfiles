@@ -64,16 +64,22 @@
       flake = false;
     };
 
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+    };
+
     # Zellij Switcher
     zellij-switch = {
       url = "github:mostafaqanbaryan/zellij-switch";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     # Text editor
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     # # Nextcloud Apps

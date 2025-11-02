@@ -19,7 +19,7 @@ in
       pkgs.delta # Fancy diffs
       pkgs.difftastic # Other fancy diffs
       pkgs.doggo # DNS client (dig)
-      pkgs.du-dust # Disk usage tree (ncdu)
+      pkgs.dust # Disk usage tree (ncdu)
       pkgs.dua # File sizes (du)
       pkgs.duf # Basic disk information (df)
       pkgs.jless # JSON viewer
@@ -42,7 +42,7 @@ in
 
     programs.fish.shellAliases = {
       "du" = lib.mkDefault (lib.getExe pkgs.dua);
-      "ncdu" = lib.mkDefault (lib.getExe pkgs.du-dust);
+      "ncdu" = lib.mkDefault (lib.getExe pkgs.dust);
       "df" = lib.mkDefault (lib.getExe pkgs.duf);
 
       # Use eza (exa) instead of ls for fancier output
