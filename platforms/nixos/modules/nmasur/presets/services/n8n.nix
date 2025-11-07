@@ -2,7 +2,6 @@
 # together with triggers.
 
 { config, lib, ... }:
-
 let
   inherit (config.nmasur.settings) hostnames;
   cfg = config.nmasur.presets.services.n8n;
@@ -18,16 +17,11 @@ in
 
     services.n8n = {
       enable = true;
-      webhookUrl = "https://${hostnames.n8n}";
-      settings = {
-        listen_address = "127.0.0.1";
-        port = 5678;
-
+      environment = {
+        N8N_LISTEN_ADDRESS = "127.0.0.1";
+        N8N_PORT = 5678;
+        N8N_EDITOR_BASE_URL = "https://${hostnames.n8n}";
       };
-    };
-
-    systemd.services.n8n.environment = {
-      N8N_EDITOR_BASE_URL = config.services.n8n.webhookUrl;
     };
 
     # Configure Cloudflare DNS to point to this machine
@@ -40,7 +34,9 @@ in
         handle = [
           {
             handler = "reverse_proxy";
-            upstreams = [ { dial = "localhost:${builtins.toString config.services.n8n.settings.port}"; } ];
+            upstreams = [
+              { dial = "localhost:${builtins.toString config.services.n8n.environment.N8N_PORT}"; }
+            ];
           }
         ];
       }

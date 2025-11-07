@@ -30,9 +30,9 @@ in
         karakeep.enable = lib.mkDefault true;
         litestream.enable = lib.mkDefault true;
         mathesar.enable = lib.mkDefault true;
-        minecraft-server.enable = lib.mkDefault true;
+        minecraft-server.enable = lib.mkDefault false;
         n8n.enable = lib.mkDefault true;
-        nix-autoupgrade.enable = lib.mkDefault false; # On by default for communications
+        nix-autoupgrade.enable = lib.mkDefault true; # On by default for communications
         ntfy-sh.enable = lib.mkDefault true;
         pgweb.enable = lib.mkDefault true;
         postgresql.enable = lib.mkDefault true;
