@@ -16,6 +16,7 @@ in
       pkgs.age # Encryption
       pkgs.bc # Calculator
       pkgs.bottom # System monitor (top)
+      pkgs.csvlens # CSV viewer (easier than visidata)
       pkgs.delta # Fancy diffs
       pkgs.difftastic # Other fancy diffs
       pkgs.doggo # DNS client (dig)
