@@ -17,7 +17,7 @@ in
 
     # Set Chawan as the default app for manual pages
     home.sessionVariables = {
-      MANPAGER = "${lib.getExe pkgs.chawan} -T text/x-ansi";
+      MANPAGER = "${pkgs.chawan}/bin/mancha";
     };
 
   };
