@@ -53,6 +53,8 @@ in
       };
     };
 
+    programs.ghostty.settings.initial-command = lib.getExe pkgs.zellij;
+
     xdg.configFile."zellij/layouts/compact-top.kdl".text = # kdl
       ''
         layout {
@@ -85,7 +87,7 @@ in
       enableFishIntegration = true;
       enableZshIntegration = true;
       attachExistingSession = true;
-      exitShellOnExit = false;
+      exitShellOnExit = true;
 
       settings = {
         default_mode = "locked";
@@ -188,7 +190,7 @@ in
             "bind \"Alt Shift j\"" = {
               Run = {
                 _args = [
-                  (lib.getExe pkgs.lazyjj)
+                  (lib.getExe pkgs.jjui)
                 ];
                 close_on_exit = true;
                 floating = true;
