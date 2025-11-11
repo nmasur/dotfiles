@@ -139,6 +139,7 @@
           photos = "photos.${baseName}";
           postgresql = "pg.${baseName}";
           prometheus = "prom.${baseName}";
+          recipes = "cooking.${baseName}";
           secrets = "vault.${baseName}";
           smtp = "smtp.purelymail.com";
           status = "status.${baseName}";
