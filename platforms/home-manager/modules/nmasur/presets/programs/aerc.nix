@@ -204,7 +204,7 @@ in
 
     xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux) {
       name = "aerc";
-      exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} aerc %u";
+      exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} -e aerc %u";
     };
     xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
       "${config.xsession.windowManager.i3.config.modifier}+Shift+e" =
@@ -214,7 +214,7 @@ in
             if terminal == pkgs.wezterm then
               "start --class com.noah.aerc -- aerc"
             else
-              "--class=com.noah.aerc --command=aerc";
+              "--class=com.noah.aerc -e=aerc";
         in
         "exec ${
           # Don't name the script `aerc` or it will affect grep
