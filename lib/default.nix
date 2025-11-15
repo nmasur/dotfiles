@@ -68,7 +68,8 @@ lib
     inputs.nix2vim.overlay
     inputs.zellij-switch.overlays.default
     inputs.helix.overlays.default
-  ] ++ (importOverlays ../overlays);
+  ]
+  ++ (importOverlays ../overlays);
 
   # System types to support.
   supportedSystems = [
@@ -97,7 +98,10 @@ lib
     system:
     import inputs.nixpkgs {
       inherit system overlays;
-      config.permittedInsecurePackages = [ "litestream-0.3.13" ];
+      config.permittedInsecurePackages = [
+        "litestream-0.3.13"
+        "electron-36.9.5"
+      ];
       config.allowUnfree = true;
     }
   );
@@ -130,7 +134,8 @@ lib
       ];
       extraSpecialArgs = {
         inherit colorscheme;
-      } // specialArgs;
+      }
+      // specialArgs;
     };
 
   buildNixos =
@@ -152,8 +157,10 @@ lib
           home-manager = {
             extraSpecialArgs = {
               inherit colorscheme;
-            } // specialArgs;
-          } // homeModule.home-manager;
+            }
+            // specialArgs;
+          }
+          // homeModule.home-manager;
         }
       ];
     };
@@ -178,8 +185,10 @@ lib
           home-manager = {
             extraSpecialArgs = {
               inherit colorscheme;
-            } // specialArgs;
-          } // homeModule.home-manager;
+            }
+            // specialArgs;
+          }
+          // homeModule.home-manager;
         }
       ];
     };
@@ -222,12 +231,15 @@ lib
           home-manager = {
             extraSpecialArgs = {
               inherit colorscheme;
-            } // specialArgs;
-          } // homeModule.home-manager;
+            }
+            // specialArgs;
+          }
+          // homeModule.home-manager;
         }
       ];
       specialArgs = {
-      } // specialArgs;
+      }
+      // specialArgs;
     };
 
 }

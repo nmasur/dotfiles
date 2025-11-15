@@ -214,7 +214,7 @@ in
             if terminal == pkgs.wezterm then
               "start --class com.noah.aerc -- aerc"
             else
-              "--class=com.noah.aerc -e=aerc";
+              "--class=com.noah.aerc -e aerc";
         in
         "exec ${
           # Don't name the script `aerc` or it will affect grep

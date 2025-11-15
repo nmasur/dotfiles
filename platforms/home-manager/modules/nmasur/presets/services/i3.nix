@@ -214,9 +214,9 @@ in
               cfg.commands.lockScreen != null
             ) "exec ${cfg.commands.lockScreen}";
             "${modifier}+Mod1+h" =
-              ''exec --no-startup-id ${lib.getExe cfg.terminal} -e="${pkgs.home-manager}/bin/home-manager switch --flake ${config.nmasur.presets.programs.dotfiles.path}#''${hostname} || read" '';
+              ''exec --no-startup-id ${lib.getExe cfg.terminal} -e "${lib.getExe config.nmasur.presets.programs.nixpkgs.commands.rebuildHome} '';
             "${modifier}+Mod1+r" =
-              "exec --no-startup-id ${lib.getExe cfg.terminal} -e=\'doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path} || read\'";
+              "exec --no-startup-id ${lib.getExe cfg.terminal} -e ${lib.getExe config.nmasur.presets.programs.nixpkgs.commands.rebuildNixos}";
 
             # Window options
             "${modifier}+q" = "kill";

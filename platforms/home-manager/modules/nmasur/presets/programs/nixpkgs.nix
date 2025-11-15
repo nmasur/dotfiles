@@ -29,6 +29,18 @@ in
           doas nixos-rebuild switch --flake ${config.nmasur.presets.programs.dotfiles.path}
         '';
       };
+      rebuildNixosAndPause = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.writeShellScriptBin "rebuild-nixos-pause" ''
+          ${lib.getExe cfg.commands.rebuildNixos} || read
+        '';
+      };
+      rebuildHomeAndPause = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.writeShellScriptBin "rebuild-home-pause" ''
+          ${lib.getExe cfg.commands.rebuildHome} || read
+        '';
+      };
     };
   };
 
