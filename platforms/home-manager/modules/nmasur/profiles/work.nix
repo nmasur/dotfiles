@@ -21,7 +21,7 @@ in
     ];
 
     home.packages = [
-      pkgs.visidata # CSV inspector
+      pkgs.stable.visidata # CSV inspector
       pkgs.dos2unix # Convert Windows text files
       pkgs.inetutils # Includes telnet
       pkgs.gnupg # Encryption

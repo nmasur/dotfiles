@@ -14,7 +14,7 @@ let
     # If the line isn’t committed yet, it shows the working-tree diff for THIS file only.
     # The script writes the diff to /tmp and prints the absolute path to stdout
     # Adjust `context` to see more/fewer unchanged lines around the change (default: 3).
-    # 
+    #
     # usage: git-file_pretty.sh <file> <line> [context_lines]
     # Helix mapping example:
     # B = ':open %sh{ ~/.config/helix/utils/git-blame-commit.sh "%{buffer_name}" %{cursor_line} 3 }'
@@ -45,7 +45,7 @@ let
     # Source: https://gist.github.com/gloaysa/828707f067e3bb20da18d72fa5d4963a
     # Utility for Helix: pretty-print blame info for the line under the cursor.
     # Quite basic.
-    # 
+    #
     # usage: blame_line_pretty <file> <line>
     # Helix mapping example:
     # b = ":run-shell-command ~/.config/helix/utils/blame_line_pretty.sh %{buffer_name} %{cursor_line}"
@@ -170,6 +170,7 @@ in
           }
           {
             name = "terraform";
+            scope = "source.tf";
             auto-format = true;
             language-servers = [ "terraform-ls" ];
             file-types = [
@@ -320,7 +321,7 @@ in
 
           completion-replace = true; # Replace whole word with completion
           trim-trailing-whitespace = true;
-          rainbow-brackets = true; # Make it easier to match parentheses
+          # rainbow-brackets = true; # Make it easier to match parentheses
 
           # Show whitespace visible to the user
           # Waiting for trailing whitespace option ideally

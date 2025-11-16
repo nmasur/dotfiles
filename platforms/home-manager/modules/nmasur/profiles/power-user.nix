@@ -34,7 +34,7 @@ in
       pkgs.pandoc # Convert text documents
       pkgs.qrencode # Generate qr codes
       pkgs.spacer # Output lines in terminal
-      pkgs.tealdeer # Cheatsheets
+      pkgs.stable.tealdeer # Cheatsheets
       pkgs.tree # Print tree in terminal
       pkgs.vimv-rs # Batch rename files
       pkgs.yazi # TUI file explorer
