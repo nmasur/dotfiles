@@ -189,9 +189,15 @@ in
             };
             "bind \"Alt Shift j\"" = {
               Run = {
-                _args = [
-                  (lib.getExe pkgs.jjui)
-                ];
+                _args =
+                  if pkgs.stdenv.isDarwin then
+                    [
+                      "env"
+                      "PATH=${config.home.homeDirectory}/.nix-profile/bin:/usr/bin"
+                      (lib.getExe pkgs.jjui)
+                    ]
+                  else
+                    [ (lib.getExe pkgs.jjui) ];
                 close_on_exit = true;
                 floating = true;
                 x = "1%";

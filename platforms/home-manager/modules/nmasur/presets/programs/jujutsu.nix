@@ -34,6 +34,9 @@ in
     home.packages = [
       # Required for the fsmonitor to auto-snapshot
       pkgs.watchman
+
+      # Required to be on path to work in Zellij
+      pkgs.jjui
     ];
 
   };
