@@ -123,9 +123,15 @@ in
           shared = {
             "bind \"Alt Shift s\"" = {
               Run = {
-                _args = [
-                  (lib.getExe zellij-switch-to-last)
-                ];
+                _args =
+                  if pkgs.stdenv.isDarwin then
+                    [
+                      "env"
+                      "PATH=${config.home.homeDirectory}/.nix-profile/bin:/usr/bin:/bin"
+                      (lib.getExe zellij-switch-to-last)
+                    ]
+                  else
+                    [ (lib.getExe zellij-switch-to-last) ];
                 close_on_exit = true;
               };
             };
