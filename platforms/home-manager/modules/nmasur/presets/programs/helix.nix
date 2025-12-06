@@ -169,13 +169,17 @@ in
             ];
           }
           {
-            name = "terraform";
-            scope = "source.tf";
+            name = "hcl";
+            scope = "source.hcl";
+            # injection-regex = "terraform";
             auto-format = true;
             language-servers = [ "terraform-ls" ];
+            language-id = "terraform";
             file-types = [
               "tf"
               "tfvars"
+              "terraform"
+              { glob = "*.auto.tfvars"; }
             ];
             formatter = {
               command = lib.getExe pkgs.terraform;
@@ -186,9 +190,13 @@ in
             };
           }
           {
-            name = "hcl";
+            name = "hcl-packer";
+            scope = "source.hcl-packer";
             auto-format = true;
-            file-types = [ "hcl" ];
+            file-types = [
+              "hcl"
+              "pkr.hcl"
+            ];
             formatter = {
               command = "${pkgs.packer}/bin/packer";
               args = [
