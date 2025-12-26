@@ -23,5 +23,19 @@ in
 
     # Speeds up fish launch time on macOS
     programs.fish.useBabelfish = true;
+
+    programs.fish.shellInit = ''
+      set -g __nixos_path_original $PATH
+      function __nixos_path_fix -d "fix PATH value"
+        set -l result (string split ":" $__nixos_path_original)
+        for elt in $PATH
+          if not contains -- $elt $result
+            set -a result $elt
+          end
+        end
+        set -g PATH $result
+      end
+      __nixos_path_fix
+    '';
   };
 }
