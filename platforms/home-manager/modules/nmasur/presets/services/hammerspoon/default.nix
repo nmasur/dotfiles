@@ -26,7 +26,7 @@ in
           obsidian = "${pkgs.obsidian}/Applications/Obsidian.app";
           slack = "${pkgs.slack}/Applications/Slack.app";
           wezterm = "${pkgs.wezterm}/Applications/WezTerm.app";
-          zed = "${pkgs.zed-editor}/Applications/Zed.app";
+          zed = "${config.programs.zed-editor.package}/Applications/Zed.app";
         };
     xdg.configFile."hammerspoon/Spoons/MoveWindow.spoon".source = ./Spoons/MoveWindow.spoon;
 

@@ -16,6 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.zed-editor = {
       enable = true;
+      package = pkgs.stable.zed-editor;
 
       extensions = [
         "nix"
