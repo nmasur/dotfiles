@@ -18,16 +18,17 @@ in
       "1password"
       "_1password-gui"
       "1password-cli"
-      "onepassword-password-manager" # Firefox extension
+      # "onepassword-password-manager" # Firefox extension
     ];
     home.packages = [
       pkgs._1password-cli
-    ] ++ (if pkgs.stdenv.isLinux then [ pkgs._1password-gui ] else [ ]);
+    ]
+    ++ (if pkgs.stdenv.isLinux then [ pkgs._1password-gui ] else [ ]);
 
-    # Firefox extension
-    programs.firefox.profiles.default.extensions.packages = [
-      pkgs.nur.repos.rycee.firefox-addons.onepassword-password-manager
-    ];
+    # # Firefox extension
+    # programs.firefox.profiles.default.extensions.packages = [
+    #   pkgs.nur.repos.rycee.firefox-addons.onepassword-password-manager
+    # ];
   };
 
   # # https://1password.community/discussion/135462/firefox-extension-does-not-connect-to-linux-app
