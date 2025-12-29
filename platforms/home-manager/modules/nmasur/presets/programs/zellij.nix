@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.programs.zellij;
 
   zellij-switch-to-last = pkgs.writeShellScriptBin "zellij-switch-to-last" ''
@@ -199,7 +200,7 @@ in
                   if pkgs.stdenv.isDarwin then
                     [
                       "env"
-                      "PATH=${config.home.homeDirectory}/.nix-profile/bin:/usr/bin"
+                      "PATH=${config.home.homeDirectory}/.nix-profile/bin:/etc/profiles/per-user/${username}/bin:/usr/bin"
                       (lib.getExe pkgs.jjui)
                     ]
                   else

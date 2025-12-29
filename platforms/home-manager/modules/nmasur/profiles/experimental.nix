@@ -27,6 +27,8 @@ in
       pkgs.skate # Key-value store
       pkgs.charm # Manage account and filesystem
       pkgs.pop # Send emails from a TUI
+      # pkgs.snitch # Network
+      pkgs.comma # Nix-index auto-launch
 
       pkgs.crush # AI LLM Agent
       pkgs.gemini-cli # AI LLM Agent

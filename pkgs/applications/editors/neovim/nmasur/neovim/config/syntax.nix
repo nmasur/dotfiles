@@ -3,10 +3,10 @@
 
   plugins = [
     (pkgs.vimPlugins.nvim-treesitter.withPlugins (_plugins: [
-      pkgs.nmasur.ini-grammar
-      pkgs.nmasur.puppet-grammar
-      pkgs.nmasur.rasi-grammar
-      pkgs.nmasur.vimdoc-grammar
+      pkgs.nmasur.tree-sitter-ini
+      pkgs.nmasur.tree-sitter-puppet
+      pkgs.nmasur.tree-sitter-rasi
+      pkgs.nmasur.tree-sitter-vimdoc
       pkgs.tree-sitter-grammars.tree-sitter-bash
       pkgs.tree-sitter-grammars.tree-sitter-c
       pkgs.tree-sitter-grammars.tree-sitter-fish
