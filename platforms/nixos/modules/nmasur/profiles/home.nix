@@ -44,7 +44,7 @@ in
       enable = lib.mkDefault (!config.networking.networkmanager.enable);
 
       # Allows the user to control the WiFi settings.
-      userControlled.enable = lib.mkDefault true;
+      userControlled = lib.mkDefault true;
     };
 
     # Wake up tempest with a command
