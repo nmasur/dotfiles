@@ -32,6 +32,7 @@ in
         nsxiv.enable = lib.mkDefault true;
         obsidian.enable = lib.mkDefault true;
         rofi.enable = lib.mkDefault true;
+        thunderbird.enable = lib.mkDefault true;
         xclip.enable = lib.mkDefault true;
         zathura.enable = lib.mkDefault true;
       };

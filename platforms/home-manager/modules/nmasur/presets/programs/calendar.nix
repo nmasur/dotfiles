@@ -32,7 +32,6 @@ in
   config = lib.mkIf cfg.enable {
 
     accounts.calendar.accounts.default = {
-      basePath = "other/calendars"; # Where to save calendars in ~ directory
       name = "personal";
       local.type = "filesystem";
       primary = true;
