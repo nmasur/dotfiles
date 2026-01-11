@@ -18,7 +18,7 @@
           pkgs = import nixpkgs { inherit system; };
         in
         {
-          default = pkgs.mkShell { buildInputs = with pkgs; [ nixfmt-rfc-style ]; };
+          default = pkgs.mkShell { buildInputs = with pkgs; [ nixfmt ]; };
         }
       );
     };

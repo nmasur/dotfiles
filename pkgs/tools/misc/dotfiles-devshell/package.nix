@@ -5,7 +5,7 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     git
     stylua
-    nixfmt-rfc-style
+    nixfmt
     shfmt
     shellcheck
   ];

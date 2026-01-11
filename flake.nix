@@ -287,7 +287,7 @@
             inherit (lib) overlays;
           };
         in
-        pkgs.nixfmt-rfc-style
+        pkgs.nixfmt
       );
 
       # Templates for starting other projects quickly

@@ -100,7 +100,7 @@
         lua.command = "${pkgs.stylua}/bin/stylua";
         black.command = "${pkgs.black}/bin/black";
         fish_indent.command = "${pkgs.fish}/bin/fish_indent";
-        nixfmt.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+        nixfmt.command = "${pkgs.nixfmt}/bin/nixfmt";
         rustfmt.command = "${pkgs.rustfmt}/bin/rustfmt";
         shfmt = {
           command = "${pkgs.shfmt}/bin/shfmt";
