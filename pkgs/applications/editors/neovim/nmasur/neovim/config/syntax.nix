@@ -21,7 +21,6 @@
       pkgs.tree-sitter-grammars.tree-sitter-yaml
     ]))
     pkgs.vimPlugins.vim-matchup # Better % jumping in languages
-    pkgs.vimPlugins.playground # Tree-sitter experimenting
     pkgs.vimPlugins.nginx-vim
     pkgs.vimPlugins.vim-helm
     # pkgs.vimPlugins.hmts-nvim # Tree-sitter injections for home-manager
