@@ -271,6 +271,16 @@ in
                 _args = [ "Left" ];
               };
             };
+            "bind \"Alt j\"" = {
+              MoveFocus = {
+                _args = [ "Down" ];
+              };
+            };
+            "bind \"Alt k\"" = {
+              MoveFocus = {
+                _args = [ "Up" ];
+              };
+            };
           };
 
         };
