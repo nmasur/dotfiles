@@ -21,6 +21,7 @@ in
         N8N_LISTEN_ADDRESS = "127.0.0.1";
         N8N_PORT = 5678;
         N8N_EDITOR_BASE_URL = "https://${hostnames.n8n}";
+        N8N_RESTRICT_FILE_ACCESS_TO = "/var/lib/n8n";
       };
     };
 
@@ -35,7 +36,7 @@ in
           {
             handler = "reverse_proxy";
             upstreams = [
-              { dial = "localhost:${builtins.toString config.services.n8n.environment.N8N_PORT}"; }
+              { dial = "localhost:${toString config.services.n8n.environment.N8N_PORT}"; }
             ];
           }
         ];
