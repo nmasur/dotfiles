@@ -5,7 +5,7 @@ inputs: _final: prev: {
   # Provides `pkgs.stable`.
   stable = import inputs.nixpkgs-stable {
     system = prev.stdenv.hostPlatform.system;
-    inherit (prev) config;
+    config = { };
     overlays = [
       # inputs.self.overlays.vim-plugins
     ];

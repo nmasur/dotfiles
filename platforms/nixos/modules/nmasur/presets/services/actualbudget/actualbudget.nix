@@ -125,7 +125,7 @@ in
     services.cloudflare-dyndns.domains = [ hostnames.budget ];
 
     # Backups
-    services.restic.backups.default.paths = [ "/var/lib/actual" ];
+    services.restic.backups.default.paths = [ "/var/lib/private/actual" ];
 
   };
 
