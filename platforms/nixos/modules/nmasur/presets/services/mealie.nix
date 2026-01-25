@@ -20,6 +20,9 @@ in
       };
     };
 
+    # Fix BASE_URL for downloading backups
+    systemd.services.mealie.environment.BASE_URL = lib.mkForce "https://${hostnames.recipes}";
+
     nmasur.presets.services.caddy.routes = [
       {
         match = [ { host = [ hostnames.recipes ]; } ];
