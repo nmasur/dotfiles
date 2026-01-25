@@ -22,7 +22,6 @@ in
       extensions = [
         pkgs.nmasur.gh-collaborators
         pkgs.gh-dash
-        pkgs.gh-copilot
       ];
     };
 
