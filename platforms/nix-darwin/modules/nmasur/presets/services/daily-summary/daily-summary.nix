@@ -9,13 +9,15 @@ let
   inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.services.daily-summary;
 
-  process_urls = pkgs.writers.writePython3Bin "process-urls" {
-    libraries = [
-      pkgs.python3Packages.requests
-      pkgs.python3Packages.beautifulsoup4
-    ];
-  } (builtins.readFile ./process-urls.py);
-  prompt = "Based on my browser usage for today from the markdown file located in /Users/${username}/Downloads/Sidebery/todays_urls.md, create or update a daily summary markdown file in the generated notes directory located in /Users/${username}/dev/personal/notes/generated/ with the filename format 'YYYY-MM-DD Daily Summary.md'. The resulting markdown file should use /Users/${username}/dev/personal/notes/templates/generated-summary.md as a format template, and it should summarize where I have spent my time today and highlight any notable links that I have visited. Please create markdown links to other relevant notes in /Users/${username}/dev/personal/notes/. If there is an existing markdown file for today, update it to include the newest information.";
+  # Remove process urls in favor of using extention
+  # process_urls = pkgs.writers.writePython3Bin "process-urls" {
+  #   libraries = [
+  #     pkgs.python3Packages.requests
+  #     pkgs.python3Packages.beautifulsoup4
+  #   ];
+  # } (builtins.readFile ./process-urls.py);
+  # prompt = "Based on my browser usage for today from the markdown file located in /Users/${username}/Downloads/Sidebery/todays_urls.md, create or update a daily summary markdown file in the generated notes directory located in /Users/${username}/dev/personal/notes/generated/ with the filename format 'YYYY-MM-DD Daily Summary.md'. The resulting markdown file should use /Users/${username}/dev/personal/notes/templates/generated-summary.md as a format template, and it should summarize where I have spent my time today and highlight any notable links that I have visited. Please create markdown links to other relevant notes in /Users/${username}/dev/personal/notes/. If there is an existing markdown file for today, update it to include the newest information.";
+  prompt = "Based on my browser usage for today from the JSON file located in /Users/${username}/Downloads/firefox-history/history-YYYY-MM-DD.json, create or update a daily summary markdown file in the generated notes directory located in /Users/${username}/dev/personal/notes/generated/ with the filename format 'YYYY-MM-DD Daily Summary.md'. The resulting markdown file should use /Users/${username}/dev/personal/notes/templates/generated-summary.md as a format template, and it should summarize where I have spent my time today and highlight any notable pages that I have visited, using the titles of each URL in the JSON file for markdown links. Please create markdown links to other relevant notes in /Users/${username}/dev/personal/notes/ and explain why they are being referenced. If there is an existing markdown file for today, update it to include the newest information.";
 in
 
 {
@@ -25,9 +27,12 @@ in
   config = lib.mkIf cfg.enable {
     launchd.user.agents.daily-summary = {
       # This replaces program and args entirely
+      # script = ''
+      #   ${process_urls}/bin/process-urls /Users/${username}/Downloads/Sidebery/
+      #   GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.gemini-cli}/bin/gemini --allowed-tools all --yolo --include-directories /Users/${username}/Downloads/Sidebery/ --include-directories /Users/${username}/dev/personal/notes/ "${prompt}"
+      # '';
       script = ''
-        ${process_urls}/bin/process-urls /Users/${username}/Downloads/Sidebery/
-        GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.gemini-cli}/bin/gemini --allowed-tools all --yolo --include-directories /Users/${username}/Downloads/Sidebery/ --include-directories /Users/${username}/dev/personal/notes/ "${prompt}"
+        GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.gemini-cli}/bin/gemini --allowed-tools all --yolo --include-directories /Users/${username}/Downloads/firefox-history/ --include-directories /Users/${username}/dev/personal/notes/ "${prompt}"
       '';
 
       path = [

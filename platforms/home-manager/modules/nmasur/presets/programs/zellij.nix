@@ -128,7 +128,7 @@ in
                   if pkgs.stdenv.isDarwin then
                     [
                       "env"
-                      "PATH=${config.home.homeDirectory}/.nix-profile/bin:/usr/bin:/bin"
+                      "PATH=/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/bin"
                       (lib.getExe zellij-switch-to-last)
                     ]
                   else

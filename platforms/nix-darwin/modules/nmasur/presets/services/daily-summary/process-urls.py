@@ -1,3 +1,6 @@
+# Temporarily disabled in favor of using an extension to save history
+
+
 import requests
 from bs4 import BeautifulSoup
 import json

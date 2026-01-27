@@ -46,6 +46,7 @@ in
           ublacklist
           vimium
           wappalyzer # TODO: only for work profile
+          pkgs.nmasur.firefox-history-exporter
           # saml-tracer
           # text-fragment
         ];
@@ -187,7 +188,7 @@ in
     xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
       "${config.xsession.windowManager.i3.config.modifier}+Shift+b" = "exec ${
         # Don't name the script `firefox` or it will affect grep
-        builtins.toString (
+        toString (
           pkgs.writeShellScript "focus-ff.sh" ''
             count=$(ps aux | grep -c firefox)
             if [ "$count" -eq 1 ]; then
