@@ -15,12 +15,6 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    nixpkgs.overlays = [
-      (_final: _prev: {
-        firefox-unwrapped = pkgs.stable.firefox-unwrapped;
-      })
-    ];
-
     system.defaults.CustomUserPreferences = {
       "com.apple.dock" = {
         magnification = true;

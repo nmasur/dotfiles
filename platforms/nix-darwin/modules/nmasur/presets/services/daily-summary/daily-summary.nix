@@ -46,14 +46,6 @@ in
         # RunAtLoad = true;
         StartCalendarInterval = [
           {
-            Hour = 11;
-            Minute = 45;
-          }
-          {
-            Hour = 3;
-            Minute = 45;
-          }
-          {
             Hour = 4;
             Minute = 45;
           }

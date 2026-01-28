@@ -47,6 +47,7 @@ in
           vimium
           wappalyzer # TODO: only for work profile
           pkgs.nmasur.firefox-history-exporter
+          copy-as-markdown
           # saml-tracer
           # text-fragment
         ];
@@ -62,6 +63,7 @@ in
           "trailhead.firstrun.didSeeAboutWelcome" = true; # Disable welcome splash
           "dom.forms.autocomplete.formautofill" = false; # Disable autofill
           "extensions.formautofill.creditCards.enabled" = false; # Disable credit cards
+          "extensions.autoDisableScopes" = false; # Enable extensions automatically
           "dom.payments.defaults.saveAddress" = false; # Disable address save
           "general.autoScroll" = true; # Drag middle-mouse to scroll
           "services.sync.prefs.sync.general.autoScroll" = false; # Prevent disabling autoscroll
