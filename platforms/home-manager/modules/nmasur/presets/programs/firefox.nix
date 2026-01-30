@@ -47,7 +47,7 @@ in
           vimium
           wappalyzer # TODO: only for work profile
           pkgs.nmasur.firefox-history-exporter
-          copy-as-markdown
+          # copy-as-markdown
           # saml-tracer
           # text-fragment
         ];

@@ -7,13 +7,16 @@ pkgs.stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ pkgs.zip ];
 
-  # We aren't building, just packaging
   dontUnpack = true;
 
-  buildCommand = ''
+  installPhase = ''
     dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
     mkdir -p "$dst"
-    (cd ${src}; zip "$dst/firefox-history-exporter@nmasur.com.xpi" manifest.json background.js popup.html popup.js)
+    zip -j "$dst/firefox-history-exporter@nmasur.com.xpi" \
+      "${src}/manifest.json" \
+      "${src}/background.js" \
+      "${src}/popup.html" \
+      "${src}/popup.js"
   '';
 
   meta = with pkgs.lib; {

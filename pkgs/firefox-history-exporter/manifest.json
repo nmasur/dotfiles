@@ -16,7 +16,10 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "firefox-history-exporter@nmasur.com"
+      "id": "firefox-history-exporter@nmasur.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }
