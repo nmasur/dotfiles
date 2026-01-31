@@ -101,6 +101,22 @@ in
         show_startup_tips = false;
 
         keybinds = {
+          locked = {
+            # For servers that I SSH into, use c-a-G to unlock
+            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
+              SwitchToMode = {
+                _args = [ "normal" ];
+              };
+            };
+          };
+          normal = {
+            # For servers that I SSH into, use c-a-G to lock
+            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
+              SwitchToMode = {
+                _args = [ "locked" ];
+              };
+            };
+          };
           session = {
             "bind \"w\"" = {
               LaunchOrFocusPlugin = {
