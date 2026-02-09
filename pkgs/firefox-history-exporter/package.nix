@@ -2,7 +2,7 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "firefox-history-exporter";
-  version = "1.0";
+  version = "1.1";
   src = ./.;
 
   nativeBuildInputs = [ pkgs.zip ];
