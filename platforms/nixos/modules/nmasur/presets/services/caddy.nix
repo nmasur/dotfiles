@@ -58,6 +58,7 @@ in
           {
             handler = "static_response";
             status_code = "403";
+            body = "IP not allowed";
           }
         ];
       }
@@ -109,96 +110,95 @@ in
             apps.tls.automation.policies = cfg.tlsPolicies;
 
             # Setup logging to journal and files
-            logging.logs =
-              {
-                # System logs and catch-all
-                # Must be called `default` to override Caddy's built-in default logger
-                default = {
-                  level = "INFO";
-                  encoder.format = "console";
-                  writer = {
-                    output = "stderr";
-                  };
-                  exclude = (map (hostname: "http.log.access.${hostname}") (builtins.attrNames hostname_map)) ++ [
-                    "http.log.access.${default_logger_name}"
-                  ];
+            logging.logs = {
+              # System logs and catch-all
+              # Must be called `default` to override Caddy's built-in default logger
+              default = {
+                level = "INFO";
+                encoder.format = "console";
+                writer = {
+                  output = "stderr";
                 };
-                # This is for the default access logs (anything not captured by hostname)
-                other = {
-                  level = "INFO";
-                  encoder.format = "json";
-                  writer = {
-                    output = "file";
-                    filename = "${config.services.caddy.logDir}/other.log";
-                    roll = true;
-                    inherit roll_size_mb;
-                  };
-                  include = [ "http.log.access.${default_logger_name}" ];
-                };
-                # This is for using the Caddy API, which will probably never happen
-                admin = {
-                  level = "INFO";
-                  encoder.format = "json";
-                  writer = {
-                    output = "file";
-                    filename = "${config.services.caddy.logDir}/admin.log";
-                    roll = true;
-                    inherit roll_size_mb;
-                  };
-                  include = [ "admin" ];
-                };
-                # This is for TLS cert management tracking
-                tls = {
-                  level = "INFO";
-                  encoder.format = "json";
-                  writer = {
-                    output = "file";
-                    filename = "${config.services.caddy.logDir}/tls.log";
-                    roll = true;
-                    inherit roll_size_mb;
-                  };
-                  include = [ "tls" ];
-                };
-                # This is for debugging
-                debug = {
-                  level = "DEBUG";
-                  encoder.format = "json";
-                  writer = {
-                    output = "file";
-                    filename = "${config.services.caddy.logDir}/debug.log";
-                    roll = true;
-                    roll_keep = 1;
-                    inherit roll_size_mb;
-                  };
-                };
-              }
-              # These are the access logs for individual hostnames
-              // (lib.mapAttrs (name: value: {
+                exclude = (map (hostname: "http.log.access.${hostname}") (builtins.attrNames hostname_map)) ++ [
+                  "http.log.access.${default_logger_name}"
+                ];
+              };
+              # This is for the default access logs (anything not captured by hostname)
+              other = {
                 level = "INFO";
                 encoder.format = "json";
                 writer = {
                   output = "file";
-                  filename = "${config.services.caddy.logDir}/${name}-access.log";
+                  filename = "${config.services.caddy.logDir}/other.log";
+                  roll = true;
+                  inherit roll_size_mb;
+                };
+                include = [ "http.log.access.${default_logger_name}" ];
+              };
+              # This is for using the Caddy API, which will probably never happen
+              admin = {
+                level = "INFO";
+                encoder.format = "json";
+                writer = {
+                  output = "file";
+                  filename = "${config.services.caddy.logDir}/admin.log";
+                  roll = true;
+                  inherit roll_size_mb;
+                };
+                include = [ "admin" ];
+              };
+              # This is for TLS cert management tracking
+              tls = {
+                level = "INFO";
+                encoder.format = "json";
+                writer = {
+                  output = "file";
+                  filename = "${config.services.caddy.logDir}/tls.log";
+                  roll = true;
+                  inherit roll_size_mb;
+                };
+                include = [ "tls" ];
+              };
+              # This is for debugging
+              debug = {
+                level = "DEBUG";
+                encoder.format = "json";
+                writer = {
+                  output = "file";
+                  filename = "${config.services.caddy.logDir}/debug.log";
+                  roll = true;
+                  roll_keep = 1;
+                  inherit roll_size_mb;
+                };
+              };
+            }
+            # These are the access logs for individual hostnames
+            // (lib.mapAttrs (name: value: {
+              level = "INFO";
+              encoder.format = "json";
+              writer = {
+                output = "file";
+                filename = "${config.services.caddy.logDir}/${name}-access.log";
+                roll = true;
+                inherit roll_size_mb;
+              };
+              include = [ "http.log.access.${name}" ];
+            }) hostname_map)
+            # We also capture just the errors separately for easy debugging
+            // (lib.mapAttrs' (name: value: {
+              name = "${name}-error";
+              value = {
+                level = "ERROR";
+                encoder.format = "json";
+                writer = {
+                  output = "file";
+                  filename = "${config.services.caddy.logDir}/${name}-error.log";
                   roll = true;
                   inherit roll_size_mb;
                 };
                 include = [ "http.log.access.${name}" ];
-              }) hostname_map)
-              # We also capture just the errors separately for easy debugging
-              // (lib.mapAttrs' (name: value: {
-                name = "${name}-error";
-                value = {
-                  level = "ERROR";
-                  encoder.format = "json";
-                  writer = {
-                    output = "file";
-                    filename = "${config.services.caddy.logDir}/${name}-error.log";
-                    roll = true;
-                    inherit roll_size_mb;
-                  };
-                  include = [ "http.log.access.${name}" ];
-                };
-              }) hostname_map);
+              };
+            }) hostname_map);
           }
         );
       };

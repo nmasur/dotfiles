@@ -132,6 +132,7 @@
           mathesar = "mathesar.${baseName}";
           metrics = "metrics.${baseName}";
           minecraft = "minecraft.${baseName}";
+          mumble = "mumble.${baseName}";
           n8n = "n8n.${baseName}";
           navidrome = "music.${baseName}";
           notifications = "ntfy.${baseName}";

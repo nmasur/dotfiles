@@ -173,5 +173,16 @@ in
     # Enable the home-made service that we created for non-proxied records
     services.cloudflare-dyndns-noproxy.enable = true;
 
+    # Create certs when not using proxy
+    secrets.cloudflare-dns-api-prefixed = {
+      source = ./cloudflare-api.age;
+      dest = "${config.secretsDirectory}/cloudflare-dns-api-prefixed";
+      prefix = "CLOUDFLARE_DNS_API_TOKEN=";
+    };
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "acme@${config.nmasur.presets.programs.msmtp.domain}";
+    };
+
   };
 }
