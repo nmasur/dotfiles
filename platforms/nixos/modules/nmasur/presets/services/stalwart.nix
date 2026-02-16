@@ -5,12 +5,12 @@
 
 let
   inherit (config.nmasur.settings) hostnames;
-  cfg = config.nmasur.presets.services.stalwart-mail;
+  cfg = config.nmasur.presets.services.stalwart;
 in
 
 {
 
-  options.nmasur.presets.services.stalwart-mail = {
+  options.nmasur.presets.services.stalwart = {
     enable = lib.mkEnableOption "Stalwart mail and contacts server";
     port = lib.mkOption {
       type = lib.types.port;
@@ -21,7 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    services.stalwart-mail = {
+    services.stalwart = {
       enable = true;
       settings = {
         server.listener.http = {

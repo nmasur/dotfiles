@@ -15,6 +15,9 @@ in
       port = 9099;
       database.createLocally = true;
       listenAddress = "127.0.0.1";
+      settings = {
+        TOKEN_TIME = 7200; # Hours for login to last (300 days)
+      };
     };
 
     nmasur.presets.services.caddy.routes = [
@@ -23,7 +26,7 @@ in
         handle = [
           {
             handler = "reverse_proxy";
-            upstreams = [ { dial = "localhost:${builtins.toString config.services.mealie.port}"; } ];
+            upstreams = [ { dial = "localhost:${toString config.services.mealie.port}"; } ];
           }
         ];
       }
