@@ -34,7 +34,6 @@
       };
       global = {
         brewfile = true; # Run brew bundle from anywhere
-        lockfiles = false; # Don't save lockfile (since running from anywhere)
       };
       brews = [
         "trash" # Delete files and folders to trash instead of rm
