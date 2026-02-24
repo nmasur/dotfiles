@@ -29,6 +29,7 @@ in
       pkgs.ssm-session-manager-plugin
       pkgs.awslogs
       pkgs.stu # TUI for AWS S3
+      pkgs.pre-commit
       pkgs.google-cloud-sdk
       pkgs.vault-bin
       pkgs.ipcalc # Make IP network calculations
