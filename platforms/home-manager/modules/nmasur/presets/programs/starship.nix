@@ -15,6 +15,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    home.packages = [ pkgs.jj-starship ];
+
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
@@ -27,6 +29,7 @@ in
           "$git_branch"
           "$git_commit"
           "$git_status"
+          "\${custom.jj}"
           "$hostname"
           "$cmd_duration"
           "$character"
@@ -38,23 +41,33 @@ in
           vicmd_symbol = "[❮](bold green)";
         };
         cmd_duration = {
-          min_time = 5000;
+          min_time = 5001;
           show_notifications = if pkgs.stdenv.isLinux then false else true;
           min_time_to_notify = 30000;
           format = "[$duration]($style) ";
+        };
+        custom = {
+          jj = {
+            when = "jj-starship detect";
+            shell = [ "jj-starship" ];
+            format = "$output ";
+          };
         };
         directory = {
           truncate_to_repo = true;
           truncation_length = 100;
         };
         git_branch = {
+          disabled = true;
           format = "[$symbol$branch]($style)";
         };
         git_commit = {
+          disabled = true;
           format = "( @ [$hash]($style) )";
           only_detached = false;
         };
         git_status = {
+          disabled = true;
           format = "([$all_status$ahead_behind]($style) )";
           conflicted = "=";
           ahead = "⇡";

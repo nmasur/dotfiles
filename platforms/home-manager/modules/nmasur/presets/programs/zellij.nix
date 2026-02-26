@@ -101,7 +101,7 @@ in
         show_startup_tips = false;
 
         keybinds = {
-          locked = {
+          locked = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to unlock
             "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
               SwitchToMode = {
@@ -109,7 +109,7 @@ in
               };
             };
           };
-          normal = {
+          normal = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to lock
             "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
               SwitchToMode = {
