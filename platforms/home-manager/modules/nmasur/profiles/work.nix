@@ -38,6 +38,7 @@ in
       pkgs.nmasur.ocr # Converts images to text
       pkgs.nmasur.aws-ec2 # Browse EC2 instances
       pkgs.nmasur.terraform-init # Quick shortcut for initializing Terraform backend
+      pkgs.uv # Python packaging
     ];
 
     programs.fish.shellAliases.ec2 = "aws-ec2";
