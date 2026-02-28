@@ -49,7 +49,11 @@ in
         custom = {
           jj = {
             when = "jj-starship detect";
-            shell = [ "jj-starship" ];
+            shell = [
+              "jj-starship"
+              "--no-jj-prefix"
+              "--no-git-prefix"
+            ];
             format = "$output ";
           };
         };
