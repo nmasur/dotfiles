@@ -46,7 +46,7 @@ in
           ublacklist
           vimium
           wappalyzer # TODO: only for work profile
-          pkgs.nmasur.firefox-history-exporter
+          # pkgs.nmasur.firefox-history-exporter
           # copy-as-markdown
           # saml-tracer
           # text-fragment
