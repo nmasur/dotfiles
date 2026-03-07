@@ -28,9 +28,22 @@ in
       before = [ "grafana.service" ];
     };
 
+    secrets.grafana-secret-key = {
+             source = ./grafana-secret-key.age;
+      dest = "${config.secretsDirectory}/grafana-secret-key";
+      owner = "grafana";
+      group = "grafana";
+      permissions = "0440";
+    };
+    systemd.services.grafana-secret-key  = {
+      requiredBy = [ "grafana.service" ];
+      before = [ "grafana.service" ];
+    };
+
     services.grafana = {
       enable = true;
       settings = {
+        security.secret_key = "$__file{${config.secrets.grafana-secret-key.dest}}";
         server = {
           domain = hostnames.metrics;
           http_addr = "127.0.0.1";
