@@ -24,6 +24,7 @@ in
         .terraform/
         .target/
         /Library/
+        .jj/
       '';
     };
   };
