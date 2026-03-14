@@ -29,6 +29,7 @@ in
           zed = "${config.programs.zed-editor.package}/Applications/Zed.app";
         };
     xdg.configFile."hammerspoon/Spoons/MoveWindow.spoon".source = ./Spoons/MoveWindow.spoon;
+    xdg.configFile."hammerspoon/Spoons/HideZoomWindow.spoon".source = ./Spoons/HideZoomWindow.spoon;
 
     home.activation.reloadHammerspoon = config.lib.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.reload()"

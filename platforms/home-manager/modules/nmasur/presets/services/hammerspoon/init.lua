@@ -3,3 +3,4 @@ hs.loadSpoon("ControlEscape"):start() -- Load Hammerspoon bits from https://gith
 hs.loadSpoon("Launcher"):init()
 hs.loadSpoon("DismissAlerts"):init()
 hs.loadSpoon("MoveWindow"):init()
+hs.loadSpoon("HideZoomWindow"):init()
