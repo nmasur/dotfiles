@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  # pkgs,
   lib,
   ...
 }:
@@ -23,17 +23,18 @@ in
     };
 
     # Create nix-index if doesn't exist
-    home.activation.createNixIndex =
-      let
-        cacheDir = "${config.xdg.cacheHome}/nix-index";
-      in
-      lib.mkIf config.programs.nix-index.enable (
-        config.lib.dag.entryAfter [ "writeBoundary" ] ''
-          if [ ! -d ${cacheDir} ]; then
-              run ${pkgs.nix-index}/bin/nix-index -f ${pkgs.path}
-          fi
-        ''
-      );
+    # Should not be necessary with the nix-index-database flake
+    # home.activation.createNixIndex =
+    #   let
+    #     cacheDir = "${config.xdg.cacheHome}/nix-index";
+    #   in
+    #   lib.mkIf config.programs.nix-index.enable (
+    #     config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    #       if [ ! -d ${cacheDir} ]; then
+    #           run ${pkgs.nix-index}/bin/nix-index -f ${pkgs.path}
+    #       fi
+    #     ''
+    #   );
 
   };
 

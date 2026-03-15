@@ -154,6 +154,7 @@ lib
       pkgs = pkgsBySystem.${system};
       modules = [
         inputs.home-manager.nixosModules.home-manager
+        inputs.nix-index-database.nixosModules.default
         inputs.disko.nixosModules.disko
         inputs.wsl.nixosModules.wsl
         { imports = (nixFiles ../platforms/nixos); }
@@ -179,6 +180,8 @@ lib
     inputs.darwin.lib.darwinSystem {
       inherit system specialArgs;
       modules = [
+        inputs.home-manager.darwinModules.home-manager
+        inputs.nix-index-database.darwinModules.nix-index
         inputs.mac-app-util.darwinModules.default
         {
           imports = (nixFiles ../platforms/nix-darwin);
@@ -223,6 +226,7 @@ lib
       pkgs = pkgsBySystem.${system};
       modules = [
         inputs.home-manager.nixosModules.home-manager
+        inputs.nix-index-database.homeModules.default
         inputs.disko.nixosModules.disko
         inputs.wsl.nixosModules.wsl
         {

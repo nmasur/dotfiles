@@ -57,9 +57,10 @@ in
     ];
 
     # Extending time for home-manager build for things like nix-index cache
-    systemd.services."home-manager-${username}" = {
-      serviceConfig.TimeoutStartSec = lib.mkForce "45m";
-    };
+    # Should not be necessary with nix-index-database flake
+    # systemd.services."home-manager-${username}" = {
+    #   serviceConfig.TimeoutStartSec = lib.mkForce "45m";
+    # };
 
     allowUnfreePackages = config.home-manager.users.${username}.allowUnfreePackages;
 
