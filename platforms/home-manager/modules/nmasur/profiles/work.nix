@@ -21,6 +21,7 @@ in
     ];
 
     home.packages = [
+      pkgs.claude-code # AI LLM Agent
       pkgs.stable.visidata # CSV inspector
       pkgs.dos2unix # Convert Windows text files
       pkgs.inetutils # Includes telnet
