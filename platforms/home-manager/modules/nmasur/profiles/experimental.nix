@@ -31,7 +31,7 @@ in
       pkgs.comma # Nix-index auto-launch
       pkgs.nix-inspect # TUI for browsing Nix configs
 
-      pkgs.crush # AI LLM Agent
+      # pkgs.crush # AI LLM Agent
       pkgs.gemini-cli # AI LLM Agent
 
     ];
