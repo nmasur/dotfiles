@@ -21,6 +21,7 @@ in
     ];
 
     home.packages = [
+      pkgs.actionlint # Lint for GitHub Actions Workflows
       pkgs.claude-code # AI LLM Agent
       pkgs.stable.visidata # CSV inspector
       pkgs.dos2unix # Convert Windows text files
