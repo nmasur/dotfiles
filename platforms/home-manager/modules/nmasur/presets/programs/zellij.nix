@@ -15,7 +15,7 @@ let
       return 1
     fi
     echo "$ZELLIJ_SESSION_NAME" > ~/.local/state/zellij-last-session
-    zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--session $TARGET_SESSION"
+    ${lib.getExe pkgs.zellij} action switch-session $TARGET_SESSION
   '';
 in
 
@@ -42,13 +42,13 @@ in
                 return 1
               end
               echo "$ZELLIJ_SESSION_NAME" > ~/.local/state/zellij-last-session
-              zellij pipe --plugin file:$(which zellij-switch.wasm) -- "--cwd $TARGET_DIR --layout default --session $(basename $TARGET_DIR)"
+              ${lib.getExe pkgs.zellij} action switch-session $(basename $TARGET_DIR) --cwd $TARGET_DIR --layout default
             '';
         };
         gh-run = {
           body = # fish
             ''
-              zellij action new-pane --start-suspended -- gh run watch
+              ${lib.getExe pkgs.zellij} action new-pane --start-suspended -- gh run watch
             '';
         };
       };
@@ -143,8 +143,8 @@ in
                 _args =
                   if pkgs.stdenv.isDarwin then
                     [
-                      "env"
-                      "PATH=/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/bin"
+                      # "env"
+                      # "PATH=/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/bin"
                       (lib.getExe zellij-switch-to-last)
                     ]
                   else
