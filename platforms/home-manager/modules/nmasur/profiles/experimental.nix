@@ -33,6 +33,7 @@ in
 
       # pkgs.crush # AI LLM Agent
       pkgs.gemini-cli # AI LLM Agent
+      pkgs.pi-coding-agent # AI LLM Agent
 
     ];
 
