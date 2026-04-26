@@ -25,7 +25,7 @@ in
       pkgs.duf # Basic disk information (df)
       pkgs.jless # JSON viewer
       pkgs.jo # JSON output
-      pkgs.mpd # TUI slideshows
+      pkgs.stable.mpd # TUI slideshows
       pkgs.nixfmt # Format Nix code
       pkgs.nmasur.jqr # FZF fq JSON tool
       pkgs.nmasur.osc # Clipboard over SSH

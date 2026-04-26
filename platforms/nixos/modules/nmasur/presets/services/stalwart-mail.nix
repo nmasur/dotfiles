@@ -34,6 +34,7 @@ in
         };
       };
     };
+    services.stalwart.stateVersion = config.system.stateVersion;
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ hostnames.contacts ];
