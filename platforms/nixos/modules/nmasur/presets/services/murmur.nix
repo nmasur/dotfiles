@@ -34,7 +34,9 @@ in
 
     security.acme.certs."${hostnames.mumble}" = {
       dnsProvider = "cloudflare";
-      credentialsFile = config.secrets.cloudflare-dns-api-prefixed.dest;
+      credentialFiles = {
+        CLOUDFLARE_API_KEY_FILE = config.secrets.cloudflare-dns-api-prefixed.dest;
+      };
       group = config.services.murmur.group;
     };
   };
