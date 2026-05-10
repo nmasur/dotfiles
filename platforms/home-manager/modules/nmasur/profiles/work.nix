@@ -72,7 +72,11 @@ in
         ripgrep.enable = lib.mkDefault true;
         starship.enable = lib.mkDefault true;
         terraform.enable = lib.mkDefault true;
+        thunderbird.enable = lib.mkDefault true;
         weather.enable = lib.mkDefault true;
+      };
+      services = {
+        mbsync.enable = lib.mkDefault true;
       };
     };
 

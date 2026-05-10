@@ -52,6 +52,7 @@ in
         "/Applications/Ghostty.app"
         "${pkgs.discord}/Applications/Discord.app"
         "${pkgs.obsidian}/Applications/Obsidian.app"
+        "${pkgs.thunderbird}/Applications/Thunderbird.app"
       ];
     };
   };
