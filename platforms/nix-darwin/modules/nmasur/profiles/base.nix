@@ -22,7 +22,7 @@ in
         homebrew.enable = lib.mkDefault true;
       };
       services = {
-        daily-summary.enable = lib.mkDefault true;
+        daily-summary.enable = lib.mkDefault false;
         dock.enable = lib.mkDefault true;
         finder.enable = lib.mkDefault true;
         hammerspoon.enable = lib.mkDefault true;
