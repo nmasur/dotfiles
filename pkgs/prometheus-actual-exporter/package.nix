@@ -3,7 +3,8 @@
   fetchFromGitHub,
   nodejs_20,
   buildNpmPackage,
-  nodePackages,
+  typescript,
+  node-gyp,
   python3,
   gcc,
   gnumake,
@@ -30,9 +31,9 @@ buildNpmPackage (finalAttrs: rec {
 
   nativeBuildInputs = [
     nodejs_20
-    nodePackages.typescript
+    typescript
     python3
-    nodePackages.node-gyp
+    node-gyp
     gcc
     gnumake
   ];
@@ -53,8 +54,8 @@ buildNpmPackage (finalAttrs: rec {
     # export npm_config_build_from_source=true
     # export npm_config_unsafe_perm=true
     # export BINARY_SITE=none
-    # export PATH=${nodePackages.node-gyp}/bin:$PATH
-    # export npm_config_node_gyp=${nodePackages.node-gyp}/bin/node-gyp
+    # export PATH=${node-gyp}/bin:$PATH
+    # export npm_config_node_gyp=${node-gyp}/bin/node-gyp
 
     # npm rebuild better-sqlite3 --build-from-source --verbose
 
@@ -74,8 +75,8 @@ buildNpmPackage (finalAttrs: rec {
     export npm_config_build_from_source=true
     export npm_config_unsafe_perm=true
     export BINARY_SITE=none
-    export PATH=${nodePackages.node-gyp}/bin:$PATH
-    export npm_config_node_gyp=${nodePackages.node-gyp}/bin/node-gyp
+    export PATH=${node-gyp}/bin:$PATH
+    export npm_config_node_gyp=${node-gyp}/bin/node-gyp
 
     sed -i '/"install"/d' node_modules/better-sqlite3/package.json
     rm -f node_modules/better-sqlite3/build/Release/better_sqlite3.node || true

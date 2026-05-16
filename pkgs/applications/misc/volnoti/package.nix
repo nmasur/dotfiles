@@ -1,6 +1,9 @@
 # Fix: Volnoti error: 'volnoti' has been removed due to lack of maintenance upstream.
 
 { pkgs, lib, ... }:
+if !pkgs.stdenv.isLinux then
+  null
+else
 pkgs.stdenv.mkDerivation {
   pname = "volnoti";
   version = "2013-09-23";

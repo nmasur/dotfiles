@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh run *)",
+      "Bash(jj status *)",
+      "Bash(jj new *)",
+      "Bash(jj describe *)",
+      "Bash(nix flake *)"
     ]
   }
 }

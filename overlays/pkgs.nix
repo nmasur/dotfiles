@@ -21,6 +21,9 @@ let
     # [ package1.drv package2.drv ]
     (builtins.map (name: prev.callPackage name { }))
 
+    # Filter out packages that return null (e.g. platform-specific packages)
+    (builtins.filter (v: v != null))
+
     # Convert the list to an attrset
     # { package1 = package1.drv, package2 = package2.drv }
     listToAttrsByPnameOrName
