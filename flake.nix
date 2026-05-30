@@ -75,11 +75,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    jj-starship = {
-      url = "github:dmmulroy/jj-starship";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # # Text editor
     # helix = {
     #   url = "github:helix-editor/helix";
