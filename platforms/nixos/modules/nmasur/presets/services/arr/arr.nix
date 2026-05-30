@@ -71,7 +71,7 @@ in
       bazarr = {
         enable = true;
       };
-      jellyseerr.enable = true;
+      seerr.enable = true;
       prowlarr.enable = true;
       sabnzbd = {
         enable = true;
@@ -244,7 +244,7 @@ in
         handle = [
           {
             handler = "reverse_proxy";
-            upstreams = [ { dial = "localhost:${builtins.toString config.services.jellyseerr.port}"; } ];
+            upstreams = [ { dial = "localhost:${builtins.toString config.services.seerr.port}"; } ];
           }
         ];
       }

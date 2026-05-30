@@ -3,6 +3,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -46,6 +47,9 @@ in
     ) cfg.publicKeys;
 
     # Add terminfo for SSH from popular terminal emulators
-    environment.enableAllTerminfo = true;
+    environment.systemPackages = [
+      pkgs.ghostty.terminfo
+      pkgs.kitty.terminfo
+    ];
   };
 }

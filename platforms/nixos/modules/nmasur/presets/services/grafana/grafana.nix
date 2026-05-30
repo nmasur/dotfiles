@@ -786,7 +786,7 @@ in
                           {
                             matcher = {
                               id = "byName";
-                              options = "localhost:${builtins.toString config.services.jellyseerr.port}";
+                              options = "localhost:${builtins.toString config.services.seerr.port}";
                             };
                             properties = [
                               {
