@@ -45,6 +45,7 @@ in
       ];
       # If password is requested and fails, continue to boot eventually
       passwordTimeout = 300;
+      forceImportRoot = false; # Recommended default
     };
 
   };

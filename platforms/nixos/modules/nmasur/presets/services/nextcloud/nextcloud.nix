@@ -17,7 +17,7 @@ in
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud32; # Required to specify
+      package = pkgs.nextcloud33; # Required to specify
       configureRedis = true;
       datadir = "/data/nextcloud";
       database.createLocally = true;

@@ -791,7 +791,7 @@ in
                             properties = [
                               {
                                 id = "displayName";
-                                value = "Jellyseerr";
+                                value = "Seerr";
                               }
                               {
                                 id = "links";
