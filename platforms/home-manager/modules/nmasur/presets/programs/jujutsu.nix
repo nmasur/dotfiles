@@ -33,7 +33,7 @@ in
 
     home.packages = [
       # Required for the fsmonitor to auto-snapshot
-      pkgs.watchman
+      pkgs.stable.watchman
 
       # Required to be on path to work in Zellij
       pkgs.jjui
