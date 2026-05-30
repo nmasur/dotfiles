@@ -35,7 +35,7 @@ in
       group = "grafana";
       permissions = "0440";
     };
-    systemd.services.grafana-secret-key  = {
+    systemd.services.grafana-secret-key-secret  = {
       requiredBy = [ "grafana.service" ];
       before = [ "grafana.service" ];
     };
