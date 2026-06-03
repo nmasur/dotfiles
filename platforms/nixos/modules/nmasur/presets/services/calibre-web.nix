@@ -32,14 +32,10 @@ in
         reverseProxyAuth.enable = false;
         enableBookConversion = true;
         enableBookUploading = true;
+        # Point this directly to the folder containing your 'metadata.db' file
         calibreLibrary = libraryPath;
       };
     };
-
-    # metadata.db lives in /var/lib/calibre-web-db and is symlinked into the
-    # library dir; ProtectSystem=strict in the upstream module blocks writes
-    # through symlinks unless the real target path is also listed.
-    systemd.services.calibre-web.serviceConfig.ReadWritePaths = [ "/var/lib/calibre-web-db" ];
 
     # Allow web traffic to Caddy
     nmasur.presets.services.caddy.routes = [
@@ -64,6 +60,13 @@ in
 
     # Grant user access to Calibre directories
     users.users.${username}.extraGroups = [ "calibre-web" ];
+
+    # Ensure the service has explicit filesystem read/write access to the library path
+    # This fixes the "sqlite3.OperationalError: unable to open database file" bug
+    systemd.services.calibre-web.serviceConfig.ReadWritePaths = [
+      libraryPath
+      "/var/lib/calibre-web-db"
+    ];
 
     # Run a backup on a schedule
     systemd.timers.calibre-backup = lib.mkIf config.nmasur.presets.services.litestream.enable {
