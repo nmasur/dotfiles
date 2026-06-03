@@ -36,6 +36,11 @@ in
       };
     };
 
+    # metadata.db lives in /var/lib/calibre-web-db and is symlinked into the
+    # library dir; ProtectSystem=strict in the upstream module blocks writes
+    # through symlinks unless the real target path is also listed.
+    systemd.services.calibre-web.serviceConfig.ReadWritePaths = [ "/var/lib/calibre-web-db" ];
+
     # Allow web traffic to Caddy
     nmasur.presets.services.caddy.routes = [
       {
