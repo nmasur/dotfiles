@@ -65,7 +65,7 @@ in
     };
 
     xdg.configFile."git/allowed-signers".text = ''
-      7386960+nmasur@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s
+      ${config.nmasur.presets.programs.git.email} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+AbmjGEwITk5CK9y7+Rg27Fokgj9QEjgc9wST6MA3s
     '';
 
     programs.fish.shellAbbrs = {

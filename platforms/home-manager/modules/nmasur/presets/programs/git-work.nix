@@ -39,8 +39,19 @@ in
   config = lib.mkIf cfg.enable {
 
     programs.git = {
-      settings.user.name = lib.mkForce cfg.work.name;
-      settings.user.email = lib.mkForce cfg.work.email;
+      settings = {
+        user = {
+          name = lib.mkForce cfg.work.name;
+          email = lib.mkForce cfg.work.email;
+          signingKey = "~/.ssh/work_github";
+        };
+        commit = {
+          gpgsign = true;
+        };
+        tag = {
+          gpgsign = true;
+        };
+      };
       includes = [
         {
           path = "${config.home.homeDirectory}/${config.xdg.configFile."git/personal".target}";
@@ -50,18 +61,17 @@ in
 
     };
 
+    # Add work to signers file
+    xdg.configFile."git/allowed-signers".text = ''
+      ${cfg.work.email} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIP7aXbmKHmWUZgwG5HPtwx+nREVeMIRplpAAzxPOFXL
+    '';
+
     # Personal git config
     xdg.configFile."git/personal".text = lib.generators.toGitINI {
       user = {
         name = cfg.personal.name;
         email = cfg.personal.email;
         signingkey = "~/.ssh/id_ed25519";
-      };
-      commit = {
-        gpgsign = true;
-      };
-      tag = {
-        gpgsign = true;
       };
     };
 
