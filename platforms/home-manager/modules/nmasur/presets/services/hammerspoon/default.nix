@@ -32,9 +32,9 @@ in
     xdg.configFile."hammerspoon/Spoons/HideZoomWindow.spoon".source = ./Spoons/HideZoomWindow.spoon;
 
     home.activation.reloadHammerspoon = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.reload()"
+      $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.reload()" || true
       $DRY_RUN_CMD sleep 1
-      $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.console.clearConsole()"
+      $DRY_RUN_CMD /Applications/Hammerspoon.app/Contents/Frameworks/hs/hs -c "hs.console.clearConsole()" || true
     '';
   };
 
