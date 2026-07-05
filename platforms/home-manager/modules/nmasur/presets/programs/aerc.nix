@@ -202,6 +202,9 @@ in
       };
     };
 
+    # Used for macOS
+    xdg.enable = lib.mkDefault pkgs.stdenv.isDarwin;
+
     xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux) {
       name = "aerc";
       exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} -e aerc %u";

@@ -17,32 +17,25 @@ in
 
     nmasur.presets = {
       fonts.enable = lib.mkDefault true;
-      services.hammerspoon.enable = lib.mkDefault true;
-      programs.nixpkgs-darwin.enable = lib.mkDefault true;
-      programs.mpv.enable = lib.mkDefault true;
+      services = {
+        darwin-settings.enable = lib.mkDefault true;
+        dock.enable = lib.mkDefault true;
+        finder.enable = lib.mkDefault true;
+        hammerspoon.enable = lib.mkDefault true;
+        menubar.enable = lib.mkDefault true;
+      };
+      programs = {
+        fish-darwin.enable = lib.mkDefault true;
+        homebrew.enable = lib.mkDefault true;
+        nixpkgs-darwin.enable = lib.mkDefault true;
+        mpv.enable = lib.mkDefault true;
+      };
     };
 
     home.homeDirectory = lib.mkForce "/Users/${config.home.username}";
 
-    # Default shell setting doesn't work
-    home.sessionVariables = {
-      SHELL = "${pkgs.fish}/bin/fish";
-    };
-
-    # Used for aerc
-    xdg.enable = lib.mkDefault pkgs.stdenv.isDarwin;
-
-    programs.fish.shellAbbrs.t = "trash";
-
-    # Add homebrew paths to CLI path
-    home.sessionPath = [
-      "/opt/homebrew/bin/"
-      "/opt/homebrew/opt/trash/bin"
-    ];
-
     home.packages = [
       pkgs.noti # Create notifications programmatically
-      pkgs.ice-bar # Menu bar hiding
     ];
   };
 

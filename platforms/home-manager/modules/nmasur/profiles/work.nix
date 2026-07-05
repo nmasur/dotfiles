@@ -43,6 +43,14 @@ in
       pkgs.uv # Python packaging
     ];
 
+    home.file.".Brewfile".text = /* homebrew */ ''
+      cask "1password" # 1Password will not launch from Nix on macOS
+      # cask "gitify" # Git notifications in menu bar (downgrade manually from 4.6.1)
+      # cask "logitech-g-hub" # Mouse and keyboard management
+      cask "logitune" # Logitech webcam firmware
+      cask "meetingbar" # Show meetings in menu bar
+    '';
+
     programs.fish.shellAliases.ec2 = "aws-ec2";
 
     nmasur.presets = {

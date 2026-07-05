@@ -16,13 +16,12 @@ in
   config = lib.mkIf cfg.enable {
 
     # Set the i3 terminal
-    nmasur.presets.services.i3.terminal =
-      if pkgs.stdenv.isDarwin then pkgs.alacritty else config.programs.ghostty.package;
+    nmasur.presets.services.i3.terminal = config.programs.ghostty.package;
 
     programs.ghostty = {
       enable = true;
 
-      package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
+      package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
 
       enableFishIntegration = true;
       enableBashIntegration = true;

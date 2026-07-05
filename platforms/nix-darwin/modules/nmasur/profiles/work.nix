@@ -16,12 +16,12 @@ in
 
     nmasur.profiles.base.enable = lib.mkDefault true;
 
-    homebrew.casks = [
-      "1password" # 1Password will not launch from Nix on macOS
-      # "gitify" # Git notifications in menu bar (downgrade manually from 4.6.1)
-      # "logitech-g-hub" # Mouse and keyboard management
-      "logitune" # Logitech webcam firmware
-      "meetingbar" # Show meetings in menu bar
-    ];
+    # homebrew.casks = [
+    #   "1password" # 1Password will not launch from Nix on macOS
+    #   # "gitify" # Git notifications in menu bar (downgrade manually from 4.6.1)
+    #   # "logitech-g-hub" # Mouse and keyboard management
+    #   "logitune" # Logitech webcam firmware
+    #   "meetingbar" # Show meetings in menu bar
+    # ];
   };
 }
