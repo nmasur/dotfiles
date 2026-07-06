@@ -35,6 +35,7 @@ in
         {
           discord = "${pkgs.discord}/Applications/Discord.app";
           firefox = "${pkgs.firefox-unwrapped}/Applications/Firefox.app";
+          ghostty = "${pkgs.ghostty-bin}/Applications/Ghostty.app";
           obsidian = "${pkgs.obsidian}/Applications/Obsidian.app";
           slack = "${pkgs.slack}/Applications/Slack.app";
           wezterm = "${pkgs.wezterm}/Applications/WezTerm.app";
