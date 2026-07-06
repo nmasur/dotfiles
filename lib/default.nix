@@ -66,7 +66,9 @@ lib
   overlays = [
     inputs.nur.overlays.default
     inputs.nix2vim.overlay
-    inputs.zellij-switch.overlays.default
+    (final: prev: {
+      zellij-switch = inputs.zellij-switch.packages.${prev.stdenv.hostPlatform.system}.default;
+    })
     # inputs.helix.overlays.default
   ]
   ++ (importOverlays ../overlays);
