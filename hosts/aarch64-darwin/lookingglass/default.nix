@@ -12,9 +12,9 @@ rec {
 
   nmasur.profiles = {
     base.enable = true;
-    work.enable = true;
-    extra.enable = true;
-    gaming.enable = true;
+    # work.enable = true;
+    # extra.enable = true;
+    # gaming.enable = true;
   };
 
   home-manager.users."Noah.Masur" = {
@@ -26,6 +26,7 @@ rec {
     nmasur.profiles = {
       common.enable = true;
       darwin-base.enable = true;
+      darwin-gaming.enable = true;
       power-user.enable = true;
       work.enable = true;
       experimental.enable = true;
