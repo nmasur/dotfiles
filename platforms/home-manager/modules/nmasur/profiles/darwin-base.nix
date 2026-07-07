@@ -29,14 +29,11 @@ in
         homebrew.enable = lib.mkDefault true;
         nixpkgs-darwin.enable = lib.mkDefault true;
         mpv.enable = lib.mkDefault true;
+        noti.enable = lib.mkDefault true;
       };
     };
 
     home.homeDirectory = lib.mkForce "/Users/${config.home.username}";
-
-    home.packages = [
-      pkgs.noti # Create notifications programmatically
-    ];
   };
 
   # Fix for: 'Error: HOME is set to "/var/root" but we expect "/var/empty"'
