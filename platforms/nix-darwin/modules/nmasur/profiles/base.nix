@@ -17,10 +17,11 @@ in
     system.primaryUser = config.nmasur.settings.username;
 
     nmasur.presets = {
-      # programs = {
-      # fish.enable = lib.mkDefault true;
-      # homebrew.enable = lib.mkDefault true;
-      # };
+      programs = {
+        _1password.enable = lib.mkDefault true;
+        # fish.enable = lib.mkDefault true;
+        # homebrew.enable = lib.mkDefault true;
+      };
       services = {
         # daily-summary.enable = lib.mkDefault false;
         # dock.enable = lib.mkDefault true;

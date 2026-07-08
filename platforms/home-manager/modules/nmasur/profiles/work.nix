@@ -44,7 +44,7 @@ in
     ];
 
     home.file.".Brewfile".text = /* homebrew */ ''
-      cask "1password" # 1Password will not launch from Nix on macOS
+      # cask "1password" # 1Password will not launch from Nix on macOS
       # cask "gitify" # Git notifications in menu bar (downgrade manually from 4.6.1)
       # cask "logitech-g-hub" # Mouse and keyboard management
       cask "logitune" # Logitech webcam firmware
@@ -56,7 +56,7 @@ in
     nmasur.presets = {
       fonts.enable = lib.mkDefault true;
       programs = {
-        _1password.enable = lib.mkDefault true;
+        # _1password.enable = lib.mkDefault true;
         atuin.enable = lib.mkDefault true;
         aws-ssh.enable = lib.mkDefault true;
         bash.enable = lib.mkDefault true;
