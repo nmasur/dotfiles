@@ -103,6 +103,9 @@ lib
       config.permittedInsecurePackages = [
         "litestream-0.3.13"
         "electron-36.9.5"
+        # Build-time-only dep of karakeep's frontend; CVEs don't reach
+        # the runtime closure. Remove once nixpkgs bumps it.
+        "pnpm-9.15.9"
       ];
       config.allowUnfree = true;
     }
