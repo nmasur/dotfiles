@@ -28,6 +28,7 @@ rec {
     nmasur.profiles = {
       common.enable = true;
       linux-base.enable = true;
+      llm-development.enable = true;
       power-user.enable = true;
     };
     nmasur.presets.programs.helix.enable = true;

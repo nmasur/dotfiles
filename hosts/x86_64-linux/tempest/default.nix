@@ -30,6 +30,7 @@ rec {
       linux-base.enable = true;
       linux-gui.enable = true;
       linux-gaming.enable = true;
+      llm-development.enable = true;
       power-user.enable = true;
       developer.enable = true;
       experimental.enable = true;

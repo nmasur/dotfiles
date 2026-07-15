@@ -12,12 +12,9 @@ in
   options.nmasur.presets.programs._1password.enable = lib.mkEnableOption "1Password password manager";
 
   config = lib.mkIf cfg.enable {
-    allowUnfreePackages = [
-      "1password"
-      "_1password-gui"
-      "1password-cli"
-    ];
-
+    # Unfree packages are already permitted via the shared nixpkgs instance
+    # created in lib/default.nix (config.allowUnfree = true). Setting
+    # nixpkgs.config here would conflict with nixpkgs.pkgs being set externally.
     programs._1password.enable = true;
     programs._1password-gui = {
       enable = true;
