@@ -179,22 +179,20 @@ lib
     inputs.darwin.lib.darwinSystem {
       inherit system specialArgs;
       modules = [
-        inputs.home-manager.darwinModules.home-manager
         inputs.mac-app-util.darwinModules.default
         {
           imports = (nixFiles ../platforms/nix-darwin);
           nixpkgs.pkgs = pkgsBySystem.${system};
         }
-        module
-        {
-          home-manager = {
-            extraSpecialArgs = {
-              inherit colorscheme;
-            }
-            // specialArgs;
-          }
-          // homeModule.home-manager;
-        }
+        # Home Manager is intentionally NOT activated here. It is managed
+        # standalone via `nh home switch` (see homeConfigurations, extracted
+        # from the host module's `home-manager.users`). Strip that attr so
+        # darwin-rebuild doesn't also activate a second, divergent HM
+        # generation with different store paths (useUserPackages puts packages
+        # in /etc/profiles/per-user vs. ~/.nix-profile standalone) -- that
+        # mismatch broke the prompt after every darwin-rebuild until the next
+        # `nh home switch`.
+        (builtins.removeAttrs module [ "home-manager" ])
       ];
     };
 
