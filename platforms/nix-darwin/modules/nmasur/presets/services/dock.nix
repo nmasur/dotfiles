@@ -50,7 +50,10 @@ in
         "/System/Applications/Mail.app"
         "/Applications/zoom.us.app"
         "/Applications/Ghostty.app"
-        "${pkgs.discord}/Applications/Discord.app"
+        # Discord comes from Homebrew on macOS: the nixpkgs bundle is modified
+        # in place, breaking its notarization seal, so macOS 26+ refuses to
+        # launch it ("damaged").
+        "/Applications/Discord.app"
         "${pkgs.obsidian}/Applications/Obsidian.app"
         "${pkgs.thunderbird}/Applications/Thunderbird.app"
       ];

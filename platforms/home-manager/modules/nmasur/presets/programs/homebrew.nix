@@ -27,6 +27,7 @@ in
       cask "notunes" # Don't launch Apple Music with the play button
       cask "topnotch" # Darkens the menu bar to complete black
       cask "ghostty" # Terminal application (not buildable on Nix on macOS)
+      cask "discord" # nixpkgs bundle breaks its notarization seal on macOS 26+
 
       # Mac App Store apps (requires 'mas' CLI, optional)
       # mas "Tailscale", id: 1475387142
