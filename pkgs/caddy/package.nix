@@ -18,5 +18,5 @@
 }).withPlugins
   {
     plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
-    hash = "sha256-xz43pXTsnYmXZDAAUT+vTapoq3O/8br7igGwqZbjFdk=";
+    hash = "sha256-pNIRthmPf+J6BPfJ51afBCWt66evnRs1+f9wv09EvK0=";
   }
