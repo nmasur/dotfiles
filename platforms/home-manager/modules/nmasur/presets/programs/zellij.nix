@@ -109,6 +109,10 @@ in
 
       settings = {
         default_mode = "locked";
+        # Spawn fish directly instead of trusting $SHELL, which inherits the
+        # macOS login shell. On darwin that login shell is no longer managed by
+        # nix-darwin, so $SHELL can point at a stale /run/current-system path.
+        default_shell = lib.getExe pkgs.fish;
         # default_layout = "compact-top";
         # Remove border
         pane_frames = false;

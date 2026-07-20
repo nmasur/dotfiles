@@ -19,7 +19,7 @@ in
     nmasur.presets = {
       programs = {
         _1password.enable = lib.mkDefault true;
-        # fish.enable = lib.mkDefault true;
+        fish.enable = lib.mkDefault true;
         # homebrew.enable = lib.mkDefault true;
       };
       services = {

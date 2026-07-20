@@ -18,16 +18,16 @@ in
       ca = "cargo";
     };
 
-    home.packages = with pkgs; [
-      gcc
-      rustc
-      cargo
-      cargo-watch
-      clippy
-      rustfmt
-      pkg-config
-      openssl
-      rust-analyzer
+    home.packages = [
+      pkgs.gcc
+      pkgs.rustc
+      pkgs.cargo
+      pkgs.stable.cargo-watch
+      pkgs.clippy
+      pkgs.rustfmt
+      pkgs.pkg-config
+      pkgs.openssl
+      pkgs.rust-analyzer
     ];
   };
 }
