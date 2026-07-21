@@ -40,6 +40,12 @@
       # inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list for their inputs
     };
 
+    # Caddy with decoupled plugin hashes
+    nix-caddy-withplugins = {
+      url = "github:MichailiK/nix-caddy-withplugins/nixos-unstable";
+      # Important: Do not follow nixpkgs here, per the README
+    };
+
     # Manage disk format and partitioning
     disko = {
       url = "github:nix-community/disko";
