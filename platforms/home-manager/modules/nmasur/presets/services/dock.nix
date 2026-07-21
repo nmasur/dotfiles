@@ -48,7 +48,7 @@ in
         tilesize = 44;
 
         persistent-apps = map mkDockApp [
-          "${pkgs._1password-gui}/Applications/1Password.app"
+          "/Applications/1Password.app"
           "${pkgs.slack}/Applications/Slack.app"
           "/System/Applications/Calendar.app"
           "${pkgs.firefox-unwrapped}/Applications/Firefox.app"

@@ -33,7 +33,7 @@ in
     xdg.configFile."hammerspoon/Spoons/Launcher.spoon/init.lua".source =
       pkgs.replaceVars ./Spoons/Launcher.spoon/init.lua
         {
-          discord = "${pkgs.discord}/Applications/Discord.app";
+          discord = "Discord.app";
           firefox = "${pkgs.firefox-unwrapped}/Applications/Firefox.app";
           ghostty = "${pkgs.ghostty-bin}/Applications/Ghostty.app";
           obsidian = "${pkgs.obsidian}/Applications/Obsidian.app";
