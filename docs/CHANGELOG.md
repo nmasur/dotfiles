@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-25
+
+- Added `overlays/cheetah3.nix` to disable `pythonMetadataCheckPhase` for `cheetah3`. 
+  This fixes an issue where the NixOS rebuild fails for `sabnzbd` due to `importlib.metadata.PackageNotFoundError: No package metadata was found for cheetah3` during the Python package evaluation in `nixos-unstable`.
+
 ## 2026-07-20
 
 - Added `overlays/paho-mqtt.nix` to disable paho-mqtt's flaky, socket-based
