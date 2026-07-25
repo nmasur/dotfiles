@@ -49,10 +49,12 @@ in
 
         persistent-apps = map mkDockApp [
           "/Applications/1Password.app"
+          "${pkgs.thunderbird}/Applications/Thunderbird.app"
           "${pkgs.slack}/Applications/Slack.app"
           "/System/Applications/Calendar.app"
           "${pkgs.firefox-unwrapped}/Applications/Firefox.app"
           "/System/Applications/Messages.app"
+          "/System/Applications/Preview.app"
           "/System/Applications/Mail.app"
           "/Applications/zoom.us.app"
           "${config.programs.ghostty.package}/Applications/Ghostty.app"
@@ -61,7 +63,6 @@ in
           # refuses to launch it ("damaged"). See presets/programs/homebrew.nix.
           "/Applications/Discord.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
-          "${pkgs.thunderbird}/Applications/Thunderbird.app"
         ];
       };
     };
