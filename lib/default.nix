@@ -159,6 +159,7 @@ lib
         inputs.wsl.nixosModules.wsl
         { imports = (nixFiles ../platforms/nixos); }
         module
+        # (builtins.removeAttrs module [ "home-manager" ])
         {
           home-manager = {
             extraSpecialArgs = {

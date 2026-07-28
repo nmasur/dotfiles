@@ -21,6 +21,23 @@ in
       };
       services = {
         actualbudget.enable = lib.mkDefault true;
+        actualtap = {
+          enable = lib.mkDefault true;
+          instances = {
+            budget1 = {
+              port = 3031;
+              path = "/actualtap1";
+              budgetIdFile = ../presets/services/actualtap/budget1-id.age;
+              apiKeyFile = ../presets/services/actualtap/budget1-api-key.age;
+            };
+            budget2 = {
+              port = 3032;
+              path = "/actualtap2";
+              budgetIdFile = ../presets/services/actualtap/budget2-id.age;
+              apiKeyFile = ../presets/services/actualtap/budget2-api-key.age;
+            };
+          };
+        };
         caddy.enable = lib.mkDefault true;
         cloudflare.enable = lib.mkDefault true;
         cloudflared.enable = lib.mkDefault true;

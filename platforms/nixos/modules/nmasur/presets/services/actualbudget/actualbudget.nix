@@ -109,8 +109,9 @@ in
     };
 
     # Allow web traffic to Caddy
-    nmasur.presets.services.caddy.routes = [
+    nmasur.presets.services.caddy.routes = lib.mkAfter [
       {
+        group = "actual";
         match = [ { host = [ hostnames.budget ]; } ];
         handle = [
           {
