@@ -21,6 +21,9 @@ in
 
     home.packages = [
 
+      pkgs.nmasur.ren-find # Rename files
+      pkgs.nmasur.rep-grep # Replace text in files
+
       # Charm tools
 
       pkgs.glow # Markdown previews

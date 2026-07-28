@@ -29,8 +29,6 @@ in
       pkgs.nixfmt # Format Nix code
       pkgs.nmasur.jqr # FZF fq JSON tool
       pkgs.nmasur.osc # Clipboard over SSH
-      pkgs.nmasur.ren-find # Rename files
-      pkgs.nmasur.rep-grep # Replace text in files
       pkgs.pandoc # Convert text documents
       pkgs.qrencode # Generate qr codes
       pkgs.spacer # Output lines in terminal
