@@ -7,6 +7,7 @@
 
 let
   cfg = config.nmasur.presets.programs.jujutsu;
+  tomlFormat = pkgs.formats.toml { };
 in
 
 {
@@ -29,6 +30,31 @@ in
         fsmonitor.backend = "watchman";
         fsmonitor.watchman.register-snapshot-trigger = true;
       };
+    };
+
+    xdg.configFile."jjui/config.toml".source = tomlFormat.generate "jjui-config" {
+      actions = [
+        {
+          name = "set-github-bypass";
+          lua = ''
+            exec_shell([[gh api --method PATCH -H "Accept: application/vnd.github+json" /repos/$(gh repo view --json nameWithOwner -q .nameWithOwner)/properties/values -f 'properties[][property_name]=Allow-Ruleset-Bypass' -f 'properties[][value]=true']])
+            flash("Set GitHub rule bypass")
+          '';
+          key = "ctrl+b";
+          scope = "revisions";
+          desc = "Set GitHub rule bypass";
+        }
+        {
+          name = "remove-github-bypass";
+          lua = ''
+            exec_shell([[gh api --method PATCH -H "Accept: application/vnd.github+json" /repos/$(gh repo view --json nameWithOwner -q .nameWithOwner)/properties/values -f 'properties[][property_name]=Allow-Ruleset-Bypass' -f 'properties[][value]=']])
+            flash("Removed GitHub rule bypass")
+          '';
+          key = "ctrl+shift+b";
+          scope = "revisions";
+          desc = "Remove GitHub rule bypass";
+        }
+      ];
     };
 
     home.packages = [
