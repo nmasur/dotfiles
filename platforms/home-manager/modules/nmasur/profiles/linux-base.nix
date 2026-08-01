@@ -30,8 +30,9 @@ in
       publicShare = lib.mkDefault "$HOME/other/public";
       templates = lib.mkDefault "$HOME/other/templates";
       extraConfig = {
-        XDG_DEV_DIR = lib.mkDefault "$HOME/dev";
+        DEV = lib.mkDefault "$HOME/dev";
       };
+      setSessionVariables = true;
     };
 
     nmasur.presets.programs = {

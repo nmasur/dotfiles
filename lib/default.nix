@@ -76,7 +76,6 @@ lib
   # System types to support.
   supportedSystems = [
     "x86_64-linux"
-    "x86_64-darwin"
     "aarch64-linux"
     "aarch64-darwin"
   ];
@@ -227,7 +226,7 @@ lib
       pkgs = pkgsBySystem.${system};
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        inputs.nix-index-database.homeModules.default
+        inputs.nix-index-database.nixosModules.default
         inputs.disko.nixosModules.disko
         inputs.wsl.nixosModules.wsl
         {

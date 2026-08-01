@@ -203,7 +203,7 @@ in
     };
 
     # Used for macOS
-    xdg.enable = lib.mkDefault pkgs.stdenv.isDarwin;
+    xdg.enable = lib.mkIf pkgs.stdenv.isDarwin true;
 
     xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux) {
       name = "aerc";

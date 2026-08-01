@@ -23,6 +23,7 @@ in
 
     programs.firefox = {
       enable = true;
+      configPath = ".mozilla/firefox";
       package = pkgs.firefox;
       profiles.default = {
         id = 0;

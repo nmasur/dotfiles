@@ -39,5 +39,6 @@ buildNpmPackage rec {
     homepage = "https://github.com/MattFaz/actualtap";
     license = licenses.gpl3Only;
     maintainers = [ ];
+    mainProgram = "actualtap";
   };
 }

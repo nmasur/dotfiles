@@ -25,6 +25,7 @@ in
   config = lib.mkIf cfg.enable {
     # Cursor
     home.pointerCursor = {
+      enable = true;
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
       size = 24;

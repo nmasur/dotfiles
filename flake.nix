@@ -159,37 +159,8 @@
           transmission = "transmission.${baseName}";
         };
 
-    in
-    rec {
-
       lib = import ./lib inputs;
       flattenAttrset = attrs: builtins.foldl' lib.mergeAttrs { } (builtins.attrValues attrs);
-
-      nixosConfigurations = flattenAttrset (
-        builtins.mapAttrs (
-          system: hosts:
-          builtins.mapAttrs (
-            name: module:
-            lib.buildNixos {
-              inherit system module;
-              specialArgs = { inherit hostnames; };
-            }
-          ) hosts
-        ) lib.linuxHosts
-      );
-
-      darwinConfigurations = flattenAttrset (
-        builtins.mapAttrs (
-          system: hosts:
-          builtins.mapAttrs (
-            name: module:
-            lib.buildDarwin {
-              inherit system module;
-              specialArgs = { inherit hostnames; };
-            }
-          ) hosts
-        ) lib.darwinHosts
-      );
 
       homeModules = builtins.mapAttrs (
         system: hosts:
@@ -197,19 +168,6 @@
           name: module: (builtins.head (lib.attrsToList module.home-manager.users)).value
         ) hosts
       ) lib.hosts;
-
-      homeConfigurations = flattenAttrset (
-        builtins.mapAttrs (
-          system: hosts:
-          builtins.mapAttrs (
-            name: module:
-            lib.buildHome {
-              inherit system module;
-              specialArgs = { inherit hostnames; };
-            }
-          ) hosts
-        ) homeModules
-      );
 
       # Disk formatting, only used once
       diskoConfigurations = {
@@ -239,6 +197,51 @@
         }) hosts)
       ) lib.linuxHosts # x86_64-linux = { arrow = ...; swan = ...; }
       ;
+
+    in
+    {
+
+      inherit lib;
+
+      nixosConfigurations = flattenAttrset (
+
+        builtins.mapAttrs (
+          system: hosts:
+          builtins.mapAttrs (
+            name: module:
+            lib.buildNixos {
+              inherit system module;
+              specialArgs = { inherit hostnames; };
+            }
+          ) hosts
+        ) lib.linuxHosts
+      );
+
+      darwinConfigurations = flattenAttrset (
+        builtins.mapAttrs (
+          system: hosts:
+          builtins.mapAttrs (
+            name: module:
+            lib.buildDarwin {
+              inherit system module;
+              specialArgs = { inherit hostnames; };
+            }
+          ) hosts
+        ) lib.darwinHosts
+      );
+
+      homeConfigurations = flattenAttrset (
+        builtins.mapAttrs (
+          system: hosts:
+          builtins.mapAttrs (
+            name: module:
+            lib.buildHome {
+              inherit system module;
+              specialArgs = { inherit hostnames; };
+            }
+          ) hosts
+        ) homeModules
+      );
 
       # packages =
       #   lib.forSystems lib.linuxSystems (
