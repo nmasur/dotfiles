@@ -58,8 +58,15 @@ in
               if test "$TARGET_DIR" = $(pwd)
                 return 1
               end
+              # Zellij names each session's IPC socket $TMPDIR/zellij-<uid>/<ver>/<name>.
+              # On macOS the socket path is capped at 103 bytes; the $TMPDIR prefix under
+              # /var/folders/... eats ~79 of those, leaving only ~24 chars for the name.
+              # A longer basename overflows the socket path, and because switch-session has
+              # already detached from the current session by the time the new one fails to
+              # bind, it takes the whole terminal down. Truncate to stay well under the limit.
+              set SESSION_NAME (basename $TARGET_DIR | string sub --length 20)
               echo "$ZELLIJ_SESSION_NAME" > ~/.local/state/zellij-last-session
-              ${lib.getExe pkgs.zellij} action switch-session $(basename $TARGET_DIR) --cwd $TARGET_DIR --layout default
+              ${lib.getExe pkgs.zellij} action switch-session $SESSION_NAME --cwd $TARGET_DIR --layout default
             '';
         };
         gh-run = {
