@@ -2,6 +2,43 @@
 
 ## 2026-08-03
 
+- Added `presets/security/corporate-ca.nix` (nix-darwin) and enabled it on the
+  `lookingglass` host to trust a corporate TLS-intercepting proxy's root CA.
+  Behind the corp network, Nix fetches failed with `SSL peer certificate ...
+  self-signed certificate in certificate chain (19)` because Nix's stock Mozilla
+  CA bundle doesn't contain the interception root. The module appends the cert
+  to `security.pki.certificateFiles`, which rebuilds
+  `/etc/ssl/certs/ca-certificates.crt` (read by both the Nix daemon and, via
+  `NIX_SSL_CERT_FILE`, client-side flake fetches).
+
+  The cert is kept **out of this public repo** and referenced by absolute path.
+  It is passed as a string (not a Nix path literal) so pure flake evaluation
+  doesn't read it at eval time, and it lives at a root-owned, world-readable
+  path because the unprivileged `nixbld` build user cannot traverse `$HOME`
+  (mode `0750`) to read it at build time.
+
+  One-time setup on a machine behind the proxy:
+
+  ```sh
+  # 1. Extract the self-signed corporate root from any TLS connection it MITMs
+  #    (the last cert in the chain, subject == issuer). Any HTTPS host works:
+  echo | openssl s_client -connect example.com:443 -servername example.com \
+    -showcerts 2>/dev/null \
+    | awk '/BEGIN CERT/{c++} c==2' > /tmp/CorpCA.pem
+  openssl x509 -in /tmp/CorpCA.pem -noout -subject -issuer   # sanity check
+
+  # 2. Install to the root-owned path the config points at:
+  sudo install -d -m 0755 -o root -g wheel /etc/ssl/corp-ca
+  sudo install -m 0644 -o root -g wheel /tmp/CorpCA.pem \
+    /etc/ssl/corp-ca/CorpCA.pem
+
+  # 3. Bootstrap the first rebuild (which must fetch inputs over the proxy)
+  #    with a combined bundle, then it's permanent:
+  cat /etc/ssl/certs/ca-certificates.crt /etc/ssl/corp-ca/CorpCA.pem \
+    > /tmp/combined-ca.crt
+  NIX_SSL_CERT_FILE=/tmp/combined-ca.crt nh darwin switch . --configuration lookingglass
+  ```
+
 - Fixed the `zellij-session` fish function in `presets/programs/zellij.nix`
   truncating the session name (derived from the target directory basename)
   to 20 characters. Zellij names each session's Unix-domain IPC socket

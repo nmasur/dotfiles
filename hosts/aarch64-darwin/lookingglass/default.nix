@@ -17,6 +17,16 @@ rec {
     # gaming.enable = true;
   };
 
+  # Corporate network runs a TLS-intercepting proxy. Trust its root CA so Nix
+  # fetches don't fail with "self-signed certificate in certificate chain". The
+  # cert lives outside this public repo at a root-owned, world-readable path so
+  # the unprivileged Nix build user can read it (a copy under $HOME is not
+  # traversable by nixbld). See docs/CHANGELOG.md to extract and install it.
+  nmasur.presets.security.corporateCa = {
+    enable = true;
+    certFile = "/etc/ssl/corp-ca/CorpCA.pem";
+  };
+
   home-manager.users."Noah.Masur" = {
     nmasur.settings = {
       username = nmasur.settings.username;
