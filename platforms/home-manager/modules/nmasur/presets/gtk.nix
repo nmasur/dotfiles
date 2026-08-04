@@ -49,6 +49,7 @@ in
       gtk4.extraConfig = {
         gtk-application-prefer-dark-theme = config.theme.mode == "dark";
       };
+      gtk4.theme = null;
     };
 
   };
