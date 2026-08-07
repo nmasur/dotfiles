@@ -1,5 +1,6 @@
 inputs: final: prev: {
 
-  firefox-unwrapped = final.stable.firefox-unwrapped;
+  # Switch firefox to stable or unstable depending on need
+  firefox-unwrapped = final.unstable.firefox-unwrapped;
 
 }

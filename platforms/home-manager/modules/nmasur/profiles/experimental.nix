@@ -21,8 +21,8 @@ in
 
     home.packages = [
 
-      pkgs.nmasur.ren-find # Rename files
-      pkgs.nmasur.rep-grep # Replace text in files
+      # pkgs.nmasur.ren-find # Rename files
+      # pkgs.nmasur.rep-grep # Replace text in files
 
       # Charm tools
 
@@ -30,11 +30,16 @@ in
       pkgs.skate # Key-value store
       pkgs.charm # Manage account and filesystem
       pkgs.pop # Send emails from a TUI
+      # pkgs.crush # AI LLM Agent
+
+      # Other utilities
+
       pkgs.snitch # Network
       pkgs.comma # Nix-index auto-launch
       pkgs.nix-inspect # TUI for browsing Nix configs
 
-      # pkgs.crush # AI LLM Agent
+      # LLM
+
       pkgs.gemini-cli # AI LLM Agent
       pkgs.antigravity-cli # AI LLM Agent
       pkgs.pi-coding-agent # AI LLM Agent
