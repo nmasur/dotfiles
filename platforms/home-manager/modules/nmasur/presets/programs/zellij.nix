@@ -208,11 +208,13 @@ in
             };
             "bind \"Alt Shift w\"" = {
               Run = {
-                _args = [
-                  (lib.getExe pkgs.gh)
-                  "run"
-                  "watch"
-                ];
+                _args =
+                  (if config.nmasur.presets.programs.noti.enable then [ (lib.getExe pkgs.noti) ] else [ ])
+                  ++ [
+                    (lib.getExe pkgs.gh)
+                    "run"
+                    "watch"
+                  ];
                 # direction = "Right";
                 # close_on_exit = false;
                 # start_suspended = true;
