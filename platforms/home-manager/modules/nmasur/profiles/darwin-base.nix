@@ -25,6 +25,7 @@ in
         menubar.enable = lib.mkDefault true;
       };
       programs = {
+        calibre.enable = lib.mkDefault true;
         fish-darwin.enable = lib.mkDefault true;
         homebrew.enable = lib.mkDefault true;
         nixpkgs-darwin.enable = lib.mkDefault true;
