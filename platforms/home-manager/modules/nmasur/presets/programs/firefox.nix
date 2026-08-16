@@ -21,14 +21,6 @@ in
       "okta-browser-plugin"
     ];
 
-    home.file."Library/Application Support/Firefox/installs.ini" = lib.mkIf pkgs.stdenv.isDarwin {
-      text = ''
-        [43AEB1562DAA8804]
-        Default=Profiles/default
-        Locked=1
-      '';
-    };
-
     programs.firefox = {
       enable = true;
       package = pkgs.firefox;

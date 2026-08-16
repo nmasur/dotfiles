@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-16
+
+- Fixed Firefox "profile cannot be loaded" error on macOS by removing `home.file."Library/Application Support/Firefox/installs.ini"`. Hardcoding an installation hash in `installs.ini` broke whenever Firefox was updated or rebuilt in the Nix store because the nix store path changed, causing Firefox to compute a new installation hash, fail to match or write to the read-only `installs.ini` symlink, and error out. Firefox on macOS uses `profiles.ini` (managed by Home Manager) and `MOZ_LEGACY_PROFILES=1` (exported by nixpkgs' launcher wrapper).
+
 ## 2026-08-03
 
 - Added `presets/security/corporate-ca.nix` (nix-darwin) and enabled it on the
