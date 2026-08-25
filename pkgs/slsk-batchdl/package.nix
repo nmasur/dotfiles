@@ -6,7 +6,7 @@
   dotnetCorePackages,
 }:
 
-if !stdenv.isLinux then
+if !stdenv.hostPlatform.isLinux then
   null
 else
   buildDotnetModule rec {

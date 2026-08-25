@@ -18,7 +18,7 @@ in
     programs.chawan = {
       enable = true;
       settings = {
-        external.copy-cmd = if pkgs.stdenv.isLinux then "xclip -selection clipboard -in" else "pbcopy";
+        external.copy-cmd = if pkgs.stdenv.hostPlatform.isLinux then "xclip -selection clipboard -in" else "pbcopy";
       };
     };
 

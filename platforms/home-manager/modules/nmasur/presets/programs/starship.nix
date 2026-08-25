@@ -42,7 +42,7 @@ in
         };
         cmd_duration = {
           min_time = 5001;
-          show_notifications = if pkgs.stdenv.isLinux then false else true;
+          show_notifications = if pkgs.stdenv.hostPlatform.isLinux then false else true;
           min_time_to_notify = 30000;
           format = "[$duration]($style) ";
         };

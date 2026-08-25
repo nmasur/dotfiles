@@ -105,7 +105,7 @@ in
         }
 
         config.font = wezterm.font('${cfg.font}', { weight = 'Bold'})
-        config.font_size = ${if pkgs.stdenv.isLinux then "14.0" else "18.0"}
+        config.font_size = ${if pkgs.stdenv.hostPlatform.isLinux then "14.0" else "18.0"}
 
         -- Fix color blocks instead of text
         config.front_end = "WebGpu"
@@ -114,7 +114,7 @@ in
         config.hide_tab_bar_if_only_one_tab = true
         config.window_frame = {
           font = wezterm.font('${cfg.font}', { weight = 'Bold'}),
-          font_size = ${if pkgs.stdenv.isLinux then "12.0" else "16.0"},
+          font_size = ${if pkgs.stdenv.hostPlatform.isLinux then "12.0" else "16.0"},
         }
 
         config.colors = {
@@ -191,7 +191,7 @@ in
           -- super-t open new tab in new dir
           {
             key = 't',
-            mods = ${if pkgs.stdenv.isDarwin then "'SUPER'" else "'ALT'"},
+            mods = ${if pkgs.stdenv.hostPlatform.isDarwin then "'SUPER'" else "'ALT'"},
             action = wezterm.action.SpawnCommandInNewTab {
               cwd = wezterm.home_dir,
             },

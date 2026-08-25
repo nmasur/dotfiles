@@ -15,7 +15,7 @@ in
 
     home.username = config.nmasur.settings.username;
     home.homeDirectory =
-      if pkgs.stdenv.isDarwin then "/Users/${config.home.username}" else "/home/${config.home.username}";
+      if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${config.home.username}" else "/home/${config.home.username}";
 
     home.packages = [
       pkgs.dig # DNS lookup

@@ -18,7 +18,7 @@ in
     nmasur.presets.services.i3.terminal = pkgs.kitty;
 
     # Set the Rofi terminal for running programs
-    programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux (lib.mkDefault "${pkgs.kitty}/bin/kitty");
+    programs.rofi.terminal = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (lib.mkDefault "${pkgs.kitty}/bin/kitty");
 
     # Display images in the terminal
     programs.fish.interactiveShellInit = # fish

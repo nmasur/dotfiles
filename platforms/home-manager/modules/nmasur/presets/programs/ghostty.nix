@@ -21,7 +21,7 @@ in
     programs.ghostty = {
       enable = true;
 
-      package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
+      package = if pkgs.stdenv.hostPlatform.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
 
       enableFishIntegration = false; # Handled conditionally below to avoid conflicts inside Zellij/TMUX
       enableBashIntegration = true;
@@ -33,8 +33,8 @@ in
         macos-titlebar-style = "hidden";
         window-decoration = false;
         macos-non-native-fullscreen = true;
-        quit-after-last-window-closed = lib.mkIf pkgs.stdenv.isDarwin true;
-        fullscreen = if pkgs.stdenv.isDarwin then true else false;
+        quit-after-last-window-closed = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin true;
+        fullscreen = if pkgs.stdenv.hostPlatform.isDarwin then true else false;
         keybind = [
           "super+t=unbind" # Pass super-t to underlying tool (e.g. zellij tabs)
           "super+shift+]=unbind"

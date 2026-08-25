@@ -23,7 +23,7 @@ in
     home.packages = [
       pkgs._1password-cli
     ]
-    ++ (if pkgs.stdenv.isLinux then [ pkgs._1password-gui ] else [ ]);
+    ++ (if pkgs.stdenv.hostPlatform.isLinux then [ pkgs._1password-gui ] else [ ]);
 
     # # Firefox extension
     # programs.firefox.profiles.default.extensions.packages = [

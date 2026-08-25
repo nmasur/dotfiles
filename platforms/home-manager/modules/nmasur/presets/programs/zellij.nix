@@ -140,17 +140,17 @@ in
         show_startup_tips = false;
 
         keybinds = {
-          locked = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
+          locked = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to unlock
-            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
+            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
               SwitchToMode = {
                 _args = [ "normal" ];
               };
             };
           };
-          normal = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
+          normal = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to lock
-            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.isLinux && !config.programs.ghostty.enable) {
+            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
               SwitchToMode = {
                 _args = [ "locked" ];
               };
@@ -180,7 +180,7 @@ in
             "bind \"Alt Shift s\"" = {
               Run = {
                 _args =
-                  if pkgs.stdenv.isDarwin then
+                  if pkgs.stdenv.hostPlatform.isDarwin then
                     [
                       # "env"
                       # "PATH=/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/bin"
@@ -254,7 +254,7 @@ in
             "bind \"Alt Shift j\"" = {
               Run = {
                 _args =
-                  if pkgs.stdenv.isDarwin then
+                  if pkgs.stdenv.hostPlatform.isDarwin then
                     [
                       "env"
                       "PATH=${config.home.homeDirectory}/.nix-profile/bin:/etc/profiles/per-user/${username}/bin:/usr/bin"
@@ -295,24 +295,24 @@ in
             "bind \"Ctrl Shift Tab\"" = {
               GoToPreviousTab = { };
             };
-            "bind \"Super t\"" = lib.mkIf pkgs.stdenv.isDarwin {
+            "bind \"Super t\"" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
               NewTab = { };
             };
-            "bind \"Alt t\"" = lib.mkIf pkgs.stdenv.isLinux {
+            "bind \"Alt t\"" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
               NewTab = { };
             };
-            "bind \"Super k\"" = lib.mkIf pkgs.stdenv.isDarwin {
+            "bind \"Super k\"" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
               SwitchToMode = {
                 _args = [ "scroll" ];
               };
             };
-            "bind \"Super Shift e\"" = lib.mkIf pkgs.stdenv.isDarwin {
+            "bind \"Super Shift e\"" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
               EditScrollback = { };
               SwitchToMode = {
                 _args = [ "locked" ];
               };
             };
-            "bind \"Alt Shift e\"" = lib.mkIf pkgs.stdenv.isLinux {
+            "bind \"Alt Shift e\"" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
               EditScrollback = { };
               SwitchToMode = {
                 _args = [ "locked" ];

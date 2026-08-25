@@ -15,7 +15,7 @@ in
     description = "Nixpkgs tools for macOS";
     default =
       config.nmasur.presets.programs.nixpkgs.enable
-      && pkgs.stdenv.isDarwin
+      && pkgs.stdenv.hostPlatform.isDarwin
       && config.nmasur.presets.programs.dotfiles.enable;
   };
 

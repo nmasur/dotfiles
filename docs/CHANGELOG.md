@@ -2,6 +2,12 @@
 
 ## 2026-08-25
 
+- Fixed Nix evaluation warnings for `stdenv` deprecation and `gemini-cli`:
+  - Replaced deprecated `stdenv.isLinux` and `stdenv.isDarwin` checks across module presets and package definitions with `stdenv.hostPlatform.isLinux` and `stdenv.hostPlatform.isDarwin`.
+  - Replaced deprecated `pkgs.gemini-cli` with `pkgs.antigravity-cli` (and updated binary invocation to `agy`) in `experimental.nix` profile and `daily-summary.nix` launchd service.
+
+## 2026-08-25
+
 - Fixed multi-second hang and permanent typing latency in Fish after exiting TUIs inside Zellij and Ghostty:
   - Exported `fish_features = "no-query-term"` in `home.sessionVariables` and added `set -gx fish_features no-query-term` to Fish's top-level `shellInit`. Previous attempt (`set -a fish_features no-query-term` in `interactiveShellInit`) set a local variable inside an anonymous initialization function block that went out of scope immediately after startup. Furthermore, Fish reads `fish_features` at binary launch before interactive init functions run. Without `no-query-term` exported prior to Fish startup, Fish attempted terminal feature queries (Primary Device Attributes `DA1` / `\e[?c` and termcap) whenever a TUI (e.g. Neovim, Lazygit, Yazi) exited and returned control to Fish. Zellij drops or delays DA1 response sequences, causing Fish to block on a multi-second stdin timeout, followed by severe input reader desynchronization and typing latency on every subsequent keystroke.
   - Disabled `programs.ghostty.enableFishIntegration` and conditionally sourced Ghostty's shell integration script in `shellInit` only when NOT running inside a multiplexer (`not set -q ZELLIJ` and `not set -q TMUX`). Sourcing Ghostty's shell integration inside Zellij sent duplicate and conflicting OSC 133 prompt markers and DECSCUSR cursor escape sequences to Zellij's PTY parser.

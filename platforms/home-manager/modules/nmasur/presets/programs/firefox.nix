@@ -25,7 +25,7 @@ in
       enable = true;
       package = pkgs.firefox;
       # Use appropriate default path depending on the OS
-      configPath = if pkgs.stdenv.isDarwin then "Library/Application Support/Firefox" else ".mozilla/firefox";
+      configPath = if pkgs.stdenv.hostPlatform.isDarwin then "Library/Application Support/Firefox" else ".mozilla/firefox";
       profiles.default = {
         id = 0;
         name = "default";
@@ -57,7 +57,7 @@ in
           "app.update.auto" = false;
           "browser.aboutConfig.showWarning" = false;
           "browser.warnOnQuit" = false;
-          "browser.quitShortcut.disabled" = if pkgs.stdenv.isLinux then true else false;
+          "browser.quitShortcut.disabled" = if pkgs.stdenv.hostPlatform.isLinux then true else false;
           "browser.theme.dark-private-windows" = true;
           "browser.toolbars.bookmarks.visibility" = false;
           "browser.startup.page" = 3; # Restore previous session
@@ -189,7 +189,7 @@ in
 
     };
 
-    xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
+    xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       "${config.xsession.windowManager.i3.config.modifier}+Shift+b" = "exec ${
         # Don't name the script `firefox` or it will affect grep
         toString (

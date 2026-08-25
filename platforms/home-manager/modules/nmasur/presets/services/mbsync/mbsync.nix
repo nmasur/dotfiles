@@ -43,14 +43,14 @@ in
     };
 
     # Automatically check for mail and keep files synced locally
-    services.mbsync = lib.mkIf pkgs.stdenv.isLinux {
+    services.mbsync = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       enable = true;
       frequency = "*:0/5";
       postExec = "${lib.getExe pkgs.notmuch} new";
     };
 
     # Used to watch for new mail and trigger sync
-    services.imapnotify.enable = pkgs.stdenv.isLinux;
+    services.imapnotify.enable = pkgs.stdenv.hostPlatform.isLinux;
 
     # Allows sending email from CLI/sendmail
     programs.msmtp.enable = true;

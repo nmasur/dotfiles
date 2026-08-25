@@ -29,10 +29,10 @@ in
       # This replaces program and args entirely
       # script = ''
       #   ${process_urls}/bin/process-urls /Users/${username}/Downloads/Sidebery/
-      #   GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.gemini-cli}/bin/gemini --allowed-tools all --yolo --include-directories /Users/${username}/Downloads/Sidebery/ --include-directories /Users/${username}/dev/personal/notes/ "${prompt}"
+      #   GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.antigravity-cli}/bin/agy --allowed-tools all --yolo --include-directories /Users/${username}/Downloads/Sidebery/ --include-directories /Users/${username}/dev/personal/notes/ "${prompt}"
       # '';
       script = ''
-        GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.gemini-cli}/bin/gemini --allowed-tools all --yolo --include-directories "/Users/${username}/Downloads/firefox-history/,/Users/${username}/dev/personal/notes/" "${prompt} | tee -a /Users/${username}/dev/personal/gemini-archive/daily-summary-logs/$(date +"%Y-%m-%d").log"
+        GEMINI_API_KEY=$(cat /Users/${username}/.config/gemini/.gemini_api_key) ${pkgs.antigravity-cli}/bin/agy --allowed-tools all --yolo --include-directories "/Users/${username}/Downloads/firefox-history/,/Users/${username}/dev/personal/notes/" "${prompt} | tee -a /Users/${username}/dev/personal/gemini-archive/daily-summary-logs/$(date +"%Y-%m-%d").log"
       '';
 
       path = [

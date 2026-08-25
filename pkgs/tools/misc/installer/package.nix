@@ -3,7 +3,7 @@
 # Inspired by https://github.com/cleverca22/nix-tests/blob/master/kexec/justdoit.nix
 # This script will partition and format drives; use at your own risk!
 
-if !pkgs.stdenv.isLinux then
+if !pkgs.stdenv.hostPlatform.isLinux then
   null
 else
   pkgs.writeShellScriptBin "installer" ''

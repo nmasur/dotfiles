@@ -40,7 +40,6 @@ in
 
       # LLM
 
-      pkgs.gemini-cli # AI LLM Agent
       pkgs.antigravity-cli # AI LLM Agent
       pkgs.pi-coding-agent # AI LLM Agent
 

@@ -13,7 +13,7 @@ in
 
   options.nmasur.presets.programs.noti.enable = lib.mkEnableOption "Noti CLI notifications";
 
-  config = lib.mkIf (cfg.enable && (pkgs.stdenv.isDarwin || config.services.dunst.enable)) {
+  config = lib.mkIf (cfg.enable && (pkgs.stdenv.hostPlatform.isDarwin || config.services.dunst.enable)) {
     home.packages = [ pkgs.noti ];
     programs.fish = {
       shellAbbrs = {

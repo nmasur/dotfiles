@@ -63,7 +63,7 @@ in
     # Create a desktop option for launching Neovim from a file manager
     # (Requires launching the terminal and then executing Neovim)
     xdg.desktopEntries.nvim =
-      lib.mkIf (pkgs.stdenv.isLinux && config.nmasur.presets.services.i3.enable)
+      lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && config.nmasur.presets.services.i3.enable)
         {
           name = "Neovim wrapper";
           exec = ''${lib.getExe config.nmasur.presets.services.i3.terminal} --command="nvim %F"''; # TODO: change to generic

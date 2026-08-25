@@ -1,7 +1,7 @@
 # Fix: Volnoti error: 'volnoti' has been removed due to lack of maintenance upstream.
 
 { pkgs, lib, ... }:
-if !pkgs.stdenv.isLinux then
+if !pkgs.stdenv.hostPlatform.isLinux then
   null
 else
 pkgs.stdenv.mkDerivation {

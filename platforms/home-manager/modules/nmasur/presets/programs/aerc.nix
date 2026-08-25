@@ -203,13 +203,13 @@ in
     };
 
     # Used for macOS
-    xdg.enable = lib.mkIf pkgs.stdenv.isDarwin true;
+    xdg.enable = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin true;
 
-    xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.isLinux) {
+    xdg.desktopEntries.aerc = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux) {
       name = "aerc";
       exec = "${lib.getExe config.nmasur.presets.services.i3.terminal} -e aerc %u";
     };
-    xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.isLinux {
+    xsession.windowManager.i3.config.keybindings = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       "${config.xsession.windowManager.i3.config.modifier}+Shift+e" =
         let
           terminal = config.nmasur.presets.services.i3.terminal;
