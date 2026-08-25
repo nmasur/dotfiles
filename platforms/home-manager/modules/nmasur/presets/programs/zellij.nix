@@ -75,6 +75,17 @@ in
               ${lib.getExe pkgs.zellij} action new-pane --start-suspended -- gh run watch
             '';
         };
+        __fish_update_cwd_osc = {
+          description = "Notify Zellij/terminal of CWD changes without hostname mismatch";
+          body = # fish
+            ''
+              if test "$TERM" != "dumb"
+                  printf \e\]7\;file://%s\a (string escape --style=url -- $PWD)
+              end
+            '';
+          onVariable = "PWD";
+          onEvent = "fish_prompt";
+        };
       };
     };
 

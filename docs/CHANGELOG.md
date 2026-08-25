@@ -2,6 +2,7 @@
 
 ## 2026-08-16
 
+- Fixed Zellij new tab directory tracking by adding `__fish_update_cwd_osc` override in `presets/programs/zellij.nix`. Fish's default OSC 7 sequence includes `$hostname`, which on macOS or dynamic network environments evaluates to `Noah-MacBook-Pro.local` or a domain suffix. Zellij compares the OSC 7 hostname against its system hostname (`Noah-MacBook-Pro`), finds a mismatch, and silently ignores the CWD update, leaving new tabs stuck in a previous directory or session default. Overriding `__fish_update_cwd_osc` to send `file://<PWD>` (empty hostname) ensures Zellij always updates its cached CWD on every `cd` and prompt render.
 - Fixed Firefox "profile cannot be loaded" error on macOS by removing `home.file."Library/Application Support/Firefox/installs.ini"`. Hardcoding an installation hash in `installs.ini` broke whenever Firefox was updated or rebuilt in the Nix store because the nix store path changed, causing Firefox to compute a new installation hash, fail to match or write to the read-only `installs.ini` symlink, and error out. Firefox on macOS uses `profiles.ini` (managed by Home Manager) and `MOZ_LEGACY_PROFILES=1` (exported by nixpkgs' launcher wrapper).
 
 ## 2026-08-03
