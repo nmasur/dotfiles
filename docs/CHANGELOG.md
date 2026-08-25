@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-25
+
+- Fixed multi-second hang and permanent typing latency in Fish after exiting TUIs inside Zellij and Ghostty:
+  - Exported `fish_features = "no-query-term"` in `home.sessionVariables` and added `set -gx fish_features no-query-term` to Fish's top-level `shellInit`. Previous attempt (`set -a fish_features no-query-term` in `interactiveShellInit`) set a local variable inside an anonymous initialization function block that went out of scope immediately after startup. Furthermore, Fish reads `fish_features` at binary launch before interactive init functions run. Without `no-query-term` exported prior to Fish startup, Fish attempted terminal feature queries (Primary Device Attributes `DA1` / `\e[?c` and termcap) whenever a TUI (e.g. Neovim, Lazygit, Yazi) exited and returned control to Fish. Zellij drops or delays DA1 response sequences, causing Fish to block on a multi-second stdin timeout, followed by severe input reader desynchronization and typing latency on every subsequent keystroke.
+  - Disabled `programs.ghostty.enableFishIntegration` and conditionally sourced Ghostty's shell integration script in `shellInit` only when NOT running inside a multiplexer (`not set -q ZELLIJ` and `not set -q TMUX`). Sourcing Ghostty's shell integration inside Zellij sent duplicate and conflicting OSC 133 prompt markers and DECSCUSR cursor escape sequences to Zellij's PTY parser.
+
 ## 2026-08-16
 
 - Fixed Zellij new tab directory tracking by adding `__fish_update_cwd_osc` override in `presets/programs/zellij.nix`. Fish's default OSC 7 sequence includes `$hostname`, which on macOS or dynamic network environments evaluates to `Noah-MacBook-Pro.local` or a domain suffix. Zellij compares the OSC 7 hostname against its system hostname (`Noah-MacBook-Pro`), finds a mismatch, and silently ignores the CWD update, leaving new tabs stuck in a previous directory or session default. Overriding `__fish_update_cwd_osc` to send `file://<PWD>` (empty hostname) ensures Zellij always updates its cached CWD on every `cd` and prompt render.

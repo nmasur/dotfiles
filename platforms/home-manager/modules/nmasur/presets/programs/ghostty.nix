@@ -23,7 +23,7 @@ in
 
       package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
 
-      enableFishIntegration = true;
+      enableFishIntegration = false; # Handled conditionally below to avoid conflicts inside Zellij/TMUX
       enableBashIntegration = true;
       enableZshIntegration = true;
       installBatSyntax = false; # The file doesn't seem to exist in the pkg
@@ -80,6 +80,13 @@ in
       };
 
     };
+
+    # Conditionally enable Ghostty fish shell integration only when NOT running inside multiplexers like Zellij/TMUX
+    programs.fish.shellInit = ''
+      if set -q GHOSTTY_RESOURCES_DIR; and not set -q ZELLIJ; and not set -q TMUX
+        source "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+      end
+    '';
 
   };
 }

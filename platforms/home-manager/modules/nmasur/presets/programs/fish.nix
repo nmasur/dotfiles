@@ -69,9 +69,6 @@ in
         set -g fish_cursor_insert line
         set -g fish_cursor_visual block
         set -g fish_cursor_replace_one underscore
-
-        # Fix for lagging after exiting TUIs with Zellij and Ghostty
-        set -a fish_features no-query-term
       '';
       loginShellInit = "";
       shellAbbrs = {
@@ -117,10 +114,17 @@ in
         dr = "docker run --rm -it";
         db = "docker build . -t";
       };
-      shellInit = "";
+      shellInit = ''
+        # Fix for lagging/hanging after exiting TUIs inside terminal multiplexers like Zellij:
+        # Disable fish terminal querying at startup so fish does not query DA1/termcap on return.
+        set -gx fish_features no-query-term
+      '';
     };
 
-    home.sessionVariables.fish_greeting = "";
+    home.sessionVariables = {
+      fish_greeting = "";
+      fish_features = "no-query-term";
+    };
 
   };
 }
