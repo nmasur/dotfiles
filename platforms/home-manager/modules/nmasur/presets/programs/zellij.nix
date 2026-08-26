@@ -134,6 +134,15 @@ in
         # default_layout = "compact-top";
         # Remove border
         pane_frames = false;
+        # Ghostty + Zellij have several open upstream bugs where the Kitty
+        # keyboard protocol's "enhancement" flags get left in a stuck/elevated
+        # state after a full-screen TUI exits (e.g. zellij-org/zellij#3887,
+        # #3723, #4178), causing every subsequent keystroke to be sent as a
+        # CSI-u sequence that fish has to wait out an escape-timeout to
+        # disambiguate. This shows up as typing lag that builds up the longer
+        # you were inside the TUI, until the pane's protocol state resets.
+        # Disabling it entirely avoids the whole bug class.
+        support_kitty_keyboard_protocol = false;
         # Scrollback
         scrollback_editor = config.home.sessionVariables.EDITOR;
 

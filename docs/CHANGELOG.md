@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-26
+
+- Fixed persistent Fish typing lag after long TUI sessions (Neovim, jjui, Yazi) inside Zellij + Ghostty, which the `no-query-term` / Ghostty-integration fixes from 2026-08-25 did not resolve:
+  - Verified on Fish 4.8.1 that the `query-term` feature already defaults to `off`, so exporting `fish_features = no-query-term` is a no-op on this Fish version — it isn't the cause of (or fix for) this class of lag.
+  - Set `support_kitty_keyboard_protocol = false` in `zellij.nix`. Zellij and Ghostty have several open upstream bugs (zellij-org/zellij#3887, #3723, #4178) where the Kitty keyboard protocol's enhancement-flag stack is left in an elevated state after a full-screen TUI exits without properly popping it. Every subsequent keystroke then arrives as a CSI-u sequence that Fish must wait out an escape-disambiguation timeout to parse, which reads as typing lag that worsens the longer the TUI session ran, and persists until the pane's protocol state resets (e.g. a fresh shell/pane). Disabling the protocol support in Zellij avoids the whole bug class; trades off precise modifier reporting (e.g. distinguishing Ctrl+Shift+key) for TUIs running inside Zellij panes, which this setup doesn't otherwise depend on (Shift+Enter is handled via a literal Ghostty `text:` keybind, not the Kitty protocol).
+
 ## 2026-08-25
 
 - Fixed Nix evaluation warnings for `stdenv` deprecation and `gemini-cli`:
