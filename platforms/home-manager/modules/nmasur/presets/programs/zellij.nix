@@ -295,7 +295,13 @@ in
             "bind \"Super Shift ]\"" = {
               GoToNextTab = { };
             };
+            "bind \"Alt Shift ]\"" = {
+              GoToNextTab = { };
+            };
             "bind \"Super Shift [\"" = {
+              GoToPreviousTab = { };
+            };
+            "bind \"Alt Shift [\"" = {
               GoToPreviousTab = { };
             };
             "bind \"Ctrl Tab\"" = {
@@ -307,10 +313,15 @@ in
             "bind \"Super t\"" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
               NewTab = { };
             };
-            "bind \"Alt t\"" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+            "bind \"Alt t\"" = {
               NewTab = { };
             };
             "bind \"Super k\"" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+              SwitchToMode = {
+                _args = [ "scroll" ];
+              };
+            };
+            "bind \"Alt Shift k\"" = {
               SwitchToMode = {
                 _args = [ "scroll" ];
               };
@@ -321,7 +332,7 @@ in
                 _args = [ "locked" ];
               };
             };
-            "bind \"Alt Shift e\"" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+            "bind \"Alt Shift e\"" = {
               EditScrollback = { };
               SwitchToMode = {
                 _args = [ "locked" ];

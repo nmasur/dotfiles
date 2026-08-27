@@ -36,15 +36,15 @@ in
         quit-after-last-window-closed = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin true;
         fullscreen = if pkgs.stdenv.hostPlatform.isDarwin then true else false;
         keybind = [
-          "super+t=unbind" # Pass super-t to underlying tool (e.g. zellij tabs)
-          "super+shift+]=unbind"
-          "super+shift+[=unbind"
-          "ctrl+tab=unbind"
-          "ctrl+shift+tab=unbind"
-          "ctrl+tab=text:\\x1b[9;5u"
-          "ctrl+shift+tab=text:\\x1b[9;6u"
-          "super+k=unbind"
-          "super+shift+e=unbind"
+          # Translate Mac Super & Ctrl combinations into Alt (ESC prefix) sequences
+          # so Zellij receives them without needing Kitty keyboard protocol
+          "super+t=text:\\x1bt"
+          "super+shift+]=text:\\x1b}"
+          "super+shift+[=text:\\x1b{"
+          "ctrl+tab=text:\\x1b}"
+          "ctrl+shift+tab=text:\\x1b{"
+          "super+k=text:\\x1bK"
+          "super+shift+e=text:\\x1bE"
         ];
       };
       themes."gruvbox" = {
