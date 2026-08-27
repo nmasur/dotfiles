@@ -295,13 +295,31 @@ in
             "bind \"Super Shift ]\"" = {
               GoToNextTab = { };
             };
+            "bind \"Alt ]\"" = {
+              GoToNextTab = { };
+            };
+            "bind \"Alt }\"" = {
+              GoToNextTab = { };
+            };
             "bind \"Alt Shift ]\"" = {
+              GoToNextTab = { };
+            };
+            "bind \"Alt Shift }\"" = {
               GoToNextTab = { };
             };
             "bind \"Super Shift [\"" = {
               GoToPreviousTab = { };
             };
+            "bind \"Alt [\"" = {
+              GoToPreviousTab = { };
+            };
+            "bind \"Alt {\"" = {
+              GoToPreviousTab = { };
+            };
             "bind \"Alt Shift [\"" = {
+              GoToPreviousTab = { };
+            };
+            "bind \"Alt Shift {\"" = {
               GoToPreviousTab = { };
             };
             "bind \"Ctrl Tab\"" = {

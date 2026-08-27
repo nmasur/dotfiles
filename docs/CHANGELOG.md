@@ -4,7 +4,7 @@
 
 - Fixed macOS shortcuts (`Cmd+T`, `Ctrl+Tab`, `Cmd+Shift+]`, `Cmd+Shift+[`, `Cmd+K`, `Cmd+Shift+E`) in Zellij + Ghostty after disabling the Kitty keyboard protocol:
   - Mapped Ghostty keybindings (`super+t`, `super+shift+]`, `super+shift+[`, `ctrl+tab`, `ctrl+shift+tab`, `super+k`, `super+shift+e`) to send standard `Alt` (`ESC`-prefix) text sequences (`\x1bt`, `\x1b}`, `\x1b{`, `\x1bK`, `\x1bE`).
-  - Added matching unconditional `Alt` keybindings (`Alt t`, `Alt Shift ]`, `Alt Shift [`, `Alt Shift k`, `Alt Shift e`) in `zellij.nix` for tab creation, tab navigation, scroll mode, and scrollback editing.
+  - Added matching `Alt` keybindings (`Alt t`, `Alt ]`, `Alt }`, `Alt [`, `Alt {`, `Alt Shift k`, `Alt Shift e`) in `zellij.nix` for tab creation, tab navigation, scroll mode, and scrollback editing. Symbols like `]` and `}` are parsed by Zellij's termwiz input engine as distinct character codes (`'}'` vs `']'`), so binding both `Alt }` and `Alt Shift ]` ensures `\x1b}` triggers tab navigation correctly.
   - Keeps Kitty keyboard protocol disabled in Zellij (`support_kitty_keyboard_protocol = false`) so no CSI-u flags leak into Fish shell, guaranteeing zero post-TUI typing lag while restoring all shortcuts.
 
 - Fixed persistent Fish typing lag after long TUI sessions (Neovim, jjui, Yazi) inside Zellij + Ghostty, which the `no-query-term` / Ghostty-integration fixes from 2026-08-25 did not resolve:
