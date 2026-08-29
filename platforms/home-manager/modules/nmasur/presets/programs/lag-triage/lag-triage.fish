@@ -45,6 +45,23 @@ begin
 end >>$logfile 2>&1
 _lt "Captured shell + environment snapshot."
 
+# Proven root cause of the 2026-08 lag (see docs/CHANGELOG.md 2026-08-29):
+# fish latches feature flags from its startup env before config.fish runs, so
+# a shell with query-term ON sends terminal queries after every command; one
+# reply zellij fails to relay permanently degrades this process's reader.
+if status features | string match -qr '^query-term\s+on'
+    _lt ""
+    _lt "!! query-term is ON in this shell: fish did NOT get fish_features="
+    _lt "!! no-query-term in its STARTUP environment (config.fish is too late)."
+    _lt "!! This is the proven root cause of the post-TUI lag — a query reply"
+    _lt "!! lost by zellij permanently degrades this fish process's reader."
+    _lt "!! Fix: spawn fish with the variable exported (zellij default_shell"
+    _lt "!! wrapper fish-no-query-term). Subshells are immune because they"
+    _lt "!! inherit the exported variable — that's why a new shell 'fixes' it."
+else
+    _lt "query-term is off in this shell (good — the known root cause is ruled out)."
+end
+
 # ---- 3. Terminal state below the shell --------------------------------------
 _lt ""
 _lt "Querying terminal state (takes a few seconds)..."
@@ -76,6 +93,10 @@ set -l fixed none
 _lt ""
 _lt "Now applying resets one at a time. After each, type into the test prompt"
 _lt "to judge whether the lag is gone."
+_lt "CAVEAT: fish's read prompt may NOT exhibit lag even when the main"
+_lt "commandline does. If typing at these test prompts never feels laggy at"
+_lt "all, answer 'u' (unsure) instead of 'y' — a 'y' here is only meaningful"
+_lt "if you could feel the lag at the test prompts before the reset."
 
 if test $fixed = none
     _lt ""

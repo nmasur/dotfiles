@@ -9,6 +9,22 @@ let
   inherit (config.nmasur.settings) username;
   cfg = config.nmasur.presets.programs.zellij;
 
+  # fish latches feature flags from its startup ENVIRONMENT before config.fish
+  # runs, so the `set -gx fish_features no-query-term` in config.fish only
+  # protects CHILD fish processes — which is why subshells/exec fish were always
+  # immune to the post-TUI typing lag while zellij-spawned pane shells were not.
+  # With query-term latched on, fish sends OSC 11 + CPR + DA1 queries after
+  # every command and waits for replies; if zellij fails to relay even one
+  # reply (a race during TUI teardown or heavy output), that fish process's
+  # reader is PERMANENTLY degraded — reproduced deterministically in a PTY
+  # harness on fish 4.8.1 (see docs/CHANGELOG.md 2026-08-29 and
+  # presets/programs/lag-triage/upstream_repro.py). Spawning fish with the
+  # variable already exported makes every pane shell immune.
+  fish-no-query-term = pkgs.writeShellScriptBin "fish-no-query-term" ''
+    export fish_features=no-query-term
+    exec ${lib.getExe pkgs.fish} "$@"
+  '';
+
   zellij-switch-to-last = pkgs.writeShellScriptBin "zellij-switch-to-last" ''
     TARGET_SESSION=$(cat ~/.local/state/zellij-last-session)
     if [ -z "$TARGET_SESSION" ]; then
@@ -130,7 +146,10 @@ in
         # Spawn fish directly instead of trusting $SHELL, which inherits the
         # macOS login shell. On darwin that login shell is no longer managed by
         # nix-darwin, so $SHELL can point at a stale /run/current-system path.
-        default_shell = lib.getExe pkgs.fish;
+        # Wrapped to export fish_features=no-query-term BEFORE fish starts —
+        # see the fish-no-query-term comment above for why this must happen in
+        # the environment rather than in config.fish.
+        default_shell = lib.getExe fish-no-query-term;
         # default_layout = "compact-top";
         # Remove border
         pane_frames = false;
