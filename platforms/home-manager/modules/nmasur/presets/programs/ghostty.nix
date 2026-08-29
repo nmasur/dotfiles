@@ -45,6 +45,9 @@ in
           "ctrl+shift+tab=text:\\x1b{"
           "super+k=text:\\x1bK"
           "super+shift+e=text:\\x1bE"
+          # Send CSI-u sequence for Alt+Shift+P / Super+Shift+P to bypass Zellij 0.45's DCS (ESC P) parser timeout (~1.5s delay)
+          "alt+shift+p=text:\\x1b[112;4u"
+          "super+shift+p=text:\\x1b[112;4u"
         ];
       };
       themes."gruvbox" = {

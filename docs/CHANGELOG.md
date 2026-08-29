@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-29
+
+- Fixed 1.5-second latency when pressing `Alt-Shift-P` to trigger `zellij-session` in Zellij 0.45.0 + Ghostty:
+  - **Root Cause**: Zellij 0.45.0 introduced `StdinAnsiParser` (`zellij-client/src/stdin_ansi_parser.rs`) using `termwiz::InputParser` to parse ANSI control strings (OSCs, CSIs, DCSs) arriving on stdin. When pressing `Alt-Shift-P` (Option-Shift-P) with `support_kitty_keyboard_protocol = false`, Ghostty sent `\x1bP` (`ESC` + uppercase `P`). In ECMA-48 / VT100 standards, `ESC P` is the 7-bit ASCII representation of `DCS` (Device Control String). `StdinAnsiParser` buffered `\x1bP` waiting for a DCS string payload and string terminator (`ST` / `\x1b\`), hitting a ~1.5-second escape timeout before flushing `\x1bP` as residue to the keyboard handler.
+  - **Fix**: Added `alt+shift+p=text:\x1b[112;4u` and `super+shift+p=text:\x1b[112;4u` in `ghostty.nix` to send the explicit CSI-u sequence for `Alt+Shift+p` (`'p'` with modifier 4 = `ALT | SHIFT`). `StdinAnsiParser` immediately recognizes `\x1b[112;4u` as non-DCS input and passes it straight to the keyboard handler with 0ms latency.
+
 ## 2026-08-26
 
 - Fixed macOS shortcuts (`Cmd+T`, `Ctrl+Tab`, `Cmd+Shift+]`, `Cmd+Shift+[`, `Cmd+K`, `Cmd+Shift+E`) in Zellij + Ghostty after disabling the Kitty keyboard protocol:
