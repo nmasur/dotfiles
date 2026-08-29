@@ -63,6 +63,7 @@ in
       git.enable = lib.mkDefault true;
       helix.enable = lib.mkDefault true;
       jujutsu.enable = lib.mkDefault true;
+      lag-triage.enable = lib.mkDefault true;
       lazygit.enable = lib.mkDefault true;
       # neovim.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;

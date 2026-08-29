@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-29 (later)
+
+- Added a diagnostic toolkit (`lag-triage` / `unlag` fish functions + `term-probe` binary, `presets/programs/lag-triage/`) for the still-recurring post-TUI typing lag in fish + Zellij + Ghostty, instead of another blind fix. Findings that motivated it:
+  - All three prior fixes were either no-ops or insufficient: `fish_features = no-query-term` is a **no-op** because `query-term` already defaults to *off* in fish 4.8.1 (verified with `status features`); disabling Ghostty's fish integration inside Zellij and setting `support_kitty_keyboard_protocol = false` did not stop recurrence.
+  - PTY captures of fish 4.8.1 (`TERM=xterm-256color`, with and without `$ZELLIJ`) show fish never writes Kitty keyboard sequences to the wire — it uses modifyOtherKeys (`\e[>4;1m`), application keypad (`\e=`), bracketed paste (`?2004`), and color-theme reporting (`?2031`), enabling them at every prompt and disabling them before every external command. Crucially, a fresh subshell's startup bytes are identical to the parent's post-command re-enable bytes, so "a subshell fixes the lag" cannot be explained by a simple terminal-state reset — leaving two competing hypotheses that only live capture can separate: (1) fish-internal reader state poisoned by stray/partial escape bytes (e.g. leaked from a closing floating pane), cleared only by a new fish process; (2) Zellij/Ghostty-level stuck state (Zellij 0.45's `StdinAnsiParser` is already a proven source of input delays — see the Alt-Shift-P fix below).
+  - Also note: the floating-pane TUIs (jjui via Alt-Shift-J, yazi via Alt-Shift-Y, scrollback editor) run in their own panes and never pass through the shell's fish process at all, while `nvim` runs inside the shell pane — the triage log records which path preceded the lag.
+  - **Next occurrence: run `lag-triage` in the lagging shell BEFORE starting a new shell.** It snapshots the environment, queries pane terminal state (kitty flags, modifyOtherKeys, DEC modes, DA1 round-trip latency), captures raw keystroke bytes+timing bypassing fish, then applies staged resets (kitty pop/clear, modifyOtherKeys off, keypad/cursor, mouse/focus/sync, altscreen, stty, DECSTR) — the stage that cures it names the stuck layer. Logs to `~/.local/state/lag-triage/` for an upstream issue. `unlag` is the one-shot convenience version (if `unlag` never helps but `exec fish` does, the bug is fish-internal).
+
 ## 2026-08-29
 
 - Fixed 1.5-second latency when pressing `Alt-Shift-P` to trigger `zellij-session` in Zellij 0.45.0 + Ghostty:
