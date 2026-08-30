@@ -47,6 +47,7 @@ in
           host = cfg.host;
           passwordeval = "${pkgs.age}/bin/age --decrypt --identity ${config.identityFile} ${pkgs.writeText "mailpass-system.age" (builtins.readFile cfg.passwordFile)}";
           user = cfg.user;
+          from = cfg.user;
           from_full_name = "${config.networking.hostName} System";
           port = 465;
           tls = true;
