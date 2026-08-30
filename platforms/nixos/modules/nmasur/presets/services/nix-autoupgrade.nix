@@ -27,7 +27,7 @@ in
     system.autoUpgrade = {
       enable = true;
       dates = "09:33";
-      flake = "git+${cfg.repo}";
+      flake = "git+ssh://${cfg.repo}";
       randomizedDelaySec = "25min";
       operation = "switch";
       allowReboot = true;
