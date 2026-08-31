@@ -32,6 +32,15 @@ in
         description = "Reset terminal state left behind by a TUI";
         body = builtins.readFile ./unlag.fish;
       };
+      lag-sample = {
+        description = "Stack-sample fish and zellij while typing lag is happening";
+        body = builtins.readFile ./lag-sample.fish;
+      };
+      __autosuggestion_unwedge = {
+        description = "Reset autosuggestion state after each command to prevent post-TUI typing lag";
+        onEvent = "fish_postexec";
+        body = builtins.readFile ./autosuggestion-unwedge.fish;
+      };
     };
 
   };

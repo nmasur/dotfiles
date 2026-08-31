@@ -20,8 +20,21 @@ let
   # harness on fish 4.8.1 (see docs/CHANGELOG.md 2026-08-29 and
   # presets/programs/lag-triage/upstream_repro.py). Spawning fish with the
   # variable already exported makes every pane shell immune.
+  # Flight recorder for the still-unsolved post-TUI typing lag: sampling the
+  # process CURES the lag (a wedged thread gets kicked loose), so the only way
+  # to observe it is a recorder that is already running before the lag starts.
+  # Armed by `touch ~/.local/state/lag-triage/RECORD`; new panes then log
+  # fish's reader/thread internals to ~/.local/state/lag-triage/flight/.
+  # Remove the RECORD file to disable (zero overhead when off).
   fish-no-query-term = pkgs.writeShellScriptBin "fish-no-query-term" ''
     export fish_features=no-query-term
+    dir="$HOME/.local/state/lag-triage"
+    if [ -e "$dir/RECORD" ]; then
+      mkdir -p "$dir/flight"
+      find "$dir/flight" -type f -mtime +3 -delete 2>/dev/null
+      export FISH_DEBUG='reader,term-support,proc-termowner,iothread,fd-monitor,topic-monitor'
+      export FISH_DEBUG_OUTPUT="$dir/flight/fish-$(date +%Y%m%d-%H%M%S)-$$.log"
+    fi
     exec ${lib.getExe pkgs.fish} "$@"
   '';
 
