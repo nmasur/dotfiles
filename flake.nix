@@ -136,6 +136,7 @@
           download = "download.${baseName}";
           files = "files.${baseName}";
           git = "git.${baseName}";
+          hister = "hister.${baseName}";
           imap = "imap.purelymail.com";
           influxdb = "influxdb.${baseName}";
           irc = "irc.${baseName}";

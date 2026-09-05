@@ -43,6 +43,7 @@ in
         cloudflared.enable = lib.mkDefault true;
         gitea.enable = lib.mkDefault true;
         grafana.enable = lib.mkDefault true;
+        hister.enable = lib.mkDefault true;
         influxdb2.enable = lib.mkDefault true;
         karakeep.enable = lib.mkDefault true;
         litestream.enable = lib.mkDefault true;
