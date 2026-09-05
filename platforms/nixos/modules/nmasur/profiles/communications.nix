@@ -55,6 +55,7 @@ in
         nix-autoupgrade.enable = lib.mkDefault true; # On by default for communications
         ntfy-sh.enable = lib.mkDefault true;
         pgweb.enable = lib.mkDefault true;
+        pocket-id.enable = lib.mkDefault true;
         postgresql.enable = lib.mkDefault true;
         stalwart.enable = lib.mkDefault true;
         thelounge.enable = lib.mkDefault true;

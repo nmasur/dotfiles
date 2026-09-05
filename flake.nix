@@ -128,6 +128,7 @@
         in
         {
           audiobooks = "read.${baseName}";
+          auth = "auth.${baseName}";
           bookmarks = "keep.${baseName}";
           books = "books.${baseName}";
           budget = "money.${baseName}";
