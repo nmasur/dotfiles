@@ -41,8 +41,6 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    home.packages = [ pkgs.zellij-switch ];
-
     programs.fish = {
       shellAbbrs.z = "zellij";
       functions = {
@@ -170,19 +168,23 @@ in
         keybinds = {
           locked = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to unlock
-            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
-              SwitchToMode = {
-                _args = [ "normal" ];
-              };
-            };
+            "bind \"Ctrl Alt G\"" =
+              lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable)
+                {
+                  SwitchToMode = {
+                    _args = [ "normal" ];
+                  };
+                };
           };
           normal = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to lock
-            "bind \"Ctrl Alt G\"" = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
-              SwitchToMode = {
-                _args = [ "locked" ];
-              };
-            };
+            "bind \"Ctrl Alt G\"" =
+              lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable)
+                {
+                  SwitchToMode = {
+                    _args = [ "locked" ];
+                  };
+                };
           };
           session = {
             "bind \"w\"" = {
