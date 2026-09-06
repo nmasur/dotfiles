@@ -2,6 +2,12 @@
 
 ## 2026-09-06
 
+- **Fixed OpenSSH authorized principals certificate authentication for Cloudflare Tunnel**:
+  - Replaced manual `environment.etc."ssh/authorized_principals/${username}"` symlink and `Match User` config with NixOS native `users.users.<name>.openssh.authorizedPrincipals`.
+  - Root cause: `environment.etc` without an explicit `mode` creates symlinks pointing into `/nix/store`, which has group-writable mode `0775` (`nixbld` group). Under `StrictModes yes`, sshd refused authentication with `bad ownership or modes for directory /nix/store`, causing certificate principal matching to fail with `Certificate does not contain an authorized principal`.
+  - Setting `users.users.<name>.openssh.authorizedPrincipals` causes NixOS to generate `/etc/ssh/authorized_principals.d/<name>` with `mode = "0444"`, copying the file instead of symlinking into the store, and automatically configuring `services.openssh.settings.AuthorizedPrincipalsFile = "/etc/ssh/authorized_principals.d/%u"`.
+  - Also added `mode = "0444"` to `/etc/ssh/ca.pub` and moved `TrustedUserCAKeys` into `services.openssh.settings`.
+
 - **Configured OpenID Connect (OIDC) authentication for Mealie**:
   - Configured `services.mealie.settings` with OIDC settings pointing to Pocket ID (`auth.masu.rs`), using client ID `040925ed-b39e-4442-b8e8-369c948c0cd2`.
   - Added secret management for `mealie-oidc-secret.age` via `secrets.mealie-oidc-secret`, using `prefix = "OIDC_CLIENT_SECRET="` to generate an environment file.

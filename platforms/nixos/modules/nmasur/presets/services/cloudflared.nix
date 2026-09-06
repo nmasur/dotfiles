@@ -25,7 +25,7 @@
 # Set ca = "<public key>"
 
 let
-  inherit (config.nmasur.settings) username;
+  inherit (config.nmasur.settings) username hostnames;
   cfg = config.nmasur.presets.services.cloudflared;
 in
 
@@ -68,27 +68,24 @@ in
 
     # Grant Cloudflare access to SSH into this server
     environment.etc = {
-      "ssh/ca.pub".text = ''
-        ${cfg.tunnel.ca}
-      '';
-
-      # Must match the username portion of the email address in Cloudflare
-      # Access
-      "ssh/authorized_principals".text = ''
-        ${username}
-      '';
+      "ssh/ca.pub" = {
+        text = ''
+          ${cfg.tunnel.ca}
+        '';
+        mode = "0444";
+      };
     };
 
+    users.users.${username}.openssh.authorizedPrincipals = [
+      username
+      "${username}@${hostnames.mail}"
+    ];
+
     # Adjust SSH config to allow access from Cloudflare's certificate
-    services.openssh.extraConfig = ''
-      PubkeyAuthentication yes
-      TrustedUserCAKeys /etc/ssh/ca.pub
-      Match User '${username}'
-        AuthorizedPrincipalsFile /etc/ssh/authorized_principals
-        # if there is no existing AuthenticationMethods
-        AuthenticationMethods publickey
-    '';
-    services.openssh.settings.Macs = [ "hmac-sha2-512" ]; # Fix for failure to find matching mac
+    services.openssh.settings = {
+      TrustedUserCAKeys = "/etc/ssh/ca.pub";
+      Macs = [ "hmac-sha2-512" ]; # Fix for failure to find matching mac
+    };
 
     # Create credentials file for Cloudflare
     secrets.cloudflared = {
