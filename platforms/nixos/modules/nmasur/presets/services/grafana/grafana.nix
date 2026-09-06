@@ -29,13 +29,25 @@ in
     };
 
     secrets.grafana-secret-key = {
-             source = ./grafana-secret-key.age;
+      source = ./grafana-secret-key.age;
       dest = "${config.secretsDirectory}/grafana-secret-key";
       owner = "grafana";
       group = "grafana";
       permissions = "0440";
     };
-    systemd.services.grafana-secret-key-secret  = {
+    systemd.services.grafana-secret-key-secret = {
+      requiredBy = [ "grafana.service" ];
+      before = [ "grafana.service" ];
+    };
+
+    secrets.grafana-oidc-secret = {
+      source = ./grafana-oidc-secret.age;
+      dest = "${config.secretsDirectory}/grafana-oidc-secret";
+      owner = "grafana";
+      group = "grafana";
+      permissions = "0440";
+    };
+    systemd.services.grafana-oidc-secret-secret = {
       requiredBy = [ "grafana.service" ];
       before = [ "grafana.service" ];
     };
@@ -49,6 +61,7 @@ in
           http_addr = "127.0.0.1";
           http_port = 3000;
           protocol = "http";
+          root_url = "https://${hostnames.metrics}/";
         };
         smtp = rec {
           enabled = true;
@@ -57,6 +70,19 @@ in
           password = "$__file{${config.secrets.mailpass-grafana.dest}}";
           from_name = "Grafana";
           from_address = user;
+        };
+        "auth.generic_oauth" = {
+          enabled = true;
+          name = "Pocket ID";
+          allow_sign_up = true;
+          client_id = "85d879ed-1a86-4984-b33d-43806500ef98";
+          client_secret = "$__file{${config.secrets.grafana-oidc-secret.dest}}";
+          scopes = "openid profile email";
+          auth_url = "https://${hostnames.auth}/authorize";
+          token_url = "https://${hostnames.auth}/api/oidc/token";
+          api_url = "https://${hostnames.auth}/api/oidc/userinfo";
+          login_attribute_path = "preferred_username";
+          skip_org_role_sync = true;
         };
       };
       provision = {

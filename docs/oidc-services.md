@@ -139,12 +139,14 @@ All client secrets should be encrypted with `agenix` under the respective servic
     enabled = true;
     name = "Pocket ID";
     allow_sign_up = true;
-    client_id = "grafana";
+    client_id = "85d879ed-1a86-4984-b33d-43806500ef98";
     client_secret = "$__file{${config.secrets.grafana-oidc-secret.dest}}";
     scopes = "openid profile email";
-    auth_url = "https://auth.masu.rs/authorize";
-    token_url = "https://auth.masu.rs/api/oidc/token";
-    api_url = "https://auth.masu.rs/api/oidc/userinfo";
+    auth_url = "https://${hostnames.auth}/authorize";
+    token_url = "https://${hostnames.auth}/api/oidc/token";
+    api_url = "https://${hostnames.auth}/api/oidc/userinfo";
+    login_attribute_path = "preferred_username";
+    skip_org_role_sync = true;
   };
   ```
 
