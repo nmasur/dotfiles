@@ -102,6 +102,11 @@
   to bind, the failure took down the entire terminal instead of erroring
   gracefully.
 
+## 2026-09-06
+
+- Configured Grafana OIDC authentication via Pocket ID in `platforms/nixos/modules/nmasur/presets/services/grafana/grafana.nix`.
+- Enabled `auth.oauth_allow_insecure_email_lookup = true` in Grafana settings to allow linking an incoming OAuth login to an existing Grafana user account with the same email.
+
 ## 2026-07-25
 
 - Added jjui config generation to `jujutsu.nix` in Home Manager to include custom GitHub ruleset bypass commands (`ctrl+b` and `ctrl+shift+b`).

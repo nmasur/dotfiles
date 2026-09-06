@@ -56,6 +56,9 @@ in
       enable = true;
       settings = {
         security.secret_key = "$__file{${config.secrets.grafana-secret-key.dest}}";
+        auth = {
+          oauth_allow_insecure_email_lookup = true;
+        };
         server = {
           domain = hostnames.metrics;
           http_addr = "127.0.0.1";
