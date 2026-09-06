@@ -91,13 +91,13 @@ All client secrets should be encrypted with `agenix` under the respective servic
 - **Pocket ID Redirect URIs:**
   - Web: `https://photos.masu.rs/auth/login`
   - Mobile: `app.immich:///oauth-callback`
-- **NixOS Configuration (`immich.nix`):**
+- **Setup in `immich/immich.nix`:**
   ```nix
   services.immich.settings.oauth = {
     enabled = true;
-    issuerUrl = "https://auth.masu.rs";
-    clientId = "immich";
-    clientSecret = "..."; # or IMMICH_OAUTH_CLIENT_SECRET via environment file
+    issuerUrl = "https://${hostnames.auth}";
+    clientId = "1f4e0f8d-6cee-4d67-8d53-74bf6c18ae09";
+    clientSecret._secret = config.secrets.immich-oidc-secret.dest;
     scope = "openid profile email";
     autoRegister = true;
     buttonText = "Login with Pocket ID";

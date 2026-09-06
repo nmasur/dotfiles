@@ -2,6 +2,13 @@
 
 ## 2026-09-06
 
+- **Configured OpenID Connect (OIDC) authentication for Immich**:
+  - Configured `services.immich.settings.oauth` with OIDC settings pointing to Pocket ID (`auth.masu.rs`), using client ID `1f4e0f8d-6cee-4d67-8d53-74bf6c18ae09`.
+  - Added secret management for `immich-oidc-secret.age` via `secrets.immich-oidc-secret` with owner `immich` and group `shared` (0440).
+  - Wired client secret substitution using NixOS's native `clientSecret._secret = config.secrets.immich-oidc-secret.dest`, leveraging `utils.genJqSecretsReplacement` with systemd `LoadCredential`.
+  - Configured `systemd.services.immich-server` to order after `immich-oidc-secret-secret.service`.
+  - Updated `docs/oidc-services.md` with the verified configuration and redirect URIs.
+
 - **Fixed OpenSSH authorized principals certificate authentication for Cloudflare Tunnel**:
   - Replaced manual `environment.etc."ssh/authorized_principals/${username}"` symlink and `Match User` config with NixOS native `users.users.<name>.openssh.authorizedPrincipals`.
   - Root cause: `environment.etc` without an explicit `mode` creates symlinks pointing into `/nix/store`, which has group-writable mode `0775` (`nixbld` group). Under `StrictModes yes`, sshd refused authentication with `bad ownership or modes for directory /nix/store`, causing certificate principal matching to fail with `Certificate does not contain an authorized principal`.
