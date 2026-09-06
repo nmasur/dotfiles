@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-06
+
+- **Configured OpenID Connect (OIDC) authentication for Actual Budget**:
+  - Configured `services.actual.settings` with `loginMethod = "openid"` and `openId` settings pointing to Pocket ID (`auth.masu.rs`), using client ID `92afe9f8-7ef6-42ab-8a06-701df3c7179d`.
+  - Added secret management for `actualbudget-oidc-secret.age` via `secrets.actualbudget-oidc-secret`, set with owner `actualbudget` and group `shared` (0440).
+  - Configured `systemd.services.actual` to order after the decrypted secret service and granted the dynamic unit access via `SupplementaryGroups = [ "shared" ]` and `PrivateUsers = false`.
+  - Updated `docs/oidc-services.md` with the verified callback URI (`https://money.masu.rs/openid/callback`) and NixOS configuration snippet.
+
 ## 2026-08-29 (root cause found and fixed)
 
 - **Root-caused and fixed the recurring post-TUI typing lag** (fish + Zellij + Ghostty) using a `lag-triage` capture from a live lagging shell plus a deterministic PTY reproduction (`presets/programs/lag-triage/upstream_repro.py`):

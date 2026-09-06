@@ -34,7 +34,7 @@ These services support OpenID Connect natively without requiring external authen
 | **Mealie** | `cooking.masu.rs` | Native core feature | NixOS env vars (`OIDC_AUTH_ENABLED`, etc.) |
 | **Karakeep / Hoarder** | `keep.masu.rs` | Native (NextAuth OIDC) | NixOS env vars (`OAUTH_WELLKNOWN_URL`, etc.) |
 | **Audiobookshelf** | `read.masu.rs` | Native core feature (v2.3+) | Web UI (Settings → Authentication) |
-| **Actual Budget** | `money.masu.rs` | Native core feature (v24.3+) | NixOS env vars (`ACTUAL_LOGIN_METHOD=openid`) |
+| **Actual Budget** | `money.masu.rs` | Native core feature (v24.3+) | NixOS config (`services.actual.settings.openId`) |
 
 ---
 
@@ -218,16 +218,18 @@ All client secrets should be encrypted with `agenix` under the respective servic
   - Match user by email or username
 
 ### 9. Actual Budget (`money.masu.rs`)
-- **Pocket ID Redirect URI:** `https://money.masu.rs/oauth/callback`
+- **Pocket ID Redirect URI:** `https://money.masu.rs/openid/callback`
 - **Setup in `actualbudget/actualbudget.nix`:**
   ```nix
   services.actual.settings = {
-    # Passed via environment or configuration
-    ACTUAL_LOGIN_METHOD = "openid";
-    ACTUAL_OPENID_DISCOVERY_URL = "https://auth.masu.rs/.well-known/openid-configuration";
-    ACTUAL_OPENID_CLIENT_ID = "actual";
-    ACTUAL_OPENID_CLIENT_SECRET = "...";
-    ACTUAL_OPENID_SERVER_HOSTNAME = "https://money.masu.rs";
+    loginMethod = "openid";
+    openId = {
+      discoveryURL = "https://${hostnames.auth}/.well-known/openid-configuration";
+      client_id = "92afe9f8-7ef6-42ab-8a06-701df3c7179d";
+      client_secret._secret = config.secrets.actualbudget-oidc-secret.dest;
+      server_hostname = "https://${hostnames.budget}";
+      authMethod = "openid";
+    };
   };
   ```
   *Note:* The optional end-to-end budget encryption password remains separate from the server authentication.

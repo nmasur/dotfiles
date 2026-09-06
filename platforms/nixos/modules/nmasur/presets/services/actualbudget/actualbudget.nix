@@ -32,6 +32,22 @@ in
       enable = true;
       settings = {
         port = cfg.port;
+        loginMethod = "openid";
+        openId = {
+          discoveryURL = "https://${hostnames.auth}/.well-known/openid-configuration";
+          client_id = "92afe9f8-7ef6-42ab-8a06-701df3c7179d";
+          client_secret._secret = config.secrets.actualbudget-oidc-secret.dest;
+          server_hostname = "https://${hostnames.budget}";
+          authMethod = "openid";
+        };
+      };
+    };
+
+    systemd.services.actual = {
+      after = [ "actualbudget-oidc-secret-secret.service" ];
+      serviceConfig = {
+        PrivateUsers = lib.mkForce false;
+        SupplementaryGroups = [ "shared" ];
       };
     };
 
@@ -106,6 +122,17 @@ in
       dest = "${config.secretsDirectory}/actualbudget-budget-id";
       owner = builtins.toString config.users.users.actualbudget.uid;
       group = builtins.toString config.users.users.actualbudget.uid;
+    };
+    secrets.actualbudget-oidc-secret = {
+      source = ./actualbudget-oidc-secret.age;
+      dest = "${config.secretsDirectory}/actualbudget-oidc-secret";
+      owner = config.users.users.actualbudget.name;
+      group = config.users.groups.shared.name;
+      permissions = "0440";
+    };
+    systemd.services.actualbudget-oidc-secret-secret = {
+      requiredBy = [ "actual.service" ];
+      before = [ "actual.service" ];
     };
 
     # Allow web traffic to Caddy
