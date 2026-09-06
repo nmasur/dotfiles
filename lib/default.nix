@@ -105,6 +105,7 @@ lib
         # Build-time-only dep of karakeep's frontend; CVEs don't reach
         # the runtime closure. Remove once nixpkgs bumps it.
         "pnpm-9.15.9"
+        "keybase-gui-6.5.1"
       ];
       config.allowUnfree = true;
     }
