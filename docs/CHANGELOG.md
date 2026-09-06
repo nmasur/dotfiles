@@ -2,6 +2,13 @@
 
 ## 2026-09-06
 
+- **Configured OpenID Connect (OIDC) authentication for Mealie**:
+  - Configured `services.mealie.settings` with OIDC settings pointing to Pocket ID (`auth.masu.rs`), using client ID `040925ed-b39e-4442-b8e8-369c948c0cd2`.
+  - Added secret management for `mealie-oidc-secret.age` via `secrets.mealie-oidc-secret`, using `prefix = "OIDC_CLIENT_SECRET="` to generate an environment file.
+  - Configured `services.mealie.credentialsFile` to load the client secret via systemd's `EnvironmentFile` without exposing it in the world-readable Nix store or systemd unit file.
+  - Configured `systemd.services.mealie` to order after `mealie-oidc-secret-secret.service`.
+  - Updated `docs/oidc-services.md` with the verified configuration and callback URI (`https://cooking.masu.rs/login`).
+
 - **Configured OpenID Connect (OIDC) authentication for Actual Budget**:
   - Configured `services.actual.settings` with `loginMethod = "openid"` and `openId` settings pointing to Pocket ID (`auth.masu.rs`), using client ID `92afe9f8-7ef6-42ab-8a06-701df3c7179d`.
   - Added secret management for `actualbudget-oidc-secret.age` via `secrets.actualbudget-oidc-secret`, set with owner `actualbudget` and group `shared` (0440).

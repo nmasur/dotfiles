@@ -31,7 +31,7 @@ These services support OpenID Connect natively without requiring external authen
 | **Nextcloud** | `cloud.masu.rs` | Native (official `user_oidc` app) | Nextcloud app + `nextcloud-occ user_oidc:provider` |
 | **Grafana** | `metrics.masu.rs` | Native (Generic OAuth) | NixOS config (`services.grafana.settings."auth.generic_oauth"`) |
 | **Paperless-ngx** | `paper.masu.rs` | Native (`django-allauth`) | NixOS env vars (`PAPERLESS_SOCIALACCOUNT_PROVIDERS`) |
-| **Mealie** | `cooking.masu.rs` | Native core feature | NixOS env vars (`OIDC_AUTH_ENABLED`, etc.) |
+| **Mealie** | `cooking.masu.rs` | Native core feature | NixOS config (`services.mealie.settings` + `credentialsFile`) |
 | **Karakeep / Hoarder** | `keep.masu.rs` | Native (NextAuth OIDC) | NixOS env vars (`OAUTH_WELLKNOWN_URL`, etc.) |
 | **Audiobookshelf** | `read.masu.rs` | Native core feature (v2.3+) | Web UI (Settings → Authentication) |
 | **Actual Budget** | `money.masu.rs` | Native core feature (v24.3+) | NixOS config (`services.actual.settings.openId`) |
@@ -181,16 +181,18 @@ All client secrets should be encrypted with `agenix` under the respective servic
 
 ### 6. Mealie (`cooking.masu.rs`)
 - **Pocket ID Redirect URI:** `https://cooking.masu.rs/login`
-- **Setup in `mealie.nix`:**
+- **Setup in `mealie/mealie.nix`:**
   ```nix
-  systemd.services.mealie.environment = {
-    OIDC_AUTH_ENABLED = "true";
-    OIDC_SIGNUP_ENABLED = "true";
-    OIDC_CONFIGURATION_URL = "https://auth.masu.rs/.well-known/openid-configuration";
-    OIDC_CLIENT_ID = "mealie";
-    OIDC_CLIENT_SECRET = "...";
-    OIDC_PROVIDER_NAME = "Pocket ID";
-    OIDC_USER_CLAIM = "email";
+  services.mealie = {
+    credentialsFile = config.secrets.mealie-oidc-secret.dest;
+    settings = {
+      OIDC_AUTH_ENABLED = "true";
+      OIDC_SIGNUP_ENABLED = "true";
+      OIDC_CONFIGURATION_URL = "https://${hostnames.auth}/.well-known/openid-configuration";
+      OIDC_CLIENT_ID = "040925ed-b39e-4442-b8e8-369c948c0cd2";
+      OIDC_PROVIDER_NAME = "Pocket ID";
+      OIDC_USER_CLAIM = "email";
+    };
   };
   ```
 
