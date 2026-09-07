@@ -44,9 +44,27 @@ in
       {
         match = [ { host = [ hostnames.stream ]; } ];
         handle = [
+          # Resolve client IP: use Cloudflare's CF-Connecting-IP if present, otherwise remote host
+          {
+            handler = "map";
+            source = "{http.request.header.CF-Connecting-IP}";
+            destinations = [ "{client_ip}" ];
+            defaults = [ "{http.request.remote.host}" ];
+            mappings = [
+              {
+                input_regexp = "^(.+)$";
+                outputs = [ "\${1}" ];
+              }
+            ];
+          }
           {
             handler = "reverse_proxy";
             upstreams = [ { dial = "localhost:8096"; } ];
+            headers.request.set = {
+              "X-Real-IP" = [ "{client_ip}" ];
+              "X-Forwarded-For" = [ "{client_ip}" ];
+              "X-Forwarded-Proto" = [ "{http.request.scheme}" ];
+            };
           }
         ];
       }

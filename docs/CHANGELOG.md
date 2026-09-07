@@ -2,6 +2,10 @@
 
 ## 2026-09-07
 
+- **Configured real client IP forwarding for Jellyfin reverse proxy**:
+  - Added a `map` handler to Jellyfin's Caddy route in `platforms/nixos/modules/nmasur/presets/services/jellyfin.nix` to resolve `{client_ip}` using Cloudflare's `CF-Connecting-IP` header when available, falling back to `{http.request.remote.host}` for direct local LAN connections.
+  - Configured `reverse_proxy.headers.request.set` to forward `X-Real-IP`, `X-Forwarded-For`, and `X-Forwarded-Proto` with the resolved client IP and request scheme to Jellyfin.
+
 - **Configured OpenID Connect (OIDC) authentication for Nextcloud**:
   - Added `user_oidc` to `services.nextcloud.extraApps`.
   - Added secret management for `nextcloud-oidc-secret.age` via `secrets.nextcloud-oidc-secret` with owner `nextcloud` and group `nextcloud` (0440).
