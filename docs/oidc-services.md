@@ -121,15 +121,39 @@ All client secrets should be encrypted with `agenix` under the respective servic
 ### 3. Nextcloud (`cloud.masu.rs`)
 - **Pocket ID Redirect URI:** `https://cloud.masu.rs/apps/user_oidc/code`
 - **Setup in `nextcloud/nextcloud.nix`:**
-  1. Add `user_oidc` to `services.nextcloud.extraApps`.
-  2. Configure the provider via `nextcloud-occ`:
-     ```bash
-     nextcloud-occ user_oidc:provider pocket-id \
-       --clientid="<client_id>" \
-       --clientsecret="<client_secret>" \
-       --discoveryuri="https://auth.masu.rs/.well-known/openid-configuration" \
-       --scope="openid profile email"
-     ```
+  ```nix
+  secrets.nextcloud-oidc-secret = {
+    source = ./nextcloud-oidc-secret.age;
+    dest = "${config.secretsDirectory}/nextcloud-oidc-secret";
+    owner = "nextcloud";
+    group = "nextcloud";
+    permissions = "0440";
+  };
+  systemd.services.nextcloud-oidc-secret-secret = {
+    requiredBy = [ "nextcloud-setup.service" ];
+    before = [ "nextcloud-setup.service" ];
+  };
+
+  services.nextcloud = {
+    settings.overwriteprotocol = "https";
+    extraApps = {
+      user_oidc = config.services.nextcloud.package.packages.apps.user_oidc;
+    };
+  };
+
+  systemd.services.nextcloud-setup = {
+    after = [ "nextcloud-oidc-secret-secret.service" ];
+    postStart = ''
+      ${config.services.nextcloud.occ}/bin/nextcloud-occ user_oidc:provider pocket-id \
+        --clientid="c8a32c58-a781-4f14-9070-f498fdfda438" \
+        --clientsecret-file="${config.secrets.nextcloud-oidc-secret.dest}" \
+        --discoveryuri="https://${hostnames.auth}/.well-known/openid-configuration" \
+        --scope="openid profile email" \
+        --mapping-uid="preferred_username" \
+        --unique-uid=0
+    '';
+  };
+  ```
 
 ### 4. Grafana (`metrics.masu.rs`)
 - **Pocket ID Redirect URI:** `https://metrics.masu.rs/login/generic_oauth`

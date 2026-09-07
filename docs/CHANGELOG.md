@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-09-07
+
+- **Configured OpenID Connect (OIDC) authentication for Nextcloud**:
+  - Added `user_oidc` to `services.nextcloud.extraApps`.
+  - Added secret management for `nextcloud-oidc-secret.age` via `secrets.nextcloud-oidc-secret` with owner `nextcloud` and group `nextcloud` (0440).
+  - Configured `systemd.services.nextcloud-oidc-secret-secret` to be required by and order before `nextcloud-setup.service`.
+  - Set `services.nextcloud.settings.overwriteprotocol = "https"` to ensure correct scheme handling for redirect URIs behind reverse proxy.
+  - Configured automated idempotent upsert of the Pocket ID provider via `systemd.services.nextcloud-setup.postStart` running `nextcloud-occ user_oidc:provider pocket-id` with client ID `c8a32c58-a781-4f14-9070-f498fdfda438`, `--clientsecret-file`, discovery URI `https://${hostnames.auth}/.well-known/openid-configuration`, `--mapping-uid="preferred_username"`, and `--unique-uid=0` to connect OIDC logins directly to existing local Nextcloud accounts.
+  - Updated `docs/oidc-services.md` with the verified configuration and callback URI (`https://cloud.masu.rs/apps/user_oidc/code`).
+
 ## 2026-09-06
 
 - **Configured OpenID Connect (OIDC) authentication for Immich**:

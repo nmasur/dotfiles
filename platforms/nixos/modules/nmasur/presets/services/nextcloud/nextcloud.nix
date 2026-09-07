@@ -33,6 +33,7 @@ in
         # Allow access when hitting either of these hosts or IPs
         trusted_domains = [ hostnames.content ];
         trusted_proxies = [ "127.0.0.1" ];
+        overwriteprotocol = "https";
         maintenance_window_start = 4; # Run jobs at 4am UTC
         log_type = "file";
         loglevel = 1; # Include all actions in the log
@@ -41,6 +42,7 @@ in
       extraApps = {
         calendar = config.services.nextcloud.package.packages.apps.calendar;
         contacts = config.services.nextcloud.package.packages.apps.contacts;
+        user_oidc = config.services.nextcloud.package.packages.apps.user_oidc;
         # These apps are defined and pinned by overlay in flake.
         # news = pkgs.nextcloudApps.news;
         # external = pkgs.nextcloudApps.external;
@@ -209,6 +211,32 @@ in
     systemd.services.nextcloud-secret = {
       requiredBy = [ "nextcloud-setup.service" ];
       before = [ "nextcloud-setup.service" ];
+    };
+
+    secrets.nextcloud-oidc-secret = {
+      source = ./nextcloud-oidc-secret.age;
+      dest = "${config.secretsDirectory}/nextcloud-oidc-secret";
+      owner = "nextcloud";
+      group = "nextcloud";
+      permissions = "0440";
+    };
+    systemd.services.nextcloud-oidc-secret-secret = {
+      requiredBy = [ "nextcloud-setup.service" ];
+      before = [ "nextcloud-setup.service" ];
+    };
+
+    # Configure Pocket ID OIDC provider after Nextcloud setup enables apps
+    systemd.services.nextcloud-setup = {
+      after = [ "nextcloud-oidc-secret-secret.service" ];
+      postStart = ''
+        ${config.services.nextcloud.occ}/bin/nextcloud-occ user_oidc:provider pocket-id \
+          --clientid="c8a32c58-a781-4f14-9070-f498fdfda438" \
+          --clientsecret-file="${config.secrets.nextcloud-oidc-secret.dest}" \
+          --discoveryuri="https://${hostnames.auth}/.well-known/openid-configuration" \
+          --scope="openid profile email" \
+          --mapping-uid="preferred_username" \
+          --unique-uid=0
+      '';
     };
 
     # Grant user access to Nextcloud directories
