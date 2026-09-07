@@ -183,24 +183,28 @@ All client secrets should be encrypted with `agenix` under the respective servic
   ```nix
   services.paperless.settings = {
     PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
-    PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
-      openid_connect = {
-        SERVERS = [
-          {
-            id = "pocket-id";
-            name = "Pocket ID";
-            server_url = "https://auth.masu.rs";
-            token_auth_method = "client_secret_basic";
-            APP = {
-              client_id = "paperless";
-              secret = "..."; # or via environmentFile
-            };
-          }
-        ];
-      };
-    };
-    PAPERLESS_REDIRECT_LOGIN_TO_SSO = "true"; # Optional: bypass local login
+    PAPERLESS_REDIRECT_LOGIN_TO_SSO = true;
   };
+  # Configured via environmentFile to pass the client secret, enable PKCE, and link by email:
+  # PAPERLESS_SOCIALACCOUNT_PROVIDERS = builtins.toJSON {
+  #   openid_connect = {
+  #     APPS = [
+  #       {
+  #         provider_id = "pocket-id";
+  #         name = "Pocket ID";
+  #         client_id = "e6ff7fce-8e67-4c66-8f32-5ec3db4740a9";
+  #         secret = "...";
+  #         settings = {
+  #           server_url = "https://auth.masu.rs";
+  #           token_auth_method = "client_secret_basic";
+  #           oauth_pkce_enabled = true;
+  #           email_authentication = true;
+  #           verified_email = true;
+  #         };
+  #       }
+  #     ];
+  #   };
+  # };
   ```
 
 ### 6. Mealie (`cooking.masu.rs`)

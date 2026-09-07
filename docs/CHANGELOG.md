@@ -2,6 +2,14 @@
 
 ## 2026-09-07
 
+- **Configured OpenID Connect (OIDC) authentication for Paperless-ngx**:
+  - Added secret management for `paperless-oidc-secret.age` via `secrets.paperless-oidc-secret` owned by `paperless:paperless` (0440).
+  - Configured `systemd.services.paperless-oidc-secret-secret` to run before and be required by all Paperless units, dynamically generating `/var/private/paperless-env` with `PAPERLESS_SOCIALACCOUNT_PROVIDERS` configured for Pocket ID (`auth.masu.rs`) using `client_id = "e6ff7fce-8e67-4c66-8f32-5ec3db4740a9"`, `oauth_pkce_enabled = true`, and email authentication linking (`email_authentication = true`, `verified_email = true`) in the native `APPS` schema.
+  - Added `services.paperless.environmentFile = "${config.secretsDirectory}/paperless-env"` to securely pass the OIDC configuration to Paperless services without exposing secrets in the Nix store.
+  - Configured Paperless settings to enable `allauth.socialaccount.providers.openid_connect` in `PAPERLESS_APPS` and enabled `PAPERLESS_REDIRECT_LOGIN_TO_SSO`.
+  - Configured reverse proxy trust settings (`PAPERLESS_USE_X_FORWARD_HOST`, `PAPERLESS_PROXY_SSL_HEADER`, and `PAPERLESS_TRUSTED_PROXIES`) to ensure callback URIs preserve the `https://` scheme behind Caddy.
+  - Fixed `systemd.services.paperless-secret` to order before and be required by `paperless-scheduler.service` instead of non-existent `paperless.service`.
+
 - **Configured real client IP forwarding for Jellyfin reverse proxy**:
   - Added a `map` handler to Jellyfin's Caddy route in `platforms/nixos/modules/nmasur/presets/services/jellyfin.nix` to resolve `{client_ip}` using Cloudflare's `CF-Connecting-IP` header when available, falling back to `{http.request.remote.host}` for direct local LAN connections.
   - Configured `reverse_proxy.headers.request.set` to forward `X-Real-IP`, `X-Forwarded-For`, and `X-Forwarded-Proto` with the resolved client IP and request scheme to Jellyfin.
