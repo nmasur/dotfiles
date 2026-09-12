@@ -29,7 +29,7 @@ in
       };
     };
 
-    programs.fish.enable = lib.mkDefault config.home-manager.users.${username}.programs.fish.enable;
+    programs.fish.enable = lib.mkDefault (config.home-manager.users.${username}.programs.fish.enable or true);
 
     # Allows us to declaritively set password
     users.mutableUsers = lib.mkDefault false;
@@ -62,7 +62,7 @@ in
     #   serviceConfig.TimeoutStartSec = lib.mkForce "45m";
     # };
 
-    allowUnfreePackages = config.home-manager.users.${username}.allowUnfreePackages;
+    allowUnfreePackages = config.home-manager.users.${username}.allowUnfreePackages or [];
 
     wsl.enable = lib.mkDefault false;
 

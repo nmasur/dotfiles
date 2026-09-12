@@ -160,17 +160,7 @@ lib
         inputs.api.nixosModules.default
         inputs.wsl.nixosModules.wsl
         { imports = (nixFiles ../platforms/nixos); }
-        module
-        # (builtins.removeAttrs module [ "home-manager" ])
-        {
-          home-manager = {
-            extraSpecialArgs = {
-              inherit colorscheme;
-            }
-            // specialArgs;
-          }
-          // homeModule.home-manager;
-        }
+        (builtins.removeAttrs module [ "home-manager" ])
       ];
     };
 
