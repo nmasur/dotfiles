@@ -66,6 +66,7 @@ lib
   overlays = [
     inputs.nur.overlays.default
     inputs.nix2vim.overlay
+    inputs.api.overlays.default
     (final: prev: {
       zellij-switch = inputs.zellij-switch.packages.${prev.stdenv.hostPlatform.system}.default;
     })
@@ -156,6 +157,7 @@ lib
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.default
         inputs.disko.nixosModules.disko
+        inputs.api.nixosModules.default
         inputs.wsl.nixosModules.wsl
         { imports = (nixFiles ../platforms/nixos); }
         module
@@ -229,6 +231,7 @@ lib
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.default
         inputs.disko.nixosModules.disko
+        inputs.api.nixosModules.default
         inputs.wsl.nixosModules.wsl
         {
           imports = (nixFiles ../platforms/nixos) ++ (nixFiles ../platforms/generators);

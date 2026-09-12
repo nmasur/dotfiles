@@ -22,7 +22,7 @@ in
       services = {
         actualbudget.enable = lib.mkDefault true;
         actualtap = {
-          enable = lib.mkDefault true;
+          enable = lib.mkDefault false;
           instances = {
             budget1 = {
               port = 3031;
@@ -38,6 +38,7 @@ in
             };
           };
         };
+        api.enable = lib.mkDefault true;
         caddy.enable = lib.mkDefault true;
         cloudflare.enable = lib.mkDefault true;
         cloudflared.enable = lib.mkDefault true;

@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-09-12
+
+- **Integrated `api` service for `flame`**:
+  - Added `github:nmasur/api` as a flake input with `inputs.nixpkgs.follows = "nixpkgs"`.
+  - Added hostname `api = "api.masu.rs"`.
+  - Added `inputs.api.overlays.default` to system overlays and `inputs.api.nixosModules.default` to `buildNixos` and `generateImage` modules in `lib/default.nix`.
+  - Created preset `platforms/nixos/modules/nmasur/presets/services/api/api.nix` with options for `nmasur.presets.services.api.enable`:
+    - Configures `services.api.enable = true` and `services.api.hostname = hostnames.api`.
+    - Configures `services.api.backends.actual` with `actualServerUrl`, `apiKeysFile`, `serverPasswordFile`, and budget sync ID files for `budget1` and `budget2`.
+    - Added secret definitions for `api-actual-keys`, `api-actual-budget1-sync-id`, and `api-actual-budget2-sync-id` owned by `api_actual` with prefixes `API_KEYS=`, `ACTUAL_SYNC_ID_BUDGET1=`, and `ACTUAL_SYNC_ID_BUDGET2=`.
+    - Reused `config.secrets.actualbudget-password.dest` for upstream Actual server password.
+    - Ordered `systemd.services.api-actual` after and required by `postgresql-setup.service`, secret services, and `actual.service`.
+    - Added PostgreSQL peer authentication for `api_actual` (`local api_actual api_actual peer`) and database backup via `services.postgresqlBackup.databases = [ "api_actual" ]`.
+    - Added `systemd.services.postgresql-setup.preStart` hook in `postgresql.nix` to refresh collation version on `template1` and `postgres` (`ALTER DATABASE ... REFRESH COLLATION VERSION`), preventing database creation failure after glibc upgrades.
+    - Mounted generated `caddyRoutes` onto `nmasur.presets.services.caddy.routes`.
+    - Added `hostnames.api` to `services.cloudflare-dyndns.domains`.
+    - Added `/var/lib/api-actual` to restic backups.
+  - Enabled `nmasur.presets.services.api` and disabled `actualtap` in `platforms/nixos/modules/nmasur/profiles/communications.nix`.
+
 ## 2026-09-07
 
 - **Configured OpenID Connect (OIDC) authentication for Paperless-ngx**:

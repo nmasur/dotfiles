@@ -86,6 +86,12 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
+    # Generic self-hosted REST API service
+    api = {
+      url = "github:nmasur/api";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # # Text editor
     # helix = {
     #   url = "github:helix-editor/helix";
@@ -127,6 +133,7 @@
           baseName = "masu.rs";
         in
         {
+          api = "api.${baseName}";
           audiobooks = "read.${baseName}";
           auth = "auth.${baseName}";
           bookmarks = "keep.${baseName}";
