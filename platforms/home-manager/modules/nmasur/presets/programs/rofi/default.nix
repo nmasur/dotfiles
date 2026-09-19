@@ -56,7 +56,6 @@ in
       enable = true;
       cycle = true;
       location = "center";
-      pass = { };
       terminal = lib.getExe cfg.terminal;
       plugins = [
         pkgs.rofi-calc

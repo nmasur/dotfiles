@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-19
+
+- **Fixed missing user attribute and deprecations during flake check**:
+  - Fixed evaluation failure in `platforms/nixos/modules/nmasur/presets/services/lightdm.nix` when resolving `config.home-manager.users.${username}.programs.fish.enable` by providing an `or true` fallback, accounting for home-manager removal from NixOS modules.
+  - Removed deprecated `programs.rofi.pass = { };` definition in `platforms/home-manager/modules/nmasur/presets/programs/rofi/default.nix` which caused assertion errors following the removal of `rofi-pass` in upstream home-manager and nixpkgs.
+  - Added safety fallbacks using `config.users.users.${username}.home` in `notes-git-sync` and `hammerspoon` modules when referencing user directories via `config.home-manager.users.${username}`.
+
 ## 2026-09-12
 
 - **Integrated `api` service for `flame`**:

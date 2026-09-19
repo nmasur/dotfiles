@@ -30,7 +30,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    programs.fish.enable = lib.mkIf (config.home-manager.users.${username}.programs.fish.enable) true; # Needed for LightDM to remember username
+    programs.fish.enable = lib.mkIf (config.home-manager.users.${username}.programs.fish.enable or true) true; # Needed for LightDM to remember username
 
     services.xserver = {
       enable = true;

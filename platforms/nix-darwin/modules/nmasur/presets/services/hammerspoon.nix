@@ -20,7 +20,7 @@ in
 
     system.activationScripts.postActivation.text = ''
       defaults write org.hammerspoon.Hammerspoon MJConfigFile "${
-        config.home-manager.users.${username}.xdg.configHome
+        config.home-manager.users.${username}.xdg.configHome or "${config.users.users.${username}.home}/.config"
       }/hammerspoon/init.lua"
       sudo killall Dock
     '';

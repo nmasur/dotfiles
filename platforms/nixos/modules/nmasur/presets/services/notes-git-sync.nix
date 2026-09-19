@@ -28,7 +28,7 @@ in
         Type = "oneshot";
         ExecStartPre = "${lib.getExe pkgs.git} -C /data/git/notes reset --hard master";
         ExecStart = "${lib.getExe pkgs.git} -C /data/git/notes pull";
-        WorkingDirectory = config.home-manager.users.${username}.home.homeDirectory;
+        WorkingDirectory = config.home-manager.users.${username}.home.homeDirectory or config.users.users.${username}.home;
         Environment = "PATH=${pkgs.openssh}/bin";
       };
     };
