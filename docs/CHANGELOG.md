@@ -50,6 +50,21 @@
 
 ## 2026-09-29
 
+- **Added Valheim dedicated server package, service, and preset**:
+  - Added `steam-fetcher` (`github:nix-community/steam-fetcher`) flake input with `inputs.nixpkgs.follows = "nixpkgs"`.
+  - Added `inputs.steam-fetcher.overlay` to system overlays in `lib/default.nix`.
+  - Added `pkgs/valheim-server/package.nix` wrapping the Valheim dedicated server with modern `buildFHSEnv`, updated to latest release 1.0.16 (Steam depot `896661`, manifest `1285123405092214913`), with graceful fallback for non-x86_64-linux platforms.
+  - Added `overlays/valheim.nix` exposing `valheim-server`, `valheim-server-unwrapped`, and `fetchValheimThunderstoreMod` for compatibility.
+  - Added NixOS service module `platforms/nixos/modules/services/valheim.nix` defining `services.valheim`:
+    - Manages dedicated user/group `valheim` and systemd service `valheim.service`.
+    - Supports runtime decryption/loading of server password via `passwordFile` (avoiding plaintext secrets in the Nix store) as well as fallback `password` string option.
+    - Configures firewall rules for Valheim UDP ports (`port`, `port + 1`, `port + 2`).
+    - Configures admin, permitted, and banned Steam ID list files.
+  - Added preset module `platforms/nixos/modules/nmasur/presets/services/valheim/valheim.nix` with options for `nmasur.presets.services.valheim.enable`:
+    - Wires up `secrets.valheim-password` with encrypted secret file `valheim-password.age` and sets `systemd.services.valheim-password-secret` dependency before `valheim.service`.
+    - Adds `valheim = "valheim.masu.rs"` hostname to `flake.nix` and configures `nmasur.presets.services.cloudflare.noProxyDomains = [ hostnames.valheim ]` for DNS-only UDP routing.
+    - Adds `valheim.enable = lib.mkDefault false;` under `services` in `platforms/nixos/modules/nmasur/profiles/communications.nix`.
+
 - **Separated Restic backup repositories per host**:
   - Updated `services.restic.backups.default.repository` in `platforms/nixos/modules/nmasur/presets/services/restic/restic.nix` to append `/${config.networking.hostName}`, isolating backups by host in S3 (e.g., `.../restic/flame` and `.../restic/swan`).
   - Enabled `services.restic.backups.default.initialize = true` to automatically initialize the repository in S3 if it does not already exist.

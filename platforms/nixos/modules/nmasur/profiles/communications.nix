@@ -61,6 +61,7 @@ in
         stalwart.enable = lib.mkDefault true;
         thelounge.enable = lib.mkDefault true;
         uptime-kuma.enable = lib.mkDefault true;
+        valheim.enable = lib.mkDefault false;
         vaultwarden.enable = lib.mkDefault true;
         victoriametrics.enable = lib.mkDefault true;
       };

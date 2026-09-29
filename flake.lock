@@ -547,6 +547,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "rust-overlay": "rust-overlay",
+        "steam-fetcher": "steam-fetcher",
         "wsl": "wsl",
         "zellij-switch": "zellij-switch",
         "zenyd-mpv-scripts": "zenyd-mpv-scripts"
@@ -567,6 +568,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "steam-fetcher": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758622040,
+        "narHash": "sha256-BRUZZoQDCD1qByJjHm4YKipQlB2PburWLG9Iaggr8XQ=",
+        "owner": "nix-community",
+        "repo": "steam-fetcher",
+        "rev": "ab5e3a0828b4b179feb548c57be584ce812956a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "steam-fetcher",
         "type": "github"
       }
     },

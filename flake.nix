@@ -92,6 +92,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Steam depot fetcher
+    steam-fetcher = {
+      url = "github:nix-community/steam-fetcher";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # # Text editor
     # helix = {
     #   url = "github:helix-editor/helix";
@@ -166,6 +172,7 @@
           status = "status.${baseName}";
           stream = "stream.${baseName}";
           transmission = "transmission.${baseName}";
+          valheim = "valheim.${baseName}";
         };
 
       lib = import ./lib inputs;

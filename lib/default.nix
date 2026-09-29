@@ -67,6 +67,7 @@ lib
     inputs.nur.overlays.default
     inputs.nix2vim.overlay
     inputs.api.overlays.default
+    inputs.steam-fetcher.overlay
     (final: prev: {
       zellij-switch = inputs.zellij-switch.packages.${prev.stdenv.hostPlatform.system}.default;
     })
