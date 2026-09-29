@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-29
+
+- **Separated Restic backup repositories per host**:
+  - Updated `services.restic.backups.default.repository` in `platforms/nixos/modules/nmasur/presets/services/restic/restic.nix` to append `/${config.networking.hostName}`, isolating backups by host in S3 (e.g., `.../restic/flame` and `.../restic/swan`).
+  - Enabled `services.restic.backups.default.initialize = true` to automatically initialize the repository in S3 if it does not already exist.
+  - Resolves exclusive lock contention during post-backup `forget --prune` when multiple servers run scheduled backups in overlapping windows.
+
 ## 2026-09-19
 
 - **Fixed missing user attribute and deprecations during flake check**:
