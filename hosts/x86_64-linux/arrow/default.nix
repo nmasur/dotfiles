@@ -2,9 +2,23 @@
 # System configuration for temporary VM
 
 rec {
+  imports = [
+    ({ modulesPath, ... }: {
+      imports = [ "${modulesPath}/virtualisation/amazon-image.nix" ];
+    })
+  ];
+
   # Hardware
   networking.hostName = "arrow";
-  aws.enable = true;
+
+  # Ensure BIOS GRUB is used instead of server profile's systemd-boot
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.grub.enable = true;
+
+  # Resolves PermitRootLogin conflict with amazon-image.nix
+  nmasur.presets.services.openssh-aws.enable = true;
+
+  users.users.ssm-user.extraGroups = [ "wheel" ];
 
   nmasur.settings = {
     username = "noah";
@@ -26,6 +40,7 @@ rec {
       common.enable = true;
       linux-base.enable = true;
       llm-development.enable = true;
+      work-base.enable = true;
     };
     nmasur.presets.programs.git-work.work = {
       name = "Noah-Masur_1701";
@@ -35,19 +50,5 @@ rec {
   };
 
   system.stateVersion = "26.05";
-
-  # These filesystems are ignored by nixos-generators
-
-  # This is the root filesystem containing NixOS
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
-
-  # This is the boot filesystem for Grub
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-  };
 
 }

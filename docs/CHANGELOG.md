@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-11
+
+- **Configured `arrow` host for AWS EC2 deployment**:
+  - Imported `${modulesPath}/virtualisation/amazon-image.nix` in `hosts/x86_64-linux/arrow/default.nix` for native EC2 configuration (EBS root filesystem with auto-resize, partition auto-growth, serial console on `ttyS0`, and EC2 udev utilities).
+  - Explicitly disabled `boot.loader.systemd-boot` and enabled BIOS `boot.loader.grub` to override `systemd-boot` default set by the server profile on non-UEFI EC2 partition layouts.
+  - Enabled `nmasur.presets.services.openssh-aws.enable` to resolve SSH `PermitRootLogin` conflicting definitions between the base SSH preset and `amazon-image.nix`.
+  - Added `ssm-user` to the `wheel` group for elevation when connecting via AWS Systems Manager Session Manager.
+  - Removed obsolete dummy `fileSystems."/boot"` and `fileSystems."/"` declarations.
+
 ## 2026-09-29
 
 - **Separated Restic backup repositories per host**:
