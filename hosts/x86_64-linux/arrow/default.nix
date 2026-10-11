@@ -4,6 +4,7 @@
 rec {
   # Hardware
   networking.hostName = "arrow";
+  aws.enable = true;
 
   nmasur.settings = {
     username = "noah";
@@ -24,11 +25,16 @@ rec {
     nmasur.profiles = {
       common.enable = true;
       linux-base.enable = true;
+      llm-development.enable = true;
     };
-    home.stateVersion = "23.05";
+    nmasur.presets.programs.git-work.work = {
+      name = "Noah-Masur_1701";
+      email = "${nmasur.settings.username}@take2games.com";
+    };
+    home.stateVersion = "26.05";
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "26.05";
 
   # These filesystems are ignored by nixos-generators
 
