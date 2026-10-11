@@ -40,6 +40,7 @@ rec {
       common.enable = true;
       linux-base.enable = true;
       llm-development.enable = true;
+      power-user.enable = true;
       work-base.enable = true;
     };
     nmasur.presets.programs.git-work.work = {
