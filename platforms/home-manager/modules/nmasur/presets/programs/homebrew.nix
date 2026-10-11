@@ -28,6 +28,7 @@ in
       cask "topnotch" # Darkens the menu bar to complete black
       cask "ghostty" # Terminal application (not buildable on Nix on macOS)
       cask "discord" # nixpkgs bundle breaks its notarization seal on macOS 26+
+      cask "vorssaint" # Customizations and automations for macOS
 
       # Mac App Store apps (requires 'mas' CLI, optional)
       # mas "Tailscale", id: 1475387142
