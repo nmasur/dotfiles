@@ -178,6 +178,10 @@ in
 
         show_startup_tips = false;
 
+        # For nested sessions, automatically descend into the session without
+        # fullscreening it.
+        nested_session_handling = "descend";
+
         keybinds = {
           locked = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && !config.programs.ghostty.enable) {
             # For servers that I SSH into, use c-a-G to unlock
