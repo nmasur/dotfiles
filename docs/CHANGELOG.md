@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-15: post-TUI lag — re-investigation, timestamped recorder
+
+- **Status: root cause still unproven.** Not reproducible in fresh shells: a PTY harness (with and without a real zellij 0.45.1 session, fish 4.9.3, the real config and a copy of the real history) showed no echo-latency change after hx (with nixd/marksman/rumdl running), jjui, yazi, vim, less, lazygit or Claude Code, nor with huge history autosuggestions or concurrent history writers.
+- New facts:
+  - Timeline: fish 4.8.0 first landed in the store on 2026-07-05 and the first lag fix attempt was 2026-08-08. 4.8.0 changed history timestamps/merging (fish #10300), which is the data autosuggestions search on every keystroke.
+  - Today's (2026-10-15) lag was in a 36-day-old fish **4.8.1** pane. 57 of 85 running fish processes are still 4.8.1 (started before 4.9.3 was installed on 2026-09-24); there is no evidence yet either way that 4.9.3 shells lag. Long-lived shells are the main difference from every failed reproduction.
+  - In the shell history, the command run right before a heal was `hx` in 4 of the 5 cases with usable context (Helix, not previously on the trigger list).
+- Corrections to earlier entries: the thread-pool starvation theory (2026-08-31) is not supported. In all September flight logs every enqueued work item was picked up by a worker (2090/2090). The September logs had no timestamps, so they cannot show whether fish was slow to handle keys or the delay was downstream (zellij/ghostty). In most pre-heal windows fish handled keys one at a time with a repaint after each (no input backlog), which weakly points away from fish's input loop.
+- Recorder upgrade (`zellij.nix` `fish-no-query-term`, `lag-triage/flight_filter.pl`): when `~/.local/state/lag-triage/RECORD` exists, new pane shells stream `FISH_DEBUG` through a FIFO into a Perl filter that adds millisecond timestamps and redacts typed/pasted content and command lines (the September logs contained pasted secrets in clear text). Added `reader-render`, `complete`, `autoload`, `history` and `uvar-notifier` categories. `config.fish` now drops `FISH_DEBUG`/`FISH_DEBUG_OUTPUT` so subshells and `fish -c` children no longer write into the recorder's path (they previously truncated the same log file).
+- `heal-autosuggest` (Ctrl-b) now first copies the last 20k lines of the pane's timestamped log to `~/.local/state/lag-triage/episodes/`, so pressing it during a lag preserves the evidence. Next step: analyze the first episode (time from each `Read byte` to the following `Writing terminal command` decides fish-side versus downstream).
+
 ## 2026-10-11
 
 - **Configured `arrow` host for AWS EC2 deployment**:

@@ -23,6 +23,17 @@ in
 
     home.packages = [ term-probe ];
 
+    # The zellij pane wrapper (fish-no-query-term) exports FISH_DEBUG and
+    # FISH_DEBUG_OUTPUT so the pane shell records itself. fish reads them once
+    # at startup, so drop them here to keep subshells and `fish -c` children
+    # from writing into the recorder's FIFO path.
+    programs.fish.shellInit = lib.mkBefore ''
+      if set -q FISH_FLIGHT_LOG
+          set -e FISH_DEBUG
+          set -e FISH_DEBUG_OUTPUT
+      end
+    '';
+
     # Ctrl-b: EXECUTE the proven manual cure as a real commandline. The cure
     # is not the variable's end value (it starts and ends at 1) — it is the
     # reader fully exiting readline and re-entering, which only command
@@ -60,8 +71,15 @@ in
         # execute it. Executing (not inline-setting) is what cures: it forces
         # the reader to leave and re-enter readline. Runs in place of whatever
         # is currently typed.
+        # When the flight recorder is armed, first copy the recent timestamped
+        # log so the lag that made you press Ctrl-b is preserved for analysis.
         body = # fish
           ''
+            if set -q FISH_FLIGHT_LOG; and test -f "$FISH_FLIGHT_LOG"
+                set -l dir ~/.local/state/lag-triage/episodes
+                mkdir -p $dir
+                tail -n 20000 $FISH_FLIGHT_LOG >$dir/episode-(date +%Y%m%d-%H%M%S)-$fish_pid.log
+            end
             commandline -r 'set -g fish_autosuggestion_enabled 0; and set -g fish_autosuggestion_enabled 1'
             commandline -f execute
           '';
