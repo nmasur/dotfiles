@@ -10,42 +10,13 @@ let
   cfg = config.nmasur.presets.programs.zellij;
 
   # fish latches feature flags from its startup ENVIRONMENT before config.fish
-  # runs, so the `set -gx fish_features no-query-term` in config.fish only
-  # protects CHILD fish processes — which is why subshells/exec fish were always
-  # immune to the post-TUI typing lag while zellij-spawned pane shells were not.
-  # With query-term latched on, fish sends OSC 11 + CPR + DA1 queries after
-  # every command and waits for replies; if zellij fails to relay even one
-  # reply (a race during TUI teardown or heavy output), that fish process's
-  # reader is PERMANENTLY degraded — reproduced deterministically in a PTY
-  # harness on fish 4.8.1 (see docs/CHANGELOG.md 2026-08-29 and
-  # presets/programs/lag-triage/upstream_repro.py). Spawning fish with the
-  # variable already exported makes every pane shell immune.
-  # Flight recorder for the still-unsolved post-TUI typing lag: the lag only
-  # shows up in long-lived pane shells and has never reproduced in a fresh
-  # shell, so the recorder must already be running when it starts.
-  # Armed by `touch ~/.local/state/lag-triage/RECORD`; new panes then stream
-  # fish's debug log through flight_filter.pl, which adds millisecond
-  # timestamps (the September logs had none, which made them inconclusive)
-  # and redacts typed/pasted text. Ctrl-b (heal-autosuggest) snapshots the
-  # recent log into ~/.local/state/lag-triage/episodes/ before healing.
-  # Remove the RECORD file to disable (zero overhead when off).
+  # runs, so `set -gx fish_features no-query-term` in config.fish only affects
+  # child fish processes. Spawning pane shells with the variable already
+  # exported keeps fish from sending terminal queries (OSC 11, CPR, DA1) that
+  # zellij may fail to relay; on fish 4.8.1 a single missed reply was shown to
+  # degrade that shell's reader for good.
   fish-no-query-term = pkgs.writeShellScriptBin "fish-no-query-term" ''
     export fish_features=no-query-term
-    dir="$HOME/.local/state/lag-triage"
-    if [ -e "$dir/RECORD" ]; then
-      mkdir -p "$dir/flight"
-      find "$dir/flight" -type f -mtime +3 -delete 2>/dev/null
-      log="$dir/flight/fish-$(date +%Y%m%d-%H%M%S)-$$.log"
-      fifo="$dir/flight/.fifo-$$"
-      rm -f "$fifo"
-      if mkfifo -m 600 "$fifo"; then
-        # The filter exits on EOF once fish (this pid after exec) exits.
-        ${lib.getExe pkgs.perl} ${./lag-triage/flight_filter.pl} "$fifo" "$log" </dev/null >/dev/null 2>&1 &
-        export FISH_DEBUG='reader,reader-render,term-support,proc-termowner,iothread,fd-monitor,topic-monitor,complete,autoload,history,uvar-notifier'
-        export FISH_DEBUG_OUTPUT="$fifo"
-        export FISH_FLIGHT_LOG="$log"
-      fi
-    fi
     exec ${lib.getExe pkgs.fish} "$@"
   '';
 

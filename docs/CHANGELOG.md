@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-17: removed post-TUI lag tooling
+
+- With the root cause fixed (starship notifications, below), removed the `lag-triage` module: `lag-triage`, `unlag`, `lag-sample`, `term-probe`, the PTY repro script, the flight recorder filter and the Ctrl-b `heal-autosuggest` binding. Also deleted its `power-user.nix` enable and `~/.local/state/lag-triage`.
+- The zellij `fish-no-query-term` wrapper now only exports `fish_features=no-query-term` before starting fish; the recorder is gone.
+
 ## 2026-10-17: post-TUI lag ROOT CAUSE — starship cmd_duration notifications
 
 - The first timestamped episode (fish 4.9.3, fresh zellij session) showed fish handling keys in ~1ms, but every prompt took **~2s**, blocked on one child process. After Ctrl-b, prompts dropped to ~50ms.
