@@ -183,27 +183,35 @@
         root = import ./hosts/x86_64-linux/swan/root.nix;
       };
 
+      awsOnlyHosts = [ "arrow" ];
+
       generators = builtins.mapAttrs (
         # x86_64-linux = { arrow = ...; swan = ...; }
         system: hosts:
-        (lib.concatMapAttrs (name: module: {
-          "${name}-aws" = lib.generateImage {
-            inherit system module;
-            format = "amazon";
-            specialArgs = { inherit hostnames; };
-          };
-          "${name}-iso" = lib.generateImage {
-            inherit system module;
-            format = "iso";
-            specialArgs = { inherit hostnames; };
-          };
-          "${name}-qcow" = lib.generateImage {
-            inherit system module;
-            format = "qcow-efi";
-            specialArgs = { inherit hostnames; };
-            # extraModules = [ "${nixpkgs}/nixos/modules/virtualisation/oci-image.nix" ];
-          };
-        }) hosts)
+        (lib.concatMapAttrs (
+          name: module:
+          {
+            "${name}-aws" = lib.generateImage {
+              inherit system module;
+              format = "amazon";
+              specialArgs = { inherit hostnames; };
+            };
+          }
+          # Hosts that import amazon-image.nix directly conflict with other formats
+          // lib.optionalAttrs (!builtins.elem name awsOnlyHosts) {
+            "${name}-iso" = lib.generateImage {
+              inherit system module;
+              format = "iso";
+              specialArgs = { inherit hostnames; };
+            };
+            "${name}-qcow" = lib.generateImage {
+              inherit system module;
+              format = "qcow-efi";
+              specialArgs = { inherit hostnames; };
+              # extraModules = [ "${nixpkgs}/nixos/modules/virtualisation/oci-image.nix" ];
+            };
+          }
+        ) hosts)
       ) lib.linuxHosts # x86_64-linux = { arrow = ...; swan = ...; }
       ;
 

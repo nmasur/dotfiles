@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-17: fix flake check for AWS-only arrow
+
+- `nix flake check` (run by the weekly Update Flake workflow) failed evaluating `packages.x86_64-linux.arrow-iso`: arrow now imports `amazon-image.nix` directly, which conflicts with the `iso` and `qcow-efi` generator formats (`boot.loader.timeout` 1 vs 10, and similar).
+- `flake.nix` now has an `awsOnlyHosts = [ "arrow" ]` list; those hosts only get the `-aws` image. `arrow-iso` and `arrow-qcow` are no longer exported.
+
 ## 2026-10-15: post-TUI lag — re-investigation, timestamped recorder
 
 - **Status: root cause still unproven.** Not reproducible in fresh shells: a PTY harness (with and without a real zellij 0.45.1 session, fish 4.9.3, the real config and a copy of the real history) showed no echo-latency change after hx (with nixd/marksman/rumdl running), jjui, yazi, vim, less, lazygit or Claude Code, nor with huge history autosuggestions or concurrent history writers.
