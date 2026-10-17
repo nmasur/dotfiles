@@ -42,8 +42,13 @@ in
         };
         cmd_duration = {
           min_time = 5001;
-          show_notifications = if pkgs.stdenv.hostPlatform.isLinux then false else true;
-          min_time_to_notify = 30000;
+          # Must stay off. On macOS the notification blocks the prompt for ~2s,
+          # and fish's $CMD_DURATION keeps its value until the next command
+          # actually runs. So after any long command (every TUI session),
+          # every prompt redraw -- Enter on an empty line, vi mode switches,
+          # repaints -- re-sent the notification and froze the shell for 2s.
+          # That was the "post-TUI typing lag" (see docs/CHANGELOG.md).
+          show_notifications = false;
           format = "[$duration]($style) ";
         };
         custom = {

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-17: post-TUI lag ROOT CAUSE — starship cmd_duration notifications
+
+- The first timestamped episode (fish 4.9.3, fresh zellij session) showed fish handling keys in ~1ms, but every prompt took **~2s**, blocked on one child process. After Ctrl-b, prompts dropped to ~50ms.
+- Cause: `starship.nix` set `cmd_duration.show_notifications = true` on darwin only (`min_time_to_notify = 30000`). On macOS, sending that notification blocks `starship prompt` for ~2s (measured: 0.03s with `--cmd-duration=100` vs 2.02s with `--cmd-duration=600000`). fish keeps `$CMD_DURATION` until another command actually executes. So after any command over 30s (i.e. every TUI session), every prompt redraw re-sent the notification and froze the shell for 2s: Enter on an empty line, vi mode switches, repaints.
+- This explains every observation: macOS-only (Linux had notifications off), "post-TUI" (TUIs are the long commands), and why the toggle "cured" it. Executing *any* command resets `$CMD_DURATION`; autosuggestions were never involved. The 2026-08/09 entries blaming fish autosuggestions, query-term and thread pools were wrong.
+- Fix: `show_notifications = false` everywhere. Verified: the real config with a 10-minute duration renders in 0.05s and still shows the duration.
+
 ## 2026-10-17: disable atuin tests
 
 - Added `overlays/atuin.nix` to disable atuin 18.23.0's `checkPhase`. Its
