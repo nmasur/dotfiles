@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-17: disable atuin tests
+
+- Added `overlays/atuin.nix` to disable atuin 18.23.0's `checkPhase`. Its
+  PTY-driven e2e tests (`tests/e2e_capture.rs`, `tests/e2e_pty.rs`, notably the
+  bash-preexec variants) time out in the darwin build sandbox ("timed out
+  waiting for shell session ID", `captured: []`), which broke
+  `nh home switch` for `lookingglass` after the flake update. atuin isn't in
+  the binary cache for aarch64-darwin, so it gets built locally. Skipping
+  individual tests wasn't viable: cargo stops at the first failing test binary,
+  hiding later failures behind ~13-minute rebuilds. The 554 unit tests passed.
+
 ## 2026-10-17: fix flake check for AWS-only arrow
 
 - `nix flake check` (run by the weekly Update Flake workflow) failed evaluating `packages.x86_64-linux.arrow-iso`: arrow now imports `amazon-image.nix` directly, which conflicts with the `iso` and `qcow-efi` generator formats (`boot.loader.timeout` 1 vs 10, and similar).

@@ -33,7 +33,7 @@ in
       # size = 11.0;
     };
     services.polybar.config."bar/main".font-0 = "Hack Nerd Font:size=10;2";
-    programs.rofi.font = "Hack Nerd Font 14";
+    programs.rofi.settings.font = "Hack Nerd Font 14";
     programs.alacritty.settings.font.normal.family = "Maple Mono NF";
     programs.kitty.font.name = "Maple Mono NF";
     nmasur.presets.programs.wezterm.font = "Maple Mono NF";
