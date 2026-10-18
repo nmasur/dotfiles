@@ -106,6 +106,12 @@ in
       lidarr = {
         enable = true;
       };
+      shelfmark = {
+        enable = true;
+        environment = {
+          URL_BASE = "/shelfmark";
+        };
+      };
     };
 
     # Allows shared group to read/write the sabnzbd directory
@@ -158,6 +164,22 @@ in
           {
             handler = "reverse_proxy";
             upstreams = [ { dial = arrConfig.readarr.url; } ];
+          }
+        ];
+      }
+      {
+        match = [
+          {
+            host = [ hostnames.download ];
+            path = [ "/shelfmark*" ];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              { dial = "localhost:${builtins.toString config.services.shelfmark.environment.FLASK_PORT}"; }
+            ];
           }
         ];
       }
