@@ -837,7 +837,7 @@ in
                           {
                             matcher = {
                               id = "byName";
-                              options = "localhost:${builtins.toString config.services.bazarr.listenPort}";
+                              options = "localhost:${builtins.toString config.services.bazarr.settings.general.port}";
                             };
                             properties = [
                               {

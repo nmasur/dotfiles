@@ -25,7 +25,6 @@ in
       hostName = "localhost";
       maxUploadSize = "50G";
       config = {
-        adminpassFile = config.secrets.nextcloud.dest;
         dbtype = "pgsql"; # Enables postgresql
       };
       settings = {
@@ -209,8 +208,14 @@ in
       permissions = "0440";
     };
     systemd.services.nextcloud-secret = {
-      requiredBy = [ "nextcloud-setup.service" ];
-      before = [ "nextcloud-setup.service" ];
+      requiredBy = [
+        "nextcloud-setup.service"
+        "prometheus-nextcloud-exporter.service"
+      ];
+      before = [
+        "nextcloud-setup.service"
+        "prometheus-nextcloud-exporter.service"
+      ];
     };
 
     secrets.nextcloud-oidc-secret = {
@@ -249,9 +254,9 @@ in
     networking.hosts."127.0.0.1" = [ hostnames.content ];
     services.prometheus.exporters.nextcloud = {
       enable = true;
-      username = config.services.nextcloud.config.adminuser;
+      username = "root";
       url = "https://${hostnames.content}";
-      passwordFile = config.services.nextcloud.config.adminpassFile;
+      passwordFile = config.secrets.nextcloud.dest;
     };
     nmasur.presets.services.prometheus-exporters.scrapeTargets = [
       "127.0.0.1:${builtins.toString config.services.prometheus.exporters.nextcloud.port}"

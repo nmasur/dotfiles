@@ -203,7 +203,7 @@ in
             upstreams = [
               {
                 # Bazarr only dynamically sets the port, not the host
-                dial = "localhost:${builtins.toString config.services.bazarr.listenPort}";
+                dial = "localhost:${builtins.toString config.services.bazarr.settings.general.port}";
               }
             ];
           }

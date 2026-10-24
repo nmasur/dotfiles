@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-24: fix build failures for NixOS swan
+
+- **Nextcloud**: Upstream NixOS removed `services.nextcloud.config.adminpassFile` and `services.nextcloud.config.adminuser`. Removed `adminpassFile` from `services.nextcloud.config`, updated `services.prometheus.exporters.nextcloud` to reference `config.secrets.nextcloud.dest` directly as `passwordFile` and set `username = "root"`, and added ordering dependencies on `nextcloud-secret` for `prometheus-nextcloud-exporter.service`.
+- **Bazarr**: Replaced obsolete `services.bazarr.listenPort` with `services.bazarr.settings.general.port` in Caddy reverse proxy upstream (`arr.nix`) and Grafana dashboard matcher (`grafana.nix`).
+- **pyopenjtalk-plus**: Added `overlays/pyopenjtalk-plus.nix` disabling `test_run_njd_from_mecab_invalid_input_should_not_break_next_call`, which fails under Python 3.14 due to an exact string match assertion on the `TypeError` message ("Expected str, got int" vs expected "must be str").
+- **calibre**: Added `overlays/calibre.nix` setting `doInstallCheck = false`, bypassing upstream failure in `test_speech_dispatcher` caused by `speechd-minimal` omitting Python bindings in nixpkgs.
+
+
 ## 2026-10-17: removed post-TUI lag tooling
 
 - With the root cause fixed (starship notifications, below), removed the `lag-triage` module: `lag-triage`, `unlag`, `lag-sample`, `term-probe`, the PTY repro script, the flight recorder filter and the Ctrl-b `heal-autosuggest` binding. Also deleted its `power-user.nix` enable and `~/.local/state/lag-triage`.
