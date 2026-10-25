@@ -30,6 +30,7 @@ in
         "postgresql.target"
       ];
       requires = [
+        "postgresql.target"
         "mathesar-secret.service"
         "mathesar-postgres-secret.service"
       ];

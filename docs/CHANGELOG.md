@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-25: fix pgweb/mathesar postgresql.target dependency and refresh all DB collations
+
+- **pgweb & mathesar**: Added `requires = [ "postgresql.target" ];` to `systemd.services.pgweb` (`platforms/nixos/modules/nmasur/presets/services/pgweb.nix`) and `"postgresql.target"` to `systemd.services.mathesar.requires` (`platforms/nixos/modules/nmasur/presets/services/mathesar/mathesar.nix`). Previously they only set `after = [ "postgresql.target" ]`, allowing `switch-to-configuration` to start `pgweb.service` before `postgresql.target` was queued and causing `pgweb` to fail with `connect: no such file or directory` on `/run/postgresql/.s.PGSQL.5432`.
+- **PostgreSQL collation version refresh**: Updated `systemd.services.postgresql-setup.preStart` (`platforms/nixos/modules/nmasur/presets/services/postgresql.nix`) to iterate over all databases with `datallowconn` in `pg_database` and run `ALTER DATABASE ... REFRESH COLLATION VERSION;` instead of only refreshing `template1` and `postgres`.
+
 ## 2026-10-24: fix build failures for NixOS swan
 
 - **Nextcloud**: Upstream NixOS removed `services.nextcloud.config.adminpassFile` and `services.nextcloud.config.adminuser`. Removed `adminpassFile` from `services.nextcloud.config`, updated `services.prometheus.exporters.nextcloud` to reference `config.secrets.nextcloud.dest` directly as `passwordFile` and set `username = "root"`, and added ordering dependencies on `nextcloud-secret` for `prometheus-nextcloud-exporter.service`.

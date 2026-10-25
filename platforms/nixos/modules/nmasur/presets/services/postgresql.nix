@@ -45,8 +45,9 @@ in
           if ! systemctl is-active --quiet postgresql.service; then break; fi
           sleep 0.1
         done
-        ${config.services.postgresql.package}/bin/psql -d postgres -tAc 'ALTER DATABASE template1 REFRESH COLLATION VERSION;' || true
-        ${config.services.postgresql.package}/bin/psql -d postgres -tAc 'ALTER DATABASE postgres REFRESH COLLATION VERSION;' || true
+        for db in $(${config.services.postgresql.package}/bin/psql -d postgres -tAc 'SELECT datname FROM pg_database WHERE datallowconn;'); do
+          ${config.services.postgresql.package}/bin/psql -d postgres -tAc "ALTER DATABASE \"$db\" REFRESH COLLATION VERSION;" || true
+        done
       '';
     };
   };

@@ -28,6 +28,9 @@ in
       after = [
         "postgresql.target"
       ];
+      requires = [
+        "postgresql.target"
+      ];
       # requires = [ "pgweb-secret.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
