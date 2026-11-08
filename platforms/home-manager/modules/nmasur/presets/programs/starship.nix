@@ -15,8 +15,6 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    home.packages = [ pkgs.jj-starship ];
-
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
@@ -29,7 +27,9 @@ in
           "$git_branch"
           "$git_commit"
           "$git_status"
-          "\${custom.jj}"
+          "$jj_bookmark"
+          "$jj_status"
+          "$jj_change"
           "$hostname"
           "$cmd_duration"
           "$character"
@@ -50,17 +50,6 @@ in
           # That was the "post-TUI typing lag" (see docs/CHANGELOG.md).
           show_notifications = false;
           format = "[$duration]($style) ";
-        };
-        custom = {
-          jj = {
-            when = "jj-starship detect";
-            shell = [
-              "jj-starship"
-              "--no-jj-prefix"
-              "--no-git-prefix"
-            ];
-            format = "$output ";
-          };
         };
         directory = {
           truncate_to_repo = true;
