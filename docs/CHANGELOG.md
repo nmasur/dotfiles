@@ -327,3 +327,12 @@
   (paho-mqtt is pulled in transitively, e.g. via mealie). The override is
   applied through `pythonPackagesExtensions` so it covers every Python
   package set.
+
+## 2026-11-15
+
+- Disabled `volnoti` by default in the `linux-gui` home-manager profile.
+  It builds against `gtk2`, which nixpkgs now marks as broken, so evaluating
+  any Linux GUI host (e.g. `staff`) failed and the weekly flake.lock update PR
+  was auto-closed. The volume indicator is not essential; the preset and
+  package are left in place (`pkgs/applications/misc/volnoti`) if it is
+  re-enabled or replaced later.

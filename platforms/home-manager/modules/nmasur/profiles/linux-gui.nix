@@ -43,7 +43,7 @@ in
         mbsync.enable = lib.mkDefault true;
         picom.enable = lib.mkDefault true;
         polybar.enable = lib.mkDefault true;
-        volnoti.enable = lib.mkDefault true;
+        volnoti.enable = lib.mkDefault false; # Off: depends on gtk2, broken in nixpkgs
       };
     };
 
