@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-16: fix occasional terminal crash on zellij switch-session
+
+- **Root cause**: the zellij 0.45.1 client leaks one socketpair (2 fds) per `switch-session`. Reproduced with two throwaway sessions: 10 → 33 fds over 12 switches. A client lives as long as its Ghostty window, and macOS gives GUI-launched processes a soft `RLIMIT_NOFILE` of 256 (`launchctl limit maxfiles`). After ~120 switches the client hits EMFILE. Its `assert_socket` liveness probe of the target then fails, so it treats the session as dead and spawns a new server under the same name. That server takes over the socket path, which orphans the real server (still running but unreachable). The new server then panics at `zellij-utils/src/ipc.rs:409` with "Too many open files" and the terminal exits. The log showed this signature three times (2026-11-08, 11-09, 11-16), and each one left a pair of servers sharing a socket name.
+- **`zellij.nix`**: Ghostty's `initial-command` now goes through a `zellij-high-nofile` wrapper that raises the soft fd limit to 65536 before `exec zellij`, so the leak would need ~32k switches in one window to matter.
+- **`zellij.nix`**: `zellij-switch-to-last` used `return 1` outside a function, which bash rejects and then carries on. It now uses `exit 1`, so an empty last-session file no longer overwrites the state file and runs `switch-session` with no name.
+
 ## 2026-11-15: update api flake input to bump @actual-app/api to 26.10.0 and fix caddy build
 
 - **`flake.lock`**: Updated `api` input (`github:nmasur/api`) from `55e0de89` to `4e310cf4` so `api-actual` uses `@actual-app/api` 26.10.0 matching `actual-server` 26.10.0 (`1787013118115_add_account_groups.sql`) and resolves `out-of-sync-migrations` errors on `budget1`.

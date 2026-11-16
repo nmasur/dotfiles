@@ -20,10 +20,24 @@ let
     exec ${lib.getExe pkgs.fish} "$@"
   '';
 
+  # The zellij 0.45.1 client leaks one socketpair (2 fds) on every
+  # switch-session, and a client lives as long as its Ghostty window. macOS
+  # gives GUI-launched processes a soft RLIMIT_NOFILE of 256, so after ~120
+  # switches in one window the client hits EMFILE. Its liveness probe of the
+  # target session then fails, it decides the session is dead, and it spawns a
+  # replacement server under the same name. That server steals the socket
+  # path (orphaning the real, still-running server), inherits the leaked fds,
+  # panics with "Too many open files", and takes the terminal down. Raising the
+  # soft limit makes the leak harmless in practice.
+  zellij-high-nofile = pkgs.writeShellScriptBin "zellij-high-nofile" ''
+    ulimit -Sn 65536 2>/dev/null || ulimit -Sn "$(ulimit -Hn)" 2>/dev/null
+    exec ${lib.getExe pkgs.zellij} "$@"
+  '';
+
   zellij-switch-to-last = pkgs.writeShellScriptBin "zellij-switch-to-last" ''
     TARGET_SESSION=$(cat ~/.local/state/zellij-last-session)
     if [ -z "$TARGET_SESSION" ]; then
-      return 1
+      exit 1
     fi
     echo "$ZELLIJ_SESSION_NAME" > ~/.local/state/zellij-last-session
     ${lib.getExe pkgs.zellij} action switch-session $TARGET_SESSION
@@ -98,7 +112,8 @@ in
       };
     };
 
-    programs.ghostty.settings.initial-command = lib.getExe pkgs.zellij;
+    # Launch through the fd-limit wrapper; see zellij-high-nofile above.
+    programs.ghostty.settings.initial-command = lib.getExe zellij-high-nofile;
 
     xdg.configFile."zellij/layouts/compact-top.kdl".text = # kdl
       ''
