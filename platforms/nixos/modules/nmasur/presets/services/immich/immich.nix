@@ -57,7 +57,14 @@ in
 
     nmasur.presets.services.caddy.routes = [
       {
-        match = [ { host = [ hostnames.photos ]; } ];
+        match = [
+          {
+            host = [
+              hostnames.photos
+              hostnames.photosLocal
+            ];
+          }
+        ];
         handle = [
           {
             handler = "reverse_proxy";
@@ -69,9 +76,13 @@ in
 
     # Configure Cloudflare DNS to point to this machine
     services.cloudflare-dyndns.domains = [ hostnames.photos ];
+    nmasur.presets.services.cloudflare.dnsRecords.${hostnames.photosLocal} = "192.168.1.218";
 
     # Point localhost to the local domain
-    networking.hosts."127.0.0.1" = [ hostnames.photos ];
+    networking.hosts."127.0.0.1" = [
+      hostnames.photos
+      hostnames.photosLocal
+    ];
 
     # Backups
     services.restic.backups.default.paths = [ "/data/images" ];

@@ -58,6 +58,12 @@ in
       description = "Domains to use for dyndns without CDN proxying.";
       default = [ ];
     };
+
+    dnsRecords = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      description = "Static DNS A records (mapping domain to IPv4 address) without CDN proxying.";
+      default = { };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -123,7 +129,8 @@ in
       after = [
         "cloudflare-api-prefixed-secret.service"
         "letsencrypt-key-secret.service"
-      ];
+      ]
+      ++ lib.optional config.services.bind.enable "bind.service";
       requires = [
         "cloudflare-api-prefixed-secret.service"
         "letsencrypt-key-secret.service"
@@ -172,6 +179,76 @@ in
 
     # Enable the home-made service that we created for non-proxied records
     services.cloudflare-dyndns-noproxy.enable = true;
+
+    # Create or update static non-proxied DNS records in Cloudflare
+    systemd.services.cloudflare-dns-records = lib.mkIf (cfg.dnsRecords != { }) {
+      description = "Cloudflare Static DNS Records";
+      after = [
+        "network-online.target"
+        "cloudflare-api-secret.service"
+      ]
+      ++ lib.optional config.services.bind.enable "bind.service";
+      wants = [ "network-online.target" ];
+      requires = [ "cloudflare-api-secret.service" ];
+      wantedBy = [ "multi-user.target" ];
+
+      path = [
+        pkgs.curl
+        pkgs.jq
+      ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        DynamicUser = true;
+        LoadCredential = [
+          "apiToken:${config.secrets.cloudflare-api.dest}"
+        ];
+      };
+
+      script = ''
+        set -euo pipefail
+        CLOUDFLARE_API_TOKEN="$(tr -d '\r\n' < "''${CREDENTIALS_DIRECTORY}/apiToken")"
+        API_URL="https://api.cloudflare.com/client/v4"
+        CURL_ARGS=(-fsSL --retry 5 --retry-all-errors --retry-delay 2 --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" --header "Content-Type: application/json")
+
+        ZONES_JSON="$(curl "''${CURL_ARGS[@]}" "$API_URL/zones")"
+
+        ${lib.concatStringsSep "\n" (
+          lib.mapAttrsToList (domain: ip: ''
+            ZONE_ID="$(echo "$ZONES_JSON" | jq -r --arg domain ${lib.escapeShellArg domain} '
+              .result[] | .name as $zone | select($domain == $zone or ($domain | endswith("." + $zone))) | .id
+            ' | head -n1)"
+
+            if [ -z "$ZONE_ID" ]; then
+              echo "Error: Could not find Cloudflare zone for ${domain}" >&2
+              exit 1
+            fi
+
+            RECORDS_JSON="$(curl "''${CURL_ARGS[@]}" "$API_URL/zones/$ZONE_ID/dns_records?type=A&name=${domain}")"
+
+            RECORD_ID="$(echo "$RECORDS_JSON" | jq -r '.result[0].id // empty')"
+            CURRENT_IP="$(echo "$RECORDS_JSON" | jq -r '.result[0].content // empty')"
+            CURRENT_PROXIED="$(echo "$RECORDS_JSON" | jq -r '.result[0].proxied | tostring')"
+
+            PAYLOAD="$(jq -nc \
+              --arg name ${lib.escapeShellArg domain} \
+              --arg content ${lib.escapeShellArg ip} \
+              '{type: "A", name: $name, content: $content, ttl: 1, proxied: false}')"
+
+            if [ -z "$RECORD_ID" ]; then
+              echo "Creating Cloudflare A record for ${domain} -> ${ip}"
+              curl "''${CURL_ARGS[@]}" -X POST --data "$PAYLOAD" "$API_URL/zones/$ZONE_ID/dns_records" >/dev/null
+            elif [ "$CURRENT_IP" != ${lib.escapeShellArg ip} ] || [ "$CURRENT_PROXIED" != "false" ]; then
+              echo "Updating Cloudflare A record for ${domain} -> ${ip}"
+              curl "''${CURL_ARGS[@]}" -X PUT --data "$PAYLOAD" "$API_URL/zones/$ZONE_ID/dns_records/$RECORD_ID" >/dev/null
+            else
+              echo "Cloudflare A record for ${domain} is already up to date (${ip})"
+            fi
+          '') cfg.dnsRecords
+        )}
+      '';
+    };
 
     # Create certs when not using proxy
     secrets.cloudflare-dns-api-prefixed = {

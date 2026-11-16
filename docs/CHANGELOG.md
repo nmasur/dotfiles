@@ -341,3 +341,9 @@
   was auto-closed. The volume indicator is not essential; the preset and
   package are left in place (`pkgs/applications/misc/volnoti`) if it is
   re-enabled or replaced later.
+
+## 2026-11-16
+
+- Added `photosLocal = "photos-local.masu.rs"` hostname in `flake.nix` and configured Immich (`platforms/nixos/modules/nmasur/presets/services/immich/immich.nix`) to serve both `photos.masu.rs` and `photos-local.masu.rs` through Caddy with automatic ACME DNS-01 TLS certificates.
+- Added `nmasur.presets.services.cloudflare.dnsRecords` option and `cloudflare-dns-records` systemd service in `platforms/nixos/modules/nmasur/presets/services/cloudflare/cloudflare.nix` to manage static non-proxied Cloudflare A records, pointing `photos-local.masu.rs` to `192.168.1.218`.
+

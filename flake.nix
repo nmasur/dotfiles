@@ -164,6 +164,7 @@
           notifications = "ntfy.${baseName}";
           paperless = "paper.${baseName}";
           photos = "photos.${baseName}";
+          photosLocal = "photos-local.${baseName}";
           postgresql = "pg.${baseName}";
           prometheus = "prom.${baseName}";
           recipes = "cooking.${baseName}";
