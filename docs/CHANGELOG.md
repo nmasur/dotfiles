@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-15: update api flake input to bump @actual-app/api to 26.10.0 and fix caddy build
+
+- **`flake.lock`**: Updated `api` input (`github:nmasur/api`) from `55e0de89` to `4e310cf4` so `api-actual` uses `@actual-app/api` 26.10.0 matching `actual-server` 26.10.0 (`1787013118115_add_account_groups.sql`) and resolves `out-of-sync-migrations` errors on `budget1`.
+- **`pkgs/caddy/package.nix`**: Overrode `postConfigure` on `pkgs.caddy.withPlugins` to use `rm -f` across `cmd/x509rootsfallback.go`, `caddy/cmd/x509rootsfallback.go`, and `vendor/github.com/caddyserver/caddy/v2/cmd/x509rootsfallback.go` so `nix-caddy-withplugins` builds cleanly with nixpkgs' Caddy 2.11.7 derivation.
+
 ## 2026-10-25: fix pgweb/mathesar postgresql.target dependency and refresh all DB collations
 
 - **pgweb & mathesar**: Added `requires = [ "postgresql.target" ];` to `systemd.services.pgweb` (`platforms/nixos/modules/nmasur/presets/services/pgweb.nix`) and `"postgresql.target"` to `systemd.services.mathesar.requires` (`platforms/nixos/modules/nmasur/presets/services/mathesar/mathesar.nix`). Previously they only set `after = [ "postgresql.target" ]`, allowing `switch-to-configuration` to start `pgweb.service` before `postgresql.target` was queued and causing `pgweb` to fail with `connect: no such file or directory` on `/run/postgresql/.s.PGSQL.5432`.
