@@ -57,6 +57,14 @@ in
       ];
     };
 
+    # jj's watchman client runs `watchman get-sockname` on every command, and the
+    # watchman CLI takes ~110ms just to start. Pointing it at the socket directly
+    # skips that (jj log: 140ms -> 30ms). Caveat: jj then can't auto-start the
+    # watchman server; if it isn't running, jj silently falls back to a full scan.
+    home.sessionVariables = lib.optionalAttrs pkgs.stdenv.isDarwin {
+      WATCHMAN_SOCK = "${config.home.homeDirectory}/.local/state/watchman/${config.home.username}-state/sock";
+    };
+
     home.packages = [
       # Required for the fsmonitor to auto-snapshot
       pkgs.watchman

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-18: fix starship jj timeout warnings (slow watchman client startup)
+
+- **Root cause**: starship's jj modules run `jj` several times per prompt, each snapshotting the working copy. With `fsmonitor.backend = "watchman"`, jj's watchman client resolves the socket by running `watchman get-sockname` on every command, and the watchman CLI takes ~110ms just to start (even `watchman --help`). The server itself answers in ~0.4ms. In `platform-api` this made `jj log -r @` take ~140ms (vs ~30ms with no fsmonitor), and parallel jj modules contending for the working-copy lock pushed prompts past starship's 500ms default, logging `Executing command "jj" timed out`.
+- **`jujutsu.nix`**: On Darwin, set `WATCHMAN_SOCK` to the server socket so jj skips the CLI lookup (140ms -> 30ms, watchman stays enabled). Caveat: jj can no longer auto-start the watchman server; if it isn't running, jj silently falls back to a full scan.
+- **`starship.nix`**: Raised `command_timeout` to 2000ms as a safety net for large snapshots.
+
 ## 2026-11-16: fix occasional terminal crash on zellij switch-session
 
 - **Root cause**: the zellij 0.45.1 client leaks one socketpair (2 fds) per `switch-session`. Reproduced with two throwaway sessions: 10 → 33 fds over 12 switches. A client lives as long as its Ghostty window, and macOS gives GUI-launched processes a soft `RLIMIT_NOFILE` of 256 (`launchctl limit maxfiles`). After ~120 switches the client hits EMFILE. Its `assert_socket` liveness probe of the target then fails, so it treats the session as dead and spawns a new server under the same name. That server takes over the socket path, which orphans the real server (still running but unreachable). The new server then panics at `zellij-utils/src/ipc.rs:409` with "Too many open files" and the terminal exits. The log showed this signature three times (2026-11-08, 11-09, 11-16), and each one left a pair of servers sharing a socket name.

@@ -22,6 +22,9 @@ in
       enableTransience = true; # Replace previous prompts with custom string
       settings = {
         add_newline = false; # Don't print new line at the start of the prompt
+        # Default is 500ms. The jj modules snapshot the working copy, which can
+        # exceed that in large repos (e.g. platform-api) and logs WARN timeouts.
+        command_timeout = 2000;
         format = lib.concatStrings [
           "$directory"
           "$git_branch"
